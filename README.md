@@ -29,7 +29,7 @@ For v0.3.22 it references the verified three-part delta package under `packages/
 - transport: SHA-256-verified base64 chunks
 - update behavior: source-project files only; restart required; no live hot-patching
 
-The older `packages/v0.3.22/` directory is an abandoned interrupted staging attempt and is not referenced by the active manifest.
+The interrupted original staging directory has been removed; the active v0.3.22 update package is only `packages/v0.3.22-delta/`.
 
 ## Current research target
 
