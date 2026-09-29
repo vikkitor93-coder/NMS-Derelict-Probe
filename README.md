@@ -1,32 +1,34 @@
 # NMS Derelict Probe
 
-Read-only No Man's Sky derelict-freighter generation research/modding toolkit.
+Current stable package: **v0.3.24**.
 
-Current stable package: **v0.3.23**.
+## v0.3.24 — diagnosable GitHub/upload workflow
 
-## v0.3.23 hotfix
+This release fixes the main diagnostics gap in the v0.3.23 GUI workflow.
 
-v0.3.22 launched GUI GitHub/update/upload helpers with Python's `sys.executable`. Inside the injected pyMHF process that value can be the host game executable (`NMS.exe`), which is why **Set up GitHub uploads** and **Install Surveyor update** could start another No Man's Sky instance.
+Every GUI research/GitHub action now leaves durable evidence in:
 
-v0.3.23 fixes the complete helper path:
+- `%LOCALAPPDATA%\NMSDerelictSurveyor\latest.log` — start/success/failure/exception events;
+- `%LOCALAPPDATA%\NMSDerelictSurveyor\gui-actions\workflow-latest.log` — combined action history;
+- `gui-actions\latest-<action>.log` — latest output for one action;
+- timestamped action logs;
+- `gui-actions\workflow-diagnostic-latest.txt` — command, return code, stdout/stderr;
+- `gui-actions\github-integration.log` — GitHub CLI/auth/API/upload stages;
+- `gui-actions\github-diagnostic-latest.txt` — read-only GitHub diagnostic.
 
-- launchers persist the verified external Python 3.12/3.13 executable in `%LOCALAPPDATA%\NMSDerelictSurveyor\python-executable.txt`;
-- GitHub setup, update checks/installs, and every research `+ upload` action use that interpreter;
-- only executables whose basename starts with `python` are accepted;
-- non-Python hosts such as `NMS.exe` are refused rather than launched.
+New GUI buttons:
 
-Because the updater button itself is affected in v0.3.22, **v0.3.23 must be installed manually once**. From v0.3.23 onward, the GUI updater can be used normally.
+- **Open workflow log**
+- **Open workflow diagnostic**
+- **Run GitHub diagnostic**
 
-## GitHub workflow
+The GUI status text is intentionally short so it remains readable in pyMHF's non-wrapping fields.
 
-After v0.3.23 is installed, the pyMHF companion GUI can:
+When GitHub CLI authentication is required on Windows, `gh auth login --web` opens in a visible console so the one-time device-code prompt is not hidden.
 
-- **Set up GitHub uploads** once using GitHub CLI's credential store;
-- **Measure derelict generation + upload**;
-- **Extract dungeon caller code + upload**;
-- run the existing Prepare / Analyze workflows in the background;
-- **Check for Surveyor update** and **Install Surveyor update**.
+The v0.3.23 safety fix remains: helper actions resolve only a real Python interpreter and never use injected `NMS.exe`.
 
-Successful research actions commit only the expected generated evidence plus a SHA-256/size run manifest under `research-uploads/<UTC>-<action>/`.
+Active update package: `packages/v0.3.24-delta/`
+SHA-256: `923ed244cdec57ccc8d28e7940e1c993999ebe9a7ee8dc39db9f6b1be9115c30`
 
-The active updater package is the SHA-256-verified three-part delta under `packages/v0.3.23-delta/`.
+Verification: **82/82 tests**, compileall, JSON parse, helper diagnostic/failure smoke tests, ZIP integrity.
