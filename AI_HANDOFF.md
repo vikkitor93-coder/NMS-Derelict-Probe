@@ -2,10 +2,20 @@
 
 Read-only NMS.py/pyMHF derelict-freighter research project. Current target: deterministic address/seed -> dungeon layout path.
 
-v0.3.22 adds background companion-GUI buttons for the existing research CMD workflows and automatic GitHub research evidence upload. GitHub upload setup uses GitHub CLI's credential store (optionally installed via winget); the project does not store a PAT/password. Successful actions atomically commit expected JSON/CSV outputs plus a hash/size run-manifest under research-uploads/<UTC-run>-<action>/. Local command logs remain local.
+## Research state
 
-Updater contract remains schema 1 and intentionally retains the v0.3.21-compatible SHA-256-verified base64-chunk transport so installed v0.3.21 can update to v0.3.22. Updates modify the extracted source project only and require restart.
+Known 35-container address `00001A0004E84EFD` repeatedly produces dungeon-root descriptor seed `9256392A2F5A74AC`. v0.3.19 captured the outer Engine AddResource caller return at RVA `00635115`; the CALL is at `00635110` and targets `01831A10`. The descriptor is already seeded before Engine::AddResource. v0.3.20 added offline caller-code extraction.
 
-Verification: 77/77 unit tests pass, Python compileall passes, 36 packaged JSON files parse. Windows PowerShell/CMD execution and gh browser authentication still require first-machine smoke testing.
+## v0.3.22 integration
 
-Next action: install/update v0.3.22, click Set up GitHub uploads once, then click Extract dungeon caller code + upload. When it reports Complete + uploaded, tell ChatGPT "check".
+The pyMHF GUI has background research buttons plus GitHub upload/update controls. Live room/crate/research telemetry remains in the safe opaque/non-layered overlay instead of being duplicated in the action GUI.
+
+GitHub upload setup uses `gh auth login --web`; the project does not persist a PAT/password. Successful research actions atomically commit the expected JSON/CSV outputs plus `run-manifest.json` under `research-uploads/<UTC>-<action>/`. Local command logs remain local.
+
+Launchers persist the extracted source root in `%LOCALAPPDATA%\\NMSDerelictSurveyor\\project-root.txt`. The updater downloads the public manifest, reconstructs its base64 package, verifies SHA-256, validates each managed file, and then updates only the extracted source project. Restart is required.
+
+Active v0.3.22 update package: `packages/v0.3.22-delta/part-000.b64` through `part-002.b64`, SHA-256 `e88c49f5aed55158c92c6c35bc5b39f360b87b679337e8aca0efd30187c466ed`. The older `packages/v0.3.22/` folder is incomplete staging and is intentionally not referenced.
+
+Verification of rebuilt v0.3.22: **77/77 unit tests**, Python compileall, packaged JSON parse, and ZIP integrity all pass. Windows CMD/PowerShell execution and first-time GitHub browser authentication still require user-machine smoke testing.
+
+Next action: install/bootstrap v0.3.22, click **Set up GitHub uploads** once, then **Extract dungeon caller code + upload**. When it reports **Complete + uploaded**, the user can tell ChatGPT **check**.
