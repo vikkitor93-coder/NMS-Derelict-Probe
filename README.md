@@ -2,35 +2,31 @@
 
 Read-only No Man's Sky derelict-freighter generation research/modding toolkit.
 
-Current stable package: **v0.3.22**.
+Current stable package: **v0.3.23**.
+
+## v0.3.23 hotfix
+
+v0.3.22 launched GUI GitHub/update/upload helpers with Python's `sys.executable`. Inside the injected pyMHF process that value can be the host game executable (`NMS.exe`), which is why **Set up GitHub uploads** and **Install Surveyor update** could start another No Man's Sky instance.
+
+v0.3.23 fixes the complete helper path:
+
+- launchers persist the verified external Python 3.12/3.13 executable in `%LOCALAPPDATA%\NMSDerelictSurveyor\python-executable.txt`;
+- GitHub setup, update checks/installs, and every research `+ upload` action use that interpreter;
+- only executables whose basename starts with `python` are accepted;
+- non-Python hosts such as `NMS.exe` are refused rather than launched.
+
+Because the updater button itself is affected in v0.3.22, **v0.3.23 must be installed manually once**. From v0.3.23 onward, the GUI updater can be used normally.
 
 ## GitHub workflow
 
-v0.3.22 is the one-time bootstrap for the integrated workflow. After installing it, the pyMHF companion GUI can:
+After v0.3.23 is installed, the pyMHF companion GUI can:
 
 - **Set up GitHub uploads** once using GitHub CLI's credential store;
-- run **Measure derelict generation + upload**;
-- run **Extract dungeon caller code + upload**;
-- run the existing Prepare / Analyze research workflows in the background;
-- **Check for Surveyor update** and **Install Surveyor update** from this repository.
+- **Measure derelict generation + upload**;
+- **Extract dungeon caller code + upload**;
+- run the existing Prepare / Analyze workflows in the background;
+- **Check for Surveyor update** and **Install Surveyor update**.
 
-Successful research actions commit only the expected generated JSON/CSV evidence plus a SHA-256/size run manifest under `research-uploads/<UTC>-<action>/`. Local command logs stay local.
+Successful research actions commit only the expected generated evidence plus a SHA-256/size run manifest under `research-uploads/<UTC>-<action>/`.
 
-Live room/crate/research telemetry remains in the safe external overlay; it is intentionally not duplicated in the action GUI.
-
-## Update package
-
-The active update manifest is `update-manifest.json`.
-
-For v0.3.22 it references the verified three-part delta package under `packages/v0.3.22-delta/`:
-
-- package SHA-256: `e88c49f5aed55158c92c6c35bc5b39f360b87b679337e8aca0efd30187c466ed`
-- delta base: v0.3.20
-- transport: SHA-256-verified base64 chunks
-- update behavior: source-project files only; restart required; no live hot-patching
-
-The interrupted original staging directory has been removed; the active v0.3.22 update package is only `packages/v0.3.22-delta/`.
-
-## Current research target
-
-Recover the deterministic transform from universe/system address to the dungeon-root resource descriptor seed and then to the generated room/container layout. The known 35-container system `00001A0004E84EFD` repeatedly produces root seed `9256392A2F5A74AC`; the current next evidence target is the caller code around RVA `0x00635110`.
+The active updater package is the SHA-256-verified three-part delta under `packages/v0.3.23-delta/`.
