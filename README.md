@@ -4,11 +4,33 @@ Read-only No Man's Sky derelict-freighter generation research/modding toolkit.
 
 Current stable package: **v0.3.22**.
 
-The pyMHF companion GUI can:
-- check/install project updates from this repository (restart required; no live hot-patching);
-- run the existing safe research CMD workflows, including **Measure derelict generation + upload**;
-- automatically upload generated research JSON/CSV evidence under `research-uploads/<UTC-run>-<action>/` after one-time GitHub CLI authentication.
+## GitHub workflow
 
-The in-game overlay remains the place for live room/crate/research telemetry; the pyMHF GUI does not duplicate that overlay data.
+v0.3.22 is the one-time bootstrap for the integrated workflow. After installing it, the pyMHF companion GUI can:
 
-For a research handoff, run a GUI action ending in **+ upload**, wait for **Complete + uploaded**, then tell ChatGPT **check**.
+- **Set up GitHub uploads** once using GitHub CLI's credential store;
+- run **Measure derelict generation + upload**;
+- run **Extract dungeon caller code + upload**;
+- run the existing Prepare / Analyze research workflows in the background;
+- **Check for Surveyor update** and **Install Surveyor update** from this repository.
+
+Successful research actions commit only the expected generated JSON/CSV evidence plus a SHA-256/size run manifest under `research-uploads/<UTC>-<action>/`. Local command logs stay local.
+
+Live room/crate/research telemetry remains in the safe external overlay; it is intentionally not duplicated in the action GUI.
+
+## Update package
+
+The active update manifest is `update-manifest.json`.
+
+For v0.3.22 it references the verified three-part delta package under `packages/v0.3.22-delta/`:
+
+- package SHA-256: `e88c49f5aed55158c92c6c35bc5b39f360b87b679337e8aca0efd30187c466ed`
+- delta base: v0.3.20
+- transport: SHA-256-verified base64 chunks
+- update behavior: source-project files only; restart required; no live hot-patching
+
+The older `packages/v0.3.22/` directory is an abandoned interrupted staging attempt and is not referenced by the active manifest.
+
+## Current research target
+
+Recover the deterministic transform from universe/system address to the dungeon-root resource descriptor seed and then to the generated room/container layout. The known 35-container system `00001A0004E84EFD` repeatedly produces root seed `9256392A2F5A74AC`; the current next evidence target is the caller code around RVA `0x00635110`.
