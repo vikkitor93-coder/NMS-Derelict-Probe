@@ -14,7 +14,7 @@ GitHub upload setup uses `gh auth login --web`; the project does not persist a P
 
 Launchers persist the extracted source root in `%LOCALAPPDATA%\\NMSDerelictSurveyor\\project-root.txt`. The updater downloads the public manifest, reconstructs its base64 package, verifies SHA-256, validates each managed file, and then updates only the extracted source project. Restart is required.
 
-Active v0.3.22 update package: `packages/v0.3.22-delta/part-000.b64` through `part-002.b64`, SHA-256 `e88c49f5aed55158c92c6c35bc5b39f360b87b679337e8aca0efd30187c466ed`. The older `packages/v0.3.22/` folder is incomplete staging and is intentionally not referenced.
+Active v0.3.22 update package: `packages/v0.3.22-delta/part-000.b64` through `part-002.b64`, SHA-256 `e88c49f5aed55158c92c6c35bc5b39f360b87b679337e8aca0efd30187c466ed`. The interrupted original staging folder has been removed; only the verified `packages/v0.3.22-delta/` package remains active.
 
 Verification of rebuilt v0.3.22: **77/77 unit tests**, Python compileall, packaged JSON parse, and ZIP integrity all pass. Windows CMD/PowerShell execution and first-time GitHub browser authentication still require user-machine smoke testing.
 
