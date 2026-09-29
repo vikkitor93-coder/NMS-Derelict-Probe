@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "version": "0.3.21",
+  "version": "0.3.22",
   "repository": "vikkitor93-coder/NMS-Derelict-Probe",
   "branch": "main",
-  "package_url": "https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/main/packages/NMS-Derelict-Probe-v0.3.21.zip",
+  "package_url": "https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/main/packages/NMS-Derelict-Probe-v0.3.22.zip",
   "managed_files": [
     "AI_HANDOFF.md",
     "Analyze-Dungeon-Generation.cmd",
