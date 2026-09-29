@@ -10,8 +10,8 @@
     "packages/v0.3.22-delta/part-001.b64",
     "packages/v0.3.22-delta/part-002.b64"
   ],
-  "package_sha256": "d7236d3cb68fa7c76532c2e876d8db4bc2ad6121f2ac8ec9b664c42963a9da5b",
-  "package_size": 104611,
+  "package_sha256": "e88c49f5aed55158c92c6c35bc5b39f360b87b679337e8aca0efd30187c466ed",
+  "package_size": 104733,
   "managed_files": [
     "AI_HANDOFF.md",
     "Analyze-Dungeon-Generation.cmd",
