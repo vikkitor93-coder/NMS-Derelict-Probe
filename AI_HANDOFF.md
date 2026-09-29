@@ -1,13 +1,24 @@
-# AI handoff — NMS Derelict Probe v0.3.23
+# AI handoff — NMS Derelict Probe v0.3.24
 
-Critical regression fixed: v0.3.22 used `sys.executable` for helper subprocesses from inside injected pyMHF. On the user's machine that resolves to `NMS.exe`, so GUI setup/update buttons started another game instance. v0.3.23 persists the external Python interpreter path from the launcher and refuses any non-Python host executable.
+v0.3.24 is a diagnostics hardening release for the GUI GitHub/research workflow.
 
-This applies to **Set up GitHub uploads**, **Check for Surveyor update**, **Install Surveyor update**, and all research `+ upload` buttons. If no safe Python interpreter is available, the GUI reports an error and launches nothing.
+Observed user evidence: their v0.3.23 `latest.log` showed the probe starting but contained no GitHub/upload action failures. The old workflow runner wrote those failures only to separate `gui-actions` files, so the normal log was silent.
 
-Verification: 79/79 tests pass; Python compileall and ZIP integrity pass.
+v0.3.24 changes:
+- mirrors workflow start/success/failure/exception into `latest.log`;
+- persistent `gui-actions/workflow-latest.log`;
+- per-action + timestamped action logs;
+- `workflow-diagnostic-latest.txt` with sanitized command, return code, stdout/stderr and exceptions;
+- `github-integration.log` with CLI discovery, auth return codes, upload output discovery and API stages/failures;
+- read-only `diagnose` subcommand + **Run GitHub diagnostic** button;
+- **Open workflow log** and **Open workflow diagnostic** buttons;
+- short GUI status/detail strings to avoid right-edge truncation;
+- Windows GitHub web auth runs in a visible console so the device-code prompt cannot be hidden.
 
-Migration: v0.3.22 users must install v0.3.23 manually once because the v0.3.22 updater button is itself affected. After v0.3.23, GitHub self-update is the intended path.
+No PAT/password/token is logged. The v0.3.23 real-Python-only helper fix is preserved.
 
-Research state remains unchanged: address `00001A0004E84EFD` -> root seed `9256392A2F5A74AC`; next evidence target is offline caller code around RVA `0x00635110`.
+Verification: 82/82 tests, Python compileall, all packaged JSON parses, helper smoke tests, ZIP integrity.
 
-Next action after installing v0.3.23: click **Set up GitHub uploads**. It should open GitHub authentication if needed and must not launch NMS. Then use **Extract dungeon caller code + upload** and tell ChatGPT `check`.
+Next user action: update/install v0.3.24, click **Run GitHub diagnostic**, then **Open workflow diagnostic** if anything is not OK. Send that diagnostic file or the updated `latest.log`. After setup succeeds, use **Extract dungeon caller code + upload** and tell ChatGPT `check`.
+
+Research state is unchanged: address `00001A0004E84EFD`, root seed `9256392A2F5A74AC`, next caller-code target around RVA `0x00635110`.
