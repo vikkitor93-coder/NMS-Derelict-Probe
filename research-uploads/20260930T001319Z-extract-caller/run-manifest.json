@@ -1,0 +1,12 @@
+{
+  "action": "extract-caller",
+  "files": [
+    {
+      "name": "dungeon-caller-code-latest.json",
+      "sha256": "dd68088d6d81d78ed0e4b00ed8bcdc461aabd879e657d06de7d9dc646630e118",
+      "size": 42082
+    }
+  ],
+  "utc": "20260930T001319Z",
+  "version": 1
+}
