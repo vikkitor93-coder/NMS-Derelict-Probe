@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "probe_version": "0.3.33",
+  "utc": "2026-09-30T03:08:00.292Z",
+  "method": "all-callers-single-hook-exact-descriptor-correlation",
+  "logical_entry_rva_hex": "00634BC0",
+  "static_direct_reference_count": 52,
+  "recursive_return_rva_hex": "00634C63",
+  "root_resource": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+  "root_descriptor_pointer_hex": "0000017475826D28",
+  "root_seed_hex": "9256392A2F5A74AC",
+  "exact_external_caller": {
+    "utc": "2026-09-30T03:08:00.291Z",
+    "context_pointer_hex": "00000175A21C98D0",
+    "owner_pointer_hex": "0000017475826C00",
+    "descriptor_pointer_hex": "0000017475826D28",
+    "primary_seed_hex": "9256392A2F5A74AC",
+    "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+    "caller_return_offset_hex": "02BFCC1A",
+    "external_origin_caller_return_offset_hex": "02BFCC1A",
+    "recursion_depth": 0,
+    "caller_class": "external",
+    "known_static_candidate": false,
+    "age_ms_at_root_add": 0.74,
+    "resolved_external_caller_return_offset_hex": "02BFCC1A"
+  },
+  "exact_external_caller_return_offset_hex": "02BFCC1A",
+  "unique_callers_observed": 10,
+  "caller_hit_counts": {
+    "0055773B": 994,
+    "0061A87F": 19,
+    "00634C63": 8806,
+    "01235D9B": 88,
+    "015347E0": 88,
+    "01534850": 134,
+    "016B9320": 10782,
+    "017D60D0": 12,
+    "02BFCC1A": 77579,
+    "02BFCD6D": 23460
+  },
+  "interpretation": "All shared-entry callers are observed at once; exact descriptor identity selects the derelict path and the verified self-recursive edge is excluded."
+}
