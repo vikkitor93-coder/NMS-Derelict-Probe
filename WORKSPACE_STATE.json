@@ -1,18 +1,17 @@
 {
-  "schema_version": 2,
-  "updated_utc": "2026-09-30T16:47:00Z",
+  "schema_version": 3,
+  "updated_utc": "2026-09-30T16:55:00Z",
   "integration": {
     "branch": "main",
-    "main_head_at_sync": "6a55209a2b0014012b509c930c46d5497a5a6bd3",
-    "canonical_commit": "8d8d0c61ec14af36f8a87cf6969e8bf9a87f21fe",
     "canonical_version": "0.3.38",
-    "current_objective": "parallel derelict research with isolated Surveyor variants"
+    "current_objective": "parallel derelict research with isolated Surveyor variants",
+    "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay"
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
     "seed-lineage": "claimed",
     "dungeon-decompile": "claimed",
-    "metadata": "free"
+    "metadata": "free-at-last-sync"
   },
   "lanes": {
     "runtime-dispatch": {
@@ -38,7 +37,7 @@
     },
     "metadata": {
       "branch": "agent/metadata",
-      "status": "free-ready-from-current-main",
+      "status": "free-ready-from-current-main-at-last-sync",
       "objective": "Map abandoned-freighter component DungeonOptions/weights, DungeonRootScene, dungeon-table presets and static asset relationships without duplicating runtime/seed/decompile lanes."
     }
   },
@@ -58,16 +57,18 @@
     ]
   },
   "new_agent_start": {
-    "rule": "Always read main first. Do not claim or modify an existing claimed agent branch unless explicitly assigned to that lane.",
+    "rule": "Read AGENT_START_HERE.md first. You are one parallel agent, not the sole project owner. Do not claim or modify an occupied lane unless explicitly assigned.",
     "resume_order": [
+      "AGENT_START_HERE.md",
       "WORKSPACE_STATE.json",
-      "AI_HANDOFF.md",
       "RESEARCH_INDEX.md",
+      "AI_HANDOFF.md",
       "AGENT_WORKFLOW.md",
-      "the assigned lane manifest and only relevant files"
+      "the assigned lane manifest and only relevant files/evidence"
     ],
-    "branch_rule": "For a new independent task, create a fresh branch from current main named agent/<short-lane-id>. The pre-created agent/metadata branch is currently free and synchronized to main.",
-    "output_rule": "Keep experimental Surveyor changes lane-specific, publish a manifest + reproducible patch + tests, and never push experimental changes directly to main."
+    "branch_rule": "For a new independent task, create a fresh branch from current main named agent/<short-lane-id>. Use agent/metadata only if it is still free when you begin.",
+    "output_rule": "Keep experimental Surveyor changes lane-specific, publish a manifest + reproducible patch + tests/evidence, and never push experimental changes directly to main.",
+    "autonomy_rule": "Continue within the lane until the objective is complete, blocked on another lane, or genuine human/local-machine intervention is required."
   },
   "artifact_policy": {
     "complete_zip_storage": "ChatGPT Library",
