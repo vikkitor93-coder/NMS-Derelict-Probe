@@ -1,16 +1,17 @@
 {
   "schema_version": 1,
-  "version": "0.3.29",
+  "version": "0.3.30",
   "repository": "vikkitor93-coder/NMS-Derelict-Probe",
   "branch": "main",
   "package_transport": "base64-chunks",
-  "package_kind": "delta-from-v0.3.28",
+  "package_kind": "delta-from-v0.3.29",
   "package_parts": [
-    "packages/v0.3.29-delta/part-000.b64",
-    "packages/v0.3.29-delta/part-001.b64"
+    "packages/v0.3.30-delta/part-000.b64",
+    "packages/v0.3.30-delta/part-001.b64",
+    "packages/v0.3.30-delta/part-002.b64"
   ],
-  "package_sha256": "ca5ad655fb66a49c99fcdddc6d21165365522e5ef7aa22c646517d65406dc3da",
-  "package_size": 70625,
+  "package_sha256": "e3044db4c3bd9ff7949f32e92a5bff03a3433a54a414d84569d017728f7faef0",
+  "package_size": 77976,
   "managed_files": [
     "AI_HANDOFF.md",
     "CHANGELOG.md",
@@ -19,9 +20,16 @@
     "PROJECT_PLAN.md",
     "README.md",
     "Restart-Surveyor.ps1",
+    "Start-Derelict-Probe-NoOverlay.cmd",
+    "Start-Derelict-Probe.cmd",
+    "Start-NMS.cmd",
+    "Start-NMS.ps1",
+    "Start-Surveyor.cmd",
+    "Start-Surveyor.ps1",
     "VERSION.txt",
     "mod/derelict_baseline_probe.py",
     "tests/test_tools.py",
-    "tools/github_integration.py"
+    "tools/github_integration.py",
+    "tools/surveyor_controller.py"
   ]
 }
