@@ -1,4 +1,12 @@
-# NMS Derelict Probe v0.3.26
+# NMS Derelict Probe v0.3.27
+
+## v0.3.27 — one-click safe restart
+
+The pyMHF companion interface now has **Restart Surveyor**. It saves the active research session first, launches a detached restart helper, requests a normal Windows close of the current NMS process, waits until that process is actually gone, and only then relaunches through the existing Surveyor launcher. It never starts a second NMS while the current instance is still alive.
+
+Restart preserves the most recent launch mode: normal launches return with the external overlay enabled, while `Start-Derelict-Probe-NoOverlay.cmd` launches return in **No Overlay** mode. Both launchers persist that preference in `%LOCALAPPDATA%\NMSDerelictSurveyor\launch-mode.txt`. Restart diagnostics are written to `gui-actions\restart-latest.log`.
+
+The helper deliberately **does not force-kill NMS**. If Windows cannot close the game cleanly within 30 seconds, it logs the failure and leaves the current process alone rather than risking a save/write interruption.
 
 ## v0.3.26 — move one function upstream without launching NMS
 
