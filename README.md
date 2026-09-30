@@ -1,34 +1,31 @@
 # NMS Derelict Probe
 
-Current stable package: **v0.3.24**.
+Current stable package: **v0.3.25**.
 
-## v0.3.24 — diagnosable GitHub/upload workflow
+## v0.3.25 — fixed upload execution and clipped workflow text
 
-This release fixes the main diagnostics gap in the v0.3.23 GUI workflow.
+The v0.3.24 diagnostic proved GitHub itself was healthy: GitHub CLI installed, authentication OK, repository API access OK, and push permission true. The failure occurred before GitHub because the GUI built one quoted `cmd.exe /s /c ... && ...` chain and Windows rejected the quoted CMD path.
 
-Every GUI research/GitHub action now leaves durable evidence in:
+v0.3.25 removes that shell chain.
 
-- `%LOCALAPPDATA%\NMSDerelictSurveyor\latest.log` — start/success/failure/exception events;
-- `%LOCALAPPDATA%\NMSDerelictSurveyor\gui-actions\workflow-latest.log` — combined action history;
-- `gui-actions\latest-<action>.log` — latest output for one action;
-- timestamped action logs;
-- `gui-actions\workflow-diagnostic-latest.txt` — command, return code, stdout/stderr;
-- `gui-actions\github-integration.log` — GitHub CLI/auth/API/upload stages;
-- `gui-actions\github-diagnostic-latest.txt` — read-only GitHub diagnostic.
+GUI research/upload actions now run as two explicit background steps:
 
-New GUI buttons:
+1. **Run research command**
+2. **Upload generated evidence**
 
-- **Open workflow log**
-- **Open workflow diagnostic**
-- **Run GitHub diagnostic**
+PowerShell-backed workflows launch their `.ps1` file directly. Caller extraction launches its Python tool directly. Step 2 runs only when step 1 returns exit code 0. Normal research/upload actions remain hidden/background and do not open an empty CMD window.
 
-The GUI status text is intentionally short so it remains readable in pyMHF's non-wrapping fields.
+pyMHF STRING rows do not word-wrap, so the old long workflow detail field is replaced by three short rows: **Workflow message 1 / 2 / 3**. Long information is split across rows rather than disappearing off the right edge.
 
-When GitHub CLI authentication is required on Windows, `gh auth login --web` opens in a visible console so the one-time device-code prompt is not hidden.
+Persistent diagnostics from v0.3.24 remain available:
+- `gui-actions/workflow-latest.log`
+- per-action and timestamped logs
+- `gui-actions/workflow-diagnostic-latest.txt`
+- `gui-actions/github-integration.log`
+- `gui-actions/github-diagnostic-latest.txt`
+- mirrored workflow events in normal `latest.log`
 
-The v0.3.23 safety fix remains: helper actions resolve only a real Python interpreter and never use injected `NMS.exe`.
+Active update package: `packages/v0.3.25-delta/`
+SHA-256: `508c9320461aadf6329a48d4ec3d826d5e566aa9b18eef66d82bb86d8e33bff6`
 
-Active update package: `packages/v0.3.24-delta/`
-SHA-256: `923ed244cdec57ccc8d28e7940e1c993999ebe9a7ee8dc39db9f6b1be9115c30`
-
-Verification: **82/82 tests**, compileall, JSON parse, helper diagnostic/failure smoke tests, ZIP integrity.
+Verification: **85/85 tests**, Python compileall, packaged JSON parse, ZIP integrity.
