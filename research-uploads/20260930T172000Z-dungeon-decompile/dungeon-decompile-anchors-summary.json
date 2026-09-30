@@ -1,0 +1,1375 @@
+{
+  "schema_version": 1,
+  "lane": "agent/dungeon-decompile",
+  "run_id": "20260930T172000Z-dungeon-decompile",
+  "tool_version": "0.3.38-DUNGEON-C",
+  "method": "offline-pe-derelict-anchor-xref-scan",
+  "input": {
+    "file_name": "NMS.exe",
+    "file_size": 88545352,
+    "sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "pe_timestamp_hex": "6ABB9CC5",
+    "image_base_hex": "0000000140000000"
+  },
+  "exact_root_return_rva_hex": "02BFCC1A",
+  "anchor_summary": [
+    {
+      "id": "freighter_dungeons_table_path",
+      "confidence": "derelict-specific",
+      "occurrence_count": 2,
+      "occurrences": [
+        {
+          "section": ".rdata",
+          "rva_hex": "034F4772",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": []
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "04AC6253",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": []
+        }
+      ]
+    },
+    {
+      "id": "dungeon_root_scene_path",
+      "confidence": "derelict-specific",
+      "occurrence_count": 1,
+      "occurrences": [
+        {
+          "section": ".rdata",
+          "rva_hex": "04AA5F21",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": []
+        }
+      ]
+    },
+    {
+      "id": "abandoned_freighter_component_type",
+      "confidence": "public-metadata",
+      "occurrence_count": 17,
+      "occurrences": [
+        {
+          "section": ".text",
+          "rva_hex": "010FCE01",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "010FCE01",
+              "target_rva_hex": "010FCE01",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023B64E3",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023B64E3",
+              "target_rva_hex": "023B64E3",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023B6598",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023B6598",
+              "target_rva_hex": "023B6598",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023B65A9",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023B65A9",
+              "target_rva_hex": "023B65A9",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023B6D0E",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023B6D0E",
+              "target_rva_hex": "023B6D0E",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "023B6D00",
+                "end_rva_exclusive_hex": "023B6D1E",
+                "byte_count": 30,
+                "unwind_info_rva_hex": "04D25D14",
+                "pdata_entry_rva_hex": "074B2B2C"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023B8491",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023B8491",
+              "target_rva_hex": "023B8491",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "023B8460",
+                "end_rva_exclusive_hex": "023B84BA",
+                "byte_count": 90,
+                "unwind_info_rva_hex": "04C83D34",
+                "pdata_entry_rva_hex": "074B3024"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023B93D6",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023B93D6",
+              "target_rva_hex": "023B93D6",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "023B9260",
+                "end_rva_exclusive_hex": "023B93E1",
+                "byte_count": 385,
+                "unwind_info_rva_hex": "04BF576C",
+                "pdata_entry_rva_hex": "074B3198"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023BA4B7",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023BA4B7",
+              "target_rva_hex": "023BA4B7",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "023BA4A0",
+                "end_rva_exclusive_hex": "023BA56B",
+                "byte_count": 203,
+                "unwind_info_rva_hex": "04BF3A38",
+                "pdata_entry_rva_hex": "074B32C4"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023BAF02",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023BAF02",
+              "target_rva_hex": "023BAF02",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "023BAEE0",
+                "end_rva_exclusive_hex": "023BAFF1",
+                "byte_count": 273,
+                "unwind_info_rva_hex": "04BF4CAC",
+                "pdata_entry_rva_hex": "074B33F0"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023BB453",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023BB453",
+              "target_rva_hex": "023BB453",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023BC2AD",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023BC2AD",
+              "target_rva_hex": "023BC2AD",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "023BC290",
+                "end_rva_exclusive_hex": "023BC2F8",
+                "byte_count": 104,
+                "unwind_info_rva_hex": "04BF3A38",
+                "pdata_entry_rva_hex": "074B35E8"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023BDB58",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023BDB58",
+              "target_rva_hex": "023BDB58",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "023BDB40",
+                "end_rva_exclusive_hex": "023BDD1A",
+                "byte_count": 474,
+                "unwind_info_rva_hex": "04CDC208",
+                "pdata_entry_rva_hex": "074B372C"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "023BFC53",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": [
+            {
+              "instruction_rva_hex": "023BFC53",
+              "target_rva_hex": "023BFC53",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03487360",
+          "encoding": "u32-le",
+          "value_hex": "06F8085E",
+          "code_references": []
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03487368",
+          "encoding": "u64-le",
+          "value_hex": "7993F7B402A1267D",
+          "code_references": []
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03487BE0",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": [
+            {
+              "instruction_rva_hex": "023BDC6C",
+              "target_rva_hex": "03487BE0",
+              "kind": null,
+              "runtime_function": {
+                "begin_rva_hex": "023BDB40",
+                "end_rva_exclusive_hex": "023BDD1A",
+                "byte_count": 474,
+                "unwind_info_rva_hex": "04CDC208",
+                "pdata_entry_rva_hex": "074B372C"
+              }
+            },
+            {
+              "instruction_rva_hex": "023BDC8B",
+              "target_rva_hex": "03487BE0",
+              "kind": null,
+              "runtime_function": {
+                "begin_rva_hex": "023BDB40",
+                "end_rva_exclusive_hex": "023BDD1A",
+                "byte_count": 474,
+                "unwind_info_rva_hex": "04CDC208",
+                "pdata_entry_rva_hex": "074B372C"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "04AC61D1",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": []
+        }
+      ]
+    },
+    {
+      "id": "freighter_dungeon_params_type",
+      "confidence": "public-metadata",
+      "occurrence_count": 15,
+      "occurrences": [
+        {
+          "section": ".text",
+          "rva_hex": "020F637F",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": [
+            {
+              "instruction_rva_hex": "020F637F",
+              "target_rva_hex": "020F637F",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "020F6370",
+                "end_rva_exclusive_hex": "020F63EE",
+                "byte_count": 126,
+                "unwind_info_rva_hex": "04BF3A58",
+                "pdata_entry_rva_hex": "0749389C"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "020F6390",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": [
+            {
+              "instruction_rva_hex": "020F6390",
+              "target_rva_hex": "020F6390",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "020F6370",
+                "end_rva_exclusive_hex": "020F63EE",
+                "byte_count": 126,
+                "unwind_info_rva_hex": "04BF3A58",
+                "pdata_entry_rva_hex": "0749389C"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "020F6E4E",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": [
+            {
+              "instruction_rva_hex": "020F6E4E",
+              "target_rva_hex": "020F6E4E",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "020F6E40",
+                "end_rva_exclusive_hex": "020F6E5E",
+                "byte_count": 30,
+                "unwind_info_rva_hex": "04CE35E8",
+                "pdata_entry_rva_hex": "074939C8"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "020F8531",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": [
+            {
+              "instruction_rva_hex": "020F8531",
+              "target_rva_hex": "020F8531",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "020F8500",
+                "end_rva_exclusive_hex": "020F85DD",
+                "byte_count": 221,
+                "unwind_info_rva_hex": "04BF45D4",
+                "pdata_entry_rva_hex": "07493E6C"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "020F956F",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": [
+            {
+              "instruction_rva_hex": "020F956F",
+              "target_rva_hex": "020F956F",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "020F9430",
+                "end_rva_exclusive_hex": "020F9579",
+                "byte_count": 329,
+                "unwind_info_rva_hex": "04BFB1F4",
+                "pdata_entry_rva_hex": "07493FC8"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "020FA77D",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": [
+            {
+              "instruction_rva_hex": "020FA77D",
+              "target_rva_hex": "020FA77D",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "020FA770",
+                "end_rva_exclusive_hex": "020FA7D4",
+                "byte_count": 100,
+                "unwind_info_rva_hex": "04BF3A58",
+                "pdata_entry_rva_hex": "074940F4"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "020FB153",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": [
+            {
+              "instruction_rva_hex": "020FB153",
+              "target_rva_hex": "020FB153",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "020FB9CD",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": [
+            {
+              "instruction_rva_hex": "020FB9CD",
+              "target_rva_hex": "020FB9CD",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "020FB9C0",
+                "end_rva_exclusive_hex": "020FB9DE",
+                "byte_count": 30,
+                "unwind_info_rva_hex": "04BF6F0C",
+                "pdata_entry_rva_hex": "07494298"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "020FC8FD",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": [
+            {
+              "instruction_rva_hex": "020FC8FD",
+              "target_rva_hex": "020FC8FD",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "020FC8E0",
+                "end_rva_exclusive_hex": "020FC948",
+                "byte_count": 104,
+                "unwind_info_rva_hex": "04BF3A38",
+                "pdata_entry_rva_hex": "07494448"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "020FE348",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": [
+            {
+              "instruction_rva_hex": "020FE348",
+              "target_rva_hex": "020FE348",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "020FE330",
+                "end_rva_exclusive_hex": "020FE50A",
+                "byte_count": 474,
+                "unwind_info_rva_hex": "04CDC208",
+                "pdata_entry_rva_hex": "0749458C"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "020FFED3",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": [
+            {
+              "instruction_rva_hex": "020FFED3",
+              "target_rva_hex": "020FFED3",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03470F48",
+          "encoding": "u32-le",
+          "value_hex": "72ADBEFC",
+          "code_references": []
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03470F50",
+          "encoding": "u64-le",
+          "value_hex": "06EE56BC9B1C348C",
+          "code_references": []
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "034712B9",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": []
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03471570",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": [
+            {
+              "instruction_rva_hex": "020FE45C",
+              "target_rva_hex": "03471570",
+              "kind": null,
+              "runtime_function": {
+                "begin_rva_hex": "020FE330",
+                "end_rva_exclusive_hex": "020FE50A",
+                "byte_count": 474,
+                "unwind_info_rva_hex": "04CDC208",
+                "pdata_entry_rva_hex": "0749458C"
+              }
+            },
+            {
+              "instruction_rva_hex": "020FE47B",
+              "target_rva_hex": "03471570",
+              "kind": null,
+              "runtime_function": {
+                "begin_rva_hex": "020FE330",
+                "end_rva_exclusive_hex": "020FE50A",
+                "byte_count": 474,
+                "unwind_info_rva_hex": "04CDC208",
+                "pdata_entry_rva_hex": "0749458C"
+              }
+            },
+            {
+              "instruction_rva_hex": "02AA9318",
+              "target_rva_hex": "03471570",
+              "kind": null,
+              "runtime_function": {
+                "begin_rva_hex": "02AA92F0",
+                "end_rva_exclusive_hex": "02AA932E",
+                "byte_count": 62,
+                "unwind_info_rva_hex": "04BF477C",
+                "pdata_entry_rva_hex": "074F0FB0"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dungeon_generation_params_type",
+      "confidence": "public-metadata",
+      "occurrence_count": 20,
+      "occurrences": [
+        {
+          "section": ".text",
+          "rva_hex": "02113E68",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "02113E68",
+              "target_rva_hex": "02113E68",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "02113E79",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "02113E79",
+              "target_rva_hex": "02113E79",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "0211456D",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "0211456D",
+              "target_rva_hex": "0211456D",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "02114560",
+                "end_rva_exclusive_hex": "0211457D",
+                "byte_count": 29,
+                "unwind_info_rva_hex": "04C0AFAC",
+                "pdata_entry_rva_hex": "07495258"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "021158EC",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "021158EC",
+              "target_rva_hex": "021158EC",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "021158C0",
+                "end_rva_exclusive_hex": "021159B2",
+                "byte_count": 242,
+                "unwind_info_rva_hex": "04BFB1F4",
+                "pdata_entry_rva_hex": "07495690"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "02116656",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "02116656",
+              "target_rva_hex": "02116656",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "021165A0",
+                "end_rva_exclusive_hex": "02116732",
+                "byte_count": 402,
+                "unwind_info_rva_hex": "04BF3928",
+                "pdata_entry_rva_hex": "07495780"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "02116725",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "02116725",
+              "target_rva_hex": "02116725",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "021165A0",
+                "end_rva_exclusive_hex": "02116732",
+                "byte_count": 402,
+                "unwind_info_rva_hex": "04BF3928",
+                "pdata_entry_rva_hex": "07495780"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "02117789",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "02117789",
+              "target_rva_hex": "02117789",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "02117780",
+                "end_rva_exclusive_hex": "021177CA",
+                "byte_count": 74,
+                "unwind_info_rva_hex": "04BF398C",
+                "pdata_entry_rva_hex": "07495870"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "02117F8D",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "02117F8D",
+              "target_rva_hex": "02117F8D",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "02117F80",
+                "end_rva_exclusive_hex": "02117FBD",
+                "byte_count": 61,
+                "unwind_info_rva_hex": "04BFC9C0",
+                "pdata_entry_rva_hex": "07495960"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "021184E3",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "021184E3",
+              "target_rva_hex": "021184E3",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "0211914D",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "0211914D",
+              "target_rva_hex": "0211914D",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "02119130",
+                "end_rva_exclusive_hex": "02119198",
+                "byte_count": 104,
+                "unwind_info_rva_hex": "04BF3A38",
+                "pdata_entry_rva_hex": "07495B40"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "0211A488",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "0211A488",
+              "target_rva_hex": "0211A488",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": {
+                "begin_rva_hex": "0211A470",
+                "end_rva_exclusive_hex": "0211A64A",
+                "byte_count": 474,
+                "unwind_info_rva_hex": "04CDC208",
+                "pdata_entry_rva_hex": "07495C48"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".text",
+          "rva_hex": "0211BC23",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": [
+            {
+              "instruction_rva_hex": "0211BC23",
+              "target_rva_hex": "0211BC23",
+              "kind": "anchor-bytes-in-text",
+              "runtime_function": null
+            }
+          ]
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03471590",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": [
+            {
+              "instruction_rva_hex": "021065B7",
+              "target_rva_hex": "03471590",
+              "kind": null,
+              "runtime_function": {
+                "begin_rva_hex": "02106457",
+                "end_rva_exclusive_hex": "0210660D",
+                "byte_count": 438,
+                "unwind_info_rva_hex": "04D10A18",
+                "pdata_entry_rva_hex": "07494C1C"
+              }
+            },
+            {
+              "instruction_rva_hex": "0211A59C",
+              "target_rva_hex": "03471590",
+              "kind": null,
+              "runtime_function": {
+                "begin_rva_hex": "0211A470",
+                "end_rva_exclusive_hex": "0211A64A",
+                "byte_count": 474,
+                "unwind_info_rva_hex": "04CDC208",
+                "pdata_entry_rva_hex": "07495C48"
+              }
+            },
+            {
+              "instruction_rva_hex": "0211A5BB",
+              "target_rva_hex": "03471590",
+              "kind": null,
+              "runtime_function": {
+                "begin_rva_hex": "0211A470",
+                "end_rva_exclusive_hex": "0211A64A",
+                "byte_count": 474,
+                "unwind_info_rva_hex": "04CDC208",
+                "pdata_entry_rva_hex": "07495C48"
+              }
+            }
+          ]
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03471908",
+          "encoding": "u32-le",
+          "value_hex": "6A576804",
+          "code_references": []
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03471910",
+          "encoding": "u64-le",
+          "value_hex": "E7D601F5368CC57E",
+          "code_references": []
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03471C19",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": []
+        },
+        {
+          "section": ".data",
+          "rva_hex": "050CC4ED",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": []
+        },
+        {
+          "section": ".data",
+          "rva_hex": "050FD6C6",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": []
+        },
+        {
+          "section": ".data",
+          "rva_hex": "0515DF14",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": []
+        },
+        {
+          "section": ".data",
+          "rva_hex": "051B024D",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": []
+        }
+      ]
+    },
+    {
+      "id": "freighter_dungeon_choice_type",
+      "confidence": "public-metadata",
+      "occurrence_count": 3,
+      "occurrences": [
+        {
+          "section": ".rdata",
+          "rva_hex": "03470ED8",
+          "encoding": "u64-le",
+          "value_hex": "078AE72738A1A3C8",
+          "code_references": []
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03471241",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": []
+        },
+        {
+          "section": ".rdata",
+          "rva_hex": "03471550",
+          "encoding": "ascii",
+          "value_hex": null,
+          "code_references": [
+            {
+              "instruction_rva_hex": "020FE302",
+              "target_rva_hex": "03471550",
+              "kind": null,
+              "runtime_function": {
+                "begin_rva_hex": "020FE2E0",
+                "end_rva_exclusive_hex": "020FE327",
+                "byte_count": 71,
+                "unwind_info_rva_hex": "04BF477C",
+                "pdata_entry_rva_hex": "07494580"
+              }
+            },
+            {
+              "instruction_rva_hex": "023C54BC",
+              "target_rva_hex": "03471550",
+              "kind": null,
+              "runtime_function": {
+                "begin_rva_hex": "023C5460",
+                "end_rva_exclusive_hex": "023C56BF",
+                "byte_count": 607,
+                "unwind_info_rva_hex": "04CE81A4",
+                "pdata_entry_rva_hex": "074B3C3C"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "candidate_function_count": 38,
+  "candidate_functions": [
+    {
+      "begin_rva_hex": "023BDB40",
+      "end_rva_exclusive_hex": "023BDD1A",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 3,
+      "distance_from_exact_root_return": 8646874
+    },
+    {
+      "begin_rva_hex": "0211A470",
+      "end_rva_exclusive_hex": "0211A64A",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 3,
+      "distance_from_exact_root_return": 11413418
+    },
+    {
+      "begin_rva_hex": "020FE330",
+      "end_rva_exclusive_hex": "020FE50A",
+      "anchor_ids": [
+        "freighter_dungeon_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 3,
+      "distance_from_exact_root_return": 11528426
+    },
+    {
+      "begin_rva_hex": "021165A0",
+      "end_rva_exclusive_hex": "02116732",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 2,
+      "distance_from_exact_root_return": 11429498
+    },
+    {
+      "begin_rva_hex": "020F6370",
+      "end_rva_exclusive_hex": "020F63EE",
+      "anchor_ids": [
+        "freighter_dungeon_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 2,
+      "distance_from_exact_root_return": 11561130
+    },
+    {
+      "begin_rva_hex": "02AA92F0",
+      "end_rva_exclusive_hex": "02AA932E",
+      "anchor_ids": [
+        "freighter_dungeon_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 1390890
+    },
+    {
+      "begin_rva_hex": "023C5460",
+      "end_rva_exclusive_hex": "023C56BF",
+      "anchor_ids": [
+        "freighter_dungeon_choice_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8615866
+    },
+    {
+      "begin_rva_hex": "023BFC53",
+      "end_rva_exclusive_hex": "023BFC54",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8638407
+    },
+    {
+      "begin_rva_hex": "023BC290",
+      "end_rva_exclusive_hex": "023BC2F8",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8653194
+    },
+    {
+      "begin_rva_hex": "023BB453",
+      "end_rva_exclusive_hex": "023BB454",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8656839
+    },
+    {
+      "begin_rva_hex": "023BAEE0",
+      "end_rva_exclusive_hex": "023BAFF1",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8658234
+    },
+    {
+      "begin_rva_hex": "023BA4A0",
+      "end_rva_exclusive_hex": "023BA56B",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8660858
+    },
+    {
+      "begin_rva_hex": "023B9260",
+      "end_rva_exclusive_hex": "023B93E1",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8665530
+    },
+    {
+      "begin_rva_hex": "023B8460",
+      "end_rva_exclusive_hex": "023B84BA",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8669114
+    },
+    {
+      "begin_rva_hex": "023B6D00",
+      "end_rva_exclusive_hex": "023B6D1E",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8675098
+    },
+    {
+      "begin_rva_hex": "023B65A9",
+      "end_rva_exclusive_hex": "023B65AA",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8676977
+    },
+    {
+      "begin_rva_hex": "023B6598",
+      "end_rva_exclusive_hex": "023B6599",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8676994
+    },
+    {
+      "begin_rva_hex": "023B64E3",
+      "end_rva_exclusive_hex": "023B64E4",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 8677175
+    },
+    {
+      "begin_rva_hex": "0211BC23",
+      "end_rva_exclusive_hex": "0211BC24",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11407351
+    },
+    {
+      "begin_rva_hex": "02119130",
+      "end_rva_exclusive_hex": "02119198",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11418346
+    },
+    {
+      "begin_rva_hex": "021184E3",
+      "end_rva_exclusive_hex": "021184E4",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11421495
+    },
+    {
+      "begin_rva_hex": "02117F80",
+      "end_rva_exclusive_hex": "02117FBD",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11422874
+    },
+    {
+      "begin_rva_hex": "02117780",
+      "end_rva_exclusive_hex": "021177CA",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11424922
+    },
+    {
+      "begin_rva_hex": "021158C0",
+      "end_rva_exclusive_hex": "021159B2",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11432794
+    },
+    {
+      "begin_rva_hex": "02114560",
+      "end_rva_exclusive_hex": "0211457D",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11437754
+    },
+    {
+      "begin_rva_hex": "02113E79",
+      "end_rva_exclusive_hex": "02113E7A",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11439521
+    },
+    {
+      "begin_rva_hex": "02113E68",
+      "end_rva_exclusive_hex": "02113E69",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11439538
+    },
+    {
+      "begin_rva_hex": "02106457",
+      "end_rva_exclusive_hex": "0210660D",
+      "anchor_ids": [
+        "dungeon_generation_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11495363
+    },
+    {
+      "begin_rva_hex": "020FFED3",
+      "end_rva_exclusive_hex": "020FFED4",
+      "anchor_ids": [
+        "freighter_dungeon_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11521351
+    },
+    {
+      "begin_rva_hex": "020FE2E0",
+      "end_rva_exclusive_hex": "020FE327",
+      "anchor_ids": [
+        "freighter_dungeon_choice_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11528506
+    },
+    {
+      "begin_rva_hex": "020FC8E0",
+      "end_rva_exclusive_hex": "020FC948",
+      "anchor_ids": [
+        "freighter_dungeon_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11535162
+    },
+    {
+      "begin_rva_hex": "020FB9C0",
+      "end_rva_exclusive_hex": "020FB9DE",
+      "anchor_ids": [
+        "freighter_dungeon_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11539034
+    },
+    {
+      "begin_rva_hex": "020FB153",
+      "end_rva_exclusive_hex": "020FB154",
+      "anchor_ids": [
+        "freighter_dungeon_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11541191
+    },
+    {
+      "begin_rva_hex": "020FA770",
+      "end_rva_exclusive_hex": "020FA7D4",
+      "anchor_ids": [
+        "freighter_dungeon_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11543722
+    },
+    {
+      "begin_rva_hex": "020F9430",
+      "end_rva_exclusive_hex": "020F9579",
+      "anchor_ids": [
+        "freighter_dungeon_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11548650
+    },
+    {
+      "begin_rva_hex": "020F8500",
+      "end_rva_exclusive_hex": "020F85DD",
+      "anchor_ids": [
+        "freighter_dungeon_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11552538
+    },
+    {
+      "begin_rva_hex": "020F6E40",
+      "end_rva_exclusive_hex": "020F6E5E",
+      "anchor_ids": [
+        "freighter_dungeon_params_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 11558362
+    },
+    {
+      "begin_rva_hex": "010FCE01",
+      "end_rva_exclusive_hex": "010FCE02",
+      "anchor_ids": [
+        "abandoned_freighter_component_type"
+      ],
+      "distinct_anchor_count": 1,
+      "reference_count": 1,
+      "distance_from_exact_root_return": 28311065
+    }
+  ],
+  "conclusion": {
+    "consumer_function_identified": false,
+    "multi_anchor_candidates": 0,
+    "interpretation": "The scan found metadata/type-anchor references, but no candidate function was supported by more than one distinct anchor family. No candidate is confirmed as the derelict dungeon generator. The path-string anchors had no code references in this scanner. Treat all candidates as triage-only."
+  },
+  "raw_output_sha256": "e4eec77b6323396f6e9f9f31bebe58b9cfa11697c209255b6907f1d4218f9ceb",
+  "raw_output_local_path": "/tmp/dungeon-decompile-anchors-latest.json"
+}
