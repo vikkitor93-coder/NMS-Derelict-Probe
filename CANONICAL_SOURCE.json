@@ -1,34 +1,32 @@
 {
   "schema_version": 2,
-  "version": "0.3.39",
-  "status": "canonical-verified-source-package",
+  "version": "0.3.40",
+  "status": "verified-release-source-package",
   "artifact": {
-    "storage": "chatgpt-library",
-    "library_path": "/NMS modding/NMS-Derelict-Probe-v0.3.39-Agent-Console.zip",
-    "file_name": "NMS-Derelict-Probe-v0.3.39-Agent-Console.zip",
-    "sha256": "b896d51193dba98badc4021b901bfba235d34e296e52e42e7acc9ec23013ea4f",
-    "size_bytes": 319862,
-    "files": 108,
-    "library_file_id": "libfile_27a84e0c71108191a9911428bdcbb3de"
+    "storage": "github-base64-chunks-and-local-zip",
+    "file_name": "NMS-Derelict-Probe-v0.3.40-live-output.zip",
+    "sha256": "7c0da2344c479b832b0bf1a3e4d3b72ab0bcf9390e1c6af1b200b6b68e693520",
+    "size_bytes": 314940,
+    "files": 109
   },
   "repository_transport": {
     "status": "reproducible-base64-chunks",
-    "reason": "GitHub update-manifest serves the exact complete ZIP as base64 chunks after this integration PR is merged; the Library artifact remains the direct-download package."
+    "reason": "The main-branch update manifest serves the verified complete ZIP as base64 chunks after integration; the local ZIP is available for direct download."
   },
   "verification": {
-    "unit_tests": "119/119 passed",
+    "unit_tests": "120/120 passed",
     "compileall": "passed",
     "json_files_parsed": 37,
-    "runtime_logic_changed": false
+    "runtime_logic_changed": true
   },
   "resume": {
-    "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json first, then AI_HANDOFF.md and RESEARCH_INDEX.md; materialize the exact Library artifact only when full source bytes are needed.",
+    "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json first; reconstruct the exact ZIP from the package chunks when full source bytes are needed.",
     "research_agent": "Use the lane manifest/patch and branch. Do not rely on private chat context.",
     "integration_agent": "Verify the artifact SHA-256 before applying a lane patch or producing a new complete ZIP."
   },
   "notes": [
-    "This Library artifact is the verified complete v0.3.39 source package, based on canonical v0.3.38.",
-    "The new Agent Console is read-only and does not change NMS runtime/probe behavior or existing controller/probe protocols.",
-    "The in-app update path advances to v0.3.39 when the integration PR updates the main-branch manifest and package chunks."
+    "This verified v0.3.40 source package builds on the v0.3.39 Agent Console release.",
+    "Issue #7 changes only the standalone controller research workflow display and adds a focused test; NMS probe and controller command protocol are unchanged.",
+    "The in-app update path advances to v0.3.40 only after this branch and its Agent Console dependency reach main."
   ]
 }
