@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "lane": "agent/dungeon-decompile",
+  "status": "analysis-of-post-7.05-capture",
+  "source": "main branch research uploads; post-7.05 attribution supplied by user",
+  "source_evidence": {
+    "generation_baseline": {
+      "path": "research-uploads/20260930T174712Z-analyze-generation/generation-baseline-latest.json",
+      "sha256": "22303225707d1dd8b08288c8bc2eacee70f11d64c9a6e2119a963fa9d72f4df0"
+    },
+    "measurements_summary": {
+      "path": "research-uploads/20260930T174647Z-measure/generation-measurements-summary.json",
+      "sha256": "0c8b86e923f11119482ca10c32fe249f2979e6e60771b3678a47c88c3b1ef101"
+    }
+  },
+  "post_update_observation": {
+    "session_id": "20260930T173540Z_00001A0004E84EFD",
+    "probe_version": "0.3.33",
+    "universe_address_hex": "00001A0004E84EFD",
+    "dungeon_root_seed_hex": "9256392A2F5A74AC",
+    "dungeon_root_seed_status": "candidate-captured-unverified",
+    "preset": "MEDI_FLOATERS",
+    "preset_confidence": "high",
+    "logical_generated_chunks": 10,
+    "observed_main_rooms": 8,
+    "observed_dead_end_rooms": 2,
+    "observed_total_rooms": 10,
+    "table_rooms_value": 7,
+    "main_room_count_matches_table": false,
+    "room_model_status": "needs-review",
+    "room_parent_index_coverage": 10,
+    "analyzer_container_counts": {
+      "salvage_crates": 11,
+      "crew_footlockers": 5,
+      "target_containers": 16,
+      "qualification": "baseline fields are predicted counts; do not call them independently verified physical counts"
+    },
+    "dungeon_scene_instances": 150,
+    "layout_signature_sha256": "53c7cc058100d09de4f1d7633f23379a6bd66dc6c82af96ebf5d053746636be4",
+    "layout_multiset_signature_sha256": "2f8395fe9f2cef2f93ebaae548885fa8b15faea36a59e3c771297038b04b8f70"
+  },
+  "historical_pre_update_reference": {
+    "session_id": "20260929T183320Z_00001A0004E84EFD",
+    "probe_version": "0.3.13",
+    "universe_address_hex": "00001A0004E84EFD",
+    "dungeon_root_seed_hex": "9256392A2F5A74AC",
+    "preset": "CARGO_FLOATERS",
+    "main_rooms": 7,
+    "dead_end_rooms": 1,
+    "total_rooms": 8,
+    "target_containers": 35,
+    "room_model_status": "validated-against-table",
+    "layout_signature_sha256": "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536",
+    "treatment": "historical; not the current post-7.05 layout"
+  },
+  "findings": {
+    "measured_or_reported": "The new capture and historical capture both record the same universe address and root-seed candidate while differing in inferred preset, room composition and layout signature.",
+    "confirmed_from_analyzer": "Current capture infers MEDI_FLOATERS with high confidence; its model has 8 main + 2 dead-end rooms; table Rooms is 7; room_model_status is needs-review.",
+    "inference": "The changed preset/layout is consistent with the user-reported 7.05 generation change; this is one post-update sample and does not establish repeatability or a changed seed derivation.",
+    "not_proven": [
+      "root seed validity beyond captured candidate status",
+      "deterministic post-update output across repeated runs",
+      "why runtime main-room count exceeds the parsed table Rooms value",
+      "the NMS function consuming GcDungeonGenerationParams"
+    ]
+  },
+  "dungeon_c_static_result": {
+    "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "candidate_function_count": 38,
+    "multi_anchor_candidates": 0,
+    "conclusion": "Top references inspected so far are schema/type handling or defaults initialization; no consumer/generator function identified."
+  },
+  "next_action": {
+    "dependency_lane": "agent/runtime-dispatch",
+    "reason": "Need the post-update live value at owner+0x10 and its target/thunk bytes, correlated with owner+0x128 root descriptor, to refine the runtime call path. This evidence may expose a path for generator/caller decompilation.",
+    "human_recipe": "Open Surveyor RUNTIME-A > Start NMS > load the known derelict in system 00001A0004E84EFD > wait until the Root dispatch +0x10 capture reports success > click Analyze generation + upload > tell Main AI \"check\".",
+    "full_derelict_traversal_required": false
+  }
+}
