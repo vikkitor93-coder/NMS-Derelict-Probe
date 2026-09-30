@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "version": "0.3.32",
+  "version": "0.3.33",
   "repository": "vikkitor93-coder/NMS-Derelict-Probe",
   "branch": "main",
   "package_transport": "base64-chunks",
-  "package_kind": "delta-from-v0.3.31",
+  "package_kind": "delta-from-v0.3.32",
   "package_parts": [
-    "packages/v0.3.32-delta/part-000.b64",
-    "packages/v0.3.32-delta/part-001.b64",
-    "packages/v0.3.32-delta/part-002.b64"
+    "packages/v0.3.33-delta/part-000.b64",
+    "packages/v0.3.33-delta/part-001.b64",
+    "packages/v0.3.33-delta/part-002.b64"
   ],
-  "package_sha256": "9d2679f80b7ef685094dd010718a1a77fa53008a65ce1e19f00f3cbdf5c36974",
-  "package_size": 89183,
+  "package_sha256": "2100b553c1f043d51a4c2e4b3cd8f7aa9dccfa1c2031dd6e53c8dedfcd33d240",
+  "package_size": 98923,
   "managed_files": [
     "AI_HANDOFF.md",
     "CHANGELOG.md",
@@ -23,6 +23,7 @@
     "tools/analyze_generation_baseline.py",
     "tools/analyze_nms_seed_function.py",
     "tools/extract_nms_upstream_callers.py",
+    "tools/github_integration.py",
     "tools/surveyor_controller.py"
   ]
 }
