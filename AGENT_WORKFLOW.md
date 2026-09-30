@@ -16,6 +16,8 @@ Use a separate Git worktree or clone for every lane. Never share a writable work
 
 ## Surveyor variants
 
+Lane-specific UI additions use the shared contract in `AGENT_UI_EXTENSION_GUIDE.md`. Submit versioned JSON panels/manifests and stable host action IDs; do not fork the complete Surveyor window for a UI-only change. Keep standalone research workflows available until integration accepts the panel.
+
 Each lane may modify its own Surveyor immediately. It must:
 
 1. keep the stable controller/probe protocol backwards-compatible unless an integration PR deliberately versions it;
@@ -60,3 +62,11 @@ Before yielding control or after any meaningful discovery, the active AI must up
 When switching modes, the incoming AI should first read `WORKSPACE_STATE.json`, then `AI_HANDOFF.md` and `RESEARCH_INDEX.md`, then only the active lane manifest/changed files. Do not reread the whole repository unless those files say it is necessary.
 
 Both normal ChatGPT and Work/Codex may act as the integration AI. Only one integration operation should be active at a time; research lanes remain isolated. Codex Local may use a local worktree/terminal for implementation and tests, while normal ChatGPT or Work may review results and integrate through GitHub. No conclusion may rely only on private chat context: commit the evidence or summary needed to reproduce it.
+
+## Agent Console status publishing
+
+Surveyor's read-only Agent Console shows only status that has been published to GitHub; it cannot see private chat messages. Every agent lane should keep `agent-patches/<lane>/STATUS.json` current on its own branch, using `schema/agent-status-v1.schema.json`.
+
+Update that file when starting work, when the state changes, and before asking the user to do anything. For a human request, include the exact Surveyor request, numbered user steps, the visible success condition, evidence to return, and whether a full derelict traversal is required. Clear the request when no longer needed. Never include tokens, local paths, device details, or personal data.
+
+Main remains responsible for syncing the integrated `WORKSPACE_STATE.json`. The console reads that main-branch registry and each lane's branch status/manifest; it labels an old registry as stale and keeps the last successful display if refresh fails. Do not treat an uncommitted chat update as visible or completed work.
