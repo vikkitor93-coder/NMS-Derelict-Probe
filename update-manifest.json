@@ -1,27 +1,29 @@
 {
   "schema_version": 1,
-  "version": "0.3.27",
+  "version": "0.3.28",
   "repository": "vikkitor93-coder/NMS-Derelict-Probe",
   "branch": "main",
   "package_transport": "base64-chunks",
-  "package_kind": "delta-from-v0.3.26",
+  "package_kind": "delta-from-v0.3.27",
   "package_parts": [
-    "packages/v0.3.27-delta/part-000.b64",
-    "packages/v0.3.27-delta/part-001.b64",
-    "packages/v0.3.27-delta/part-002.b64"
+    "packages/v0.3.28-delta/part-000.b64",
+    "packages/v0.3.28-delta/part-001.b64",
+    "packages/v0.3.28-delta/part-002.b64"
   ],
-  "package_sha256": "dce69e3ceae7badef41eecfaac2de83a427ec2c1dea13b0ddda6c5153e5791bd",
-  "package_size": 76794,
+  "package_sha256": "0b78952c858cb5b60f8be0c552a324b3264f780ca02bce574ad1df8e0f2ce5da",
+  "package_size": 73072,
   "managed_files": [
     "AI_HANDOFF.md",
+    "Analyze-Dungeon-Seed-Function.cmd",
     "CHANGELOG.md",
     "Install-and-Start-NoOverlay.ps1",
     "Install-and-Start.ps1",
     "PROJECT_PLAN.md",
     "README.md",
-    "Restart-Surveyor.ps1",
     "VERSION.txt",
     "mod/derelict_baseline_probe.py",
-    "tests/test_tools.py"
+    "tests/test_tools.py",
+    "tools/analyze_nms_seed_function.py",
+    "tools/github_integration.py"
   ]
 }
