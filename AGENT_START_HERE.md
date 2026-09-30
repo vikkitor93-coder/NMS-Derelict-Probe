@@ -28,6 +28,8 @@ All lanes contribute evidence toward connecting that chain.
 4. Read `AGENT_WORKFLOW.md` for branch/Surveyor/evidence/PR rules.
 5. Read only your assigned lane manifest and relevant changed files/evidence.
 
+For any Surveyor panel/action request, also follow `AGENT_UI_EXTENSION_GUIDE.md`. All four lanes share its single versioned, data-only extension contract; do not add lane-specific Python UI modules or shell-command strings.
+
 Historical sections and old next-actions are never more authoritative than `WORKSPACE_STATE.json`.
 
 ## Lane rules

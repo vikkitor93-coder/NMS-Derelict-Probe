@@ -1,265 +1,147 @@
-# AI handoff — NMS Derelict Probe v0.3.38
+# AI handoff — NMS Derelict Probe v0.3.41 candidate
 
-## Read this first
+## Current handoff state
 
-This file is the **current technical handoff**, not a chronological log. Historical implementation details and old next-actions belong in Git history / `CHANGELOG.md` and must not override the current registry.
+This is the current continuation point for the main integration worker. The candidate is based on the v0.3.40 Live Output package and is prepared on `integration/issue-8-ui-extensions`; it is not yet the installed `main` release.
 
-New agents should read in this order:
+- Issue #8 adds `AGENT_UI_EXTENSION_GUIDE.md`, a shared Surveyor UI API 1.0, a data-only JSON extension loader, and one DUNGEON-C sample panel.
+- Extensions are downloaded into staging, checked against declared dependencies and SHA-256 hashes, checked for host/API compatibility, and activated without restarting Surveyor. Previous versions remain available for rollback.
+- Extension panels can request only the eight stable `research.*` host action IDs. No agent-provided code, shell command, path, or process arguments are run. Preconditions are rechecked at click time.
+- Evidence uploads initiated through a lane extension use a timestamped `<lane>-<action>` folder and run manifest. Local action records are also stored under `%LOCALAPPDATA%\NMSDerelictSurveyor\ui-extensions\<lane>\runs`.
+- The DUNGEON-C sample panel launches the existing exact-root-caller offline extractor. It does not require NMS to run or a derelict traversal.
+- Tests cover compatible install, hash/command rejection, failed-update preservation, live version activation, rollback, and evidence namespacing. Tk visual execution on Windows still needs a human machine.
 
-1. `AGENT_START_HERE.md`
-2. `WORKSPACE_STATE.json`
-3. `RESEARCH_INDEX.md`
-4. this file
-5. `AGENT_WORKFLOW.md`
-6. the assigned lane manifest and only relevant changed files/evidence
+## Exact next action
 
-The repository is the continuity layer between normal ChatGPT, Work, Codex, and other AI agents. Do not rely on hidden chat context.
+Run the new focused tests and the full existing regression suite, compile all Python files, validate all package JSON and the source ZIP hash, then publish a PR from `integration/issue-8-ui-extensions` targeting `main`. Do not merge the PR until those checks pass. Keep the existing human tasks in `WORKSPACE_STATE.json` intact.
 
-## Shared mission
+## Canonical source status
 
-Reverse engineer No Man's Sky abandoned/derelict freighter procedural generation far enough to identify and safely invoke the real dungeon generator directly.
+The last integrated canonical release is v0.3.38. The v0.3.41 candidate package must become authoritative only after its updated root `update-manifest.json` and full-package chunks are merged together.
 
-Long-term target:
+---
 
-`seed -> invoke real NMS derelict/dungeon generator -> capture selected preset/layout/rooms/resources -> next seed`
+## Prior Agent Console implementation record
 
-The unresolved chain all agents are contributing toward is:
+The v0.3.39 standalone Surveyor opened a compact read-only Agent Console beside the main UI. The current v0.3.41 candidate retains it and adds the extension panel described above. It still cannot read private chats; agents must publish STATUS.json updates for new requests to appear.
 
-`universe address/system -> system seed -> POI/derelict seed derivation -> weighted DungeonOptions choice -> GcDungeonGenerationParams consumer -> room/layout/resource generation`
+No probe, game overlay, or controller-command protocol was changed. The Agent Console is a separate Tkinter `Toplevel` and has no access to NMS memory.
 
-The project is no longer starting from zero: both runtime and static/public anchors exist on multiple points of this chain.
+Current published lane picture at the v0.3.39 source snapshot:
+
+- Runtime-A needs one short live capture of the exact `owner+0x10` dispatch slot. No full derelict traversal is required.
+- Seed-B has published system-seed anchors; it requires no Surveyor action.
+- DUNGEON-C uploaded its offline NMS.exe scan (38 candidates; no multi-anchor matches; generator consumer unidentified); agent work can continue offline.
+- Metadata-D is free at the last sync.
+
+The remaining human action is Runtime-A. Exact recipe: extract and run `NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip` > start NMS from Surveyor > load the same known derelict only until **Root dispatch +0x10** is captured > click **Analyze generation + upload** > return to this Main chat and write `check`. No full traversal is required. The Agent Console can copy these steps.
+
+## Agent status data contract
+
+`schema/agent-status-v1.schema.json` defines the additive lane status format. Agents commit `agent-patches/<lane>/STATUS.json` on their own branch when work starts, changes state, or needs a human. Required fields are schema version, lane, UTC update time, state, and summary; human requests carry exact steps, success condition, evidence to return, and full-traversal requirement. Main updates the integrated `WORKSPACE_STATE.json`. The console falls back to current lane manifests when no STATUS.json exists yet.
+
+## Run and verify
+
+- Normal launch: extract the complete project ZIP and double-click `Start-Surveyor.cmd`. The main Surveyor and Agent Console open independently from NMS.
+- Runtime: existing Python 3.12/3.13 plus Tkinter; the Agent Console adds no installed dependency and sends only public read-only GET requests to this GitHub repository.
+- Regression tests: `python -m unittest discover -s tests`.
+- Syntax check: `python -m compileall -q tools mod overlay tests`.
+- This v0.3.39 ZIP is an integration candidate. The in-app updater serves it only after the matching PR's `update-manifest.json` and package chunks reach `main`; until then, install from the complete ZIP.
+
+## v0.3.39 verification and limits
+
+Agent Console data logic: 6 focused tests pass. Full regression suite: 119/119 pass. `compileall` passes; 37 packaged JSON files parse. The Tkinter window has not been visually exercised on Windows in this environment. Agent updates remain invisible until their status/manifest changes are committed to GitHub; the console cannot inspect chat state.
 
 ## Product architecture
 
-Surveyor runs independently of NMS.
+The user clarified that Surveyor itself must run independently of NMS. v0.3.30 moves the primary UI out of the injected pyMHF process into `tools/surveyor_controller.py`.
 
-- `tools/surveyor_controller.py` is the standalone primary UI.
-- `Start-Surveyor.cmd` / `.ps1` starts Surveyor only.
-- `Start-NMS.ps1` detects/persists NMS.exe, syncs the pyMHF probe to `GAMEDATA\MODS`, prepares config, then launches the proven visible `pymhf.exe run nmspy` path.
-- Surveyor survives NMS exit and can restart without restarting NMS.
+- `Start-Surveyor.cmd` / `Start-Surveyor.ps1` starts the standalone controller only.
+- Backwards-compatible `Start-Derelict-Probe.cmd` now starts Surveyor, not NMS.
+- The controller survives NMS exit and has a **Start NMS** button.
+- `Start-NMS.ps1` detects/persists NMS.exe, syncs the probe to `GAMEDATA\MODS`, and starts `pymhf run nmspy` in a separate process.
+- **Restart Surveyor** restarts only `surveyor_controller.py`; it never closes or restarts NMS.
+- Game overlay is optional and defaults OFF.
 - The injected `DerelictBaselineProbe` is `@no_gui` and acts as a read-only backend.
-- Controller/probe commands use `%LOCALAPPDATA%\NMSDerelictSurveyor\controller-command.json` plus the acknowledgement file.
-- Game overlay is optional and defaults off.
-- Evidence/local analysis state lives under `%LOCALAPPDATA%\NMSDerelictSurveyor\asset-work-v1`.
+- Standalone live-capture controls write `%LOCALAPPDATA%\NMSDerelictSurveyor\controller-command.json`; the probe polls it and acknowledges in `controller-command-ack.json`.
+- Existing live status, logs, evidence, GitHub uploads and offline research actions are preserved.
 
-Do not reintroduce the old hidden pyMHF import preflight; pyMHF console initialization can fail in hidden/captured PowerShell. Stable launcher behavior is considered working and must be preserved unless a dedicated launcher task says otherwise.
+Updater details:
+- Controller shows loaded controller, downloaded/source and available versions.
+- GitHub helper bug fixed: `_stage_installed_mod` now uses `ROOT / "installed-mod-file.txt"` (v0.3.29 referenced an undefined `SURVEYOR_ROOT`).
+- After install, restart only Surveyor to load new controller code. Backend probe changes apply on the next NMS launch unless separately live-reloaded by pyMHF tooling.
 
-## Canonical source / artifact policy
+Verification for v0.3.34: 106/106 regression tests, compileall, packaged JSON parse, full ZIP integrity, delta integrity, and delta-apply equality against v0.3.32.
 
-Canonical baseline version: **v0.3.38**.
+## Research state
 
-Verified complete baseline ZIP:
+Latest uploaded `analyze-seed-function` evidence (`20260930T005951Z`) revealed an analyzer-boundary mistake:
+- `.pdata` entry containing root call: `0x0063505C .. 0x0063553E`
+- this range starts mid-flow (no real prologue, live nonvolatile registers already in use) and is **not** the logical C++ function entry
+- original caller window has the unique current-build prologue at `0x00634BC0`, immediately after four `CC` bytes
+- v0.3.26 required >=6 padding bytes and therefore skipped `0x00634BC0`, wrongly choosing previous helper `0x006345B0`
+- true function at `0x00634BC0` copies second argument to `RSI` at `0x00634BE1`
+- primary seed read `movups xmm0,[rsi+0x138]` at `0x00634DBE`, **before** root AddResource
+- use-seed flag check `[rsi+0x140]` at `0x00634E26`, **before** root AddResource
+- descriptor pointer is `RSI+0x128`; root AddResource is `0x00635110`
+- no direct seed write has yet been proven
 
-`/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip`
+v0.3.31 corrected both static tools and the corrected scan found 52 direct references. v0.3.34 now observes all 52 through one shared-entry hook and carries the original external caller through recursive invocations using a per-thread stack. Do not claim the `9256392A2F5A74AC` derivation formula is solved until the exact caller is captured and its upstream seed construction is demonstrated.
 
-Recorded SHA-256:
 
-`7ac2ce0c9cf7188839e03dca984b457b649716d4298bcb779ce178a64293a9e7`
+## v0.3.34 all-callers-at-once correlation
 
-Canonical verification before parallelization:
+The user explicitly asked to test all 52 static caller references at once rather than batching them. v0.3.34 makes that behavior explicit. One hook at the verified shared entry `0x00634BC0` observes every invocation and records caller return RVA + exact embedded descriptor pointer for seeded descriptors. The verified self-recursive return RVA is `0x00634C63`; it is retained as evidence but excluded when choosing the external root-path caller.
 
-- 113/113 tests passed;
-- compileall passed;
-- 35 JSON files parsed;
-- runtime logic unchanged by canonicalization.
+When the exact `DUNGEON.SCENE.MBIN` descriptor reaches `Engine::AddResource`, the probe now records `logical_entry_exact_external_caller_return_offset_hex` plus a larger small code window and immediately writes `asset-work-v1/exact-root-caller-latest.json`. The dedicated file includes the exact external caller, descriptor pointer, root seed, observed caller hit counts, and the static candidate count. `Analyze generation + upload` uploads that file alongside `generation-baseline-latest.json` when available.
 
-Complete experimental ZIPs are stored in ChatGPT Library. GitHub carries source-state summaries, manifests, reproducible patches, evidence, branches, PRs, and integration state.
+Historical v0.3.34 action; superseded by the v0.3.38 exact caller capture and the current Runtime-A dispatch-slot validation described above.
 
-## Confirmed runtime baseline
+## v0.3.32 exact runtime caller correlation
 
-Known baseline universe address:
+The corrected v0.3.31 offline scan found 52 direct references to the verified logical entry `0x00634BC0`, proving the function is generic enough that static xrefs alone do not identify the derelict-specific path. v0.3.32 adds a narrow read-only signature hook at that entry. It records seeded descriptor calls only in a bounded in-memory ring, then correlates the exact descriptor pointer when `DUNGEON.SCENE.MBIN` reaches `Engine::AddResource`. The root event stores `logical_entry_matches`, `logical_entry_nearest_caller_return_offset_hex`, and a small code window.
 
-`00001A0004E84EFD`
+Historical v0.3.32 action; superseded by the current Runtime-A capture request above. Do not ask the user to repeat older exact-caller work.
+### v0.3.34 launcher repair
+- Standalone Surveyor Start NMS now uses the repaired `Start-NMS.ps1`.
+- Do not restore the old `import nmspy, pymhf 2>$null` hard gate; it hid the actual Python traceback and could loop on a package that pip reported as already installed.
+- The launcher tests/repairs the selected runtime, may fall back to Python 3.12, writes pyMHF local config, and starts via `python -m pymhf run nmspy`.
+- Runtime failure evidence: `%LOCALAPPDATA%\NMSDerelictSurveyor\runtime-repair-latest.log`.
 
-Known root resource:
 
-`MODELS/SPACE/POI/DUNGEON.SCENE.MBIN`
+## v0.3.36 launcher correction
+The standalone controller remains the primary UI, but Start NMS must not import pyMHF inside the controller's hidden/captured PowerShell process. pyMHF creates questionary/prompt_toolkit console objects at import time and fails there with `NoConsoleScreenBufferError`. Start-NMS.ps1 now checks package metadata without importing pyMHF, prepares the probe/config/optional overlay, then spawns a fresh visible cmd.exe which runs the proven `pymhf.exe run nmspy` command. Do not reintroduce a hidden pyMHF import preflight or Python downgrade workaround for this console error. The all-52 exact-caller correlation remains unchanged.
 
-Captured root descriptor seed:
+## v0.3.38 exact root caller result / next action
+Baseline B short capture on 2026-09-30 correlated the exact dungeon descriptor pointer `0000017475826D28` / root seed `9256392A2F5A74AC` to external caller return RVA `02BFCC1A` with recursion depth 0 and age 0.74 ms at the root add. This RVA was **not** among the 52 direct E8/E9 static references to logical entry `00634BC0`, so the derelict path is likely indirect (function pointer/thunk/other non-rel32 transfer) rather than one of the 52 direct xrefs. Do not infer a symbol yet.
 
-`9256392A2F5A74AC`
+v0.3.38 added `tools/extract_exact_root_caller_code.py`, `Extract-Exact-Root-Caller-Code.cmd`, a standalone UI button **Extract exact root caller + upload**, and GitHub action `extract-exact-root-caller`. It reads `%LOCALAPPDATA%\NMSDerelictSurveyor\asset-work-v1\exact-root-caller-latest.json`, maps the exact RVA into installed `NMS.exe`, captures a bounded code window, and conservatively recognizes direct `E8 rel32` and indirect `FF /2` calls. Output: `exact-root-caller-code-latest.json`. This historical action is complete; the current Runtime-A request is to inspect the exact dispatch slot live.
 
-Verified logical shared entry:
 
-`NMS.exe + 00634BC0`
+### v0.3.38 next research step
+The exact external call at `02BFCC17` decoded as `FF 52 10`, targeting the verified logical function `00634BC0`. Static resolution found no coherent conventional vtable candidate. The current follow-up is Runtime-A's live capture of the value at `owner+0x10`; do not call it a proven C++ vtable slot or class.
 
-Exact runtime-correlated external root-path return RVA:
 
-`02BFCC1A`
+## v0.3.37–v0.3.38 research/tool state
 
-Exact external call instruction:
+- v0.3.37 added offline extraction/decoding of the exact runtime-correlated external caller. The known baseline captured `02BFCC17: FF 52 10` (`call qword ptr [rdx+0x10]`) with return RVA `02BFCC1A`.
+- The same runtime event correlated owner pointer `0000017475826C00`, descriptor pointer `0000017475826D28` (`owner + 0x128`), primary seed `9256392A2F5A74AC`, and secondary seed `FFFFFFFFFFFFFFFF`.
+- v0.3.38 added an offline attempt to resolve the `+0x10` dispatch slot. It found zero coherent static vtable candidates for the verified `00634BC0` target. Treat `owner` as an unknown runtime dispatch/owner structure; do **not** claim a conventional C++ vtable/class until live evidence proves it.
+- Next live runtime target: at the exact root event capture `owner`, slot address `owner+0x10`, value at that slot, its module/RVA when applicable, a bounded target byte window/thunk chain, and re-confirm the descriptor at `owner+0x128`. No full derelict traversal is needed.
 
-`02BFCC17: FF 52 10` -> `call qword ptr [RDX+0x10]`
+## External research incorporated 2026-09-30 (not yet runtime-proven)
 
-Same root event correlated:
+- Public reverse-engineering provides a disassembly-derived universal-address -> system-seed implementation. For the known baseline universe address `00001A0004E84EFD`, the derived 32-bit system seed is `B006BAB6`. This is an upstream anchor, not yet a proven direct parent of the derelict root seed.
+- Current/public metadata definitions confirm `cTkResourceDescriptor`: descriptor vector `+0x0`, primary `cTkSeed` `+0x10`, secondary `cTkSeed` `+0x20`. This independently supports the probe's descriptor interpretation.
+- `cGcAbandonedFreighterComponentData` contains `DungeonRootScene` and weighted `DungeonOptions`; each `cGcFreighterDungeonChoice` contains a preset `Name` and `Weighting`.
+- `cGcFreighterDungeonsTable` contains `cGcFreighterDungeonParams`, whose `GcDungeonGenerationParams` includes Size/Entrance/Rooms, X/Y/Z probabilities, StraightMultiplier, main/branch room types, quests, generation rules and pruning rules. The project already has a current-Cosmos dungeon-table parser; do not duplicate it.
+- Pi / Every Item Procedural demonstrates the desired long-term technique: retain a live NMS manager and call real game generation repeatedly across seeds. The long-term goal is the analogous direct derelict/dungeon generator call, but this is not yet located.
+- ReNMS general WFC/freighter-base `cGcMap` structures are useful reference material but are **not proven** to be the abandoned-derelict dungeon generator. Keep that lead separate.
 
-- owner: `0000017475826C00`
-- descriptor: `0000017475826D28`
-- descriptor = owner + `0x128`
-- primary seed: `9256392A2F5A74AC`
-- secondary seed: `FFFFFFFFFFFFFFFF`
-- recursion depth: 0
-- age at root AddResource: ~0.74 ms
+## Multi-agent workflow
 
-A prior static scan found 52 direct rel32 references to `00634BC0`, but this actual derelict root caller was indirect and was not one of those 52 direct references.
-
-## Critical interpretation cautions
-
-Do **not** call `owner+0x10` a proven normal C++ vtable slot. The offline static resolver found no coherent conventional static vtable candidate for target `00634BC0`.
-
-Do **not** identify `owner` as a normal `cTkResource`; current public `cTkResource` layout places its embedded descriptor elsewhere than `owner+0x128`.
-
-Use neutral terms such as `owner`, `dispatch object`, `dispatch slot`, or `runtime structure` until live evidence proves more.
-
-## Public/static research incorporated
-
-Current public NMS.py definitions independently support the probe's `cTkResourceDescriptor` interpretation:
-
-- descriptor vector at `+0x0`;
-- primary `cTkSeed` at `+0x10`;
-- secondary `cTkSeed` at `+0x20`.
-
-Public/current metadata establishes an explicit abandoned-freighter configuration chain:
-
-- `GcAbandonedFreighterComponentData`
-  - `DungeonRootScene`
-  - weighted `DungeonOptions[]`
-- `GcFreighterDungeonChoice`
-  - `Name`
-  - `Weighting`
-- `GcFreighterDungeonsTable`
-  - `GcFreighterDungeonParams`
-  - `GcDungeonGenerationParams`
-
-Known `GcDungeonGenerationParams` inputs include:
-
-- SizeX/Y/Z;
-- EntranceX/Y/Z;
-- Rooms;
-- X/Y/Z probabilities;
-- StraightMultiplier;
-- MainRoomTypes / BranchRoomTypes;
-- quests;
-- generation rules;
-- pruning rules.
-
-The project already has a current Cosmos `FREIGHTERDUNGEONSTABLE` parser. Do not duplicate it unless your task is specifically improving that parser.
-
-Pi / Every Item Procedural demonstrates the desired end-state technique for other NMS generators: retain a live manager and invoke real game procedural functions repeatedly across seeds. It does **not** already provide the abandoned-derelict interior generator.
-
-ReNMS general WFC/freighter-base `cGcMap` structures are reference material only; they are not proven to be the abandoned-derelict dungeon generator.
-
-## Seed research state
-
-A public disassembly-derived universal-address -> system-seed implementation has been incorporated by the Seed-B lane.
-
-Known anchors now include:
-
-- `00001A0004E84EFD -> B006BAB6 -> initial generator state 3E342BADCF79F176`
-- `0001550006607CAC -> 9E1A7905 -> initial generator state 37DEC848947D131C`
-
-Known corresponding captured derelict root seeds:
-
-- baseline 35: `9256392A2F5A74AC`
-- baseline 51: `00C9E8DF0327789E`
-
-Direct equality was not found. The system-seed -> derelict-root-seed relationship remains **unknown and unclaimed**.
-
-## Current parallel lanes
-
-The authoritative claim/state registry is `WORKSPACE_STATE.json`.
-
-### Runtime-A — `agent/runtime-dispatch`
-
-Purpose: capture the live value of the exact root event's `owner+0x10` dispatch slot, classify its target/module/RVA, collect nearby qwords and bounded target/thunk bytes, and reconfirm descriptor correlation at `owner+0x128`.
-
-Status: **build ready; awaiting short live validation**.
-
-Manifest:
-
-`agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json`
-
-Complete build:
-
-`/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip`
-
-No full derelict traversal should be required.
-
-### Seed-B — `agent/seed-lineage`
-
-Purpose: create deterministic system-seed anchors and constrain the unknown derivation into the derelict root seed without inventing a formula.
-
-Status: **first agent output published; do not duplicate**.
-
-Manifest:
-
-`agent-patches/seed-lineage/SEED_B_MANIFEST.json`
-
-The current result is useful upstream anchoring, not a solved derivation.
-
-### DUNGEON-C — `agent/dungeon-decompile`
-
-Purpose: scan the installed current `NMS.exe` offline for dungeon/derelict metadata anchors, xrefs, runtime-function ranges, and bounded code windows to narrow the real `GcDungeonGenerationParams` consumer/generator path.
-
-Status: **tool/output published; waiting for local offline NMS.exe scan**.
-
-Manifest:
-
-`agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json`
-
-Game runtime is not required for this scan.
-
-### Metadata-D — `agent/metadata`
-
-Purpose: map abandoned-freighter component `DungeonOptions`/weights, `DungeonRootScene`, dungeon-table presets, and static asset relationships; identify evidence that helps locate the weighted preset-selection boundary without duplicating the runtime/seed/decompile lanes.
-
-Status: see `WORKSPACE_STATE.json`; at the last integration sync this was the free predefined lane.
-
-## Shared open research questions
-
-1. What exactly is the runtime `owner`/dispatch object and what does its live `+0x10` target resolve to?
-2. What state/seed feeds the abandoned-freighter `DungeonOptions` weighted choice?
-3. Which current NMS function consumes `GcDungeonGenerationParams` to build the derelict layout?
-4. How is the captured root descriptor seed derived from system/POI/derelict state?
-5. Once the generator boundary is understood, can the Pi direct-call pattern be adapted safely for high-volume offline/in-process derelict generation?
-
-These are one shared problem, not five unrelated projects.
-
-## Evidence discipline
-
-Every conclusion must remain clearly in one of these categories:
-
-- **measured runtime fact**;
-- **public/static structure or algorithm confirmed**;
-- **inference**;
-- **hypothesis**.
-
-Do not upgrade inference to fact because it fits the model. Preserve contradictory evidence.
-
-## User workflow / human intervention preference
-
-The user wants minimal, literal intervention instructions with no interpretive overhead.
-
-When intervention is required, give one step-by-step chain such as:
-
-`Open NMS/Surveyor build > perform exact action > wait for exact visible success condition > click exact upload action > tell Main AI "check"`
-
-Explicitly say whether a full derelict traversal is required. Default is no traversal.
-
-When the user says `check`, inspect only new evidence/commits since the last reviewed state. Avoid rereading unchanged files unless needed for correctness.
-
-## Agent operating rules
-
-- You are one agent among several; do not assume exclusive ownership of the project.
-- Work only in your assigned or newly claimed non-overlapping lane.
-- Continue autonomously until complete, genuinely blocked, or human intervention is required.
-- Keep your Surveyor variant visibly lane-labeled.
-- Keep experimental evidence lane-specific.
-- Preserve stable behavior and protocols; make changes modular/backwards-compatible.
-- Default to read-only NMS instrumentation.
-- Run targeted regression tests and report exact results truthfully.
-- Publish a lane manifest + reproducible patch/evidence before yielding.
-- Never push experimental research changes directly to `main`.
-- Integration accepts only the smallest reproducible/proven subset.
-
-For the exact startup prompt and branch/output contract, read `AGENT_START_HERE.md` and `AGENT_WORKFLOW.md`.
+- `main` is integration-only. Research agents work on isolated branches/worktrees and never push experimental runtime changes directly to `main`.
+- Shared contract: current canonical package + `AI_HANDOFF.md` + `RESEARCH_INDEX.md` + `AGENT_WORKFLOW.md`. Agents should read only their lane's files/evidence unless broader context is required.
+- Lanes: `agent/runtime-dispatch`, `agent/seed-lineage`, `agent/dungeon-decompile`, `agent/metadata`; integration is the only lane that combines proven changes.
+- Every experimental Surveyor must visibly identify its lane/build (for example `Surveyor · RUNTIME-A`) and write evidence under a lane-specific namespace so simultaneous variants cannot be confused.
+- Agents publish a PR containing source changes, tests, evidence schema changes, and a concise handoff. Main integration accepts only reproducible/proven findings.
