@@ -1,10 +1,10 @@
 # NMS Derelict Probe
 
-Current stable package: **v0.3.33**.
+Current stable package: **v0.3.34**.
 
-## v0.3.33 — all 52 callers at once
+## v0.3.34 — all 52 callers at once
 
-v0.3.33 makes the runtime caller test explicit and self-contained. The single verified hook at `0x00634BC0` observes every caller that reaches the shared function, so all 52 static direct references are covered in one run rather than being tested in batches.
+v0.3.34 makes the runtime caller test explicit and self-contained. The single verified hook at `0x00634BC0` observes every caller that reaches the shared function, so all 52 static direct references are covered in one run rather than being tested in batches.
 
 When the derelict root `DUNGEON.SCENE.MBIN` reaches `Engine::AddResource`, Surveyor matches the exact descriptor pointer, excludes the verified self-recursive edge (`return RVA 0x00634C63`), and records the nearest external caller as the exact root-path candidate. The result is written immediately to `%LOCALAPPDATA%\NMSDerelictSurveyor\asset-work-v1\exact-root-caller-latest.json` so the evidence survives even if NMS is closed right after capture.
 
@@ -62,4 +62,7 @@ The injected `DerelictBaselineProbe` is now a headless backend (`@no_gui`). It c
 
 The latest upload exposed an analyzer interpretation bug rather than the seed formula. The `.pdata` range `0x0063505C..0x0063553E` is the **runtime fragment containing the root call**, not the logical function entry. The original caller bytes contain a stronger entry at `0x00634BC0`, preceded by four `CC` bytes and a full x64 prologue. Within the known entry-to-root prefix, the descriptor seed is read at `0x00634DBE` and the use-seed flag is checked at `0x00634E26`, both before the root `Engine::AddResource` call at `0x00635110`. No direct seed write has yet been demonstrated.
 
-The corrected v0.3.31 scan found 52 direct references. v0.3.33 now observes all of them at once at runtime and selects the exact external caller by descriptor identity; no batch-by-batch caller testing is required.
+The corrected v0.3.31 scan found 52 direct references. v0.3.34 now observes all of them at once at runtime and selects the exact external caller by descriptor identity; no batch-by-batch caller testing is required.
+## v0.3.34 Start NMS runtime repair
+
+`Start-NMS.ps1` now self-repairs the NMSpy/pyMHF runtime instead of treating a hidden import failure as a generic missing-package error. It tests the actual interpreter, force-repairs the pinned runtime only when needed, falls back to Python 3.12 when necessary, writes the local pyMHF NMS/MODS config, and launches with `python -m pymhf run nmspy`. A full import traceback is retained in `%LOCALAPPDATA%\NMSDerelictSurveyor\runtime-repair-latest.log` if startup still fails. `Start-NMS-With-Overlay.cmd` is the manual overlay launcher; `Start-NMS.cmd` records without the overlay.
