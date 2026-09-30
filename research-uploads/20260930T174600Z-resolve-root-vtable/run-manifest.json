@@ -1,0 +1,12 @@
+{
+  "action": "resolve-root-vtable",
+  "files": [
+    {
+      "name": "exact-root-vtable-latest.json",
+      "sha256": "0fd0e89d6c8d08b31e9fffbd488fae9942248001ed85efd7ed58da1f1178d067",
+      "size": 1416
+    }
+  ],
+  "utc": "20260930T174600Z",
+  "version": 1
+}
