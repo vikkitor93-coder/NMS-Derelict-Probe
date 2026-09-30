@@ -1,4 +1,4 @@
-# AI handoff — NMS Derelict Probe v0.3.32
+# AI handoff — NMS Derelict Probe v0.3.33
 
 ## Product architecture
 
@@ -19,7 +19,7 @@ Updater details:
 - GitHub helper bug fixed: `_stage_installed_mod` now uses `ROOT / "installed-mod-file.txt"` (v0.3.29 referenced an undefined `SURVEYOR_ROOT`).
 - After install, restart only Surveyor to load new controller code. Backend probe changes apply on the next NMS launch unless separately live-reloaded by pyMHF tooling.
 
-Verification target for this revision: standalone controller/source compile; full regression suite; JSON parse; full ZIP and delta integrity; delta apply against v0.3.29.
+Verification for v0.3.33: 106/106 regression tests, compileall, packaged JSON parse, full ZIP integrity, delta integrity, and delta-apply equality against v0.3.32.
 
 ## Research state
 
@@ -34,8 +34,16 @@ Latest uploaded `analyze-seed-function` evidence (`20260930T005951Z`) revealed a
 - descriptor pointer is `RSI+0x128`; root AddResource is `0x00635110`
 - no direct seed write has yet been proven
 
-v0.3.31 corrects both static tools. Next action is **Extract upstream callers + upload** again; it will scan the full installed `NMS.exe` for direct references to corrected logical entry `0x00634BC0`. After that, inspect external xrefs or move to indirect/vtable entry tracing if none exist. Do not claim the `9256392A2F5A74AC` derivation formula is solved.
+v0.3.31 corrected both static tools and the corrected scan found 52 direct references. v0.3.33 now observes all 52 through one shared-entry hook and carries the original external caller through recursive invocations using a per-thread stack. Do not claim the `9256392A2F5A74AC` derivation formula is solved until the exact caller is captured and its upstream seed construction is demonstrated.
 
+
+## v0.3.33 all-callers-at-once correlation
+
+The user explicitly asked to test all 52 static caller references at once rather than batching them. v0.3.33 makes that behavior explicit. One hook at the verified shared entry `0x00634BC0` observes every invocation and records caller return RVA + exact embedded descriptor pointer for seeded descriptors. The verified self-recursive return RVA is `0x00634C63`; it is retained as evidence but excluded when choosing the external root-path caller.
+
+When the exact `DUNGEON.SCENE.MBIN` descriptor reaches `Engine::AddResource`, the probe now records `logical_entry_exact_external_caller_return_offset_hex` plus a larger small code window and immediately writes `asset-work-v1/exact-root-caller-latest.json`. The dedicated file includes the exact external caller, descriptor pointer, root seed, observed caller hit counts, and the static candidate count. `Analyze generation + upload` uploads that file alongside `generation-baseline-latest.json` when available.
+
+Next live action: update to v0.3.33, launch NMS from standalone Surveyor, load a known derelict only until **Exact root caller** changes from `Not captured`, then stop/save and run **Analyze generation + upload**. No full traversal is required.
 
 ## v0.3.32 exact runtime caller correlation
 
