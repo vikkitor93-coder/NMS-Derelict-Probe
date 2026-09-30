@@ -1,4 +1,4 @@
-# AI handoff — NMS Derelict Probe v0.3.30
+# AI handoff — NMS Derelict Probe v0.3.31
 
 ## Product architecture
 
@@ -23,14 +23,15 @@ Verification target for this revision: standalone controller/source compile; ful
 
 ## Research state
 
-Latest uploaded `analyze-seed-function` evidence (`20260930T005951Z`) corrected the containing runtime function using authoritative PE `.pdata` metadata:
-- function: `0x0063505C .. 0x0063553E` (1250 bytes)
-- root `Engine::AddResource` call: `0x00635110`
-- previous padding candidate `0x006345B0` was not the authoritative unwind-function start
-- descriptor references: `+0x128` at `0x006350B0` / `0x006350D4`
-- primary seed read: `+0x138` at `0x0063523F`
-- no conservative direct descriptor/seed writes found in the function
-- no direct references to the function found
-- `.rdata` references seen were unwind metadata, no validated MSVC RTTI candidate
+Latest uploaded `analyze-seed-function` evidence (`20260930T005951Z`) revealed an analyzer-boundary mistake:
+- `.pdata` entry containing root call: `0x0063505C .. 0x0063553E`
+- this range starts mid-flow (no real prologue, live nonvolatile registers already in use) and is **not** the logical C++ function entry
+- original caller window has the unique current-build prologue at `0x00634BC0`, immediately after four `CC` bytes
+- v0.3.26 required >=6 padding bytes and therefore skipped `0x00634BC0`, wrongly choosing previous helper `0x006345B0`
+- true function at `0x00634BC0` copies second argument to `RSI` at `0x00634BE1`
+- primary seed read `movups xmm0,[rsi+0x138]` at `0x00634DBE`, **before** root AddResource
+- use-seed flag check `[rsi+0x140]` at `0x00634E26`, **before** root AddResource
+- descriptor pointer is `RSI+0x128`; root AddResource is `0x00635110`
+- no direct seed write has yet been proven
 
-Interpretation: the root descriptor seed is already populated when this runtime function consumes it. The producer is likely upstream/indirect (virtual/function pointer/object population), not yet identified. Do not claim the `9256392A2F5A74AC` derivation formula is solved.
+v0.3.31 corrects both static tools. Next action is **Extract upstream callers + upload** again; it will scan the full installed `NMS.exe` for direct references to corrected logical entry `0x00634BC0`. After that, inspect external xrefs or move to indirect/vtable entry tracing if none exist. Do not claim the `9256392A2F5A74AC` derivation formula is solved.
