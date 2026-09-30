@@ -1,24 +1,17 @@
-# AI handoff — NMS Derelict Probe v0.3.24
+# AI handoff — NMS Derelict Probe v0.3.25
 
-v0.3.24 is a diagnostics hardening release for the GUI GitHub/research workflow.
+Read-only NMS.py/pyMHF derelict research project.
 
-Observed user evidence: their v0.3.23 `latest.log` showed the probe starting but contained no GitHub/upload action failures. The old workflow runner wrote those failures only to separate `gui-actions` files, so the normal log was silent.
+User supplied v0.3.24 workflow log proving GitHub integration itself is healthy (gh found/auth OK/repo API OK/push=true). The failing Measure + upload command returned exit 1 before upload because Windows cmd.exe /s /c misparsed the quoted Measure-Derelict-Generation.cmd path.
 
-v0.3.24 changes:
-- mirrors workflow start/success/failure/exception into `latest.log`;
-- persistent `gui-actions/workflow-latest.log`;
-- per-action + timestamped action logs;
-- `workflow-diagnostic-latest.txt` with sanitized command, return code, stdout/stderr and exceptions;
-- `github-integration.log` with CLI discovery, auth return codes, upload output discovery and API stages/failures;
-- read-only `diagnose` subcommand + **Run GitHub diagnostic** button;
-- **Open workflow log** and **Open workflow diagnostic** buttons;
-- short GUI status/detail strings to avoid right-edge truncation;
-- Windows GitHub web auth runs in a visible console so the device-code prompt cannot be hidden.
+v0.3.25 fixes this by removing the chained CMD string entirely. _project_action now creates explicit sequential subprocess steps: research command first, upload helper second. PowerShell workflows launch their .ps1 directly; caller extraction launches tools/extract_nms_caller_code.py with the persisted safe Python interpreter. Upload only runs after research returns 0. Normal GUI actions use CREATE_NO_WINDOW.
 
-No PAT/password/token is logged. The v0.3.23 real-Python-only helper fix is preserved.
+GUI clipping is also fixed without relying on unsupported wrapping: the single long detail field is exposed as three <=52-character Workflow message rows.
 
-Verification: 82/82 tests, Python compileall, all packaged JSON parses, helper smoke tests, ZIP integrity.
+Step-level logging events: workflow_step_started, workflow_step_completed, workflow_step_failed. workflow-diagnostic-latest.txt records the failed step.
 
-Next user action: update/install v0.3.24, click **Run GitHub diagnostic**, then **Open workflow diagnostic** if anything is not OK. Send that diagnostic file or the updated `latest.log`. After setup succeeds, use **Extract dungeon caller code + upload** and tell ChatGPT `check`.
+Verification: 85/85 tests, compileall, 35 packaged JSON files parse, ZIP integrity passes.
 
-Research state is unchanged: address `00001A0004E84EFD`, root seed `9256392A2F5A74AC`, next caller-code target around RVA `0x00635110`.
+Research state unchanged: known 35-container address 00001A0004E84EFD, root descriptor seed 9256392A2F5A74AC, caller return 00635115 / CALL RVA 00635110.
+
+Next live action: update/install v0.3.25 and click **Extract dungeon caller code + upload**. It should display Step 1/2 then Step 2/2 and complete without opening an empty command window. If it fails, send workflow-diagnostic-latest.txt or workflow-latest.log.
