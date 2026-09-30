@@ -39,13 +39,21 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "Decompile/cross-reference top type-registration candidates and find the actual GcDungeonGenerationParams consumer; the uploaded NMS.exe anchor scan produced no multi-anchor candidates.",
-    "candidate_identity_rule": "triage-only until decompiler/runtime evidence proves a function role"
+    "next_method": "Post-7.05 capture analysis is published. Static scan still has no consumer candidate; await the RUNTIME-A owner+0x10 live capture, then decompile the newly resolved target/caller path. Treat MEDI_FLOATERS as the current high-confidence preset inference, but its 8-main/2-dead-end capture versus table Rooms=7 is flagged needs-review.",
+    "candidate_identity_rule": "triage-only until decompiler/runtime evidence proves a function role",
+    "post_update_evidence": "research-uploads/20260930T181100Z-dungeon-decompile/post-7.05-capture-analysis.json"
   },
   "human_validation": {
-    "required": false,
-    "game_runtime_required": false,
-    "steps": []
+    "required": true,
+    "game_runtime_required": true,
+    "blocking_dependency": "agent/runtime-dispatch",
+    "steps": [
+      "Open Surveyor RUNTIME-A.",
+      "Start NMS and load the known derelict in system 00001A0004E84EFD.",
+      "Wait for the visible Root dispatch +0x10 captured success status; do not traverse the derelict.",
+      "Click Analyze generation + upload.",
+      "Tell Main AI: check."
+    ]
   },
   "latest_scan": {
     "evidence_path": "research-uploads/20260930T172000Z-dungeon-decompile/dungeon-decompile-anchors-summary.json",
@@ -54,5 +62,24 @@
     "candidate_function_count": 38,
     "multi_anchor_candidates": 0,
     "consumer_identified": false
+  },
+  "latest_post_update_capture": {
+    "session_id": "20260930T173540Z_00001A0004E84EFD",
+    "evidence_path": "research-uploads/20260930T174712Z-analyze-generation/generation-baseline-latest.json",
+    "evidence_sha256": "22303225707d1dd8b08288c8bc2eacee70f11d64c9a6e2119a963fa9d72f4df0",
+    "universe_address_hex": "00001A0004E84EFD",
+    "root_seed_hex": "9256392A2F5A74AC",
+    "root_seed_status": "candidate-captured-unverified",
+    "inferred_preset": "MEDI_FLOATERS",
+    "preset_confidence": "high",
+    "observed_rooms": {
+      "main": 8,
+      "dead_end": 2,
+      "total": 10
+    },
+    "table_rooms_value": 7,
+    "room_model_status": "needs-review",
+    "analyzer_target_containers": 16,
+    "historical_pre_update": "CARGO_FLOATERS; 7 main + 1 dead end; 35 target containers; same root seed candidate"
   }
 }
