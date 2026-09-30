@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "updated_utc": "2026-09-30T15:35:00Z",
+  "integration": {
+    "branch": "main",
+    "canonical_commit": "8d8d0c61ec14af36f8a87cf6969e8bf9a87f21fe",
+    "canonical_version": "0.3.38",
+    "current_objective": "runtime-dispatch live validation (RUNTIME-A)"
+  },
+  "lanes": {
+    "runtime-dispatch": {
+      "branch": "agent/runtime-dispatch",
+      "status": "human-validation-ready",
+      "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
+      "next_action": "Run RUNTIME-A on the known derelict until owner+0x10 dispatch capture succeeds; no traversal required."
+    },
+    "seed-lineage": {
+      "branch": "agent/seed-lineage",
+      "status": "queued",
+      "next_action": "Resume after Runtime-A evidence is integrated unless intentionally run in parallel."
+    },
+    "dungeon-decompile": {
+      "branch": "agent/dungeon-decompile",
+      "status": "queued"
+    },
+    "metadata": {
+      "branch": "agent/metadata",
+      "status": "queued"
+    }
+  },
+  "human_intervention": {
+    "required_now": true,
+    "pending_lane": "runtime-dispatch",
+    "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
+    "reason": "Offline/coding work for the first runtime objective is complete; the next unknown is a live owner+0x10 dispatch value from NMS."
+  },
+  "artifact_policy": {
+    "complete_zip_storage": "ChatGPT Library",
+    "canonical_library_path": "/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip",
+    "github_role": "manifests, patches, evidence, branches, PRs, source-state summaries"
+  },
+  "resume_order": [
+    "WORKSPACE_STATE.json",
+    "AI_HANDOFF.md",
+    "RESEARCH_INDEX.md",
+    "AGENT_WORKFLOW.md",
+    "active lane manifest and only its changed files"
+  ],
+  "cross_mode_rule": "Normal ChatGPT and Work/Codex must treat committed GitHub state as authoritative and may switch roles without relying on hidden conversation context."
+}

@@ -44,3 +44,19 @@ The integration agent may merge only the useful subset; experimental UI/tools ca
 ## Runtime test handoff
 
 When human intervention is needed, the lane must reduce it to one explicit recipe: which ZIP/build to run, which known address/derelict to load, which button/action to use, what success indicator to wait for, and whether a traversal is required. Default is no traversal.
+
+## Normal ChatGPT ↔ Work/Codex switching
+
+The repository, not any chat's hidden context, is the continuity layer. A task must be resumable from GitHub alone.
+
+Before yielding control or after any meaningful discovery, the active AI must update the relevant branch so another ChatGPT surface can continue without replaying the prior conversation. At minimum keep these current:
+
+- `AI_HANDOFF.md`: architecture, confirmed facts, latest changes, test state, exact next action;
+- `RESEARCH_INDEX.md`: measured/public-confirmed/inferred/hypothesis separation;
+- `WORKSPACE_STATE.json`: current integration commit, lane states, human-intervention state, and next objective;
+- the lane manifest under `agent-patches/<lane>/` when a lane has produced a build/tool;
+- the PR/commit containing any code or research result not yet integrated.
+
+When switching modes, the incoming AI should first read `WORKSPACE_STATE.json`, then `AI_HANDOFF.md` and `RESEARCH_INDEX.md`, then only the active lane manifest/changed files. Do not reread the whole repository unless those files say it is necessary.
+
+Both normal ChatGPT and Work/Codex may act as the integration AI. Only one integration operation should be active at a time; research lanes remain isolated. Codex Local may use a local worktree/terminal for implementation and tests, while normal ChatGPT or Work may review results and integrate through GitHub. No conclusion may rely only on private chat context: commit the evidence or summary needed to reproduce it.

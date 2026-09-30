@@ -1,20 +1,33 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "version": "0.3.38",
   "status": "canonical-verified-source-package",
-  "package": "packages/v0.3.38/NMS-Derelict-Probe-v0.3.38-canonical.zip",
-  "sha256": "7ac2ce0c9cf7188839e03dca984b457b649716d4298bcb779ce178a64293a9e7",
-  "size_bytes": 289495,
-  "files": 103,
+  "artifact": {
+    "storage": "chatgpt-library",
+    "library_path": "/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip",
+    "file_name": "NMS-Derelict-Probe-v0.3.38-canonical.zip",
+    "sha256": "7ac2ce0c9cf7188839e03dca984b457b649716d4298bcb779ce178a64293a9e7",
+    "size_bytes": 289495,
+    "files": 103
+  },
+  "repository_transport": {
+    "status": "not-authoritative",
+    "reason": "The GitHub connector binary upload produced a size/hash mismatch. Complete ZIP artifacts are therefore stored in ChatGPT Library; GitHub remains authoritative for manifests, patches, evidence, branches and PRs."
+  },
   "verification": {
     "unit_tests": "113/113 passed",
     "compileall": "passed",
     "json_files_parsed": 35,
     "runtime_logic_changed": false
   },
+  "resume": {
+    "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json first. Materialize the exact Library artifact only if full source bytes are needed.",
+    "research_agent": "Use the lane manifest/patch and branch. Do not rely on private chat context.",
+    "integration_agent": "Verify artifact SHA-256 before applying a lane patch or producing a new complete ZIP."
+  },
   "notes": [
-    "This package is the authoritative v0.3.38 source baseline for integration and agent branches.",
+    "This Library artifact is the authoritative complete v0.3.38 source baseline.",
     "Only documentation/handoff hygiene and generated cache removal differ from the previously produced v0.3.38 ZIP.",
-    "The stable main update channel is intentionally not advanced by this metadata-only canonicalization step."
+    "The stable user updater/version channel is intentionally not advanced by canonicalization alone."
   ]
 }
