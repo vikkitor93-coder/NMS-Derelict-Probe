@@ -1,4 +1,4 @@
-# AI handoff — NMS Derelict Probe v0.3.31
+# AI handoff — NMS Derelict Probe v0.3.32
 
 ## Product architecture
 
@@ -35,3 +35,10 @@ Latest uploaded `analyze-seed-function` evidence (`20260930T005951Z`) revealed a
 - no direct seed write has yet been proven
 
 v0.3.31 corrects both static tools. Next action is **Extract upstream callers + upload** again; it will scan the full installed `NMS.exe` for direct references to corrected logical entry `0x00634BC0`. After that, inspect external xrefs or move to indirect/vtable entry tracing if none exist. Do not claim the `9256392A2F5A74AC` derivation formula is solved.
+
+
+## v0.3.32 exact runtime caller correlation
+
+The corrected v0.3.31 offline scan found 52 direct references to the verified logical entry `0x00634BC0`, proving the function is generic enough that static xrefs alone do not identify the derelict-specific path. v0.3.32 adds a narrow read-only signature hook at that entry. It records seeded descriptor calls only in a bounded in-memory ring, then correlates the exact descriptor pointer when `DUNGEON.SCENE.MBIN` reaches `Engine::AddResource`. The root event stores `logical_entry_matches`, `logical_entry_nearest_caller_return_offset_hex`, and a small code window.
+
+Next live action: use a known derelict/address, wait only until standalone Surveyor shows **Root entry caller**, stop/save, then run **Analyze generation + upload** (or Measure + upload if a fresh measurement wrapper is desired) and tell ChatGPT `check`. Do not require a full room traversal.
