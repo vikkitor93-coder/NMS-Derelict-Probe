@@ -1,28 +1,27 @@
 {
   "schema_version": 1,
-  "version": "0.3.25",
+  "version": "0.3.26",
   "repository": "vikkitor93-coder/NMS-Derelict-Probe",
   "branch": "main",
   "package_transport": "base64-chunks",
-  "package_kind": "delta-from-v0.3.24",
+  "package_kind": "delta-from-v0.3.25",
   "package_parts": [
-    "packages/v0.3.25-delta/part-000.b64",
-    "packages/v0.3.25-delta/part-001.b64",
-    "packages/v0.3.25-delta/part-002.b64"
+    "packages/v0.3.26-delta/part-000.b64",
+    "packages/v0.3.26-delta/part-001.b64",
+    "packages/v0.3.26-delta/part-002.b64"
   ],
-  "package_sha256": "508c9320461aadf6329a48d4ec3d826d5e566aa9b18eef66d82bb86d8e33bff6",
-  "package_size": 74743,
+  "package_sha256": "775492dc7c1c32701903b20e602860fea4af4b98c3ae2c5a204a68870e6968e7",
+  "package_size": 78985,
   "managed_files": [
-    "CHANGELOG.md",
     "VERSION.txt",
-    "AI_HANDOFF.md",
-    "Install-and-Start-NoOverlay.ps1",
-    "PROJECT_PLAN.md",
-    "Analyze-Generation-Baseline.ps1",
-    "Measure-Derelict-Generation.ps1",
     "README.md",
-    "Install-and-Start.ps1",
-    "tests/test_tools.py",
-    "mod/derelict_baseline_probe.py"
+    "CHANGELOG.md",
+    "PROJECT_PLAN.md",
+    "AI_HANDOFF.md",
+    "Extract-Dungeon-Upstream-Callers.cmd",
+    "mod/derelict_baseline_probe.py",
+    "tools/github_integration.py",
+    "tools/extract_nms_upstream_callers.py",
+    "tests/test_tools.py"
   ]
 }
