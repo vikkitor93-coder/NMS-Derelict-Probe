@@ -1,0 +1,12 @@
+{
+  "action": "analyze-seed-function",
+  "files": [
+    {
+      "name": "dungeon-seed-function-analysis-latest.json",
+      "sha256": "cf512be77cfdab6ad89ef3e33fa6e67b5c6fdfcf9e87225ca46778a8369879d1",
+      "size": 6113
+    }
+  ],
+  "utc": "20260930T005951Z",
+  "version": 1
+}
