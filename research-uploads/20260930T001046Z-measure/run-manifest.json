@@ -1,0 +1,27 @@
+{
+  "action": "measure",
+  "files": [
+    {
+      "name": "generation-baseline-latest.json",
+      "sha256": "40e4359193795860ae8ff214c013f0548a1009eafd9d25e8a3fee13391183279",
+      "size": 34829
+    },
+    {
+      "name": "generation-measurements-summary.json",
+      "sha256": "ba8e6c50830f3596a48fef1f59a84d9c323c5735d2ba38070ac9de2bb1b0cafe",
+      "size": 46081
+    },
+    {
+      "name": "generation-measurements.csv",
+      "sha256": "4d1b01b50dc9ac4f095f0988edf07a501e0a6609952b37735fd65045461c8fab",
+      "size": 6814
+    },
+    {
+      "name": "seed-room-correlation.json",
+      "sha256": "6d8f21d55e8652a61fc90c6f094762df68754a1b66a69367e70fa9eefacb8231",
+      "size": 31247
+    }
+  ],
+  "utc": "20260930T001046Z",
+  "version": 1
+}

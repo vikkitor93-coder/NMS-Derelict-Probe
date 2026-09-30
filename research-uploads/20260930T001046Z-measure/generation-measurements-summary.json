@@ -1,0 +1,1501 @@
+{
+  "version": 1,
+  "measurement_count": 9,
+  "measurements": [
+    {
+      "session_id": "20260929T144401Z_0001550006607CAC",
+      "probe_version": "0.3.5",
+      "universe_address_hex": "0001550006607CAC",
+      "reality_index": 0,
+      "solar_system_index": 341,
+      "voxel_x": -852,
+      "voxel_y": 6,
+      "voxel_z": 1543,
+      "preset": "CARGO_FLOATERS",
+      "preset_confidence": "high",
+      "main_rooms": 7,
+      "dead_end_rooms": 2,
+      "total_rooms": 9,
+      "salvage_crates": 32,
+      "crew_footlockers": 19,
+      "target_containers": 51,
+      "reward_seed_hexes": [
+        "1EE5E3C00986D42A"
+      ],
+      "dungeon_root_seed_hexes": [
+        "00C9E8DF0327789E"
+      ],
+      "resource_seed_lineage_signature_sha256": null,
+      "resource_seed_primary_hexes": [],
+      "resource_seed_context_signature_sha256": null,
+      "resource_seed_context_primary_hexes": [],
+      "poi_seed_candidate_hexes": [],
+      "poi_context_status": "not-captured",
+      "poi_description_return_hexes": [],
+      "poi_description_return_matches_root_seed": false,
+      "dungeon_root_inside_poi_prepare": false,
+      "dungeon_root_inside_poi_activation": false,
+      "dungeon_root_inside_poi_lifecycle": false,
+      "resource_manager_root_event_count": 0,
+      "dungeon_root_engine_caller_offsets": [],
+      "dungeon_root_manager_caller_offsets": [],
+      "dungeon_root_engine_call_sites": [],
+      "layout_signature_sha256": "1f90face36444c74ff3bb84b4626bda2f5b779f409cf321a41b48f01ab59ee25",
+      "layout_multiset_signature_sha256": "01873414614001532573819e7c11b687b9cd1db4a9a9398d4c42f0a0e3546b1c",
+      "room_parent_index_coverage": 0,
+      "legacy_stream_signature_sha256": "ac6daf3152d7f6e1d9ea43070844da6654b3624e5d36a52de656b33b96f3e522",
+      "generation_signature_sha256": "1f90face36444c74ff3bb84b4626bda2f5b779f409cf321a41b48f01ab59ee25",
+      "room_model_status": "validated-against-table",
+      "room_sequence": [
+        {
+          "order": 1,
+          "stream_order": 1,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [],
+          "salvage": 0,
+          "footlockers": 4,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 2,
+          "stream_order": 2,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [],
+          "salvage": 3,
+          "footlockers": 1,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 3,
+          "stream_order": 3,
+          "room_index": null,
+          "room_label": null,
+          "kind": "dead_end",
+          "family": "BARRACKS",
+          "parent_names": [],
+          "salvage": 1,
+          "footlockers": 0,
+          "targets": 1,
+          "dead_end_evidence": [
+            "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN"
+          ]
+        },
+        {
+          "order": 4,
+          "stream_order": 4,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [],
+          "salvage": 3,
+          "footlockers": 0,
+          "targets": 3,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 5,
+          "stream_order": 5,
+          "room_index": null,
+          "room_label": null,
+          "kind": "dead_end",
+          "family": "BARRACKS",
+          "parent_names": [],
+          "salvage": 1,
+          "footlockers": 0,
+          "targets": 1,
+          "dead_end_evidence": [
+            "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN"
+          ]
+        },
+        {
+          "order": 6,
+          "stream_order": 6,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "END",
+          "parent_names": [],
+          "salvage": 3,
+          "footlockers": 10,
+          "targets": 13,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 7,
+          "stream_order": 7,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [],
+          "salvage": 0,
+          "footlockers": 2,
+          "targets": 2,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 8,
+          "stream_order": 8,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [],
+          "salvage": 4,
+          "footlockers": 0,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 9,
+          "stream_order": 9,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [],
+          "salvage": 17,
+          "footlockers": 2,
+          "targets": 19,
+          "dead_end_evidence": []
+        }
+      ]
+    },
+    {
+      "session_id": "20260929T161635Z_00001A0004E84EFD",
+      "probe_version": "0.3.10",
+      "universe_address_hex": "00001A0004E84EFD",
+      "reality_index": 0,
+      "solar_system_index": 26,
+      "voxel_x": -259,
+      "voxel_y": 4,
+      "voxel_z": -380,
+      "preset": "CARGO_FLOATERS",
+      "preset_confidence": "high",
+      "main_rooms": 7,
+      "dead_end_rooms": 1,
+      "total_rooms": 8,
+      "salvage_crates": 31,
+      "crew_footlockers": 4,
+      "target_containers": 35,
+      "reward_seed_hexes": [
+        "CE0669F299792E85"
+      ],
+      "dungeon_root_seed_hexes": [],
+      "resource_seed_lineage_signature_sha256": null,
+      "resource_seed_primary_hexes": [],
+      "resource_seed_context_signature_sha256": null,
+      "resource_seed_context_primary_hexes": [],
+      "poi_seed_candidate_hexes": [],
+      "poi_context_status": "not-captured",
+      "poi_description_return_hexes": [],
+      "poi_description_return_matches_root_seed": false,
+      "dungeon_root_inside_poi_prepare": false,
+      "dungeon_root_inside_poi_activation": false,
+      "dungeon_root_inside_poi_lifecycle": false,
+      "resource_manager_root_event_count": 0,
+      "dungeon_root_engine_caller_offsets": [],
+      "dungeon_root_manager_caller_offsets": [],
+      "dungeon_root_engine_call_sites": [],
+      "layout_signature_sha256": "88aa1a360e937063558419b731d2cb0dee4e95ad879131b1b80f8c803dbdace7",
+      "layout_multiset_signature_sha256": "4fc1b70c8aa5313718470b42f9d206f62dc4802c2e71549bc9731e702c6c639a",
+      "room_parent_index_coverage": 0,
+      "legacy_stream_signature_sha256": "37db5444095ce331b9e4d4da8123daa8cb6f7bed54edd270a9dfb17f673e04b8",
+      "generation_signature_sha256": "88aa1a360e937063558419b731d2cb0dee4e95ad879131b1b80f8c803dbdace7",
+      "room_model_status": "validated-against-table",
+      "room_sequence": [
+        {
+          "order": 1,
+          "stream_order": 1,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 2,
+          "stream_order": 2,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [],
+          "salvage": 15,
+          "footlockers": 0,
+          "targets": 15,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 3,
+          "stream_order": 3,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [],
+          "salvage": 10,
+          "footlockers": 0,
+          "targets": 10,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 4,
+          "stream_order": 4,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "HANGAR",
+          "parent_names": [],
+          "salvage": 1,
+          "footlockers": 2,
+          "targets": 3,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 5,
+          "stream_order": 5,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [],
+          "salvage": 4,
+          "footlockers": 0,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 6,
+          "stream_order": 6,
+          "room_index": null,
+          "room_label": null,
+          "kind": "dead_end",
+          "family": "BARRACKS",
+          "parent_names": [],
+          "salvage": 0,
+          "footlockers": 0,
+          "targets": 0,
+          "dead_end_evidence": [
+            "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+          ]
+        },
+        {
+          "order": 7,
+          "stream_order": 7,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 8,
+          "stream_order": 8,
+          "room_index": null,
+          "room_label": null,
+          "kind": "main_room",
+          "family": "END",
+          "parent_names": [],
+          "salvage": 1,
+          "footlockers": 0,
+          "targets": 1,
+          "dead_end_evidence": []
+        }
+      ]
+    },
+    {
+      "session_id": "20260929T172658Z_00001A0004E84EFD",
+      "probe_version": "0.3.11",
+      "universe_address_hex": "00001A0004E84EFD",
+      "reality_index": 0,
+      "solar_system_index": 26,
+      "voxel_x": -259,
+      "voxel_y": 4,
+      "voxel_z": -380,
+      "preset": "CARGO_FLOATERS",
+      "preset_confidence": "high",
+      "main_rooms": 7,
+      "dead_end_rooms": 1,
+      "total_rooms": 8,
+      "salvage_crates": 31,
+      "crew_footlockers": 4,
+      "target_containers": 35,
+      "reward_seed_hexes": [
+        "CE0669F299792E85"
+      ],
+      "dungeon_root_seed_hexes": [],
+      "resource_seed_lineage_signature_sha256": null,
+      "resource_seed_primary_hexes": [],
+      "resource_seed_context_signature_sha256": null,
+      "resource_seed_context_primary_hexes": [],
+      "poi_seed_candidate_hexes": [
+        "00001A0004E84EFD"
+      ],
+      "poi_context_status": "universe-address-confirmed",
+      "poi_description_return_hexes": [],
+      "poi_description_return_matches_root_seed": false,
+      "dungeon_root_inside_poi_prepare": false,
+      "dungeon_root_inside_poi_activation": false,
+      "dungeon_root_inside_poi_lifecycle": false,
+      "resource_manager_root_event_count": 0,
+      "dungeon_root_engine_caller_offsets": [],
+      "dungeon_root_manager_caller_offsets": [],
+      "dungeon_root_engine_call_sites": [],
+      "layout_signature_sha256": "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536",
+      "layout_multiset_signature_sha256": "4fc1b70c8aa5313718470b42f9d206f62dc4802c2e71549bc9731e702c6c639a",
+      "room_parent_index_coverage": 8,
+      "legacy_stream_signature_sha256": "a90f80e74540ef33264c2bc86c854cc373ebc1497403a7ca4910bf30770a7724",
+      "generation_signature_sha256": "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536",
+      "room_model_status": "validated-against-table",
+      "room_sequence": [
+        {
+          "order": 1,
+          "stream_order": 1,
+          "room_index": 1,
+          "room_label": "Room 1",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 1"
+          ],
+          "salvage": 15,
+          "footlockers": 0,
+          "targets": 15,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 2,
+          "stream_order": 2,
+          "room_index": 6,
+          "room_label": "Room 6",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 6"
+          ],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 3,
+          "stream_order": 3,
+          "room_index": 3,
+          "room_label": "Room 3",
+          "kind": "main_room",
+          "family": "HANGAR",
+          "parent_names": [
+            "Room 3"
+          ],
+          "salvage": 1,
+          "footlockers": 2,
+          "targets": 3,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 4,
+          "stream_order": 4,
+          "room_index": 0,
+          "room_label": "Room 0",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 0"
+          ],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 5,
+          "stream_order": 5,
+          "room_index": 2,
+          "room_label": "Room 2",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 2"
+          ],
+          "salvage": 10,
+          "footlockers": 0,
+          "targets": 10,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 6,
+          "stream_order": 6,
+          "room_index": 4,
+          "room_label": "Room 4",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 4"
+          ],
+          "salvage": 4,
+          "footlockers": 0,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 7,
+          "stream_order": 7,
+          "room_index": 5,
+          "room_label": "Room 5",
+          "kind": "dead_end",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 5"
+          ],
+          "salvage": 0,
+          "footlockers": 0,
+          "targets": 0,
+          "dead_end_evidence": [
+            "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+          ]
+        },
+        {
+          "order": 8,
+          "stream_order": 8,
+          "room_index": 7,
+          "room_label": "Room 7",
+          "kind": "main_room",
+          "family": "END",
+          "parent_names": [
+            "Room 7"
+          ],
+          "salvage": 1,
+          "footlockers": 0,
+          "targets": 1,
+          "dead_end_evidence": []
+        }
+      ]
+    },
+    {
+      "session_id": "20260929T175122Z_0001550006607CAC",
+      "probe_version": "0.3.12",
+      "universe_address_hex": "0001550006607CAC",
+      "reality_index": 0,
+      "solar_system_index": 341,
+      "voxel_x": -852,
+      "voxel_y": 6,
+      "voxel_z": 1543,
+      "preset": "CARGO_FLOATERS",
+      "preset_confidence": "high",
+      "main_rooms": 7,
+      "dead_end_rooms": 2,
+      "total_rooms": 9,
+      "salvage_crates": 32,
+      "crew_footlockers": 19,
+      "target_containers": 51,
+      "reward_seed_hexes": [
+        "1EE5E3C00986D42A"
+      ],
+      "dungeon_root_seed_hexes": [
+        "00C9E8DF0327789E"
+      ],
+      "resource_seed_lineage_signature_sha256": null,
+      "resource_seed_primary_hexes": [],
+      "resource_seed_context_signature_sha256": null,
+      "resource_seed_context_primary_hexes": [],
+      "poi_seed_candidate_hexes": [
+        "0001550006607CAC"
+      ],
+      "poi_context_status": "universe-address-confirmed",
+      "poi_description_return_hexes": [],
+      "poi_description_return_matches_root_seed": false,
+      "dungeon_root_inside_poi_prepare": false,
+      "dungeon_root_inside_poi_activation": false,
+      "dungeon_root_inside_poi_lifecycle": false,
+      "resource_manager_root_event_count": 0,
+      "dungeon_root_engine_caller_offsets": [],
+      "dungeon_root_manager_caller_offsets": [],
+      "dungeon_root_engine_call_sites": [],
+      "layout_signature_sha256": "cbecd690412a75c1e819a34928327b32ed55e40fe776d600e5513fec10b13785",
+      "layout_multiset_signature_sha256": "01873414614001532573819e7c11b687b9cd1db4a9a9398d4c42f0a0e3546b1c",
+      "room_parent_index_coverage": 9,
+      "legacy_stream_signature_sha256": "ac6daf3152d7f6e1d9ea43070844da6654b3624e5d36a52de656b33b96f3e522",
+      "generation_signature_sha256": "cbecd690412a75c1e819a34928327b32ed55e40fe776d600e5513fec10b13785",
+      "room_model_status": "validated-against-table",
+      "room_sequence": [
+        {
+          "order": 1,
+          "stream_order": 1,
+          "room_index": 3,
+          "room_label": "Room 3",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 3"
+          ],
+          "salvage": 0,
+          "footlockers": 4,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 2,
+          "stream_order": 2,
+          "room_index": 1,
+          "room_label": "Room 1",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 1"
+          ],
+          "salvage": 3,
+          "footlockers": 1,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 3,
+          "stream_order": 3,
+          "room_index": 4,
+          "room_label": "Room 4",
+          "kind": "dead_end",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 4"
+          ],
+          "salvage": 1,
+          "footlockers": 0,
+          "targets": 1,
+          "dead_end_evidence": [
+            "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN"
+          ]
+        },
+        {
+          "order": 4,
+          "stream_order": 4,
+          "room_index": 5,
+          "room_label": "Room 5",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 5"
+          ],
+          "salvage": 3,
+          "footlockers": 0,
+          "targets": 3,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 5,
+          "stream_order": 5,
+          "room_index": 7,
+          "room_label": "Room 7",
+          "kind": "dead_end",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 7"
+          ],
+          "salvage": 1,
+          "footlockers": 0,
+          "targets": 1,
+          "dead_end_evidence": [
+            "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN"
+          ]
+        },
+        {
+          "order": 6,
+          "stream_order": 6,
+          "room_index": 8,
+          "room_label": "Room 8",
+          "kind": "main_room",
+          "family": "END",
+          "parent_names": [
+            "Room 8"
+          ],
+          "salvage": 3,
+          "footlockers": 10,
+          "targets": 13,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 7,
+          "stream_order": 7,
+          "room_index": 0,
+          "room_label": "Room 0",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 0"
+          ],
+          "salvage": 0,
+          "footlockers": 2,
+          "targets": 2,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 8,
+          "stream_order": 8,
+          "room_index": 2,
+          "room_label": "Room 2",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 2"
+          ],
+          "salvage": 4,
+          "footlockers": 0,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 9,
+          "stream_order": 9,
+          "room_index": 6,
+          "room_label": "Room 6",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 6"
+          ],
+          "salvage": 17,
+          "footlockers": 2,
+          "targets": 19,
+          "dead_end_evidence": []
+        }
+      ]
+    },
+    {
+      "session_id": "20260929T183320Z_00001A0004E84EFD",
+      "probe_version": "0.3.13",
+      "universe_address_hex": "00001A0004E84EFD",
+      "reality_index": 0,
+      "solar_system_index": 26,
+      "voxel_x": -259,
+      "voxel_y": 4,
+      "voxel_z": -380,
+      "preset": "CARGO_FLOATERS",
+      "preset_confidence": "high",
+      "main_rooms": 7,
+      "dead_end_rooms": 1,
+      "total_rooms": 8,
+      "salvage_crates": 31,
+      "crew_footlockers": 4,
+      "target_containers": 35,
+      "reward_seed_hexes": [
+        "CE0669F299792E85"
+      ],
+      "dungeon_root_seed_hexes": [
+        "9256392A2F5A74AC"
+      ],
+      "resource_seed_lineage_signature_sha256": null,
+      "resource_seed_primary_hexes": [],
+      "resource_seed_context_signature_sha256": null,
+      "resource_seed_context_primary_hexes": [],
+      "poi_seed_candidate_hexes": [
+        "00001A0004E84EFD"
+      ],
+      "poi_context_status": "universe-address-confirmed",
+      "poi_description_return_hexes": [],
+      "poi_description_return_matches_root_seed": false,
+      "dungeon_root_inside_poi_prepare": false,
+      "dungeon_root_inside_poi_activation": false,
+      "dungeon_root_inside_poi_lifecycle": false,
+      "resource_manager_root_event_count": 0,
+      "dungeon_root_engine_caller_offsets": [],
+      "dungeon_root_manager_caller_offsets": [],
+      "dungeon_root_engine_call_sites": [],
+      "layout_signature_sha256": "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536",
+      "layout_multiset_signature_sha256": "4fc1b70c8aa5313718470b42f9d206f62dc4802c2e71549bc9731e702c6c639a",
+      "room_parent_index_coverage": 8,
+      "legacy_stream_signature_sha256": "a90f80e74540ef33264c2bc86c854cc373ebc1497403a7ca4910bf30770a7724",
+      "generation_signature_sha256": "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536",
+      "room_model_status": "validated-against-table",
+      "room_sequence": [
+        {
+          "order": 1,
+          "stream_order": 1,
+          "room_index": 1,
+          "room_label": "Room 1",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 1"
+          ],
+          "salvage": 15,
+          "footlockers": 0,
+          "targets": 15,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 2,
+          "stream_order": 2,
+          "room_index": 6,
+          "room_label": "Room 6",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 6"
+          ],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 3,
+          "stream_order": 3,
+          "room_index": 3,
+          "room_label": "Room 3",
+          "kind": "main_room",
+          "family": "HANGAR",
+          "parent_names": [
+            "Room 3"
+          ],
+          "salvage": 1,
+          "footlockers": 2,
+          "targets": 3,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 4,
+          "stream_order": 4,
+          "room_index": 0,
+          "room_label": "Room 0",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 0"
+          ],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 5,
+          "stream_order": 5,
+          "room_index": 2,
+          "room_label": "Room 2",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 2"
+          ],
+          "salvage": 10,
+          "footlockers": 0,
+          "targets": 10,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 6,
+          "stream_order": 6,
+          "room_index": 4,
+          "room_label": "Room 4",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 4"
+          ],
+          "salvage": 4,
+          "footlockers": 0,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 7,
+          "stream_order": 7,
+          "room_index": 5,
+          "room_label": "Room 5",
+          "kind": "dead_end",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 5"
+          ],
+          "salvage": 0,
+          "footlockers": 0,
+          "targets": 0,
+          "dead_end_evidence": [
+            "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+          ]
+        },
+        {
+          "order": 8,
+          "stream_order": 8,
+          "room_index": 7,
+          "room_label": "Room 7",
+          "kind": "main_room",
+          "family": "END",
+          "parent_names": [
+            "Room 7"
+          ],
+          "salvage": 1,
+          "footlockers": 0,
+          "targets": 1,
+          "dead_end_evidence": []
+        }
+      ]
+    },
+    {
+      "session_id": "20260929T185821Z_00001A0004E84EFD",
+      "probe_version": "0.3.14",
+      "universe_address_hex": "00001A0004E84EFD",
+      "reality_index": 0,
+      "solar_system_index": 26,
+      "voxel_x": -259,
+      "voxel_y": 4,
+      "voxel_z": -380,
+      "preset": "CARGO_FLOATERS",
+      "preset_confidence": "high",
+      "main_rooms": 7,
+      "dead_end_rooms": 1,
+      "total_rooms": 8,
+      "salvage_crates": 31,
+      "crew_footlockers": 4,
+      "target_containers": 35,
+      "reward_seed_hexes": [
+        "CE0669F299792E85"
+      ],
+      "dungeon_root_seed_hexes": [
+        "9256392A2F5A74AC"
+      ],
+      "resource_seed_lineage_signature_sha256": "1c170e4adea39c940d218df40b49a222c5ade702ff2664501d6c5dbac736cfe1",
+      "resource_seed_primary_hexes": [
+        "9256392A2F5A74AC"
+      ],
+      "resource_seed_context_signature_sha256": null,
+      "resource_seed_context_primary_hexes": [],
+      "poi_seed_candidate_hexes": [
+        "00001A0004E84EFD"
+      ],
+      "poi_context_status": "universe-address-confirmed",
+      "poi_description_return_hexes": [],
+      "poi_description_return_matches_root_seed": false,
+      "dungeon_root_inside_poi_prepare": false,
+      "dungeon_root_inside_poi_activation": false,
+      "dungeon_root_inside_poi_lifecycle": false,
+      "resource_manager_root_event_count": 0,
+      "dungeon_root_engine_caller_offsets": [],
+      "dungeon_root_manager_caller_offsets": [],
+      "dungeon_root_engine_call_sites": [],
+      "layout_signature_sha256": "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536",
+      "layout_multiset_signature_sha256": "4fc1b70c8aa5313718470b42f9d206f62dc4802c2e71549bc9731e702c6c639a",
+      "room_parent_index_coverage": 8,
+      "legacy_stream_signature_sha256": "a90f80e74540ef33264c2bc86c854cc373ebc1497403a7ca4910bf30770a7724",
+      "generation_signature_sha256": "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536",
+      "room_model_status": "validated-against-table",
+      "room_sequence": [
+        {
+          "order": 1,
+          "stream_order": 1,
+          "room_index": 1,
+          "room_label": "Room 1",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 1"
+          ],
+          "salvage": 15,
+          "footlockers": 0,
+          "targets": 15,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 2,
+          "stream_order": 2,
+          "room_index": 6,
+          "room_label": "Room 6",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 6"
+          ],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 3,
+          "stream_order": 3,
+          "room_index": 3,
+          "room_label": "Room 3",
+          "kind": "main_room",
+          "family": "HANGAR",
+          "parent_names": [
+            "Room 3"
+          ],
+          "salvage": 1,
+          "footlockers": 2,
+          "targets": 3,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 4,
+          "stream_order": 4,
+          "room_index": 0,
+          "room_label": "Room 0",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 0"
+          ],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 5,
+          "stream_order": 5,
+          "room_index": 2,
+          "room_label": "Room 2",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 2"
+          ],
+          "salvage": 10,
+          "footlockers": 0,
+          "targets": 10,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 6,
+          "stream_order": 6,
+          "room_index": 4,
+          "room_label": "Room 4",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 4"
+          ],
+          "salvage": 4,
+          "footlockers": 0,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 7,
+          "stream_order": 7,
+          "room_index": 5,
+          "room_label": "Room 5",
+          "kind": "dead_end",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 5"
+          ],
+          "salvage": 0,
+          "footlockers": 0,
+          "targets": 0,
+          "dead_end_evidence": [
+            "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+          ]
+        },
+        {
+          "order": 8,
+          "stream_order": 8,
+          "room_index": 7,
+          "room_label": "Room 7",
+          "kind": "main_room",
+          "family": "END",
+          "parent_names": [
+            "Room 7"
+          ],
+          "salvage": 1,
+          "footlockers": 0,
+          "targets": 1,
+          "dead_end_evidence": []
+        }
+      ]
+    },
+    {
+      "session_id": "20260929T195205Z_00001A0004E84EFD",
+      "probe_version": "0.3.17",
+      "universe_address_hex": "00001A0004E84EFD",
+      "reality_index": 0,
+      "solar_system_index": 26,
+      "voxel_x": -259,
+      "voxel_y": 4,
+      "voxel_z": -380,
+      "preset": "CARGO_FLOATERS",
+      "preset_confidence": "high",
+      "main_rooms": 7,
+      "dead_end_rooms": 1,
+      "total_rooms": 8,
+      "salvage_crates": 31,
+      "crew_footlockers": 4,
+      "target_containers": 35,
+      "reward_seed_hexes": [
+        "CE0669F299792E85"
+      ],
+      "dungeon_root_seed_hexes": [
+        "9256392A2F5A74AC"
+      ],
+      "resource_seed_lineage_signature_sha256": "1c170e4adea39c940d218df40b49a222c5ade702ff2664501d6c5dbac736cfe1",
+      "resource_seed_primary_hexes": [
+        "9256392A2F5A74AC"
+      ],
+      "resource_seed_context_signature_sha256": "fb0d7e94ac0051840fbc66ce83c0a3942006a2ae27373868e30d18c6d66acf5f",
+      "resource_seed_context_primary_hexes": [
+        "0AD621B873019F4F",
+        "B4B85467860660FD",
+        "B9BBC13335D522C2",
+        "00001A0004E84EFD",
+        "A837B97723290E5C",
+        "6E121336ADC5FFBF",
+        "A664CB025DBA7179",
+        "FC41CDC809FBC08F",
+        "A85ACCEFA42959CA",
+        "175E0D95A065E2C5",
+        "19DBCF77B6216CC4",
+        "37A9C675256DD71A",
+        "CCB012823ED907F8",
+        "0664401C5D00D463",
+        "96BCA4561148F642",
+        "25CEBF1D6EA8AA2A",
+        "64C8FB7BA73C8925",
+        "6DEB159B045A85CD",
+        "CCC0C03A583EBB5D",
+        "9256392A2F5A74AC"
+      ],
+      "poi_seed_candidate_hexes": [
+        "00001A0004E84EFD"
+      ],
+      "poi_context_status": "universe-address-confirmed",
+      "poi_description_return_hexes": [
+        "000000F2834FD400"
+      ],
+      "poi_description_return_matches_root_seed": false,
+      "dungeon_root_inside_poi_prepare": false,
+      "dungeon_root_inside_poi_activation": false,
+      "dungeon_root_inside_poi_lifecycle": false,
+      "resource_manager_root_event_count": 0,
+      "dungeon_root_engine_caller_offsets": [],
+      "dungeon_root_manager_caller_offsets": [],
+      "dungeon_root_engine_call_sites": [],
+      "layout_signature_sha256": "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536",
+      "layout_multiset_signature_sha256": "4fc1b70c8aa5313718470b42f9d206f62dc4802c2e71549bc9731e702c6c639a",
+      "room_parent_index_coverage": 8,
+      "legacy_stream_signature_sha256": "a90f80e74540ef33264c2bc86c854cc373ebc1497403a7ca4910bf30770a7724",
+      "generation_signature_sha256": "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536",
+      "room_model_status": "validated-against-table",
+      "room_sequence": [
+        {
+          "order": 1,
+          "stream_order": 1,
+          "room_index": 1,
+          "room_label": "Room 1",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 1"
+          ],
+          "salvage": 15,
+          "footlockers": 0,
+          "targets": 15,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 2,
+          "stream_order": 2,
+          "room_index": 6,
+          "room_label": "Room 6",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 6"
+          ],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 3,
+          "stream_order": 3,
+          "room_index": 3,
+          "room_label": "Room 3",
+          "kind": "main_room",
+          "family": "HANGAR",
+          "parent_names": [
+            "Room 3"
+          ],
+          "salvage": 1,
+          "footlockers": 2,
+          "targets": 3,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 4,
+          "stream_order": 4,
+          "room_index": 0,
+          "room_label": "Room 0",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 0"
+          ],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 5,
+          "stream_order": 5,
+          "room_index": 2,
+          "room_label": "Room 2",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 2"
+          ],
+          "salvage": 10,
+          "footlockers": 0,
+          "targets": 10,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 6,
+          "stream_order": 6,
+          "room_index": 4,
+          "room_label": "Room 4",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 4"
+          ],
+          "salvage": 4,
+          "footlockers": 0,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 7,
+          "stream_order": 7,
+          "room_index": 5,
+          "room_label": "Room 5",
+          "kind": "dead_end",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 5"
+          ],
+          "salvage": 0,
+          "footlockers": 0,
+          "targets": 0,
+          "dead_end_evidence": [
+            "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+          ]
+        },
+        {
+          "order": 8,
+          "stream_order": 8,
+          "room_index": 7,
+          "room_label": "Room 7",
+          "kind": "main_room",
+          "family": "END",
+          "parent_names": [
+            "Room 7"
+          ],
+          "salvage": 1,
+          "footlockers": 0,
+          "targets": 1,
+          "dead_end_evidence": []
+        }
+      ]
+    },
+    {
+      "session_id": "20260929T201042Z_00001A0004E84EFD",
+      "probe_version": "0.3.18",
+      "universe_address_hex": "00001A0004E84EFD",
+      "reality_index": 0,
+      "solar_system_index": 26,
+      "voxel_x": -259,
+      "voxel_y": 4,
+      "voxel_z": -380,
+      "preset": "CARGO_FLOATERS",
+      "preset_confidence": "high",
+      "main_rooms": 7,
+      "dead_end_rooms": 1,
+      "total_rooms": 8,
+      "salvage_crates": 31,
+      "crew_footlockers": 4,
+      "target_containers": 35,
+      "reward_seed_hexes": [
+        "CE0669F299792E85"
+      ],
+      "dungeon_root_seed_hexes": [
+        "9256392A2F5A74AC"
+      ],
+      "resource_seed_lineage_signature_sha256": "1c170e4adea39c940d218df40b49a222c5ade702ff2664501d6c5dbac736cfe1",
+      "resource_seed_primary_hexes": [
+        "9256392A2F5A74AC"
+      ],
+      "resource_seed_context_signature_sha256": "fb0d7e94ac0051840fbc66ce83c0a3942006a2ae27373868e30d18c6d66acf5f",
+      "resource_seed_context_primary_hexes": [
+        "0AD621B873019F4F",
+        "B4B85467860660FD",
+        "B9BBC13335D522C2",
+        "00001A0004E84EFD",
+        "A837B97723290E5C",
+        "6E121336ADC5FFBF",
+        "A664CB025DBA7179",
+        "FC41CDC809FBC08F",
+        "A85ACCEFA42959CA",
+        "175E0D95A065E2C5",
+        "19DBCF77B6216CC4",
+        "37A9C675256DD71A",
+        "CCB012823ED907F8",
+        "0664401C5D00D463",
+        "96BCA4561148F642",
+        "25CEBF1D6EA8AA2A",
+        "64C8FB7BA73C8925",
+        "6DEB159B045A85CD",
+        "CCC0C03A583EBB5D",
+        "9256392A2F5A74AC"
+      ],
+      "poi_seed_candidate_hexes": [
+        "00001A0004E84EFD"
+      ],
+      "poi_context_status": "universe-address-confirmed",
+      "poi_description_return_hexes": [
+        "000000895A94D180"
+      ],
+      "poi_description_return_matches_root_seed": false,
+      "dungeon_root_inside_poi_prepare": false,
+      "dungeon_root_inside_poi_activation": false,
+      "dungeon_root_inside_poi_lifecycle": false,
+      "resource_manager_root_event_count": 1,
+      "dungeon_root_engine_caller_offsets": [],
+      "dungeon_root_manager_caller_offsets": [],
+      "dungeon_root_engine_call_sites": [],
+      "layout_signature_sha256": "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536",
+      "layout_multiset_signature_sha256": "4fc1b70c8aa5313718470b42f9d206f62dc4802c2e71549bc9731e702c6c639a",
+      "room_parent_index_coverage": 8,
+      "legacy_stream_signature_sha256": "a90f80e74540ef33264c2bc86c854cc373ebc1497403a7ca4910bf30770a7724",
+      "generation_signature_sha256": "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536",
+      "room_model_status": "validated-against-table",
+      "room_sequence": [
+        {
+          "order": 1,
+          "stream_order": 1,
+          "room_index": 1,
+          "room_label": "Room 1",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 1"
+          ],
+          "salvage": 15,
+          "footlockers": 0,
+          "targets": 15,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 2,
+          "stream_order": 2,
+          "room_index": 6,
+          "room_label": "Room 6",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 6"
+          ],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 3,
+          "stream_order": 3,
+          "room_index": 3,
+          "room_label": "Room 3",
+          "kind": "main_room",
+          "family": "HANGAR",
+          "parent_names": [
+            "Room 3"
+          ],
+          "salvage": 1,
+          "footlockers": 2,
+          "targets": 3,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 4,
+          "stream_order": 4,
+          "room_index": 0,
+          "room_label": "Room 0",
+          "kind": "main_room",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 0"
+          ],
+          "salvage": 0,
+          "footlockers": 1,
+          "targets": 1,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 5,
+          "stream_order": 5,
+          "room_index": 2,
+          "room_label": "Room 2",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 2"
+          ],
+          "salvage": 10,
+          "footlockers": 0,
+          "targets": 10,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 6,
+          "stream_order": 6,
+          "room_index": 4,
+          "room_label": "Room 4",
+          "kind": "main_room",
+          "family": "CARG",
+          "parent_names": [
+            "Room 4"
+          ],
+          "salvage": 4,
+          "footlockers": 0,
+          "targets": 4,
+          "dead_end_evidence": []
+        },
+        {
+          "order": 7,
+          "stream_order": 7,
+          "room_index": 5,
+          "room_label": "Room 5",
+          "kind": "dead_end",
+          "family": "BARRACKS",
+          "parent_names": [
+            "Room 5"
+          ],
+          "salvage": 0,
+          "footlockers": 0,
+          "targets": 0,
+          "dead_end_evidence": [
+            "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+          ]
+        },
+        {
+          "order": 8,
+          "stream_order": 8,
+          "room_index": 7,
+          "room_label": "Room 7",
+          "kind": "main_room",
+          "family": "END",
+          "parent_names": [
+            "Room 7"
+          ],
+          "salvage": 1,
+          "footlockers": 0,
+          "targets": 1,
+          "dead_end_evidence": []
+        }
+      ]
+    },
+    {
+      "session_id": "20260929T203022Z_00001A0004E84EFD",
+      "probe_version": "0.3.19",
+      "universe_address_hex": "00001A0004E84EFD",
+      "reality_index": 0,
+      "solar_system_index": 26,
+      "voxel_x": -259,
+      "voxel_y": 4,
+      "voxel_z": -380,
+      "preset": null,
+      "preset_confidence": "unresolved",
+      "main_rooms": 0,
+      "dead_end_rooms": 0,
+      "total_rooms": 0,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "reward_seed_hexes": [],
+      "dungeon_root_seed_hexes": [
+        "9256392A2F5A74AC"
+      ],
+      "resource_seed_lineage_signature_sha256": "1c170e4adea39c940d218df40b49a222c5ade702ff2664501d6c5dbac736cfe1",
+      "resource_seed_primary_hexes": [
+        "9256392A2F5A74AC"
+      ],
+      "resource_seed_context_signature_sha256": "fb0d7e94ac0051840fbc66ce83c0a3942006a2ae27373868e30d18c6d66acf5f",
+      "resource_seed_context_primary_hexes": [
+        "0AD621B873019F4F",
+        "B4B85467860660FD",
+        "B9BBC13335D522C2",
+        "00001A0004E84EFD",
+        "A837B97723290E5C",
+        "6E121336ADC5FFBF",
+        "A664CB025DBA7179",
+        "FC41CDC809FBC08F",
+        "A85ACCEFA42959CA",
+        "175E0D95A065E2C5",
+        "19DBCF77B6216CC4",
+        "37A9C675256DD71A",
+        "CCB012823ED907F8",
+        "0664401C5D00D463",
+        "96BCA4561148F642",
+        "25CEBF1D6EA8AA2A",
+        "64C8FB7BA73C8925",
+        "6DEB159B045A85CD",
+        "CCC0C03A583EBB5D",
+        "9256392A2F5A74AC"
+      ],
+      "poi_seed_candidate_hexes": [
+        "00001A0004E84EFD"
+      ],
+      "poi_context_status": "universe-address-confirmed",
+      "poi_description_return_hexes": [
+        "000000AB0D9BD560"
+      ],
+      "poi_description_return_matches_root_seed": false,
+      "dungeon_root_inside_poi_prepare": false,
+      "dungeon_root_inside_poi_activation": false,
+      "dungeon_root_inside_poi_lifecycle": false,
+      "resource_manager_root_event_count": 1,
+      "dungeon_root_engine_caller_offsets": [
+        "00635115"
+      ],
+      "dungeon_root_manager_caller_offsets": [
+        "01831AA3"
+      ],
+      "dungeon_root_engine_call_sites": [
+        {
+          "encoding": "E8 rel32",
+          "call_instruction_offset_hex": "00635110",
+          "call_target_offset_hex": "01831A10",
+          "descriptor_argument_source_register": "RDI",
+          "descriptor_passed_unchanged_to_engine": true
+        }
+      ],
+      "layout_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "layout_multiset_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "room_parent_index_coverage": 0,
+      "legacy_stream_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "generation_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "room_model_status": "needs-review",
+      "room_sequence": []
+    }
+  ]
+}

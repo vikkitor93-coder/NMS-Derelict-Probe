@@ -1,0 +1,911 @@
+{
+  "version": 1,
+  "analysis_tool_version": "0.3.24",
+  "session_id": "20260929T203022Z_00001A0004E84EFD",
+  "probe_version": "0.3.19",
+  "universe_address_hex": "00001A0004E84EFD",
+  "reality_index": 0,
+  "galactic_address": {
+    "planet_index": 0,
+    "solar_system_index": 26,
+    "voxel_x": -259,
+    "voxel_y": 4,
+    "voxel_z": -380
+  },
+  "dungeon_scene_instances": 0,
+  "logical_generated_chunks": 0,
+  "predicted_salvage_crates": 0,
+  "predicted_crew_footlockers": 0,
+  "predicted_target_containers": 0,
+  "preset_inference": {
+    "preset": null,
+    "confidence": "unresolved",
+    "candidates": [
+      "MEDI_TURRETS",
+      "MEDI_FLOATERS",
+      "MEDI_BUGS",
+      "MEDI_SLIME",
+      "MEDI_MAZE",
+      "CARGO_TURRETS",
+      "CARGO_FLOATERS",
+      "CARGO_BUGS",
+      "CARGO_SLIME",
+      "CARGO_MAZE"
+    ],
+    "family": null,
+    "hazard": null,
+    "family_scene_counts": {
+      "CARG": 0,
+      "MEDI": 0
+    },
+    "all_scene_family_counts": {},
+    "hazard_evidence": []
+  },
+  "selected_preset_config": null,
+  "reward_seed_candidates": [],
+  "dungeon_root_seed_candidates": [
+    {
+      "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+      "seed_hex": "9256392A2F5A74AC",
+      "seed_u64": 10544678430880461996,
+      "use_seed_value": true,
+      "observations": 1,
+      "captured_universe_addresses": [
+        "00001A0004E84EFD"
+      ],
+      "interpretation": "dungeon-root-resource-descriptor-seed-candidate"
+    }
+  ],
+  "dungeon_root_seed_status": "candidate-captured-unverified",
+  "resource_seed_lineage": {
+    "status": "captured",
+    "event_count": 1,
+    "ordered_signature_sha256": "1c170e4adea39c940d218df40b49a222c5ade702ff2664501d6c5dbac736cfe1",
+    "unique_primary_seed_hexes": [
+      "9256392A2F5A74AC"
+    ],
+    "unique_secondary_seed_hexes": [],
+    "events": [
+      {
+        "event_order": 599,
+        "trace_sequence": 1027,
+        "utc": "2026-09-29T20:30:17.150Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "9256392A2F5A74AC",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      }
+    ],
+    "scope": "dungeon-only",
+    "interpretation": "ordered non-zero descriptor seeds on dungeon resource events; correlation evidence only"
+  },
+  "resource_seed_lineage_status": "captured",
+  "resource_seed_context_lineage": {
+    "status": "captured",
+    "event_count": 58,
+    "ordered_signature_sha256": "fb0d7e94ac0051840fbc66ce83c0a3942006a2ae27373868e30d18c6d66acf5f",
+    "unique_primary_seed_hexes": [
+      "0AD621B873019F4F",
+      "B4B85467860660FD",
+      "B9BBC13335D522C2",
+      "00001A0004E84EFD",
+      "A837B97723290E5C",
+      "6E121336ADC5FFBF",
+      "A664CB025DBA7179",
+      "FC41CDC809FBC08F",
+      "A85ACCEFA42959CA",
+      "175E0D95A065E2C5",
+      "19DBCF77B6216CC4",
+      "37A9C675256DD71A",
+      "CCB012823ED907F8",
+      "0664401C5D00D463",
+      "96BCA4561148F642",
+      "25CEBF1D6EA8AA2A",
+      "64C8FB7BA73C8925",
+      "6DEB159B045A85CD",
+      "CCC0C03A583EBB5D",
+      "9256392A2F5A74AC"
+    ],
+    "unique_secondary_seed_hexes": [],
+    "events": [
+      {
+        "event_order": 43,
+        "trace_sequence": 471,
+        "utc": "2026-09-29T20:29:40.012Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/DOORMODULE_ANIMATEDDOORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 44,
+        "trace_sequence": 472,
+        "utc": "2026-09-29T20:29:40.084Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_RIGHTROOMABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 47,
+        "trace_sequence": 475,
+        "utc": "2026-09-29T20:29:40.177Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_LEFTROOMABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 48,
+        "trace_sequence": 476,
+        "utc": "2026-09-29T20:29:40.177Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_BARAABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 49,
+        "trace_sequence": 477,
+        "utc": "2026-09-29T20:29:40.177Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_LEFTROOMBABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 50,
+        "trace_sequence": 478,
+        "utc": "2026-09-29T20:29:40.177Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_LEFTROOMCABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 382,
+        "trace_sequence": 810,
+        "utc": "2026-09-29T20:29:42.165Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/EXTLAYOUT_ABANDONED1.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 383,
+        "trace_sequence": 811,
+        "utc": "2026-09-29T20:29:42.165Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/EXTLAYOUT_ABANDONED2.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 384,
+        "trace_sequence": 812,
+        "utc": "2026-09-29T20:29:42.165Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/EXTLAYOUT_ABANDONED3.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 385,
+        "trace_sequence": 813,
+        "utc": "2026-09-29T20:29:42.165Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/EXTLAYOUT_ABANDONED4.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 386,
+        "trace_sequence": 814,
+        "utc": "2026-09-29T20:29:42.173Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_CAPBUNKABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 390,
+        "trace_sequence": 818,
+        "utc": "2026-09-29T20:29:42.220Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_DOORWAYINTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 421,
+        "trace_sequence": 849,
+        "utc": "2026-09-29T20:29:42.228Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/DOORMODULE_ANIMATEDDOORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 422,
+        "trace_sequence": 850,
+        "utc": "2026-09-29T20:29:42.229Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/DOORMODULE_EXTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 423,
+        "trace_sequence": 851,
+        "utc": "2026-09-29T20:29:42.231Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/CORRIDORMODULE_STRAIGHTINTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 424,
+        "trace_sequence": 852,
+        "utc": "2026-09-29T20:29:42.231Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_DOORWAYINABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 425,
+        "trace_sequence": 853,
+        "utc": "2026-09-29T20:29:42.231Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_ABANDONED1.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 426,
+        "trace_sequence": 854,
+        "utc": "2026-09-29T20:29:42.231Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_ABANDONED2.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 427,
+        "trace_sequence": 855,
+        "utc": "2026-09-29T20:29:42.236Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_ABANDONED3.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 468,
+        "trace_sequence": 896,
+        "utc": "2026-09-29T20:29:42.274Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_ABANDONED4.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 469,
+        "trace_sequence": 897,
+        "utc": "2026-09-29T20:29:42.274Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_ABANDONED5.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 555,
+        "trace_sequence": 983,
+        "utc": "2026-09-29T20:29:42.303Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PROPS/ABANDONED/INTERIOR_TENTACLEPLANT.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 556,
+        "trace_sequence": 984,
+        "utc": "2026-09-29T20:29:42.324Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/COMMONPARTS/ABANDONEDTERMINAL.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 559,
+        "trace_sequence": 987,
+        "utc": "2026-09-29T20:29:43.243Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/EXTLAYOUT_UNDERWATERABANDONED1.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 560,
+        "trace_sequence": 988,
+        "utc": "2026-09-29T20:29:43.243Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_CAPBUNKABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 561,
+        "trace_sequence": 989,
+        "utc": "2026-09-29T20:29:43.243Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_DOORWAYINTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 562,
+        "trace_sequence": 990,
+        "utc": "2026-09-29T20:29:43.374Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/DOORMODULE_EXTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 563,
+        "trace_sequence": 991,
+        "utc": "2026-09-29T20:29:43.380Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/CORRIDORMODULE_STRAIGHTINTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 564,
+        "trace_sequence": 992,
+        "utc": "2026-09-29T20:29:43.490Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_DOORWAYINABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 565,
+        "trace_sequence": 993,
+        "utc": "2026-09-29T20:29:43.525Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PROPS/ABANDONED/INTERIOR_TENTACLEPLANT.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 566,
+        "trace_sequence": 994,
+        "utc": "2026-09-29T20:29:43.525Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/COMMONPARTS/ABANDONEDTERMINAL.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 571,
+        "trace_sequence": 999,
+        "utc": "2026-09-29T20:29:57.212Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/SPACE/HULKPRESSUREELECTRICALARC.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 572,
+        "trace_sequence": 1000,
+        "utc": "2026-09-29T20:29:57.214Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/HULKPIECEEXPLOSION.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 573,
+        "trace_sequence": 1001,
+        "utc": "2026-09-29T20:29:57.216Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/HULKREACTOREXPLOSION.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 574,
+        "trace_sequence": 1002,
+        "utc": "2026-09-29T20:29:57.221Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/HULKPARTEXPLOSION.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 575,
+        "trace_sequence": 1003,
+        "utc": "2026-09-29T20:29:57.229Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/HULKMODULEEXPLOSION.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 576,
+        "trace_sequence": 1004,
+        "utc": "2026-09-29T20:29:57.231Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/HULKMELTDOWNEXPLOSION.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 577,
+        "trace_sequence": 1005,
+        "utc": "2026-09-29T20:29:57.562Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/ABANDRONEEXPLODE.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 578,
+        "trace_sequence": 1006,
+        "utc": "2026-09-29T20:29:58.131Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/SPACE/HULKPANELVENT.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 579,
+        "trace_sequence": 1007,
+        "utc": "2026-09-29T20:29:58.156Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/SPACE/HULKELECTRICALARC.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 580,
+        "trace_sequence": 1008,
+        "utc": "2026-09-29T20:29:58.158Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/SPACE/HULKPARTDETACH.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 581,
+        "trace_sequence": 1009,
+        "utc": "2026-09-29T20:29:58.416Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/STATION/ABANDONEDSTATIONELEC.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 582,
+        "trace_sequence": 1010,
+        "utc": "2026-09-29T20:30:03.494Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKENICE.SCENE.MBIN",
+        "primary_seed_hex": "A837B97723290E5C",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 583,
+        "trace_sequence": 1011,
+        "utc": "2026-09-29T20:30:03.494Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKENICE.SCENE.MBIN",
+        "primary_seed_hex": "6E121336ADC5FFBF",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 584,
+        "trace_sequence": 1012,
+        "utc": "2026-09-29T20:30:03.495Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKENICE.SCENE.MBIN",
+        "primary_seed_hex": "A664CB025DBA7179",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 585,
+        "trace_sequence": 1013,
+        "utc": "2026-09-29T20:30:03.495Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKENICE.SCENE.MBIN",
+        "primary_seed_hex": "FC41CDC809FBC08F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 586,
+        "trace_sequence": 1014,
+        "utc": "2026-09-29T20:30:03.495Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKENICE.SCENE.MBIN",
+        "primary_seed_hex": "A85ACCEFA42959CA",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 587,
+        "trace_sequence": 1015,
+        "utc": "2026-09-29T20:30:03.495Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKEN.SCENE.MBIN",
+        "primary_seed_hex": "175E0D95A065E2C5",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 588,
+        "trace_sequence": 1016,
+        "utc": "2026-09-29T20:30:03.495Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKEN.SCENE.MBIN",
+        "primary_seed_hex": "19DBCF77B6216CC4",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 589,
+        "trace_sequence": 1017,
+        "utc": "2026-09-29T20:30:03.495Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKEN.SCENE.MBIN",
+        "primary_seed_hex": "37A9C675256DD71A",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 590,
+        "trace_sequence": 1018,
+        "utc": "2026-09-29T20:30:03.495Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKEN.SCENE.MBIN",
+        "primary_seed_hex": "CCB012823ED907F8",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 591,
+        "trace_sequence": 1019,
+        "utc": "2026-09-29T20:30:03.496Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKEN.SCENE.MBIN",
+        "primary_seed_hex": "0664401C5D00D463",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 592,
+        "trace_sequence": 1020,
+        "utc": "2026-09-29T20:30:03.501Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/HULK/PARTS/GRABBABLES/JUNKPROC.SCENE.MBIN",
+        "primary_seed_hex": "96BCA4561148F642",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 593,
+        "trace_sequence": 1021,
+        "utc": "2026-09-29T20:30:03.501Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/HULK/PARTS/GRABBABLES/JUNKPROC.SCENE.MBIN",
+        "primary_seed_hex": "25CEBF1D6EA8AA2A",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 594,
+        "trace_sequence": 1022,
+        "utc": "2026-09-29T20:30:03.501Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/HULK/PARTS/GRABBABLES/JUNKPROC.SCENE.MBIN",
+        "primary_seed_hex": "64C8FB7BA73C8925",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 595,
+        "trace_sequence": 1023,
+        "utc": "2026-09-29T20:30:03.501Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/HULK/PARTS/GRABBABLES/JUNKPROC.SCENE.MBIN",
+        "primary_seed_hex": "6DEB159B045A85CD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 596,
+        "trace_sequence": 1024,
+        "utc": "2026-09-29T20:30:03.501Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/HULK/PARTS/GRABBABLES/JUNKPROC.SCENE.MBIN",
+        "primary_seed_hex": "CCC0C03A583EBB5D",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 599,
+        "trace_sequence": 1027,
+        "utc": "2026-09-29T20:30:17.150Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "9256392A2F5A74AC",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      }
+    ],
+    "scope": "recorded-derelict-poi-context",
+    "interpretation": "ordered non-zero descriptor seeds across all derelict/POI resource events already captured by the probe; correlation evidence only"
+  },
+  "resource_seed_context_lineage_status": "captured",
+  "poi_generation_trace": {
+    "status": "captured",
+    "description_input_count": 2,
+    "description_result_count": 2,
+    "description_return_hexes": [
+      "000000AB0D9BD560"
+    ],
+    "description_results": [
+      {
+        "event_order": 1,
+        "trace_sequence": null,
+        "utc": null,
+        "poi_type_value": 6,
+        "poi_type_name": "AbandonedFreighter",
+        "component_address_hex": "000000AB0D9BD560",
+        "raw_argument_hex": "00001A0004E84EFD",
+        "return_value_hex": "000000AB0D9BD560",
+        "return_matches_universe_address": false,
+        "return_matches_dungeon_root_seed": false
+      },
+      {
+        "event_order": 570,
+        "trace_sequence": 998,
+        "utc": "2026-09-29T20:29:56.888Z",
+        "poi_type_value": 6,
+        "poi_type_name": "AbandonedFreighter",
+        "component_address_hex": "000000AB0D9BD560",
+        "raw_argument_hex": "00001A0004E84EFD",
+        "return_value_hex": "000000AB0D9BD560",
+        "return_matches_universe_address": false,
+        "return_matches_dungeon_root_seed": false
+      }
+    ],
+    "prepare_event_count": 0,
+    "prepare_events": [],
+    "activation_event_count": 0,
+    "activation_events": [],
+    "lifecycle_event_count": 0,
+    "lifecycle_events": [],
+    "dungeon_root_inside_prepare": false,
+    "dungeon_root_prepare_scope_events": [],
+    "dungeon_root_inside_activation": false,
+    "dungeon_root_activation_scope_events": [],
+    "dungeon_root_inside_lifecycle": false,
+    "dungeon_root_lifecycle_scope_events": [],
+    "dungeon_root_resource_events": [
+      {
+        "event_order": 599,
+        "trace_sequence": 1027,
+        "utc": "2026-09-29T20:30:17.150Z",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "9256392A2F5A74AC",
+        "descriptor_pointer_hex": "0000028868813D28",
+        "caller_return_offset_hex": "00635115",
+        "caller_code_window": {
+          "start_offset_hex": "006350E5",
+          "return_offset_hex": "00635115",
+          "return_index": 48,
+          "byte_count": 80,
+          "bytes_hex": "0400004C89751841B900040004488D8DE0000000440F44C8BA01000000488D45E0488944242848897C2420E8FBC81F01488BD0488D8ECC010000E8ECC4B9FF488D8DE0000000E8C03A7202B201488D8D"
+        },
+        "caller_decoded": {
+          "encoding": "E8 rel32",
+          "call_instruction_offset_hex": "00635110",
+          "call_target_offset_hex": "01831A10",
+          "descriptor_argument_source_register": "RDI",
+          "descriptor_passed_unchanged_to_engine": true
+        },
+        "poi_prepare_scope_component_hexes": [],
+        "poi_activation_scope_component_hexes": [],
+        "poi_lifecycle_scope_component_hexes": []
+      }
+    ],
+    "resource_manager_root_event_count": 1,
+    "resource_manager_root_events": [
+      {
+        "event_order": 600,
+        "trace_sequence": 1028,
+        "utc": "2026-09-29T20:30:17.158Z",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "9256392A2F5A74AC",
+        "descriptor_pointer_hex": "0000028868813D28",
+        "caller_return_offset_hex": "01831AA3",
+        "user_call": true,
+        "poi_activation_scope_component_hexes": [],
+        "poi_lifecycle_scope_component_hexes": []
+      }
+    ],
+    "dungeon_root_engine_caller_offsets": [
+      "00635115"
+    ],
+    "dungeon_root_manager_caller_offsets": [
+      "01831AA3"
+    ],
+    "dungeon_root_engine_call_sites": [
+      {
+        "encoding": "E8 rel32",
+        "call_instruction_offset_hex": "00635110",
+        "call_target_offset_hex": "01831A10",
+        "descriptor_argument_source_register": "RDI",
+        "descriptor_passed_unchanged_to_engine": true
+      }
+    ],
+    "interpretation": "target-POI description/lifecycle plus dungeon-root resource boundaries and caller call-sites; correlation evidence only"
+  },
+  "poi_generation_trace_status": "captured",
+  "poi_seed_candidates": [
+    {
+      "poi_type_value": 6,
+      "poi_type_name": "AbandonedFreighter",
+      "raw_argument_hex": "00001A0004E84EFD",
+      "raw_argument_u64": 28587384655613,
+      "interpretation": "universe-address-confirmed",
+      "observations": 2,
+      "matches_universe_address": true
+    }
+  ],
+  "poi_context_arguments": [
+    {
+      "poi_type_value": 6,
+      "poi_type_name": "AbandonedFreighter",
+      "raw_argument_hex": "00001A0004E84EFD",
+      "raw_argument_u64": 28587384655613,
+      "interpretation": "universe-address-confirmed",
+      "observations": 2,
+      "matches_universe_address": true
+    }
+  ],
+  "discarded_poi_context_arguments": [],
+  "poi_context_status": "universe-address-confirmed",
+  "layout_seed_status": "dungeon-root-resource-seed-candidate",
+  "generation_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "layout_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "layout_multiset_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "legacy_stream_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_16_system_block_hypothesis": {
+    "solar_system_index_decimal": 26,
+    "solar_system_index_hex": "0x01A",
+    "block_start_hex": "0x010",
+    "block_end_hex": "0x01F",
+    "status": "historical-community-hypothesis-not-yet-validated-on-cosmos"
+  },
+  "base_room_count_from_table": null,
+  "observed_main_rooms": 0,
+  "observed_dead_end_rooms": 0,
+  "observed_total_rooms": 0,
+  "main_room_count_matches_table": null,
+  "manual_room_markers": {
+    "main_rooms_f6": 0,
+    "dead_ends_f5": 0
+  },
+  "room_model_status": "needs-review",
+  "room_parent_index_coverage": 0,
+  "canonical_room_sequence": [],
+  "logical_groups": []
+}
