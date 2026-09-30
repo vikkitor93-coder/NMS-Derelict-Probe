@@ -1,6 +1,15 @@
 # NMS Derelict Probe
 
-Current stable package: **v0.3.31**.
+Current stable package: **v0.3.32**.
+
+
+## v0.3.32 — exact runtime caller correlation
+
+The corrected v0.3.31 full-executable scan found **52** direct `CALL/JMP rel32` references to the generic logical entry at `0x00634BC0`. That is too many static candidates to identify the derelict-specific path safely. v0.3.32 therefore adds one narrow read-only runtime correlation hook using the verified entry signature.
+
+The hook remembers only seeded descriptor invocations in memory. When `MODELS/SPACE/POI/DUNGEON.SCENE.MBIN` later reaches `Engine::AddResource`, Surveyor matches the exact descriptor pointer and records the nearest `0x00634BC0` caller plus a tiny code window. It does not write game memory and does not hook global RNG.
+
+The standalone Surveyor status now includes **Root entry caller**. Once that value appears, a short capture is enough; a full derelict traversal is unnecessary.
 
 ## v0.3.31 — corrected logical-function analysis
 
