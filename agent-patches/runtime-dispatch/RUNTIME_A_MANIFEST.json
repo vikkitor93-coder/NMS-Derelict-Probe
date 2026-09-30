@@ -1,15 +1,19 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "variant_id": "RUNTIME-A",
   "lane": "agent/runtime-dispatch",
-  "base": "integration/v0.3.38-canonical",
+  "base": "canonical v0.3.38",
   "base_version": "0.3.38",
   "purpose": "Capture the live owner+0x10 dispatch target at the exact descriptor-correlated derelict root event.",
   "complete_zip": {
+    "storage": "chatgpt-library",
+    "library_path": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
     "name": "NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
-    "sha256": "60e2639c06351b49160a4571636a10e205512949a2bdfe332b220910d9c29e51",
-    "size_bytes": 295659,
-    "files": 104
+    "sha256": "9cfc13d13f72d8c72038cc40878c3401aa52d89f901f3adc055ba50fb29744a8",
+    "size_bytes": 309909,
+    "files": 104,
+    "cache_files": 0,
+    "provenance": "Reconstructed by integration AI from the exact published Runtime-A patch against the verified canonical v0.3.38 Library artifact."
   },
   "integration_patch": {
     "path": "agent-patches/runtime-dispatch/runtime-a.patch.gz.b64",
@@ -32,8 +36,8 @@
     "unit_regression_tests": "115/115 passed",
     "compileall": "passed",
     "json_files_parsed": 35,
-    "cache_files_in_complete_zip": 0,
-    "game_memory_write_api_added": false
+    "game_memory_write_api_added": false,
+    "integration_reconstruction_verified": true
   },
   "evidence": {
     "local_file": "%LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1\\exact-root-dispatch-latest.json",
@@ -43,7 +47,7 @@
   "human_validation": {
     "required": true,
     "steps": [
-      "Run the RUNTIME-A complete ZIP.",
+      "Extract and run NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip.",
       "Start NMS from Surveyor.",
       "Load the same known derelict only until Root dispatch +0x10 is captured.",
       "Click Analyze generation + upload.",
