@@ -39,17 +39,20 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "offline current-NMS.exe metadata/string/type anchor xref triage",
+    "next_method": "Decompile/cross-reference top type-registration candidates and find the actual GcDungeonGenerationParams consumer; the uploaded NMS.exe anchor scan produced no multi-anchor candidates.",
     "candidate_identity_rule": "triage-only until decompiler/runtime evidence proves a function role"
   },
   "human_validation": {
-    "required": true,
+    "required": false,
     "game_runtime_required": false,
-    "steps": [
-      "Run the DUNGEON-C complete ZIP.",
-      "Click Scan dungeon decompile anchors + upload.",
-      "Select NMS.exe only if auto-detection fails.",
-      "Tell the integration AI: check."
-    ]
+    "steps": []
+  },
+  "latest_scan": {
+    "evidence_path": "research-uploads/20260930T172000Z-dungeon-decompile/dungeon-decompile-anchors-summary.json",
+    "evidence_commit": "5aa2f99015b0539ce2199a975a49197bcd6b4b6a",
+    "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "candidate_function_count": 38,
+    "multi_anchor_candidates": 0,
+    "consumer_identified": false
   }
 }
