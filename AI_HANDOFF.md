@@ -1,29 +1,22 @@
-# AI handoff — NMS Derelict Probe v0.3.27
+# AI handoff — NMS Derelict Probe v0.3.28
 
-Read-only NMS.py/pyMHF derelict research project. Goal: derive deterministic universe-address/system coordinates -> dungeon descriptor seed -> room layout -> target-container count offline.
+Read-only NMS.py/pyMHF derelict-freighter reverse-engineering project.
 
-## Research state
-- Known address: `00001A0004E84EFD`; root descriptor seed: `9256392A2F5A74AC`.
-- Root `Engine::AddResource` call RVA: `0x00635110`; return `0x00635115`; target `0x01831A10`.
-- The containing function starts at candidate RVA `0x00634BC0`, immediately after compiler INT3 padding.
-- Function prologue copies its second argument into RSI. Descriptor address is `RSI + 0x128`.
-- Primary seed is read at `RSI + 0x138`; use-seed flag checked at `RSI + 0x140`, before the root AddResource call. Therefore the root seed is created upstream of this function.
-- Current public NMS.py did not provide a reliable named signature for `0x00634BC0`; do not invent a symbol name.
-- v0.3.26 added offline `Extract upstream callers + upload` to scan installed NMS.exe for direct E8/E9 references to `0x00634BC0`.
+## Stable evidence
 
-## v0.3.27 restart convenience
-Added GUI **Restart Surveyor**. The callback saves any active research session, starts a detached `Restart-Surveyor.ps1`, and passes the current NMS PID plus the recorded launch mode. The helper uses `Process.CloseMainWindow()` for a clean close, waits up to 30 seconds, and relaunches only after the old PID is gone. It deliberately refuses to force-kill NMS.
+Known address `00001A0004E84EFD` repeatedly correlates with dungeon-root descriptor seed `9256392A2F5A74AC`.
+Runtime capture established root `Engine::AddResource` CALL RVA `0x00635110` and caller return `0x00635115`; the descriptor already contains that seed at the resource boundary.
 
-Both `Install-and-Start.ps1` and `Install-and-Start-NoOverlay.ps1` now write `%LOCALAPPDATA%\NMSDerelictSurveyor\launch-mode.txt` as `overlay` or `no-overlay`. Restart selects `Start-Derelict-Probe.cmd` or `Start-Derelict-Probe-NoOverlay.cmd` accordingly. Diagnostics: `%LOCALAPPDATA%\NMSDerelictSurveyor\gui-actions\restart-latest.log`.
+The 20 KiB offline caller extraction matched the installed NMS.exe exactly. The v0.3.26 upstream scan now places the nearest INT3-padding containing-function candidate at `0x006345B0` (correcting the earlier informal `0x00634BC0` estimate). It found exactly one direct rel32 reference to `0x006345B0`: CALL `0x00634C76 -> 0x006345B0`. Because `0x00634C76` lies inside the same candidate function, this is a self/recursive call, not an external upstream caller.
 
-## Stable workflow
-GitHub CLI auth/update/upload works. GUI research actions run in explicit background steps and persistent diagnostics remain under `%LOCALAPPDATA%\NMSDerelictSurveyor\gui-actions`. The external live overlay remains separate and opaque/non-layered. Never reintroduce alpha/layered rendering by default.
+The same scan observed descriptor-related offsets in this routine: embedded descriptor around second-argument `+0x128`, primary seed at `+0x138` (descriptor `+0x10`), and UseSeedValue at `+0x140` (descriptor `+0x18`). Treat the register/base interpretation as byte-pattern evidence, not a fully recovered C++ signature.
 
-## Safety
-Runtime probe remains observational only. Do not add setters, inventory/reward/save mutation, or online hooks. Do not call the dungeon-root descriptor seed the actual room-selection RNG state until causality is proven. Restart is clean-close-only; do not replace it with forced process termination without explicit user request.
+## v0.3.28
 
-## Verification
-91/91 unit tests pass. Python compileall passes. All packaged JSON files parse. PowerShell/NMS restart behavior cannot be executed in the Linux build environment and needs one Windows smoke test.
+Adds `tools/analyze_nms_seed_function.py` and GUI action **Analyze seed function + upload**. It is fully offline/read-only and produces `dungeon-seed-function-analysis-latest.json`.
 
-## Exact next action
-Update/install v0.3.27 and use **Restart Surveyor** whenever a restart is needed. For the research path, click **Extract upstream callers + upload**, then tell ChatGPT `check`. No derelict run is needed.
+It uses PE `.pdata` runtime-function entries as authoritative function-boundary evidence, classifies direct xrefs as internal/external, scans all references to offsets `0x128/0x138/0x140`, conservatively flags common direct writes, scans non-text function-pointer references, and attempts validated standard MSVC x64 RTTI/vftable recovery.
+
+Important correction: do not claim the seed is definitely constructed in another function merely because it is read before root AddResource. The same containing recursive function could have populated it on an earlier branch. v0.3.28 is designed to test that before adding a risky runtime hook.
+
+Next action: update/install v0.3.28, restart once, click **Analyze seed function + upload**, then tell ChatGPT `check`.
