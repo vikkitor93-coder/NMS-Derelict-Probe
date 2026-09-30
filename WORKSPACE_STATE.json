@@ -1,50 +1,78 @@
 {
-  "schema_version": 1,
-  "updated_utc": "2026-09-30T15:35:00Z",
+  "schema_version": 2,
+  "updated_utc": "2026-09-30T16:47:00Z",
   "integration": {
     "branch": "main",
+    "main_head_at_sync": "6a55209a2b0014012b509c930c46d5497a5a6bd3",
     "canonical_commit": "8d8d0c61ec14af36f8a87cf6969e8bf9a87f21fe",
     "canonical_version": "0.3.38",
-    "current_objective": "runtime-dispatch live validation (RUNTIME-A)"
+    "current_objective": "parallel derelict research with isolated Surveyor variants"
+  },
+  "lane_claims": {
+    "runtime-dispatch": "claimed",
+    "seed-lineage": "claimed",
+    "dungeon-decompile": "claimed",
+    "metadata": "free"
   },
   "lanes": {
     "runtime-dispatch": {
       "branch": "agent/runtime-dispatch",
-      "status": "human-validation-ready",
+      "status": "build-ready-awaiting-live-validation",
       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
+      "pull_request": 1,
+      "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
       "next_action": "Run RUNTIME-A on the known derelict until owner+0x10 dispatch capture succeeds; no traversal required."
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage",
-      "status": "queued",
-      "next_action": "Resume after Runtime-A evidence is integrated unless intentionally run in parallel."
+      "status": "agent-output-published-do-not-duplicate",
+      "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
+      "result_summary": "Offline system-seed anchors implemented and verified; direct equality with known derelict root seeds was not found and no derivation is claimed.",
+      "human_validation_required": false
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
-      "status": "queued"
+      "status": "agent-output-published-do-not-duplicate",
+      "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
+      "next_action": "Run the offline NMS.exe anchor scan from DUNGEON-C and upload the result; game runtime is not required."
     },
     "metadata": {
       "branch": "agent/metadata",
-      "status": "queued"
+      "status": "free-ready-from-current-main",
+      "objective": "Map abandoned-freighter component DungeonOptions/weights, DungeonRootScene, dungeon-table presets and static asset relationships without duplicating runtime/seed/decompile lanes."
     }
   },
   "human_intervention": {
     "required_now": true,
-    "pending_lane": "runtime-dispatch",
-    "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
-    "reason": "Offline/coding work for the first runtime objective is complete; the next unknown is a live owner+0x10 dispatch value from NMS."
+    "pending": [
+      {
+        "lane": "runtime-dispatch",
+        "kind": "live-game-short-capture",
+        "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json"
+      },
+      {
+        "lane": "dungeon-decompile",
+        "kind": "offline-local-NMS-exe-scan",
+        "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json"
+      }
+    ]
+  },
+  "new_agent_start": {
+    "rule": "Always read main first. Do not claim or modify an existing claimed agent branch unless explicitly assigned to that lane.",
+    "resume_order": [
+      "WORKSPACE_STATE.json",
+      "AI_HANDOFF.md",
+      "RESEARCH_INDEX.md",
+      "AGENT_WORKFLOW.md",
+      "the assigned lane manifest and only relevant files"
+    ],
+    "branch_rule": "For a new independent task, create a fresh branch from current main named agent/<short-lane-id>. The pre-created agent/metadata branch is currently free and synchronized to main.",
+    "output_rule": "Keep experimental Surveyor changes lane-specific, publish a manifest + reproducible patch + tests, and never push experimental changes directly to main."
   },
   "artifact_policy": {
     "complete_zip_storage": "ChatGPT Library",
     "canonical_library_path": "/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip",
     "github_role": "manifests, patches, evidence, branches, PRs, source-state summaries"
   },
-  "resume_order": [
-    "WORKSPACE_STATE.json",
-    "AI_HANDOFF.md",
-    "RESEARCH_INDEX.md",
-    "AGENT_WORKFLOW.md",
-    "active lane manifest and only its changed files"
-  ],
   "cross_mode_rule": "Normal ChatGPT and Work/Codex must treat committed GitHub state as authoritative and may switch roles without relying on hidden conversation context."
 }
