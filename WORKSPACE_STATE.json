@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "updated_utc": "2026-09-30T15:30:00Z",
+  "updated_utc": "2026-09-30T15:35:00Z",
   "integration": {
     "branch": "main",
     "canonical_commit": "8d8d0c61ec14af36f8a87cf6969e8bf9a87f21fe",
     "canonical_version": "0.3.38",
-    "current_objective": "repair canonical package transport and preserve cross-mode handoff"
+    "current_objective": "runtime-dispatch live validation (RUNTIME-A)"
   },
   "lanes": {
     "runtime-dispatch": {
@@ -17,7 +17,7 @@
     "seed-lineage": {
       "branch": "agent/seed-lineage",
       "status": "queued",
-      "next_action": "Begin only after the current runtime-dispatch intervention is completed unless integration explicitly parallelizes it."
+      "next_action": "Resume after Runtime-A evidence is integrated unless intentionally run in parallel."
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
@@ -29,9 +29,15 @@
     }
   },
   "human_intervention": {
-    "required_now": false,
+    "required_now": true,
     "pending_lane": "runtime-dispatch",
-    "reason": "Canonical package transport is being repaired first."
+    "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
+    "reason": "Offline/coding work for the first runtime objective is complete; the next unknown is a live owner+0x10 dispatch value from NMS."
+  },
+  "artifact_policy": {
+    "complete_zip_storage": "ChatGPT Library",
+    "canonical_library_path": "/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip",
+    "github_role": "manifests, patches, evidence, branches, PRs, source-state summaries"
   },
   "resume_order": [
     "WORKSPACE_STATE.json",
