@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "lane": "integration/agent-console",
+  "purpose": "Add a compact Surveyor Agent Console that shows current published lane status and exact user/Surveyor requests.",
+  "base": {
+    "version": "0.3.38",
+    "sha256": "7ac2ce0c9cf7188839e03dca984b457b649716d4298bcb779ce178a64293a9e7"
+  },
+  "candidate": {
+    "version": "0.3.39",
+    "library_path": "/NMS modding/NMS-Derelict-Probe-v0.3.39-Agent-Console.zip",
+    "sha256": "b896d51193dba98badc4021b901bfba235d34e296e52e42e7acc9ec23013ea4f",
+    "size_bytes": 319862,
+    "files": 108
+  },
+  "patch": {
+    "path": "agent-patches/integration/agent-console/agent-console.patch.gz.b64",
+    "encoded_sha256": "f46ae440d4bbc68424eba2e1c6d26f4d13fb8cad19a0d193ffd2e5c2a9daaae0",
+    "gzip_sha256": "356d4093f275b92d40b1ebf828688305967eaf4b57ffd4fb73c291a0d946dd66",
+    "decoded_patch_sha256": "ab2528ac8df6148c1aca82282a9b03dfd07e3a7fcfa71c291a60346d12f956cd",
+    "decoded_size_bytes": 60423,
+    "decode": "base64-decode, then gzip-decompress",
+    "apply_against": "canonical v0.3.38 package"
+  },
+  "changed_files": [
+    "AGENT_START_HERE.md",
+    "AGENT_WORKFLOW.md",
+    "AI_HANDOFF.md",
+    "CHANGELOG.md",
+    "PROJECT_PLAN.md",
+    "README.md",
+    "VERSION.txt",
+    "WORKSPACE_STATE.json",
+    "schema/agent-status-v1.schema.json",
+    "tests/test_agent_console.py",
+    "tests/test_tools.py",
+    "tools/agent_console.py",
+    "tools/surveyor_controller.py"
+  ],
+  "verification": {
+    "focused_tests": "6/6 passed",
+    "full_regression_tests": "119/119 passed",
+    "compileall": "passed",
+    "json_files_parsed": 37,
+    "zip_integrity": "passed",
+    "runtime_probe_changed": false,
+    "controller_probe_protocol_changed": false,
+    "windows_visual_launch": "not exercised in this Linux environment"
+  },
+  "human_intervention": {
+    "required_for_console": false,
+    "current_research_request": "Runtime-A short live dispatch-slot capture; no full derelict traversal required.",
+    "steps": [
+      "Extract and run NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip.",
+      "Start NMS from Surveyor.",
+      "Load the same known derelict until Root dispatch +0x10 is captured.",
+      "Click Analyze generation + upload.",
+      "Return to the Main chat and write check."
+    ],
+    "full_derelict_traversal_required": false
+  },
+  "rollback": "Restore prior complete v0.3.38 ZIP; existing controller/probe protocols and local evidence remain compatible."
+}
