@@ -1,0 +1,12 @@
+{
+  "action": "extract-exact-root-caller",
+  "files": [
+    {
+      "name": "exact-root-caller-code-latest.json",
+      "sha256": "85935d7bc5a1fe975bdfa97b3ff60be726dfaaa2fbbe746b661ed854cdebd13e",
+      "size": 47970
+    }
+  ],
+  "utc": "20260930T174516Z",
+  "version": 1
+}
