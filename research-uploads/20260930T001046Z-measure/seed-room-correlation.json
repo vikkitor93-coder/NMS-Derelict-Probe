@@ -1,0 +1,1088 @@
+{
+  "version": 1,
+  "measurement_count": 9,
+  "unique_addresses": 2,
+  "repeated_address_groups": 2,
+  "repeated_address_groups_with_stable_layout": 1,
+  "address_groups": [
+    {
+      "universe_address_hex": "00001A0004E84EFD",
+      "measurement_count": 7,
+      "preset_values": [
+        "CARGO_FLOATERS"
+      ],
+      "target_container_values": [
+        0,
+        35
+      ],
+      "layout_multiset_signatures": [
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "4fc1b70c8aa5313718470b42f9d206f62dc4802c2e71549bc9731e702c6c639a"
+      ],
+      "ordered_layout_signatures": [
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "f233c4800676d9e9788ace1843f6cb5127469bf3d9157dff65e464d57e070536"
+      ],
+      "reward_seed_hexes": [
+        "CE0669F299792E85"
+      ],
+      "dungeon_root_seed_hexes": [
+        "9256392A2F5A74AC"
+      ],
+      "dungeon_root_seed_measurement_coverage": 5,
+      "poi_context_hexes": [
+        "00001A0004E84EFD"
+      ],
+      "poi_context_equals_universe_address": true,
+      "layout_stable_across_repeats": false,
+      "reward_seed_stable_across_repeats": true,
+      "dungeon_root_seed_stable_across_repeats": null,
+      "resource_seed_lineage_signatures": [
+        "1c170e4adea39c940d218df40b49a222c5ade702ff2664501d6c5dbac736cfe1"
+      ],
+      "resource_seed_lineage_measurement_coverage": 4,
+      "resource_seed_lineage_stable_across_repeats": null,
+      "room_sequences": [
+        [
+          {
+            "order": 1,
+            "stream_order": 1,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 2,
+            "stream_order": 2,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [],
+            "salvage": 15,
+            "footlockers": 0,
+            "targets": 15,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 3,
+            "stream_order": 3,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [],
+            "salvage": 10,
+            "footlockers": 0,
+            "targets": 10,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 4,
+            "stream_order": 4,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "HANGAR",
+            "parent_names": [],
+            "salvage": 1,
+            "footlockers": 2,
+            "targets": 3,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 5,
+            "stream_order": 5,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [],
+            "salvage": 4,
+            "footlockers": 0,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 6,
+            "stream_order": 6,
+            "room_index": null,
+            "room_label": null,
+            "kind": "dead_end",
+            "family": "BARRACKS",
+            "parent_names": [],
+            "salvage": 0,
+            "footlockers": 0,
+            "targets": 0,
+            "dead_end_evidence": [
+              "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+            ]
+          },
+          {
+            "order": 7,
+            "stream_order": 7,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 8,
+            "stream_order": 8,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "END",
+            "parent_names": [],
+            "salvage": 1,
+            "footlockers": 0,
+            "targets": 1,
+            "dead_end_evidence": []
+          }
+        ],
+        [
+          {
+            "order": 1,
+            "stream_order": 1,
+            "room_index": 1,
+            "room_label": "Room 1",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 1"
+            ],
+            "salvage": 15,
+            "footlockers": 0,
+            "targets": 15,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 2,
+            "stream_order": 2,
+            "room_index": 6,
+            "room_label": "Room 6",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 6"
+            ],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 3,
+            "stream_order": 3,
+            "room_index": 3,
+            "room_label": "Room 3",
+            "kind": "main_room",
+            "family": "HANGAR",
+            "parent_names": [
+              "Room 3"
+            ],
+            "salvage": 1,
+            "footlockers": 2,
+            "targets": 3,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 4,
+            "stream_order": 4,
+            "room_index": 0,
+            "room_label": "Room 0",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 0"
+            ],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 5,
+            "stream_order": 5,
+            "room_index": 2,
+            "room_label": "Room 2",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 2"
+            ],
+            "salvage": 10,
+            "footlockers": 0,
+            "targets": 10,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 6,
+            "stream_order": 6,
+            "room_index": 4,
+            "room_label": "Room 4",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 4"
+            ],
+            "salvage": 4,
+            "footlockers": 0,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 7,
+            "stream_order": 7,
+            "room_index": 5,
+            "room_label": "Room 5",
+            "kind": "dead_end",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 5"
+            ],
+            "salvage": 0,
+            "footlockers": 0,
+            "targets": 0,
+            "dead_end_evidence": [
+              "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+            ]
+          },
+          {
+            "order": 8,
+            "stream_order": 8,
+            "room_index": 7,
+            "room_label": "Room 7",
+            "kind": "main_room",
+            "family": "END",
+            "parent_names": [
+              "Room 7"
+            ],
+            "salvage": 1,
+            "footlockers": 0,
+            "targets": 1,
+            "dead_end_evidence": []
+          }
+        ],
+        [
+          {
+            "order": 1,
+            "stream_order": 1,
+            "room_index": 1,
+            "room_label": "Room 1",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 1"
+            ],
+            "salvage": 15,
+            "footlockers": 0,
+            "targets": 15,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 2,
+            "stream_order": 2,
+            "room_index": 6,
+            "room_label": "Room 6",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 6"
+            ],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 3,
+            "stream_order": 3,
+            "room_index": 3,
+            "room_label": "Room 3",
+            "kind": "main_room",
+            "family": "HANGAR",
+            "parent_names": [
+              "Room 3"
+            ],
+            "salvage": 1,
+            "footlockers": 2,
+            "targets": 3,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 4,
+            "stream_order": 4,
+            "room_index": 0,
+            "room_label": "Room 0",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 0"
+            ],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 5,
+            "stream_order": 5,
+            "room_index": 2,
+            "room_label": "Room 2",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 2"
+            ],
+            "salvage": 10,
+            "footlockers": 0,
+            "targets": 10,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 6,
+            "stream_order": 6,
+            "room_index": 4,
+            "room_label": "Room 4",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 4"
+            ],
+            "salvage": 4,
+            "footlockers": 0,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 7,
+            "stream_order": 7,
+            "room_index": 5,
+            "room_label": "Room 5",
+            "kind": "dead_end",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 5"
+            ],
+            "salvage": 0,
+            "footlockers": 0,
+            "targets": 0,
+            "dead_end_evidence": [
+              "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+            ]
+          },
+          {
+            "order": 8,
+            "stream_order": 8,
+            "room_index": 7,
+            "room_label": "Room 7",
+            "kind": "main_room",
+            "family": "END",
+            "parent_names": [
+              "Room 7"
+            ],
+            "salvage": 1,
+            "footlockers": 0,
+            "targets": 1,
+            "dead_end_evidence": []
+          }
+        ],
+        [
+          {
+            "order": 1,
+            "stream_order": 1,
+            "room_index": 1,
+            "room_label": "Room 1",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 1"
+            ],
+            "salvage": 15,
+            "footlockers": 0,
+            "targets": 15,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 2,
+            "stream_order": 2,
+            "room_index": 6,
+            "room_label": "Room 6",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 6"
+            ],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 3,
+            "stream_order": 3,
+            "room_index": 3,
+            "room_label": "Room 3",
+            "kind": "main_room",
+            "family": "HANGAR",
+            "parent_names": [
+              "Room 3"
+            ],
+            "salvage": 1,
+            "footlockers": 2,
+            "targets": 3,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 4,
+            "stream_order": 4,
+            "room_index": 0,
+            "room_label": "Room 0",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 0"
+            ],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 5,
+            "stream_order": 5,
+            "room_index": 2,
+            "room_label": "Room 2",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 2"
+            ],
+            "salvage": 10,
+            "footlockers": 0,
+            "targets": 10,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 6,
+            "stream_order": 6,
+            "room_index": 4,
+            "room_label": "Room 4",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 4"
+            ],
+            "salvage": 4,
+            "footlockers": 0,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 7,
+            "stream_order": 7,
+            "room_index": 5,
+            "room_label": "Room 5",
+            "kind": "dead_end",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 5"
+            ],
+            "salvage": 0,
+            "footlockers": 0,
+            "targets": 0,
+            "dead_end_evidence": [
+              "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+            ]
+          },
+          {
+            "order": 8,
+            "stream_order": 8,
+            "room_index": 7,
+            "room_label": "Room 7",
+            "kind": "main_room",
+            "family": "END",
+            "parent_names": [
+              "Room 7"
+            ],
+            "salvage": 1,
+            "footlockers": 0,
+            "targets": 1,
+            "dead_end_evidence": []
+          }
+        ],
+        [
+          {
+            "order": 1,
+            "stream_order": 1,
+            "room_index": 1,
+            "room_label": "Room 1",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 1"
+            ],
+            "salvage": 15,
+            "footlockers": 0,
+            "targets": 15,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 2,
+            "stream_order": 2,
+            "room_index": 6,
+            "room_label": "Room 6",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 6"
+            ],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 3,
+            "stream_order": 3,
+            "room_index": 3,
+            "room_label": "Room 3",
+            "kind": "main_room",
+            "family": "HANGAR",
+            "parent_names": [
+              "Room 3"
+            ],
+            "salvage": 1,
+            "footlockers": 2,
+            "targets": 3,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 4,
+            "stream_order": 4,
+            "room_index": 0,
+            "room_label": "Room 0",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 0"
+            ],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 5,
+            "stream_order": 5,
+            "room_index": 2,
+            "room_label": "Room 2",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 2"
+            ],
+            "salvage": 10,
+            "footlockers": 0,
+            "targets": 10,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 6,
+            "stream_order": 6,
+            "room_index": 4,
+            "room_label": "Room 4",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 4"
+            ],
+            "salvage": 4,
+            "footlockers": 0,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 7,
+            "stream_order": 7,
+            "room_index": 5,
+            "room_label": "Room 5",
+            "kind": "dead_end",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 5"
+            ],
+            "salvage": 0,
+            "footlockers": 0,
+            "targets": 0,
+            "dead_end_evidence": [
+              "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+            ]
+          },
+          {
+            "order": 8,
+            "stream_order": 8,
+            "room_index": 7,
+            "room_label": "Room 7",
+            "kind": "main_room",
+            "family": "END",
+            "parent_names": [
+              "Room 7"
+            ],
+            "salvage": 1,
+            "footlockers": 0,
+            "targets": 1,
+            "dead_end_evidence": []
+          }
+        ],
+        [
+          {
+            "order": 1,
+            "stream_order": 1,
+            "room_index": 1,
+            "room_label": "Room 1",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 1"
+            ],
+            "salvage": 15,
+            "footlockers": 0,
+            "targets": 15,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 2,
+            "stream_order": 2,
+            "room_index": 6,
+            "room_label": "Room 6",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 6"
+            ],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 3,
+            "stream_order": 3,
+            "room_index": 3,
+            "room_label": "Room 3",
+            "kind": "main_room",
+            "family": "HANGAR",
+            "parent_names": [
+              "Room 3"
+            ],
+            "salvage": 1,
+            "footlockers": 2,
+            "targets": 3,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 4,
+            "stream_order": 4,
+            "room_index": 0,
+            "room_label": "Room 0",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 0"
+            ],
+            "salvage": 0,
+            "footlockers": 1,
+            "targets": 1,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 5,
+            "stream_order": 5,
+            "room_index": 2,
+            "room_label": "Room 2",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 2"
+            ],
+            "salvage": 10,
+            "footlockers": 0,
+            "targets": 10,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 6,
+            "stream_order": 6,
+            "room_index": 4,
+            "room_label": "Room 4",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 4"
+            ],
+            "salvage": 4,
+            "footlockers": 0,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 7,
+            "stream_order": 7,
+            "room_index": 5,
+            "room_label": "Room 5",
+            "kind": "dead_end",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 5"
+            ],
+            "salvage": 0,
+            "footlockers": 0,
+            "targets": 0,
+            "dead_end_evidence": [
+              "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+            ]
+          },
+          {
+            "order": 8,
+            "stream_order": 8,
+            "room_index": 7,
+            "room_label": "Room 7",
+            "kind": "main_room",
+            "family": "END",
+            "parent_names": [
+              "Room 7"
+            ],
+            "salvage": 1,
+            "footlockers": 0,
+            "targets": 1,
+            "dead_end_evidence": []
+          }
+        ],
+        []
+      ]
+    },
+    {
+      "universe_address_hex": "0001550006607CAC",
+      "measurement_count": 2,
+      "preset_values": [
+        "CARGO_FLOATERS"
+      ],
+      "target_container_values": [
+        51
+      ],
+      "layout_multiset_signatures": [
+        "01873414614001532573819e7c11b687b9cd1db4a9a9398d4c42f0a0e3546b1c"
+      ],
+      "ordered_layout_signatures": [
+        "cbecd690412a75c1e819a34928327b32ed55e40fe776d600e5513fec10b13785"
+      ],
+      "reward_seed_hexes": [
+        "1EE5E3C00986D42A"
+      ],
+      "dungeon_root_seed_hexes": [
+        "00C9E8DF0327789E"
+      ],
+      "dungeon_root_seed_measurement_coverage": 2,
+      "poi_context_hexes": [
+        "0001550006607CAC"
+      ],
+      "poi_context_equals_universe_address": true,
+      "layout_stable_across_repeats": true,
+      "reward_seed_stable_across_repeats": true,
+      "dungeon_root_seed_stable_across_repeats": true,
+      "resource_seed_lineage_signatures": [],
+      "resource_seed_lineage_measurement_coverage": 0,
+      "resource_seed_lineage_stable_across_repeats": null,
+      "room_sequences": [
+        [
+          {
+            "order": 1,
+            "stream_order": 1,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [],
+            "salvage": 0,
+            "footlockers": 4,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 2,
+            "stream_order": 2,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [],
+            "salvage": 3,
+            "footlockers": 1,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 3,
+            "stream_order": 3,
+            "room_index": null,
+            "room_label": null,
+            "kind": "dead_end",
+            "family": "BARRACKS",
+            "parent_names": [],
+            "salvage": 1,
+            "footlockers": 0,
+            "targets": 1,
+            "dead_end_evidence": [
+              "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN"
+            ]
+          },
+          {
+            "order": 4,
+            "stream_order": 4,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [],
+            "salvage": 3,
+            "footlockers": 0,
+            "targets": 3,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 5,
+            "stream_order": 5,
+            "room_index": null,
+            "room_label": null,
+            "kind": "dead_end",
+            "family": "BARRACKS",
+            "parent_names": [],
+            "salvage": 1,
+            "footlockers": 0,
+            "targets": 1,
+            "dead_end_evidence": [
+              "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN"
+            ]
+          },
+          {
+            "order": 6,
+            "stream_order": 6,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "END",
+            "parent_names": [],
+            "salvage": 3,
+            "footlockers": 10,
+            "targets": 13,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 7,
+            "stream_order": 7,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [],
+            "salvage": 0,
+            "footlockers": 2,
+            "targets": 2,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 8,
+            "stream_order": 8,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [],
+            "salvage": 4,
+            "footlockers": 0,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 9,
+            "stream_order": 9,
+            "room_index": null,
+            "room_label": null,
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [],
+            "salvage": 17,
+            "footlockers": 2,
+            "targets": 19,
+            "dead_end_evidence": []
+          }
+        ],
+        [
+          {
+            "order": 1,
+            "stream_order": 1,
+            "room_index": 3,
+            "room_label": "Room 3",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 3"
+            ],
+            "salvage": 0,
+            "footlockers": 4,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 2,
+            "stream_order": 2,
+            "room_index": 1,
+            "room_label": "Room 1",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 1"
+            ],
+            "salvage": 3,
+            "footlockers": 1,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 3,
+            "stream_order": 3,
+            "room_index": 4,
+            "room_label": "Room 4",
+            "kind": "dead_end",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 4"
+            ],
+            "salvage": 1,
+            "footlockers": 0,
+            "targets": 1,
+            "dead_end_evidence": [
+              "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN"
+            ]
+          },
+          {
+            "order": 4,
+            "stream_order": 4,
+            "room_index": 5,
+            "room_label": "Room 5",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 5"
+            ],
+            "salvage": 3,
+            "footlockers": 0,
+            "targets": 3,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 5,
+            "stream_order": 5,
+            "room_index": 7,
+            "room_label": "Room 7",
+            "kind": "dead_end",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 7"
+            ],
+            "salvage": 1,
+            "footlockers": 0,
+            "targets": 1,
+            "dead_end_evidence": [
+              "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN"
+            ]
+          },
+          {
+            "order": 6,
+            "stream_order": 6,
+            "room_index": 8,
+            "room_label": "Room 8",
+            "kind": "main_room",
+            "family": "END",
+            "parent_names": [
+              "Room 8"
+            ],
+            "salvage": 3,
+            "footlockers": 10,
+            "targets": 13,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 7,
+            "stream_order": 7,
+            "room_index": 0,
+            "room_label": "Room 0",
+            "kind": "main_room",
+            "family": "BARRACKS",
+            "parent_names": [
+              "Room 0"
+            ],
+            "salvage": 0,
+            "footlockers": 2,
+            "targets": 2,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 8,
+            "stream_order": 8,
+            "room_index": 2,
+            "room_label": "Room 2",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 2"
+            ],
+            "salvage": 4,
+            "footlockers": 0,
+            "targets": 4,
+            "dead_end_evidence": []
+          },
+          {
+            "order": 9,
+            "stream_order": 9,
+            "room_index": 6,
+            "room_label": "Room 6",
+            "kind": "main_room",
+            "family": "CARG",
+            "parent_names": [
+              "Room 6"
+            ],
+            "salvage": 17,
+            "footlockers": 2,
+            "targets": 19,
+            "dead_end_evidence": []
+          }
+        ]
+      ]
+    }
+  ],
+  "reward_seed_collisions_across_addresses": [],
+  "dungeon_root_seed_collisions_across_addresses": [],
+  "layout_collisions_across_addresses": [],
+  "interpretation": {
+    "poi_context": "If poi_context_equals_universe_address is true, that hook argument is the system address, not a layout seed.",
+    "layout_signature": "Ordered Room N signature when full parent-index coverage is available.",
+    "layout_multiset_signature": "Stable room-assembly signature independent of threaded stream order and available for legacy captures.",
+    "reward_seed": "Still a correlation candidate; equality with layout seed is not assumed.",
+    "dungeon_root_seed": "Primary cTkResourceDescriptor seed attached to MODELS/SPACE/POI/DUNGEON.SCENE.MBIN; strongest current layout-seed candidate but still unverified.",
+    "resource_seed_lineage": "Ordered non-zero descriptor seeds on DUNGEON resource add/find events; used to locate the derivation chain without assuming any event is RNG state."
+  }
+}
