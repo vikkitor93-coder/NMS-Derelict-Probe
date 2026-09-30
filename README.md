@@ -1,6 +1,16 @@
 # NMS Derelict Probe
 
-Current stable package: **v0.3.30**.
+Current stable package: **v0.3.31**.
+
+## v0.3.31 — corrected logical-function analysis
+
+The previous static analyzer treated the PE `.pdata` entry containing the root `Engine::AddResource` call (`0x0063505C..0x0063553E`) as if it were the entire logical C++ function. That was too strong: the fragment starts in the middle of live state-machine code and is entered from earlier code.
+
+The caller window proves the real logical entry candidate is **`0x00634BC0`**: it is immediately preceded by four `INT3` bytes and begins with a normal MSVC x64 prologue. The older upstream scanner required at least six padding bytes, so it skipped this boundary and incorrectly selected the previous helper at `0x006345B0`.
+
+v0.3.31 fixes both offline analyzers. **Extract upstream callers + upload** now targets `0x00634BC0`, and **Analyze seed function + upload** reports the root `.pdata` entry as a runtime fragment rather than claiming it is the logical function start. It also scans the known logical-entry-to-root prefix for descriptor/seed reads and direct writes.
+
+No new NMS/derelict run is required.
 
 ## v0.3.30 — standalone Surveyor controller
 
@@ -34,4 +44,6 @@ The injected `DerelictBaselineProbe` is now a headless backend (`@no_gui`). It c
 
 ## Current research checkpoint
 
-Latest uploaded seed-function analysis validated the containing function with PE unwind metadata as `0x0063505C..0x0063553E`. The function reads the embedded descriptor/primary seed but contains no conservative direct write to the descriptor seed fields, has no external direct rel32 references, and yielded no validated MSVC RTTI candidate. The deterministic seed producer therefore remains upstream/indirect and is not yet identified.
+The latest upload exposed an analyzer interpretation bug rather than the seed formula. The `.pdata` range `0x0063505C..0x0063553E` is the **runtime fragment containing the root call**, not the logical function entry. The original caller bytes contain a stronger entry at `0x00634BC0`, preceded by four `CC` bytes and a full x64 prologue. Within the known entry-to-root prefix, the descriptor seed is read at `0x00634DBE` and the use-seed flag is checked at `0x00634E26`, both before the root `Engine::AddResource` call at `0x00635110`. No direct seed write has yet been demonstrated.
+
+Next step: rerun **Extract upstream callers + upload** on v0.3.31 so the entire `NMS.exe` is scanned for references to the corrected entry `0x00634BC0`.
