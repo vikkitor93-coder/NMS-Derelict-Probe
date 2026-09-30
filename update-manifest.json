@@ -1,27 +1,27 @@
 {
   "schema_version": 1,
-  "version": "0.3.26",
+  "version": "0.3.27",
   "repository": "vikkitor93-coder/NMS-Derelict-Probe",
   "branch": "main",
   "package_transport": "base64-chunks",
-  "package_kind": "delta-from-v0.3.25",
+  "package_kind": "delta-from-v0.3.26",
   "package_parts": [
-    "packages/v0.3.26-delta/part-000.b64",
-    "packages/v0.3.26-delta/part-001.b64",
-    "packages/v0.3.26-delta/part-002.b64"
+    "packages/v0.3.27-delta/part-000.b64",
+    "packages/v0.3.27-delta/part-001.b64",
+    "packages/v0.3.27-delta/part-002.b64"
   ],
-  "package_sha256": "775492dc7c1c32701903b20e602860fea4af4b98c3ae2c5a204a68870e6968e7",
-  "package_size": 78985,
+  "package_sha256": "dce69e3ceae7badef41eecfaac2de83a427ec2c1dea13b0ddda6c5153e5791bd",
+  "package_size": 76794,
   "managed_files": [
-    "VERSION.txt",
-    "README.md",
-    "CHANGELOG.md",
-    "PROJECT_PLAN.md",
     "AI_HANDOFF.md",
-    "Extract-Dungeon-Upstream-Callers.cmd",
+    "CHANGELOG.md",
+    "Install-and-Start-NoOverlay.ps1",
+    "Install-and-Start.ps1",
+    "PROJECT_PLAN.md",
+    "README.md",
+    "Restart-Surveyor.ps1",
+    "VERSION.txt",
     "mod/derelict_baseline_probe.py",
-    "tools/github_integration.py",
-    "tools/extract_nms_upstream_callers.py",
     "tests/test_tools.py"
   ]
 }
