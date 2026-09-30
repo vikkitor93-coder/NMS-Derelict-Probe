@@ -1,33 +1,34 @@
 {
   "schema_version": 2,
-  "version": "0.3.38",
+  "version": "0.3.39",
   "status": "canonical-verified-source-package",
   "artifact": {
     "storage": "chatgpt-library",
-    "library_path": "/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip",
-    "file_name": "NMS-Derelict-Probe-v0.3.38-canonical.zip",
-    "sha256": "7ac2ce0c9cf7188839e03dca984b457b649716d4298bcb779ce178a64293a9e7",
-    "size_bytes": 289495,
-    "files": 103
+    "library_path": "/NMS modding/NMS-Derelict-Probe-v0.3.39-Agent-Console.zip",
+    "file_name": "NMS-Derelict-Probe-v0.3.39-Agent-Console.zip",
+    "sha256": "b896d51193dba98badc4021b901bfba235d34e296e52e42e7acc9ec23013ea4f",
+    "size_bytes": 319862,
+    "files": 108,
+    "library_file_id": "libfile_27a84e0c71108191a9911428bdcbb3de"
   },
   "repository_transport": {
-    "status": "not-authoritative",
-    "reason": "The GitHub connector binary upload produced a size/hash mismatch. Complete ZIP artifacts are therefore stored in ChatGPT Library; GitHub remains authoritative for manifests, patches, evidence, branches and PRs."
+    "status": "reproducible-base64-chunks",
+    "reason": "GitHub update-manifest serves the exact complete ZIP as base64 chunks after this integration PR is merged; the Library artifact remains the direct-download package."
   },
   "verification": {
-    "unit_tests": "113/113 passed",
+    "unit_tests": "119/119 passed",
     "compileall": "passed",
-    "json_files_parsed": 35,
+    "json_files_parsed": 37,
     "runtime_logic_changed": false
   },
   "resume": {
-    "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json first. Materialize the exact Library artifact only if full source bytes are needed.",
+    "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json first, then AI_HANDOFF.md and RESEARCH_INDEX.md; materialize the exact Library artifact only when full source bytes are needed.",
     "research_agent": "Use the lane manifest/patch and branch. Do not rely on private chat context.",
-    "integration_agent": "Verify artifact SHA-256 before applying a lane patch or producing a new complete ZIP."
+    "integration_agent": "Verify the artifact SHA-256 before applying a lane patch or producing a new complete ZIP."
   },
   "notes": [
-    "This Library artifact is the authoritative complete v0.3.38 source baseline.",
-    "Only documentation/handoff hygiene and generated cache removal differ from the previously produced v0.3.38 ZIP.",
-    "The stable user updater/version channel is intentionally not advanced by canonicalization alone."
+    "This Library artifact is the verified complete v0.3.39 source package, based on canonical v0.3.38.",
+    "The new Agent Console is read-only and does not change NMS runtime/probe behavior or existing controller/probe protocols.",
+    "The in-app update path advances to v0.3.39 when the integration PR updates the main-branch manifest and package chunks."
   ]
 }
