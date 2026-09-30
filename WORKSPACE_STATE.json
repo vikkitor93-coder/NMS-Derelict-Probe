@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "updated_utc": "2026-09-30T15:30:00Z",
+  "integration": {
+    "branch": "main",
+    "canonical_commit": "8d8d0c61ec14af36f8a87cf6969e8bf9a87f21fe",
+    "canonical_version": "0.3.38",
+    "current_objective": "repair canonical package transport and preserve cross-mode handoff"
+  },
+  "lanes": {
+    "runtime-dispatch": {
+      "branch": "agent/runtime-dispatch",
+      "status": "human-validation-ready",
+      "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
+      "next_action": "Run RUNTIME-A on the known derelict until owner+0x10 dispatch capture succeeds; no traversal required."
+    },
+    "seed-lineage": {
+      "branch": "agent/seed-lineage",
+      "status": "queued",
+      "next_action": "Begin only after the current runtime-dispatch intervention is completed unless integration explicitly parallelizes it."
+    },
+    "dungeon-decompile": {
+      "branch": "agent/dungeon-decompile",
+      "status": "queued"
+    },
+    "metadata": {
+      "branch": "agent/metadata",
+      "status": "queued"
+    }
+  },
+  "human_intervention": {
+    "required_now": false,
+    "pending_lane": "runtime-dispatch",
+    "reason": "Canonical package transport is being repaired first."
+  },
+  "resume_order": [
+    "WORKSPACE_STATE.json",
+    "AI_HANDOFF.md",
+    "RESEARCH_INDEX.md",
+    "AGENT_WORKFLOW.md",
+    "active lane manifest and only its changed files"
+  ],
+  "cross_mode_rule": "Normal ChatGPT and Work/Codex must treat committed GitHub state as authoritative and may switch roles without relying on hidden conversation context."
+}
