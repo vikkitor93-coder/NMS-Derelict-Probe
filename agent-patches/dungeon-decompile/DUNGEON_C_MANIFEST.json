@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "variant_id": "DUNGEON-C",
+  "lane": "agent/dungeon-decompile",
+  "base": "main canonical v0.3.38",
+  "base_version": "0.3.38",
+  "purpose": "Scan the installed NMS.exe offline for derelict/dungeon metadata anchors, simple RIP-relative xrefs, PE runtime-function ranges and bounded code windows for focused decompilation.",
+  "complete_zip": {
+    "name": "NMS-Derelict-Probe-v0.3.38-DUNGEON-C.zip",
+    "sha256": "06b9d015588b0ac470b4724e6fbe104d8e043a4a11ca8174c201f905b240520e",
+    "size_bytes": 313441,
+    "files": 107
+  },
+  "integration_patch": {
+    "path": "agent-patches/dungeon-decompile/dungeon-c.patch.gz.b64",
+    "encoded_sha256": "1e9291e6226ba1f76960451b862f08667039aafc25cf436d4659cb52a7455e45",
+    "decoded_patch_sha256": "c633e35c92784297ce1cccbfb210532d2541650d360b875efdbeee971c30213a",
+    "decoded_size_bytes": 30950,
+    "decode": "base64-decode, then gzip-decompress",
+    "apply_against": "canonical v0.3.38 package"
+  },
+  "changed_files": [
+    "AGENT_VARIANT.md",
+    "AI_HANDOFF.md",
+    "CHANGELOG.md",
+    "Scan-Dungeon-Decompile-Anchors.cmd",
+    "THIRD_PARTY_NOTICES.md",
+    "tests/test_tools.py",
+    "tools/github_integration.py",
+    "tools/scan_dungeon_decompile_anchors.py",
+    "tools/surveyor_controller.py"
+  ],
+  "verification": {
+    "unit_regression_tests": "116/116 passed",
+    "compileall": "passed",
+    "json_files_parsed": 35,
+    "cache_files_in_complete_zip": 0,
+    "game_memory_write_api_added": false
+  },
+  "research_status": {
+    "published_consumer_function_found": false,
+    "next_method": "offline current-NMS.exe metadata/string/type anchor xref triage",
+    "candidate_identity_rule": "triage-only until decompiler/runtime evidence proves a function role"
+  },
+  "human_validation": {
+    "required": true,
+    "game_runtime_required": false,
+    "steps": [
+      "Run the DUNGEON-C complete ZIP.",
+      "Click Scan dungeon decompile anchors + upload.",
+      "Select NMS.exe only if auto-detection fails.",
+      "Tell the integration AI: check."
+    ]
+  }
+}
