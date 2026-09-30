@@ -1,0 +1,31 @@
+{
+  "issue": 7,
+  "branch": "agent/issue-7-live-output",
+  "status": "packaged-awaiting-integration",
+  "base": "v0.3.39 Agent Console candidate, SHA-256 b896d51193dba98badc4021b901bfba235d34e296e52e42e7acc9ec23013ea4f",
+  "dependency": "PR #6 must merge before the v0.3.40 updater manifest can reach main.",
+  "patch": "agent-patches/issue-7/surveyor-live-output.patch",
+  "changed_files_in_patch": [
+    "tools/surveyor_controller.py",
+    "tests/test_workflow_stream.py"
+  ],
+  "behavior": "Stream research command output into a scrollable pane, show command/progress/latest line/exit status, and keep existing workflow logs and upload steps.",
+  "checks": {
+    "py_compile": "passed",
+    "test_agent_console.py": "6 passed",
+    "test_workflow_stream.py": "1 passed",
+    "git_apply_check_against_v0.3.39": "passed",
+    "windows_visual_ui": "not run; available Python interpreter lacks tkinter",
+    "full_unittest_suite": "120/120 passed",
+    "compileall": "passed"
+  },
+  "runtime_probe_changed": false,
+  "controller_probe_protocol_changed": false,
+  "package": {
+    "files": 109,
+    "transport": "packages/v0.3.40-full",
+    "sha256": "7c0da2344c479b832b0bf1a3e4d3b72ab0bcf9390e1c6af1b200b6b68e693520",
+    "file_name": "NMS-Derelict-Probe-v0.3.40-live-output.zip",
+    "bytes": 314940
+  }
+}
