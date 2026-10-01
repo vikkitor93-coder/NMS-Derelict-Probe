@@ -1,0 +1,18 @@
+{
+  "action": "analyze-generation",
+  "evidence_namespace": "runtime-dispatch",
+  "files": [
+    {
+      "name": "generation-baseline-latest.json",
+      "sha256": "8bfc5bbd2ee3f87fcac2659e1731f785e42877ad54ea892261037dbf24ca7061",
+      "size": 39671
+    },
+    {
+      "name": "exact-root-caller-latest.json",
+      "sha256": "ca339b20737c5e41e7d778516bf4acbeab0247deeb150163cfab0df7c161e2f0",
+      "size": 1530
+    }
+  ],
+  "utc": "20261001T033336Z",
+  "version": 1
+}
