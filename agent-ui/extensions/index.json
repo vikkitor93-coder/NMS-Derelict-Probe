@@ -5,6 +5,11 @@
       "extension_id": "dungeon-decompile",
       "version": "1.0.0",
       "manifest_path": "dungeon-decompile/1.0.0/manifest.json"
+    },
+    {
+      "extension_id": "seed-lineage",
+      "version": "1.0.0",
+      "manifest_path": "seed-lineage/1.0.0/manifest.json"
     }
   ]
 }
