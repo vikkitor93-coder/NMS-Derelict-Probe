@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "lane_id": "seed-lineage",
+  "extension": {
+    "extension_id": "seed-lineage",
+    "version": "1.0.0",
+    "compatible_surveyor_api_version": "1.0",
+    "min_surveyor_version": "0.3.41",
+    "action_id": "research.analyze_seed_function",
+    "preconditions": [
+      "workflow.idle"
+    ],
+    "evidence_namespace": "seed-lineage",
+    "parameters": {},
+    "request_only": false,
+    "files": [
+      {
+        "path": "agent-ui/extensions/seed-lineage/1.0.0/panel.json",
+        "sha256": "e93ad2b8ac7927fa4e09346222999af9836c0e0708608abf493f7395dc714779"
+      },
+      {
+        "path": "agent-ui/extensions/seed-lineage/1.0.0/manifest.json",
+        "sha256": "5ed9fa64b9fa7b87367cfd1bf2485e188c3a310a6f383ea79ba5c88c74938b25"
+      }
+    ]
+  },
+  "base": {
+    "branch": "integration/issue-8-ui-extensions",
+    "commit": "9aae5e339a91ede605c5d089e36c65f029fa8467"
+  },
+  "changed_files": [
+    "agent-ui/extensions/seed-lineage/1.0.0/panel.json",
+    "agent-ui/extensions/seed-lineage/1.0.0/manifest.json",
+    "agent-ui/extensions/index.json",
+    "tests/test_seed_lineage_ui_extension.py",
+    "AI_HANDOFF.md",
+    "agent-patches/seed-lineage/SEED_B_UI_MANIFEST.json",
+    "agent-patches/seed-lineage/seed-lineage-ui-1.0.0.patch"
+  ],
+  "file_sha256": {
+    "agent-ui/extensions/seed-lineage/1.0.0/panel.json": "e93ad2b8ac7927fa4e09346222999af9836c0e0708608abf493f7395dc714779",
+    "agent-ui/extensions/seed-lineage/1.0.0/manifest.json": "5ed9fa64b9fa7b87367cfd1bf2485e188c3a310a6f383ea79ba5c88c74938b25",
+    "agent-ui/extensions/index.json": "0327c8735910564cbd3d0d336e7940906c09630676b3e812961dcd54f44ec8a5",
+    "tests/test_seed_lineage_ui_extension.py": "6fce05ea2aeea3bbc8fa1bdfecf80aae84b75f9cf1d3ccc8dfa09be9c897a5b6",
+    "AI_HANDOFF.md": "e16caeb030f4c8d561520e2b3f32d9f84de8e80e11c28b2a0b04f1198a7eff89",
+    "agent-patches/seed-lineage/seed-lineage-ui-1.0.0.patch": "c1b12f21d8c1e5c2fc95cafe53403b464a90352f4520cf79ae90a69c79f13d4e"
+  },
+  "evidence": {
+    "measured_facts": [
+      "Post-7.05 capture at the same known system records root seed 9256392A2F5A74AC, MEDI_FLOATERS, 10 rooms, and 16 containers.",
+      "Pre-update capture recorded CARGO_FLOATERS, 8 rooms, and 35 containers; this layout is historical.",
+      "The prior SEED-B manifest reports direct system-seed/root-seed equality was not found; the derivation is unknown."
+    ],
+    "inferences": [
+      "The shared root seed with changed observed layout means the old layout must not be presented as current; no causal explanation is asserted."
+    ],
+    "hypotheses": []
+  },
+  "verification": {
+    "focused": "python -m unittest tests.test_agent_ui_extensions tests.test_agent_extension_upload_namespace tests.test_seed_lineage_ui_extension tests.test_agent_console tests.test_workflow_stream \u2014 18/18 passed",
+    "full": "python -m unittest discover -s tests \u2014 131/131 passed",
+    "compileall": "python -m compileall -q tools mod overlay tests \u2014 passed",
+    "json_and_hashes": "42 JSON files parsed; 2 indexed extensions; 0 extension file hash mismatches",
+    "patch": "patch --dry-run -p1 against v0.3.41 candidate \u2014 passed",
+    "windows_tk_visual": "not run in the Linux environment"
+  },
+  "rollback": [
+    "Before merge: close the PR; no installed source state changes.",
+    "After merge/source update: revert the lane extension commit to remove its index entry, panel, manifest, test, and lane patch/manifest; the shared host and standalone Seed-B workflow are untouched.",
+    "If a prior seed-lineage extension version is installed, use Agent Console rollback to activate it. Version 1.0.0 is the first published seed-lineage UI version, so no older lane panel exists yet."
+  ],
+  "human_action_required": false,
+  "windows_visual_smoke": {
+    "status": "not run",
+    "steps": [
+      "Launch Surveyor v0.3.41",
+      "Open Agent Console and refresh extensions",
+      "Confirm SEED-B panel appears without restarting Surveyor",
+      "Confirm the offline action is enabled only when workflow is idle; no NMS run or derelict traversal is needed"
+    ]
+  }
+}
