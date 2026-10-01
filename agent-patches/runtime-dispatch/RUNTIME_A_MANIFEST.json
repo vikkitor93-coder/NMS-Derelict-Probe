@@ -46,13 +46,50 @@
   },
   "human_validation": {
     "required": true,
+    "purpose": "Capture the live owner+0x10 dispatch slot value and target identity at the exact descriptor-correlated root event; recent upload captured root/owner/descriptor but omitted the live slot value.",
     "steps": [
-      "Extract and run NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip.",
-      "Start NMS from Surveyor.",
-      "Load the same known derelict only until Root dispatch +0x10 is captured.",
+      "Fully exit NMS.",
+      "Extract and run NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip from the existing Runtime-A artifact.",
+      "In Surveyor RUNTIME-A, click Start NMS.",
+      "Load the same known derelict and stop when Root dispatch +0x10 captured appears.",
       "Click Analyze generation + upload.",
-      "Tell the integration AI: check."
+      "Return to Main and write check."
     ],
-    "full_derelict_traversal_required": false
+    "success_condition": "The new upload includes the live owner+0x10 slot value and target pointer/identity together with the descriptor recheck.",
+    "evidence_to_return": [
+      "Fresh exact-root-caller-latest.json and its run-manifest.json.",
+      "Fresh capture indicating whether owner+0x10 value and target identity were captured."
+    ],
+    "full_derelict_traversal_required": false,
+    "if_probe_change_needed": "Use a compatible probe build and fully restart NMS; never hot-swap probe code."
+  },
+  "latest_capture_review": {
+    "reviewed_utc": "2026-10-01T15:30:30Z",
+    "uploads": [
+      "research-uploads/20261001T033336Z-runtime-dispatch-analyze-generation-62f7020f/",
+      "research-uploads/20261001T033416Z-measure/"
+    ],
+    "measured_facts": {
+      "root_seed": "9256392A2F5A74AC",
+      "probe_version": "0.3.33",
+      "exact_root_capture_utc": "2026-10-01T03:33:10.459Z",
+      "owner_pointer": "00000264633A5C00",
+      "descriptor_pointer": "00000264633A5D28",
+      "descriptor_offset_from_owner": "+0x128",
+      "external_caller_return_offset": "02C0497A",
+      "live_owner_plus_0x10_slot_value_present": false,
+      "live_owner_plus_0x10_target_pointer_present": false,
+      "generation_session": "20261001T033313Z_00001A0004E84EFD",
+      "dungeon_scene_instances": 0,
+      "logical_generated_chunks": 0,
+      "preset": null,
+      "preset_confidence": "unresolved",
+      "observed_rooms": 0,
+      "predicted_target_containers": 0
+    },
+    "interpretation": "The known root was observed again, but this upload does not validate the live owner+0x10 dispatch value/target. This Runtime-A session did not reproduce the separate post-7.05 MEDI_FLOATERS layout evidence.",
+    "evidence_qualification": "Root seed remains candidate-captured-unverified; zero scene/count values mean no generation capture in this session, not evidence that the derelict layout is empty.",
+    "next_action": "Repeat the exact short Runtime-A capture and obtain a live owner+0x10 slot value and target identity at the descriptor-correlated root event; no full traversal.",
+    "human_action_required": true
   }
 }
