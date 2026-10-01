@@ -3,7 +3,11 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.41**.
+Current Surveyor package: **v0.3.42**.
+
+## v0.3.42 — four-lane Agent Console
+
+The Agent Console shows all four agents side by side. Each information panel scrolls independently, and lane actions stay in a fixed bottom strip. Check all extensions from the top control, then update all available extensions or update an individual lane.
 
 ## v0.3.41 — shared lane UI extensions
 
