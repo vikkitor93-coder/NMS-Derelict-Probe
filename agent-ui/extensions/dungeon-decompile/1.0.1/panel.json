@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "title": "DUNGEON-C · Post-7.05 generation evidence",
+  "summary": "Shown only while DUNGEON-C requests human input. After RUNTIME-A reports Root dispatch +0x10 capture success, analyze and upload the captured generation baseline. Current post-7.05 evidence is MEDI_FLOATERS, 10 observed rooms, and 16 predicted target containers; the CARGO_FLOATERS capture is historical.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.analyze_generation",
+      "label": "Analyze generation + upload",
+      "description": "Run after the RUNTIME-A Root dispatch +0x10 capture succeeds. Analyzes the latest captured generation and extracted assets; no derelict traversal is required.",
+      "preconditions": [
+        "workflow.idle",
+        "nms.running",
+        "probe.connected"
+      ],
+      "evidence_namespace": "dungeon-decompile",
+      "parameters": {}
+    }
+  ]
+}
