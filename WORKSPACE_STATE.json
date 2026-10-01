@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-01T02:20:00Z",
+  "updated_utc": "2026-10-01T02:57:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.41",
@@ -28,10 +28,12 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage",
-      "status": "agent-output-published-do-not-duplicate",
+      "status": "awaiting-fresh-live-caller-capture",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
       "result_summary": "Offline system-seed anchors implemented and verified; direct equality with known derelict root seeds was not found and no derivation is claimed.",
-      "human_validation_required": false
+      "human_validation_required": true,
+      "next_action": "Fully exit and relaunch NMS from the installed executable, capture only the root resource event at universe 00001A0004E84EFD, run Extract caller code + upload, and verify baseline_window_matches_exe before rerunning upstream analysis.",
+      "latest_diagnostic": "research-uploads/20261001T023658Z-seed-lineage-analyze-seed-function-diagnostic/DIAGNOSTIC.md"
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
@@ -57,6 +59,11 @@
         "lane": "dungeon-decompile",
         "kind": "offline-local-NMS-exe-scan",
         "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json"
+      },
+      {
+        "lane": "seed-lineage",
+        "kind": "fresh-root-caller-capture-after-NMS-relaunch",
+        "evidence": "research-uploads/20261001T023658Z-seed-lineage-analyze-seed-function-diagnostic/DIAGNOSTIC.md"
       }
     ]
   },
@@ -86,7 +93,7 @@
     "base_branch": "main",
     "version": "0.3.41",
     "status": "published-partial-issue-8",
-    "next_action": "Visually verify extension refresh and rollback on Windows. Separately complete the Runtime-A owner+0x10 capture check; no full derelict traversal is required.",
+    "next_action": "Visually verify extension refresh and rollback on Windows. Separately complete the Runtime-A owner+0x10 capture check; no full derelict traversal is required. Seed-lineage also needs one fresh root caller capture after a full NMS relaunch; no full derelict traversal is required.",
     "test_button_changes": "none; issues 13 and 14 are closed and their button patches are excluded from this source.",
     "base_commit": "f17617abe19d8164892988e1f873353c8f95d49f"
   }
