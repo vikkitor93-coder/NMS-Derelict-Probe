@@ -1,15 +1,15 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-09-30T22:09:59Z",
+  "updated_utc": "2026-10-01T02:20:00Z",
   "integration": {
     "branch": "main",
-    "canonical_version": "0.3.38",
+    "canonical_version": "0.3.41",
     "current_objective": "Implement issue #8 shared, versioned Surveyor UI extensions while preserving all lane workflows and controller/probe protocols.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
     "candidate_version": "0.3.41",
     "candidate_branch": "integration/issue-8-ui-extensions",
     "candidate_base": "main@f17617abe19d8164892988e1f873353c8f95d49f",
-    "candidate_status": "implementation-complete-pending-integration-review"
+    "candidate_status": "published-partial-issue-8"
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
@@ -85,8 +85,8 @@
     "branch": "integration/issue-8-ui-extensions",
     "base_branch": "main",
     "version": "0.3.41",
-    "status": "implementation-complete-pending-integration-review",
-    "next_action": "Review and merge the issue #8 PR; then verify the Windows UI update/rollback flow. Preserve the pending Runtime-A live validation requirement.",
+    "status": "published-partial-issue-8",
+    "next_action": "Visually verify extension refresh and rollback on Windows. Separately complete the Runtime-A owner+0x10 capture check; no full derelict traversal is required.",
     "test_button_changes": "none; issues 13 and 14 are closed and their button patches are excluded from this source.",
     "base_commit": "f17617abe19d8164892988e1f873353c8f95d49f"
   }
