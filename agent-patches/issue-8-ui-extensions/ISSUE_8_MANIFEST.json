@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "issue": 8,
+  "title": "Define versioned agent UI extensions and shared agent instructions",
+  "status": "ui-extension-host-implemented; unified-probe-capture-consolidation-pending",
+  "candidate_version": "0.3.41",
+  "branch": "integration/issue-8-ui-extensions",
+  "base_commit": "f17617abe19d8164892988e1f873353c8f95d49f",
+  "summary": "Adds one versioned, data-only Surveyor extension interface for lane panels, verified live install/reload and rollback, namespaced research uploads, a reusable lane-agent prompt, and a DUNGEON-C example panel.",
+  "changed_project_files": [
+    "AGENT_UI_EXTENSION_GUIDE.md",
+    "AGENT_START_HERE.md",
+    "AGENT_WORKFLOW.md",
+    "AI_HANDOFF.md",
+    "README.md",
+    "CHANGELOG.md",
+    "VERSION.txt",
+    "WORKSPACE_STATE.json",
+    "agent-ui/extensions/index.json",
+    "agent-ui/extensions/dungeon-decompile/1.0.0/manifest.json",
+    "agent-ui/extensions/dungeon-decompile/1.0.0/panel.json",
+    "tools/agent_ui_extensions.py",
+    "tools/surveyor_controller.py",
+    "tools/github_integration.py",
+    "tests/test_agent_ui_extensions.py",
+    "tests/test_agent_extension_upload_namespace.py",
+    "tests/test_tools.py"
+  ],
+  "verification": {
+    "focused_tests": "17/17 passed",
+    "full_tests": "130/130 passed",
+    "compileall": "passed",
+    "windows_tk_visual_run": "not run in this Linux environment",
+    "continuation_tests": "17 focused; 130 full; compileall passed; 40 JSON files parsed",
+    "handoff_followup_patch": "agent-patches/issue-8-ui-extensions/handoff-followup.patch"
+  },
+  "safety": {
+    "extensions_are_data_only": true,
+    "agent_shell_or_python_execution": false,
+    "stable_action_ids_only": true,
+    "hash_and_api_checks_before_activation": true,
+    "previous_versions_retained_for_rollback": true,
+    "probe_or_controller_command_protocol_changed": false
+  },
+  "remaining_issue_8_acceptance": [
+    "Review and safely consolidate any required lane probe hooks into one signature/version-guarded build with independently selectable capture profiles.",
+    "Runtime-A dispatch capture still needs its short live validation before its experimental hook is integrated.",
+    "Exercise live extension update and rollback visually on Windows."
+  ],
+  "human_action": {
+    "required_for_runtime_a_validation": true,
+    "steps": [
+      "Extract the Runtime-A Surveyor ZIP from the Runtime-A manifest.",
+      "Double-click Start-Surveyor.cmd, then click Start NMS.",
+      "Load the known derelict only until Surveyor shows Root dispatch +0x10 captured.",
+      "Click Analyze generation + upload.",
+      "Return to Main and write: check."
+    ],
+    "full_derelict_traversal_required": false
+  },
+  "rollback": "Restore the prior update-manifest.json/package chunks to return to v0.3.40. For UI panels, activate a retained older version with the Agent Console rollback button.",
+  "artifact": {
+    "file_name": "NMS-Derelict-Probe-v0.3.41.zip",
+    "sha256": "bfb709f5e552a5db94b4fcb5dbcc4478f65c3d34f16cd6a7d01755f6cba6cacc",
+    "size_bytes": 326191,
+    "files": 116
+  },
+  "package_parts": [
+    "packages/v0.3.41-full/part-000.b64",
+    "packages/v0.3.41-full/part-001.b64",
+    "packages/v0.3.41-full/part-002.b64",
+    "packages/v0.3.41-full/part-003.b64",
+    "packages/v0.3.41-full/part-004.b64",
+    "packages/v0.3.41-full/part-005.b64",
+    "packages/v0.3.41-full/part-006.b64",
+    "packages/v0.3.41-full/part-007.b64",
+    "packages/v0.3.41-full/part-008.b64",
+    "packages/v0.3.41-full/part-009.b64"
+  ],
+  "source_patch": {
+    "path": "/workspace/scratch/1719a618d73a/nms-work/agent-patches/issue-8-ui-extensions/issue-8.patch",
+    "sha256": "458e3239cfae5b86f9d12cd8bf17960e77c00b83f2f8cf2bda4bd8fe732cb6ec",
+    "size_bytes": 79918,
+    "verification": "git apply --check passed; applying to v0.3.40 reconstructs all 116 candidate files (line endings normalized)."
+  },
+  "base_branch": "main"
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": 3,
+  "updated_utc": "2026-09-30T22:09:59Z",
+  "integration": {
+    "branch": "main",
+    "canonical_version": "0.3.38",
+    "current_objective": "Implement issue #8 shared, versioned Surveyor UI extensions while preserving all lane workflows and controller/probe protocols.",
+    "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
+    "candidate_version": "0.3.41",
+    "candidate_branch": "integration/issue-8-ui-extensions",
+    "candidate_base": "main@f17617abe19d8164892988e1f873353c8f95d49f",
+    "candidate_status": "implementation-complete-pending-integration-review"
+  },
+  "lane_claims": {
+    "runtime-dispatch": "claimed",
+    "seed-lineage": "claimed",
+    "dungeon-decompile": "claimed",
+    "metadata": "free-at-last-sync"
+  },
+  "lanes": {
+    "runtime-dispatch": {
+      "branch": "agent/runtime-dispatch",
+      "status": "build-ready-awaiting-live-validation",
+      "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
+      "pull_request": 1,
+      "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
+      "next_action": "Run RUNTIME-A on the known derelict until owner+0x10 dispatch capture succeeds; no traversal required."
+    },
+    "seed-lineage": {
+      "branch": "agent/seed-lineage",
+      "status": "agent-output-published-do-not-duplicate",
+      "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
+      "result_summary": "Offline system-seed anchors implemented and verified; direct equality with known derelict root seeds was not found and no derivation is claimed.",
+      "human_validation_required": false
+    },
+    "dungeon-decompile": {
+      "branch": "agent/dungeon-decompile",
+      "status": "agent-output-published-do-not-duplicate",
+      "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
+      "next_action": "Run the offline NMS.exe anchor scan from DUNGEON-C and upload the result; game runtime is not required."
+    },
+    "metadata": {
+      "branch": "agent/metadata",
+      "status": "free-ready-from-current-main-at-last-sync",
+      "objective": "Map abandoned-freighter component DungeonOptions/weights, DungeonRootScene, dungeon-table presets and static asset relationships without duplicating runtime/seed/decompile lanes."
+    }
+  },
+  "human_intervention": {
+    "required_now": true,
+    "pending": [
+      {
+        "lane": "runtime-dispatch",
+        "kind": "live-game-short-capture",
+        "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json"
+      },
+      {
+        "lane": "dungeon-decompile",
+        "kind": "offline-local-NMS-exe-scan",
+        "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json"
+      }
+    ]
+  },
+  "new_agent_start": {
+    "rule": "Read AGENT_START_HERE.md first. You are one parallel agent, not the sole project owner. Do not claim or modify an occupied lane unless explicitly assigned.",
+    "resume_order": [
+      "AGENT_START_HERE.md",
+      "WORKSPACE_STATE.json",
+      "RESEARCH_INDEX.md",
+      "AI_HANDOFF.md",
+      "AGENT_WORKFLOW.md",
+      "the assigned lane manifest and only relevant files/evidence"
+    ],
+    "branch_rule": "For a new independent task, create a fresh branch from current main named agent/<short-lane-id>. Use agent/metadata only if it is still free when you begin.",
+    "output_rule": "Keep experimental Surveyor changes lane-specific, publish a manifest + reproducible patch + tests/evidence, and never push experimental changes directly to main.",
+    "autonomy_rule": "Continue within the lane until the objective is complete, blocked on another lane, or genuine human/local-machine intervention is required."
+  },
+  "artifact_policy": {
+    "complete_zip_storage": "ChatGPT Library",
+    "canonical_library_path": "/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip",
+    "github_role": "manifests, patches, evidence, branches, PRs, source-state summaries"
+  },
+  "cross_mode_rule": "Normal ChatGPT and Work/Codex must treat committed GitHub state as authoritative and may switch roles without relying on hidden conversation context.",
+  "candidate_integration": {
+    "issue": 8,
+    "branch": "integration/issue-8-ui-extensions",
+    "base_branch": "main",
+    "version": "0.3.41",
+    "status": "implementation-complete-pending-integration-review",
+    "next_action": "Review and merge the issue #8 PR; then verify the Windows UI update/rollback flow. Preserve the pending Runtime-A live validation requirement.",
+    "test_button_changes": "none; issues 13 and 14 are closed and their button patches are excluded from this source.",
+    "base_commit": "f17617abe19d8164892988e1f873353c8f95d49f"
+  }
+}

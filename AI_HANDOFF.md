@@ -1,4 +1,62 @@
-# AI handoff — NMS Derelict Probe v0.3.38
+# AI handoff — NMS Derelict Probe v0.3.41 candidate
+
+## Current handoff state
+
+This is the current continuation point for the main integration worker. The candidate is based on the v0.3.40 Live Output package and is prepared on `integration/issue-8-ui-extensions`; it is not yet the installed `main` release.
+
+- Issue #8 adds `AGENT_UI_EXTENSION_GUIDE.md`, a shared Surveyor UI API 1.0, a data-only JSON extension loader, and one DUNGEON-C sample panel.
+- Extensions are downloaded into staging, checked against declared dependencies and SHA-256 hashes, checked for host/API compatibility, and activated without restarting Surveyor. Previous versions remain available for rollback.
+- Extension panels can request only the eight stable `research.*` host action IDs. No agent-provided code, shell command, path, or process arguments are run. Preconditions are rechecked at click time.
+- Evidence uploads initiated through a lane extension use a timestamped `<lane>-<action>` folder and run manifest. Local action records are also stored under `%LOCALAPPDATA%\NMSDerelictSurveyor\ui-extensions\<lane>\runs`.
+- The DUNGEON-C sample panel launches the existing exact-root-caller offline extractor. It does not require NMS to run or a derelict traversal.
+- Tests cover compatible install, hash/command rejection, failed-update preservation, live version activation, rollback, and evidence namespacing. Tk visual execution on Windows still needs a human machine.
+
+## Exact next action
+
+The issue-8 UI extension host is implemented and its regression checks pass. PR #15 remains a draft; issue #8 remains open because the unified probe-capture requirement and Windows visual validation are still outstanding. Do not claim full issue acceptance or merge the candidate as the completed issue.
+
+**Next human action (Windows; no full derelict traversal):** use the Runtime-A Surveyor build identified by `agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json` > start Surveyor > click **Start NMS** > load the known derelict only until **Root dispatch +0x10 captured** appears > click **Analyze generation + upload** > return to Main and write `check`. Then review whether the capture hook is compatible with the other lane profiles before integration. Separately, visually verify the DUNGEON-C extension refresh and rollback in the Windows Surveyor UI.
+
+**Verification completed in this continuation:** focused extension/console/workflow tests 17/17 passed; full suite 130/130 passed; `compileall` passed; 40 JSON files parsed; the 116-entry source ZIP passed integrity and SHA-256 checks. Windows/Tk visual behavior was not run in this Linux environment.
+
+Issues #13 and #14 remain closed as not planned. Their benchmark branches were reset to `main`, removing the test-only help-button project; GitHub branch names remain because the connected API cannot delete refs. The delivered package contains no benchmark help button.
+
+## Canonical source status
+
+The last integrated canonical release is v0.3.38. The v0.3.41 candidate package must become authoritative only after its updated root `update-manifest.json` and full-package chunks are merged together.
+
+---
+
+## Prior Agent Console implementation record
+
+The v0.3.39 standalone Surveyor opened a compact read-only Agent Console beside the main UI. The current v0.3.41 candidate retains it and adds the extension panel described above. It still cannot read private chats; agents must publish STATUS.json updates for new requests to appear.
+
+No probe, game overlay, or controller-command protocol was changed. The Agent Console is a separate Tkinter `Toplevel` and has no access to NMS memory.
+
+Current published lane picture at the v0.3.39 source snapshot:
+
+- Runtime-A needs one short live capture of the exact `owner+0x10` dispatch slot. No full derelict traversal is required.
+- Seed-B has published system-seed anchors; it requires no Surveyor action.
+- DUNGEON-C uploaded its offline NMS.exe scan (38 candidates; no multi-anchor matches; generator consumer unidentified); agent work can continue offline.
+- Metadata-D is free at the last sync.
+
+The remaining human action is Runtime-A. Exact recipe: extract and run `NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip` > start NMS from Surveyor > load the same known derelict only until **Root dispatch +0x10** is captured > click **Analyze generation + upload** > return to this Main chat and write `check`. No full traversal is required. The Agent Console can copy these steps.
+
+## Agent status data contract
+
+`schema/agent-status-v1.schema.json` defines the additive lane status format. Agents commit `agent-patches/<lane>/STATUS.json` on their own branch when work starts, changes state, or needs a human. Required fields are schema version, lane, UTC update time, state, and summary; human requests carry exact steps, success condition, evidence to return, and full-traversal requirement. Main updates the integrated `WORKSPACE_STATE.json`. The console falls back to current lane manifests when no STATUS.json exists yet.
+
+## Run and verify
+
+- Normal launch: extract the complete project ZIP and double-click `Start-Surveyor.cmd`. The main Surveyor and Agent Console open independently from NMS.
+- Runtime: existing Python 3.12/3.13 plus Tkinter; the Agent Console adds no installed dependency and sends only public read-only GET requests to this GitHub repository.
+- Regression tests: `python -m unittest discover -s tests`.
+- Syntax check: `python -m compileall -q tools mod overlay tests`.
+- This v0.3.39 ZIP is an integration candidate. The in-app updater serves it only after the matching PR's `update-manifest.json` and package chunks reach `main`; until then, install from the complete ZIP.
+
+## v0.3.39 verification and limits
+
+Agent Console data logic: 6 focused tests pass. Full regression suite: 119/119 pass. `compileall` passes; 37 packaged JSON files parse. The Tkinter window has not been visually exercised on Windows in this environment. Agent updates remain invisible until their status/manifest changes are committed to GitHub; the console cannot inspect chat state.
 
 ## Product architecture
 
@@ -43,13 +101,13 @@ The user explicitly asked to test all 52 static caller references at once rather
 
 When the exact `DUNGEON.SCENE.MBIN` descriptor reaches `Engine::AddResource`, the probe now records `logical_entry_exact_external_caller_return_offset_hex` plus a larger small code window and immediately writes `asset-work-v1/exact-root-caller-latest.json`. The dedicated file includes the exact external caller, descriptor pointer, root seed, observed caller hit counts, and the static candidate count. `Analyze generation + upload` uploads that file alongside `generation-baseline-latest.json` when available.
 
-Next live action: update to v0.3.34, launch NMS from standalone Surveyor, load a known derelict only until **Exact root caller** changes from `Not captured`, then stop/save and run **Analyze generation + upload**. No full traversal is required.
+Historical v0.3.34 action; superseded by the v0.3.38 exact caller capture and the current Runtime-A dispatch-slot validation described above.
 
 ## v0.3.32 exact runtime caller correlation
 
 The corrected v0.3.31 offline scan found 52 direct references to the verified logical entry `0x00634BC0`, proving the function is generic enough that static xrefs alone do not identify the derelict-specific path. v0.3.32 adds a narrow read-only signature hook at that entry. It records seeded descriptor calls only in a bounded in-memory ring, then correlates the exact descriptor pointer when `DUNGEON.SCENE.MBIN` reaches `Engine::AddResource`. The root event stores `logical_entry_matches`, `logical_entry_nearest_caller_return_offset_hex`, and a small code window.
 
-Next live action: use a known derelict/address, wait only until standalone Surveyor shows **Root entry caller**, stop/save, then run **Analyze generation + upload** (or Measure + upload if a fresh measurement wrapper is desired) and tell ChatGPT `check`. Do not require a full room traversal.
+Historical v0.3.32 action; superseded by the current Runtime-A capture request above. Do not ask the user to repeat older exact-caller work.
 ### v0.3.34 launcher repair
 - Standalone Surveyor Start NMS now uses the repaired `Start-NMS.ps1`.
 - Do not restore the old `import nmspy, pymhf 2>$null` hard gate; it hid the actual Python traceback and could loop on a package that pip reported as already installed.
@@ -63,11 +121,11 @@ The standalone controller remains the primary UI, but Start NMS must not import 
 ## v0.3.38 exact root caller result / next action
 Baseline B short capture on 2026-09-30 correlated the exact dungeon descriptor pointer `0000017475826D28` / root seed `9256392A2F5A74AC` to external caller return RVA `02BFCC1A` with recursion depth 0 and age 0.74 ms at the root add. This RVA was **not** among the 52 direct E8/E9 static references to logical entry `00634BC0`, so the derelict path is likely indirect (function pointer/thunk/other non-rel32 transfer) rather than one of the 52 direct xrefs. Do not infer a symbol yet.
 
-v0.3.38 adds `tools/extract_exact_root_caller_code.py`, `Extract-Exact-Root-Caller-Code.cmd`, a standalone UI button **Extract exact root caller + upload**, and GitHub action `extract-exact-root-caller`. It reads `%LOCALAPPDATA%\NMSDerelictSurveyor\asset-work-v1\exact-root-caller-latest.json`, maps the exact RVA into installed `NMS.exe`, captures a bounded code window, and conservatively recognizes direct `E8 rel32` and indirect `FF /2` calls. Output: `exact-root-caller-code-latest.json`. No NMS run is needed. Next user workflow: update/restart Surveyor, click **Extract exact root caller + upload**, then say `check`.
+v0.3.38 added `tools/extract_exact_root_caller_code.py`, `Extract-Exact-Root-Caller-Code.cmd`, a standalone UI button **Extract exact root caller + upload**, and GitHub action `extract-exact-root-caller`. It reads `%LOCALAPPDATA%\NMSDerelictSurveyor\asset-work-v1\exact-root-caller-latest.json`, maps the exact RVA into installed `NMS.exe`, captures a bounded code window, and conservatively recognizes direct `E8 rel32` and indirect `FF /2` calls. Output: `exact-root-caller-code-latest.json`. This historical action is complete; the current Runtime-A request is to inspect the exact dispatch slot live.
 
 
 ### v0.3.38 next research step
-The exact external call at `02BFCC17` decoded as `FF 52 10`: load vtable from the object and call virtual slot `+0x10`. The runtime target was the verified logical function `00634BC0`. Use **Resolve root vtable + upload** to identify vtable candidate(s), RTTI/class metadata and constructor/reference sites offline. Do not launch NMS for this step.
+The exact external call at `02BFCC17` decoded as `FF 52 10`, targeting the verified logical function `00634BC0`. Static resolution found no coherent conventional vtable candidate. The current follow-up is Runtime-A's live capture of the value at `owner+0x10`; do not call it a proven C++ vtable slot or class.
 
 
 ## v0.3.37–v0.3.38 research/tool state
