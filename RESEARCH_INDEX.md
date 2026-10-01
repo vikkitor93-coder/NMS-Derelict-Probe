@@ -1,6 +1,15 @@
 # NMS Derelict Probe — Research Index
 
-Last updated: 2026-09-30. This file is the short shared truth table for humans and parallel AI agents.
+Last updated: 2026-10-01. This file is the short shared truth table for humans and parallel AI agents.
+
+## Seed-lineage capture consistency (2026-10-01)
+
+- **Measured:** caller and upstream evidence both show universe `00001A0004E84EFD`, root seed `9256392A2F5A74AC`, and call RVA `00635110`.
+- **Measured:** caller session `20260930T030805Z_00001A0004E84EFD` and upstream session `20260929T203022Z_00001A0004E84EFD` differ. Caller NMS.exe hash is `671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4`; upstream hash is `b7913f268dfc62386b6b68f524bfc8ade4a44a9f4fbad39085b7bf51be3680cb`. Caller evidence says `baseline_window_matches_exe: false`.
+- **Measured:** rerunning the current boundary detector against the attached caller evidence raises `No compiler-padding function boundary found before the call`.
+- **Inference:** the upstream candidate `00634BC0` is not validated for this caller window; do not use it as a current boundary.
+- **Hypothesis:** evidence was captured across a running-process/executable change or otherwise mixed across states. A fresh post-relaunch capture is needed to verify.
+- **Next:** relaunch NMS from the installed executable, capture one root resource event at the known system, run **Extract caller code + upload**, and verify `baseline_window_matches_exe` before rerunning upstream analysis. No full traversal is required.
 
 ## Confirmed runtime facts
 

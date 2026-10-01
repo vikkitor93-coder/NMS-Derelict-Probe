@@ -79,6 +79,12 @@ Updater details:
 
 Verification for v0.3.34: 106/106 regression tests, compileall, packaged JSON parse, full ZIP integrity, delta integrity, and delta-apply equality against v0.3.32.
 
+## 2026-10-01 seed-lineage analyzer diagnostic
+
+The `Analyze seed function + upload` diagnostic failed at compiler-padding boundary lookup. Evidence is recorded at `research-uploads/20261001T023658Z-seed-lineage-analyze-seed-function-diagnostic/`. The caller and upstream JSONs share universe address `00001A0004E84EFD`, root seed `9256392A2F5A74AC`, and call RVA `00635110`, but their capture sessions and NMS.exe SHA-256 values differ. The caller JSON reports `baseline_window_matches_exe: false`. The saved candidate `00634BC0` is not validated for this caller capture and must not be treated as a current function boundary.
+
+**Next:** fully exit and relaunch NMS from the installed executable, capture only the root resource event at the known system, run Surveyor's **Extract caller code + upload**, and verify the executable-window match before rerunning upstream analysis. No full traversal is required. No probe/controller code change has been made based on this mismatched evidence.
+
 ## Research state
 
 Latest uploaded `analyze-seed-function` evidence (`20260930T005951Z`) revealed an analyzer-boundary mistake:
