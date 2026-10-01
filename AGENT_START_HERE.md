@@ -24,9 +24,10 @@ All lanes contribute evidence toward connecting that chain.
 
 1. Read `WORKSPACE_STATE.json` for the **current** lane claims and next actions.
 2. Read `RESEARCH_INDEX.md` for the short truth table: confirmed facts, public-structure facts, hypotheses, and disproven ideas.
-3. Read `AI_HANDOFF.md` for architecture, current technical context, user workflow, and important constraints.
-4. Read `AGENT_WORKFLOW.md` for branch/Surveyor/evidence/PR rules.
-5. Read only your assigned lane manifest and relevant changed files/evidence.
+3. Read `PROJECT_PROFILE.md` for stable project purpose, constraints, evidence conventions, and user handoff preferences.
+4. Read `AI_HANDOFF.md` for architecture, current technical context, latest technical state, and next action.
+5. Read `AGENT_WORKFLOW.md` for branch/Surveyor/evidence/PR rules.
+6. Read only your assigned lane manifest and relevant changed files/evidence.
 
 Historical sections and old next-actions are never more authoritative than `WORKSPACE_STATE.json`.
 
