@@ -1,20 +1,35 @@
 {
-  "schema_version": 1,
-  "version": "0.3.38",
-  "status": "canonical-verified-source-package",
-  "package": "packages/v0.3.38/NMS-Derelict-Probe-v0.3.38-canonical.zip",
-  "sha256": "7ac2ce0c9cf7188839e03dca984b457b649716d4298bcb779ce178a64293a9e7",
-  "size_bytes": 289495,
-  "files": 103,
+  "schema_version": 2,
+  "version": "0.3.41",
+  "status": "integration-candidate",
+  "artifact": {
+    "storage": "github-base64-chunks-and-chatgpt-library",
+    "file_name": "NMS-Derelict-Probe-v0.3.41.zip",
+    "sha256": "bfb709f5e552a5db94b4fcb5dbcc4478f65c3d34f16cd6a7d01755f6cba6cacc",
+    "size_bytes": 326191,
+    "files": 116
+  },
+  "repository_transport": {
+    "status": "reproducible-base64-chunks",
+    "reason": "The complete ZIP is retained as a direct Library artifact and reproducibly encoded in the repository package chunk format."
+  },
   "verification": {
-    "unit_tests": "113/113 passed",
+    "focused_tests": "17/17 passed",
+    "unit_tests": "130/130 passed",
     "compileall": "passed",
-    "json_files_parsed": 35,
-    "runtime_logic_changed": false
+    "json_files_parsed": 40,
+    "zip_integrity": "passed",
+    "game_probe_logic_changed": false,
+    "source_patch_reconstruction": "passed",
+    "package_refresh": "handoff-only continuation update"
+  },
+  "resume": {
+    "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json and AI_HANDOFF.md first; the complete ZIP is the source snapshot.",
+    "integration_agent": "Review agent-patches/issue-8-ui-extensions/ISSUE_8_MANIFEST.json and issue-8.patch; issue #8 remains partial until the lane capture hook plan is verified."
   },
   "notes": [
-    "This package is the authoritative v0.3.38 source baseline for integration and agent branches.",
-    "Only documentation/handoff hygiene and generated cache removal differ from the previously produced v0.3.38 ZIP.",
-    "The stable main update channel is intentionally not advanced by this metadata-only canonicalization step."
+    "Builds on v0.3.40 after PRs #6 and #11 were integrated into main.",
+    "Implements the shared Surveyor extension host and a DUNGEON-C example panel; probe hook consolidation is still pending.",
+    "Issues #13 and #14 are closed; their help-button patches are excluded."
   ]
 }

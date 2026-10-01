@@ -1,0 +1,212 @@
+diff --git a/tools/surveyor_controller.py b/tools/surveyor_controller.py
+index f5dd35a..3a65316 100644
+--- a/tools/surveyor_controller.py
++++ b/tools/surveyor_controller.py
+@@ -3,7 +3,9 @@ from __future__ import annotations
+ import argparse
+ import json
+ import os
++import queue
+ import re
++import shlex
+ import shutil
+ import subprocess
+ import sys
+@@ -169,6 +171,12 @@ class SurveyorController:
+         self.caller_scan_state = tk.StringVar(value="Armed — all callers at once")
+         self.workflow_status = tk.StringVar(value="Ready")
+         self.workflow_detail = tk.StringVar(value="Surveyor is independent from NMS and will stay open when the game closes.")
++        self.workflow_command = tk.StringVar(value="")
++        self.workflow_progress = tk.StringVar(value="")
++        self.workflow_latest = tk.StringVar(value="")
++        self.output_events: queue.SimpleQueue[tuple[str, str]] = queue.SimpleQueue()
++        self._latest_output = ""
++        self._latest_progress = ""
+         self.overlay_enabled = tk.BooleanVar(value=self._load_overlay_pref())
+ 
+         self._build_ui()
+@@ -178,8 +186,15 @@ class SurveyorController:
+         self._refresh()
+ 
+     def _build_ui(self) -> None:
+-        root = ttk.Frame(self.window, padding=12)
+-        root.pack(fill="both", expand=True)
++        canvas = tk.Canvas(self.window, highlightthickness=0)
++        page_scroll = ttk.Scrollbar(self.window, orient="vertical", command=canvas.yview)
++        canvas.configure(yscrollcommand=page_scroll.set)
++        page_scroll.pack(side="right", fill="y")
++        canvas.pack(side="left", fill="both", expand=True)
++        root = ttk.Frame(canvas, padding=12)
++        page = canvas.create_window((0, 0), window=root, anchor="nw")
++        root.bind("<Configure>", lambda _event: canvas.configure(scrollregion=canvas.bbox("all")))
++        canvas.bind("<Configure>", lambda event: canvas.itemconfigure(page, width=event.width))
+ 
+         title_row = ttk.Frame(root)
+         title_row.pack(fill="x")
+@@ -250,6 +265,43 @@ class SurveyorController:
+         workflow.pack(fill="both", expand=True)
+         ttk.Label(workflow, textvariable=self.workflow_status, font=("Segoe UI", 10, "bold")).pack(anchor="w")
+         ttk.Label(workflow, textvariable=self.workflow_detail, wraplength=690, justify="left").pack(anchor="w", pady=(4, 0))
++        ttk.Label(workflow, textvariable=self.workflow_command, wraplength=690, justify="left").pack(anchor="w", pady=(4, 0))
++        ttk.Label(workflow, textvariable=self.workflow_progress).pack(anchor="w")
++        ttk.Label(workflow, textvariable=self.workflow_latest, wraplength=690, justify="left").pack(anchor="w")
++        output_frame = ttk.Frame(workflow)
++        output_frame.pack(fill="both", expand=True, pady=(4, 0))
++        self.workflow_output = tk.Text(output_frame, height=12, wrap="none", state="disabled")
++        output_scroll = ttk.Scrollbar(output_frame, orient="vertical", command=self.workflow_output.yview)
++        self.workflow_output.configure(yscrollcommand=output_scroll.set)
++        self.workflow_output.pack(side="left", fill="both", expand=True)
++        output_scroll.pack(side="right", fill="y")
++        self.window.after(50, self._drain_output_events)
++
++    def _drain_output_events(self) -> None:
++        lines = []
++        for _ in range(200):
++            try:
++                kind, value = self.output_events.get_nowait()
++            except queue.Empty:
++                break
++            if kind == "clear":
++                self.workflow_output.configure(state="normal")
++                self.workflow_output.delete("1.0", "end")
++                self.workflow_output.configure(state="disabled")
++                self.workflow_progress.set("")
++                self.workflow_latest.set("")
++            elif kind == "command":
++                self.workflow_command.set(value)
++            elif kind == "line":
++                lines.append(value)
++        if lines:
++            self.workflow_output.configure(state="normal")
++            self.workflow_output.insert("end", "".join(lines))
++            self.workflow_output.see("end")
++            self.workflow_output.configure(state="disabled")
++        self.workflow_latest.set(self._latest_output)
++        self.workflow_progress.set(self._latest_progress)
++        self.window.after(50, self._drain_output_events)
+ 
+     @staticmethod
+     def _row(parent: ttk.Widget, label: str, value: tk.StringVar) -> None:
+@@ -599,7 +651,10 @@ class SurveyorController:
+             self._set_status("Another action is running", "Wait for the current action to finish.")
+             return
+         self.workflow_running = True
++        self._latest_output = ""
++        self._latest_progress = ""
+         self._set_status(f"Running: {label}", f"Step 1/{len(steps)}")
++        self.output_events.put(("clear", ""))
+ 
+         def worker() -> None:
+             env = os.environ.copy()
+@@ -617,6 +672,9 @@ class SurveyorController:
+                 for index, (step_name, command) in enumerate(steps, start=1):
+                     last_command = command
+                     self._set_status(f"Running: {label}", f"Step {index}/{len(steps)}: {step_name}")
++                    command_text = subprocess.list2cmdline(command) if os.name == "nt" else shlex.join(command)
++                    self.output_events.put(("command", f"Command: {command_text}"))
++                    self.output_events.put(("line", f"===== STEP {index}/{len(steps)} {step_name} =====\nCommand: {command_text}\n"))
+                     _log("workflow_step_started", label=label, step=step_name, command=" ".join(_safe(x) for x in command))
+                     flags = 0
+                     if os.name == "nt" and not visible:
+@@ -626,10 +684,24 @@ class SurveyorController:
+                         stdout = ""
+                         stderr = ""
+                     else:
+-                        proc = subprocess.run(command, cwd=str(self.project_root), env=env, capture_output=True, text=True, check=False, creationflags=flags)
+-                        stdout = proc.stdout or ""
+-                        stderr = proc.stderr or ""
++                        chunks: list[str] = []
++                        with subprocess.Popen(command, cwd=str(self.project_root), env=env,
++                                              stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
++                                              text=True, errors="replace", bufsize=1,
++                                              creationflags=flags) as proc:
++                            assert proc.stdout is not None
++                            for line in proc.stdout:
++                                chunks.append(line)
++                                self.output_events.put(("line", line))
++                                self._latest_output = line.strip()
++                                if "progress" in line.lower() or re.search(r"\b\d{1,3}%", line):
++                                    self._latest_progress = line.strip()
++                            proc.wait()
++                        stdout = "".join(chunks)
++                        stderr = ""
+                     returncode = proc.returncode
++                    self._latest_output = f"Exit status: {returncode}"
++                    self.output_events.put(("line", f"Exit status: {returncode}\n"))
+                     text = f"===== STEP {index}/{len(steps)} {step_name} =====\nCommand: {' '.join(_safe(x) for x in command)}\nReturn code: {returncode}\n\nSTDOUT\n{_safe(stdout or '<empty>')}\n\nSTDERR\n{_safe(stderr or '<empty>')}\n"
+                     all_output.append(text)
+                     if returncode != 0:
+diff --git a/tests/test_workflow_stream.py b/tests/test_workflow_stream.py
+new file mode 100644
+index 0000000..b24ef1c
+--- /dev/null
++++ b/tests/test_workflow_stream.py
+@@ -0,0 +1,68 @@
++import importlib.util
++import queue
++import sys
++import tempfile
++import time
++import types
++import unittest
++from pathlib import Path
++from unittest.mock import patch
++
++
++SOURCE = Path(__file__).resolve().parents[1] / "tools" / "surveyor_controller.py"
++sys.path.insert(0, str(SOURCE.parent))
++try:
++    import tkinter  # noqa: F401
++except ImportError:
++    tkinter = types.ModuleType("tkinter")
++    tkinter.StringVar = type("StringVar", (), {})
++    tkinter.ttk = types.ModuleType("tkinter.ttk")
++    tkinter.ttk.Widget = type("Widget", (), {})
++    tkinter.messagebox = types.ModuleType("tkinter.messagebox")
++    sys.modules.update({"tkinter": tkinter, "tkinter.ttk": tkinter.ttk,
++                        "tkinter.messagebox": tkinter.messagebox})
++spec = importlib.util.spec_from_file_location("surveyor_controller", SOURCE)
++controller_module = importlib.util.module_from_spec(spec)
++spec.loader.exec_module(controller_module)
++
++
++class WorkflowStreamTests(unittest.TestCase):
++    def test_output_arrives_before_exit_and_failure_skips_upload(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            root = Path(tmp)
++            controller = controller_module.SurveyorController.__new__(controller_module.SurveyorController)
++            controller.project_root = root
++            controller.workflow_running = False
++            controller.output_events = queue.SimpleQueue()
++            controller._set_status = lambda *_args: None
++            controller.window = type("Window", (), {"after": lambda _self, _ms, callback: callback()})()
++            command = [sys.executable, "-u", "-c", "import sys,time; print('started', flush=True); time.sleep(.4); print('progress 50%', flush=True); print('error detail', file=sys.stderr, flush=True); sys.exit(3)"]
++            upload = [sys.executable, "-c", "print('upload should not run')"]
++            with patch.object(controller_module, "LOG_DIR", root), \
++                 patch.object(controller_module, "WORKFLOW_LOG", root / "workflow.log"), \
++                 patch.object(controller_module, "WORKFLOW_DIAGNOSTIC", root / "diagnostic.txt"):
++                controller._run_steps("Test action", [("Research", command), ("Upload", upload)])
++                deadline = time.monotonic() + 5
++                early = []
++                while time.monotonic() < deadline and "started\n" not in early:
++                    try:
++                        kind, value = controller.output_events.get_nowait()
++                        if kind == "line":
++                            early.append(value)
++                    except queue.Empty:
++                        time.sleep(.01)
++                self.assertIn("started\n", early)
++                self.assertTrue(controller.workflow_running)
++                while controller.workflow_running and time.monotonic() < deadline:
++                    time.sleep(.01)
++                self.assertFalse(controller.workflow_running)
++                log = (root / "latest-test-action.log").read_text(encoding="utf-8")
++                self.assertIn("progress 50%", log)
++                self.assertIn("error detail", log)
++                self.assertNotIn("upload should not run", log)
++                self.assertEqual(controller._latest_output, "Exit status: 3")
++                self.assertEqual(controller._latest_progress, "progress 50%")
++
++
++if __name__ == "__main__":
++    unittest.main()
