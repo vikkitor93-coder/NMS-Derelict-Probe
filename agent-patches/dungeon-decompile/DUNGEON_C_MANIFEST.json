@@ -112,8 +112,8 @@
       "host_extension_and_namespace_tests": "10/10 passed",
       "full_host_candidate_suite": "136/136 passed",
       "compileall": "passed",
-      "json_files_parsed": 42,
-      "tested_against": "Surveyor 0.3.41 candidate source; lane panel/index/test overlaid before tests"
+      "json_files_parsed": 46,
+      "tested_against": "Surveyor 0.3.41 candidate source with lane extension, manifest, evidence, and tests overlaid"
     },
     "rollback": "Restore index.json to dungeon-decompile/1.0.0/manifest.json, then in Surveyor Agent Console select DUNGEON-C and click Roll back to v1.0.0. Both versions remain installed; do not delete v1.0.1 files.",
     "new_game_capture_produced_by_tests": false,
