@@ -1,11 +1,15 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-09-30T16:55:00Z",
+  "updated_utc": "2026-09-30T22:09:59Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.38",
-    "current_objective": "parallel derelict research with isolated Surveyor variants",
-    "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay"
+    "current_objective": "Implement issue #8 shared, versioned Surveyor UI extensions while preserving all lane workflows and controller/probe protocols.",
+    "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
+    "candidate_version": "0.3.41",
+    "candidate_branch": "integration/issue-8-ui-extensions",
+    "candidate_base": "main@f17617abe19d8164892988e1f873353c8f95d49f",
+    "candidate_status": "implementation-complete-pending-integration-review"
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
@@ -75,5 +79,15 @@
     "canonical_library_path": "/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip",
     "github_role": "manifests, patches, evidence, branches, PRs, source-state summaries"
   },
-  "cross_mode_rule": "Normal ChatGPT and Work/Codex must treat committed GitHub state as authoritative and may switch roles without relying on hidden conversation context."
+  "cross_mode_rule": "Normal ChatGPT and Work/Codex must treat committed GitHub state as authoritative and may switch roles without relying on hidden conversation context.",
+  "candidate_integration": {
+    "issue": 8,
+    "branch": "integration/issue-8-ui-extensions",
+    "base_branch": "main",
+    "version": "0.3.41",
+    "status": "implementation-complete-pending-integration-review",
+    "next_action": "Review and merge the issue #8 PR; then verify the Windows UI update/rollback flow. Preserve the pending Runtime-A live validation requirement.",
+    "test_button_changes": "none; issues 13 and 14 are closed and their button patches are excluded from this source.",
+    "base_commit": "f17617abe19d8164892988e1f873353c8f95d49f"
+  }
 }

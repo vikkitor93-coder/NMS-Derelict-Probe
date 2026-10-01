@@ -1,0 +1,1477 @@
+--- a/AGENT_START_HERE.md
++++ b/AGENT_START_HERE.md
+@@ -27,6 +27,8 @@
+ 3. Read `AI_HANDOFF.md` for architecture, current technical context, user workflow, and important constraints.
+ 4. Read `AGENT_WORKFLOW.md` for branch/Surveyor/evidence/PR rules.
+ 5. Read only your assigned lane manifest and relevant changed files/evidence.
++
++For any Surveyor panel/action request, also follow `AGENT_UI_EXTENSION_GUIDE.md`. All four lanes share its single versioned, data-only extension contract; do not add lane-specific Python UI modules or shell-command strings.
+ 
+ Historical sections and old next-actions are never more authoritative than `WORKSPACE_STATE.json`.
+ 
+--- a/AGENT_UI_EXTENSION_GUIDE.md
++++ b/AGENT_UI_EXTENSION_GUIDE.md
+@@ -0,0 +1,68 @@
++# Surveyor agent UI extension contract
++
++Contract version: **1**. Surveyor host UI API: **1.0**. This guide applies to all four research lanes; lane extensions add panels to the shared Agent Console rather than shipping separate Surveyor builds.
++
++## Files and identity
++
++Publish extensions under `agent-ui/extensions/<lane-id>/<extension-version>/`:
++
++- `manifest.json` declares `schema_version: 1`, `extension_id` (the stable lane ID), semantic `version`, `compatible_surveyor_api_version: "1.0"`, `min_surveyor_version`, `dependencies`, `entry_point`, and `files`.
++- `files` is a list of every panel/asset JSON path plus its lowercase SHA-256. The entry point must appear in this list.
++- `panel.json` is the entry point. It declares `schema_version: 1`, a short `title`, optional `summary`, an `actions` list, and optional `request_only` (default false). When `request_only` is true, Surveyor shows action buttons only while that lane's published status says it needs human input.
++- `agent-ui/extensions/index.json` lists each current extension identity, version, and relative manifest path.
++
++All paths are relative POSIX `.json` paths. Do not include `..`, absolute paths, executable files, Python modules, URLs, or shell commands. Surveyor validates identity/version compatibility and every listed hash before it activates a panel. The loader accepts only the documented JSON keys; extra fields are rejected.
++
++## Panel and action requests
++
++Each action request uses this shape:
++
++```json
++{
++  "action_id": "research.extract_exact_root_caller",
++  "label": "Extract exact root caller + upload",
++  "description": "Runs the reviewed offline extractor.",
++  "preconditions": ["workflow.idle"],
++  "evidence_namespace": "dungeon-decompile",
++  "parameters": {}
++}
++```
++
++`action_id` must be one of the stable host IDs below. The extension requests an action; Surveyor maps it to its own reviewed handler. Extensions cannot provide commands, paths, process arguments, or executable code. API 1.0 accepts empty parameters because the current registered actions do not need caller input. A future host API may add named parameters only when the host defines and validates their type/range; do not encode user input into action strings.
++
++Stable action IDs in host API 1.0:
++
++| Action ID | Host behavior |
++| --- | --- |
++| `research.analyze_seed_function` | Analyze the seed function and upload evidence |
++| `research.extract_upstream_callers` | Extract upstream callers and upload evidence |
++| `research.extract_exact_root_caller` | Extract the exact root caller and upload evidence |
++| `research.resolve_root_vtable` | Resolve the root vtable and upload evidence |
++| `research.extract_caller_code` | Extract caller code and upload evidence |
++| `research.measure_generation` | Measure generation and upload evidence |
++| `research.prepare_assets` | Prepare crate assets and upload evidence |
++| `research.analyze_generation` | Analyze generation and upload evidence |
++
++Supported declarative preconditions are `workflow.idle`, `nms.running`, and `probe.connected`. Surveyor checks them both before displaying and immediately before running an action. Unknown IDs, unsatisfied preconditions, and actions unavailable in the installed host are disabled or rejected without invoking a process.
++
++`dependencies` is a list of capability IDs. API 1.0 supports `agent-console.ui.v1` and `action.<stable-action-id>` for the host actions listed above. Unsupported dependencies prevent activation. `evidence_namespace` must equal the extension/lane ID. The existing upload helper appends it and a unique short run ID to the timestamped repository folder (`research-uploads/<UTC>-<lane>-<action>-<run-id>/`) and run manifest. Surveyor also writes a collision-safe local action record below its extension state folder. Keep action outputs within these lane/action folders; never use a shared `latest` filename as the only evidence artifact.
++
++## Lifecycle, errors, and rollback
++
++Extensions are data-only panels, so loading/reloading does not import agent code. Surveyor downloads into a staging folder, checks version/API compatibility and SHA-256 values, then atomically installs and activates the extension while the main window stays open. Prior versions remain installed. If download, validation, or rendering fails, the prior panel remains active and the core Surveyor actions continue to work. The panel provides rollback to the newest older installed version.
++
++Panels may update live. Changes to Surveyor host code require a normal Surveyor update/restart; changes to injected probe hooks require a compatible probe build and an NMS restart. Never hot-swap probe/backend code into a running NMS process.
++
++## Publishing and integration review
++
++1. Create a new semantic extension-version directory; never overwrite an already published version.
++2. Recompute SHA-256 for every file and update `manifest.json` and the shared index.
++3. Run the extension validation/update/rollback tests and include the exact results in the PR.
++4. Submit the manifest, panel JSON, index change, and any required tests in the lane PR. Keep the lane's standalone research workflow usable until integration accepts it.
++5. Integration reviews the action IDs and preconditions, file hashes, lane output namespace, host/API compatibility, and rollback. Do not combine different lane actions into an indiscriminate “Run All.”
++
++## Copy/paste prompt for a lane agent
++
++```text
++Read AGENT_UI_EXTENSION_GUIDE.md and the current WORKSPACE_STATE.json. Implement only the optional Surveyor UI extension for your lane `<LANE-ID>` using the shared host UI API 1.0 contract. Add a versioned data-only JSON panel and manifest with hashed files; request only stable host action IDs that fit your lane, declare exact preconditions and the lane evidence namespace, and do not provide shell commands, executable code, or arbitrary process arguments. Preserve Surveyor core behavior, controller/probe protocols, and your standalone workflow. Test compatibility, integrity rejection, live refresh, and rollback; then publish the extension, index update, tests, and a manifest/patch/PR. Do not invent a second extension API or combine lane actions into Run All.
++```
+--- a/AGENT_WORKFLOW.md
++++ b/AGENT_WORKFLOW.md
+@@ -15,6 +15,8 @@
+ Use a separate Git worktree or clone for every lane. Never share a writable working directory between agents.
+ 
+ ## Surveyor variants
++
++Lane-specific UI additions use the shared contract in `AGENT_UI_EXTENSION_GUIDE.md`. Submit versioned JSON panels/manifests and stable host action IDs; do not fork the complete Surveyor window for a UI-only change. Keep standalone research workflows available until integration accepts the panel.
+ 
+ Each lane may modify its own Surveyor immediately. It must:
+ 
+--- a/AI_HANDOFF.md
++++ b/AI_HANDOFF.md
+@@ -1,8 +1,29 @@
+-# AI handoff — NMS Derelict Probe v0.3.39
++# AI handoff — NMS Derelict Probe v0.3.41 candidate
+ 
+-## Current state — Agent Console
++## Current handoff state
+ 
+-The standalone Surveyor now opens a compact read-only Agent Console beside the main UI. `tools/agent_console.py` fetches `WORKSPACE_STATE.json` from `main` and each agent branch's `agent-patches/<lane>/STATUS.json` plus its manifest over public HTTPS. It refreshes every 60 seconds, flags a main registry older than 30 minutes, and preserves the last successful display on refresh failure. The user can select a lane and copy its exact Surveyor recipe or copy all lane statuses for chat handoff. It cannot read private chats; agents must publish STATUS.json updates for new requests to appear.
++This is the current continuation point for the main integration worker. The candidate is based on the v0.3.40 Live Output package and is prepared on `integration/issue-8-ui-extensions`; it is not yet the installed `main` release.
++
++- Issue #8 adds `AGENT_UI_EXTENSION_GUIDE.md`, a shared Surveyor UI API 1.0, a data-only JSON extension loader, and one DUNGEON-C sample panel.
++- Extensions are downloaded into staging, checked against declared dependencies and SHA-256 hashes, checked for host/API compatibility, and activated without restarting Surveyor. Previous versions remain available for rollback.
++- Extension panels can request only the eight stable `research.*` host action IDs. No agent-provided code, shell command, path, or process arguments are run. Preconditions are rechecked at click time.
++- Evidence uploads initiated through a lane extension use a timestamped `<lane>-<action>` folder and run manifest. Local action records are also stored under `%LOCALAPPDATA%\NMSDerelictSurveyor\ui-extensions\<lane>\runs`.
++- The DUNGEON-C sample panel launches the existing exact-root-caller offline extractor. It does not require NMS to run or a derelict traversal.
++- Tests cover compatible install, hash/command rejection, failed-update preservation, live version activation, rollback, and evidence namespacing. Tk visual execution on Windows still needs a human machine.
++
++## Exact next action
++
++Run the new focused tests and the full existing regression suite, compile all Python files, validate all package JSON and the source ZIP hash, then publish a PR from `integration/issue-8-ui-extensions` targeting `main`. Do not merge the PR until those checks pass. Keep the existing human tasks in `WORKSPACE_STATE.json` intact.
++
++## Canonical source status
++
++The last integrated canonical release is v0.3.38. The v0.3.41 candidate package must become authoritative only after its updated root `update-manifest.json` and full-package chunks are merged together.
++
++---
++
++## Prior Agent Console implementation record
++
++The v0.3.39 standalone Surveyor opened a compact read-only Agent Console beside the main UI. The current v0.3.41 candidate retains it and adds the extension panel described above. It still cannot read private chats; agents must publish STATUS.json updates for new requests to appear.
+ 
+ No probe, game overlay, or controller-command protocol was changed. The Agent Console is a separate Tkinter `Toplevel` and has no access to NMS memory.
+ 
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,3 +1,11 @@
++# 0.3.41 — shared lane UI extensions
++
++- Added the versioned Surveyor UI extension guide and a reusable prompt for all four research lanes.
++- Added a data-only extension loader with API/version/dependency checks, SHA-256 verification, staged activation, update notice, live panel refresh, and rollback.
++- Added the DUNGEON-C sample panel using the existing offline exact-root-caller action.
++- Added lane-specific, collision-safe upload folders and local action records for extension-launched research actions.
++- Preserved the controller/probe command protocol and kept all existing Surveyor actions intact.
++
+ ## 0.3.40
+ - Show each research command, its current step, progress, latest output line, and exit status in Surveyor while it runs.
+ - Add a scrollable output pane and stream combined command output without blocking the UI; keep the complete workflow log and diagnostic.
+--- a/README.md
++++ b/README.md
+@@ -3,7 +3,11 @@
+ > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
+ 
+ 
+-Current Surveyor package: **v0.3.40**.
++Current Surveyor package: **v0.3.41**.
++
++## v0.3.41 — shared lane UI extensions
++
++The Agent Console can load versioned, hash-checked JSON panels for each research lane without restarting Surveyor. Panel buttons request stable Surveyor action IDs; extensions cannot run supplied shell commands or code. Updates activate live, previous versions remain available for rollback, and lane-triggered uploads use timestamped lane/action folders. See `AGENT_UI_EXTENSION_GUIDE.md` for the contract and reusable agent prompt.
+ 
+ ## v0.3.40 — live research output
+ 
+--- a/VERSION.txt
++++ b/VERSION.txt
+@@ -1 +1 @@
+-0.3.40
++0.3.41
+--- a/WORKSPACE_STATE.json
++++ b/WORKSPACE_STATE.json
+@@ -1,12 +1,15 @@
+ {
+   "schema_version": 3,
+-  "updated_utc": "2026-09-30T17:31:00Z",
++  "updated_utc": "2026-09-30T22:09:59Z",
+   "integration": {
+-    "branch": "integration/agent-console",
++    "branch": "main",
+     "canonical_version": "0.3.38",
+-    "candidate_version": "0.3.39",
+-    "current_objective": "show current agent lanes and exact human/Surveyor requests in the standalone Surveyor Agent Console",
+-    "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay"
++    "current_objective": "Implement issue #8 shared, versioned Surveyor UI extensions while preserving all lane workflows and controller/probe protocols.",
++    "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
++    "candidate_version": "0.3.41",
++    "candidate_branch": "integration/issue-8-ui-extensions",
++    "candidate_base": "main@f17617abe19d8164892988e1f873353c8f95d49f",
++    "candidate_status": "implementation-complete-pending-integration-review"
+   },
+   "lane_claims": {
+     "runtime-dispatch": "claimed",
+@@ -21,27 +24,25 @@
+       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
+       "pull_request": 1,
+       "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
+-      "next_action": "Run RUNTIME-A on the known derelict until owner+0x10 dispatch capture succeeds; no full traversal is required."
++      "next_action": "Run RUNTIME-A on the known derelict until owner+0x10 dispatch capture succeeds; no traversal required."
+     },
+     "seed-lineage": {
+       "branch": "agent/seed-lineage",
+       "status": "agent-output-published-do-not-duplicate",
+       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
+-      "result_summary": "Offline system-seed anchors are verified. Direct equality with known derelict root seeds was not found; no derivation is claimed.",
++      "result_summary": "Offline system-seed anchors implemented and verified; direct equality with known derelict root seeds was not found and no derivation is claimed.",
+       "human_validation_required": false
+     },
+     "dungeon-decompile": {
+       "branch": "agent/dungeon-decompile",
+-      "status": "anchor-scan-published-agent-can-continue-offline",
++      "status": "agent-output-published-do-not-duplicate",
+       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
+-      "result_summary": "The uploaded NMS.exe scan found 38 candidate functions and no multi-anchor candidates; the generator consumer remains unidentified.",
+-      "next_action": "Continue offline decompilation/cross-reference work; no Surveyor action is currently required.",
+-      "latest_evidence": "research-uploads/20260930T172000Z-dungeon-decompile/dungeon-decompile-anchors-summary.json"
++      "next_action": "Run the offline NMS.exe anchor scan from DUNGEON-C and upload the result; game runtime is not required."
+     },
+     "metadata": {
+       "branch": "agent/metadata",
+-      "status": "free-ready-from-current-main",
+-      "objective": "Map abandoned-freighter DungeonOptions/weights, DungeonRootScene, dungeon-table presets and static asset relationships without duplicating other research lanes."
++      "status": "free-ready-from-current-main-at-last-sync",
++      "objective": "Map abandoned-freighter component DungeonOptions/weights, DungeonRootScene, dungeon-table presets and static asset relationships without duplicating runtime/seed/decompile lanes."
+     }
+   },
+   "human_intervention": {
+@@ -50,22 +51,43 @@
+       {
+         "lane": "runtime-dispatch",
+         "kind": "live-game-short-capture",
+-        "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
+-        "full_derelict_traversal_required": false
++        "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json"
++      },
++      {
++        "lane": "dungeon-decompile",
++        "kind": "offline-local-NMS-exe-scan",
++        "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json"
+       }
+     ]
+   },
+-  "agent_console": {
+-    "schema_version": 1,
+-    "status_contract": "schema/agent-status-v1.schema.json",
+-    "lane_status_path": "agent-patches/<lane>/STATUS.json",
+-    "refresh_seconds": 60,
+-    "status_is_published_only": true
++  "new_agent_start": {
++    "rule": "Read AGENT_START_HERE.md first. You are one parallel agent, not the sole project owner. Do not claim or modify an occupied lane unless explicitly assigned.",
++    "resume_order": [
++      "AGENT_START_HERE.md",
++      "WORKSPACE_STATE.json",
++      "RESEARCH_INDEX.md",
++      "AI_HANDOFF.md",
++      "AGENT_WORKFLOW.md",
++      "the assigned lane manifest and only relevant files/evidence"
++    ],
++    "branch_rule": "For a new independent task, create a fresh branch from current main named agent/<short-lane-id>. Use agent/metadata only if it is still free when you begin.",
++    "output_rule": "Keep experimental Surveyor changes lane-specific, publish a manifest + reproducible patch + tests/evidence, and never push experimental changes directly to main.",
++    "autonomy_rule": "Continue within the lane until the objective is complete, blocked on another lane, or genuine human/local-machine intervention is required."
+   },
+   "artifact_policy": {
+     "complete_zip_storage": "ChatGPT Library",
+     "canonical_library_path": "/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip",
+-    "github_role": "manifests, patches, evidence, branches, PRs, and integrated status summaries"
++    "github_role": "manifests, patches, evidence, branches, PRs, source-state summaries"
+   },
+-  "cross_mode_rule": "Normal ChatGPT and Work/Codex treat committed GitHub state as the continuity layer; private chat messages are not visible to the Surveyor console."
++  "cross_mode_rule": "Normal ChatGPT and Work/Codex must treat committed GitHub state as authoritative and may switch roles without relying on hidden conversation context.",
++  "candidate_integration": {
++    "issue": 8,
++    "branch": "integration/issue-8-ui-extensions",
++    "base_branch": "main",
++    "version": "0.3.41",
++    "status": "implementation-complete-pending-integration-review",
++    "next_action": "Review and merge the issue #8 PR; then verify the Windows UI update/rollback flow. Preserve the pending Runtime-A live validation requirement.",
++    "test_button_changes": "none; issues 13 and 14 are closed and their button patches are excluded from this source.",
++    "base_commit": "f17617abe19d8164892988e1f873353c8f95d49f"
++  }
+ }
+--- a/agent-ui/extensions/dungeon-decompile/1.0.0/manifest.json
++++ b/agent-ui/extensions/dungeon-decompile/1.0.0/manifest.json
+@@ -0,0 +1,15 @@
++{
++  "schema_version": 1,
++  "extension_id": "dungeon-decompile",
++  "version": "1.0.0",
++  "compatible_surveyor_api_version": "1.0",
++  "min_surveyor_version": "0.3.41",
++  "dependencies": ["agent-console.ui.v1", "action.research.extract_exact_root_caller"],
++  "entry_point": "panel.json",
++  "files": [
++    {
++      "path": "panel.json",
++      "sha256": "147c442751fc3fe8b9601082013a34af9d579c1628d75f19cb0b49ccdc0e7b77"
++    }
++  ]
++}
+--- a/agent-ui/extensions/dungeon-decompile/1.0.0/panel.json
++++ b/agent-ui/extensions/dungeon-decompile/1.0.0/panel.json
+@@ -0,0 +1,16 @@
++{
++  "schema_version": 1,
++  "title": "DUNGEON-C · Offline caller evidence",
++  "summary": "Run the reviewed exact-root caller extraction against the configured local NMS.exe and upload its evidence. No game session or derelict traversal is required.",
++  "request_only": true,
++  "actions": [
++    {
++      "action_id": "research.extract_exact_root_caller",
++      "label": "Extract exact root caller + upload",
++      "description": "Runs the existing Surveyor offline extractor and uploads its JSON result.",
++      "preconditions": ["workflow.idle"],
++      "evidence_namespace": "dungeon-decompile",
++      "parameters": {}
++    }
++  ]
++}
+--- a/agent-ui/extensions/index.json
++++ b/agent-ui/extensions/index.json
+@@ -0,0 +1,10 @@
++{
++  "schema_version": 1,
++  "extensions": [
++    {
++      "extension_id": "dungeon-decompile",
++      "version": "1.0.0",
++      "manifest_path": "dungeon-decompile/1.0.0/manifest.json"
++    }
++  ]
++}
+--- a/tests/test_agent_extension_upload_namespace.py
++++ b/tests/test_agent_extension_upload_namespace.py
+@@ -0,0 +1,31 @@
++import importlib.util
++from pathlib import Path
++import unittest
++
++ROOT = Path(__file__).resolve().parents[1]
++SPEC = importlib.util.spec_from_file_location("github_integration", ROOT / "tools" / "github_integration.py")
++github_integration = importlib.util.module_from_spec(SPEC)
++assert SPEC.loader
++SPEC.loader.exec_module(github_integration)
++
++
++class EvidenceNamespaceTests(unittest.TestCase):
++    def test_unscoped_upload_path_is_backward_compatible(self):
++        self.assertEqual(
++            "research-uploads/20260930T190000Z-measure",
++            github_integration.evidence_folder("20260930T190000Z", "measure"),
++        )
++
++    def test_lane_extension_gets_unique_timestamped_namespace(self):
++        first = github_integration.evidence_folder("20260930T190000Z", "extract-exact-root-caller", "dungeon-decompile")
++        second = github_integration.evidence_folder("20260930T190000Z", "extract-exact-root-caller", "dungeon-decompile")
++        self.assertRegex(first, r"^research-uploads/20260930T190000Z-dungeon-decompile-extract-exact-root-caller-[0-9a-f]{8}$")
++        self.assertNotEqual(first, second)
++
++    def test_unsafe_namespace_is_rejected(self):
++        with self.assertRaisesRegex(RuntimeError, "Invalid agent evidence namespace"):
++            github_integration.evidence_folder("20260930T190000Z", "measure", "../other")
++
++
++if __name__ == "__main__":
++    unittest.main()
+--- a/tests/test_agent_ui_extensions.py
++++ b/tests/test_agent_ui_extensions.py
+@@ -0,0 +1,146 @@
++import hashlib
++import importlib.util
++import json
++import tempfile
++import unittest
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parents[1]
++SPEC = importlib.util.spec_from_file_location("agent_ui_extensions", ROOT / "tools" / "agent_ui_extensions.py")
++extensions = importlib.util.module_from_spec(SPEC)
++assert SPEC.loader
++SPEC.loader.exec_module(extensions)
++
++
++def package(extension_id="test-lane", version="1.0.0", summary="Panel"):
++    panel = {
++        "schema_version": 1,
++        "title": "Test extension",
++        "summary": summary,
++        "actions": [{
++            "action_id": "research.extract_exact_root_caller",
++            "label": "Extract caller",
++            "description": "Use the host action.",
++            "preconditions": ["workflow.idle"],
++            "evidence_namespace": extension_id,
++            "parameters": {},
++        }],
++    }
++    panel_bytes = (json.dumps(panel, sort_keys=True) + "\n").encode()
++    manifest = {
++        "schema_version": 1,
++        "extension_id": extension_id,
++        "version": version,
++        "compatible_surveyor_api_version": "1.0",
++        "min_surveyor_version": "0.3.41",
++        "dependencies": ["agent-console.ui.v1", "action.research.extract_exact_root_caller"],
++        "entry_point": "panel.json",
++        "files": [{"path": "panel.json", "sha256": hashlib.sha256(panel_bytes).hexdigest()}],
++    }
++    entry = {"extension_id": extension_id, "version": version, "manifest_path": f"{extension_id}/{version}/manifest.json"}
++    url_base = extensions.REMOTE_BASE
++    remote = {
++        url_base + entry["manifest_path"]: (json.dumps(manifest) + "\n").encode(),
++        url_base + f"{extension_id}/{version}/panel.json": panel_bytes,
++    }
++    return entry, manifest, panel, remote
++
++
++class AgentUIExtensionTests(unittest.TestCase):
++    def test_published_dungeon_decompile_sample_matches_contract(self):
++        folder = ROOT / "agent-ui" / "extensions" / "dungeon-decompile" / "1.0.0"
++        manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
++        validated, panel = extensions.validate_manifest(
++            manifest,
++            "dungeon-decompile",
++            "1.0.0",
++            "0.3.41",
++            lambda rel: (folder / rel).read_bytes(),
++            extensions.HOST_ACTION_IDS,
++        )
++        self.assertEqual("dungeon-decompile", validated["extension_id"])
++        self.assertEqual("DUNGEON-C · Offline caller evidence", panel["title"])
++        self.assertEqual("dungeon-decompile", panel["actions"][0]["evidence_namespace"])
++
++    def test_installs_valid_data_only_panel_and_activates_it(self):
++        entry, _manifest, _panel, remote = package()
++        with tempfile.TemporaryDirectory() as tmp:
++            manifest, panel = extensions.install_extension(Path(tmp), entry, "0.3.41", extensions.HOST_ACTION_IDS, remote.__getitem__)
++            self.assertEqual("test-lane", manifest["extension_id"])
++            self.assertEqual("Test extension", panel["title"])
++            loaded = extensions.load_installed_extension(Path(tmp), "test-lane", "0.3.41", extensions.HOST_ACTION_IDS)
++            self.assertEqual("1.0.0", loaded[0]["version"])
++
++    def test_failed_update_keeps_previous_version_active(self):
++        first, _, _, first_remote = package(version="1.0.0", summary="Old")
++        second, _, _, second_remote = package(version="1.1.0", summary="New")
++        with tempfile.TemporaryDirectory() as tmp:
++            root = Path(tmp)
++            extensions.install_extension(root, first, "0.3.41", extensions.HOST_ACTION_IDS, first_remote.__getitem__)
++            broken = dict(second_remote)
++            panel_url = extensions.REMOTE_BASE + "test-lane/1.1.0/panel.json"
++            broken[panel_url] = b'{"schema_version":1,"title":"tampered"}'
++            with self.assertRaises(extensions.ExtensionError):
++                extensions.install_extension(root, second, "0.3.41", extensions.HOST_ACTION_IDS, broken.__getitem__)
++            current = extensions.load_installed_extension(root, "test-lane", "0.3.41", extensions.HOST_ACTION_IDS)
++            self.assertEqual("1.0.0", current[0]["version"])
++            self.assertEqual(["1.0.0"], extensions.installed_versions(root, "test-lane"))
++
++    def test_update_activation_preserves_older_version_for_rollback(self):
++        first, _, _, first_remote = package(version="1.0.0", summary="Old")
++        second, _, _, second_remote = package(version="1.1.0", summary="New")
++        with tempfile.TemporaryDirectory() as tmp:
++            root = Path(tmp)
++            extensions.install_extension(root, first, "0.3.41", extensions.HOST_ACTION_IDS, first_remote.__getitem__)
++            self.assertEqual([second], extensions.update_candidates([second], root))
++            extensions.install_extension(root, second, "0.3.41", extensions.HOST_ACTION_IDS, second_remote.__getitem__)
++            self.assertEqual([], extensions.update_candidates([second], root))
++            old_manifest = extensions.activate_installed_extension(root, "test-lane", "1.0.0", "0.3.41", extensions.HOST_ACTION_IDS)
++            self.assertEqual("1.0.0", old_manifest[0]["version"])
++            self.assertEqual(["1.1.0", "1.0.0"], extensions.installed_versions(root, "test-lane"))
++
++    def test_hash_mismatch_and_unknown_shell_action_are_rejected(self):
++        entry, manifest, _panel, _remote = package()
++        with self.assertRaisesRegex(extensions.ExtensionError, "SHA-256 mismatch"):
++            extensions.validate_manifest(manifest, entry["extension_id"], entry["version"], "0.3.41", lambda _p: b"changed", extensions.HOST_ACTION_IDS)
++        panel = {
++            "schema_version": 1,
++            "title": "Bad",
++            "actions": [{
++                "action_id": "research.extract_exact_root_caller",
++                "label": "Run",
++                "command": "powershell.exe -Command ...",
++                "evidence_namespace": "test-lane",
++            }],
++        }
++        encoded = (json.dumps(panel) + "\n").encode()
++        manifest = dict(manifest)
++        manifest["files"] = [{"path": "panel.json", "sha256": hashlib.sha256(encoded).hexdigest()}]
++        with self.assertRaisesRegex(extensions.ExtensionError, "unsupported fields"):
++            extensions.validate_manifest(manifest, entry["extension_id"], entry["version"], "0.3.41", lambda _p: encoded, extensions.HOST_ACTION_IDS)
++
++    def test_incompatible_dependencies_preconditions_and_urls_are_rejected(self):
++        entry, manifest, _panel, _remote = package()
++        unsupported = dict(manifest, dependencies=["shell.execution.v1"])
++        raw_panel = json.dumps({"schema_version": 1, "title": "No actions", "actions": []}).encode()
++        unsupported["files"] = [{"path": "panel.json", "sha256": hashlib.sha256(raw_panel).hexdigest()}]
++        with self.assertRaisesRegex(extensions.ExtensionError, "unsupported or duplicate dependency"):
++            extensions.validate_manifest(unsupported, entry["extension_id"], entry["version"], "0.3.41", lambda _p: raw_panel, extensions.HOST_ACTION_IDS)
++        with self.assertRaisesRegex(extensions.ExtensionError, "newer Surveyor"):
++            extensions.validate_manifest(manifest, entry["extension_id"], entry["version"], "0.3.40", lambda _p: b"", extensions.HOST_ACTION_IDS)
++        self.assertEqual((False, "Needs: nms.running"), extensions.preconditions_met(["nms.running"], {"nms_running": False}))
++        self.assertEqual((True, ""), extensions.preconditions_met(["workflow.idle"], {"workflow_idle": True}))
++        with self.assertRaises(extensions.ExtensionError):
++            extensions.remote_url("../outside.json")
++
++    def test_local_action_records_are_lane_namespaced_and_collision_safe(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            root = Path(tmp)
++            a = extensions.write_action_record(root, "lane-a", "1.0.0", "research.extract_exact_root_caller", "complete")
++            b = extensions.write_action_record(root, "lane-a", "1.0.0", "research.extract_exact_root_caller", "complete")
++            self.assertNotEqual(a.name, b.name)
++            self.assertEqual("lane-a", json.loads(a.read_text())["extension_id"])
++
++
++if __name__ == "__main__":
++    unittest.main()
+--- a/tests/test_tools.py
++++ b/tests/test_tools.py
+@@ -999,7 +999,7 @@
+ 
+ 
+     def test_v0322_version_marker(self):
+-        self.assertEqual("0.3.39", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
++        self.assertEqual("0.3.41", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+ 
+     def test_v0322_probe_exposes_background_research_buttons(self):
+         source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+@@ -1231,7 +1231,7 @@
+         self.assertNotIn("Test-Runtime", start_nms)
+         self.assertNotIn("Python.Python.3.12", start_nms)
+         self.assertNotIn("import pymhf; import nmspy", start_nms)
+-        self.assertIn('CONTROLLER_VERSION = "0.3.39"', controller)
++        self.assertIn('CONTROLLER_VERSION = "0.3.41"', controller)
+         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
+ 
+ 
+@@ -1280,7 +1280,7 @@
+             self.assertIn(token, probe)
+ 
+     def test_v0330_version(self):
+-        self.assertEqual("0.3.39", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
++        self.assertEqual("0.3.41", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
+ 
+     def test_v0328_seed_function_relrefs_classify_recursion(self):
+--- a/tools/agent_ui_extensions.py
++++ b/tools/agent_ui_extensions.py
+@@ -0,0 +1,435 @@
++"""Verified, data-only UI extensions for Surveyor's Agent Console.
++
++Extensions are JSON manifests and JSON panels. They cannot ship Python code,
++shell commands, executable paths, or URLs. The host maps stable action IDs to
++its own reviewed handlers.
++"""
++from __future__ import annotations
++
++import hashlib
++import json
++import os
++import re
++import shutil
++import tempfile
++import threading
++import uuid
++from datetime import datetime, timezone
++from pathlib import Path, PurePosixPath
++from typing import Callable
++
++API_VERSION = "1.0"
++INDEX_SCHEMA_VERSION = 1
++MANIFEST_SCHEMA_VERSION = 1
++PANEL_SCHEMA_VERSION = 1
++MAX_JSON_BYTES = 1_000_000
++MAX_FILES = 32
++MAX_TOTAL_BYTES = 4_000_000
++REPOSITORY = "vikkitor93-coder/NMS-Derelict-Probe"
++REMOTE_BASE = f"https://raw.githubusercontent.com/{REPOSITORY}/main/agent-ui/extensions/"
++EXTENSION_ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,47}$")
++SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
++ALLOWED_PRECONDITIONS = frozenset({"workflow.idle", "nms.running", "probe.connected"})
++HOST_ACTION_IDS = frozenset({
++    "research.analyze_seed_function",
++    "research.extract_upstream_callers",
++    "research.extract_exact_root_caller",
++    "research.resolve_root_vtable",
++    "research.extract_caller_code",
++    "research.measure_generation",
++    "research.prepare_assets",
++    "research.analyze_generation",
++})
++_ACTIVE_LOCK = threading.Lock()
++
++
++class ExtensionError(ValueError):
++    """An extension is invalid, incompatible, or failed integrity checks."""
++
++
++def _version(value: object) -> tuple[int, int, int]:
++    if not isinstance(value, str) or not SEMVER_RE.fullmatch(value):
++        raise ExtensionError(f"Invalid semantic version: {value!r}")
++    return tuple(int(part) for part in value.split("."))  # type: ignore[return-value]
++
++
++def _json_bytes(raw: bytes, what: str) -> dict:
++    if len(raw) > MAX_JSON_BYTES:
++        raise ExtensionError(f"{what} exceeds the size limit")
++    try:
++        value = json.loads(raw.decode("utf-8"))
++    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
++        raise ExtensionError(f"{what} is not valid UTF-8 JSON") from exc
++    if not isinstance(value, dict):
++        raise ExtensionError(f"{what} must be a JSON object")
++    return value
++
++
++def _relative_json_path(value: object) -> str:
++    if not isinstance(value, str) or not value or "\\" in value:
++        raise ExtensionError("Extension file paths must be non-empty relative POSIX paths")
++    if not re.fullmatch(r"[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*", value):
++        raise ExtensionError("Extension file path contains unsupported characters")
++    path = PurePosixPath(value)
++    if path.is_absolute() or any(part in ("", ".", "..") for part in path.parts) or path.suffix.lower() != ".json":
++        raise ExtensionError(f"Unsafe extension file path: {value!r}")
++    return path.as_posix()
++
++
++def validate_index(index: dict) -> list[dict]:
++    if index.get("schema_version") != INDEX_SCHEMA_VERSION or not isinstance(index.get("extensions"), list):
++        raise ExtensionError("Unsupported extension index schema")
++    seen: set[str] = set()
++    result = []
++    for item in index["extensions"]:
++        if not isinstance(item, dict):
++            raise ExtensionError("Extension index entries must be objects")
++        if set(item) != {"extension_id", "version", "manifest_path"}:
++            raise ExtensionError("Extension index entry contains unsupported fields")
++        extension_id = item.get("extension_id")
++        if not isinstance(extension_id, str) or not EXTENSION_ID_RE.fullmatch(extension_id) or extension_id in seen:
++            raise ExtensionError("Invalid or duplicate extension identity")
++        _version(item.get("version"))
++        manifest_path = _relative_json_path(item.get("manifest_path"))
++        if manifest_path != f"{extension_id}/{item['version']}/manifest.json":
++            raise ExtensionError("Manifest path must match its extension identity and version")
++        seen.add(extension_id)
++        result.append({"extension_id": extension_id, "version": item["version"], "manifest_path": manifest_path})
++    return result
++
++
++def validate_manifest(
++    manifest: dict,
++    extension_id: str,
++    version: str,
++    host_version: str,
++    read_file: Callable[[str], bytes],
++    allowed_action_ids: set[str] | frozenset[str],
++) -> tuple[dict, dict]:
++    if manifest.get("schema_version") != MANIFEST_SCHEMA_VERSION:
++        raise ExtensionError("Unsupported extension manifest schema")
++    if set(manifest) != {
++        "schema_version", "extension_id", "version", "compatible_surveyor_api_version",
++        "min_surveyor_version", "entry_point", "files", "dependencies",
++    }:
++        raise ExtensionError("Extension manifest contains unsupported fields")
++    if manifest.get("extension_id") != extension_id or manifest.get("version") != version:
++        raise ExtensionError("Extension identity/version does not match the update index")
++    if not EXTENSION_ID_RE.fullmatch(extension_id):
++        raise ExtensionError("Invalid extension identity")
++    if manifest.get("compatible_surveyor_api_version") != API_VERSION:
++        raise ExtensionError("Extension requires a different Surveyor UI API version")
++    if _version(host_version) < _version(manifest.get("min_surveyor_version")):
++        raise ExtensionError("Extension requires a newer Surveyor version")
++    dependencies = manifest.get("dependencies")
++    if not isinstance(dependencies, list) or any(not isinstance(item, str) for item in dependencies):
++        raise ExtensionError("Extension dependencies must be a list of capability IDs")
++    supported_dependencies = {"agent-console.ui.v1"}
++    supported_dependencies.update(f"action.{action_id}" for action_id in allowed_action_ids)
++    if len(dependencies) != len(set(dependencies)) or any(item not in supported_dependencies for item in dependencies):
++        raise ExtensionError("Extension declares an unsupported or duplicate dependency")
++    if "agent-console.ui.v1" not in dependencies:
++        raise ExtensionError("Extension must declare the Agent Console UI dependency")
++
++    files = manifest.get("files")
++    if not isinstance(files, list) or not files or len(files) > MAX_FILES:
++        raise ExtensionError("Extension must list between 1 and 32 hashed JSON files")
++    hashed: dict[str, str] = {}
++    total = 0
++    for record in files:
++        if not isinstance(record, dict):
++            raise ExtensionError("Invalid hashed file record")
++        if set(record) != {"path", "sha256"}:
++            raise ExtensionError("Hashed file record contains unsupported fields")
++        rel = _relative_json_path(record.get("path"))
++        digest = record.get("sha256")
++        if rel in hashed or not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
++            raise ExtensionError("Duplicate path or invalid SHA-256 in file list")
++        data = read_file(rel)
++        total += len(data)
++        if total > MAX_TOTAL_BYTES:
++            raise ExtensionError("Extension exceeds the total size limit")
++        if hashlib.sha256(data).hexdigest() != digest:
++            raise ExtensionError(f"SHA-256 mismatch for {rel}")
++        hashed[rel] = digest
++
++    entry = _relative_json_path(manifest.get("entry_point"))
++    if entry not in hashed:
++        raise ExtensionError("The entry point must be included in the hashed file list")
++    panel = _json_bytes(read_file(entry), "Extension entry point")
++    if panel.get("schema_version") != PANEL_SCHEMA_VERSION:
++        raise ExtensionError("Unsupported extension panel schema")
++    if set(panel) - {"schema_version", "title", "summary", "actions", "request_only"}:
++        raise ExtensionError("Extension panel contains unsupported fields")
++    if not isinstance(panel.get("request_only", False), bool):
++        raise ExtensionError("request_only must be a boolean")
++    if not isinstance(panel.get("title"), str) or not panel["title"].strip() or len(panel["title"]) > 100:
++        raise ExtensionError("Extension panel needs a short title")
++    if not isinstance(panel.get("summary", ""), str) or len(panel.get("summary", "")) > 500:
++        raise ExtensionError("Invalid extension panel summary")
++    actions = panel.get("actions", [])
++    if not isinstance(actions, list) or len(actions) > 24:
++        raise ExtensionError("Extension panel actions must be a list of at most 24 actions")
++    action_ids: set[str] = set()
++    normalized_actions = []
++    for action in actions:
++        if not isinstance(action, dict):
++            raise ExtensionError("Extension actions must be objects")
++        if set(action) - {"action_id", "label", "preconditions", "evidence_namespace", "description", "parameters"}:
++            raise ExtensionError("Extension action contains unsupported fields")
++        action_id = action.get("action_id")
++        label = action.get("label")
++        preconditions = action.get("preconditions", [])
++        namespace = action.get("evidence_namespace")
++        if action_id not in allowed_action_ids or action_id in action_ids:
++            raise ExtensionError(f"Unsupported or duplicate host action ID: {action_id!r}")
++        if not isinstance(label, str) or not label.strip() or len(label) > 80:
++            raise ExtensionError("Extension actions need short labels")
++        if not isinstance(preconditions, list) or any(item not in ALLOWED_PRECONDITIONS for item in preconditions):
++            raise ExtensionError("Action contains an unsupported precondition")
++        if not isinstance(namespace, str) or namespace != extension_id:
++            raise ExtensionError("Action evidence_namespace must match its extension identity")
++        if action.get("parameters", {}) != {}:
++            raise ExtensionError("This host API version does not accept extension-supplied parameters")
++        action_ids.add(action_id)
++        normalized_actions.append({
++            "action_id": action_id,
++            "label": label.strip(),
++            "preconditions": list(preconditions),
++            "evidence_namespace": namespace,
++            "description": str(action.get("description", ""))[:300],
++        })
++    panel["actions"] = normalized_actions
++    return manifest, panel
++
++
++def remote_url(relative_path: str) -> str:
++    rel = _relative_json_path(relative_path)
++    return REMOTE_BASE + rel
++
++
++def fetch_bytes(url: str, timeout: float = 6.0) -> bytes:
++    """Fetch only JSON extension data from this repository's pinned directory."""
++    from urllib.parse import urlparse
++    import urllib.request
++
++    parsed = urlparse(url)
++    prefix = f"/{REPOSITORY}/main/agent-ui/extensions/"
++    if parsed.scheme != "https" or parsed.hostname != "raw.githubusercontent.com" or not parsed.path.startswith(prefix):
++        raise ExtensionError("Extension URL is outside the trusted repository path")
++    request = urllib.request.Request(url, headers={"User-Agent": "NMS-Derelict-Surveyor"})
++    try:
++        with urllib.request.urlopen(request, timeout=timeout) as response:
++            raw = response.read(MAX_JSON_BYTES + 1)
++    except Exception as exc:
++        raise ExtensionError(f"Could not fetch extension data: {type(exc).__name__}") from exc
++    if len(raw) > MAX_JSON_BYTES:
++        raise ExtensionError("Remote extension file exceeds the size limit")
++    return raw
++
++
++def load_index(fetch: Callable[[str], bytes] = fetch_bytes) -> list[dict]:
++    return validate_index(_json_bytes(fetch(REMOTE_BASE + "index.json"), "Extension index"))
++
++
++def _safe_local_file(root: Path, relative_path: str) -> Path:
++    rel = _relative_json_path(relative_path)
++    base = root.resolve()
++    path = base.joinpath(*PurePosixPath(rel).parts)
++    if path.is_symlink() or base not in path.resolve().parents:
++        raise ExtensionError("Extension file resolves outside its version folder")
++    return path
++
++
++def load_installed_extension(
++    extensions_root: Path,
++    extension_id: str,
++    host_version: str,
++    allowed_action_ids: set[str] | frozenset[str],
++) -> tuple[dict, dict] | None:
++    active_file = extensions_root / "active.json"
++    try:
++        active = json.loads(active_file.read_text(encoding="utf-8"))
++    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
++        return None
++    version = active.get(extension_id) if isinstance(active, dict) else None
++    if not isinstance(version, str):
++        return None
++    _version(version)
++    root = extensions_root.resolve()
++    folder = extensions_root / extension_id / version
++    if folder.is_symlink() or root not in folder.resolve().parents:
++        raise ExtensionError("Installed extension folder resolves outside its root")
++    manifest = _json_bytes(_safe_local_file(folder, "manifest.json").read_bytes(), "Installed extension manifest")
++    return validate_manifest(
++        manifest,
++        extension_id,
++        version,
++        host_version,
++        lambda rel: _safe_local_file(folder, rel).read_bytes(),
++        allowed_action_ids,
++    )
++
++
++def installed_versions(extensions_root: Path, extension_id: str) -> list[str]:
++    folder = extensions_root / extension_id
++    if not folder.is_dir():
++        return []
++    versions = []
++    for child in folder.iterdir():
++        if child.is_dir() and SEMVER_RE.fullmatch(child.name):
++            versions.append(child.name)
++    return sorted(versions, key=_version, reverse=True)
++
++
++def set_active_version(extensions_root: Path, extension_id: str, version: str) -> None:
++    if not EXTENSION_ID_RE.fullmatch(extension_id):
++        raise ExtensionError("Invalid extension identity")
++    _version(version)
++    root = extensions_root.resolve()
++    folder = extensions_root / extension_id / version
++    if folder.is_symlink() or root not in folder.resolve().parents or not (folder / "manifest.json").is_file():
++        raise ExtensionError("Cannot activate an extension version that is not installed")
++    active_file = extensions_root / "active.json"
++    with _ACTIVE_LOCK:
++        current = {}
++        try:
++            candidate = json.loads(active_file.read_text(encoding="utf-8"))
++            if isinstance(candidate, dict):
++                current = {str(k): str(v) for k, v in candidate.items()}
++        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
++            pass
++        current[extension_id] = version
++        active_file.parent.mkdir(parents=True, exist_ok=True)
++        temp = active_file.with_suffix(".tmp")
++        temp.write_text(json.dumps(current, sort_keys=True, indent=2) + "\n", encoding="utf-8")
++        os.replace(temp, active_file)
++
++
++def activate_installed_extension(
++    extensions_root: Path,
++    extension_id: str,
++    version: str,
++    host_version: str,
++    allowed_action_ids: set[str] | frozenset[str],
++) -> tuple[dict, dict]:
++    folder = extensions_root / extension_id / version
++    root = extensions_root.resolve()
++    if folder.is_symlink() or root not in folder.resolve().parents:
++        raise ExtensionError("Installed extension folder resolves outside its root")
++    manifest = _json_bytes(_safe_local_file(folder, "manifest.json").read_bytes(), "Installed extension manifest")
++    validated = validate_manifest(
++        manifest,
++        extension_id,
++        version,
++        host_version,
++        lambda rel: _safe_local_file(folder, rel).read_bytes(),
++        allowed_action_ids,
++    )
++    set_active_version(extensions_root, extension_id, version)
++    return validated
++
++
++def install_extension(
++    extensions_root: Path,
++    index_entry: dict,
++    host_version: str,
++    allowed_action_ids: set[str] | frozenset[str],
++    fetch: Callable[[str], bytes] = fetch_bytes,
++) -> tuple[dict, dict]:
++    entry = validate_index({"schema_version": INDEX_SCHEMA_VERSION, "extensions": [index_entry]})[0]
++    manifest_path = entry["manifest_path"]
++    raw_manifest = _json_bytes(fetch(remote_url(manifest_path)), "Extension manifest")
++    if raw_manifest.get("extension_id") != entry["extension_id"] or raw_manifest.get("version") != entry["version"]:
++        raise ExtensionError("Manifest does not match the extension index")
++    files = raw_manifest.get("files")
++    if not isinstance(files, list):
++        raise ExtensionError("Extension file list is missing")
++    extensions_root.mkdir(parents=True, exist_ok=True)
++    extension_dir = extensions_root / entry["extension_id"]
++    extension_dir.mkdir(parents=True, exist_ok=True)
++    destination = extension_dir / entry["version"]
++    if destination.exists():
++        manifest = _json_bytes(_safe_local_file(destination, "manifest.json").read_bytes(), "Installed extension manifest")
++        validated = validate_manifest(manifest, entry["extension_id"], entry["version"], host_version,
++                                      lambda rel: _safe_local_file(destination, rel).read_bytes(), allowed_action_ids)
++        set_active_version(extensions_root, entry["extension_id"], entry["version"])
++        return validated
++
++    stage = Path(tempfile.mkdtemp(prefix=f".{entry['extension_id']}-", dir=str(extension_dir)))
++    try:
++        (stage / "manifest.json").write_text(json.dumps(raw_manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
++        total = len(json.dumps(raw_manifest).encode("utf-8"))
++        if len(files) > MAX_FILES:
++            raise ExtensionError("Too many files in extension")
++        for record in files:
++            rel = _relative_json_path(record.get("path") if isinstance(record, dict) else None)
++            data = fetch(remote_url(f"{entry['extension_id']}/{entry['version']}/{rel}"))
++            total += len(data)
++            if total > MAX_TOTAL_BYTES:
++                raise ExtensionError("Extension exceeds the total size limit")
++            target = _safe_local_file(stage, rel)
++            target.parent.mkdir(parents=True, exist_ok=True)
++            target.write_bytes(data)
++        validated = validate_manifest(raw_manifest, entry["extension_id"], entry["version"], host_version,
++                                      lambda rel: _safe_local_file(stage, rel).read_bytes(), allowed_action_ids)
++        os.replace(stage, destination)
++        set_active_version(extensions_root, entry["extension_id"], entry["version"])
++        return validated
++    except Exception:
++        shutil.rmtree(stage, ignore_errors=True)
++        raise
++
++
++def update_candidates(index_entries: list[dict], extensions_root: Path) -> list[dict]:
++    updates = []
++    for entry in index_entries:
++        active = None
++        try:
++            value = json.loads((extensions_root / "active.json").read_text(encoding="utf-8"))
++            active = value.get(entry["extension_id"]) if isinstance(value, dict) else None
++        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
++            pass
++        if active is None or _version(entry["version"]) > _version(active):
++            updates.append(entry)
++    return updates
++
++
++def preconditions_met(preconditions: list[str], state: dict) -> tuple[bool, str]:
++    checks = {
++        "workflow.idle": bool(state.get("workflow_idle")),
++        "nms.running": bool(state.get("nms_running")),
++        "probe.connected": bool(state.get("probe_connected")),
++    }
++    failed = [condition for condition in preconditions if not checks.get(condition, False)]
++    return (not failed, "" if not failed else "Needs: " + ", ".join(failed))
++
++
++def write_action_record(
++    extensions_root: Path,
++    extension_id: str,
++    version: str,
++    action_id: str,
++    status: str,
++    detail: str = "",
++    upload_path: str = "",
++) -> Path:
++    """Write collision-safe local action metadata under the lane namespace."""
++    if not EXTENSION_ID_RE.fullmatch(extension_id):
++        raise ExtensionError("Invalid evidence namespace")
++    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
++    safe_action = re.sub(r"[^a-z0-9.-]+", "-", action_id.lower()).strip("-")[:64]
++    folder = extensions_root / extension_id / "runs"
++    folder.mkdir(parents=True, exist_ok=True)
++    target = folder / f"{stamp}-{safe_action}-{uuid.uuid4().hex[:8]}.json"
++    target.write_text(json.dumps({
++        "schema_version": 1,
++        "utc": datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
++        "extension_id": extension_id,
++        "extension_version": version,
++        "action_id": action_id,
++        "status": status,
++        "detail": detail[:500],
++        "upload_path": upload_path[:240],
++    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
++    return target
+--- a/tools/github_integration.py
++++ b/tools/github_integration.py
+@@ -5,10 +5,12 @@
+ import hashlib
+ import json
+ import os
++import re
+ import shutil
+ import subprocess
+ import sys
+ import tempfile
++import uuid
+ import traceback
+ import urllib.error
+ import urllib.request
+@@ -196,8 +198,11 @@
+     if not files:
+         raise RuntimeError("The action completed but none of its expected research outputs exist.")
+     now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+-    folder = f"research-uploads/{now}-{action}"
++    namespace = os.environ.get("NMSDS_EVIDENCE_NAMESPACE", "").strip()
++    folder = evidence_folder(now, action, namespace)
+     manifest = {"version": 1, "utc": now, "action": action, "files": []}
++    if namespace:
++        manifest["evidence_namespace"] = namespace
+     ref = _api_json(gh, "GET", f"repos/{REPO}/git/ref/heads/{BRANCH}")
+     parent = ref["object"]["sha"]
+     commit = _api_json(gh, "GET", f"repos/{REPO}/git/commits/{parent}")
+@@ -224,6 +229,14 @@
+     _api_json(gh, "PATCH", f"repos/{REPO}/git/refs/heads/{BRANCH}", {"sha": new_commit["sha"], "force": False})
+     print(f"Complete + uploaded: https://github.com/{REPO}/tree/{BRANCH}/{folder}")
+     _log("upload_complete", action=action, folder=folder, commit=new_commit["sha"])
++
++
++def evidence_folder(timestamp: str, action: str, namespace: str = "") -> str:
++    """Return a safe, backwards-compatible evidence folder for an upload."""
++    if namespace and not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,47}", namespace):
++        raise RuntimeError("Invalid agent evidence namespace.")
++    suffix = f"{namespace}-{action}-{uuid.uuid4().hex[:8]}" if namespace else action
++    return f"research-uploads/{timestamp}-{suffix}"
+ 
+ 
+ def _fetch_json(url: str) -> object:
+--- a/tools/surveyor_controller.py
++++ b/tools/surveyor_controller.py
+@@ -16,12 +16,14 @@
+ from pathlib import Path
+ from tkinter import messagebox, ttk
+ 
+-try:
+-    from . import agent_console
+-except ImportError:  # Running surveyor_controller.py directly from the tools folder.
+-    import agent_console
+-
+-CONTROLLER_VERSION = "0.3.40"
++try:
++    from . import agent_console
++    from . import agent_ui_extensions
++except ImportError:  # Running surveyor_controller.py directly from the tools folder.
++    import agent_console
++    import agent_ui_extensions
++
++CONTROLLER_VERSION = "0.3.41"
+ ROOT = Path(os.environ.get("LOCALAPPDATA") or Path.home()) / "NMSDerelictSurveyor"
+ WORK = ROOT / "asset-work-v1"
+ LOG_DIR = ROOT / "gui-actions"
+@@ -158,7 +160,16 @@
+         self.agent_copy_button: ttk.Button | None = None
+         self.agent_fetch_running = False
+         self.agent_snapshot: dict | None = None
+-        self.agent_selected_lane: dict | None = None
++        self.agent_selected_lane: dict | None = None
++        self.agent_ui_extensions_root = ROOT / "ui-extensions"
++        self.agent_ui_extension_index: list[dict] = []
++        self.agent_ui_extension_error = ""
++        self.agent_ui_extension_check_running = False
++        self.agent_ui_extension_frame: ttk.LabelFrame | None = None
++        self.agent_ui_extension_body: ttk.Frame | None = None
++        self.agent_ui_action_buttons: list[tuple[ttk.Button, list[str]]] = []
++        self.agent_ui_extension_installing: set[str] = set()
++        self.agent_ui_extension_notice = tk.StringVar(value="Checking for lane UI extensions…")
+ 
+         self.loaded_version = tk.StringVar(value=f"Controller {CONTROLLER_VERSION}")
+         self.source_version = tk.StringVar(value=self._source_version())
+@@ -375,12 +386,21 @@
+ 
+         actions = ttk.Frame(outer)
+         actions.pack(fill="x", pady=(8, 0))
+-        ttk.Button(actions, text="Refresh now", command=self._refresh_agent_console).pack(side="left")
+-        self.agent_copy_button = ttk.Button(actions, text="Copy Surveyor steps", command=self._copy_agent_steps)
+-        self.agent_copy_button.pack(side="left", padx=(8, 0))
+-        ttk.Button(actions, text="Copy status summary", command=self._copy_agent_summary).pack(side="left", padx=(8, 0))
+-
+-        self.window.after_idle(self._refresh_agent_console)
++        ttk.Button(actions, text="Refresh now", command=self._refresh_agent_console).pack(side="left")
++        self.agent_copy_button = ttk.Button(actions, text="Copy Surveyor steps", command=self._copy_agent_steps)
++        self.agent_copy_button.pack(side="left", padx=(8, 0))
++        ttk.Button(actions, text="Copy status summary", command=self._copy_agent_summary).pack(side="left", padx=(8, 0))
++
++        extension_box = ttk.LabelFrame(outer, text="Lane UI extension", padding=6)
++        extension_box.pack(fill="x", pady=(8, 0))
++        ttk.Label(extension_box, textvariable=self.agent_ui_extension_notice, wraplength=650).pack(anchor="w")
++        self.agent_ui_extension_body = ttk.Frame(extension_box)
++        self.agent_ui_extension_body.pack(fill="x", pady=(4, 0))
++        ttk.Button(actions, text="Check extensions", command=self._check_agent_ui_extensions).pack(side="right")
++        self.agent_ui_extension_frame = extension_box
++
++        self.window.after_idle(self._refresh_agent_console)
++        self.window.after_idle(self._check_agent_ui_extensions)
+ 
+     def _refresh_agent_console(self) -> None:
+         if self.agent_fetch_running:
+@@ -397,10 +417,11 @@
+ 
+         threading.Thread(target=worker, name="Surveyor-Agent-Console", daemon=True).start()
+ 
+-    def _scheduled_agent_refresh(self) -> None:
+-        self._refresh_agent_console()
+-        if self.window.winfo_exists():
+-            self.window.after(60000, self._scheduled_agent_refresh)
++    def _scheduled_agent_refresh(self) -> None:
++        self._refresh_agent_console()
++        self._check_agent_ui_extensions()
++        if self.window.winfo_exists():
++            self.window.after(60000, self._scheduled_agent_refresh)
+ 
+     def _apply_agent_snapshot(self, snapshot: dict) -> None:
+         self.agent_fetch_running = False
+@@ -433,10 +454,11 @@
+                     values=(lane["name"], lane["status"], "Yes" if lane.get("human_required") else "No"),
+                     tags=tags,
+                 )
+-            if snapshot.get("lanes"):
+-                first = snapshot["lanes"][0]
+-                self.agent_tree.selection_set(first["id"])
+-                self._render_agent_details(first)
++            if snapshot.get("lanes"):
++                first = snapshot["lanes"][0]
++                self.agent_tree.selection_set(first["id"])
++                self._render_agent_details(first)
++                self._render_agent_ui_extension(first)
+ 
+     def _show_selected_agent(self, _event: object = None) -> None:
+         if not self.agent_tree or not self.agent_snapshot:
+@@ -446,8 +468,209 @@
+             return
+         lane_id = selection[0]
+         lane = next((item for item in self.agent_snapshot.get("lanes", []) if item.get("id") == lane_id), None)
+-        if lane:
+-            self._render_agent_details(lane)
++        if lane:
++            self._render_agent_details(lane)
++            self._render_agent_ui_extension(lane)
++
++    def _check_agent_ui_extensions(self) -> None:
++        if self.agent_ui_extension_check_running:
++            return
++        self.agent_ui_extension_check_running = True
++        self.agent_ui_extension_notice.set("Checking published lane UI extensions…")
++
++        def worker() -> None:
++            try:
++                entries = agent_ui_extensions.load_index()
++                error = ""
++            except Exception as exc:
++                entries = []
++                error = f"{type(exc).__name__}: {exc}"
++            try:
++                self.window.after(0, lambda: self._apply_agent_ui_extensions(entries, error))
++            except (tk.TclError, RuntimeError):
++                pass
++
++        threading.Thread(target=worker, name="Surveyor-UI-Extensions", daemon=True).start()
++
++    def _apply_agent_ui_extensions(self, entries: list[dict], error: str) -> None:
++        self.agent_ui_extension_check_running = False
++        if error:
++            self.agent_ui_extension_error = error
++            if not self.agent_ui_extension_index:
++                self.agent_ui_extension_notice.set("Lane UI extension updates are unavailable. The core Surveyor remains usable.")
++                _log("agent_ui_extension_index_error", error=error)
++        else:
++            self.agent_ui_extension_error = ""
++            self.agent_ui_extension_index = entries
++        if self.agent_selected_lane:
++            self._render_agent_ui_extension(self.agent_selected_lane)
++
++    def _extension_context(self) -> dict:
++        live = _read_json(LIVE_STATUS)
++        heartbeat = float(live.get("heartbeat_epoch") or 0.0)
++        connected = heartbeat > 0 and time.time() - heartbeat < 3.5 and _nms_running()
++        return {
++            "workflow_idle": not self.workflow_running,
++            "nms_running": _nms_running(),
++            "probe_connected": connected,
++        }
++
++    def _render_agent_ui_extension(self, lane: dict) -> None:
++        body = self.agent_ui_extension_body
++        if body is None or not body.winfo_exists():
++            return
++        for child in body.winfo_children():
++            child.destroy()
++        self.agent_ui_action_buttons.clear()
++        extension_id = lane.get("id", "")
++        entry = next((item for item in self.agent_ui_extension_index if item["extension_id"] == extension_id), None)
++        active = None
++        panel = None
++        extension_version = ""
++        try:
++            loaded = agent_ui_extensions.load_installed_extension(
++                self.agent_ui_extensions_root,
++                extension_id,
++                CONTROLLER_VERSION,
++                agent_ui_extensions.HOST_ACTION_IDS,
++            )
++            if loaded:
++                manifest, panel = loaded
++                active = manifest
++                extension_version = manifest["version"]
++        except Exception as exc:
++            _log("agent_ui_extension_load_error", extension_id=extension_id, error=repr(exc))
++            ttk.Label(body, text="This lane extension failed validation. Surveyor core actions are unaffected.").pack(anchor="w")
++
++        if entry and (active is None or agent_ui_extensions.update_candidates([entry], self.agent_ui_extensions_root)):
++            version = entry["version"]
++            label = f"{lane.get('name', extension_id)} has a UI extension update (v{version}). Update?"
++            self.agent_ui_extension_notice.set(label)
++            ttk.Button(body, text=f"Install/update to v{version}", command=lambda e=entry: self._confirm_agent_ui_extension_update(e)).pack(anchor="w")
++        elif self.agent_ui_extension_error:
++            self.agent_ui_extension_notice.set("Could not check for UI extension updates. Installed panels remain available.")
++        elif active:
++            self.agent_ui_extension_notice.set(f"{lane.get('name', extension_id)} extension v{extension_version} is active.")
++        else:
++            self.agent_ui_extension_notice.set("No lane UI extension is currently published for this lane.")
++
++        if panel and panel.get("request_only") and not lane.get("human_required"):
++            ttk.Label(body, text="No action is currently requested by this lane.").pack(anchor="w", pady=(4, 0))
++
++        if panel and (not panel.get("request_only") or lane.get("human_required")):
++            ttk.Label(body, text=panel["title"], font=("Segoe UI", 10, "bold")).pack(anchor="w", pady=(4, 0))
++            if panel.get("summary"):
++                ttk.Label(body, text=panel["summary"], wraplength=640).pack(anchor="w", pady=(2, 2))
++            for action in panel["actions"]:
++                allowed, reason = agent_ui_extensions.preconditions_met(action["preconditions"], self._extension_context())
++                row = ttk.Frame(body)
++                row.pack(fill="x", pady=2)
++                button = ttk.Button(
++                    row,
++                    text=action["label"],
++                    command=lambda a=action, i=extension_id, v=extension_version: self._run_agent_ui_extension_action(i, v, a),
++                )
++                button.pack(side="left")
++                if not allowed:
++                    button.state(["disabled"])
++                self.agent_ui_action_buttons.append((button, action["preconditions"]))
++                if reason:
++                    ttk.Label(row, text=reason).pack(side="left", padx=(8, 0))
++
++        if active:
++            versions = agent_ui_extensions.installed_versions(self.agent_ui_extensions_root, extension_id)
++            older = [version for version in versions if agent_ui_extensions._version(version) < agent_ui_extensions._version(extension_version)]
++            if older:
++                ttk.Button(body, text=f"Roll back to v{older[0]}", command=lambda i=extension_id, v=older[0]: self._rollback_agent_ui_extension(i, v)).pack(anchor="w", pady=(4, 0))
++
++    def _confirm_agent_ui_extension_update(self, entry: dict) -> None:
++        extension_id = entry["extension_id"]
++        version = entry["version"]
++        if extension_id in self.agent_ui_extension_installing:
++            return
++        # The persistent update button is the notice. Avoid repeated popups on refresh.
++        if not messagebox.askyesno("Surveyor UI update", f"The {extension_id} agent has published a UI update (v{version}). Install it now?", parent=self.agent_console_window):
++            return
++        self.agent_ui_extension_installing.add(extension_id)
++        self.agent_ui_extension_notice.set(f"Installing {extension_id} UI extension v{version}…")
++
++        def worker() -> None:
++            try:
++                agent_ui_extensions.install_extension(
++                    self.agent_ui_extensions_root,
++                    entry,
++                    CONTROLLER_VERSION,
++                    agent_ui_extensions.HOST_ACTION_IDS,
++                )
++                error = ""
++            except Exception as exc:
++                error = f"{type(exc).__name__}: {exc}"
++            try:
++                self.window.after(0, lambda: self._finish_agent_ui_extension_update(extension_id, error))
++            except (tk.TclError, RuntimeError):
++                pass
++
++        threading.Thread(target=worker, name=f"Surveyor-UI-Extension-{extension_id}", daemon=True).start()
++
++    def _finish_agent_ui_extension_update(self, extension_id: str, error: str) -> None:
++        self.agent_ui_extension_installing.discard(extension_id)
++        if error:
++            self.agent_ui_extension_notice.set("Extension update failed. The previous version remains active.")
++            _log("agent_ui_extension_update_failed", extension_id=extension_id, error=error)
++            messagebox.showerror("Surveyor UI extension", f"The update failed; the previous version is still active.\n\n{error}", parent=self.agent_console_window)
++        else:
++            self.agent_ui_extension_notice.set(f"{extension_id} UI extension refreshed without restarting Surveyor.")
++            _log("agent_ui_extension_updated", extension_id=extension_id)
++        if self.agent_selected_lane:
++            self._render_agent_ui_extension(self.agent_selected_lane)
++
++    def _rollback_agent_ui_extension(self, extension_id: str, version: str) -> None:
++        try:
++            agent_ui_extensions.activate_installed_extension(
++                self.agent_ui_extensions_root,
++                extension_id,
++                version,
++                CONTROLLER_VERSION,
++                agent_ui_extensions.HOST_ACTION_IDS,
++            )
++            _log("agent_ui_extension_rollback", extension_id=extension_id, version=version)
++            self.agent_ui_extension_notice.set(f"{extension_id} UI extension rolled back to v{version}.")
++            if self.agent_selected_lane:
++                self._render_agent_ui_extension(self.agent_selected_lane)
++        except Exception as exc:
++            _log("agent_ui_extension_rollback_failed", extension_id=extension_id, version=version, error=repr(exc))
++            messagebox.showerror("Surveyor UI extension", f"Rollback failed; the active extension was left unchanged.\n\n{exc}", parent=self.agent_console_window)
++
++    def _run_agent_ui_extension_action(self, extension_id: str, version: str, action: dict) -> None:
++        if action.get("action_id") not in agent_ui_extensions.HOST_ACTION_IDS:
++            self._set_status("Extension action rejected", "The action ID is not registered by Surveyor.")
++            return
++        current = agent_ui_extensions.load_installed_extension(
++            self.agent_ui_extensions_root, extension_id, CONTROLLER_VERSION, agent_ui_extensions.HOST_ACTION_IDS
++        )
++        if not current or current[0].get("version") != version:
++            self._set_status("Extension action rejected", "The selected UI extension version is no longer active.")
++            return
++        allowed, reason = agent_ui_extensions.preconditions_met(action["preconditions"], self._extension_context())
++        if not allowed:
++            self._set_status("Agent action unavailable", reason)
++            return
++        calls = {
++            "research.analyze_seed_function": ("Analyze seed function + upload", "Analyze-Dungeon-Seed-Function.cmd", "analyze-seed-function"),
++            "research.extract_upstream_callers": ("Extract upstream callers + upload", "Extract-Dungeon-Upstream-Callers.cmd", "extract-upstream"),
++            "research.extract_exact_root_caller": ("Extract exact root caller + upload", "Extract-Exact-Root-Caller-Code.cmd", "extract-exact-root-caller"),
++            "research.resolve_root_vtable": ("Resolve root vtable + upload", "Resolve-Exact-Root-VTable.cmd", "resolve-root-vtable"),
++            "research.extract_caller_code": ("Extract caller code + upload", "Extract-Dungeon-Caller-Code.cmd", "extract-caller"),
++            "research.measure_generation": ("Measure generation + upload", "Measure-Derelict-Generation.cmd", "measure"),
++            "research.prepare_assets": ("Prepare crate assets + upload", "Prepare-Crate-Assets.cmd", "prepare-assets"),
++            "research.analyze_generation": ("Analyze generation + upload", "Analyze-Generation-Baseline.cmd", "analyze-generation"),
++        }
++        call = calls.get(action["action_id"])
++        if call is None:
++            self._set_status("Agent action unavailable", "This Surveyor build has no handler for that action.")
++            return
++        _log("agent_ui_extension_action", extension_id=extension_id, version=version, action_id=action["action_id"])
++        self._project_action(*call, evidence_namespace=extension_id, extension_version=version, extension_action_id=action["action_id"])
+ 
+     def _render_agent_details(self, lane: dict) -> None:
+         self.agent_selected_lane = lane
+@@ -525,15 +748,16 @@
+         except Exception as exc:
+             _log("overlay_pref_error", error=repr(exc))
+ 
+-    def _refresh(self) -> None:
+-        running = _nms_running()
++    def _refresh(self) -> None:
++        running = _nms_running()
+         self.nms_state.set("Running" if running else "Not running")
+         self.start_nms_button.state(["disabled"] if running else ["!disabled"])
+         self.source_version.set(self._source_version())
+ 
+         live = _read_json(LIVE_STATUS)
+-        heartbeat = float(live.get("heartbeat_epoch") or 0.0)
+-        fresh = heartbeat > 0 and time.time() - heartbeat < 3.5
++        heartbeat = float(live.get("heartbeat_epoch") or 0.0)
++        fresh = heartbeat > 0 and time.time() - heartbeat < 3.5
++        self._refresh_agent_extension_action_states(running, running and fresh)
+         if running and fresh:
+             self.last_live_pid = int(live.get("process_id") or 0) or None
+             version = str(live.get("probe_version") or "unknown")
+@@ -568,7 +792,20 @@
+             self.counts_state.set("Crates —   Rooms —")
+             self.root_caller_state.set("Not captured")
+             self.caller_scan_state.set("Armed — all callers at once")
+-        self.window.after(750, self._refresh)
++        self.window.after(750, self._refresh)
++
++    def _refresh_agent_extension_action_states(self, nms_running: bool, probe_connected: bool) -> None:
++        state = {
++            "workflow_idle": not self.workflow_running,
++            "nms_running": nms_running,
++            "probe_connected": probe_connected,
++        }
++        for button, preconditions in self.agent_ui_action_buttons:
++            try:
++                enabled, _reason = agent_ui_extensions.preconditions_met(preconditions, state)
++                button.state(["!disabled"] if enabled else ["disabled"])
++            except tk.TclError:
++                continue
+ 
+     def _set_status(self, status: str, detail: str = "") -> None:
+         self.window.after(0, lambda: self.workflow_status.set(status))
+@@ -635,18 +872,36 @@
+             return [os.environ.get("COMSPEC", "cmd.exe"), "/d", "/c", str(cmd)]
+         return None
+ 
+-    def _project_action(self, label: str, cmd_name: str, upload_action: str) -> None:
++    def _project_action(
++        self,
++        label: str,
++        cmd_name: str,
++        upload_action: str,
++        evidence_namespace: str = "",
++        extension_version: str = "",
++        extension_action_id: str = "",
++    ) -> None:
+         command = self._project_action_command(cmd_name)
+         if command is None:
+             self._set_status("Research action unavailable", f"Missing workflow for {cmd_name}")
+             return
+         helper = self.project_root / "tools" / "github_integration.py"
+-        self._run_steps(label, [
+-            ("Run research command", command),
+-            ("Upload generated evidence", [self.python_exe, str(helper), "upload", "--action", upload_action]),
+-        ])
+-
+-    def _run_steps(self, label: str, steps: list[tuple[str, list[str]]], visible: bool = False) -> None:
++        self._run_steps(label, [
++            ("Run research command", command),
++            ("Upload generated evidence", [self.python_exe, str(helper), "upload", "--action", upload_action]),
++        ], evidence_namespace=evidence_namespace, extension_version=extension_version,
++           extension_action_id=extension_action_id, upload_action=upload_action)
++
++    def _run_steps(
++        self,
++        label: str,
++        steps: list[tuple[str, list[str]]],
++        visible: bool = False,
++        evidence_namespace: str = "",
++        extension_version: str = "",
++        extension_action_id: str = "",
++        upload_action: str = "",
++    ) -> None:
+         if self.workflow_running:
+             self._set_status("Another action is running", "Wait for the current action to finish.")
+             return
+@@ -657,11 +912,16 @@
+         self.output_events.put(("clear", ""))
+ 
+         def worker() -> None:
+-            env = os.environ.copy()
+-            env["NMSDS_NONINTERACTIVE"] = "1"
+-            env["NMSDS_PARENT_ACTION"] = label
+-            timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+-            safe_name = re.sub(r"[^A-Za-z0-9_.-]+", "-", label).strip("-").lower() or "action"
++            env = os.environ.copy()
++            env["NMSDS_NONINTERACTIVE"] = "1"
++            env["NMSDS_PARENT_ACTION"] = label
++            env.pop("NMSDS_EVIDENCE_NAMESPACE", None)
++            if evidence_namespace:
++                env["NMSDS_EVIDENCE_NAMESPACE"] = evidence_namespace
++            timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
++            safe_name = re.sub(r"[^A-Za-z0-9_.-]+", "-", label).strip("-").lower() or "action"
++            if evidence_namespace:
++                safe_name = f"{evidence_namespace}-{safe_name}"
+             per_log = LOG_DIR / f"latest-{safe_name}.log"
+             archive = LOG_DIR / f"{timestamp}-{safe_name}.log"
+             all_output: list[str] = []
+@@ -713,14 +973,33 @@
+                 archive.write_text(block, encoding="utf-8")
+                 with WORKFLOW_LOG.open("a", encoding="utf-8") as fh:
+                     fh.write(block)
+-                WORKFLOW_DIAGNOSTIC.write_text(
++                WORKFLOW_DIAGNOSTIC.write_text(
+                     "NMS Derelict Surveyor standalone workflow diagnostic\n"
+                     f"UTC: {_utc()}\nController version: {CONTROLLER_VERSION}\nAction: {label}\n"
+                     f"Failed step: {failed_step or 'none'}\nReturn code: {returncode}\n\n" + "\n".join(all_output),
+-                    encoding="utf-8",
+-                )
+-                combined = "\n".join(all_output)
+-                remote = re.search(r"NMSDS_REMOTE_VERSION=([^\r\n]+)", combined)
++                    encoding="utf-8",
++                )
++                combined = "\n".join(all_output)
++                if evidence_namespace and extension_version and extension_action_id:
++                    upload_match = re.search(
++                        rf"https://github\.com/{re.escape(agent_ui_extensions.REPOSITORY)}/tree/[^/\s]+/(research-uploads/[^\s]+)",
++                        combined,
++                    )
++                    upload_path = upload_match.group(1).rstrip(".,)") if upload_match else ""
++                    try:
++                        record = agent_ui_extensions.write_action_record(
++                            self.agent_ui_extensions_root,
++                            evidence_namespace,
++                            extension_version,
++                            extension_action_id,
++                            "complete" if returncode == 0 else "failed",
++                            f"Exit status: {returncode}; failed step: {failed_step or 'none'}",
++                            upload_path,
++                        )
++                        _log("agent_ui_extension_action_recorded", extension_id=evidence_namespace, record=record)
++                    except Exception as record_error:
++                        _log("agent_ui_extension_action_record_error", extension_id=evidence_namespace, error=repr(record_error))
++                remote = re.search(r"NMSDS_REMOTE_VERSION=([^\r\n]+)", combined)
+                 status = re.findall(r"NMSDS_STATUS=([^\r\n]+)", combined)
+                 detail = re.findall(r"NMSDS_DETAIL=([^\r\n]+)", combined)
+                 if remote:

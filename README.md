@@ -1,6 +1,27 @@
 # NMS Derelict Probe
 
-Current stable package: **v0.3.34**.
+> **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
+
+
+Current Surveyor package: **v0.3.41**.
+
+## v0.3.41 — shared lane UI extensions
+
+The Agent Console can load versioned, hash-checked JSON panels for each research lane without restarting Surveyor. Panel buttons request stable Surveyor action IDs; extensions cannot run supplied shell commands or code. Updates activate live, previous versions remain available for rollback, and lane-triggered uploads use timestamped lane/action folders. See `AGENT_UI_EXTENSION_GUIDE.md` for the contract and reusable agent prompt.
+
+## v0.3.40 — live research output
+
+Surveyor shows the current research command, step, progress, latest output line, and exit status as it runs. The main window and output history can be scrolled, and the full workflow log remains available for copying or diagnosis. Fast output is batched for the display so the window stays responsive.
+
+## v0.3.39 — Agent Console
+
+Standalone Surveyor opens a compact **Agent Console** alongside its main window. It shows the latest published state of Runtime-A, Seed-B, DUNGEON-C, and Metadata-D, highlights lanes needing Surveyor input, and gives the exact steps, success condition, evidence to return, and full-traversal requirement.
+
+The console reads `WORKSPACE_STATE.json` from the repository's `main` branch and reads `agent-patches/<lane>/STATUS.json` plus each lane manifest from the corresponding agent branch. It refreshes every 60 seconds and can also refresh on demand. If the main registry is older than 30 minutes, it displays a stale-state warning; if a refresh fails, it keeps the last successful view. The console does not read private chat messages. Agent requests appear only after they are published to GitHub.
+
+Select a lane and click **Copy Surveyor steps** to copy its literal user recipe. After completing the recipe and its upload step, return to the Main chat and write `check`. **Copy status summary** copies the visible lane states and pending human action for chat handoff.
+
+To publish a lane's current request, commit `agent-patches/<lane>/STATUS.json` on that lane's branch using `schema/agent-status-v1.schema.json`. Include exact steps and say whether a full derelict traversal is required.
 
 ## v0.3.34 — all 52 callers at once
 
@@ -66,3 +87,10 @@ The corrected v0.3.31 scan found 52 direct references. v0.3.34 now observes all 
 ## v0.3.34 Start NMS runtime repair
 
 `Start-NMS.ps1` now self-repairs the NMSpy/pyMHF runtime instead of treating a hidden import failure as a generic missing-package error. It tests the actual interpreter, force-repairs the pinned runtime only when needed, falls back to Python 3.12 when necessary, writes the local pyMHF NMS/MODS config, and launches with `python -m pymhf run nmspy`. A full import traceback is retained in `%LOCALAPPDATA%\NMSDerelictSurveyor\runtime-repair-latest.log` if startup still fails. `Start-NMS-With-Overlay.cmd` is the manual overlay launcher; `Start-NMS.cmd` records without the overlay.
+
+
+### Exact root caller follow-up (v0.3.38)
+After `Analyze generation + upload` has captured an exact root caller, use **Extract exact root caller + upload** in the standalone Surveyor. This is offline/read-only: it opens the installed `NMS.exe`, maps the exact caller return RVA, captures surrounding bytes, and uploads `exact-root-caller-code-latest.json`. No additional derelict run is required for this step.
+
+### Exact root vtable resolution (v0.3.38)
+After **Extract exact root caller + upload** reports the virtual call shape (`FF 52 10`), use **Resolve root vtable + upload**. It scans the installed `NMS.exe` offline for vtable entries whose `+0x10` slot points to the verified `0x00634BC0` function, records neighbouring virtual methods, tries to decode MSVC RTTI/class metadata, and records RIP-relative code references to candidate vtables. It does not launch NMS or write to the game.
