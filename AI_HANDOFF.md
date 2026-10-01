@@ -15,7 +15,7 @@ This is the current continuation point for the main integration worker. The cand
 
 Lane `dungeon-decompile` has optional extension v1.0.1 on branch `agent/dungeon-decompile`, PR #18 targeting `integration/issue-8-ui-extensions`. It is data-only and uses API 1.0 action `research.analyze_generation`, request-only while this lane needs input, with preconditions `workflow.idle`, `nms.running`, `probe.connected`, empty parameters, and evidence namespace `dungeon-decompile`. Published v1.0.0 remains installed for rollback.
 
-Checks on the Surveyor 0.3.41 candidate with the new lane files overlaid: lane tests 6/6; host extension/namespace tests 10/10; full suite 136/136; compileall passed; 42 JSON files parsed. No live game capture was produced by these tests.
+Checks on the Surveyor 0.3.41 candidate with the new lane files overlaid: lane tests 6/6; host extension/namespace tests 10/10; full suite 136/136; compileall passed; 46 JSON files parsed. No live game capture was produced by these tests.
 
 The post-7.05 capture records root seed candidate `9256392A2F5A74AC`, high-confidence inferred preset `MEDI_FLOATERS`, 10 observed rooms, and 16 predicted target containers. The earlier `CARGO_FLOATERS` / 8-room / 35-container result remains historical. Root-seed validity and repeatability are unproven; room count versus table value 7 needs review.
 
