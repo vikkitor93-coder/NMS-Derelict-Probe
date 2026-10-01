@@ -17,13 +17,13 @@ The issue-8 host and panels are published. Issue #8 remains open because the sha
 
 **Next human action (Windows; no full derelict traversal):** use the Runtime-A Surveyor build identified by `agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json` > start Surveyor > click **Start NMS** > load the known derelict only until **Root dispatch +0x10 captured** appears > click **Analyze generation + upload** > return to Main and write `check`. Then review whether the capture hook is compatible with the other lane profiles before integration. Separately, visually verify the DUNGEON-C extension refresh and rollback in the Windows Surveyor UI.
 
-**Verification recorded across candidate overlays:** host focused suite 17/17 and full suite 130/130; DUNGEON-C candidate suite 136/136; runtime-dispatch full suite 138/138; seed-lineage full suite 131/131; metadata parser/hash checks passed. The lane suites were not rerun together after publication. Each catalog entry points to its matching manifest and all four published panel SHA-256 values match. Windows/Tk visual behavior was not run in this Linux environment.
+**Combined published-source verification:** full test suite 145/145 passed after reconciling the DUNGEON-C test with the shared four-entry catalog; `compileall` passed; 52 JSON files parsed; all four extension manifest hashes passed; the complete source ZIP passed integrity verification (SHA-256 `9d513cd1bb46b3d757d8b67c70a6e799058f092bff2f2c1817acaba564453898`). Windows/Tk visual behavior was not run in this Linux environment.
 
 Issues #13 and #14 remain closed as not planned. Their benchmark branches were reset to `main`, removing the test-only help-button project; GitHub branch names remain because the connected API cannot delete refs. The delivered package contains no benchmark help button.
 
 ## Canonical source status
 
-The last integrated canonical release is v0.3.38. The v0.3.41 candidate package must become authoritative only after its updated root `update-manifest.json` and full-package chunks are merged together.
+The published canonical release is v0.3.41. Its `update-manifest.json` and full-package chunks are on `main`; the complete source ZIP with all four panels and extension tests is stored at `/NMS modding/NMS-Derelict-Probe-v0.3.41-published.zip` (SHA-256 `9d513cd1bb46b3d757d8b67c70a6e799058f092bff2f2c1817acaba564453898`).
 
 ---
 
