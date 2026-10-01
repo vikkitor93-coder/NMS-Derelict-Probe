@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "lane": "metadata",
+  "branch": "agent/metadata",
+  "base_branch": "integration/issue-8-ui-extensions",
+  "objective": "Add the optional METADATA-D data-only panel using Surveyor shared UI API 1.0 without changing core, controller/probe protocols, or the standalone workflow.",
+  "extension": {
+    "id": "metadata",
+    "version": "1.0.0",
+    "manifest": "agent-ui/extensions/metadata/1.0.0/manifest.json",
+    "panel": "agent-ui/extensions/metadata/1.0.0/panel.json",
+    "index": "agent-ui/extensions/index.json",
+    "sha256_panel": "651f40f506b2eeda155ee66523b931bf6fba053551cd6d51a363a5b3900a602a"
+  },
+  "supported_actions": [
+    "research.prepare_assets",
+    "research.analyze_generation"
+  ],
+  "preconditions": [
+    "workflow.idle"
+  ],
+  "evidence_namespace": "metadata",
+  "result": "The extension can expose the registered asset-preparation and generation-analysis actions. API 1.0 does not register a dedicated abandoned-freighter DungeonOptions scan action, so this panel does not claim to run that custom analysis.",
+  "measured_evidence": {
+    "source_path": "research-uploads/20260930T174712Z-analyze-generation/generation-baseline-latest.json",
+    "session_id": "20260930T173540Z_00001A0004E84EFD",
+    "root_seed": "9256392A2F5A74AC",
+    "rooms": {
+      "main": 8,
+      "dead_end": 2,
+      "total": 10
+    },
+    "table_rooms": 7,
+    "target_containers": 16
+  },
+  "inferred_evidence": {
+    "preset": "MEDI_FLOATERS",
+    "confidence": "high",
+    "basis": "Inferred from the captured generation evidence; not a directly measured DungeonOptions value."
+  },
+  "files_changed": [
+    "agent-ui/extensions/metadata/1.0.0/panel.json",
+    "agent-ui/extensions/metadata/1.0.0/manifest.json",
+    "agent-ui/extensions/index.json",
+    "agent-patches/metadata/STATUS.json",
+    "agent-patches/metadata/METADATA_UI_EXTENSION_TESTS.json",
+    "agent-patches/metadata/METADATA_D_MANIFEST.json"
+  ],
+  "verification": {
+    "lane_status_parser": "PASS: v0.3.41 tools/agent_console.py::_normalize_lane returned human_required=true; surveyor_request, all four user_steps, success_condition, evidence_to_return populated; full_derelict_required=false.",
+    "extension_manifest_hash": "PASS: v0.3.41 tools/agent_ui_extensions.py::validate_manifest accepted extension metadata 1.0.0 and verified panel SHA-256 651f40f506b2eeda155ee66523b931bf6fba053551cd6d51a363a5b3900a602a.",
+    "extension_contract": "PASS: request_only=true; two registered actions; both use workflow.idle, metadata namespace, and empty API 1.0 parameters.",
+    "windows_live_refresh": "not run",
+    "windows_visual_rollback": "not run"
+  },
+  "human_validation": {
+    "required": true,
+    "steps": [
+      "Install or update to the shared host build 0.3.41 or later.",
+      "Select the metadata lane in Agent Console.",
+      "Click Prepare assets + upload and wait for completion.",
+      "Return to Main and write: check."
+    ],
+    "full_derelict_traversal_required": false
+  },
+  "rollback": "Remove the metadata extension identity from agent-ui/extensions/index.json to stop discovery, or activate a retained prior metadata extension version through Agent Console. No Surveyor core or probe rollback is needed.",
+  "integration_subset": "Take the metadata directory, its index entry, and this manifest/test record after the host candidate is merged.",
+  "updated_utc": "2026-10-01T01:12:53Z"
+}

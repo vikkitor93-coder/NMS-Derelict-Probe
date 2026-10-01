@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "lane": "metadata",
+  "extension_version": "1.0.0",
+  "local_contract_checks": {
+    "method": "inline JavaScript contract assertions in the authoring session",
+    "passed": 12,
+    "failed": 0,
+    "checks": [
+      "SHA-256 implementation verified against the standard abc test vector",
+      "Manifest schema and Surveyor API compatibility",
+      "Semantic version and lane identity",
+      "Entry point listed and lowercase SHA-256 format/value",
+      "Only registered research action IDs",
+      "Only supported nonempty preconditions",
+      "API 1.0 parameters are empty objects",
+      "Evidence namespace equals metadata",
+      "No command/path/arguments/executable/script/URL fields",
+      "request_only is boolean true",
+      "Unknown action ID rejected by allowlist",
+      "Unsupported precondition rejected by allowlist"
+    ]
+  },
+  "shared_host_tests": {
+    "source_branch": "integration/issue-8-ui-extensions",
+    "source_commit": "9aae5e339a91ede605c5d089e36c65f029fa8467",
+    "reported_by_host_manifest": {
+      "focused_tests": "17/17 passed",
+      "full_tests": "130/130 passed",
+      "compileall": "passed"
+    },
+    "covers": [
+      "mocked install and activation",
+      "failed update preserves prior active version",
+      "older extension version retained and activatable for rollback",
+      "hash mismatch and unknown shell action rejected",
+      "unsupported dependencies/preconditions/URLs rejected",
+      "lane namespaced collision-safe action records"
+    ],
+    "rerun_for_metadata_extension": false
+  },
+  "live_validation": {
+    "windows_live_refresh": "not run",
+    "windows_visual_rollback": "not run",
+    "status": "pending integration review and Windows run"
+  },
+  "lane_specific_runtime": {
+    "nms_run": false,
+    "derelict_traversal": false,
+    "probe_hook_changes": false
+  }
+}
