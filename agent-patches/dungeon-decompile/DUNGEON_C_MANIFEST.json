@@ -116,6 +116,36 @@
       "tested_against": "Surveyor 0.3.41 candidate source; lane panel/index/test overlaid before tests"
     },
     "rollback": "Restore index.json to dungeon-decompile/1.0.0/manifest.json, then in Surveyor Agent Console select DUNGEON-C and click Roll back to v1.0.0. Both versions remain installed; do not delete v1.0.1 files.",
-    "new_game_capture_produced_by_tests": false
+    "new_game_capture_produced_by_tests": false,
+    "parallel_index_reconciliation": {
+      "current_integration_index": [
+        {
+          "extension_id": "dungeon-decompile",
+          "version": "1.0.0",
+          "manifest_path": "dungeon-decompile/1.0.0/manifest.json"
+        }
+      ],
+      "open_lane_prs": [
+        {
+          "pr": 16,
+          "extension_id": "metadata",
+          "version": "1.0.0",
+          "manifest_path": "metadata/1.0.0/manifest.json"
+        },
+        {
+          "pr": 17,
+          "extension_id": "seed-lineage",
+          "version": "1.0.0",
+          "manifest_path": "seed-lineage/1.0.0/manifest.json"
+        },
+        {
+          "pr": 19,
+          "extension_id": "runtime-dispatch",
+          "version": "1.0.0",
+          "manifest_path": "runtime-dispatch/1.0.0/manifest.json"
+        }
+      ],
+      "integration_action": "After the companion PR extension files are present, preserve all three lane entries and replace the dungeon-decompile 1.0.0 row with 1.0.1. Exact combined index is recorded in PR #18."
+    }
   }
 }
