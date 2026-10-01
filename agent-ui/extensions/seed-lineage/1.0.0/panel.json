@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "title": "SEED-B · Seed function analysis",
+  "summary": "Post-7.05 capture at the same system: root seed 9256392A2F5A74AC, MEDI_FLOATERS, 10 rooms, 16 containers. Earlier CARGO_FLOATERS, 8-room, 35-container layout is historical. Run the offline seed-function analyzer; system-seed anchors are confirmed, but no root-seed derivation is established.",
+  "request_only": false,
+  "actions": [
+    {
+      "action_id": "research.analyze_seed_function",
+      "label": "Analyze seed function + upload",
+      "description": "Runs the existing offline seed-function analyzer and uploads its JSON result.",
+      "preconditions": ["workflow.idle"],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    }
+  ]
+}
