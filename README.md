@@ -3,7 +3,11 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.42**.
+Current Surveyor package: **v0.3.43**.
+
+## v0.3.43 — Agent Console scrolling and bulk upload
+
+Lane headers show extension version and upload receipt first. Mouse-wheel scrolling works over content in the main app and each lane panel. **Upload all** confirms once and runs currently eligible lane actions sequentially.
 
 ## v0.3.42 — four-lane Agent Console
 

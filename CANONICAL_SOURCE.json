@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "version": "0.3.42",
+  "version": "0.3.43",
   "status": "release-candidate",
   "artifact": {
     "storage": "github-base64-chunks-and-chatgpt-library",
-    "file_name": "NMS-Derelict-Probe-v0.3.42.zip",
-    "sha256": "4f3057e82f7ce01c2f62af548b062e460fe8371bed614538dc182d23d10ee67f",
-    "size_bytes": 331865,
-    "files": 116
+    "file_name": "NMS-Derelict-Probe-v0.3.43.zip",
+    "sha256": "ee51b807d755dfe5f62a93bf604d7f61191c90e83a445ce1ae493c8a9a8da043",
+    "size_bytes": 353900,
+    "files": 134
   },
   "repository_transport": {
     "status": "reproducible-base64-chunks",
@@ -15,13 +15,13 @@
   },
   "verification": {
     "focused_tests": "17/17 passed",
-    "unit_tests": "150/150 passed",
+    "unit_tests": "151/151 passed",
     "compileall": "passed",
-    "json_files_parsed": 40,
+    "json_files_parsed": 54,
     "zip_integrity": "passed",
     "game_probe_logic_changed": false,
     "source_patch_reconstruction": "passed",
-    "package_refresh": "handoff-only continuation update",
+    "package_refresh": "0.3.43 update manifest and all source files encoded in matching chunks",
     "in_app_update": "v0.3.42 package and matching base64 chunks prepared"
   },
   "resume": {
