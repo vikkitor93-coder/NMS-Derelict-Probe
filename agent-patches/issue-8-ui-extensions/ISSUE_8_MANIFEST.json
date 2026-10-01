@@ -2,11 +2,11 @@
   "schema_version": 1,
   "issue": 8,
   "title": "Define versioned agent UI extensions and shared agent instructions",
-  "status": "ui-extension-host-implemented; unified-probe-capture-consolidation-pending",
-  "candidate_version": "0.3.41",
-  "branch": "integration/issue-8-ui-extensions",
-  "base_commit": "f17617abe19d8164892988e1f873353c8f95d49f",
-  "summary": "Adds one versioned, data-only Surveyor extension interface for lane panels, verified live install/reload and rollback, namespaced research uploads, a reusable lane-agent prompt, and a DUNGEON-C example panel.",
+  "status": "shared-extension-host-published; four-column-console-layout-prepared; runtime-capture-validation-pending",
+  "candidate_version": "0.3.42",
+  "branch": "codex/agent-console-four-wide-20261001",
+  "base_commit": "f452433405e85d6911a15199e4ceb993a9ce45ef",
+  "summary": "Refreshes the shared four-lane Surveyor console: independent lane scroll areas, fixed per-lane task and update controls, and bulk extension update.",
   "changed_project_files": [
     "AGENT_UI_EXTENSION_GUIDE.md",
     "AGENT_START_HERE.md",
@@ -28,10 +28,10 @@
   ],
   "verification": {
     "focused_tests": "17/17 passed",
-    "full_tests": "130/130 passed",
+    "full_tests": "150/150 passed",
     "compileall": "passed",
     "windows_tk_visual_run": "not run in this Linux environment",
-    "continuation_tests": "17 focused; 130 full; compileall passed; 40 JSON files parsed",
+    "continuation_tests": "150 full tests; compileall; package ZIP and base64 chunk reconstruction passed",
     "handoff_followup_patch": "agent-patches/issue-8-ui-extensions/handoff-followup.patch"
   },
   "safety": {
@@ -58,30 +58,30 @@
     ],
     "full_derelict_traversal_required": false
   },
-  "rollback": "Restore the prior update-manifest.json/package chunks to return to v0.3.40. For UI panels, activate a retained older version with the Agent Console rollback button.",
+  "rollback": "Restore the previous update-manifest.json and v0.3.41 package chunks. For UI panels, use the retained lane-level rollback button.",
   "artifact": {
-    "file_name": "NMS-Derelict-Probe-v0.3.41.zip",
-    "sha256": "bfb709f5e552a5db94b4fcb5dbcc4478f65c3d34f16cd6a7d01755f6cba6cacc",
-    "size_bytes": 326191,
+    "file_name": "NMS-Derelict-Probe-v0.3.42.zip",
+    "sha256": "4f3057e82f7ce01c2f62af548b062e460fe8371bed614538dc182d23d10ee67f",
+    "size_bytes": 331865,
     "files": 116
   },
   "package_parts": [
-    "packages/v0.3.41-full/part-000.b64",
-    "packages/v0.3.41-full/part-001.b64",
-    "packages/v0.3.41-full/part-002.b64",
-    "packages/v0.3.41-full/part-003.b64",
-    "packages/v0.3.41-full/part-004.b64",
-    "packages/v0.3.41-full/part-005.b64",
-    "packages/v0.3.41-full/part-006.b64",
-    "packages/v0.3.41-full/part-007.b64",
-    "packages/v0.3.41-full/part-008.b64",
-    "packages/v0.3.41-full/part-009.b64"
+    "packages/v0.3.42-full/part-000.b64",
+    "packages/v0.3.42-full/part-001.b64",
+    "packages/v0.3.42-full/part-002.b64",
+    "packages/v0.3.42-full/part-003.b64",
+    "packages/v0.3.42-full/part-004.b64",
+    "packages/v0.3.42-full/part-005.b64",
+    "packages/v0.3.42-full/part-006.b64",
+    "packages/v0.3.42-full/part-007.b64",
+    "packages/v0.3.42-full/part-008.b64",
+    "packages/v0.3.42-full/part-009.b64"
   ],
   "source_patch": {
-    "path": "/workspace/scratch/1719a618d73a/nms-work/agent-patches/issue-8-ui-extensions/issue-8.patch",
-    "sha256": "458e3239cfae5b86f9d12cd8bf17960e77c00b83f2f8cf2bda4bd8fe732cb6ec",
-    "size_bytes": 79918,
-    "verification": "git apply --check passed; applying to v0.3.40 reconstructs all 116 candidate files (line endings normalized)."
+    "path": "NMS-Derelict-Probe-v0.3.42.zip",
+    "sha256": "4f3057e82f7ce01c2f62af548b062e460fe8371bed614538dc182d23d10ee67f",
+    "size_bytes": 331865,
+    "verification": "ZIP integrity passed; base64 update chunks reconstruct exact package."
   },
   "base_branch": "main"
 }
