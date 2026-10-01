@@ -14,6 +14,7 @@ This is the current continuation point for the main integration worker. The cand
 ## Seed-lineage Surveyor extension 1.0.0
 
 - Added a data-only panel at `agent-ui/extensions/seed-lineage/1.0.0/` using host API 1.0.
+- Preserved the previously published `SEED_B_MANIFEST.json` and `seed-b.patch.gz.b64` lane artifacts.
 - The panel requests only `research.analyze_seed_function`, requires `workflow.idle`, sends empty parameters, and scopes uploads to `seed-lineage`.
 - `request_only` is false because this lane currently has no pending human validation; the offline action remains available.
 - The panel and manifest are indexed and SHA-256 checked. The standalone Seed-B workflow and all host/controller/probe code are unchanged.
