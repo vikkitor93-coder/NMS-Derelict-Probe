@@ -11,6 +11,16 @@ This is the current continuation point for the main integration worker. The cand
 - The DUNGEON-C sample panel launches the existing exact-root-caller offline extractor. It does not require NMS to run or a derelict traversal.
 - Tests cover compatible install, hash/command rejection, failed-update preservation, live version activation, rollback, and evidence namespacing. Tk visual execution on Windows still needs a human machine.
 
+## Seed-lineage Surveyor extension 1.0.0
+
+- Added a data-only panel at `agent-ui/extensions/seed-lineage/1.0.0/` using host API 1.0.
+- The panel requests only `research.analyze_seed_function`, requires `workflow.idle`, sends empty parameters, and scopes uploads to `seed-lineage`.
+- `request_only` is false because this lane currently has no pending human validation; the offline action remains available.
+- The panel and manifest are indexed and SHA-256 checked. The standalone Seed-B workflow and all host/controller/probe code are unchanged.
+- To roll back, select the prior installed extension version in Agent Console. If no prior seed-lineage version exists, remove its index entry and extension folder; host core actions and the standalone workflow remain available.
+- Latest lane evidence: baseline root seed `9256392A2F5A74AC`; post-7.05 capture is `MEDI_FLOATERS`, 10 rooms, 16 containers. The earlier `CARGO_FLOATERS`, 8-room, 35-container layout is historical. The system-seed-to-root-seed derivation remains unknown.
+- Verification for this panel is recorded in `tests/test_seed_lineage_ui_extension.py` and the lane PR manifest.
+
 ## Exact next action
 
 The issue-8 UI extension host is implemented and its regression checks pass. PR #15 remains a draft; issue #8 remains open because the unified probe-capture requirement and Windows visual validation are still outstanding. Do not claim full issue acceptance or merge the candidate as the completed issue.
