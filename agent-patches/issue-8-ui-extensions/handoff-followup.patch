@@ -1,0 +1,17 @@
+--- a/AI_HANDOFF.md
++++ b/AI_HANDOFF.md
+@@ -13,7 +13,13 @@
+ 
+ ## Exact next action
+ 
+-Run the new focused tests and the full existing regression suite, compile all Python files, validate all package JSON and the source ZIP hash, then publish a PR from `integration/issue-8-ui-extensions` targeting `main`. Do not merge the PR until those checks pass. Keep the existing human tasks in `WORKSPACE_STATE.json` intact.
++The issue-8 UI extension host is implemented and its regression checks pass. PR #15 remains a draft; issue #8 remains open because the unified probe-capture requirement and Windows visual validation are still outstanding. Do not claim full issue acceptance or merge the candidate as the completed issue.
++
++**Next human action (Windows; no full derelict traversal):** use the Runtime-A Surveyor build identified by `agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json` > start Surveyor > click **Start NMS** > load the known derelict only until **Root dispatch +0x10 captured** appears > click **Analyze generation + upload** > return to Main and write `check`. Then review whether the capture hook is compatible with the other lane profiles before integration. Separately, visually verify the DUNGEON-C extension refresh and rollback in the Windows Surveyor UI.
++
++**Verification completed in this continuation:** focused extension/console/workflow tests 17/17 passed; full suite 130/130 passed; `compileall` passed; 40 JSON files parsed; the 116-entry source ZIP passed integrity and SHA-256 checks. Windows/Tk visual behavior was not run in this Linux environment.
++
++Issues #13 and #14 remain closed as not planned. Their benchmark branches were reset to `main`, removing the test-only help-button project; GitHub branch names remain because the connected API cannot delete refs. The delivered package contains no benchmark help button.
+ 
+ ## Canonical source status
+ 

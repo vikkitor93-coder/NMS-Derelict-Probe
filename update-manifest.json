@@ -17,8 +17,8 @@
     "packages/v0.3.41-full/part-008.b64",
     "packages/v0.3.41-full/part-009.b64"
   ],
-  "package_sha256": "fb7605d7dd013ba78cc7c359c7e50f7d7fc68aa41b734844ea9cf5ddde4f2cce",
-  "package_size": 325804,
+  "package_sha256": "bfb709f5e552a5db94b4fcb5dbcc4478f65c3d34f16cd6a7d01755f6cba6cacc",
+  "package_size": 326191,
   "managed_files": [
     ".gitignore",
     "AGENT_START_HERE.md",
