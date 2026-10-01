@@ -1,17 +1,19 @@
 {
   "schema_version": 1,
   "status": "needs-human-input",
-  "human_required": true,
-  "request": {
-    "surveyor_request": "Use the METADATA-D panel's Prepare assets + upload action to publish current freighter asset evidence in the metadata namespace.",
-    "user_steps": [
-      "Open Surveyor 0.3.41 or later with shared Agent Console API 1.0.",
-      "Select the metadata lane in Agent Console.",
-      "Click Prepare assets + upload.",
-      "Wait for the completion result and return to Main with: check."
-    ],
-    "success_condition": "Surveyor reports the action completed and GitHub contains a timestamped metadata/prepare-assets upload folder.",
-    "evidence_to_return": "The new timestamped metadata upload folder and run manifest.",
-    "full_derelict_traversal_required": false
-  }
+  "state": "waiting_for_user",
+  "human_intervention_required": true,
+  "surveyor_request": "Use the METADATA-D panel's Prepare assets + upload action to publish current freighter asset evidence in the metadata namespace.",
+  "user_steps": [
+    "Open Surveyor 0.3.41 or later with shared Agent Console API 1.0.",
+    "Select the metadata lane in Agent Console.",
+    "Click Prepare assets + upload.",
+    "Wait for the completion result and return to Main with: check."
+  ],
+  "success_condition": "Surveyor reports the action completed and GitHub contains a timestamped metadata/prepare-assets upload folder.",
+  "evidence_to_return": [
+    "The new timestamped metadata upload folder and run manifest."
+  ],
+  "full_derelict_required": false,
+  "updated_utc": "2026-10-01T01:12:53Z"
 }
