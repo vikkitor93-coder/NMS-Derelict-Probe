@@ -34,6 +34,8 @@
     "agent-ui/extensions/index.json",
     "tests/test_seed_lineage_ui_extension.py",
     "AI_HANDOFF.md",
+    "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
+    "agent-patches/seed-lineage/seed-b.patch.gz.b64",
     "agent-patches/seed-lineage/SEED_B_UI_MANIFEST.json",
     "agent-patches/seed-lineage/seed-lineage-ui-1.0.0.patch"
   ],
@@ -42,8 +44,10 @@
     "agent-ui/extensions/seed-lineage/1.0.0/manifest.json": "5ed9fa64b9fa7b87367cfd1bf2485e188c3a310a6f383ea79ba5c88c74938b25",
     "agent-ui/extensions/index.json": "0327c8735910564cbd3d0d336e7940906c09630676b3e812961dcd54f44ec8a5",
     "tests/test_seed_lineage_ui_extension.py": "6fce05ea2aeea3bbc8fa1bdfecf80aae84b75f9cf1d3ccc8dfa09be9c897a5b6",
-    "AI_HANDOFF.md": "e16caeb030f4c8d561520e2b3f32d9f84de8e80e11c28b2a0b04f1198a7eff89",
-    "agent-patches/seed-lineage/seed-lineage-ui-1.0.0.patch": "c1b12f21d8c1e5c2fc95cafe53403b464a90352f4520cf79ae90a69c79f13d4e"
+    "AI_HANDOFF.md": "c400fe3a899fd1120d3743a1e4e7b60d8ac134ce62945a6ba92c8469c815a63c",
+    "agent-patches/seed-lineage/SEED_B_MANIFEST.json": "adc1e30d9a56d8e1a2247bfc4cb8853463e091ea0443c6570be10da311880c28",
+    "agent-patches/seed-lineage/seed-b.patch.gz.b64": "683230fc6544ef7920e56681f2d6136cb4c4bbbafcfe2a95b0343ab8139799de",
+    "agent-patches/seed-lineage/seed-lineage-ui-1.0.0.patch": "329465d0ee3a77c8cdaa658d6abfaa2301869c0561ecf497e9882994f15e9c33"
   },
   "evidence": {
     "measured_facts": [
@@ -60,7 +64,7 @@
     "focused": "python -m unittest tests.test_agent_ui_extensions tests.test_agent_extension_upload_namespace tests.test_seed_lineage_ui_extension tests.test_agent_console tests.test_workflow_stream \u2014 18/18 passed",
     "full": "python -m unittest discover -s tests \u2014 131/131 passed",
     "compileall": "python -m compileall -q tools mod overlay tests \u2014 passed",
-    "json_and_hashes": "42 JSON files parsed; 2 indexed extensions; 0 extension file hash mismatches",
+    "json_and_hashes": "44 JSON files parsed; 2 indexed extensions; 0 extension file hash mismatches",
     "patch": "patch --dry-run -p1 against v0.3.41 candidate \u2014 passed",
     "windows_tk_visual": "not run in the Linux environment"
   },
