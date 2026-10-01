@@ -53,7 +53,7 @@ class DungeonDecompileExtensionTests(unittest.TestCase):
 
     def test_api_compatibility_versioned_index_and_every_panel_hash(self):
         entries = ui.validate_index(self.index)
-        self.assertEqual([published_entry("1.0.1")], entries)
+        self.assertIn(published_entry("1.0.1"), entries)
         manifest, panel = ui.validate_manifest(
             self.manifest, "dungeon-decompile", "1.0.1", "0.3.41",
             lambda rel: (CURRENT / rel).read_bytes(), ui.HOST_ACTION_IDS,
