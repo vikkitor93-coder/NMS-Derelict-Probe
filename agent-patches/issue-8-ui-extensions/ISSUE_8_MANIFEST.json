@@ -2,11 +2,11 @@
   "schema_version": 1,
   "issue": 8,
   "title": "Define versioned agent UI extensions and shared agent instructions",
-  "status": "shared-extension-host-published; four-column-console-layout-prepared; runtime-capture-validation-pending",
-  "candidate_version": "0.3.42",
-  "branch": "codex/agent-console-four-wide-20261001",
+  "status": "shared-extension-host-published; console-scroll-and-upload-controls-prepared; runtime-capture-validation-pending",
+  "candidate_version": "0.3.43",
+  "branch": "codex/agent-console-scroll-upload-20261001",
   "base_commit": "f452433405e85d6911a15199e4ceb993a9ce45ef",
-  "summary": "Refreshes the shared four-lane Surveyor console: independent lane scroll areas, fixed per-lane task and update controls, and bulk extension update.",
+  "summary": "Moves extension version and upload receipt to the top of each lane; adds mouse-wheel scrolling over content and a confirmed sequential Upload all workflow.",
   "changed_project_files": [
     "AGENT_UI_EXTENSION_GUIDE.md",
     "AGENT_START_HERE.md",
@@ -28,10 +28,10 @@
   ],
   "verification": {
     "focused_tests": "17/17 passed",
-    "full_tests": "150/150 passed",
+    "full_tests": "151/151 passed",
     "compileall": "passed",
     "windows_tk_visual_run": "not run in this Linux environment",
-    "continuation_tests": "150 full tests; compileall; package ZIP and base64 chunk reconstruction passed",
+    "continuation_tests": "151 full tests; compileall; ZIP integrity and package-chunk reconstruction passed",
     "handoff_followup_patch": "agent-patches/issue-8-ui-extensions/handoff-followup.patch"
   },
   "safety": {
@@ -58,30 +58,30 @@
     ],
     "full_derelict_traversal_required": false
   },
-  "rollback": "Restore the previous update-manifest.json and v0.3.41 package chunks. For UI panels, use the retained lane-level rollback button.",
+  "rollback": "Restore update-manifest.json to 0.3.42 and use packages/v0.3.42-full. Extension rollback remains available per lane.",
   "artifact": {
-    "file_name": "NMS-Derelict-Probe-v0.3.42.zip",
-    "sha256": "4f3057e82f7ce01c2f62af548b062e460fe8371bed614538dc182d23d10ee67f",
-    "size_bytes": 331865,
-    "files": 116
+    "file_name": "NMS-Derelict-Probe-v0.3.43.zip",
+    "sha256": "ee51b807d755dfe5f62a93bf604d7f61191c90e83a445ce1ae493c8a9a8da043",
+    "size_bytes": 353900,
+    "files": 134
   },
   "package_parts": [
-    "packages/v0.3.42-full/part-000.b64",
-    "packages/v0.3.42-full/part-001.b64",
-    "packages/v0.3.42-full/part-002.b64",
-    "packages/v0.3.42-full/part-003.b64",
-    "packages/v0.3.42-full/part-004.b64",
-    "packages/v0.3.42-full/part-005.b64",
-    "packages/v0.3.42-full/part-006.b64",
-    "packages/v0.3.42-full/part-007.b64",
-    "packages/v0.3.42-full/part-008.b64",
-    "packages/v0.3.42-full/part-009.b64"
+    "packages/v0.3.43-full/part-000.b64",
+    "packages/v0.3.43-full/part-001.b64",
+    "packages/v0.3.43-full/part-002.b64",
+    "packages/v0.3.43-full/part-003.b64",
+    "packages/v0.3.43-full/part-004.b64",
+    "packages/v0.3.43-full/part-005.b64",
+    "packages/v0.3.43-full/part-006.b64",
+    "packages/v0.3.43-full/part-007.b64",
+    "packages/v0.3.43-full/part-008.b64",
+    "packages/v0.3.43-full/part-009.b64"
   ],
   "source_patch": {
-    "path": "NMS-Derelict-Probe-v0.3.42.zip",
-    "sha256": "4f3057e82f7ce01c2f62af548b062e460fe8371bed614538dc182d23d10ee67f",
-    "size_bytes": 331865,
-    "verification": "ZIP integrity passed; base64 update chunks reconstruct exact package."
+    "path": "NMS-Derelict-Probe-v0.3.43.zip",
+    "sha256": "ee51b807d755dfe5f62a93bf604d7f61191c90e83a445ce1ae493c8a9a8da043",
+    "size_bytes": 353900,
+    "verification": "Complete source ZIP passed integrity; updater chunks reconstruct exact package."
   },
   "base_branch": "main"
 }
