@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "extension_id": "metadata",
+  "version": "1.0.0",
+  "compatible_surveyor_api_version": "1.0",
+  "min_surveyor_version": "0.3.41",
+  "dependencies": [
+    "agent-console.ui.v1",
+    "action.research.prepare_assets",
+    "action.research.analyze_generation"
+  ],
+  "entry_point": "panel.json",
+  "files": [
+    {
+      "path": "panel.json",
+      "sha256": "651f40f506b2eeda155ee66523b931bf6fba053551cd6d51a363a5b3900a602a"
+    }
+  ]
+}

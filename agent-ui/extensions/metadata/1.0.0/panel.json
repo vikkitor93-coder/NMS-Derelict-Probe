@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "title": "METADATA-D · Freighter options",
+  "summary": "Prepare current freighter assets and analyze generation evidence. Results are uploaded in the metadata lane.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.prepare_assets",
+      "label": "Prepare assets + upload",
+      "description": "Run Surveyor's reviewed asset preparation workflow and publish its evidence to the metadata lane.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "metadata",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.analyze_generation",
+      "label": "Analyze generation + upload",
+      "description": "Analyze the latest generation capture and publish results to the metadata lane.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "metadata",
+      "parameters": {}
+    }
+  ]
+}
