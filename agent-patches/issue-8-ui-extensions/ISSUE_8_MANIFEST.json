@@ -30,7 +30,9 @@
     "focused_tests": "17/17 passed",
     "full_tests": "130/130 passed",
     "compileall": "passed",
-    "windows_tk_visual_run": "not run in this Linux environment"
+    "windows_tk_visual_run": "not run in this Linux environment",
+    "continuation_tests": "17 focused; 130 full; compileall passed; 40 JSON files parsed",
+    "handoff_followup_patch": "agent-patches/issue-8-ui-extensions/handoff-followup.patch"
   },
   "safety": {
     "extensions_are_data_only": true,
@@ -59,8 +61,8 @@
   "rollback": "Restore the prior update-manifest.json/package chunks to return to v0.3.40. For UI panels, activate a retained older version with the Agent Console rollback button.",
   "artifact": {
     "file_name": "NMS-Derelict-Probe-v0.3.41.zip",
-    "sha256": "fb7605d7dd013ba78cc7c359c7e50f7d7fc68aa41b734844ea9cf5ddde4f2cce",
-    "size_bytes": 325804,
+    "sha256": "bfb709f5e552a5db94b4fcb5dbcc4478f65c3d34f16cd6a7d01755f6cba6cacc",
+    "size_bytes": 326191,
     "files": 116
   },
   "package_parts": [
