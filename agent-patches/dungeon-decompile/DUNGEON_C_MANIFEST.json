@@ -81,5 +81,41 @@
     "room_model_status": "needs-review",
     "analyzer_target_containers": 16,
     "historical_pre_update": "CARGO_FLOATERS; 7 main + 1 dead end; 35 target containers; same root seed candidate"
+  },
+  "surveyor_ui_extension": {
+    "extension_id": "dungeon-decompile",
+    "version": "1.0.1",
+    "compatible_surveyor_api_version": "1.0",
+    "min_surveyor_version": "0.3.41",
+    "request_only": true,
+    "action_id": "research.analyze_generation",
+    "preconditions": [
+      "workflow.idle",
+      "nms.running",
+      "probe.connected"
+    ],
+    "evidence_namespace": "dungeon-decompile",
+    "index_path": "agent-ui/extensions/index.json",
+    "paths": {
+      "panel": "agent-ui/extensions/dungeon-decompile/1.0.1/panel.json",
+      "manifest": "agent-ui/extensions/dungeon-decompile/1.0.1/manifest.json",
+      "tests": "tests/test_dungeon_decompile_extension.py"
+    },
+    "sha256": {
+      "panel": "3d2a37f8331f35b1b7c3ce8e9bcf3786e8e02a822d7fc2bb5e9ff5cf24b56aff",
+      "manifest": "ba74a0d076b4d524fea3c1d65169e3065a825e85a17ae8b4471bf7d16f848c83",
+      "index": "e8c5c7553450958f573e47aca235b42ef1ad9c280317bc77535b46f555bd6152",
+      "test": "3c25783e228e6397157d82f818e187d4551dfece7a5e91c8ddfbe2e1851c201d"
+    },
+    "verification": {
+      "lane_extension_tests": "6/6 passed",
+      "host_extension_and_namespace_tests": "10/10 passed",
+      "full_host_candidate_suite": "136/136 passed",
+      "compileall": "passed",
+      "json_files_parsed": 42,
+      "tested_against": "Surveyor 0.3.41 candidate source; lane panel/index/test overlaid before tests"
+    },
+    "rollback": "Restore index.json to dungeon-decompile/1.0.0/manifest.json, then in Surveyor Agent Console select DUNGEON-C and click Roll back to v1.0.0. Both versions remain installed; do not delete v1.0.1 files.",
+    "new_game_capture_produced_by_tests": false
   }
 }
