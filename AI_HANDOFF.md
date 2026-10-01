@@ -11,6 +11,16 @@ This is the current continuation point for the main integration worker. The cand
 - The DUNGEON-C sample panel launches the existing exact-root-caller offline extractor. It does not require NMS to run or a derelict traversal.
 - Tests cover compatible install, hash/command rejection, failed-update preservation, live version activation, rollback, and evidence namespacing. Tk visual execution on Windows still needs a human machine.
 
+## DUNGEON-C Surveyor extension — 2026-10-01
+
+Lane `dungeon-decompile` has optional extension v1.0.1 on branch `agent/dungeon-decompile`, PR #18 targeting `integration/issue-8-ui-extensions`. It is data-only and uses API 1.0 action `research.analyze_generation`, request-only while this lane needs input, with preconditions `workflow.idle`, `nms.running`, `probe.connected`, empty parameters, and evidence namespace `dungeon-decompile`. Published v1.0.0 remains installed for rollback.
+
+Checks on the Surveyor 0.3.41 candidate with the new lane files overlaid: lane tests 6/6; host extension/namespace tests 10/10; full suite 136/136; compileall passed; 42 JSON files parsed. No live game capture was produced by these tests.
+
+The post-7.05 capture records root seed candidate `9256392A2F5A74AC`, high-confidence inferred preset `MEDI_FLOATERS`, 10 observed rooms, and 16 predicted target containers. The earlier `CARGO_FLOATERS` / 8-room / 35-container result remains historical. Root-seed validity and repeatability are unproven; room count versus table value 7 needs review.
+
+Other open lane PRs also update the shared extension index. Before integration, retain their entries and replace only the DUNGEON-C v1.0.0 row with v1.0.1. PR #18 includes the exact combined index for current companion PRs #16, #17, and #19. Human next action remains the Runtime-A live capture recipe in the DUNGEON-C manifest; no full traversal is required.
+
 ## Exact next action
 
 The issue-8 UI extension host is implemented and its regression checks pass. PR #15 remains a draft; issue #8 remains open because the unified probe-capture requirement and Windows visual validation are still outstanding. Do not claim full issue acceptance or merge the candidate as the completed issue.
