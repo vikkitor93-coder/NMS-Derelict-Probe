@@ -11,6 +11,14 @@ This is the current continuation point for the main integration worker. The cand
 - The DUNGEON-C sample panel launches the existing exact-root-caller offline extractor. It does not require NMS to run or a derelict traversal.
 - Tests cover compatible install, hash/command rejection, failed-update preservation, live version activation, rollback, and evidence namespacing. Tk visual execution on Windows still needs a human machine.
 
+## Runtime-dispatch UI extension candidate
+
+- Lane branch: `agent/runtime-dispatch-ui` (PR base: `integration/issue-8-ui-extensions`).
+- Adds request-only extension `runtime-dispatch` v1.0.0 for Surveyor UI API 1.0.
+- It requests only `research.analyze_generation`, gated by `workflow.idle`, `nms.running`, and `probe.connected`; evidence stays namespaced to `runtime-dispatch`. The action uploads the Runtime-A dispatch file when the compatible probe has captured it.
+- This is additive data and tests only. It does not alter Surveyor core, controller/probe protocols, or the standalone Runtime-A workflow.
+- Focused extension tests: 8 passed. Full suite after this addition: 138 passed. Windows visual refresh and a fresh live NMS dispatch capture remain unverified.
+
 ## Exact next action
 
 The issue-8 UI extension host is implemented and its regression checks pass. PR #15 remains a draft; issue #8 remains open because the unified probe-capture requirement and Windows visual validation are still outstanding. Do not claim full issue acceptance or merge the candidate as the completed issue.
@@ -151,3 +159,12 @@ The exact external call at `02BFCC17` decoded as `FF 52 10`, targeting the verif
 - Lanes: `agent/runtime-dispatch`, `agent/seed-lineage`, `agent/dungeon-decompile`, `agent/metadata`; integration is the only lane that combines proven changes.
 - Every experimental Surveyor must visibly identify its lane/build (for example `Surveyor · RUNTIME-A`) and write evidence under a lane-specific namespace so simultaneous variants cannot be confused.
 - Agents publish a PR containing source changes, tests, evidence schema changes, and a concise handoff. Main integration accepts only reproducible/proven findings.
+
+
+## Runtime-dispatch UI extension (post-7.05)
+
+**Measured from the supplied post-7.05 capture:** the same known system retains root seed `9256392A2F5A74AC` and now reports `MEDI_FLOATERS`, 10 rooms, and 16 containers. The older pre-update `CARGO_FLOATERS`, 8-room, 35-container observation is historical; it is not the current expected layout.
+
+**Runtime-A lane state:** the generation-layout change does not itself validate the live `owner+0x10` dispatch slot. RUNTIME-A still needs the value at that slot captured at the exact root event, along with the target/module/RVA (when applicable), bounded target bytes/thunk chain, and the descriptor at `owner+0x128`. No full derelict traversal is required. Do not hot-swap probe hooks; use a compatible probe build on a fresh NMS launch if a probe change is needed.
+
+**Optional Surveyor panel:** `agent-ui/extensions/runtime-dispatch/1.0.0/` adds a data-only API 1.0 panel that requests only `research.analyze_generation`, gated by `workflow.idle`, `nms.running`, and `probe.connected`, with evidence namespace `runtime-dispatch`. The panel is `request_only` while this lane still needs live human validation. Existing standalone RUNTIME-A remains the fallback until the shared host candidate and this lane extension are integrated.

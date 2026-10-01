@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "lane": "runtime-dispatch",
+  "extension": {
+    "extension_id": "runtime-dispatch",
+    "version": "1.0.0",
+    "compatible_surveyor_api_version": "1.0",
+    "min_surveyor_version": "0.3.41",
+    "branch": "agent/runtime-dispatch-ui",
+    "base_branch": "integration/issue-8-ui-extensions",
+    "base_commit": "9aae5e339a91ede605c5d089e36c65f029fa8467"
+  },
+  "objective": "Add the optional data-only RUNTIME-A panel to the shared Surveyor host API 1.0; preserve the standalone Runtime-A workflow and existing host/probe protocols.",
+  "changed_files": [
+    "agent-ui/extensions/runtime-dispatch/1.0.0/panel.json",
+    "agent-ui/extensions/runtime-dispatch/1.0.0/manifest.json",
+    "agent-ui/extensions/index.json",
+    "tests/test_agent_ui_runtime_dispatch_extension.py",
+    "AI_HANDOFF.md",
+    "agent-patches/runtime-dispatch/RUNTIME_UI_MANIFEST.json"
+  ],
+  "sha256": {
+    "agent-ui/extensions/runtime-dispatch/1.0.0/panel.json": "6c519de7bcad12382de8e90c73be8785beb45b729db70a2f1eb9d2296e4e3a2b",
+    "agent-ui/extensions/runtime-dispatch/1.0.0/manifest.json": "c82451eeacdfa1f4575bd7cdfd2fa54ea2ce13bb4e3b70f3e303db59f300626a",
+    "agent-ui/extensions/index.json": "9f210096afe55311e41c022eacc76cb90002d3aace1b8bf81c40d2027f4a6593",
+    "tests/test_agent_ui_runtime_dispatch_extension.py": "1fc1e2efce296957269c199fa450e90ed9a815532d98bd5c833df801a15aa148",
+    "AI_HANDOFF.md": "f4c2b4ad9c1459bb9ca7c323d7f7bb68c9562ccb60792218c0a2f7deec734323"
+  },
+  "evidence": {
+    "measured_post_7_05": "The supplied latest capture reports the same known system root seed 9256392A2F5A74AC with MEDI_FLOATERS, 10 rooms, and 16 containers.",
+    "historical_pre_7_05": "CARGO_FLOATERS, 8 rooms, and 35 containers is retained as historical evidence and is not the current expected layout.",
+    "inference": "The observed layout changed while the reported root seed stayed the same; no cause is asserted.",
+    "hypothesis": "Cause of the changed layout is unknown; this extension does not propose one.",
+    "new_evidence_produced_by_pr": "None. This PR records the existing capture facts in the lane panel and tests.",
+    "remaining_runtime_evidence": "The live owner+0x10 dispatch value and target identity at the exact root event remain unvalidated by the lane manifest."
+  },
+  "action": {
+    "action_id": "research.analyze_generation",
+    "preconditions": [
+      "workflow.idle",
+      "nms.running",
+      "probe.connected"
+    ],
+    "evidence_namespace": "runtime-dispatch",
+    "parameters": {},
+    "request_only": true
+  },
+  "verification": {
+    "focused_tests": "8/8 passed: python -m unittest tests.test_agent_ui_runtime_dispatch_extension -v",
+    "full_tests": "138/138 passed: python -m unittest discover -s tests -v",
+    "compileall": "passed: python -m compileall -q tools mod overlay tests",
+    "json": "42 files parsed successfully",
+    "extension_hashes": "manifest panel file hash matched; lowercase SHA-256 verified",
+    "windows_visual_refresh": "not run (Linux environment)"
+  },
+  "rollback": [
+    "Before merge: close the lane PR.",
+    "After merge: revert the runtime-dispatch UI extension commit; this removes the lane index entry, panel/manifest, tests, lane manifest, and handoff section without changing Surveyor host behavior or the existing standalone Runtime-A workflow.",
+    "If a later panel version is installed, use the host rollback control to reactivate the newest older installed version; 1.0.0 is the first runtime-dispatch extension version."
+  ],
+  "human_action_required": {
+    "purpose": "Capture the live Runtime-A owner+0x10 dispatch value at the exact root event; no full derelict traversal is required.",
+    "steps": [
+      "Run the compatible RUNTIME-A build (the existing standalone RUNTIME-A workflow works while the API candidate is pending integration).",
+      "Open Surveyor RUNTIME-A > click Start NMS.",
+      "Load the same known derelict until the exact Root dispatch +0x10 event is captured.",
+      "Click Analyze generation + upload.",
+      "Check that the upload includes the post-7.05 baseline and the exact-root dispatch evidence; return to Main and say check."
+    ],
+    "full_derelict_traversal_required": false,
+    "probe_change_requires_compatible_build_and_fresh_nms_launch": true
+  }
+}

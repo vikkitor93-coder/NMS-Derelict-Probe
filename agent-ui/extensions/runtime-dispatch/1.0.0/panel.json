@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "title": "RUNTIME-A · Live root dispatch",
+  "summary": "Post-7.05 measured baseline: the same known system and root seed 9256392A2F5A74AC now produce MEDI_FLOATERS, 10 rooms, and 16 containers. The pre-update CARGO_FLOATERS, 8-room, 35-container layout is historical. To finish Runtime-A validation, capture the live owner+0x10 dispatch value at the exact root event, then analyze and upload. No full derelict traversal is required.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.analyze_generation",
+      "label": "Analyze generation + upload",
+      "description": "Run the reviewed generation analysis and upload the post-7.05 generation baseline plus any Runtime-A exact-root dispatch evidence supplied by the installed compatible lane build.",
+      "preconditions": [
+        "workflow.idle",
+        "nms.running",
+        "probe.connected"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    }
+  ]
+}
