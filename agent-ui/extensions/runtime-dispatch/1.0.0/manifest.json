@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "extension_id": "runtime-dispatch",
+  "version": "1.0.0",
+  "compatible_surveyor_api_version": "1.0",
+  "min_surveyor_version": "0.3.41",
+  "dependencies": [
+    "agent-console.ui.v1",
+    "action.research.analyze_generation"
+  ],
+  "entry_point": "panel.json",
+  "files": [
+    {
+      "path": "panel.json",
+      "sha256": "b2e49f0d1cefc41b98f91706b43dd8dfc3f3fcba8588977cb8f3f1452f314393"
+    }
+  ]
+}
