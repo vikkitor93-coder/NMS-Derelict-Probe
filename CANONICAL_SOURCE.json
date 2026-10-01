@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "version": "0.3.41",
-  "status": "integration-candidate",
+  "version": "0.3.42",
+  "status": "release-candidate",
   "artifact": {
     "storage": "github-base64-chunks-and-chatgpt-library",
-    "file_name": "NMS-Derelict-Probe-v0.3.41.zip",
-    "sha256": "bfb709f5e552a5db94b4fcb5dbcc4478f65c3d34f16cd6a7d01755f6cba6cacc",
-    "size_bytes": 326191,
+    "file_name": "NMS-Derelict-Probe-v0.3.42.zip",
+    "sha256": "4f3057e82f7ce01c2f62af548b062e460fe8371bed614538dc182d23d10ee67f",
+    "size_bytes": 331865,
     "files": 116
   },
   "repository_transport": {
@@ -15,13 +15,14 @@
   },
   "verification": {
     "focused_tests": "17/17 passed",
-    "unit_tests": "130/130 passed",
+    "unit_tests": "150/150 passed",
     "compileall": "passed",
     "json_files_parsed": 40,
     "zip_integrity": "passed",
     "game_probe_logic_changed": false,
     "source_patch_reconstruction": "passed",
-    "package_refresh": "handoff-only continuation update"
+    "package_refresh": "handoff-only continuation update",
+    "in_app_update": "v0.3.42 package and matching base64 chunks prepared"
   },
   "resume": {
     "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json and AI_HANDOFF.md first; the complete ZIP is the source snapshot.",
