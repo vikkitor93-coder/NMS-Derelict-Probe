@@ -1,8 +1,8 @@
-# AI handoff — NMS Derelict Probe v0.3.41 candidate
+# AI handoff — NMS Derelict Probe v0.3.41 published release
 
 ## Current handoff state
 
-This is the current continuation point for the main integration worker. The candidate is based on the v0.3.40 Live Output package and is prepared on `integration/issue-8-ui-extensions`; it is not yet the installed `main` release.
+The v0.3.41 Surveyor extension host and four lane panels are published on `main` by PR #21. The installed source package is available through `update-manifest.json`; issue #8 remains partially complete pending the Windows visual check and Runtime-A capture validation.
 
 - Issue #8 adds `AGENT_UI_EXTENSION_GUIDE.md`, a shared Surveyor UI API 1.0, a data-only JSON extension loader, and four optional lane panels (DUNGEON-C, METADATA-D, runtime-dispatch, and seed-lineage).
 - Extensions are downloaded into staging, checked against declared dependencies and SHA-256 hashes, checked for host/API compatibility, and activated without restarting Surveyor. Previous versions remain available for rollback.
@@ -13,11 +13,11 @@ This is the current continuation point for the main integration worker. The cand
 
 ## Exact next action
 
-The issue-8 UI extension host is implemented and its regression checks pass. PR #15 remains a draft; issue #8 remains open because the unified probe-capture requirement and Windows visual validation are still outstanding. Do not claim full issue acceptance or merge the candidate as the completed issue.
+The issue-8 host and panels are published. Issue #8 remains open because the shared probe-capture requirement and Windows visual validation are outstanding; the release does not claim full issue acceptance.
 
 **Next human action (Windows; no full derelict traversal):** use the Runtime-A Surveyor build identified by `agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json` > start Surveyor > click **Start NMS** > load the known derelict only until **Root dispatch +0x10 captured** appears > click **Analyze generation + upload** > return to Main and write `check`. Then review whether the capture hook is compatible with the other lane profiles before integration. Separately, visually verify the DUNGEON-C extension refresh and rollback in the Windows Surveyor UI.
 
-**Verification completed in this continuation:** focused extension/console/workflow tests 17/17 passed; full suite 130/130 passed; `compileall` passed; 40 JSON files parsed; the 116-entry source ZIP passed integrity and SHA-256 checks. Windows/Tk visual behavior was not run in this Linux environment.
+**Verification recorded across candidate overlays:** host focused suite 17/17 and full suite 130/130; DUNGEON-C candidate suite 136/136; runtime-dispatch full suite 138/138; seed-lineage full suite 131/131; metadata parser/hash checks passed. The lane suites were not rerun together after publication. Each catalog entry points to its matching manifest and all four published panel SHA-256 values match. Windows/Tk visual behavior was not run in this Linux environment.
 
 Issues #13 and #14 remain closed as not planned. Their benchmark branches were reset to `main`, removing the test-only help-button project; GitHub branch names remain because the connected API cannot delete refs. The delivered package contains no benchmark help button.
 
