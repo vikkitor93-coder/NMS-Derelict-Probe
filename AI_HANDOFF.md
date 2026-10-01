@@ -9,9 +9,10 @@ New agents should read in this order:
 1. `AGENT_START_HERE.md`
 2. `WORKSPACE_STATE.json`
 3. `RESEARCH_INDEX.md`
-4. this file
-5. `AGENT_WORKFLOW.md`
-6. the assigned lane manifest and only relevant changed files/evidence
+4. `PROJECT_PROFILE.md` for stable project context and constraints
+5. this file for current technical state and next action
+6. `AGENT_WORKFLOW.md`
+7. the assigned lane manifest and only relevant changed files/evidence
 
 The repository is the continuity layer between normal ChatGPT, Work, Codex, and other AI agents. Do not rely on hidden chat context.
 
