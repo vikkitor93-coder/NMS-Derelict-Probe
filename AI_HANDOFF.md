@@ -1,8 +1,8 @@
-# AI handoff — NMS Derelict Probe v0.3.42 release candidate
+# AI handoff — NMS Derelict Probe v0.3.43 release candidate
 
 ## Current handoff state
 
-This continuation adds a four-column Agent Console and packages the update as v0.3.42. The shared extension host is already published on main in v0.3.41; this release refreshes the installed Surveyor UI. The updater package is prepared for main integration.
+This continuation improves the four-column Agent Console and packages v0.3.43 for main integration. The shared extension host is already published on main; this release adds content-area wheel scrolling, moves lane extension/upload state to the top, and adds a confirmed sequential Upload all action.
 
 - Issue #8 adds `AGENT_UI_EXTENSION_GUIDE.md`, a shared Surveyor UI API 1.0, a data-only JSON extension loader, and one DUNGEON-C sample panel.
 - Extensions are downloaded into staging, checked against declared dependencies and SHA-256 hashes, checked for host/API compatibility, and activated without restarting Surveyor. Previous versions remain available for rollback.
@@ -23,7 +23,7 @@ Issues #13 and #14 remain closed as not planned. Their benchmark branches were r
 
 ## Canonical source status
 
-The integrated canonical release is v0.3.41. The v0.3.42 update becomes available to installed clients when its `update-manifest.json` and full-package chunks are merged together.
+The integrated canonical release is v0.3.42. The v0.3.43 update becomes available to installed clients when its `update-manifest.json` and full-package chunks are merged together.
 
 ---
 
@@ -160,3 +160,12 @@ The exact external call at `02BFCC17` decoded as `FF 52 10`, targeting the verif
 - Lane research actions, Copy full steps, individual extension updates, and rollback controls stay in the bottom strip. Update all installs all available lane extension updates after one confirmation.
 - Evidence upload receipts remain visible per lane. The live game/probe capture protocol is unchanged.
 - Verification: 150 tests pass; compileall and full-package reconstruction/integrity checks pass. Windows Tk visual QA remains outstanding.
+
+
+## v0.3.43 console update
+
+- Lane extension status/version and evidence-upload confirmation now appear at the top of each card.
+- Mouse-wheel scrolling routes to the nearest scroll canvas beneath the pointer in the main app and Agent Console; Tk Text output keeps native scrolling.
+- Upload all requires confirmation, runs only lane actions currently allowed by lane requests and preconditions, and executes them one at a time. Each action rechecks eligibility before running.
+- Verification: 151 tests and compileall passed; the v0.3.43 full package and base64 reconstruction match SHA-256. Windows visual QA remains pending.
+- Next action: install v0.3.43 and check mouse-wheel behavior over the main window and lane panels, then test Upload all with the intended lane requests.
