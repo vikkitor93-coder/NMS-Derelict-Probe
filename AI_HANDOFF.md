@@ -1,29 +1,40 @@
-# AI handoff — NMS Derelict Probe v0.3.41 published release
+# AI handoff — NMS Derelict Probe v0.3.41 candidate
 
 ## Current handoff state
 
-The v0.3.41 Surveyor extension host and four lane panels are published on `main` by PR #21. The installed source package is available through `update-manifest.json`; issue #8 remains partially complete pending the Windows visual check and Runtime-A capture validation.
+This is the current continuation point for the main integration worker. The candidate is based on the v0.3.40 Live Output package and is prepared on `integration/issue-8-ui-extensions`; it is not yet the installed `main` release.
 
-- Issue #8 adds `AGENT_UI_EXTENSION_GUIDE.md`, a shared Surveyor UI API 1.0, a data-only JSON extension loader, and four optional lane panels (DUNGEON-C, METADATA-D, runtime-dispatch, and seed-lineage).
+- Issue #8 adds `AGENT_UI_EXTENSION_GUIDE.md`, a shared Surveyor UI API 1.0, a data-only JSON extension loader, and one DUNGEON-C sample panel.
 - Extensions are downloaded into staging, checked against declared dependencies and SHA-256 hashes, checked for host/API compatibility, and activated without restarting Surveyor. Previous versions remain available for rollback.
 - Extension panels can request only the eight stable `research.*` host action IDs. No agent-provided code, shell command, path, or process arguments are run. Preconditions are rechecked at click time.
 - Evidence uploads initiated through a lane extension use a timestamped `<lane>-<action>` folder and run manifest. Local action records are also stored under `%LOCALAPPDATA%\NMSDerelictSurveyor\ui-extensions\<lane>\runs`.
 - The DUNGEON-C sample panel launches the existing exact-root-caller offline extractor. It does not require NMS to run or a derelict traversal.
 - Tests cover compatible install, hash/command rejection, failed-update preservation, live version activation, rollback, and evidence namespacing. Tk visual execution on Windows still needs a human machine.
 
+## Seed-lineage Surveyor extension 1.0.0
+
+- Added a data-only panel at `agent-ui/extensions/seed-lineage/1.0.0/` using host API 1.0.
+- Preserved the previously published `SEED_B_MANIFEST.json` and `seed-b.patch.gz.b64` lane artifacts.
+- The panel requests only `research.analyze_seed_function`, requires `workflow.idle`, sends empty parameters, and scopes uploads to `seed-lineage`.
+- `request_only` is false because this lane currently has no pending human validation; the offline action remains available.
+- The panel and manifest are indexed and SHA-256 checked. The standalone Seed-B workflow and all host/controller/probe code are unchanged.
+- To roll back, select the prior installed extension version in Agent Console. If no prior seed-lineage version exists, remove its index entry and extension folder; host core actions and the standalone workflow remain available.
+- Latest lane evidence: baseline root seed `9256392A2F5A74AC`; post-7.05 capture is `MEDI_FLOATERS`, 10 rooms, 16 containers. The earlier `CARGO_FLOATERS`, 8-room, 35-container layout is historical. The system-seed-to-root-seed derivation remains unknown.
+- Verification for this panel is recorded in `tests/test_seed_lineage_ui_extension.py` and the lane PR manifest.
+
 ## Exact next action
 
-The issue-8 host and panels are published. Issue #8 remains open because the shared probe-capture requirement and Windows visual validation are outstanding; the release does not claim full issue acceptance.
+The issue-8 UI extension host is implemented and its regression checks pass. PR #15 remains a draft; issue #8 remains open because the unified probe-capture requirement and Windows visual validation are still outstanding. Do not claim full issue acceptance or merge the candidate as the completed issue.
 
 **Next human action (Windows; no full derelict traversal):** use the Runtime-A Surveyor build identified by `agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json` > start Surveyor > click **Start NMS** > load the known derelict only until **Root dispatch +0x10 captured** appears > click **Analyze generation + upload** > return to Main and write `check`. Then review whether the capture hook is compatible with the other lane profiles before integration. Separately, visually verify the DUNGEON-C extension refresh and rollback in the Windows Surveyor UI.
 
-**Combined published-source verification:** full test suite 145/145 passed after reconciling the DUNGEON-C test with the shared four-entry catalog; `compileall` passed; 52 JSON files parsed; all four extension manifest hashes passed; the complete source ZIP passed integrity verification (SHA-256 `9d513cd1bb46b3d757d8b67c70a6e799058f092bff2f2c1817acaba564453898`). Windows/Tk visual behavior was not run in this Linux environment.
+**Verification completed in this continuation:** focused extension/console/workflow tests 17/17 passed; full suite 130/130 passed; `compileall` passed; 40 JSON files parsed; the 116-entry source ZIP passed integrity and SHA-256 checks. Windows/Tk visual behavior was not run in this Linux environment.
 
 Issues #13 and #14 remain closed as not planned. Their benchmark branches were reset to `main`, removing the test-only help-button project; GitHub branch names remain because the connected API cannot delete refs. The delivered package contains no benchmark help button.
 
 ## Canonical source status
 
-The published canonical release is v0.3.41. Its `update-manifest.json` and full-package chunks are on `main`; the complete source ZIP with all four panels and extension tests is stored at `/NMS modding/NMS-Derelict-Probe-v0.3.41-published.zip` and passes ZIP integrity verification.
+The last integrated canonical release is v0.3.38. The v0.3.41 candidate package must become authoritative only after its updated root `update-manifest.json` and full-package chunks are merged together.
 
 ---
 
@@ -81,9 +92,9 @@ Verification for v0.3.34: 106/106 regression tests, compileall, packaged JSON pa
 
 ## 2026-10-01 seed-lineage analyzer diagnostic
 
-The `Analyze seed function + upload` diagnostic failed at compiler-padding boundary lookup. Evidence is recorded at `research-uploads/20261001T023658Z-seed-lineage-analyze-seed-function-diagnostic/`. The caller and upstream JSONs share universe address `00001A0004E84EFD`, root seed `9256392A2F5A74AC`, and call RVA `00635110`, but their capture sessions and NMS.exe SHA-256 values differ. The caller JSON reports `baseline_window_matches_exe: false`. The saved candidate `00634BC0` is not validated for this caller capture and must not be treated as a current function boundary.
+The `Analyze seed function + upload` diagnostic failed at the compiler-padding boundary lookup. Evidence is recorded at `research-uploads/20261001T023658Z-seed-lineage-analyze-seed-function-diagnostic/`. The caller and upstream JSONs share universe address `00001A0004E84EFD`, root seed `9256392A2F5A74AC`, and call RVA `00635110`, but have different capture sessions and NMS.exe SHA-256 values. The caller JSON also reports `baseline_window_matches_exe: false`. The earlier saved candidate `00634BC0` is not validated for this caller capture and must not be carried forward.
 
-**Next:** fully exit and relaunch NMS from the installed executable, capture only the root resource event at the known system, run Surveyor's **Extract caller code + upload**, and verify the executable-window match before rerunning upstream analysis. No full traversal is required. No probe/controller code change has been made based on this mismatched evidence.
+Next: fully exit and relaunch NMS from the installed executable, capture only the root resource event at the known system, run **Extract caller code + upload**, and verify the executable-window match. No full traversal is required. No probe/controller code change has been made based on this mismatched evidence.
 
 ## Research state
 
@@ -157,3 +168,12 @@ The exact external call at `02BFCC17` decoded as `FF 52 10`, targeting the verif
 - Lanes: `agent/runtime-dispatch`, `agent/seed-lineage`, `agent/dungeon-decompile`, `agent/metadata`; integration is the only lane that combines proven changes.
 - Every experimental Surveyor must visibly identify its lane/build (for example `Surveyor · RUNTIME-A`) and write evidence under a lane-specific namespace so simultaneous variants cannot be confused.
 - Agents publish a PR containing source changes, tests, evidence schema changes, and a concise handoff. Main integration accepts only reproducible/proven findings.
+
+## Seed-lineage Surveyor extension 1.0.1
+
+The indexed seed-lineage extension is now v1.0.1. It is request-only while the lane needs a fresh human capture. It displays the exact recovery sequence: fully exit/relaunch NMS from the installed executable, capture only the root resource event at universe `00001A0004E84EFD`, then run **Extract caller code + upload**. Verify `baseline_window_matches_exe=true` before rerunning upstream analysis. No full derelict traversal is required.
+
+The panel uses registered action `research.extract_caller_code`, precondition `workflow.idle`, empty API 1.0 parameters, and evidence namespace `seed-lineage`. The prior 1.0.0 directory remains unchanged for rollback. This update changes no Surveyor host, controller, probe, or standalone workflow code.
+
+To install in the running program: open Agent Console > choose `seed-lineage` > **Check extensions** > install/update to **1.0.1**. To roll back, choose the installed 1.0.0 version in the panel rollback controls.
+
