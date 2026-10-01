@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "lane_id": "seed-lineage",
+  "extension": {
+    "extension_id": "seed-lineage",
+    "version": "1.0.1",
+    "compatible_surveyor_api_version": "1.0",
+    "min_surveyor_version": "0.3.41",
+    "action_id": "research.extract_caller_code",
+    "preconditions": [
+      "workflow.idle"
+    ],
+    "evidence_namespace": "seed-lineage",
+    "parameters": {},
+    "request_only": true,
+    "files": [
+      {
+        "path": "agent-ui/extensions/seed-lineage/1.0.1/panel.json",
+        "sha256": "967b94dd76a88e23c6c969a6839542d9caa1b34b0ab387682ec0fdf18bea40a5"
+      },
+      {
+        "path": "agent-ui/extensions/seed-lineage/1.0.1/manifest.json",
+        "sha256": "0c3447c85b590bae156ee73a1fb7768f882c723d9259737a4ac808bc3ea4d09e"
+      }
+    ]
+  },
+  "base": {
+    "branch": "main",
+    "commit": "0415fc9e2ba2d457901fe49a8ff77b4c90530933"
+  },
+  "changed_files": [
+    "agent-ui/extensions/seed-lineage/1.0.1/panel.json",
+    "agent-ui/extensions/seed-lineage/1.0.1/manifest.json",
+    "agent-ui/extensions/index.json",
+    "tests/test_seed_lineage_ui_extension.py",
+    "AI_HANDOFF.md",
+    "agent-patches/seed-lineage/SEED_B_UI_MANIFEST.json"
+  ],
+  "evidence": {
+    "measured_facts": [
+      "The prior caller capture reports baseline_window_matches_exe=false.",
+      "The current post-7.05 capture records root seed 9256392A2F5A74AC, MEDI_FLOATERS, 10 rooms, and 16 containers.",
+      "The earlier CARGO_FLOATERS, 8-room, 35-container layout is historical."
+    ],
+    "inferences": [
+      "A fresh caller capture should be matched to the installed executable before analyzer output is trusted."
+    ],
+    "hypotheses": []
+  },
+  "verification": {
+    "focused_tests": "python -m unittest discover -s tests -p 'test_seed_lineage_ui_extension.py' && ... test_agent_ui_extensions.py && ... test_agent_extension_upload_namespace.py && ... test_agent_console.py \u2014 17/17 passed",
+    "manifest_api_compatibility": "passed; schema 1, Surveyor API 1.0, installed host 0.3.41",
+    "extension_hashes": "passed; lowercase SHA-256 verified against panel.json",
+    "invalid_content_rejection": "passed in test_agent_ui_extensions.py (unknown shell action/fields and incompatible dependencies rejected)",
+    "live_refresh_and_rollback": "passed in test_agent_ui_extensions.py (new version detected/activated; prior version retained and restorable)",
+    "action_preconditions": "passed; workflow.idle rejected when false and accepted when true",
+    "evidence_namespacing": "passed; seed-lineage upload path and local record tests",
+    "index_preservation": "passed; all 4 current main extension entries retained, seed-lineage bumped to 1.0.1",
+    "version_1_0_0_overwritten": false,
+    "windows_visual_smoke": "not run in this Linux environment"
+  },
+  "rollback": [
+    "In Agent Console, choose seed-lineage rollback and activate 1.0.0.",
+    "If needed, remove only seed-lineage 1.0.1 from the extension index and revert the 1.0.1 files; retain 1.0.0 and all other index entries."
+  ],
+  "file_sha256": {
+    "agent-ui/extensions/seed-lineage/1.0.1/panel.json": "967b94dd76a88e23c6c969a6839542d9caa1b34b0ab387682ec0fdf18bea40a5",
+    "agent-ui/extensions/seed-lineage/1.0.1/manifest.json": "0c3447c85b590bae156ee73a1fb7768f882c723d9259737a4ac808bc3ea4d09e",
+    "agent-ui/extensions/index.json": "b4cdbce7c0be99c0e1676ce3794d08401140b41876e926f10d8bf790d197d939",
+    "tests/test_seed_lineage_ui_extension.py": "ed3d34bf918c3dd4aed0826f20040294a34ab52236e2577572ec47fb4d60f19c",
+    "agent-patches/seed-lineage/SEED_B_UI_MANIFEST.json": "19cc40951a40a5a8aa50553c14f95805dda844facc5c6d1a7dc8ea0c63170201",
+    "AI_HANDOFF.md": "187657a562998b287e0a82b1b2eec4bc60fdc596915c5ac773541c7ead908334"
+  }
+}
