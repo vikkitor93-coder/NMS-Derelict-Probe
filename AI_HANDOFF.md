@@ -13,11 +13,12 @@ This is the current continuation point for the main integration worker. The cand
 
 ## Runtime-dispatch UI extension candidate
 
-- Lane branch: `agent/runtime-dispatch-ui` (PR base: `integration/issue-8-ui-extensions`).
+- Assigned lane branch remains `agent/runtime-dispatch`; this API-host extension continuation is isolated on `agent/runtime-dispatch-ui` and targets `integration/issue-8-ui-extensions`.
 - Adds request-only extension `runtime-dispatch` v1.0.0 for Surveyor UI API 1.0.
 - It requests only `research.analyze_generation`, gated by `workflow.idle`, `nms.running`, and `probe.connected`; evidence stays namespaced to `runtime-dispatch`. The action uploads the Runtime-A dispatch file when the compatible probe has captured it.
 - This is additive data and tests only. It does not alter Surveyor core, controller/probe protocols, or the standalone Runtime-A workflow.
-- Focused extension tests: 8 passed. Full suite after this addition: 138 passed. Windows visual refresh and a fresh live NMS dispatch capture remain unverified.
+- Post-7.05 capture analysis reports seed candidate `9256392A2F5A74AC`, high-confidence `MEDI_FLOATERS` preset inference, 10 modeled rooms (8 main + 2 dead-end), and 16 analyzer-predicted container targets. The seed capture remains unverified, 8 main rooms differ from table `Rooms=7`, and target counts are not verified physical counts. The pre-update `CARGO_FLOATERS` 8-room / 35-target observation is historical; cause and repeatability are unknown.
+- Focused extension tests: 8 passed. Full suite after this addition: 138 passed. Windows visual refresh and a fresh live NMS dispatch capture remain unverified. PR #17 and #18 also edit the shared extension index; after combining all lane PRs, preserve the three entries listed in `agent-patches/runtime-dispatch/RUNTIME_UI_MANIFEST.json` under `integration_index_resolution`.
 
 ## Exact next action
 
@@ -163,7 +164,9 @@ The exact external call at `02BFCC17` decoded as `FF 52 10`, targeting the verif
 
 ## Runtime-dispatch UI extension (post-7.05)
 
-**Measured from the supplied post-7.05 capture:** the same known system retains root seed `9256392A2F5A74AC` and now reports `MEDI_FLOATERS`, 10 rooms, and 16 containers. The older pre-update `CARGO_FLOATERS`, 8-room, 35-container observation is historical; it is not the current expected layout.
+**Post-7.05 capture analysis reports:** root-seed candidate `9256392A2F5A74AC`, high-confidence `MEDI_FLOATERS` preset inference, 10 modeled rooms (8 main + 2 dead-end), and 16 analyzer-predicted container targets. The root-seed capture remains unverified; 8 main rooms differ from table `Rooms=7`; predicted targets are not verified physical counts. The earlier `CARGO_FLOATERS`, 8-room, 35-target observation is historical.
+
+**Inference:** one post-update sample is consistent with a layout change while the reported seed candidate stayed the same. It does not establish repeatability or changed seed derivation. **Hypothesis:** the cause is unknown.
 
 **Runtime-A lane state:** the generation-layout change does not itself validate the live `owner+0x10` dispatch slot. RUNTIME-A still needs the value at that slot captured at the exact root event, along with the target/module/RVA (when applicable), bounded target bytes/thunk chain, and the descriptor at `owner+0x128`. No full derelict traversal is required. Do not hot-swap probe hooks; use a compatible probe build on a fresh NMS launch if a probe change is needed.
 
