@@ -23,7 +23,7 @@ Issues #13 and #14 remain closed as not planned. Their benchmark branches were r
 
 ## Canonical source status
 
-The published canonical release is v0.3.41. Its `update-manifest.json` and full-package chunks are on `main`; the complete source ZIP with all four panels and extension tests is stored at `/NMS modding/NMS-Derelict-Probe-v0.3.41-published.zip` (SHA-256 `9d513cd1bb46b3d757d8b67c70a6e799058f092bff2f2c1817acaba564453898`).
+The published canonical release is v0.3.41. Its `update-manifest.json` and full-package chunks are on `main`; the complete source ZIP with all four panels and extension tests is stored at `/NMS modding/NMS-Derelict-Probe-v0.3.41-published.zip` and passes ZIP integrity verification.
 
 ---
 
