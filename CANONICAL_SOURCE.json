@@ -1,32 +1,35 @@
 {
   "schema_version": 2,
-  "version": "0.3.40",
-  "status": "verified-release-source-package",
+  "version": "0.3.41",
+  "status": "integration-candidate",
   "artifact": {
-    "storage": "github-base64-chunks-and-local-zip",
-    "file_name": "NMS-Derelict-Probe-v0.3.40-live-output.zip",
-    "sha256": "7c0da2344c479b832b0bf1a3e4d3b72ab0bcf9390e1c6af1b200b6b68e693520",
-    "size_bytes": 314940,
-    "files": 109
+    "storage": "github-base64-chunks-and-chatgpt-library",
+    "file_name": "NMS-Derelict-Probe-v0.3.41.zip",
+    "sha256": "bfb709f5e552a5db94b4fcb5dbcc4478f65c3d34f16cd6a7d01755f6cba6cacc",
+    "size_bytes": 326191,
+    "files": 116
   },
   "repository_transport": {
     "status": "reproducible-base64-chunks",
-    "reason": "The main-branch update manifest serves the verified complete ZIP as base64 chunks after integration; the local ZIP is available for direct download."
+    "reason": "The complete ZIP is retained as a direct Library artifact and reproducibly encoded in the repository package chunk format."
   },
   "verification": {
-    "unit_tests": "120/120 passed",
+    "focused_tests": "17/17 passed",
+    "unit_tests": "130/130 passed",
     "compileall": "passed",
-    "json_files_parsed": 37,
-    "runtime_logic_changed": true
+    "json_files_parsed": 40,
+    "zip_integrity": "passed",
+    "game_probe_logic_changed": false,
+    "source_patch_reconstruction": "passed",
+    "package_refresh": "handoff-only continuation update"
   },
   "resume": {
-    "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json first; reconstruct the exact ZIP from the package chunks when full source bytes are needed.",
-    "research_agent": "Use the lane manifest/patch and branch. Do not rely on private chat context.",
-    "integration_agent": "Verify the artifact SHA-256 before applying a lane patch or producing a new complete ZIP."
+    "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json and AI_HANDOFF.md first; the complete ZIP is the source snapshot.",
+    "integration_agent": "Review agent-patches/issue-8-ui-extensions/ISSUE_8_MANIFEST.json and issue-8.patch; issue #8 remains partial until the lane capture hook plan is verified."
   },
   "notes": [
-    "This verified v0.3.40 source package builds on the v0.3.39 Agent Console release.",
-    "Issue #7 changes only the standalone controller research workflow display and adds a focused test; NMS probe and controller command protocol are unchanged.",
-    "The in-app update path advances to v0.3.40 only after this branch and its Agent Console dependency reach main."
+    "Builds on v0.3.40 after PRs #6 and #11 were integrated into main.",
+    "Implements the shared Surveyor extension host and a DUNGEON-C example panel; probe hook consolidation is still pending.",
+    "Issues #13 and #14 are closed; their help-button patches are excluded."
   ]
 }
