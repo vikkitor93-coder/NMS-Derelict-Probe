@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "title": "DUNGEON-C · Offline caller evidence",
+  "summary": "Run the reviewed exact-root caller extraction against the configured local NMS.exe and upload its evidence. No game session or derelict traversal is required.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.extract_exact_root_caller",
+      "label": "Extract exact root caller + upload",
+      "description": "Runs the existing Surveyor offline extractor and uploads its JSON result.",
+      "preconditions": ["workflow.idle"],
+      "evidence_namespace": "dungeon-decompile",
+      "parameters": {}
+    }
+  ]
+}
