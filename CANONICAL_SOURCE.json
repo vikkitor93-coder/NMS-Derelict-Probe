@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "version": "0.3.46",
+  "version": "0.3.47",
   "status": "release-candidate",
   "artifact": {
     "storage": "github-base64-chunks-and-sandbox-download",
-    "file_name": "NMS-Derelict-Probe-v0.3.46.zip",
-    "sha256": "8d397fe114a13338bb018e8e5070131ffc4f726a23df4f2e2426283401664f0d",
-    "size_bytes": 358405,
+    "file_name": "NMS-Derelict-Probe-v0.3.47.zip",
+    "sha256": "a05be833ac4251053ef6a7d17b08fcdcdf00b5726babab6b92d3ecffd72443d9",
+    "size_bytes": 360613,
     "files": 142
   },
   "repository_transport": {
@@ -14,27 +14,19 @@
     "reason": "The complete source ZIP is delivered as the release artifact and reproducibly encoded in the repository package chunk format."
   },
   "verification": {
-    "focused_tests": "14/14 Agent Console tests passed",
-    "unit_tests": "158/158 passed",
+    "unit_tests": "160/160 passed",
     "compileall": "passed",
-    "json_files_parsed": 62,
     "zip_integrity": "passed",
-    "game_probe_logic_changed": false,
-    "source_patch_reconstruction": "passed",
-    "package_refresh": "0.3.46 complete source package; updater chunks reconstruct to matching SHA-256",
-    "in_app_update": "v0.3.46 updater package prepared for main integration",
-    "extension_file_hashes": "10/10 passed"
+    "package_refresh": "0.3.47 complete source package; updater chunks reconstruct to matching SHA-256",
+    "windows_ui": "not run in Linux workspace; visual/overlay lifecycle check pending"
   },
   "resume": {
     "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json and AI_HANDOFF.md first; the complete ZIP is the source snapshot.",
-    "integration_agent": "Review and publish the v0.3.46 release branch; install on Windows to validate prerequisite display, section collapse controls, refresh responsiveness, and scrolling."
+    "integration_agent": "Review and publish the v0.3.47 release package; verify root evidence visibility and overlay start/stop behavior on Windows."
   },
   "notes": [
-    "Builds on main at PR #32 merge commit ffc50b47568455946ff9464e181359f8e1b9464c.",
-    "v0.3.45 separates the published NEEDED request and actual action, pins versions beneath that box, and places the evidence receipt under lane buttons.",
-    "Status and extension refresh remain cache-busted and run off the Tk UI thread; unchanged panel widgets are reused.",
-    "Options expose plus/minus toggles for lane, extension, and receipt detail plus a saved refresh interval.",
-    "Package includes DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, Seed-B 1.0.2.",
-    "v0.3.46 restores exact prerequisite keys and current missing state in NEEDED, removes generic step guidance, adds per-section +/\u2212 controls in both windows, and reuses cached NMS/probe state during button refresh."
+    "v0.3.47 adds explicit root resource observations and a separate honest pending state for Runtime-A Root dispatch +0x10 capture.",
+    "Adds manual Start overlay and Stop overlay controls beside the existing auto-start toggle; stop supports overlays started by the NMS launcher.",
+    "Retains v0.3.46 Agent Console prerequisites, layout, collapse controls, refresh behavior, and extension versions."
   ]
 }
