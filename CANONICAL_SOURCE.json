@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "version": "0.3.47",
-  "status": "release-candidate",
+  "status": "published-windows-validation-pending",
   "artifact": {
     "storage": "github-base64-chunks-and-sandbox-download",
     "file_name": "NMS-Derelict-Probe-v0.3.47.zip",
@@ -22,11 +22,12 @@
   },
   "resume": {
     "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json and AI_HANDOFF.md first; the complete ZIP is the source snapshot.",
-    "integration_agent": "Review and publish the v0.3.47 release package; verify root evidence visibility and overlay start/stop behavior on Windows."
+    "integration_agent": "Install v0.3.47 on Windows and verify the root evidence lines and overlay start/stop controls."
   },
   "notes": [
     "v0.3.47 adds explicit root resource observations and a separate honest pending state for Runtime-A Root dispatch +0x10 capture.",
     "Adds manual Start overlay and Stop overlay controls beside the existing auto-start toggle; stop supports overlays started by the NMS launcher.",
-    "Retains v0.3.46 Agent Console prerequisites, layout, collapse controls, refresh behavior, and extension versions."
+    "Retains v0.3.46 Agent Console prerequisites, layout, collapse controls, refresh behavior, and extension versions.",
+    "Published in PR #35; merge commit e905f738ca1ea347f994d44e7ff44f02b3d181b7. In-app updater manifest and all 11 package chunks were verified on main."
   ]
 }
