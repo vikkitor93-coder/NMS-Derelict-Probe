@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "version": "0.3.50",
+  "change": "Bundle and stage DerelictFreighterFarming mod payload",
+  "branch": "feature/derelict-farming-0.3.50",
+  "target_branch": "main",
+  "package_zip_sha256": "8ca049bf6d8a7338645b31ccede57f6d7e826ec2d717a1b0ee6c71affbe1ae20",
+  "package_size": 389180,
+  "managed_file_count": 151,
+  "verification": {
+    "unittest": "169 tests passed",
+    "compileall": "passed",
+    "EXML_parse": "3 files parsed",
+    "payload_hashes": "3/3 match optional-mod manifest",
+    "NMS_7_05_live_test": "not run"
+  },
+  "mod_source": {
+    "archive": "7.04 DerelictFreighterFarming 4580 7.04 2026-09-28T17-10Z gb4dJyxpi.zip",
+    "file_count": 3,
+    "compiled_pak_in_archive": false,
+    "compatibility": "NMS 7.05 not runtime-validated"
+  },
+  "human_action": [
+    "Install Surveyor 0.3.50 using Check for update > Install update.",
+    "Fully close and restart NMS.",
+    "Use an Emergency Signal Scanner, activate pulse drive within 10 seconds, finish the derelict, then repeat in the same system and report whether a new derelict appears."
+  ],
+  "rollback": "Run python tools/github_integration.py rollback-derelict-farming from the Surveyor project folder; it restores backed-up files and leaves post-install modifications untouched."
+}
