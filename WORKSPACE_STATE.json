@@ -1,15 +1,15 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-02T11:13:39Z",
+  "updated_utc": "2026-10-02T12:20:00Z",
   "integration": {
     "branch": "main",
-    "canonical_version": "0.3.44",
-    "current_objective": "Validate the v0.3.44 Agent Console update on Windows and complete Runtime-A live-capture validation.",
+    "canonical_version": "0.3.45",
+    "current_objective": "Install v0.3.45 on Windows and verify the Agent Console layout, persisted display options, refresh interval, and stable scrolling during refresh.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.44",
-    "candidate_branch": "main",
-    "candidate_base": "main@a8714a0b411b19606d1b0583ce6b66d7c414e819",
-    "candidate_status": "published-v0.3.44"
+    "candidate_version": "0.3.45",
+    "candidate_branch": "codex/surveyor-options-responsive-20261002",
+    "candidate_base": "main@ffc50b47568455946ff9464e181359f8e1b9464c",
+    "candidate_status": "release-candidate-ready-for-main"
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
