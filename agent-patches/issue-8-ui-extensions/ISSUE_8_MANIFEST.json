@@ -2,11 +2,11 @@
   "schema_version": 1,
   "issue": 8,
   "title": "Define versioned agent UI extensions and shared agent instructions",
-  "status": "shared-extension-host-published; latest-lane-extensions-bundled; responsive-console-options-prepared; windows-visual-validation-pending",
-  "candidate_version": "0.3.45",
-  "branch": "codex/surveyor-options-responsive-20261002",
-  "base_commit": "ffc50b47568455946ff9464e181359f8e1b9464c",
-  "summary": "Places the published NEEDED request and actual action in a distinct fixed box, pins versions below it, moves upload confirmation below lane buttons, adds persisted display toggles and refresh timing, and reuses unchanged widgets during refresh.",
+  "status": "shared-extension-host-published; responsive-console-options-published; prerequisite-visibility-and-section-toggles-prepared; windows-visual-validation-pending",
+  "candidate_version": "0.3.46",
+  "branch": "codex/agent-console-collapse-needs-20261002",
+  "base_commit": "f1052e2bae98df16baf365934e821fdc9e5232cd",
+  "summary": "Restores exact action prerequisite keys and missing state in NEEDED without generic step text; adds top-right plus/minus controls to major sections in both windows and reuses cached NMS/probe state during action refresh.",
   "changed_project_files": [
     "AGENT_START_HERE.md",
     "AGENT_UI_EXTENSION_GUIDE.md",
@@ -36,11 +36,11 @@
     "tools/surveyor_controller.py"
   ],
   "verification": {
-    "focused_tests": "12/12 Agent Console tests passed",
-    "full_tests": "156/156 passed",
+    "focused_tests": "14/14 Agent Console tests passed",
+    "full_tests": "158/158 passed",
     "compileall": "passed",
     "windows_tk_visual_run": "not run in Linux environment",
-    "continuation_tests": "156 full tests; compileall; 62 JSON files parsed; 10 extension-file hashes; ZIP integrity and updater chunk reconstruction passed",
+    "continuation_tests": "158 full tests; compileall; 62 JSON files parsed; 10 extension-file hashes; ZIP integrity and updater chunk reconstruction passed",
     "handoff_followup_patch": "agent-patches/issue-8-ui-extensions/handoff-followup.patch"
   },
   "safety": {
@@ -67,29 +67,29 @@
     ],
     "full_derelict_traversal_required": false
   },
-  "rollback": "Restore update-manifest.json to 0.3.44 and use packages/v0.3.44-full. Per-lane extension rollback remains available.",
+  "rollback": "Restore update-manifest.json to 0.3.45 and use packages/v0.3.45-full. Per-lane extension rollback remains available.",
   "artifact": {
-    "file_name": "NMS-Derelict-Probe-v0.3.45.zip",
-    "sha256": "6e2477c86283214af568bf611015537a14b1dcdc7501af250edce829381cfa36",
-    "size_bytes": 359532,
+    "file_name": "NMS-Derelict-Probe-v0.3.46.zip",
+    "sha256": "8d397fe114a13338bb018e8e5070131ffc4f726a23df4f2e2426283401664f0d",
+    "size_bytes": 358405,
     "files": 142
   },
   "package_parts": [
-    "packages/v0.3.45-full/part-000.b64",
-    "packages/v0.3.45-full/part-001.b64",
-    "packages/v0.3.45-full/part-002.b64",
-    "packages/v0.3.45-full/part-003.b64",
-    "packages/v0.3.45-full/part-004.b64",
-    "packages/v0.3.45-full/part-005.b64",
-    "packages/v0.3.45-full/part-006.b64",
-    "packages/v0.3.45-full/part-007.b64",
-    "packages/v0.3.45-full/part-008.b64",
-    "packages/v0.3.45-full/part-009.b64"
+    "packages/v0.3.46-full/part-000.b64",
+    "packages/v0.3.46-full/part-001.b64",
+    "packages/v0.3.46-full/part-002.b64",
+    "packages/v0.3.46-full/part-003.b64",
+    "packages/v0.3.46-full/part-004.b64",
+    "packages/v0.3.46-full/part-005.b64",
+    "packages/v0.3.46-full/part-006.b64",
+    "packages/v0.3.46-full/part-007.b64",
+    "packages/v0.3.46-full/part-008.b64",
+    "packages/v0.3.46-full/part-009.b64"
   ],
   "source_patch": {
-    "path": "NMS-Derelict-Probe-v0.3.45.zip",
-    "sha256": "6e2477c86283214af568bf611015537a14b1dcdc7501af250edce829381cfa36",
-    "size_bytes": 359532,
+    "path": "NMS-Derelict-Probe-v0.3.46.zip",
+    "sha256": "8d397fe114a13338bb018e8e5070131ffc4f726a23df4f2e2426283401664f0d",
+    "size_bytes": 358405,
     "verification": "Complete source ZIP passed integrity; updater chunks reconstruct to the exact same SHA-256."
   },
   "base_branch": "main"
