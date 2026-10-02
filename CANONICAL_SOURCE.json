@@ -1,29 +1,30 @@
 {
   "schema_version": 2,
-  "version": "0.3.48",
-  "status": "release-candidate-ready-for-main-windows-validation-pending",
+  "version": "0.3.49",
+  "status": "release-candidate-pending-windows-runtime-validation",
   "artifact": {
     "storage": "github-base64-chunks-and-sandbox-download",
-    "file_name": "NMS-Derelict-Probe-v0.3.48.zip"
+    "file_name": "NMS-Derelict-Probe-v0.3.49.zip"
   },
   "repository_transport": {
     "status": "reproducible-base64-chunks",
     "reason": "The complete source ZIP is delivered as the release artifact and reproducibly encoded in the repository package chunk format."
   },
   "verification": {
-    "unit_tests": "163/163 passed",
-    "compileall": "passed",
-    "zip_integrity": "passed",
+    "unit_tests": "165/165 passed",
+    "compileall": "passed: python -m compileall -q tools overlay tests mod",
+    "zip_integrity": "to be checked against package SHA-256 before release PR",
     "windows_ui": "not run in Linux workspace; in-game alpha rendering and controls need local visual verification",
-    "package_refresh": "will match final package SHA-256",
-    "package_files": "143"
+    "package_refresh": "update-manifest.json will contain the final full-package SHA-256",
+    "package_files": "145"
   },
   "resume": {
-    "integration_agent": "Install v0.3.48 on Windows; check overlay opacity/position sliders, main-window toggles, and objective state updates."
+    "integration_agent": "Install v0.3.49 through Surveyor; restart NMS; capture owner+0x10 at the known derelict and upload."
   },
   "notes": [
+    "Adds Runtime-A probe 0.3.34 capture of the raw owner+0x10 value at the exact descriptor-correlated root event. This changes the probe only; the extension API remains data-only.",
     "Moves overlay section visibility controls into the main Surveyor window and adds opacity plus x/y offset sliders.",
-    "Publishes current agent objectives into a local file consumed by the overlay. Root detection marks root-related objectives complete with an upload-wait notice; Root dispatch +0x10 requires its own explicit capture signal.",
-    "163 unit tests pass. Windows in-game composition remains to be checked."
+    "Publishes current agent objectives; Runtime-A objective reports completion only when probe 0.3.34 emits the exact root-dispatch capture field.",
+    "165 unit tests pass. Windows live NMS capture remains to be validated."
   ]
 }
