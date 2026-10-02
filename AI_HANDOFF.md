@@ -1,10 +1,18 @@
-# AI handoff — NMS Derelict Probe v0.3.43 release candidate
+# AI handoff — NMS Derelict Probe v0.3.41 published release
+
+## 2026-10-01 Surveyor UI follow-up
+
+- The main Surveyor window and in-game overlay now use the same live-status formatter. NMS/probe/capture, manual counts, caller scan, exact root caller, telemetry, automatic crates, room loot, trace, generation, last event, and hotkeys are surfaced across both views.
+- The main window has a separate **Check lane extensions** action and extension update status. **Check app update** remains the controller release check. The extension feed is the published `agent-ui/extensions/index.json` on `main`; a lane-only update must be published there with its versioned panel and manifest before Surveyor can offer it. Agent B maps to **Seed-B · Seed lineage** (`seed-lineage`).
+- Agent Console now shows all four lanes at once in a 2×2 card view. Each card shows its status, request, extension action buttons, and a disabled **Evidence upload confirmed** checkbox. The checkbox is checked only when that lane has a successful local action record containing the GitHub `research-uploads/<lane>-…` receipt. Prior successful receipts remain checked even if a later run fails. Request-only actions remain visible but disabled until the lane requests Surveyor input.
+- The `Root dispatch +0x10 captured` Runtime-A event is still not emitted by the standard v0.3.41 live-status feed. It must not be represented as the ordinary exact-root-caller result; the Runtime-A live capture remains pending.
+- Linux validation: `python -m unittest discover -s tests` (150 tests) and `python -m compileall -q tools overlay tests`. Tk visual rendering could not be checked in the headless workspace; verify card fit on Windows at the target display resolution.
 
 ## Current handoff state
 
-This continuation improves the four-column Agent Console and packages v0.3.43 for main integration. The shared extension host is already published on main; this release adds content-area wheel scrolling, moves lane extension/upload state to the top, and adds a confirmed sequential Upload all action.
+The v0.3.41 Surveyor extension host and four lane panels are published on `main` by PR #21. This v0.3.42 package updates their console layout. The installed source package is available through `update-manifest.json`; issue #8 remains partially complete pending the Windows visual check and Runtime-A capture validation.
 
-- Issue #8 adds `AGENT_UI_EXTENSION_GUIDE.md`, a shared Surveyor UI API 1.0, a data-only JSON extension loader, and one DUNGEON-C sample panel.
+- Issue #8 adds `AGENT_UI_EXTENSION_GUIDE.md`, a shared Surveyor UI API 1.0, a data-only JSON extension loader, and four optional lane panels (DUNGEON-C, METADATA-D, runtime-dispatch, and seed-lineage).
 - Extensions are downloaded into staging, checked against declared dependencies and SHA-256 hashes, checked for host/API compatibility, and activated without restarting Surveyor. Previous versions remain available for rollback.
 - Extension panels can request only the eight stable `research.*` host action IDs. No agent-provided code, shell command, path, or process arguments are run. Preconditions are rechecked at click time.
 - Evidence uploads initiated through a lane extension use a timestamped `<lane>-<action>` folder and run manifest. Local action records are also stored under `%LOCALAPPDATA%\NMSDerelictSurveyor\ui-extensions\<lane>\runs`.
@@ -13,17 +21,17 @@ This continuation improves the four-column Agent Console and packages v0.3.43 fo
 
 ## Exact next action
 
-The shared UI extension host was published through PR #21. This v0.3.42 package updates the console layout; issue #8 remains open pending unified probe-capture review and Windows visual validation. Do not claim the broader issue is complete.
+The issue-8 host and panels are published. Issue #8 remains open because the shared probe-capture requirement and Windows visual validation are outstanding; the release does not claim full issue acceptance.
 
 **Next human action (Windows; no full derelict traversal):** use the Runtime-A Surveyor build identified by `agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json` > start Surveyor > click **Start NMS** > load the known derelict only until **Root dispatch +0x10 captured** appears > click **Analyze generation + upload** > return to Main and write `check`. Then review whether the capture hook is compatible with the other lane profiles before integration. Separately, visually verify the DUNGEON-C extension refresh and rollback in the Windows Surveyor UI.
 
-**Verification completed in this continuation:** focused extension/console/workflow tests 17/17 passed; full suite 130/130 passed; `compileall` passed; 40 JSON files parsed; the 116-entry source ZIP passed integrity and SHA-256 checks. Windows/Tk visual behavior was not run in this Linux environment.
+**Combined published-source verification:** full test suite 145/145 passed after reconciling the DUNGEON-C test with the shared four-entry catalog; `compileall` passed; 52 JSON files parsed; all four extension manifest hashes passed; the complete source ZIP passed integrity verification (SHA-256 `9d513cd1bb46b3d757d8b67c70a6e799058f092bff2f2c1817acaba564453898`). Windows/Tk visual behavior was not run in this Linux environment.
 
 Issues #13 and #14 remain closed as not planned. Their benchmark branches were reset to `main`, removing the test-only help-button project; GitHub branch names remain because the connected API cannot delete refs. The delivered package contains no benchmark help button.
 
 ## Canonical source status
 
-The integrated canonical release is v0.3.42. The v0.3.43 update becomes available to installed clients when its `update-manifest.json` and full-package chunks are merged together.
+The published canonical release is v0.3.41. Its `update-manifest.json` and full-package chunks are on `main`; the complete source ZIP with all four panels and extension tests is stored at `/NMS modding/NMS-Derelict-Probe-v0.3.41-published.zip` and passes ZIP integrity verification.
 
 ---
 
@@ -152,20 +160,24 @@ The exact external call at `02BFCC17` decoded as `FF 52 10`, targeting the verif
 - Every experimental Surveyor must visibly identify its lane/build (for example `Surveyor · RUNTIME-A`) and write evidence under a lane-specific namespace so simultaneous variants cannot be confused.
 - Agents publish a PR containing source changes, tests, evidence schema changes, and a concise handoff. Main integration accepts only reproducible/proven findings.
 
+## 2026-10-01 Agent Console layout update
 
-## v0.3.42 Agent Console layout
+- The Agent Console now shows all four lanes side by side in one row. Each lane's status, summary, Surveyor request, upload receipt, and extension details sit in an independently scrollable information area.
+- The header's **Check extensions** action refreshes the published extension index for all lanes in one request.
+- Task actions, Copy full steps, and per-lane extension update controls stay in a fixed bottom strip. Each lane update button reflects that lane's state; **Update all** installs every currently available extension update after one confirmation.
+- Agent status refresh and copy-summary controls are also anchored below the lane cards. Action-button availability continues to follow the active extension's preconditions and each lane's human-request state.
+- Validation: `python -m compileall -q tools overlay tests`; `python -m unittest discover -s tests` (150 tests passed).
+- Windows visual rendering was not exercised in this Linux workspace; review the four-column width on the target display after launching the updated Surveyor.
 
-- Four agent lanes render side by side; each lane has its own vertical information scrollbar.
-- The top Check extensions action refreshes the index for all lanes at once.
-- Lane research actions, Copy full steps, individual extension updates, and rollback controls stay in the bottom strip. Update all installs all available lane extension updates after one confirmation.
-- Evidence upload receipts remain visible per lane. The live game/probe capture protocol is unchanged.
-- Verification: 150 tests pass; compileall and full-package reconstruction/integrity checks pass. Windows Tk visual QA remains outstanding.
 
+## v0.3.43 Agent Console update
 
-## v0.3.43 console update
+- Lane panels show extension status/version and upload confirmation first.
+- Mouse-wheel events are routed to the nearest scroll canvas under the pointer; the main Surveyor page and each lane panel scroll without targeting the scrollbar. Tk Text output retains native wheel behavior.
+- Upload all confirms once, then runs currently eligible lane extension actions sequentially. Request-only actions require an active lane request; preconditions are rechecked before each action. Skipped actions are logged, and final UI directs the user to inspect each lane upload receipt.
+- Verification: `python -m unittest discover -s tests` (151 passed), `python -m compileall -q tools overlay tests`. Tk visual QA remains pending on Windows.
+- Next action: install Surveyor 0.3.43, verify wheel scrolling over the main page and lane cards, and exercise Upload all with only the intended lane requests enabled.
 
-- Lane extension status/version and evidence-upload confirmation now appear at the top of each card.
-- Mouse-wheel scrolling routes to the nearest scroll canvas beneath the pointer in the main app and Agent Console; Tk Text output keeps native scrolling.
-- Upload all requires confirmation, runs only lane actions currently allowed by lane requests and preconditions, and executes them one at a time. Each action rechecks eligibility before running.
-- Verification: 151 tests and compileall passed; the v0.3.43 full package and base64 reconstruction match SHA-256. Windows visual QA remains pending.
-- Next action: install v0.3.43 and check mouse-wheel behavior over the main window and lane panels, then test Upload all with the intended lane requests.
+## Seed-lineage extension 1.0.2
+
+Published a version-only refresh of the seed-lineage Surveyor extension for update testing. The panel contents and host action are unchanged from 1.0.1: `research.extract_caller_code`, precondition `workflow.idle`, empty API 1.0 parameters, evidence namespace `seed-lineage`, and `request_only: true`. Extension 1.0.1 remains installed for rollback.
