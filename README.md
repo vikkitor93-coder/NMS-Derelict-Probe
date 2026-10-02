@@ -3,13 +3,16 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.47**.
+Current Surveyor package: **v0.3.48**.
 
-## v0.3.47 — root evidence and overlay controls
+## v0.3.48 — transparent objective overlay
 
-- Show the observed `MODELS/SPACE/POI/DUNGEON.SCENE.MBIN` root resource path and event count in the main Surveyor and overlay.
-- Show `Root dispatch +0x10` separately; the standard probe currently reports it as not captured because the Runtime-A capture hook is not integrated.
-- Add **Start overlay** and **Stop overlay** beside the existing auto-start toggle.
+- Move all in-game overlay section toggles into the main Surveyor window.
+- Add live opacity (20–100%), horizontal offset (−800 to +800 px), and vertical offset (−500 to +600 px) sliders.
+- Show the current published objective for each agent in the game overlay, including root-detection completion and an explicit upload-wait / keep-game-open state.
+- Keep `Root dispatch +0x10` incomplete until the corresponding capture is explicitly reported.
+- Settings persist in `%LOCALAPPDATA%\NMSDerelictSurveyor\overlay-settings.json`; objectives are shared through `overlay-objectives.json`.
+- Tests: 163 passing. Windows in-game rendering still needs a local visual check.
 
 
 ## v0.3.46 — visible prerequisites and collapsible sections
@@ -112,6 +115,8 @@ The corrected v0.3.31 scan found 52 direct references. v0.3.34 now observes all 
 ## v0.3.34 Start NMS runtime repair
 
 `Start-NMS.ps1` now self-repairs the NMSpy/pyMHF runtime instead of treating a hidden import failure as a generic missing-package error. It tests the actual interpreter, force-repairs the pinned runtime only when needed, falls back to Python 3.12 when necessary, writes the local pyMHF NMS/MODS config, and launches with `python -m pymhf run nmspy`. A full import traceback is retained in `%LOCALAPPDATA%\NMSDerelictSurveyor\runtime-repair-latest.log` if startup still fails. `Start-NMS-With-Overlay.cmd` is the manual overlay launcher; `Start-NMS.cmd` records without the overlay.
+
+The v0.3.47 main Status section and in-game overlay show the observed dungeon root resource `MODELS/SPACE/POI/DUNGEON.SCENE.MBIN`. They also show **Root dispatch +0x10** as a separate status. The current standard probe does not emit Runtime-A's dispatch-slot capture, so that line explicitly remains **not captured**; the ordinary exact-root-caller result is not treated as a substitute. **Start overlay** and **Stop overlay** are available beside the existing overlay auto-start toggle in the Surveyor window.
 
 
 ### Exact root caller follow-up (v0.3.38)
