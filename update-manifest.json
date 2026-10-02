@@ -1,25 +1,25 @@
 {
   "schema_version": 1,
-  "version": "0.3.49",
+  "version": "0.3.50",
   "repository": "vikkitor93-coder/NMS-Derelict-Probe",
   "branch": "main",
   "package_transport": "base64-chunks",
   "package_kind": "full",
   "package_parts": [
-    "packages/v0.3.49-full/part-000.b64",
-    "packages/v0.3.49-full/part-001.b64",
-    "packages/v0.3.49-full/part-002.b64",
-    "packages/v0.3.49-full/part-003.b64",
-    "packages/v0.3.49-full/part-004.b64",
-    "packages/v0.3.49-full/part-005.b64",
-    "packages/v0.3.49-full/part-006.b64",
-    "packages/v0.3.49-full/part-007.b64",
-    "packages/v0.3.49-full/part-008.b64",
-    "packages/v0.3.49-full/part-009.b64",
-    "packages/v0.3.49-full/part-010.b64"
+    "packages/v0.3.50-full/part-000.b64",
+    "packages/v0.3.50-full/part-001.b64",
+    "packages/v0.3.50-full/part-002.b64",
+    "packages/v0.3.50-full/part-003.b64",
+    "packages/v0.3.50-full/part-004.b64",
+    "packages/v0.3.50-full/part-005.b64",
+    "packages/v0.3.50-full/part-006.b64",
+    "packages/v0.3.50-full/part-007.b64",
+    "packages/v0.3.50-full/part-008.b64",
+    "packages/v0.3.50-full/part-009.b64",
+    "packages/v0.3.50-full/part-010.b64"
   ],
-  "package_sha256": "d4be1111f5972a9cafabbdfc4393ce8d3af42617f195a7d1a06b29e1ede9b1e4",
-  "package_size": 379053,
+  "package_sha256": "8ca049bf6d8a7338645b31ccede57f6d7e826ec2d717a1b0ee6c71affbe1ae20",
+  "package_size": 389180,
   "managed_files": [
     ".gitignore",
     "AGENT_START_HERE.md",
@@ -165,6 +165,12 @@
     "tools/resolve_exact_root_vtable.py",
     "tools/surveyor_controller.py",
     "agent-patches/runtime-dispatch/RUNTIME_A_PROBE_0.3.34_APP_0.3.49.json",
-    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.34-from-v0.3.48.patch"
+    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.34-from-v0.3.48.patch",
+    "optional-mods/DerelictFreighterFarming/README.md",
+    "optional-mods/DerelictFreighterFarming/manifest.json",
+    "optional-mods/DerelictFreighterFarming/payload/METADATA/REALITY/TABLES/REWARDTABLE.EXML",
+    "optional-mods/DerelictFreighterFarming/payload/METADATA/SIMULATION/MISSIONS/TABLES/SPACEPOIMISSIONTABLE.EXML",
+    "optional-mods/DerelictFreighterFarming/payload/METADATA/SIMULATION/SCENE/EXPERIENCESPAWNTABLE.EXML",
+    "tests/test_optional_derelict_mod.py"
   ]
 }
