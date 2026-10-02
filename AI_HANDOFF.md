@@ -2,12 +2,14 @@
 
 ## Current state
 
-- Current source package: **v0.3.46**, release candidate for the Windows Surveyor UI. Probe and NMS launch protocols are unchanged.
+- Current source package: **v0.3.47**, Windows Surveyor UI update. Probe and NMS launch protocols are unchanged.
 - Agent Console has four side-by-side lane cards. The fixed **NEEDED** box shows the published request, actual extension action, exact required prerequisite keys, and which prerequisites are currently missing. It does not contain generic step guidance. The actual host key is `probe.connected` (fresh probe heartbeat), not `probe.running`; the v1 extension contract is unchanged.
 - Installed/published/reported versions remain immediately under NEEDED. Each evidence receipt checkbox stays fixed below its lane buttons.
 - Compact top-right +/− controls collapse each major main-window section, each Agent Console card, lane action groups, and global action group. The controls and content begin expanded; lane/global buttons remain pinned in the bottom strip. Agent Console display toggles and refresh interval persist in `%LOCALAPPDATA%\NMSDerelictSurveyor\agent-console-options.json`.
 - Auto-refresh defaults to one minute; choices are 20 seconds, 2 minutes, 5 minutes, or Off. **Refresh now** fetches status and extension index immediately. Network reads run on background threads; cache-busted lane status requests remain read-only.
 - Polling reuses unchanged extension widgets and action readiness uses the main window’s latest NMS/probe status instead of launching new process checks per lane, keeping scroll position stable and refresh work lighter.
+- Main Status and the in-game overlay now show the exact root resource path and observed event count. `Root dispatch +0x10` is shown separately and says it is not captured by the current standard probe; Runtime-A’s distinct live hook is still needed to produce that evidence.
+- **Start overlay** and **Stop overlay** sit beside the existing **Game overlay** auto-start toggle. Stop closes the titled overlay window and signals the local stop-request file, including overlays started by the NMS launcher.
 - The package carries DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, and Seed-B 1.0.2, with prior installed versions retained for rollback.
 
 ## Purpose and architecture
@@ -32,11 +34,11 @@ Reverse engineer No Man’s Sky abandoned-freighter generation using static and 
 
 ## Latest changes and verification
 
-- v0.3.46 shows exact prerequisites and missing state in NEEDED, removes generic step guidance there, adds per-section +/− controls in both windows, and uses cached game/probe state for action readiness. v0.3.45 introduced the static action/version layout, the receipt position, persisted display options, configurable polling, and cached panel rendering.
-- `python -m compileall -q tools overlay tests` passed; `python -m unittest discover -s tests` passed (156 tests). The complete ZIP passed integrity checks, 62 JSON files parsed, all 10 extension-file hashes matched, and updater chunks reconstructed to the same SHA-256. Windows visual validation is still required because Tk cannot be rendered in this Linux workspace.
+- v0.3.47 adds visible root-resource and dispatch-capture status plus manual overlay lifecycle controls. v0.3.46 shows exact prerequisites and missing state in NEEDED, adds per-section +/− controls in both windows, and uses cached game/probe state for action readiness.
+- `python -m compileall -q tools overlay tests` and the full unittest suite pass (160 tests). Windows visual verification is still needed because Tk cannot be rendered in this Linux workspace.
 - Runtime-A’s `Root dispatch +0x10 captured` live event remains unverified; don’t treat exact-root-caller output as proof.
 
 ## Rollback and next action
 
 - Roll back the app by reinstalling the previous complete v0.3.44 package. No probe, session, extension API, or saved evidence migration is needed. Extension versions retain their individual rollback controls.
-- **Next action:** install v0.3.46 on Windows and verify the NEEDED/action box, footer versions, receipt checkbox beneath buttons, all per-section plus/minus controls, interval persistence, exact prerequisite display, and scrolling while the poll runs.
+- **Next action:** install v0.3.47 on Windows; verify root resource/event visibility, the separate pending `+0x10` label, overlay start/stop beside the toggle, and that the stop control also closes an overlay auto-started with NMS. Then recheck the v0.3.46 Agent Console layout and refresh/scroll behavior.

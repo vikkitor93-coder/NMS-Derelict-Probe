@@ -1,13 +1,13 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-02T12:46:00Z",
+  "updated_utc": "2026-10-02T13:05:00Z",
   "integration": {
     "branch": "main",
-    "canonical_version": "0.3.46",
-    "current_objective": "Install v0.3.46 on Windows and verify prerequisite visibility, per-section collapse controls, refresh responsiveness, and scrolling.",
+    "canonical_version": "0.3.47",
+    "current_objective": "Publish v0.3.47 and verify root evidence visibility and overlay start/stop on Windows.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.46",
-    "candidate_branch": "codex/agent-console-collapse-needs-20261002",
+    "candidate_version": "0.3.47",
+    "candidate_branch": "integration/issue-8-ui-extensions",
     "candidate_base": "main@f1052e2bae98df16baf365934e821fdc9e5232cd",
     "candidate_status": "release-candidate-ready-for-main"
   },
@@ -57,6 +57,11 @@
         "lane": "dungeon-decompile",
         "kind": "offline-local-NMS-exe-scan",
         "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json"
+      },
+      {
+        "lane": "integration",
+        "kind": "windows-ui-overlay-validation",
+        "version": "0.3.47"
       }
     ]
   },
