@@ -1,36 +1,39 @@
 {
   "schema_version": 2,
-  "version": "0.3.43",
+  "version": "0.3.44",
   "status": "release-candidate",
   "artifact": {
     "storage": "github-base64-chunks-and-chatgpt-library",
-    "file_name": "NMS-Derelict-Probe-v0.3.43.zip",
-    "sha256": "ee51b807d755dfe5f62a93bf604d7f61191c90e83a445ce1ae493c8a9a8da043",
-    "size_bytes": 353900,
-    "files": 134
+    "file_name": "NMS-Derelict-Probe-v0.3.44.zip",
+    "sha256": "e04fc884329a837252870c9f447d74e93ff56cc1135a4a68a0a91ac1fa402192",
+    "size_bytes": 357546,
+    "files": 142
   },
   "repository_transport": {
     "status": "reproducible-base64-chunks",
     "reason": "The complete ZIP is retained as a direct Library artifact and reproducibly encoded in the repository package chunk format."
   },
   "verification": {
-    "focused_tests": "17/17 passed",
-    "unit_tests": "151/151 passed",
+    "focused_tests": "30/30 Agent Console and extension tests passed",
+    "unit_tests": "155/155 passed",
     "compileall": "passed",
-    "json_files_parsed": 54,
+    "json_files_parsed": 62,
     "zip_integrity": "passed",
     "game_probe_logic_changed": false,
     "source_patch_reconstruction": "passed",
-    "package_refresh": "0.3.43 update manifest and all source files encoded in matching chunks",
-    "in_app_update": "v0.3.42 package and matching base64 chunks prepared"
+    "package_refresh": "0.3.44 complete source package with current lane extensions; updater chunks reconstruct to matching SHA-256",
+    "in_app_update": "v0.3.44 updater package prepared for main integration"
   },
   "resume": {
     "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json and AI_HANDOFF.md first; the complete ZIP is the source snapshot.",
-    "integration_agent": "Review agent-patches/issue-8-ui-extensions/ISSUE_8_MANIFEST.json and issue-8.patch; issue #8 remains partial until the lane capture hook plan is verified."
+    "integration_agent": "Review the release PR. Install v0.3.44 on Windows to validate static lane footer placement, action readiness, scroll boundaries, and fresh status polling."
   },
   "notes": [
     "Builds on v0.3.40 after PRs #6 and #11 were integrated into main.",
     "Implements the shared Surveyor extension host and a DUNGEON-C example panel; probe hook consolidation is still pending.",
-    "Issues #13 and #14 are closed; their help-button patches are excluded."
+    "Issues #13 and #14 are closed; their help-button patches are excluded.",
+    "v0.3.44 adds fixed action/version footers, reliable click-through prerequisite guidance, bounded content scrolling, and more frequent cache-busted lane status refresh.",
+    "v0.3.44 adds fixed action/version footers, click-through prerequisite guidance, bounded content scrolling, and cache-busted frequent lane status refresh.",
+    "v0.3.44 includes the current main-branch lane extensions (DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, Seed-B 1.0.2)."
   ]
 }

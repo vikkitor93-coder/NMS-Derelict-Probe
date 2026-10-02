@@ -1,15 +1,15 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-01T02:57:00Z",
+  "updated_utc": "2026-10-02T11:13:39Z",
   "integration": {
     "branch": "main",
-    "canonical_version": "0.3.41",
-    "current_objective": "Implement issue #8 shared, versioned Surveyor UI extensions while preserving all lane workflows and controller/probe protocols.",
+    "canonical_version": "0.3.44",
+    "current_objective": "Validate the v0.3.44 Agent Console update on Windows and complete Runtime-A live-capture validation.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.41",
-    "candidate_branch": "integration/issue-8-ui-extensions",
-    "candidate_base": "main@f17617abe19d8164892988e1f873353c8f95d49f",
-    "candidate_status": "published-partial-issue-8"
+    "candidate_version": "0.3.44",
+    "candidate_branch": "main",
+    "candidate_base": "main@a8714a0b411b19606d1b0583ce6b66d7c414e819",
+    "candidate_status": "published-v0.3.44"
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
@@ -28,12 +28,10 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage",
-      "status": "awaiting-fresh-live-caller-capture",
+      "status": "agent-output-published-do-not-duplicate",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
       "result_summary": "Offline system-seed anchors implemented and verified; direct equality with known derelict root seeds was not found and no derivation is claimed.",
-      "human_validation_required": true,
-      "next_action": "Fully exit and relaunch NMS from the installed executable, capture only the root resource event at universe 00001A0004E84EFD, run Extract caller code + upload, and verify baseline_window_matches_exe before rerunning upstream analysis.",
-      "latest_diagnostic": "research-uploads/20261001T023658Z-seed-lineage-analyze-seed-function-diagnostic/DIAGNOSTIC.md"
+      "human_validation_required": false
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
@@ -59,11 +57,6 @@
         "lane": "dungeon-decompile",
         "kind": "offline-local-NMS-exe-scan",
         "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json"
-      },
-      {
-        "lane": "seed-lineage",
-        "kind": "fresh-root-caller-capture-after-NMS-relaunch",
-        "evidence": "research-uploads/20261001T023658Z-seed-lineage-analyze-seed-function-diagnostic/DIAGNOSTIC.md"
       }
     ]
   },
@@ -93,7 +86,7 @@
     "base_branch": "main",
     "version": "0.3.41",
     "status": "published-partial-issue-8",
-    "next_action": "Visually verify extension refresh and rollback on Windows. Separately complete the Runtime-A owner+0x10 capture check; no full derelict traversal is required. Seed-lineage also needs one fresh root caller capture after a full NMS relaunch; no full derelict traversal is required.",
+    "next_action": "Visually verify extension refresh and rollback on Windows. Separately complete the Runtime-A owner+0x10 capture check; no full derelict traversal is required.",
     "test_button_changes": "none; issues 13 and 14 are closed and their button patches are excluded from this source.",
     "base_commit": "f17617abe19d8164892988e1f873353c8f95d49f"
   }
