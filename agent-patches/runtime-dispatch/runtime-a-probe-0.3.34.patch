@@ -1,0 +1,423 @@
+--- a/mod/derelict_baseline_probe.py
++++ b/mod/derelict_baseline_probe.py
+@@ -33,7 +33,7 @@
+ from nmspy.decorators import main_loop
+ from nmspy.engine import GetNodeAbsoluteTransMatrix
+ 
+-PROBE_VERSION = "0.3.33"
++PROBE_VERSION = "0.3.34"
+ SCHEMA_VERSION = 1
+ ABANDONED_FREIGHTER_LOCATION_VALUE = 0xB
+ ABANDONED_FREIGHTER_POI_TYPE_VALUE = 0x6
+@@ -244,6 +244,68 @@
+         return None
+ 
+ 
++def _loaded_module_identity(address: int) -> dict[str, Any]:
++    """Identify the loaded module and RVA containing an address, when applicable."""
++    target = int(address)
++    if target <= 0x10000:
++        return {"status": "null-or-low-address", "address_hex": f"{target:016X}"}
++    if os.name != "nt":
++        return {"status": "module-lookup-unavailable", "address_hex": f"{target:016X}"}
++    try:
++        kernel32 = ctypes.windll.kernel32
++        get_module = kernel32.GetModuleHandleExW
++        get_module.argtypes = [ctypes.c_uint32, ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p)]
++        get_module.restype = ctypes.c_int
++        module = ctypes.c_void_p()
++        # FROM_ADDRESS | UNCHANGED_REFCOUNT; no module is loaded or refcount changed.
++        if not get_module(0x00000004 | 0x00000002, ctypes.c_void_p(target), ctypes.byref(module)):
++            return {"status": "not-in-loaded-module", "address_hex": f"{target:016X}"}
++        base = int(module.value or 0)
++        if base <= 0 or target < base:
++            return {"status": "module-base-unavailable", "address_hex": f"{target:016X}"}
++        get_name = kernel32.GetModuleFileNameW
++        get_name.argtypes = [ctypes.c_void_p, ctypes.c_wchar_p, ctypes.c_uint32]
++        get_name.restype = ctypes.c_uint32
++        buffer = ctypes.create_unicode_buffer(32768)
++        name_length = int(get_name(module, buffer, len(buffer)))
++        module_path = buffer.value if name_length else None
++        return {
++            "status": "loaded-module",
++            "address_hex": f"{target:016X}",
++            "module_path": module_path,
++            "module_base_hex": f"{base:016X}",
++            "module_rva_hex": f"{target - base:08X}",
++        }
++    except Exception as exc:
++        return {
++            "status": "module-lookup-error",
++            "address_hex": f"{target:016X}",
++            "error": f"{type(exc).__name__}: {exc}",
++        }
++
++
++def _owner_plus_0x10_capture(owner_pointer: int) -> dict[str, Any]:
++    """Read owner+0x10 once at the exact descriptor-correlated root event."""
++    owner = int(owner_pointer)
++    slot_address = owner + 0x10
++    raw = _read_process_bytes(slot_address, 8)
++    result: dict[str, Any] = {
++        "owner_pointer_hex": f"{owner:016X}",
++        "slot_offset_hex": "00000010",
++        "slot_address_hex": f"{slot_address:016X}",
++        "read_status": "captured" if raw is not None and len(raw) == 8 else "unreadable",
++        "raw_bytes_hex": (raw.hex().upper() if raw is not None else None),
++        "slot_value_hex": None,
++        "target_identity": None,
++    }
++    if raw is None or len(raw) != 8:
++        return result
++    value = int.from_bytes(raw, "little", signed=False)
++    result["slot_value_hex"] = f"{value:016X}"
++    result["target_identity"] = _loaded_module_identity(value)
++    return result
++
++
+ def _safe_bool(value: Any) -> bool:
+     try:
+         raw = getattr(value, "value", value)
+@@ -1450,9 +1512,12 @@
+         return match.group(1) if match else None
+ 
+     def _generation_room_summary(self) -> dict[str, Any]:
++        root_dispatch_capture = (self._last_exact_root_caller or {}).get("owner_plus_0x10_capture")
+         if not self._session:
+             if self._last_generation_room_summary is not None:
+-                return dict(self._last_generation_room_summary)
++                summary = dict(self._last_generation_room_summary)
++                summary["last_dungeon_root_owner_plus_0x10_capture"] = root_dispatch_capture
++                return summary
+             return {
+                 "total_rooms_seen": 0, "main_rooms_seen": 0, "dead_end_rooms_seen": 0,
+                 "room_parent_names_seen": 0, "rooms": [],
+@@ -1465,6 +1530,7 @@
+                 "dungeon_logical_entry_caller_offsets": [], "last_dungeon_logical_entry_caller_offset_hex": None,
+                 "dungeon_logical_entry_exact_external_caller_offsets": [],
+                 "last_dungeon_logical_entry_exact_external_caller_offset_hex": None,
++                "last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture,
+                 "logical_entry_unique_callers_observed": len(self._logical_entry_caller_hits),
+                 "logical_entry_known_candidate_hits": sum(1 for key in self._logical_entry_caller_hits if int(key, 16) in CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
+                 "logical_entry_candidate_count": len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
+@@ -1580,6 +1646,7 @@
+             "last_dungeon_logical_entry_caller_offset_hex": (logical_entry_caller_offsets[-1] if logical_entry_caller_offsets else None),
+             "dungeon_logical_entry_exact_external_caller_offsets": logical_entry_exact_external_offsets,
+             "last_dungeon_logical_entry_exact_external_caller_offset_hex": (logical_entry_exact_external_offsets[-1] if logical_entry_exact_external_offsets else None),
++            "last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture,
+             "logical_entry_unique_callers_observed": len(self._logical_entry_caller_hits),
+             "logical_entry_known_candidate_hits": sum(1 for key in self._logical_entry_caller_hits if int(key, 16) in CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
+             "logical_entry_candidate_count": len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
+@@ -1971,6 +2038,7 @@
+             "root_descriptor_pointer_hex": root_event.get("descriptor_pointer_hex"),
+             "root_seed_hex": str((root_event.get("primary_seed") or {}).get("seed_hex") or "").upper() or None,
+             "exact_external_caller": exact,
++            "owner_plus_0x10_capture": exact.get("owner_plus_0x10_capture"),
+             "exact_external_caller_return_offset_hex": exact.get("resolved_external_caller_return_offset_hex") or exact.get("external_origin_caller_return_offset_hex") or exact.get("caller_return_offset_hex"),
+             "unique_callers_observed": len(self._logical_entry_caller_hits),
+             "caller_hit_counts": dict(sorted(self._logical_entry_caller_hits.items())),
+@@ -2404,12 +2472,22 @@
+                             event["logical_entry_nearest_caller_code_window"] = None
+                 exact_external = self._logical_entry_external_match_for_descriptor(descriptor_ptr)
+                 if exact_external:
++                    owner_hex = str(exact_external.get("owner_pointer_hex") or "")
++                    try:
++                        owner_pointer = int(owner_hex, 16)
++                    except ValueError:
++                        owner_pointer = 0
++                    if owner_pointer > 0x10000:
++                        # This is intentionally one read at the root boundary, after
++                        # descriptor identity has selected the derelict invocation.
++                        exact_external["owner_plus_0x10_capture"] = _owner_plus_0x10_capture(owner_pointer)
+                     exact_offset = (
+                         exact_external.get("resolved_external_caller_return_offset_hex")
+                         or exact_external.get("external_origin_caller_return_offset_hex")
+                         or exact_external.get("caller_return_offset_hex")
+                     )
+                     event["logical_entry_exact_external_match"] = exact_external
++                    event["owner_plus_0x10_capture"] = exact_external.get("owner_plus_0x10_capture")
+                     event["logical_entry_exact_external_caller_return_offset_hex"] = exact_offset
+                     if exact_offset:
+                         try:
+--- a/overlay/derelict_overlay.py
++++ b/overlay/derelict_overlay.py
+@@ -171,6 +171,13 @@
+         f"{exact_caller} — exact external match" if exact_caller else
+         (f"{fallback_caller} — awaiting external match" if fallback_caller else "Not captured")
+     )
++    dispatch_capture = generation_status.get("last_dungeon_root_owner_plus_0x10_capture")
++    if isinstance(dispatch_capture, dict) and dispatch_capture.get("read_status") == "captured":
++        exact_root_caller += " · +0x10 captured"
++    elif isinstance(dispatch_capture, dict):
++        exact_root_caller += " · +0x10 unreadable"
++    else:
++        exact_root_caller += " · +0x10 pending"
+     if recording:
+         headline = f"DERELICT SURVEYOR v{version} · RECORDING"
+     elif state == "saved":
+@@ -221,6 +228,19 @@
+     dungeon_seed = str(gen_data.get("last_dungeon_root_seed_hex") or "")
+     if dungeon_seed:
+         generation_line += f"   DUNGEON-SEED {dungeon_seed}"
++    if isinstance(dispatch_capture, dict) and dispatch_capture.get("read_status") == "captured":
++        target = dispatch_capture.get("target_identity") if isinstance(dispatch_capture.get("target_identity"), dict) else {}
++        label = target.get("module_rva") or target.get("address") or dispatch_capture.get("slot_value_hex") or "captured"
++        generation_line += f"   ROOT+0x10 {label}"
++    if isinstance(dispatch_capture, dict):
++        slot_value = str(dispatch_capture.get("slot_value_hex") or "unreadable")
++        target = dispatch_capture.get("target_identity") if isinstance(dispatch_capture.get("target_identity"), dict) else {}
++        module_rva = str(target.get("module_rva_hex") or "")
++        target_address = str(target.get("address_hex") or "")
++        target_label = f"NMS+{module_rva}" if module_rva else (target_address or "identity unavailable")
++        generation_line += f"   ROOT+0x10 {slot_value} -> {target_label}"
++    else:
++        generation_line += "   ROOT+0x10 pending"
+ 
+     loot_summary, room_loot = format_room_loot(gen_data, recording)
+ 
+--- a/schema/live-status-v1.schema.json
++++ b/schema/live-status-v1.schema.json
+@@ -276,6 +276,87 @@
+             },
+             "additionalProperties": true
+           }
++        },
++        "last_dungeon_root_owner_plus_0x10_capture": {
++          "type": [
++            "object",
++            "null"
++          ],
++          "properties": {
++            "owner_pointer_hex": {
++              "type": [
++                "string",
++                "null"
++              ]
++            },
++            "slot_offset_hex": {
++              "type": [
++                "string",
++                "null"
++              ]
++            },
++            "slot_address_hex": {
++              "type": [
++                "string",
++                "null"
++              ]
++            },
++            "read_status": {
++              "enum": [
++                "captured",
++                "unreadable"
++              ]
++            },
++            "raw_bytes_hex": {
++              "type": [
++                "string",
++                "null"
++              ]
++            },
++            "slot_value_hex": {
++              "type": [
++                "string",
++                "null"
++              ]
++            },
++            "target_identity": {
++              "type": [
++                "object",
++                "null"
++              ],
++              "properties": {
++                "status": {
++                  "type": "string"
++                },
++                "address_hex": {
++                  "type": [
++                    "string",
++                    "null"
++                  ]
++                },
++                "module_path": {
++                  "type": [
++                    "string",
++                    "null"
++                  ]
++                },
++                "module_base_hex": {
++                  "type": [
++                    "string",
++                    "null"
++                  ]
++                },
++                "module_rva_hex": {
++                  "type": [
++                    "string",
++                    "null"
++                  ]
++                }
++              },
++              "additionalProperties": true
++            }
++          },
++          "additionalProperties": true
+         }
+       },
+       "additionalProperties": true
+--- a/tests/test_tools.py
++++ b/tests/test_tools.py
+@@ -152,6 +152,45 @@
+         ):
+             self.assertIn(key, view)
+ 
++    def test_overlay_surfaces_owner_plus_0x10_capture_and_target_identity(self):
++        status = {
++            "heartbeat_epoch": 1000.0,
++            "probe_version": "0.3.34",
++            "state": "ready",
++            "recording": False,
++            "generation_rooms": {
++                "last_dungeon_logical_entry_exact_external_caller_offset_hex": "02C0497A",
++                "last_dungeon_root_owner_plus_0x10_capture": {
++                    "read_status": "captured",
++                    "slot_value_hex": "00007FF612345678",
++                    "target_identity": {
++                        "status": "loaded-module",
++                        "module_rva_hex": "01234567",
++                    },
++                },
++            },
++        }
++        view = overlay_mod.summarize_status(status, now_epoch=1000.5)
++        self.assertIn("+0x10 captured", view["exact_root_caller"])
++        self.assertIn("ROOT+0x10 00007FF612345678 -> NMS+01234567", view["generation"])
++
++    def test_v0334_captures_owner_slot_only_after_exact_root_descriptor_match(self):
++        probe = (ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
++        self.assertIn('PROBE_VERSION = "0.3.34"', probe)
++        self.assertIn('exact_external["owner_plus_0x10_capture"] = _owner_plus_0x10_capture(owner_pointer)', probe)
++        self.assertIn('"owner_plus_0x10_capture": exact.get("owner_plus_0x10_capture")', probe)
++        self.assertIn('"last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture', probe)
++        self.assertIn("_read_process_bytes(slot_address, 8)", probe)
++        self.assertIn("kernel32.ReadProcessMemory(", probe)
++        self.assertNotIn("WriteProcessMemory", probe)
++
++    def test_live_status_schema_accepts_owner_plus_0x10_capture(self):
++        schema = json.loads((ROOT / "schema" / "live-status-v1.schema.json").read_text(encoding="utf-8"))
++        capture = schema["properties"]["generation_rooms"]["properties"]["last_dungeon_root_owner_plus_0x10_capture"]
++        self.assertIn("null", capture["type"])
++        self.assertIn("read_status", capture["properties"])
++        self.assertIn("target_identity", capture["properties"])
++
+     def test_controller_uses_shared_overlay_status_and_exposes_extension_refresh(self):
+         source = (ROOT / "tools" / "surveyor_controller.py").read_text(encoding="utf-8")
+         self.assertIn("from overlay.derelict_overlay import summarize_status", source)
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,3 +1,10 @@
++# 0.3.44 — Runtime-A owner+0x10 dispatch capture
++
++- Bump the embedded probe to 0.3.34 and read the raw 8-byte `owner+0x10` value once, only at the exact descriptor-correlated dungeon-root event.
++- Record the slot address/value and best-effort loaded-module identity in live status, the root event, and persistent exact-root evidence.
++- Show the capture state and target identity in the shared overlay. The read is observational; it does not write NMS memory.
++- Requires the matching probe build and a full NMS exit/restart. The Surveyor extension remains data-only and unchanged.
++
+ # 0.3.43 — Agent Console scroll and bulk upload
+ 
+ - Move extension version and evidence-upload confirmation to the top of every lane panel.
+--- a/README.md
++++ b/README.md
+@@ -3,7 +3,11 @@
+ > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
+ 
+ 
+-Current Surveyor package: **v0.3.43**.
++Current Surveyor app/controller package: **v0.3.43**. Runtime-A probe source in this lane patch: **0.3.34** (candidate full app package: 0.3.44).
++
++## Runtime-A probe hook 0.3.34
++
++Reads and reports the raw `owner+0x10` value only after the exact descriptor-correlated dungeon root event. This is a separate probe build change; the data-only Surveyor extension remains v1.0.1. Fully exit and relaunch NMS after installing a changed probe. See `AI_HANDOFF.md` for the exact validation and rollback steps.
+ 
+ ## v0.3.43 — Agent Console scroll and bulk upload
+ 
+--- a/AI_HANDOFF.md
++++ b/AI_HANDOFF.md
+@@ -1,4 +1,31 @@
+-# AI handoff — NMS Derelict Probe v0.3.41 published release
++# AI handoff — NMS Derelict Probe v0.3.44 candidate (app 0.3.43 + Runtime-A probe 0.3.34)
++
++## Runtime-A probe hook 0.3.34 (2026-10-02)
++
++The Runtime-A lane now has a source change that reads the raw 8-byte value at `owner+0x10` once, only at the exact descriptor-correlated `DUNGEON.SCENE.MBIN` root event. It persists the owner/slot/value and best-effort loaded-module address identity to the root event and live-status `generation_rooms` record. The overlay surfaces capture state and the target address/RVA. This is a read-only measurement; the value's semantic type is still unproven.
++
++The embedded probe version is 0.3.34. The standalone Surveyor app/controller remains 0.3.43, and extension `runtime-dispatch` remains data-only v1.0.1. App updater release metadata has not been changed by this lane patch. NMS must be fully exited and relaunched for a changed probe hook to load; do not hot-swap the mod while NMS is running.
++
++Linux verification: `python -m unittest discover -s tests -v` (154/154 passed), `python -m compileall -q tools overlay tests mod`, and JSON parsing for the live-status schema and extension index passed. Windows pyMHF/NMS runtime validation remains pending.
++
++### Human validation recipe
++
++1. Extract the Runtime-A 0.3.34 build over the existing Surveyor project/mod directory, keeping the existing data and settings.
++2. Fully exit No Man's Sky.
++3. Open Surveyor and start NMS using its **Start NMS** control so the installed probe is loaded.
++4. Load the same known derelict and wait for the root event; the overlay should show `ROOT+0x10 <value> -> NMS+<RVA>` or an address identity result, and `+0x10 captured`.
++5. In Surveyor, click **Analyze generation + upload**.
++6. Verify a successful upload receipt in the `runtime-dispatch` lane, then return to Main and write `check`.
++
++Stop once the root capture appears; no full traversal is required. If capture is unreadable, upload the analysis anyway so the owner/slot read status is recorded. Roll back by restoring the prior `mod/derelict_baseline_probe.py` (probe 0.3.33) and restarting NMS; restore the matching prior overlay only if its display behavior is also being rolled back.
++
++## Runtime-dispatch extension 1.0.1 (2026-10-02)
++
++The app package remains v0.3.43. This is a data-only extension refresh test: `runtime-dispatch` advances from 1.0.0 to 1.0.1; its panel payload and API 1.0 action contract are unchanged. The 1.0.0 files remain installed for rollback. Surveyor reads the extension feed from `agent-ui/extensions/index.json` on `main`, independently of the app package updater.
++
++To install it now, open Surveyor v0.3.43 > **Check lane extensions** > update **RUNTIME-A · Live root dispatch** from 1.0.0 to 1.0.1. PR #30 is merged as `f3cfb4ad4bff9391ad3beba77ae3d8f1b7a8f708`. The lane still awaits its separate live `owner+0x10` capture; this extension update changes no probe or controller code.
++
++Verification: the runtime-dispatch extension tests cover API/index compatibility, panel hash/action contract, rejected invalid content, exact preconditions, live refresh, rollback, and evidence namespacing. See `agent-patches/runtime-dispatch/RUNTIME_DISPATCH_EXTENSION_1.0.1.json` for exact results and hashes.
+ 
+ ## 2026-10-01 Surveyor UI follow-up
+ 
+@@ -10,28 +37,23 @@
+ 
+ ## Current handoff state
+ 
+-The v0.3.41 Surveyor extension host and four lane panels are published on `main` by PR #21. This v0.3.42 package updates their console layout. The installed source package is available through `update-manifest.json`; issue #8 remains partially complete pending the Windows visual check and Runtime-A capture validation.
++The latest full Surveyor app package is v0.3.43. Its shared extension host reads `agent-ui/extensions/index.json` on `main`, independently of the app package updater. The runtime-dispatch extension is now v1.0.1; v1.0.0 remains available for rollback. The update changes only the extension version/catalog entry and associated tests/handoff; the panel payload, API 1.0 contract, controller, probe, and game behavior are unchanged.
+ 
+-- Issue #8 adds `AGENT_UI_EXTENSION_GUIDE.md`, a shared Surveyor UI API 1.0, a data-only JSON extension loader, and four optional lane panels (DUNGEON-C, METADATA-D, runtime-dispatch, and seed-lineage).
+-- Extensions are downloaded into staging, checked against declared dependencies and SHA-256 hashes, checked for host/API compatibility, and activated without restarting Surveyor. Previous versions remain available for rollback.
+-- Extension panels can request only the eight stable `research.*` host action IDs. No agent-provided code, shell command, path, or process arguments are run. Preconditions are rechecked at click time.
+-- Evidence uploads initiated through a lane extension use a timestamped `<lane>-<action>` folder and run manifest. Local action records are also stored under `%LOCALAPPDATA%\NMSDerelictSurveyor\ui-extensions\<lane>\runs`.
+-- The DUNGEON-C sample panel launches the existing exact-root-caller offline extractor. It does not require NMS to run or a derelict traversal.
+-- Tests cover compatible install, hash/command rejection, failed-update preservation, live version activation, rollback, and evidence namespacing. Tk visual execution on Windows still needs a human machine.
++The four-lane extension host remains data-only. It validates dependencies, API compatibility, and declared SHA-256 hashes before installation; extensions use only registered `research.*` actions, with preconditions rechecked before execution. The current runtime-dispatch action is `research.analyze_generation`, namespaced to `runtime-dispatch`, with empty parameters and preconditions `workflow.idle`, `nms.running`, and `probe.connected`.
+ 
+-## Exact next action
++The runtime-dispatch lane still needs a live `owner+0x10` slot value and target identity at the descriptor-correlated root event. The latest reviewed upload repeated root candidate `9256392A2F5A74AC` but omitted that slot value. No full traversal is required. The separate post-7.05 `MEDI_FLOATERS` layout remains an inference from its own capture and was not reproduced in the latest Runtime-A analysis session.
+ 
+-The issue-8 host and panels are published. Issue #8 remains open because the shared probe-capture requirement and Windows visual validation are outstanding; the release does not claim full issue acceptance.
++## Exact next action
+ 
+-**Next human action (Windows; no full derelict traversal):** use the Runtime-A Surveyor build identified by `agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json` > start Surveyor > click **Start NMS** > load the known derelict only until **Root dispatch +0x10 captured** appears > click **Analyze generation + upload** > return to Main and write `check`. Then review whether the capture hook is compatible with the other lane profiles before integration. Separately, visually verify the DUNGEON-C extension refresh and rollback in the Windows Surveyor UI.
++**Extension refresh check:** open Surveyor v0.3.43 > click **Check lane extensions** > update **RUNTIME-A · Live root dispatch** to v1.0.1 > confirm the app reports the updated extension. No Surveyor app or NMS restart is required for this data-only extension update.
+ 
+-**Combined published-source verification:** full test suite 145/145 passed after reconciling the DUNGEON-C test with the shared four-entry catalog; `compileall` passed; 52 JSON files parsed; all four extension manifest hashes passed; the complete source ZIP passed integrity verification (SHA-256 `9d513cd1bb46b3d757d8b67c70a6e799058f092bff2f2c1817acaba564453898`). Windows/Tk visual behavior was not run in this Linux environment.
++**Runtime research remains separate:** use the existing Runtime-A build from its lane manifest > fully exit NMS > start NMS from Surveyor > load the known derelict only until **Root dispatch +0x10 captured** appears > click **Analyze generation + upload** > return to Main and write `check`. Stop at the capture indicator; no full traversal is required.
+ 
+-Issues #13 and #14 remain closed as not planned. Their benchmark branches were reset to `main`, removing the test-only help-button project; GitHub branch names remain because the connected API cannot delete refs. The delivered package contains no benchmark help button.
++Focused extension/refresh/rollback/precondition/namespacing verification passed 18/18. The tests do not replace the outstanding Windows visual check or live NMS capture.
+ 
+ ## Canonical source status
+ 
+-The published canonical release is v0.3.41. Its `update-manifest.json` and full-package chunks are on `main`; the complete source ZIP with all four panels and extension tests is stored at `/NMS modding/NMS-Derelict-Probe-v0.3.41-published.zip` and passes ZIP integrity verification.
++The full app package remains v0.3.43 and is served through `update-manifest.json`. Runtime-dispatch extension v1.0.1 is published through the shared `main` extension index; it can update independently of the app package. The complete source snapshot for this lane update is `NMS-Derelict-Probe-v0.3.43-runtime-dispatch-extension-1.0.1-source.zip`.
+ 
+ ---
+ 
+@@ -177,3 +199,7 @@
+ - Upload all confirms once, then runs currently eligible lane extension actions sequentially. Request-only actions require an active lane request; preconditions are rechecked before each action. Skipped actions are logged, and final UI directs the user to inspect each lane upload receipt.
+ - Verification: `python -m unittest discover -s tests` (151 passed), `python -m compileall -q tools overlay tests`. Tk visual QA remains pending on Windows.
+ - Next action: install Surveyor 0.3.43, verify wheel scrolling over the main page and lane cards, and exercise Upload all with only the intended lane requests enabled.
++
++## Seed-lineage extension 1.0.2
++
++Published a version-only refresh of the seed-lineage Surveyor extension for update testing. The panel contents and host action are unchanged from 1.0.1: `research.extract_caller_code`, precondition `workflow.idle`, empty API 1.0 parameters, evidence namespace `seed-lineage`, and `request_only: true`. Extension 1.0.1 remains installed for rollback.
