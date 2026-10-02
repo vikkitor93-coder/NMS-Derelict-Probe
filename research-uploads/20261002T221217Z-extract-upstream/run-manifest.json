@@ -1,0 +1,12 @@
+{
+  "action": "extract-upstream",
+  "files": [
+    {
+      "name": "dungeon-upstream-callers-latest.json",
+      "sha256": "4e3e9e23e687672a364f217affa18cfe758d1d6b9dd4347cf6e063f0e4fc9163",
+      "size": 161039
+    }
+  ],
+  "utc": "20261002T221217Z",
+  "version": 1
+}
