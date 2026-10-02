@@ -1,7 +1,7 @@
-import hashlib
 import json
 import importlib.util
 import unittest
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,14 +16,14 @@ GITHUB_SPEC.loader.exec_module(github_integration)
 
 
 class SeedLineageUIExtensionTests(unittest.TestCase):
-    def test_seed_lineage_101_matches_host_api_and_lane_scope(self):
-        folder = ROOT / "agent-ui" / "extensions" / "seed-lineage" / "1.0.1"
+    def test_seed_lineage_extension_matches_host_api_and_lane_scope(self):
+        folder = ROOT / "agent-ui" / "extensions" / "seed-lineage" / "1.0.2"
         manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
         validated, panel = extensions.validate_manifest(
             manifest,
             "seed-lineage",
-            "1.0.1",
-            "0.3.41",
+            "1.0.2",
+            "0.3.43",
             lambda rel: (folder / rel).read_bytes(),
             extensions.HOST_ACTION_IDS,
         )
@@ -33,14 +33,25 @@ class SeedLineageUIExtensionTests(unittest.TestCase):
         self.assertEqual("seed-lineage", validated["extension_id"])
         self.assertTrue(source_panel["request_only"])
         self.assertIn("baseline_window_matches_exe=false", source_panel["summary"])
-        self.assertIn("root seed 9256392A2F5A74AC, MEDI_FLOATERS, 10 rooms, 16 containers", source_panel["summary"])
-        self.assertIn("CARGO_FLOATERS, 8-room, 35-container layout is historical", source_panel["summary"])
+        self.assertIn("universe 00001A0004E84EFD", source_panel["summary"])
         action = panel["actions"][0]
         source_action = source_panel["actions"][0]
         self.assertEqual("research.extract_caller_code", action["action_id"])
         self.assertEqual(["workflow.idle"], action["preconditions"])
         self.assertEqual("seed-lineage", action["evidence_namespace"])
         self.assertEqual({}, source_action["parameters"])
+        legacy_folder = ROOT / "agent-ui" / "extensions" / "seed-lineage" / "1.0.0"
+        legacy_manifest = json.loads((legacy_folder / "manifest.json").read_text(encoding="utf-8"))
+        _legacy_validated, legacy_panel = extensions.validate_manifest(
+            legacy_manifest,
+            "seed-lineage",
+            "1.0.0",
+            "0.3.43",
+            lambda rel: (legacy_folder / rel).read_bytes(),
+            extensions.HOST_ACTION_IDS,
+        )
+        self.assertEqual("research.analyze_seed_function", legacy_panel["actions"][0]["action_id"])
+        self.assertFalse(legacy_panel["request_only"])
         self.assertEqual(
             (False, "Needs: workflow.idle"),
             extensions.preconditions_met(["workflow.idle"], {"workflow_idle": False}),
@@ -54,15 +65,26 @@ class SeedLineageUIExtensionTests(unittest.TestCase):
             r"^research-uploads/20261001T000000Z-seed-lineage-extract-caller-[0-9a-f]{8}$",
         )
 
-        for item in manifest["files"]:
-            content = (folder / item["path"]).read_bytes()
-            self.assertEqual(hashlib.sha256(content).hexdigest(), item["sha256"])
-
         index = json.loads((ROOT / "agent-ui" / "extensions" / "index.json").read_text(encoding="utf-8"))
+        self.assertIn(
+            {
+                "extension_id": "seed-lineage",
+                "version": "1.0.2",
+                "manifest_path": "seed-lineage/1.0.2/manifest.json",
+            },
+            index["extensions"],
+        )
         entry = next(item for item in index["extensions"] if item["extension_id"] == "seed-lineage")
-        self.assertEqual("1.0.1", entry["version"])
-        self.assertEqual("seed-lineage/1.0.1/manifest.json", entry["manifest_path"])
-        self.assertTrue((ROOT / "agent-ui" / "extensions" / "seed-lineage" / "1.0.0" / "manifest.json").is_file())
+        with tempfile.TemporaryDirectory() as tmp:
+            extension_state = Path(tmp)
+            (extension_state / "active.json").write_text(
+                json.dumps({"seed-lineage": "1.0.1"}), encoding="utf-8"
+            )
+            self.assertEqual([entry], extensions.update_candidates([entry], extension_state))
+            (extension_state / "active.json").write_text(
+                json.dumps({"seed-lineage": "1.0.2"}), encoding="utf-8"
+            )
+            self.assertEqual([], extensions.update_candidates([entry], extension_state))
 
 
 if __name__ == "__main__":

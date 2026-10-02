@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "title": "SEED-B · Fresh caller capture needed",
+  "summary": "Prior caller evidence has baseline_window_matches_exe=false. Fully exit and relaunch NMS from the installed executable, then capture only the root resource event at universe 00001A0004E84EFD. Click “Extract caller code + upload” and confirm the new evidence says baseline_window_matches_exe=true before upstream analysis. No full derelict traversal. Post-7.05: root seed 9256392A2F5A74AC, MEDI_FLOATERS, 10 rooms, 16 containers. The old CARGO_FLOATERS, 8-room, 35-container layout is historical.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.extract_caller_code",
+      "label": "Extract caller code + upload",
+      "description": "Extracts and uploads the current caller capture after the fresh NMS root event is recorded.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    }
+  ]
+}
