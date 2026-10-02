@@ -155,14 +155,10 @@
      if recording:
          headline = f"DERELICT SURVEYOR v{version} · RECORDING"
      elif state == "saved":
-@@ -221,6 +228,19 @@
+@@ -221,6 +228,15 @@
      dungeon_seed = str(gen_data.get("last_dungeon_root_seed_hex") or "")
      if dungeon_seed:
          generation_line += f"   DUNGEON-SEED {dungeon_seed}"
-+    if isinstance(dispatch_capture, dict) and dispatch_capture.get("read_status") == "captured":
-+        target = dispatch_capture.get("target_identity") if isinstance(dispatch_capture.get("target_identity"), dict) else {}
-+        label = target.get("module_rva") or target.get("address") or dispatch_capture.get("slot_value_hex") or "captured"
-+        generation_line += f"   ROOT+0x10 {label}"
 +    if isinstance(dispatch_capture, dict):
 +        slot_value = str(dispatch_capture.get("slot_value_hex") or "unreadable")
 +        target = dispatch_capture.get("target_identity") if isinstance(dispatch_capture.get("target_identity"), dict) else {}
@@ -313,111 +309,3 @@
      def test_controller_uses_shared_overlay_status_and_exposes_extension_refresh(self):
          source = (ROOT / "tools" / "surveyor_controller.py").read_text(encoding="utf-8")
          self.assertIn("from overlay.derelict_overlay import summarize_status", source)
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -1,3 +1,10 @@
-+# 0.3.44 — Runtime-A owner+0x10 dispatch capture
-+
-+- Bump the embedded probe to 0.3.34 and read the raw 8-byte `owner+0x10` value once, only at the exact descriptor-correlated dungeon-root event.
-+- Record the slot address/value and best-effort loaded-module identity in live status, the root event, and persistent exact-root evidence.
-+- Show the capture state and target identity in the shared overlay. The read is observational; it does not write NMS memory.
-+- Requires the matching probe build and a full NMS exit/restart. The Surveyor extension remains data-only and unchanged.
-+
- # 0.3.43 — Agent Console scroll and bulk upload
- 
- - Move extension version and evidence-upload confirmation to the top of every lane panel.
---- a/README.md
-+++ b/README.md
-@@ -3,7 +3,11 @@
- > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
- 
- 
--Current Surveyor package: **v0.3.43**.
-+Current Surveyor app/controller package: **v0.3.43**. Runtime-A probe source in this lane patch: **0.3.34** (candidate full app package: 0.3.44).
-+
-+## Runtime-A probe hook 0.3.34
-+
-+Reads and reports the raw `owner+0x10` value only after the exact descriptor-correlated dungeon root event. This is a separate probe build change; the data-only Surveyor extension remains v1.0.1. Fully exit and relaunch NMS after installing a changed probe. See `AI_HANDOFF.md` for the exact validation and rollback steps.
- 
- ## v0.3.43 — Agent Console scroll and bulk upload
- 
---- a/AI_HANDOFF.md
-+++ b/AI_HANDOFF.md
-@@ -1,4 +1,31 @@
--# AI handoff — NMS Derelict Probe v0.3.41 published release
-+# AI handoff — NMS Derelict Probe v0.3.44 candidate (app 0.3.43 + Runtime-A probe 0.3.34)
-+
-+## Runtime-A probe hook 0.3.34 (2026-10-02)
-+
-+The Runtime-A lane now has a source change that reads the raw 8-byte value at `owner+0x10` once, only at the exact descriptor-correlated `DUNGEON.SCENE.MBIN` root event. It persists the owner/slot/value and best-effort loaded-module address identity to the root event and live-status `generation_rooms` record. The overlay surfaces capture state and the target address/RVA. This is a read-only measurement; the value's semantic type is still unproven.
-+
-+The embedded probe version is 0.3.34. The standalone Surveyor app/controller remains 0.3.43, and extension `runtime-dispatch` remains data-only v1.0.1. App updater release metadata has not been changed by this lane patch. NMS must be fully exited and relaunched for a changed probe hook to load; do not hot-swap the mod while NMS is running.
-+
-+Linux verification: `python -m unittest discover -s tests -v` (154/154 passed), `python -m compileall -q tools overlay tests mod`, and JSON parsing for the live-status schema and extension index passed. Windows pyMHF/NMS runtime validation remains pending.
-+
-+### Human validation recipe
-+
-+1. Extract the Runtime-A 0.3.34 build over the existing Surveyor project/mod directory, keeping the existing data and settings.
-+2. Fully exit No Man's Sky.
-+3. Open Surveyor and start NMS using its **Start NMS** control so the installed probe is loaded.
-+4. Load the same known derelict and wait for the root event; the overlay should show `ROOT+0x10 <value> -> NMS+<RVA>` or an address identity result, and `+0x10 captured`.
-+5. In Surveyor, click **Analyze generation + upload**.
-+6. Verify a successful upload receipt in the `runtime-dispatch` lane, then return to Main and write `check`.
-+
-+Stop once the root capture appears; no full traversal is required. If capture is unreadable, upload the analysis anyway so the owner/slot read status is recorded. Roll back by restoring the prior `mod/derelict_baseline_probe.py` (probe 0.3.33) and restarting NMS; restore the matching prior overlay only if its display behavior is also being rolled back.
-+
-+## Runtime-dispatch extension 1.0.1 (2026-10-02)
-+
-+The app package remains v0.3.43. This is a data-only extension refresh test: `runtime-dispatch` advances from 1.0.0 to 1.0.1; its panel payload and API 1.0 action contract are unchanged. The 1.0.0 files remain installed for rollback. Surveyor reads the extension feed from `agent-ui/extensions/index.json` on `main`, independently of the app package updater.
-+
-+To install it now, open Surveyor v0.3.43 > **Check lane extensions** > update **RUNTIME-A · Live root dispatch** from 1.0.0 to 1.0.1. PR #30 is merged as `f3cfb4ad4bff9391ad3beba77ae3d8f1b7a8f708`. The lane still awaits its separate live `owner+0x10` capture; this extension update changes no probe or controller code.
-+
-+Verification: the runtime-dispatch extension tests cover API/index compatibility, panel hash/action contract, rejected invalid content, exact preconditions, live refresh, rollback, and evidence namespacing. See `agent-patches/runtime-dispatch/RUNTIME_DISPATCH_EXTENSION_1.0.1.json` for exact results and hashes.
- 
- ## 2026-10-01 Surveyor UI follow-up
- 
-@@ -10,28 +37,23 @@
- 
- ## Current handoff state
- 
--The v0.3.41 Surveyor extension host and four lane panels are published on `main` by PR #21. This v0.3.42 package updates their console layout. The installed source package is available through `update-manifest.json`; issue #8 remains partially complete pending the Windows visual check and Runtime-A capture validation.
-+The latest full Surveyor app package is v0.3.43. Its shared extension host reads `agent-ui/extensions/index.json` on `main`, independently of the app package updater. The runtime-dispatch extension is now v1.0.1; v1.0.0 remains available for rollback. The update changes only the extension version/catalog entry and associated tests/handoff; the panel payload, API 1.0 contract, controller, probe, and game behavior are unchanged.
- 
--- Issue #8 adds `AGENT_UI_EXTENSION_GUIDE.md`, a shared Surveyor UI API 1.0, a data-only JSON extension loader, and four optional lane panels (DUNGEON-C, METADATA-D, runtime-dispatch, and seed-lineage).
--- Extensions are downloaded into staging, checked against declared dependencies and SHA-256 hashes, checked for host/API compatibility, and activated without restarting Surveyor. Previous versions remain available for rollback.
--- Extension panels can request only the eight stable `research.*` host action IDs. No agent-provided code, shell command, path, or process arguments are run. Preconditions are rechecked at click time.
--- Evidence uploads initiated through a lane extension use a timestamped `<lane>-<action>` folder and run manifest. Local action records are also stored under `%LOCALAPPDATA%\NMSDerelictSurveyor\ui-extensions\<lane>\runs`.
--- The DUNGEON-C sample panel launches the existing exact-root-caller offline extractor. It does not require NMS to run or a derelict traversal.
--- Tests cover compatible install, hash/command rejection, failed-update preservation, live version activation, rollback, and evidence namespacing. Tk visual execution on Windows still needs a human machine.
-+The four-lane extension host remains data-only. It validates dependencies, API compatibility, and declared SHA-256 hashes before installation; extensions use only registered `research.*` actions, with preconditions rechecked before execution. The current runtime-dispatch action is `research.analyze_generation`, namespaced to `runtime-dispatch`, with empty parameters and preconditions `workflow.idle`, `nms.running`, and `probe.connected`.
- 
--## Exact next action
-+The runtime-dispatch lane still needs a live `owner+0x10` slot value and target identity at the descriptor-correlated root event. The latest reviewed upload repeated root candidate `9256392A2F5A74AC` but omitted that slot value. No full traversal is required. The separate post-7.05 `MEDI_FLOATERS` layout remains an inference from its own capture and was not reproduced in the latest Runtime-A analysis session.
- 
--The issue-8 host and panels are published. Issue #8 remains open because the shared probe-capture requirement and Windows visual validation are outstanding; the release does not claim full issue acceptance.
-+## Exact next action
- 
--**Next human action (Windows; no full derelict traversal):** use the Runtime-A Surveyor build identified by `agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json` > start Surveyor > click **Start NMS** > load the known derelict only until **Root dispatch +0x10 captured** appears > click **Analyze generation + upload** > return to Main and write `check`. Then review whether the capture hook is compatible with the other lane profiles before integration. Separately, visually verify the DUNGEON-C extension refresh and rollback in the Windows Surveyor UI.
-+**Extension refresh check:** open Surveyor v0.3.43 > click **Check lane extensions** > update **RUNTIME-A · Live root dispatch** to v1.0.1 > confirm the app reports the updated extension. No Surveyor app or NMS restart is required for this data-only extension update.
- 
--**Combined published-source verification:** full test suite 145/145 passed after reconciling the DUNGEON-C test with the shared four-entry catalog; `compileall` passed; 52 JSON files parsed; all four extension manifest hashes passed; the complete source ZIP passed integrity verification (SHA-256 `9d513cd1bb46b3d757d8b67c70a6e799058f092bff2f2c1817acaba564453898`). Windows/Tk visual behavior was not run in this Linux environment.
-+**Runtime research remains separate:** use the existing Runtime-A build from its lane manifest > fully exit NMS > start NMS from Surveyor > load the known derelict only until **Root dispatch +0x10 captured** appears > click **Analyze generation + upload** > return to Main and write `check`. Stop at the capture indicator; no full traversal is required.
- 
--Issues #13 and #14 remain closed as not planned. Their benchmark branches were reset to `main`, removing the test-only help-button project; GitHub branch names remain because the connected API cannot delete refs. The delivered package contains no benchmark help button.
-+Focused extension/refresh/rollback/precondition/namespacing verification passed 18/18. The tests do not replace the outstanding Windows visual check or live NMS capture.
- 
- ## Canonical source status
- 
--The published canonical release is v0.3.41. Its `update-manifest.json` and full-package chunks are on `main`; the complete source ZIP with all four panels and extension tests is stored at `/NMS modding/NMS-Derelict-Probe-v0.3.41-published.zip` and passes ZIP integrity verification.
-+The full app package remains v0.3.43 and is served through `update-manifest.json`. Runtime-dispatch extension v1.0.1 is published through the shared `main` extension index; it can update independently of the app package. The complete source snapshot for this lane update is `NMS-Derelict-Probe-v0.3.43-runtime-dispatch-extension-1.0.1-source.zip`.
- 
- ---
- 
-@@ -177,3 +199,7 @@
- - Upload all confirms once, then runs currently eligible lane extension actions sequentially. Request-only actions require an active lane request; preconditions are rechecked before each action. Skipped actions are logged, and final UI directs the user to inspect each lane upload receipt.
- - Verification: `python -m unittest discover -s tests` (151 passed), `python -m compileall -q tools overlay tests`. Tk visual QA remains pending on Windows.
- - Next action: install Surveyor 0.3.43, verify wheel scrolling over the main page and lane cards, and exercise Upload all with only the intended lane requests enabled.
-+
-+## Seed-lineage extension 1.0.2
-+
-+Published a version-only refresh of the seed-lineage Surveyor extension for update testing. The panel contents and host action are unchanged from 1.0.1: `research.extract_caller_code`, precondition `workflow.idle`, empty API 1.0 parameters, evidence namespace `seed-lineage`, and `request_only: true`. Extension 1.0.1 remains installed for rollback.
