@@ -12,7 +12,8 @@ from tools import surveyor_controller as controller
 
 ROOT = Path(__file__).resolve().parents[1]
 LANE = "runtime-dispatch"
-VERSION = "1.0.0"
+PREVIOUS_VERSION = "1.0.0"
+VERSION = "1.0.1"
 HOST_VERSION = "0.3.41"
 EXTENSION_DIR = ROOT / "agent-ui" / "extensions" / LANE / VERSION
 
@@ -119,30 +120,30 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
             )
 
     def test_live_install_refresh_and_rollback_keep_old_version_available(self):
-        manifest, panel = read_extension()
+        _current_manifest, panel = read_extension()
         panel_bytes = (json.dumps(panel, sort_keys=True) + "\n").encode()
-        manifest = build_manifest(VERSION, panel_bytes)
-        entry = {"extension_id": LANE, "version": VERSION, "manifest_path": f"{LANE}/{VERSION}/manifest.json"}
+        previous_manifest = build_manifest(PREVIOUS_VERSION, panel_bytes)
+        previous_entry = {"extension_id": LANE, "version": PREVIOUS_VERSION, "manifest_path": f"{LANE}/{PREVIOUS_VERSION}/manifest.json"}
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            extensions.install_extension(root, entry, HOST_VERSION, extensions.HOST_ACTION_IDS,
-                                         remote_package(manifest, panel_bytes).__getitem__)
-            self.assertEqual(VERSION, extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)[0]["version"])
+            extensions.install_extension(root, previous_entry, HOST_VERSION, extensions.HOST_ACTION_IDS,
+                                         remote_package(previous_manifest, panel_bytes).__getitem__)
+            self.assertEqual(PREVIOUS_VERSION, extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)[0]["version"])
 
             refreshed_panel = copy.deepcopy(panel)
             refreshed_panel["summary"] = "Refreshed panel data"
             refreshed_bytes = (json.dumps(refreshed_panel, sort_keys=True) + "\n").encode()
-            refreshed_manifest = build_manifest("1.0.1", refreshed_bytes)
-            refreshed_entry = {"extension_id": LANE, "version": "1.0.1", "manifest_path": f"{LANE}/1.0.1/manifest.json"}
+            refreshed_manifest = build_manifest(VERSION, refreshed_bytes)
+            refreshed_entry = {"extension_id": LANE, "version": VERSION, "manifest_path": f"{LANE}/{VERSION}/manifest.json"}
             extensions.install_extension(root, refreshed_entry, HOST_VERSION, extensions.HOST_ACTION_IDS,
                                          remote_package(refreshed_manifest, refreshed_bytes).__getitem__)
             active, active_panel = extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)
-            self.assertEqual("1.0.1", active["version"])
+            self.assertEqual(VERSION, active["version"])
             self.assertEqual("Refreshed panel data", active_panel["summary"])
-            extensions.activate_installed_extension(root, LANE, VERSION, HOST_VERSION, extensions.HOST_ACTION_IDS)
+            extensions.activate_installed_extension(root, LANE, PREVIOUS_VERSION, HOST_VERSION, extensions.HOST_ACTION_IDS)
             rolled_back, _ = extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)
-            self.assertEqual(VERSION, rolled_back["version"])
-            self.assertEqual(["1.0.1", VERSION], extensions.installed_versions(root, LANE))
+            self.assertEqual(PREVIOUS_VERSION, rolled_back["version"])
+            self.assertEqual([VERSION, PREVIOUS_VERSION], extensions.installed_versions(root, LANE))
 
     def test_lane_action_records_are_namespaced_and_collision_safe(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -164,6 +165,8 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
             agent_ui_extension_installing = {LANE}
             agent_ui_extension_notice = Notice()
             agent_selected_lane = {"id": LANE}
+            def _update_agent_extension_summary(self):
+                self.summary_refreshed = True
 
         fake = FakeController.__new__(FakeController)
         with mock.patch.object(controller.SurveyorController, "_render_agent_ui_extension") as render, \
@@ -171,6 +174,7 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
             controller.SurveyorController._finish_agent_ui_extension_update(fake, LANE, "")
         self.assertEqual(f"{LANE} UI extension refreshed without restarting Surveyor.", fake.agent_ui_extension_notice.value)
         self.assertNotIn(LANE, fake.agent_ui_extension_installing)
+        self.assertTrue(fake.summary_refreshed)
         render.assert_called_once_with(fake.agent_selected_lane)
 
     def test_uploaded_evidence_folder_uses_runtime_lane_namespace(self):
