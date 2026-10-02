@@ -302,3 +302,7 @@ The exact external call at `02BFCC17` decoded as `FF 52 10`, targeting the verif
 - Lanes: `agent/runtime-dispatch`, `agent/seed-lineage`, `agent/dungeon-decompile`, `agent/metadata`; integration is the only lane that combines proven changes.
 - Every experimental Surveyor must visibly identify its lane/build (for example `Surveyor · RUNTIME-A`) and write evidence under a lane-specific namespace so simultaneous variants cannot be confused.
 - Agents publish a PR containing source changes, tests, evidence schema changes, and a concise handoff. Main integration accepts only reproducible/proven findings.
+
+## DUNGEON-C extension refresh — 2026-10-02
+
+Extension v1.0.2 is prepared as a version-only refresh of v1.0.1. The app reads its shared extension index from `main`, so the lane push is accompanied by a narrow integration PR; Surveyor can offer the refresh after that PR merges. Focused extension suite 6/6 and source suite 151/151 passed. Rollback remains v1.0.1.
