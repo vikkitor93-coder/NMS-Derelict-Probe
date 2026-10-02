@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "lane": "metadata",
+  "branch": "agent/metadata",
+  "base_branch": "integration/issue-8-ui-extensions",
+  "objective": "Publish METADATA-D Surveyor UI extension 1.0.1 without changing Surveyor core, controller/probe protocols, or the standalone lane workflow.",
+  "extension": {
+    "id": "metadata",
+    "version": "1.0.1",
+    "manifest": "agent-ui/extensions/metadata/1.0.1/manifest.json",
+    "panel": "agent-ui/extensions/metadata/1.0.1/panel.json",
+    "index": "agent-ui/extensions/index.json",
+    "sha256_panel": "651f40f506b2eeda155ee66523b931bf6fba053551cd6d51a363a5b3900a602a"
+  },
+  "supported_actions": [
+    "research.prepare_assets",
+    "research.analyze_generation"
+  ],
+  "preconditions": [
+    "workflow.idle"
+  ],
+  "evidence_namespace": "metadata",
+  "change_summary": "Added extension version 1.0.1 with the same API 1.0 panel behavior as 1.0.0; updated the shared index and retained 1.0.0 unchanged.",
+  "verification": "8/8 local contract checks passed. Shared host lifecycle suite and Windows visual refresh/rollback were not rerun for this version-only update.",
+  "rollback": "Set the metadata entry in agent-ui/extensions/index.json back to metadata/1.0.0/manifest.json or activate retained extension 1.0.0 in Agent Console. No Surveyor core or probe rollback is needed.",
+  "human_validation": {
+    "required": true,
+    "steps": [
+      "Merge this lane PR into integration/issue-8-ui-extensions so the app's shared extension index exposes 1.0.1.",
+      "In Surveyor, run the extension update/refresh and verify metadata 1.0.1 is active."
+    ]
+  }
+}
