@@ -49,6 +49,14 @@
     "agent-ui/extensions/runtime-dispatch/1.0.1/manifest.json": "b311dcd275e6d54ae1fc182c97942519421445f246a58c119726ff3e8b0248ef",
     "agent-ui/extensions/index.json": "5c4169538f665b60ccd78523ece2d711f7cc23dbe1f240c792a3fb51177507dd",
     "tests/test_agent_ui_runtime_dispatch_extension.py": "3bbf07cfe34678274d30f896e742db2fbaf73859fcf377032c04017a02ff1ec4",
-    "AI_HANDOFF.md": "5167d8f2e851955fc3bc6dfc3dfe56fb8fba13a7368fdd3e007b5c0459f66b9d"
+    "AI_HANDOFF.md": "ba47058bc4463580799d1598df7271d52e3858f6546cd38252466afe1e7f9d66"
+  },
+  "pull_request": {
+    "number": 30,
+    "url": "https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/30",
+    "merged": true,
+    "merge_commit": "f3cfb4ad4bff9391ad3beba77ae3d8f1b7a8f708",
+    "lane_branch": "agent/runtime-dispatch-ui-1.0.1",
+    "branch_commit": "3edaeb221aadc527c5c3b5e759791e2a1088d909"
   }
 }
