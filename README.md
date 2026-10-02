@@ -3,15 +3,17 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.45**.
+Current Surveyor package: **v0.3.46**.
 
-## v0.3.45 — responsive Agent Console and configurable refresh
+## v0.3.46 — visible prerequisites and collapsible sections
 
 - Show the published **NEEDED** request and actual **Action** in a distinct fixed box; keep extension versions fixed below it and evidence-upload confirmation beneath the lane buttons.
 - Expand **Options +** to hide lane details, extension details, or receipt details with simple plus/minus toggles. Choices are saved locally.
 - Set automatic refresh to one minute by default; choose 20 seconds, 2 minutes, 5 minutes, or Off beside the refresh controls. **Refresh now** still checks lane status and extensions immediately.
-- Reuse unchanged extension widgets during refresh and update action readiness in place to avoid visual redraw artifacts.
-- Preserve the v0.3.44 status freshness, request-only action readiness, and latest four published lane extensions.
+- Show raw required and currently missing prerequisite keys in each NEEDED box; remove generic step guidance from that box.
+- Add small top-right +/− controls for each main-window section, Agent Console lane card, lane-action group, and global-action group.
+- Use cached NMS/probe status when updating action readiness, preventing repeated Windows process queries during agent refresh.
+- Preserve configurable status refresh, stable widget reuse, fixed action/version placement, and the latest four published lane extensions.
 
 
 ## v0.3.42 — four-lane Agent Console
