@@ -1,0 +1,18 @@
+{
+  "action": "analyze-generation",
+  "evidence_namespace": "dungeon-decompile",
+  "files": [
+    {
+      "name": "generation-baseline-latest.json",
+      "sha256": "ca57d7823a88f102cb1a3a8f4aa273572f048c3b58245ff4cd24c80cebb157d5",
+      "size": 76976
+    },
+    {
+      "name": "exact-root-caller-latest.json",
+      "sha256": "ac310f9e0868460695579e65090c3e8c4630d7d1dfd9a7110654d008fde91753",
+      "size": 2303
+    }
+  ],
+  "utc": "20261002T213248Z",
+  "version": 1
+}
