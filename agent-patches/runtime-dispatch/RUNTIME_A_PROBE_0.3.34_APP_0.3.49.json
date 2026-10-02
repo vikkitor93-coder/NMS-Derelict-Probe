@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "lane": "runtime-dispatch",
+  "lane_branch": "agent/runtime-dispatch",
+  "probe_version": "0.3.34",
+  "surveyor_app_version": "0.3.49",
+  "extension_version": "1.0.1",
+  "purpose": "Capture the raw owner+0x10 value once at the exact descriptor-correlated dungeon root event and expose the result through the existing Surveyor root-dispatch status.",
+  "measured_facts": [
+    "The capture is gated by exact descriptor correlation at the dungeon root event.",
+    "The hook performs one read of 8 bytes at owner+0x10 using the existing safe current-process read helper.",
+    "The raw value and best-effort loaded-module identity are included in exact-root evidence and live status.",
+    "No NMS memory writes are added."
+  ],
+  "inferences": [
+    "A loaded module RVA identifies an address location, not the C++ semantic type of the slot value."
+  ],
+  "hypotheses": [
+    "The owner+0x10 value may identify runtime dispatch behavior; live capture and further analysis are required."
+  ],
+  "human_validation": {
+    "required": true,
+    "steps": [
+      "Use Surveyor Check app update and Install update for app 0.3.49.",
+      "Fully close NMS.",
+      "Start NMS from Surveyor so the staged Runtime-A probe 0.3.34 is loaded.",
+      "Load the same known derelict and wait for Root dispatch +0x10 to report CAPTURED.",
+      "Click Analyze generation + upload and verify the runtime-dispatch receipt."
+    ],
+    "success_condition": "Surveyor root-dispatch state and objective show captured; the lane upload contains owner+0x10 capture data.",
+    "full_derelict_traversal_required": false
+  },
+  "verification": {
+    "tests": "python -m unittest discover -s tests -q \u2014 165 passed",
+    "compile": "python -m compileall -q tools overlay tests mod \u2014 passed",
+    "json": "live-status schema, extension index, canonical source parsed \u2014 passed",
+    "runtime": "Windows pyMHF/NMS validation remains pending"
+  },
+  "rollback": [
+    "In the app, reinstall the previous complete package (v0.3.48) through app update/rollback, if available.",
+    "Otherwise restore the previous probe and overlay files from the v0.3.48 source package; close and relaunch NMS."
+  ],
+  "patch_base": "Surveyor app v0.3.48 full source package; embedded probe 0.3.33",
+  "changed_files": [
+    "mod/derelict_baseline_probe.py",
+    "overlay/derelict_overlay.py",
+    "schema/live-status-v1.schema.json",
+    "tests/test_tools.py",
+    "tools/surveyor_controller.py",
+    "VERSION.txt",
+    "CHANGELOG.md",
+    "README.md",
+    "AI_HANDOFF.md",
+    "CANONICAL_SOURCE.json",
+    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.34-from-v0.3.48.patch"
+  ],
+  "sha256": {
+    "mod/derelict_baseline_probe.py": "467974e2953b1ae0c82a57aa8cd25503ae8c9e95d6059d62eb60ed117f8f92c6",
+    "overlay/derelict_overlay.py": "ffc3d1509e45f5a6b30b6967b70427ed3afebd5d75aeffaf94fa0be666ce07ba",
+    "schema/live-status-v1.schema.json": "2bdc62e96bb202c6d072eda575978bfc9637353ccba056d292b8b2c0c017d7b1",
+    "tests/test_tools.py": "d26d5e4bb3bf7e510d17020740c1724658c1aaf866f5b4fa79d97eb16d34325f",
+    "tools/surveyor_controller.py": "03f07de3c6a0ada9cfe76099b4df936dc021eae5481639cbc1458357b1a663d1",
+    "VERSION.txt": "4c7c7c333416e92f134984ad6029059d5255d2761ebab662022a20013ac9ec27",
+    "CHANGELOG.md": "0fa299a254b39fa58476cf94a1d2483e3c573188e0e27c7873f297a71020c4c5",
+    "README.md": "35ba1847293a1428cebbb52a77fc0c2feea79afb9c55270d4464b8137095db30",
+    "AI_HANDOFF.md": "772b32d3ecd757d5ab075ab1d2943a44a61c5f8fd3acfa0f0d10f404e5589242",
+    "CANONICAL_SOURCE.json": "e6736247ecc136d5e19eaa8f52ee822a4991491ce9c20a8f94213bb808053dca",
+    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.34-from-v0.3.48.patch": "0f2000abcf2971c165cd261362d37442c6424b71f5920f8608fd695dc4dc5842"
+  }
+}
