@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "extension_id": "dungeon-decompile",
+  "version": "1.0.2",
+  "compatible_surveyor_api_version": "1.0",
+  "min_surveyor_version": "0.3.41",
+  "dependencies": [
+    "agent-console.ui.v1",
+    "action.research.analyze_generation"
+  ],
+  "entry_point": "panel.json",
+  "files": [
+    {
+      "path": "panel.json",
+      "sha256": "3d2a37f8331f35b1b7c3ce8e9bcf3786e8e02a822d7fc2bb5e9ff5cf24b56aff"
+    }
+  ]
+}
