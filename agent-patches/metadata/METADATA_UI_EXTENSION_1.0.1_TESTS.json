@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "lane": "metadata",
+  "branch": "main",
+  "extension_version": "1.0.1",
+  "local_contract_checks": {
+    "passed": 8,
+    "failed": 0,
+    "checks": [
+      "Panel JSON parses and uses schema_version 1",
+      "Semantic version is 1.0.1 and identity is metadata",
+      "Panel SHA-256 matches the manifest lowercase digest",
+      "Only registered API 1.0 research action IDs are requested",
+      "Each action declares the supported workflow.idle precondition",
+      "Each action uses the metadata evidence namespace",
+      "API 1.0 action parameters are empty objects",
+      "request_only is true"
+    ]
+  },
+  "host_lifecycle_tests": {
+    "result": "not rerun for this metadata-only version bump",
+    "previous_reported_host_suite": {
+      "focused": "17/17 passed",
+      "full": "130/130 passed",
+      "compileall": "passed"
+    },
+    "covers": [
+      "failed update preserves prior active version",
+      "retained-version rollback",
+      "invalid content and hash rejection",
+      "action preconditions",
+      "evidence namespace collision safety"
+    ]
+  },
+  "live_validation": {
+    "windows_live_refresh": "not run",
+    "windows_rollback": "not run"
+  }
+}
