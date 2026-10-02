@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "version": "0.3.51",
+  "status": "release-candidate-pending-windows-mod-validation",
+  "branch": "feature/derelict-farming-0.3.51",
+  "target_branch": "main",
+  "package_sha256": "38ead4adf9829b9d0ea22f90ce7f2acf7d7f964f27ca6aba820a3de25aff9b7f",
+  "package_size": 384192,
+  "managed_file_count": 147,
+  "verification": {
+    "unit_tests": "173/173 passed",
+    "compileall": "passed",
+    "zip_integrity": "passed",
+    "archive_validation_tests": "passed"
+  },
+  "source_handling": {
+    "mod_name": "DerelictFreighterFarming",
+    "mod_asset_files_in_package": false,
+    "reason": "The Nexus author requires permission before assets are reused in another mod.",
+    "source_url": "https://www.nexusmods.com/nomanssky/mods/4580",
+    "archive_version": "7.04; user selects their own ZIP locally",
+    "NMS_7_05_live_test": "not run"
+  },
+  "human_steps": [
+    "Install Surveyor 0.3.51 with Check app update > Install update.",
+    "Restart Surveyor.",
+    "Start NMS once, then fully close NMS, so the game MODS path is recorded.",
+    "Download the mod ZIP for personal use from Nexus Mods.",
+    "Click Install Derelict Farming archive and select the ZIP.",
+    "Fully restart NMS; use the scanner, activate pulse within 10 seconds, finish the derelict, then repeat in the same system."
+  ],
+  "rollback": "Run python tools/github_integration.py rollback-derelict-farming from the Surveyor project folder."
+}
