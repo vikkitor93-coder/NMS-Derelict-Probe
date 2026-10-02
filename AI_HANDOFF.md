@@ -184,3 +184,7 @@ The exact external call at `02BFCC17` decoded as `FF 52 10`, targeting the verif
 ## Seed-lineage extension 1.0.2
 
 Published a version-only refresh of the seed-lineage Surveyor extension for update testing. The panel contents and host action are unchanged from 1.0.1: `research.extract_caller_code`, precondition `workflow.idle`, empty API 1.0 parameters, evidence namespace `seed-lineage`, and `request_only: true`. Extension 1.0.1 remains installed for rollback.
+
+## DUNGEON-C extension refresh — 2026-10-02
+
+Prepared extension v1.0.2 as a version-only refresh of the data-only v1.0.1 panel. API 1.0, registered action, exact preconditions, request-only behavior, empty parameters, evidence namespace, and panel contents are unchanged. v1.0.0 and v1.0.1 remain available for rollback. Focused DUNGEON-C extension tests: 6/6 passed; full source suite: 151/151 passed. The app reads the shared index from `main`; this refresh becomes visible after its narrow integration PR is merged.
