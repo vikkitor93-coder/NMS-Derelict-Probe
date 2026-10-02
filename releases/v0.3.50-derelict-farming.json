@@ -25,5 +25,7 @@
     "Fully close and restart NMS.",
     "Use an Emergency Signal Scanner, activate pulse drive within 10 seconds, finish the derelict, then repeat in the same system and report whether a new derelict appears."
   ],
-  "rollback": "Run python tools/github_integration.py rollback-derelict-farming from the Surveyor project folder; it restores backed-up files and leaves post-install modifications untouched."
+  "rollback": "Run python tools/github_integration.py rollback-derelict-farming from the Surveyor project folder; it restores backed-up files and leaves post-install modifications untouched.",
+  "status": "withdrawn-replaced-by-0.3.51",
+  "withdrawal_reason": "The Nexus author requires permission before the mod files are reused in another mod. The 0.3.51 package removes the mod assets from the repository's current release files and provides a local archive installer instead. The previous commit remains in Git history."
 }
