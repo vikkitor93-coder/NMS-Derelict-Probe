@@ -46,20 +46,14 @@
     "overlay/derelict_overlay.py",
     "schema/live-status-v1.schema.json",
     "tests/test_tools.py",
-    "CHANGELOG.md",
-    "README.md",
-    "AI_HANDOFF.md",
     "agent-patches/runtime-dispatch/runtime-a-probe-0.3.34.patch"
   ],
   "sha256": {
     "mod/derelict_baseline_probe.py": "6132b5b58a202454e6091f4eba1ba633090d1eba2e11e898ca581920c7d48aeb",
-    "overlay/derelict_overlay.py": "c9b2eac1e7006abfec839ebe5b13b635395be715c695c101f662e0f563fc45c2",
+    "overlay/derelict_overlay.py": "8026d39fa548989edcd1124ad13c321fd94f548b1611dbb6a5b11a071f1468bb",
     "schema/live-status-v1.schema.json": "59f505e631e141a46331c1a35e1f927e2dd57f34fcdc03390a1a76ae3c2bf9f6",
     "tests/test_tools.py": "1ace2a01957652cd20cdb3dd31bc4602a204b9b7d84af455a308eacea492314d",
-    "CHANGELOG.md": "b5a8fac18a6025e60aa68143602598fe723bb5612632099f05b6dbdb0fee947c",
-    "README.md": "25ebb2297745494a416b58a310f27d78fe744b652eafec101f31380ff36a4431",
-    "AI_HANDOFF.md": "d9a13d60fe5d27d45194bb6efeb7f96b36c6d9798ee1716e3496ca94e240f5a0",
-    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.34.patch": "359699054c272695c81ab1d1a4895c642dcba29e6415dc6771d246bfe9274dea"
+    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.34.patch": "3341755c42edb63442f7df37c9c8879aa55dd39ae55d712512bd36af84be7cc8"
   },
   "patch_base": "NMS-Derelict-Probe-v0.3.43.zip (app/probe 0.3.33 source snapshot)",
   "pull_request_target": "integration/issue-8-ui-extensions"
