@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "lane": "metadata",
+  "branch": "main",
+  "objective": "Publish METADATA-D Surveyor UI extension 1.0.1 using the shared host UI API 1.0 contract.",
+  "extension": {
+    "id": "metadata",
+    "version": "1.0.1",
+    "manifest": "agent-ui/extensions/metadata/1.0.1/manifest.json",
+    "panel": "agent-ui/extensions/metadata/1.0.1/panel.json",
+    "index": "agent-ui/extensions/index.json",
+    "sha256_panel": "651f40f506b2eeda155ee66523b931bf6fba053551cd6d51a363a5b3900a602a"
+  },
+  "supported_actions": [
+    "research.prepare_assets",
+    "research.analyze_generation"
+  ],
+  "preconditions": ["workflow.idle"],
+  "evidence_namespace": "metadata",
+  "change_summary": "Added extension version 1.0.1; preserved version 1.0.0 and retained all other index entries.",
+  "verification": "8/8 local contract checks passed. Shared host lifecycle tests and Windows visual refresh/rollback were not rerun.",
+  "rollback": "Set the metadata index entry to metadata/1.0.0/manifest.json or activate retained extension 1.0.0 in Agent Console.",
+  "human_validation": "Refresh extensions in Surveyor and confirm metadata 1.0.1 is active."
+}
