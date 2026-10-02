@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "title": "RUNTIME-A · Live root dispatch",
+  "summary": "Post-7.05 analysis: seed candidate 9256392A2F5A74AC; MEDI_FLOATERS is a high-confidence preset inference; 10 modeled rooms (8 main + 2 dead-end; table Rooms=7); 16 analyzer-predicted targets (not verified physical count). Seed capture remains unverified. Pre-update CARGO_FLOATERS, 8 modeled rooms, 35 targets is historical. Cause and repeatability are unknown. Runtime-A still needs owner+0x10 captured at the exact root event; no full traversal.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.analyze_generation",
+      "label": "Analyze generation + upload",
+      "description": "Run the reviewed generation analysis and upload the post-7.05 generation baseline plus any Runtime-A exact-root dispatch evidence supplied by the installed compatible lane build.",
+      "preconditions": [
+        "workflow.idle",
+        "nms.running",
+        "probe.connected"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "lane": "runtime-dispatch",
+  "lane_branch": "agent/runtime-dispatch-ui-1.0.1",
+  "target_branch": "main",
+  "purpose": "Publish the optional Surveyor RUNTIME-A panel as extension 1.0.1 so the app can exercise live extension refresh.",
+  "app_package_version": "0.3.43",
+  "extension": {
+    "extension_id": "runtime-dispatch",
+    "previous_version": "1.0.0",
+    "version": "1.0.1",
+    "compatible_surveyor_api_version": "1.0",
+    "min_surveyor_version": "0.3.41",
+    "action_id": "research.analyze_generation",
+    "preconditions": [
+      "workflow.idle",
+      "nms.running",
+      "probe.connected"
+    ],
+    "evidence_namespace": "runtime-dispatch",
+    "parameters": {},
+    "request_only": true,
+    "panel_payload_changed": false
+  },
+  "changed_files": [
+    "agent-ui/extensions/runtime-dispatch/1.0.1/panel.json",
+    "agent-ui/extensions/runtime-dispatch/1.0.1/manifest.json",
+    "agent-ui/extensions/index.json",
+    "tests/test_agent_ui_runtime_dispatch_extension.py",
+    "AI_HANDOFF.md",
+    "agent-patches/runtime-dispatch/RUNTIME_DISPATCH_EXTENSION_1.0.1.json"
+  ],
+  "verification": {
+    "focused_command": "python -m unittest tests.test_agent_ui_runtime_dispatch_extension tests.test_agent_ui_extensions tests.test_seed_lineage_ui_extension -v",
+    "focused_tests": "18/18 passed",
+    "extension_panel_sha256": "b2e49f0d1cefc41b98f91706b43dd8dfc3f3fcba8588977cb8f3f1452f314393",
+    "all_indexed_extension_panel_hashes": "verified against indexed manifests",
+    "invalid_content_rejection": "passed",
+    "live_refresh_and_rollback": "passed",
+    "action_preconditions_and_evidence_namespace": "passed",
+    "app_or_probe_code_changed": false
+  },
+  "rollback": [
+    "In Surveyor, activate the retained runtime-dispatch extension 1.0.0 from the extension rollback control.",
+    "To withdraw the update for new installs, revert the catalog entry in agent-ui/extensions/index.json to 1.0.0; retain both version directories."
+  ],
+  "sha256": {
+    "agent-ui/extensions/runtime-dispatch/1.0.1/panel.json": "b2e49f0d1cefc41b98f91706b43dd8dfc3f3fcba8588977cb8f3f1452f314393",
+    "agent-ui/extensions/runtime-dispatch/1.0.1/manifest.json": "b311dcd275e6d54ae1fc182c97942519421445f246a58c119726ff3e8b0248ef",
+    "agent-ui/extensions/index.json": "5c4169538f665b60ccd78523ece2d711f7cc23dbe1f240c792a3fb51177507dd",
+    "tests/test_agent_ui_runtime_dispatch_extension.py": "3bbf07cfe34678274d30f896e742db2fbaf73859fcf377032c04017a02ff1ec4",
+    "AI_HANDOFF.md": "5167d8f2e851955fc3bc6dfc3dfe56fb8fba13a7368fdd3e007b5c0459f66b9d"
+  }
+}

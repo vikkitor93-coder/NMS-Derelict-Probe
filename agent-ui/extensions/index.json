@@ -13,8 +13,8 @@
     },
     {
       "extension_id": "runtime-dispatch",
-      "version": "1.0.0",
-      "manifest_path": "runtime-dispatch/1.0.0/manifest.json"
+      "version": "1.0.1",
+      "manifest_path": "runtime-dispatch/1.0.1/manifest.json"
     },
     {
       "extension_id": "seed-lineage",
