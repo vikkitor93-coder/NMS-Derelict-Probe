@@ -1,4 +1,17 @@
-# 0.3.49 — Runtime-A owner+0x10 capture
+# Surveyor lane extension — DUNGEON-C 1.0.3 (2026-10-02)
+
+- Add a visible one-click `research.resolve_root_vtable` action for the exact external caller captured at RVA `02C0497A`; its indirect dispatch instruction is at `02C04977`.
+- Preserve the generation-analysis action and all previous panel versions for rollback.
+- Add focused tests for action registration, live preconditions, extension integrity, update, and rollback.
+- Current owner+0x10 capture reads sentinel `FFFFFFFF00000000`, not a loaded-module target. Root seed remains unverified; no layout claim is promoted.
+
+# 0.3.50 — bundle DerelictFreighterFarming
+
+- Bundle the user-supplied 7.04 farming mod's three EXML overrides as a named optional game mod and stage them into `GAMEDATA/MODS` during app update when the NMS install path is known.
+- Preserve pre-existing files with a recorded backup; add a targeted rollback command that restores originals and preserves files changed after installation.
+- The supplied payload has not been runtime-validated on NMS 7.05. A full NMS restart is required after staging.
+- Add staging, backup, preservation, missing-payload, and rollback tests.
+
 
 - Bump the embedded probe to 0.3.34 and read the raw 8-byte owner+0x10 slot once, only after exact descriptor correlation at the dungeon root event.
 - Persist the raw slot and best-effort loaded-module identity to root evidence and live status; display the result in the existing root-dispatch row/objective.
