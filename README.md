@@ -3,15 +3,16 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.44**.
+Current Surveyor package: **v0.3.45**.
 
-## v0.3.44 — clearer lane requests and fresh status
+## v0.3.45 — responsive Agent Console and configurable refresh
 
-- Show the published action needed and installed/published extension versions in fixed card footers above lane buttons.
-- Keep request actions clickable when Surveyor is idle, explain missing live prerequisites, and never use a checked upload receipt to lock an action.
-- Hide lane scrollbars when their content fits and ignore wheel input at no-scroll and boundary states.
-- Refresh published status every 20 seconds without reusing cached GitHub content; show per-lane progress, blockers, heartbeat time, and reported extension version.
-- Bundle the latest published lane extensions: DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, and Seed-B 1.0.2.
+- Show the published **NEEDED** request and actual **Action** in a distinct fixed box; keep extension versions fixed below it and evidence-upload confirmation beneath the lane buttons.
+- Expand **Options +** to hide lane details, extension details, or receipt details with simple plus/minus toggles. Choices are saved locally.
+- Set automatic refresh to one minute by default; choose 20 seconds, 2 minutes, 5 minutes, or Off beside the refresh controls. **Refresh now** still checks lane status and extensions immediately.
+- Reuse unchanged extension widgets during refresh and update action readiness in place to avoid visual redraw artifacts.
+- Preserve the v0.3.44 status freshness, request-only action readiness, and latest four published lane extensions.
+
 
 ## v0.3.42 — four-lane Agent Console
 
@@ -32,7 +33,7 @@ Surveyor shows the current research command, step, progress, latest output line,
 
 Standalone Surveyor opens a compact **Agent Console** alongside its main window. It shows the latest published state of Runtime-A, Seed-B, DUNGEON-C, and Metadata-D, highlights lanes needing Surveyor input, and gives the exact steps, success condition, evidence to return, and full-traversal requirement.
 
-The console reads `WORKSPACE_STATE.json` from the repository's `main` branch and reads `agent-patches/<lane>/STATUS.json` plus each lane manifest from the corresponding agent branch. It refreshes every 20 seconds with cache-busting and can also refresh on demand. It shows each lane's own status time and warns when it is over 15 minutes old; the main registry's age is reported separately. If a refresh fails, it keeps the last successful view. The console does not read private chat messages. Agent requests appear only after they are committed to GitHub.
+The console reads `WORKSPACE_STATE.json` from the repository's `main` branch and reads `agent-patches/<lane>/STATUS.json` plus each lane manifest from the corresponding agent branch. It refreshes at the configurable interval (one minute by default) with cache-busting and can also refresh on demand. It shows each lane's own status time and warns when it is over 15 minutes old; the main registry's age is reported separately. If a refresh fails, it keeps the last successful view. The console does not read private chat messages. Agent requests appear only after they are committed to GitHub.
 
 Select a lane and click **Copy Surveyor steps** to copy its literal user recipe. After completing the recipe and its upload step, return to the Main chat and write `check`. **Copy status summary** copies the visible lane states and pending human action for chat handoff.
 

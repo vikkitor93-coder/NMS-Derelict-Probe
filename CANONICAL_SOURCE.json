@@ -1,39 +1,39 @@
 {
   "schema_version": 2,
-  "version": "0.3.44",
+  "version": "0.3.45",
   "status": "release-candidate",
   "artifact": {
-    "storage": "github-base64-chunks-and-chatgpt-library",
-    "file_name": "NMS-Derelict-Probe-v0.3.44.zip",
-    "sha256": "e04fc884329a837252870c9f447d74e93ff56cc1135a4a68a0a91ac1fa402192",
-    "size_bytes": 357546,
+    "storage": "github-base64-chunks-and-sandbox-download",
+    "file_name": "NMS-Derelict-Probe-v0.3.45.zip",
+    "sha256": "6e2477c86283214af568bf611015537a14b1dcdc7501af250edce829381cfa36",
+    "size_bytes": 359532,
     "files": 142
   },
   "repository_transport": {
     "status": "reproducible-base64-chunks",
-    "reason": "The complete ZIP is retained as a direct Library artifact and reproducibly encoded in the repository package chunk format."
+    "reason": "The complete source ZIP is delivered as the release artifact and reproducibly encoded in the repository package chunk format."
   },
   "verification": {
-    "focused_tests": "30/30 Agent Console and extension tests passed",
-    "unit_tests": "155/155 passed",
+    "focused_tests": "12/12 Agent Console tests passed",
+    "unit_tests": "156/156 passed",
     "compileall": "passed",
     "json_files_parsed": 62,
     "zip_integrity": "passed",
     "game_probe_logic_changed": false,
     "source_patch_reconstruction": "passed",
-    "package_refresh": "0.3.44 complete source package with current lane extensions; updater chunks reconstruct to matching SHA-256",
-    "in_app_update": "v0.3.44 updater package prepared for main integration"
+    "package_refresh": "0.3.45 complete source package; updater chunks reconstruct to matching SHA-256",
+    "in_app_update": "v0.3.45 updater package prepared for main integration",
+    "extension_file_hashes": "10/10 passed"
   },
   "resume": {
     "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json and AI_HANDOFF.md first; the complete ZIP is the source snapshot.",
-    "integration_agent": "Review the release PR. Install v0.3.44 on Windows to validate static lane footer placement, action readiness, scroll boundaries, and fresh status polling."
+    "integration_agent": "Review and publish the v0.3.45 release branch; then install on Windows to validate Agent Console layout, options, refresh interval, and scroll stability."
   },
   "notes": [
-    "Builds on v0.3.40 after PRs #6 and #11 were integrated into main.",
-    "Implements the shared Surveyor extension host and a DUNGEON-C example panel; probe hook consolidation is still pending.",
-    "Issues #13 and #14 are closed; their help-button patches are excluded.",
-    "v0.3.44 adds fixed action/version footers, reliable click-through prerequisite guidance, bounded content scrolling, and more frequent cache-busted lane status refresh.",
-    "v0.3.44 adds fixed action/version footers, click-through prerequisite guidance, bounded content scrolling, and cache-busted frequent lane status refresh.",
-    "v0.3.44 includes the current main-branch lane extensions (DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, Seed-B 1.0.2)."
+    "Builds on main at PR #32 merge commit ffc50b47568455946ff9464e181359f8e1b9464c.",
+    "v0.3.45 separates the published NEEDED request and actual action, pins versions beneath that box, and places the evidence receipt under lane buttons.",
+    "Status and extension refresh remain cache-busted and run off the Tk UI thread; unchanged panel widgets are reused.",
+    "Options expose plus/minus toggles for lane, extension, and receipt detail plus a saved refresh interval.",
+    "Package includes DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, Seed-B 1.0.2."
   ]
 }
