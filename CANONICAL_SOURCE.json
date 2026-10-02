@@ -1,33 +1,29 @@
 {
   "schema_version": 2,
-  "version": "0.3.47",
-  "status": "published-windows-validation-pending",
+  "version": "0.3.48",
+  "status": "release-candidate-ready-for-main-windows-validation-pending",
   "artifact": {
     "storage": "github-base64-chunks-and-sandbox-download",
-    "file_name": "NMS-Derelict-Probe-v0.3.47.zip",
-    "sha256": "a05be833ac4251053ef6a7d17b08fcdcdf00b5726babab6b92d3ecffd72443d9",
-    "size_bytes": 360613,
-    "files": 142
+    "file_name": "NMS-Derelict-Probe-v0.3.48.zip"
   },
   "repository_transport": {
     "status": "reproducible-base64-chunks",
     "reason": "The complete source ZIP is delivered as the release artifact and reproducibly encoded in the repository package chunk format."
   },
   "verification": {
-    "unit_tests": "160/160 passed",
+    "unit_tests": "163/163 passed",
     "compileall": "passed",
     "zip_integrity": "passed",
-    "package_refresh": "0.3.47 complete source package; updater chunks reconstruct to matching SHA-256",
-    "windows_ui": "not run in Linux workspace; visual/overlay lifecycle check pending"
+    "windows_ui": "not run in Linux workspace; in-game alpha rendering and controls need local visual verification",
+    "package_refresh": "will match final package SHA-256",
+    "package_files": "143"
   },
   "resume": {
-    "normal_chatgpt_or_work": "Read WORKSPACE_STATE.json and AI_HANDOFF.md first; the complete ZIP is the source snapshot.",
-    "integration_agent": "Install v0.3.47 on Windows and verify the root evidence lines and overlay start/stop controls."
+    "integration_agent": "Install v0.3.48 on Windows; check overlay opacity/position sliders, main-window toggles, and objective state updates."
   },
   "notes": [
-    "v0.3.47 adds explicit root resource observations and a separate honest pending state for Runtime-A Root dispatch +0x10 capture.",
-    "Adds manual Start overlay and Stop overlay controls beside the existing auto-start toggle; stop supports overlays started by the NMS launcher.",
-    "Retains v0.3.46 Agent Console prerequisites, layout, collapse controls, refresh behavior, and extension versions.",
-    "Published in PR #35; merge commit e905f738ca1ea347f994d44e7ff44f02b3d181b7. In-app updater manifest and all 11 package chunks were verified on main."
+    "Moves overlay section visibility controls into the main Surveyor window and adds opacity plus x/y offset sliders.",
+    "Publishes current agent objectives into a local file consumed by the overlay. Root detection marks root-related objectives complete with an upload-wait notice; Root dispatch +0x10 requires its own explicit capture signal.",
+    "163 unit tests pass. Windows in-game composition remains to be checked."
   ]
 }
