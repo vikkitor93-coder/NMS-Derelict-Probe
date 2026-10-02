@@ -1,14 +1,14 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-02T12:20:00Z",
+  "updated_utc": "2026-10-02T12:46:00Z",
   "integration": {
     "branch": "main",
-    "canonical_version": "0.3.45",
-    "current_objective": "Install v0.3.45 on Windows and verify the Agent Console layout, persisted display options, refresh interval, and stable scrolling during refresh.",
+    "canonical_version": "0.3.46",
+    "current_objective": "Install v0.3.46 on Windows and verify prerequisite visibility, per-section collapse controls, refresh responsiveness, and scrolling.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.45",
-    "candidate_branch": "codex/surveyor-options-responsive-20261002",
-    "candidate_base": "main@ffc50b47568455946ff9464e181359f8e1b9464c",
+    "candidate_version": "0.3.46",
+    "candidate_branch": "codex/agent-console-collapse-needs-20261002",
+    "candidate_base": "main@f1052e2bae98df16baf365934e821fdc9e5232cd",
     "candidate_status": "release-candidate-ready-for-main"
   },
   "lane_claims": {
