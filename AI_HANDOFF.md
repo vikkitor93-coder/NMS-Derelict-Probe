@@ -2,11 +2,12 @@
 
 ## Current state
 
-- Current source package: **v0.3.45**, release candidate for the Windows Surveyor UI. Probe and NMS launch protocols are unchanged.
-- Agent Console has four side-by-side lane cards. The fixed **NEEDED** box shows the lane’s published request and actual extension action; installed/published/reported versions sit immediately below it. Each evidence receipt checkbox stays fixed under its lane buttons.
-- **Options +** opens plus/minus visibility toggles for lane status, extension descriptions, and receipt details. Options and auto-refresh interval persist in `%LOCALAPPDATA%\NMSDerelictSurveyor\agent-console-options.json`.
-- Auto-refresh defaults to one minute; choices are 20 seconds, 2 minutes, 5 minutes, or Off. **Refresh now** fetches status and extension index immediately. Network reads run on background threads. Cache-busted lane status requests remain read-only.
-- Polling reuses unchanged extension widgets, so scroll position and layout do not churn on every refresh. Action readiness updates in place.
+- Current source package: **v0.3.46**, release candidate for the Windows Surveyor UI. Probe and NMS launch protocols are unchanged.
+- Agent Console has four side-by-side lane cards. The fixed **NEEDED** box shows the published request, actual extension action, exact required prerequisite keys, and which prerequisites are currently missing. It does not contain generic step guidance. The actual host key is `probe.connected` (fresh probe heartbeat), not `probe.running`; the v1 extension contract is unchanged.
+- Installed/published/reported versions remain immediately under NEEDED. Each evidence receipt checkbox stays fixed below its lane buttons.
+- Compact top-right +/− controls collapse each major main-window section, each Agent Console card, lane action groups, and global action group. The controls and content begin expanded; lane/global buttons remain pinned in the bottom strip. Agent Console display toggles and refresh interval persist in `%LOCALAPPDATA%\NMSDerelictSurveyor\agent-console-options.json`.
+- Auto-refresh defaults to one minute; choices are 20 seconds, 2 minutes, 5 minutes, or Off. **Refresh now** fetches status and extension index immediately. Network reads run on background threads; cache-busted lane status requests remain read-only.
+- Polling reuses unchanged extension widgets and action readiness uses the main window’s latest NMS/probe status instead of launching new process checks per lane, keeping scroll position stable and refresh work lighter.
 - The package carries DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, and Seed-B 1.0.2, with prior installed versions retained for rollback.
 
 ## Purpose and architecture
@@ -31,11 +32,11 @@ Reverse engineer No Man’s Sky abandoned-freighter generation using static and 
 
 ## Latest changes and verification
 
-- v0.3.45 separates the actual action from the published NEEDED request, pins both and the versions outside the scroll panel, moves the upload checkbox below lane controls, adds collapsible persisted display options and selectable refresh timing, and avoids replacing unchanged panel widgets on poll.
+- v0.3.46 shows exact prerequisites and missing state in NEEDED, removes generic step guidance there, adds per-section +/− controls in both windows, and uses cached game/probe state for action readiness. v0.3.45 introduced the static action/version layout, the receipt position, persisted display options, configurable polling, and cached panel rendering.
 - `python -m compileall -q tools overlay tests` passed; `python -m unittest discover -s tests` passed (156 tests). The complete ZIP passed integrity checks, 62 JSON files parsed, all 10 extension-file hashes matched, and updater chunks reconstructed to the same SHA-256. Windows visual validation is still required because Tk cannot be rendered in this Linux workspace.
 - Runtime-A’s `Root dispatch +0x10 captured` live event remains unverified; don’t treat exact-root-caller output as proof.
 
 ## Rollback and next action
 
 - Roll back the app by reinstalling the previous complete v0.3.44 package. No probe, session, extension API, or saved evidence migration is needed. Extension versions retain their individual rollback controls.
-- **Next action:** install v0.3.45 on Windows and verify the NEEDED/action box, footer versions, receipt checkbox beneath buttons, all plus/minus visibility toggles, interval persistence, and scrolling while the poll runs.
+- **Next action:** install v0.3.46 on Windows and verify the NEEDED/action box, footer versions, receipt checkbox beneath buttons, all per-section plus/minus controls, interval persistence, exact prerequisite display, and scrolling while the poll runs.
