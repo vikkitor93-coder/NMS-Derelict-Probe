@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "version": "0.3.52",
+  "status": "release-candidate-pending-windows-mod-validation",
+  "branch": "feature/derelict-farming-0.3.52",
+  "target_branch": "main",
+  "package_sha256": "3a66c819172e7a60e67856793d5633df80c39c2c737bd32bd49b700ad5e1c9cb",
+  "package_size": 384768,
+  "managed_file_count": 147,
+  "verification": {
+    "unit_tests": "175/175 passed",
+    "compileall": "passed",
+    "zip_integrity": "passed",
+    "staging_tests": "passed"
+  },
+  "source_handling": {
+    "mod_name": "DerelictFreighterFarming",
+    "mod_asset_files_in_package": false,
+    "permission": "Nexus author requires permission before reusing assets in another mod",
+    "archive_version": "7.04; user selects own archive locally",
+    "NMS_7_05_live_test": "pending"
+  },
+  "human_steps": [
+    "Install Surveyor 0.3.52 using Check app update > Install update.",
+    "Restart Surveyor.",
+    "Start NMS once, then fully close it so the NMS MODS path is recorded.",
+    "Download the mod ZIP for personal use.",
+    "Click Install Derelict Farming archive and select the ZIP.",
+    "Fully restart NMS; use an emergency scanner, pulse within 10 seconds, finish the derelict, then repeat in the same system."
+  ],
+  "rollback": "Run python tools/github_integration.py rollback-derelict-farming from the Surveyor project folder."
+}
