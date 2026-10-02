@@ -1,25 +1,25 @@
 {
   "schema_version": 1,
-  "version": "0.3.48",
+  "version": "0.3.49",
   "repository": "vikkitor93-coder/NMS-Derelict-Probe",
   "branch": "main",
   "package_transport": "base64-chunks",
   "package_kind": "full",
   "package_parts": [
-    "packages/v0.3.48-full/part-000.b64",
-    "packages/v0.3.48-full/part-001.b64",
-    "packages/v0.3.48-full/part-002.b64",
-    "packages/v0.3.48-full/part-003.b64",
-    "packages/v0.3.48-full/part-004.b64",
-    "packages/v0.3.48-full/part-005.b64",
-    "packages/v0.3.48-full/part-006.b64",
-    "packages/v0.3.48-full/part-007.b64",
-    "packages/v0.3.48-full/part-008.b64",
-    "packages/v0.3.48-full/part-009.b64",
-    "packages/v0.3.48-full/part-010.b64"
+    "packages/v0.3.49-full/part-000.b64",
+    "packages/v0.3.49-full/part-001.b64",
+    "packages/v0.3.49-full/part-002.b64",
+    "packages/v0.3.49-full/part-003.b64",
+    "packages/v0.3.49-full/part-004.b64",
+    "packages/v0.3.49-full/part-005.b64",
+    "packages/v0.3.49-full/part-006.b64",
+    "packages/v0.3.49-full/part-007.b64",
+    "packages/v0.3.49-full/part-008.b64",
+    "packages/v0.3.49-full/part-009.b64",
+    "packages/v0.3.49-full/part-010.b64"
   ],
-  "package_sha256": "a1d2e5727b6ab1f753676124a0de67309642e98477d1fc906bf2bc134e41a710",
-  "package_size": 364114,
+  "package_sha256": "d4be1111f5972a9cafabbdfc4393ce8d3af42617f195a7d1a06b29e1ede9b1e4",
+  "package_size": 379053,
   "managed_files": [
     ".gitignore",
     "AGENT_START_HERE.md",
@@ -163,6 +163,8 @@
     "tools/index_extracted_crates.py",
     "tools/record_generation_measurement.py",
     "tools/resolve_exact_root_vtable.py",
-    "tools/surveyor_controller.py"
+    "tools/surveyor_controller.py",
+    "agent-patches/runtime-dispatch/RUNTIME_A_PROBE_0.3.34_APP_0.3.49.json",
+    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.34-from-v0.3.48.patch"
   ]
 }

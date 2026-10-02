@@ -1,3 +1,10 @@
+# 0.3.49 — Runtime-A owner+0x10 capture
+
+- Bump the embedded probe to 0.3.34 and read the raw 8-byte owner+0x10 slot once, only after exact descriptor correlation at the dungeon root event.
+- Persist the raw slot and best-effort loaded-module identity to root evidence and live status; display the result in the existing root-dispatch row/objective.
+- Keep the current data-only Runtime-A extension and all other Surveyor capabilities intact. The app updater stages the probe; restart NMS to load it.
+- Live Windows/NMS validation remains pending.
+
 # 0.3.48 — transparent objective overlay
 
 - Move all overlay visibility toggles to the main Surveyor window.

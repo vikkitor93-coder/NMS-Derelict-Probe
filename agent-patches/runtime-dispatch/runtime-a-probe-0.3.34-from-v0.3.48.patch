@@ -1,0 +1,466 @@
+--- a/mod/derelict_baseline_probe.py
++++ b/mod/derelict_baseline_probe.py
+@@ -33,7 +33,7 @@
+ from nmspy.decorators import main_loop
+ from nmspy.engine import GetNodeAbsoluteTransMatrix
+ 
+-PROBE_VERSION = "0.3.33"
++PROBE_VERSION = "0.3.34"
+ SCHEMA_VERSION = 1
+ ABANDONED_FREIGHTER_LOCATION_VALUE = 0xB
+ ABANDONED_FREIGHTER_POI_TYPE_VALUE = 0x6
+@@ -221,6 +221,69 @@
+         return None
+ 
+ 
++def _loaded_module_identity(address: int) -> dict[str, Any]:
++    """Identify the loaded module and RVA containing an address, when applicable."""
++    target = int(address)
++    if target <= 0x10000:
++        return {"status": "null-or-low-address", "address_hex": f"{target:016X}"}
++    if os.name != "nt":
++        return {"status": "module-lookup-unavailable", "address_hex": f"{target:016X}"}
++    try:
++        kernel32 = ctypes.windll.kernel32
++        get_module = kernel32.GetModuleHandleExW
++        get_module.argtypes = [ctypes.c_uint32, ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p)]
++        get_module.restype = ctypes.c_int
++        module = ctypes.c_void_p()
++        # FROM_ADDRESS | UNCHANGED_REFCOUNT; no module is loaded or refcount changed.
++        if not get_module(0x00000004 | 0x00000002, ctypes.c_void_p(target), ctypes.byref(module)):
++            return {"status": "not-in-loaded-module", "address_hex": f"{target:016X}"}
++        base = int(module.value or 0)
++        if base <= 0 or target < base:
++            return {"status": "module-base-unavailable", "address_hex": f"{target:016X}"}
++        get_name = kernel32.GetModuleFileNameW
++        get_name.argtypes = [ctypes.c_void_p, ctypes.c_wchar_p, ctypes.c_uint32]
++        get_name.restype = ctypes.c_uint32
++        buffer = ctypes.create_unicode_buffer(32768)
++        name_length = int(get_name(module, buffer, len(buffer)))
++        module_path = buffer.value if name_length else None
++        return {
++            "status": "loaded-module",
++            "address_hex": f"{target:016X}",
++            "module_path": module_path,
++            "module_base_hex": f"{base:016X}",
++            "module_rva_hex": f"{target - base:08X}",
++        }
++    except Exception as exc:
++        return {
++            "status": "module-lookup-error",
++            "address_hex": f"{target:016X}",
++            "error": f"{type(exc).__name__}: {exc}",
++        }
++
++
++def _owner_plus_0x10_capture(owner_pointer: int) -> dict[str, Any]:
++    """Read owner+0x10 once at the exact descriptor-correlated root event."""
++    owner = int(owner_pointer)
++    slot_address = owner + 0x10
++    raw = _read_process_bytes(slot_address, 8)
++    result: dict[str, Any] = {
++        "owner_pointer_hex": f"{owner:016X}",
++        "slot_offset_hex": "00000010",
++        "slot_address_hex": f"{slot_address:016X}",
++        "read_status": "captured" if raw is not None and len(raw) == 8 else "unreadable",
++        "raw_bytes_hex": (raw.hex().upper() if raw is not None else None),
++        "slot_value_hex": None,
++        "target_identity": None,
++    }
++    if raw is None or len(raw) != 8:
++        return result
++    value = int.from_bytes(raw, "little", signed=False)
++    result["slot_value_hex"] = f"{value:016X}"
++    result["target_identity"] = _loaded_module_identity(value)
++    return result
++
++
++
+ def _owner_descriptor_seed_payload(owner_pointer: int) -> dict[str, Any] | None:
+     """Read the embedded descriptor at owner+0x128 observed in the verified function."""
+     try:
+@@ -1450,9 +1513,12 @@
+         return match.group(1) if match else None
+ 
+     def _generation_room_summary(self) -> dict[str, Any]:
++        root_dispatch_capture = (self._last_exact_root_caller or {}).get("owner_plus_0x10_capture")
+         if not self._session:
+             if self._last_generation_room_summary is not None:
+-                return dict(self._last_generation_room_summary)
++                summary = dict(self._last_generation_room_summary)
++                summary["last_dungeon_root_owner_plus_0x10_capture"] = root_dispatch_capture
++                return summary
+             return {
+                 "total_rooms_seen": 0, "main_rooms_seen": 0, "dead_end_rooms_seen": 0,
+                 "room_parent_names_seen": 0, "rooms": [],
+@@ -1466,6 +1532,7 @@
+                 "dungeon_logical_entry_caller_offsets": [], "last_dungeon_logical_entry_caller_offset_hex": None,
+                 "dungeon_logical_entry_exact_external_caller_offsets": [],
+                 "last_dungeon_logical_entry_exact_external_caller_offset_hex": None,
++                "last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture,
+                 "logical_entry_unique_callers_observed": len(self._logical_entry_caller_hits),
+                 "logical_entry_known_candidate_hits": sum(1 for key in self._logical_entry_caller_hits if int(key, 16) in CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
+                 "logical_entry_candidate_count": len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
+@@ -1586,6 +1653,7 @@
+             "last_dungeon_logical_entry_caller_offset_hex": (logical_entry_caller_offsets[-1] if logical_entry_caller_offsets else None),
+             "dungeon_logical_entry_exact_external_caller_offsets": logical_entry_exact_external_offsets,
+             "last_dungeon_logical_entry_exact_external_caller_offset_hex": (logical_entry_exact_external_offsets[-1] if logical_entry_exact_external_offsets else None),
++            "last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture,
+             "logical_entry_unique_callers_observed": len(self._logical_entry_caller_hits),
+             "logical_entry_known_candidate_hits": sum(1 for key in self._logical_entry_caller_hits if int(key, 16) in CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
+             "logical_entry_candidate_count": len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
+@@ -1871,6 +1939,7 @@
+                 "position_candidates": pos_candidates,
+                 "trace": self._trace_summary(),
+                 "generation_rooms": self._generation_room_summary(),
++                "root_dispatch_capture": self._root_dispatch_capture_payload(),
+                 "hotkeys": {
+                     "room_zero": "F5",
+                     "room": "F6",
+@@ -1977,6 +2046,7 @@
+             "root_descriptor_pointer_hex": root_event.get("descriptor_pointer_hex"),
+             "root_seed_hex": str((root_event.get("primary_seed") or {}).get("seed_hex") or "").upper() or None,
+             "exact_external_caller": exact,
++            "owner_plus_0x10_capture": exact.get("owner_plus_0x10_capture"),
+             "exact_external_caller_return_offset_hex": exact.get("resolved_external_caller_return_offset_hex") or exact.get("external_origin_caller_return_offset_hex") or exact.get("caller_return_offset_hex"),
+             "unique_callers_observed": len(self._logical_entry_caller_hits),
+             "caller_hit_counts": dict(sorted(self._logical_entry_caller_hits.items())),
+@@ -1985,6 +2055,20 @@
+         self._last_exact_root_caller = payload
+         self._atomic_write_json(self._exact_root_caller_path, payload)
+ 
++    def _root_dispatch_capture_payload(self) -> dict[str, Any] | None:
++        capture = (self._last_exact_root_caller or {}).get("owner_plus_0x10_capture")
++        if not isinstance(capture, dict):
++            return None
++        identity = capture.get("target_identity") if isinstance(capture.get("target_identity"), dict) else {}
++        module_rva = identity.get("module_rva_hex")
++        return {
++            "captured": capture.get("read_status") == "captured",
++            "target_offset_hex": module_rva,
++            "slot_value_hex": capture.get("slot_value_hex"),
++            "read_status": capture.get("read_status"),
++            "target_identity": identity,
++        }
++
+     @get_caller
+     @_resource_descriptor_walk_entry.before
+     def _trace_resource_descriptor_walk_entry(self, context, owner):
+@@ -2410,6 +2494,15 @@
+                             event["logical_entry_nearest_caller_code_window"] = None
+                 exact_external = self._logical_entry_external_match_for_descriptor(descriptor_ptr)
+                 if exact_external:
++                    owner_hex = str(exact_external.get("owner_pointer_hex") or "")
++                    try:
++                        owner_pointer = int(owner_hex, 16)
++                    except ValueError:
++                        owner_pointer = 0
++                    if owner_pointer > 0x10000:
++                        exact_external["owner_plus_0x10_capture"] = _owner_plus_0x10_capture(owner_pointer)
++                    event["logical_entry_exact_external_match"] = exact_external
++                    event["owner_plus_0x10_capture"] = exact_external.get("owner_plus_0x10_capture")
+                     exact_offset = (
+                         exact_external.get("resolved_external_caller_return_offset_hex")
+                         or exact_external.get("external_origin_caller_return_offset_hex")
+--- a/overlay/derelict_overlay.py
++++ b/overlay/derelict_overlay.py
+@@ -341,6 +341,18 @@
+             f"ENG {'YES' if status.get('engineering_marked') else 'NO'}   "
+             f"MODULE {str(status.get('engineering_module_class') or 'unknown').upper()}"
+         )
++    dispatch = status.get("root_dispatch_capture") if isinstance(status.get("root_dispatch_capture"), dict) else {}
++    if dispatch.get("captured"):
++        slot_value = str(dispatch.get("slot_value_hex") or "captured")
++        target = dispatch.get("target_identity") if isinstance(dispatch.get("target_identity"), dict) else {}
++        module_rva = str(target.get("module_rva_hex") or "")
++        target_address = str(target.get("address_hex") or "")
++        target_label = f"NMS+{module_rva}" if module_rva else (target_address or str(target.get("status") or "identity unavailable"))
++        root_dispatch = f"CAPTURED {slot_value} -> {target_label}"
++    elif dispatch.get("read_status") == "unreadable":
++        root_dispatch = "Root matched · owner+0x10 unreadable"
++    else:
++        root_dispatch = "Not captured by this probe build · Runtime-A hook required"
+     return {
+         "state": state,
+         "nms": nms_line,
+@@ -349,7 +361,7 @@
+         "caller_scan": caller_scan,
+         "exact_root_caller": exact_root_caller,
+         "root_resource": root_resource,
+-        "root_dispatch": "Not captured by this probe build · Runtime-A hook required",
++        "root_dispatch": root_dispatch,
+         "headline": headline,
+         "detail": str(status.get("detail") or "Enter a derelict freighter to start recording automatically"),
+         "telemetry": telemetry,
+--- a/schema/live-status-v1.schema.json
++++ b/schema/live-status-v1.schema.json
+@@ -276,6 +276,83 @@
+             },
+             "additionalProperties": true
+           }
++        },
++        "last_dungeon_root_owner_plus_0x10_capture": {
++          "type": [
++            "object",
++            "null"
++          ],
++          "properties": {
++            "owner_pointer_hex": {
++              "type": "string"
++            },
++            "slot_offset_hex": {
++              "type": "string"
++            },
++            "slot_address_hex": {
++              "type": "string"
++            },
++            "read_status": {
++              "enum": [
++                "captured",
++                "unreadable"
++              ]
++            },
++            "raw_bytes_hex": {
++              "type": [
++                "string",
++                "null"
++              ]
++            },
++            "slot_value_hex": {
++              "type": [
++                "string",
++                "null"
++              ]
++            },
++            "target_identity": {
++              "type": [
++                "object",
++                "null"
++              ],
++              "additionalProperties": true
++            }
++          },
++          "additionalProperties": true
++        }
++      },
++      "additionalProperties": true
++    },
++    "root_dispatch_capture": {
++      "type": [
++        "object",
++        "null"
++      ],
++      "properties": {
++        "captured": {
++          "type": "boolean"
++        },
++        "target_offset_hex": {
++          "type": [
++            "string",
++            "null"
++          ]
++        },
++        "slot_value_hex": {
++          "type": [
++            "string",
++            "null"
++          ]
++        },
++        "read_status": {
++          "enum": [
++            "captured",
++            "unreadable"
++          ]
++        },
++        "target_identity": {
++          "type": "object",
++          "additionalProperties": true
+         }
+       },
+       "additionalProperties": true
+--- a/tests/test_tools.py
++++ b/tests/test_tools.py
+@@ -687,6 +687,29 @@
+         self.assertIn("POI-UA",view["generation"])
+         self.assertIn("00001A0004E84EFD",view["generation"])
+ 
++    def test_v0334_runtime_probe_captures_owner_slot_after_exact_root_match(self):
++        probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
++        self.assertIn('PROBE_VERSION = "0.3.34"', probe)
++        exact=probe.index('exact_external = self._logical_entry_external_match_for_descriptor(descriptor_ptr)')
++        capture=probe.index('exact_external["owner_plus_0x10_capture"] = _owner_plus_0x10_capture(owner_pointer)', exact)
++        self.assertGreater(capture, exact)
++        self.assertIn('"root_dispatch_capture": self._root_dispatch_capture_payload()', probe)
++        self.assertIn('"last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture', probe)
++        self.assertIn('kernel32.ReadProcessMemory(', probe)
++        self.assertNotIn('WriteProcessMemory', probe)
++        schema=json.loads((ROOT / "schema" / "live-status-v1.schema.json").read_text(encoding="utf-8"))
++        self.assertIn("root_dispatch_capture",schema["properties"])
++        self.assertIn("last_dungeon_root_owner_plus_0x10_capture",schema["properties"]["generation_rooms"]["properties"])
++
++    def test_overlay_and_objective_show_real_owner_slot_capture(self):
++        live={"root_dispatch_capture":{"captured":True,"slot_value_hex":"00007FF612345678","target_offset_hex":"01234567","target_identity":{"module_rva_hex":"01234567"}}}
++        view=overlay_mod.summarize_status({"heartbeat_epoch":1000.0,"probe_version":"0.3.34","state":"ready","recording":False,**live},now_epoch=1000.5)
++        self.assertIn("CAPTURED 00007FF612345678 -> NMS+01234567",view["root_dispatch"])
++        snapshot={"lanes":[{"id":"runtime-dispatch","name":"Runtime-A","human_required":True,"surveyor_request":"Wait for Root dispatch +0x10 capture, then upload"}]}
++        objective=overlay_mod.build_agent_objectives(snapshot,live,True)["objectives"][0]
++        self.assertTrue(objective["complete"])
++        self.assertTrue(objective["keep_game_open"])
++
+     def test_overlay_exposes_root_resource_and_separates_pending_dispatch_capture(self):
+         status={
+             "heartbeat_epoch":1000.0,"probe_version":"0.3.33","state":"recording","recording":True,
+@@ -1090,7 +1113,7 @@
+ 
+ 
+     def test_v0322_version_marker(self):
+-        self.assertEqual("0.3.48", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
++        self.assertEqual("0.3.49", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+ 
+     def test_v0322_probe_exposes_background_research_buttons(self):
+         source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+@@ -1322,7 +1345,7 @@
+         self.assertNotIn("Test-Runtime", start_nms)
+         self.assertNotIn("Python.Python.3.12", start_nms)
+         self.assertNotIn("import pymhf; import nmspy", start_nms)
+-        self.assertIn('CONTROLLER_VERSION = "0.3.48"', controller)
++        self.assertIn('CONTROLLER_VERSION = "0.3.49"', controller)
+         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
+ 
+ 
+@@ -1374,7 +1397,7 @@
+             self.assertIn(token, probe)
+ 
+     def test_v0330_version(self):
+-        self.assertEqual("0.3.48", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
++        self.assertEqual("0.3.49", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
+ 
+     def test_v0328_seed_function_relrefs_classify_recursion(self):
+--- a/tools/surveyor_controller.py
++++ b/tools/surveyor_controller.py
+@@ -31,7 +31,7 @@
+     import agent_console
+     import agent_ui_extensions
+ 
+-CONTROLLER_VERSION = "0.3.48"
++CONTROLLER_VERSION = "0.3.49"
+ AGENT_REFRESH_INTERVALS_MS = {
+     "20 seconds": 20_000,
+     "1 minute": 60_000,
+--- a/VERSION.txt
++++ b/VERSION.txt
+@@ -1 +1 @@
+-0.3.48
++0.3.49
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,3 +1,10 @@
++# 0.3.49 — Runtime-A owner+0x10 capture
++
++- Bump the embedded probe to 0.3.34 and read the raw 8-byte owner+0x10 slot once, only after exact descriptor correlation at the dungeon root event.
++- Persist the raw slot and best-effort loaded-module identity to root evidence and live status; display the result in the existing root-dispatch row/objective.
++- Keep the current data-only Runtime-A extension and all other Surveyor capabilities intact. The app updater stages the probe; restart NMS to load it.
++- Live Windows/NMS validation remains pending.
++
+ # 0.3.48 — transparent objective overlay
+ 
+ - Move all overlay visibility toggles to the main Surveyor window.
+--- a/README.md
++++ b/README.md
+@@ -3,7 +3,13 @@
+ > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
+ 
+ 
+-Current Surveyor package: **v0.3.48**.
++Current Surveyor package: **v0.3.49**. Runtime-A probe: **0.3.34**.
++
++## v0.3.49 — Runtime-A owner+0x10 capture
++
++- Read and expose the raw owner+0x10 value only at the exact descriptor-correlated dungeon root event. The existing Runtime-A panel action and all other Surveyor behavior remain available.
++- Install the app update, then restart NMS to load the probe. The value’s semantic type still requires live evidence.
++
+ 
+ ## v0.3.48 — transparent objective overlay
+ 
+--- a/AI_HANDOFF.md
++++ b/AI_HANDOFF.md
+@@ -2,16 +2,16 @@
+ 
+ ## Current state
+ 
+-- Current source package: **v0.3.48**, transparent objective overlay update. Probe and NMS launch protocols are unchanged.
++- Current source package: **v0.3.49**. Runtime-A probe is **0.3.34**; it captures owner+0x10 at the exact descriptor-correlated dungeon root event. Surveyor’s app updater stages that probe into the installed MODS folder; fully restart NMS after installing the app update.
+ - Agent Console has four side-by-side lane cards. The fixed **NEEDED** box shows the published request, actual extension action, exact required prerequisite keys, and which prerequisites are currently missing. It does not contain generic step guidance. The actual host key is `probe.connected` (fresh probe heartbeat), not `probe.running`; the v1 extension contract is unchanged.
+ - Installed/published/reported versions remain immediately under NEEDED. Each evidence receipt checkbox stays fixed below its lane buttons.
+ - Compact top-right +/− controls collapse each major main-window section, each Agent Console card, lane action groups, and global action group. The controls and content begin expanded; lane/global buttons remain pinned in the bottom strip. Agent Console display toggles and refresh interval persist in `%LOCALAPPDATA%\NMSDerelictSurveyor\agent-console-options.json`.
+ - Auto-refresh defaults to one minute; choices are 20 seconds, 2 minutes, 5 minutes, or Off. **Refresh now** fetches status and extension index immediately. Network reads run on background threads; cache-busted lane status requests remain read-only.
+ - Polling reuses unchanged extension widgets and action readiness uses the main window’s latest NMS/probe status instead of launching new process checks per lane, keeping scroll position stable and refresh work lighter.
+-- The overlay display toggles now live in the main Surveyor window; opacity and horizontal/vertical placement sliders apply live. Agent objectives come from the published status snapshot, and the overlay shows root-detected completion plus “waiting for upload / don’t close game” where applicable. `Root dispatch +0x10` still requires an explicit capture signal.
+-- Main Status and the in-game overlay now show the exact root resource path and observed event count. `Root dispatch +0x10` is shown separately and says it is not captured by the current standard probe; Runtime-A’s distinct live hook is still needed to produce that evidence.
++- The overlay display toggles now live in the main Surveyor window; opacity and horizontal/vertical placement sliders apply live. Agent objectives come from the published status snapshot, and the overlay shows root-detected completion plus “waiting for upload / don’t close game” where applicable. `Root dispatch +0x10` now reports the raw slot value and best-effort module identity when a read succeeds; its meaning remains unproven until live evidence is reviewed.
++- Main Status and the in-game overlay now show the exact root resource path and observed event count. `Root dispatch +0x10` is shown separately and uses the capture field emitted by Runtime-A probe 0.3.34.
+ - **Start overlay** and **Stop overlay** sit beside the existing **Game overlay** auto-start toggle. Stop closes the titled overlay window and signals the local stop-request file, including overlays started by the NMS launcher.
+-- The package carries DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, and Seed-B 1.0.2, with prior installed versions retained for rollback.
++- The package carries DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, and Seed-B 1.0.2, with prior installed versions retained for rollback. The Runtime-A panel stays data-only; its analyze/upload action is unchanged.
+ 
+ ## Purpose and architecture
+ 
+@@ -36,10 +36,10 @@
+ ## Latest changes and verification
+ 
+ - v0.3.48 adds main-window overlay display controls, live opacity/position settings, and published agent objectives. v0.3.47 adds visible root-resource and dispatch-capture status plus manual overlay lifecycle controls. v0.3.46 shows exact prerequisites and missing state in NEEDED, adds per-section +/− controls in both windows, and uses cached game/probe state for action readiness.
+-- `python -m compileall -q tools overlay tests` and the full unittest suite pass (163 tests). Windows visual verification is still needed because Tk cannot be rendered in this Linux workspace.
+-- Runtime-A’s `Root dispatch +0x10 captured` live event remains unverified; don’t treat exact-root-caller output as proof.
++- `python -m compileall -q tools overlay tests mod` and the full unittest suite are required for v0.3.49. Windows pyMHF/NMS live validation is still required for the new capture.
++- Runtime-A’s new capture implementation is present in probe 0.3.34, but live Windows/NMS validation and semantic interpretation remain pending; exact-root-caller output alone is not proof of a slot read.
+ 
+ ## Rollback and next action
+ 
+ - Roll back the app by reinstalling the previous complete v0.3.44 package. No probe, session, extension API, or saved evidence migration is needed. Extension versions retain their individual rollback controls.
+-- **Next action:** install v0.3.48 on Windows; verify opacity and position sliders, main-window section toggles, objective updates, and that alpha composition does not affect NMS rendering. Confirm `+0x10` remains pending until a real capture is reported.
++- **Next action:** install v0.3.49 on Windows; verify opacity and position sliders, main-window section toggles, objective updates, and that alpha composition does not affect NMS rendering. Confirm `+0x10` remains pending until a real capture is reported.
+--- a/CANONICAL_SOURCE.json
++++ b/CANONICAL_SOURCE.json
+@@ -1,29 +1,30 @@
+ {
+   "schema_version": 2,
+-  "version": "0.3.48",
+-  "status": "release-candidate-ready-for-main-windows-validation-pending",
++  "version": "0.3.49",
++  "status": "release-candidate-pending-windows-runtime-validation",
+   "artifact": {
+     "storage": "github-base64-chunks-and-sandbox-download",
+-    "file_name": "NMS-Derelict-Probe-v0.3.48.zip"
++    "file_name": "NMS-Derelict-Probe-v0.3.49.zip"
+   },
+   "repository_transport": {
+     "status": "reproducible-base64-chunks",
+     "reason": "The complete source ZIP is delivered as the release artifact and reproducibly encoded in the repository package chunk format."
+   },
+   "verification": {
+-    "unit_tests": "163/163 passed",
+-    "compileall": "passed",
+-    "zip_integrity": "passed",
++    "unit_tests": "165/165 passed",
++    "compileall": "passed: python -m compileall -q tools overlay tests mod",
++    "zip_integrity": "to be checked against package SHA-256 before release PR",
+     "windows_ui": "not run in Linux workspace; in-game alpha rendering and controls need local visual verification",
+-    "package_refresh": "will match final package SHA-256",
+-    "package_files": "143"
++    "package_refresh": "update-manifest.json will contain the final full-package SHA-256",
++    "package_files": "145"
+   },
+   "resume": {
+-    "integration_agent": "Install v0.3.48 on Windows; check overlay opacity/position sliders, main-window toggles, and objective state updates."
++    "integration_agent": "Install v0.3.49 through Surveyor; restart NMS; capture owner+0x10 at the known derelict and upload."
+   },
+   "notes": [
++    "Adds Runtime-A probe 0.3.34 capture of the raw owner+0x10 value at the exact descriptor-correlated root event. This changes the probe only; the extension API remains data-only.",
+     "Moves overlay section visibility controls into the main Surveyor window and adds opacity plus x/y offset sliders.",
+-    "Publishes current agent objectives into a local file consumed by the overlay. Root detection marks root-related objectives complete with an upload-wait notice; Root dispatch +0x10 requires its own explicit capture signal.",
+-    "163 unit tests pass. Windows in-game composition remains to be checked."
++    "Publishes current agent objectives; Runtime-A objective reports completion only when probe 0.3.34 emits the exact root-dispatch capture field.",
++    "165 unit tests pass. Windows live NMS capture remains to be validated."
+   ]
+ }
