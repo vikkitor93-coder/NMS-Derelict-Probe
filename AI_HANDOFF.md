@@ -1,5 +1,13 @@
 # AI handoff — NMS Derelict Probe v0.3.41 published release
 
+## Runtime-dispatch extension 1.0.1 (2026-10-02)
+
+The app package remains v0.3.43. This is a data-only extension refresh test: `runtime-dispatch` advances from 1.0.0 to 1.0.1; its panel payload and API 1.0 action contract are unchanged. The 1.0.0 files remain installed for rollback. Surveyor reads the extension feed from `agent-ui/extensions/index.json` on `main`, independently of the app package updater.
+
+After the catalog update is published, open Surveyor v0.3.43 > **Check lane extensions** > update **RUNTIME-A · Live root dispatch** to 1.0.1. The lane still awaits its separate live `owner+0x10` capture; no probe or controller code changed here.
+
+Verification: the runtime-dispatch extension tests cover API/index compatibility, panel hash/action contract, rejected invalid content, exact preconditions, live refresh, rollback, and evidence namespacing. See `agent-patches/runtime-dispatch/RUNTIME_DISPATCH_EXTENSION_1.0.1.json` for exact results and hashes.
+
 ## 2026-10-01 Surveyor UI follow-up
 
 - The main Surveyor window and in-game overlay now use the same live-status formatter. NMS/probe/capture, manual counts, caller scan, exact root caller, telemetry, automatic crates, room loot, trace, generation, last event, and hotkeys are surfaced across both views.
