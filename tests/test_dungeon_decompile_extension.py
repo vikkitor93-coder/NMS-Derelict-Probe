@@ -25,8 +25,8 @@ from tools import github_integration  # noqa: E402
 from tools import surveyor_controller  # noqa: E402
 
 EXTENSION = ROOT / "agent-ui" / "extensions" / "dungeon-decompile"
-CURRENT = EXTENSION / "1.0.1"
-PREVIOUS = EXTENSION / "1.0.0"
+CURRENT = EXTENSION / "1.0.2"
+PREVIOUS = EXTENSION / "1.0.1"
 
 
 def published_entry(version: str) -> dict:
@@ -53,16 +53,16 @@ class DungeonDecompileExtensionTests(unittest.TestCase):
 
     def test_api_compatibility_versioned_index_and_every_panel_hash(self):
         entries = ui.validate_index(self.index)
-        self.assertEqual([published_entry("1.0.1")], entries)
+        self.assertIn(published_entry("1.0.2"), entries)
         manifest, panel = ui.validate_manifest(
-            self.manifest, "dungeon-decompile", "1.0.1", "0.3.41",
+            self.manifest, "dungeon-decompile", "1.0.2", "0.3.41",
             lambda rel: (CURRENT / rel).read_bytes(), ui.HOST_ACTION_IDS,
         )
         self.assertEqual("1.0", manifest["compatible_surveyor_api_version"])
-        self.assertEqual("1.0.1", manifest["version"])
+        self.assertEqual("1.0.2", manifest["version"])
         self.assertEqual("research.analyze_generation", panel["actions"][0]["action_id"])
         with self.assertRaisesRegex(ui.ExtensionError, "newer Surveyor"):
-            ui.validate_manifest(self.manifest, "dungeon-decompile", "1.0.1", "0.3.40", lambda rel: (CURRENT / rel).read_bytes(), ui.HOST_ACTION_IDS)
+            ui.validate_manifest(self.manifest, "dungeon-decompile", "1.0.2", "0.3.40", lambda rel: (CURRENT / rel).read_bytes(), ui.HOST_ACTION_IDS)
         for item in self.manifest["files"]:
             data = (CURRENT / item["path"]).read_bytes()
             self.assertEqual(item["sha256"], hashlib.sha256(data).hexdigest())
@@ -81,9 +81,9 @@ class DungeonDecompileExtensionTests(unittest.TestCase):
             encoded = (json.dumps(bad_panel, ensure_ascii=False) + "\n").encode()
             bad_manifest = {**self.manifest, "files": [{"path": "panel.json", "sha256": hashlib.sha256(encoded).hexdigest()}]}
             with self.subTest(invalid_action=invalid_action), self.assertRaisesRegex(ui.ExtensionError, error):
-                ui.validate_manifest(bad_manifest, "dungeon-decompile", "1.0.1", "0.3.41", lambda _rel: encoded, ui.HOST_ACTION_IDS)
+                ui.validate_manifest(bad_manifest, "dungeon-decompile", "1.0.2", "0.3.41", lambda _rel: encoded, ui.HOST_ACTION_IDS)
         with self.assertRaisesRegex(ui.ExtensionError, "SHA-256 mismatch"):
-            ui.validate_manifest(self.manifest, "dungeon-decompile", "1.0.1", "0.3.41", lambda _rel: raw_panel + b"tampered", ui.HOST_ACTION_IDS)
+            ui.validate_manifest(self.manifest, "dungeon-decompile", "1.0.2", "0.3.41", lambda _rel: raw_panel + b"tampered", ui.HOST_ACTION_IDS)
 
     def test_request_only_panel_uses_exact_live_action_preconditions(self):
         action = self.panel["actions"][0]
@@ -111,29 +111,33 @@ class DungeonDecompileExtensionTests(unittest.TestCase):
             agent_ui_extension_notice = Notice()
             agent_selected_lane = {"id": "dungeon-decompile"}
             rendered = []
+            summary_refreshed = False
             def _render_agent_ui_extension(self, lane): self.rendered.append(lane)
+            def _update_agent_extension_summary(self): self.summary_refreshed = True
         fake = FakeController()
         with mock.patch.object(surveyor_controller, "_log"):
             surveyor_controller.SurveyorController._finish_agent_ui_extension_update(fake, "dungeon-decompile", "")
         self.assertEqual(set(), fake.agent_ui_extension_installing)
         self.assertIn("without restarting Surveyor", fake.agent_ui_extension_notice.value)
+        self.assertTrue(fake.summary_refreshed)
         self.assertEqual([fake.agent_selected_lane], fake.rendered)
 
-    def test_update_preserves_published_100_and_rolls_back(self):
-        self.assertTrue((PREVIOUS / "manifest.json").is_file(), "published v1.0.0 must remain present")
+    def test_update_preserves_published_101_and_rolls_back(self):
+        self.assertTrue((PREVIOUS / "manifest.json").is_file(), "published v1.0.1 must remain present")
+        self.assertTrue((EXTENSION / "1.0.0" / "manifest.json").is_file(), "published v1.0.0 must remain present")
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            ui.install_extension(root, published_entry("1.0.0"), "0.3.41", ui.HOST_ACTION_IDS, remote_for("1.0.0").__getitem__)
             ui.install_extension(root, published_entry("1.0.1"), "0.3.41", ui.HOST_ACTION_IDS, remote_for("1.0.1").__getitem__)
+            ui.install_extension(root, published_entry("1.0.2"), "0.3.41", ui.HOST_ACTION_IDS, remote_for("1.0.2").__getitem__)
             active, _panel = ui.load_installed_extension(root, "dungeon-decompile", "0.3.41", ui.HOST_ACTION_IDS)
-            self.assertEqual("1.0.1", active["version"])
-            old, _ = ui.activate_installed_extension(root, "dungeon-decompile", "1.0.0", "0.3.41", ui.HOST_ACTION_IDS)
-            self.assertEqual("1.0.0", old["version"])
-            self.assertEqual(["1.0.1", "1.0.0"], ui.installed_versions(root, "dungeon-decompile"))
+            self.assertEqual("1.0.2", active["version"])
+            old, _ = ui.activate_installed_extension(root, "dungeon-decompile", "1.0.1", "0.3.41", ui.HOST_ACTION_IDS)
+            self.assertEqual("1.0.1", old["version"])
+            self.assertEqual(["1.0.2", "1.0.1"], ui.installed_versions(root, "dungeon-decompile"))
 
     def test_evidence_is_written_inside_lane_namespace(self):
         with tempfile.TemporaryDirectory() as tmp:
-            record = ui.write_action_record(Path(tmp), "dungeon-decompile", "1.0.1", "research.analyze_generation", "complete")
+            record = ui.write_action_record(Path(tmp), "dungeon-decompile", "1.0.2", "research.analyze_generation", "complete")
             contents = json.loads(record.read_text(encoding="utf-8"))
             self.assertEqual("dungeon-decompile", contents["extension_id"])
         folder = github_integration.evidence_folder("20261001T120000Z", "analyze-generation", "dungeon-decompile")
