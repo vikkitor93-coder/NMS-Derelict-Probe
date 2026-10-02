@@ -48,7 +48,7 @@
     "hypotheses": []
   },
   "verification": {
-    "focused_tests": "python -m unittest discover -s tests -p 'test_seed_lineage_ui_extension.py' && python -m unittest discover -s tests -p 'test_agent_ui_extensions.py' && python -m unittest discover -s tests -p 'test_agent_extension_upload_namespace.py' && python -m unittest discover -s tests -p 'test_agent_console.py' \u2014 22/22 passed",
+    "focused_tests": "python -m unittest discover -s tests -p 'test_seed_lineage_ui_extension.py' && python -m unittest discover -s tests -p 'test_agent_ui_extensions.py' && python -m unittest discover -s tests -p 'test_agent_extension_upload_namespace.py' && python -m unittest discover -s tests -p 'test_agent_console.py' \u2014 21/21 passed",
     "manifest_api_compatibility": "passed; schema 1, Surveyor API 1.0, installed host 0.3.41",
     "extension_hashes": "passed; lowercase SHA-256 verified against panel.json",
     "invalid_content_rejection": "passed in test_agent_ui_extensions.py (unknown shell action/fields and incompatible dependencies rejected)",
