@@ -3,15 +3,22 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.43**.
+Current Surveyor package: **v0.3.44**.
 
-## v0.3.43 — Agent Console scrolling and bulk upload
+## v0.3.44 — clearer lane requests and fresh status
 
-Lane headers show extension version and upload receipt first. Mouse-wheel scrolling works over content in the main app and each lane panel. **Upload all** confirms once and runs currently eligible lane actions sequentially.
+- Show the published action needed and installed/published extension versions in fixed card footers above lane buttons.
+- Keep request actions clickable when Surveyor is idle, explain missing live prerequisites, and never use a checked upload receipt to lock an action.
+- Hide lane scrollbars when their content fits and ignore wheel input at no-scroll and boundary states.
+- Refresh published status every 20 seconds without reusing cached GitHub content; show per-lane progress, blockers, heartbeat time, and reported extension version.
+- Bundle the latest published lane extensions: DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, and Seed-B 1.0.2.
 
 ## v0.3.42 — four-lane Agent Console
 
-The Agent Console shows all four agents side by side. Each information panel scrolls independently, and lane actions stay in a fixed bottom strip. Check all extensions from the top control, then update all available extensions or update an individual lane.
+- Show all four agents side by side with an independent scrollbar in each information panel.
+- Keep copy steps, lane research actions, and extension update controls in the fixed bottom strip.
+- Check all lane extensions from the top control, then update all available extensions or update a single lane.
+- Show evidence upload receipts per lane and retain extension rollback controls.
 
 ## v0.3.41 — shared lane UI extensions
 
@@ -25,11 +32,11 @@ Surveyor shows the current research command, step, progress, latest output line,
 
 Standalone Surveyor opens a compact **Agent Console** alongside its main window. It shows the latest published state of Runtime-A, Seed-B, DUNGEON-C, and Metadata-D, highlights lanes needing Surveyor input, and gives the exact steps, success condition, evidence to return, and full-traversal requirement.
 
-The console reads `WORKSPACE_STATE.json` from the repository's `main` branch and reads `agent-patches/<lane>/STATUS.json` plus each lane manifest from the corresponding agent branch. It refreshes every 60 seconds and can also refresh on demand. If the main registry is older than 30 minutes, it displays a stale-state warning; if a refresh fails, it keeps the last successful view. The console does not read private chat messages. Agent requests appear only after they are published to GitHub.
+The console reads `WORKSPACE_STATE.json` from the repository's `main` branch and reads `agent-patches/<lane>/STATUS.json` plus each lane manifest from the corresponding agent branch. It refreshes every 20 seconds with cache-busting and can also refresh on demand. It shows each lane's own status time and warns when it is over 15 minutes old; the main registry's age is reported separately. If a refresh fails, it keeps the last successful view. The console does not read private chat messages. Agent requests appear only after they are committed to GitHub.
 
 Select a lane and click **Copy Surveyor steps** to copy its literal user recipe. After completing the recipe and its upload step, return to the Main chat and write `check`. **Copy status summary** copies the visible lane states and pending human action for chat handoff.
 
-To publish a lane's current request, commit `agent-patches/<lane>/STATUS.json` on that lane's branch using `schema/agent-status-v1.schema.json`. Include exact steps and say whether a full derelict traversal is required.
+To publish a lane's current request, commit `agent-patches/<lane>/STATUS.json` on that lane's branch using `schema/agent-status-v1.schema.json`. Update it at each meaningful milestone; include progress, blockers, next action, extension version, exact user steps, success condition, evidence to return, and whether a full derelict traversal is required.
 
 ## v0.3.34 — all 52 callers at once
 
