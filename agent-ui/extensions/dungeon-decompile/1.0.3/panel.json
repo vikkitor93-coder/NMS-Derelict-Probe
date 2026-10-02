@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "title": "DUNGEON-C · Resolve root dispatch target",
+  "summary": "Exact caller evidence maps 0x02C0497A to an indirect call at 0x02C04977 (call [vtable+0x10]). The captured owner+0x10 value is FFFFFFFF00000000, not a loaded-module target. Resolve the actual vtable target next; the dungeon-root seed remains unverified.",
+  "request_only": false,
+  "actions": [
+    {
+      "action_id": "research.resolve_root_vtable",
+      "label": "Resolve root vtable + upload",
+      "description": "Analyze the latest exact-root caller capture and local NMS.exe to resolve the target of the indirect call at RVA 0x02C04977. Uploads focused evidence; no derelict traversal is required.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "dungeon-decompile",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.analyze_generation",
+      "label": "Analyze generation + upload",
+      "description": "Analyze the latest captured generation and extracted assets; no derelict traversal is required.",
+      "preconditions": [
+        "workflow.idle",
+        "nms.running",
+        "probe.connected"
+      ],
+      "evidence_namespace": "dungeon-decompile",
+      "parameters": {}
+    }
+  ]
+}
