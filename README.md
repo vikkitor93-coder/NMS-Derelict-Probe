@@ -3,7 +3,13 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.48**.
+Current Surveyor package: **v0.3.49**. Runtime-A probe: **0.3.34**.
+
+## v0.3.49 — Runtime-A owner+0x10 capture
+
+- Read and expose the raw owner+0x10 value only at the exact descriptor-correlated dungeon root event. The existing Runtime-A panel action and all other Surveyor behavior remain available.
+- Install the app update, then restart NMS to load the probe. The value’s semantic type still requires live evidence.
+
 
 ## v0.3.48 — transparent objective overlay
 
