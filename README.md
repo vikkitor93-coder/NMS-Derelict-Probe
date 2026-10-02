@@ -3,7 +3,14 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.46**.
+Current Surveyor package: **v0.3.47**.
+
+## v0.3.47 — root evidence and overlay controls
+
+- Show the observed `MODELS/SPACE/POI/DUNGEON.SCENE.MBIN` root resource path and event count in the main Surveyor and overlay.
+- Show `Root dispatch +0x10` separately; the standard probe currently reports it as not captured because the Runtime-A capture hook is not integrated.
+- Add **Start overlay** and **Stop overlay** beside the existing auto-start toggle.
+
 
 ## v0.3.46 — visible prerequisites and collapsible sections
 
