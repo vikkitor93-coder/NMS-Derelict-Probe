@@ -1,30 +1,31 @@
 {
   "schema_version": 2,
-  "version": "0.3.49",
-  "status": "release-candidate-pending-windows-runtime-validation",
+  "version": "0.3.53",
+  "status": "release-candidate-pending-windows-mod-validation",
   "artifact": {
     "storage": "github-base64-chunks-and-sandbox-download",
-    "file_name": "NMS-Derelict-Probe-v0.3.49.zip"
+    "file_name": "NMS-Derelict-Probe-v0.3.53.zip"
   },
   "repository_transport": {
     "status": "reproducible-base64-chunks",
     "reason": "The complete source ZIP is delivered as the release artifact and reproducibly encoded in the repository package chunk format."
   },
   "verification": {
-    "unit_tests": "165/165 passed",
+    "unit_tests": "178/178 passed",
     "compileall": "passed: python -m compileall -q tools overlay tests mod",
-    "zip_integrity": "to be checked against package SHA-256 before release PR",
-    "windows_ui": "not run in Linux workspace; in-game alpha rendering and controls need local visual verification",
-    "package_refresh": "update-manifest.json will contain the final full-package SHA-256",
-    "package_files": "145"
+    "zip_integrity": "passed: package generated and hash-verified",
+    "windows_ui": "not run in Linux workspace",
+    "nms_7_05_mod_runtime": "not run; user supplies own 7.04 archive",
+    "package_refresh": "v0.3.53 package chunks and update manifest prepared for release PR",
+    "package_files": "149"
   },
   "resume": {
-    "integration_agent": "Install v0.3.49 through Surveyor; restart NMS; capture owner+0x10 at the known derelict and upload."
+    "integration_agent": "Install v0.3.53, capture the Runtime-A root event if needed, close NMS, then use Upload captured root event or Upload all saved evidence. Continue Windows/NMS validation when available."
   },
   "notes": [
-    "Adds Runtime-A probe 0.3.34 capture of the raw owner+0x10 value at the exact descriptor-correlated root event. This changes the probe only; the extension API remains data-only.",
-    "Moves overlay section visibility controls into the main Surveyor window and adds opacity plus x/y offset sliders.",
-    "Publishes current agent objectives; Runtime-A objective reports completion only when probe 0.3.34 emits the exact root-dispatch capture field.",
-    "165 unit tests pass. Windows live NMS capture remains to be validated."
+    "Constrains local archive staging to expected paths, regular XML files, and bounded sizes; rejects invalid or tampered content before touching game files.",
+    "No third-party mod assets are bundled.",
+    "The user-supplied mod archive targets 7.04; NMS 7.05 runtime behavior remains unverified.",
+    "178 unit tests pass; compileall passes. Windows UI and NMS 7.05 runtime validation remain unrun."
   ]
 }
