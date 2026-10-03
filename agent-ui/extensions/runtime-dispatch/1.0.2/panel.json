@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "title": "RUNTIME-A · Live root dispatch",
+  "summary": "Post-7.05: seed candidate 9256392A2F5A74AC; MEDI_FLOATERS is a high-confidence preset inference. 10 modeled rooms (8 main + 2 dead-end; table Rooms=7); 16 analyzer-predicted targets (not verified physical count). Seed capture is unverified; cause and repeatability unknown. Pre-update CARGO_FLOATERS, 8 rooms, 35 targets is historical. Runtime-A needs owner+0x10 at the exact root event; no full traversal. Probe saves it immediately. After CAPTURED, quit NMS and upload the saved event.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.analyze_generation",
+      "label": "Analyze generation + upload",
+      "description": "Run the reviewed generation analysis and upload the post-7.05 generation baseline plus any Runtime-A exact-root dispatch evidence supplied by the installed compatible lane build.",
+      "preconditions": [
+        "workflow.idle",
+        "nms.running",
+        "probe.connected"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.upload_runtime_capture",
+      "label": "Upload captured root event",
+      "description": "Upload the probe-saved exact root/caller/owner+0x10 JSON to Runtime-A. This works after NMS is closed; no analysis, game process, or live probe connection is required.",
+      "preconditions": [
+        "workflow.idle",
+        "runtime.capture_saved"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    }
+  ]
+}
