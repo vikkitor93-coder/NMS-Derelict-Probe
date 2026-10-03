@@ -42,3 +42,12 @@ Last updated: 2026-09-30. This file is the short shared truth table for humans a
 ## Evidence rule
 
 Every conclusion must be tagged mentally as **measured**, **public-structure confirmed**, **inferred**, or **hypothesis**. Never promote an inference to measured fact merely because it fits the current model.
+
+
+## Seed-lineage static follow-up (2026-10-02)
+
+Measured from the uploaded offline reports (20261002T221217Z-extract-upstream, 20261002T221235Z-analyze-seed-function): NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; address 00001A0004E84EFD; root seed 9256392A2F5A74AC; candidate logical entry 006388A0 after four CC bytes; root-call .pdata fragment 00638D3C..0063921E. The analyzed function reads the primary seed at second-argument +0x138, which is descriptor +0x10, and tests use-seed at second-argument +0x140, descriptor +0x18. No possible descriptor-field writes were identified in the known prefix. There are 52 direct rel32 references to the entry candidate, 51 outside the known prefix.
+
+Measured from captured caller bytes: call sites 006377B6 and 00637D86 pass RCX=RSI, RDX=RBX; in each path, RBX is the return value from a call to 00637DB0 immediately before the root-handler call.
+
+Inference: seed construction/assignment occurs upstream of the analyzed root handler. The repeated 00637DB0 call is a useful next static target. The available capture does not establish the helper's type or seed logic. The earlier padding-boundary error did not reproduce with this upload, and its local cause is unknown. The system-seed-to-root-seed formula remains unresolved.
