@@ -1,19 +1,12 @@
 {
   "schema_version": 1,
-  "status": "needs-human-input",
-  "state": "waiting_for_user",
-  "human_intervention_required": true,
-  "surveyor_request": "Re-run upstream-caller extraction and seed-function analysis using the already captured caller evidence and the installed NMS.exe. No derelict traversal is needed.",
-  "user_steps": [
-    "Open Surveyor 0.3.41 or later.",
-    "In Research, click Extract upstream callers + upload. This is offline and uses the saved caller capture plus your installed NMS.exe.",
-    "When that finishes, click Analyze seed function + upload.",
-    "If either action fails, return to this chat with the diagnostic. Also attach dungeon-caller-code-latest.json and dungeon-upstream-callers-latest.json from %LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1."
-  ],
-  "success_condition": "Surveyor reports the analysis completed and GitHub contains a new timestamped seed-lineage upload with the upstream-caller and seed-function analysis JSON.",
-  "evidence_to_return": [
-    "The timestamped seed-lineage upload folder and run manifest, or the diagnostic plus the two named local evidence JSON files."
-  ],
+  "status": "in_progress",
+  "state": "offline_follow_up",
+  "human_intervention_required": false,
+  "surveyor_request": null,
+  "user_steps": [],
+  "success_condition": "Latest offline upstream-caller and seed-function evidence is recorded; continue static lineage analysis from helper RVA 00637DB0.",
+  "evidence_to_return": [],
   "full_derelict_required": false,
-  "updated_utc": "2026-10-02T22:05:00Z"
+  "updated_utc": "2026-10-03T00:00:00Z"
 }
