@@ -2,6 +2,12 @@
 
 ## Current state
 
+## Latest human direction — 2026-10-03
+
+The user has a mod that restores access to the known 35-container S-class derelict at `00001A0004E84EFD` and wants a fresh survey because the recent game update changed the observed layout. Treat the recorded 35-container result (31 Salvage + 4 Footlockers; 7 main rooms + Room 0 dead-end; two vertical transitions; one Shuttle Bay) as historical. A later post-update capture inferred MEDI_FLOATERS, modeled 8 main + 2 dead-end rooms, and predicted 16 targets; those 16 are not a verified physical count, and the room table still says 7. The repeated root seed `9256392A2F5A74AC` remains candidate/unverified.
+
+The next run should remeasure the same system on the current game build, recording physical counts/layout independently from analyzer predictions. Capture Runtime-A owner+0x10 and target identity during the same NMS session if the probe produces valid evidence; after quitting, analyze/upload the new session and preserve the old historical upload. Runtime-A is complete only when the saved capture contains the slot and target. Seed-B must not claim derivation without evidence; DUNGEON-C should compare new measurements and continue consumer analysis from Runtime-A's target; Metadata-D should prepare/upload current asset evidence if produced.
+
 - **Upload all saved evidence** snapshots every existing research output declared by `ACTION_OUTPUTS` into one deduplicated `research-uploads/<timestamp>-all-saved-evidence-<id>/` folder on `main`. Its manifest lists which actions produced each file and marks it visible to all four lanes. The Surveyor writes a receipt to each lane card after success. This is a shared repository upload, not an automatic agent notification or a write to their status branches.
 - Overlapping local `*-latest` outputs: `generation-baseline-latest.json` (measure/analyze-generation), `generation-measurements-summary.json` and `generation-measurements.csv` (measure/compare-measurements), `seed-room-correlation.json` (measure/analyze-correlation), and `exact-root-caller-latest.json` (analyze-generation/Runtime-A upload). Local latest files are replaced by a producer rerun; GitHub uploads are timestamped snapshots.
 - Runtime-A can now upload its already-persisted root event after closing NMS via **Upload captured root event**; this panel action needs only the saved capture and an idle Surveyor workflow.
