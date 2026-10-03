@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "lane_id": "seed-lineage",
+  "checked_utc": "2026-10-02T22:12:53Z",
+  "evidence_uploads": [
+    {
+      "path": "research-uploads/20261002T221217Z-extract-upstream/dungeon-upstream-callers-latest.json",
+      "sha256": "4e3e9e23e687672a364f217affa18cfe758d1d6b9dd4347cf6e063f0e4fc9163",
+      "run_manifest": "research-uploads/20261002T221217Z-extract-upstream/run-manifest.json"
+    },
+    {
+      "path": "research-uploads/20261002T221235Z-analyze-seed-function/dungeon-seed-function-analysis-latest.json",
+      "sha256": "228ca6872ec0f182efa419b284439d7110b63228738484f689405007ca6435e0",
+      "run_manifest": "research-uploads/20261002T221235Z-analyze-seed-function/run-manifest.json"
+    }
+  ],
+  "measured": {
+    "source_session_id": "20261002T213047Z_00001A0004E84EFD",
+    "universe_address_hex": "00001A0004E84EFD",
+    "dungeon_root_seed_hex": "9256392A2F5A74AC",
+    "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "root_add_call_rva_hex": "00638DF0",
+    "logical_function_entry_candidate": {
+      "rva_hex": "006388A0",
+      "padding_byte_hex": "CC",
+      "padding_byte_count": 4
+    },
+    "root_runtime_fragment": {
+      "begin_rva_hex": "00638D3C",
+      "end_rva_exclusive_hex": "0063921E",
+      "logical_entry_matches_fragment": false
+    },
+    "seed_field_observations": {
+      "second_argument_copied_to_rsi": true,
+      "descriptor_offset_from_second_argument_hex": "00000128",
+      "primary_seed_offset_from_second_argument_hex": "00000138",
+      "primary_seed_offset_from_descriptor_hex": "00000010",
+      "use_seed_flag_offset_from_second_argument_hex": "00000140",
+      "use_seed_flag_offset_from_descriptor_hex": "00000018",
+      "seed_read_precedes_root_add": true,
+      "possible_descriptor_field_writes_in_known_prefix": 0
+    },
+    "direct_rel32_xrefs_to_entry_candidate": 52,
+    "direct_rel32_xrefs_outside_known_prefix": 51,
+    "nearest_callers": [
+      {
+        "instruction_rva_hex": "006377B6",
+        "passed_registers": "RCX=RSI, RDX=RBX",
+        "observation": "RBX receives the return value of a call to 00637DB0 immediately before the call to 006388A0."
+      },
+      {
+        "instruction_rva_hex": "00637D86",
+        "passed_registers": "RCX=RSI, RDX=RBX",
+        "observation": "RBX receives the return value of a call to 00637DB0 immediately before the call to 006388A0."
+      }
+    ],
+    "latest_analysis_completed": true,
+    "prior_boundary_failure_reproduced": false
+  },
+  "inference": [
+    "The primary seed is present in the descriptor before the root AddResource call; construction or assignment is upstream of the analyzed function.",
+    "The nearby callers and shared 00637DB0 helper are useful static candidates for following descriptor construction, but current byte windows do not establish the helper's type or seed logic."
+  ],
+  "unknowns": [
+    "The system-seed-to-derelict-root-seed derivation remains unknown.",
+    "The exact cause of the earlier local compiler-padding boundary error is unknown.",
+    "The exact type and seed-writing behavior of the object returned from 00637DB0 are not established."
+  ],
+  "human_intervention_required": false,
+  "full_derelict_traversal_required": false
+}
