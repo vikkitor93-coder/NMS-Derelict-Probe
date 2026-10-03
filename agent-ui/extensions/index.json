@@ -3,8 +3,8 @@
   "extensions": [
     {
       "extension_id": "dungeon-decompile",
-      "version": "1.0.3",
-      "manifest_path": "dungeon-decompile/1.0.3/manifest.json"
+      "version": "1.0.2",
+      "manifest_path": "dungeon-decompile/1.0.2/manifest.json"
     },
     {
       "extension_id": "metadata",
@@ -13,8 +13,8 @@
     },
     {
       "extension_id": "runtime-dispatch",
-      "version": "1.0.1",
-      "manifest_path": "runtime-dispatch/1.0.1/manifest.json"
+      "version": "1.0.2",
+      "manifest_path": "runtime-dispatch/1.0.2/manifest.json"
     },
     {
       "extension_id": "seed-lineage",

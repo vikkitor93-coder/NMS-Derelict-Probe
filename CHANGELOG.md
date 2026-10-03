@@ -1,21 +1,31 @@
-# Surveyor lane extension — DUNGEON-C 1.0.3 (2026-10-02)
+# 0.3.53 — upload all saved evidence
 
-- Add a visible one-click `research.resolve_root_vtable` action for the exact external caller captured at RVA `02C0497A`; its indirect dispatch instruction is at `02C04977`.
-- Preserve the generation-analysis action and all previous panel versions for rollback.
-- Add focused tests for action registration, live preconditions, extension integrity, update, and rollback.
-- Current owner+0x10 capture reads sentinel `FFFFFFFF00000000`, not a loaded-module target. Root seed remains unverified; no layout claim is promoted.
+- Add main-window **Upload all saved evidence**. It collects the unique existing outputs declared by research actions, uploads one shared snapshot to `main`, and records that shared upload path on all four Agent Console lane cards.
+- Include an upload manifest with producer actions and lane visibility. Uploading does not write agent status branches or send agents a live notification.
+- Add Runtime-A **Upload captured root event** so the atomically persisted exact root event can be uploaded after NMS closes.
+- Shared local latest outputs can be replaced by subsequent runs: baseline (measure/analyze-generation), measurement summary/CSV (measure/compare-measurements), room correlation (measure/analyze-correlation), and exact root caller (analyze-generation/Runtime-A upload). Timestamped GitHub snapshots remain separate.
+- Tests: updated for saved capture readiness and all-evidence path deduplication.
 
-# 0.3.50 — bundle DerelictFreighterFarming
+# 0.3.52 — constrain local mod staging
 
-- Bundle the user-supplied 7.04 farming mod's three EXML overrides as a named optional game mod and stage them into `GAMEDATA/MODS` during app update when the NMS install path is known.
-- Preserve pre-existing files with a recorded backup; add a targeted rollback command that restores originals and preserves files changed after installation.
-- The supplied payload has not been runtime-validated on NMS 7.05. A full NMS restart is required after staging.
-- Add staging, backup, preservation, missing-payload, and rollback tests.
+- Restrict install and update staging to the three expected EXML files; validate file types, sizes, and XML before copying anything into the game folder.
+- Read ZIP member contents with a fixed size limit and reject duplicates or incomplete archives.
+- No mod assets are redistributed. Keep 7.04-to-7.05 behavior pending the user's live NMS check.
+- Tests: 175 passed; compileall passed.
 
+# 0.3.51 — local DerelictFreighterFarming installer
+
+- Add a Surveyor button to select and install the user's own DerelictFreighterFarming ZIP. No third-party mod assets are included in the app package.
+- Validate only the three expected EXML paths and XML contents; do not extract arbitrary paths from the archive.
+- Preserve conflicting files with backups and keep targeted rollback. The mod author requires permission before reusing the files in another mod.
+- The published archive targets 7.04; live behavior on NMS 7.05 still needs testing.
+- The prior 0.3.50 package was withdrawn from the current updater after identifying the author's no-reuse-without-permission condition.
+
+# 0.3.49 — Runtime-A owner+0x10 capture
 
 - Bump the embedded probe to 0.3.34 and read the raw 8-byte owner+0x10 slot once, only after exact descriptor correlation at the dungeon root event.
 - Persist the raw slot and best-effort loaded-module identity to root evidence and live status; display the result in the existing root-dispatch row/objective.
-- Keep the current data-only Runtime-A extension and all other Surveyor capabilities intact. The app updater stages the probe; restart NMS to load it.
+- Keep the current data-only Runtime-A extension and all other Surveyor behavior intact. The app updater stages the probe; restart NMS to load it.
 - Live Windows/NMS validation remains pending.
 
 # 0.3.48 — transparent objective overlay
