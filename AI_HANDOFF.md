@@ -162,3 +162,12 @@ The exact external call at `02BFCC17` decoded as `FF 52 10`, targeting the verif
 - Lanes: `agent/runtime-dispatch`, `agent/seed-lineage`, `agent/dungeon-decompile`, `agent/metadata`; integration is the only lane that combines proven changes.
 - Every experimental Surveyor must visibly identify its lane/build (for example `Surveyor · RUNTIME-A`) and write evidence under a lane-specific namespace so simultaneous variants cannot be confused.
 - Agents publish a PR containing source changes, tests, evidence schema changes, and a concise handoff. Main integration accepts only reproducible/proven findings.
+
+
+## Seed-lineage follow-up — 2026-10-02
+
+The new offline uploads completed successfully: research-uploads/20261002T221217Z-extract-upstream/ and research-uploads/20261002T221235Z-analyze-seed-function/. The analyzed NMS.exe SHA-256 is 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; the captured address 00001A0004E84EFD still maps to root seed 9256392A2F5A74AC.
+
+Static analysis recovered candidate entry 006388A0 from a four-byte INT3 boundary. Its embedded descriptor primary seed is read at second-argument offset +0x138 (descriptor offset +0x10); the use-seed flag is at +0x140 (descriptor +0x18). No descriptor-field writes were found in the inspected entry-to-root prefix. The PE runtime fragment for the root call is 00638D3C..0063921E, distinct from the candidate logical entry.
+
+The two nearest captured external callers at 006377B6 and 00637D86 pass RCX=RSI, RDX=RBX; each receives RBX from helper 00637DB0 immediately before calling the root handler. This narrows the next static follow-up, but does not identify the helper's type or seed logic. The earlier compiler-padding failure did not reproduce with the newly uploaded caller capture; its original local cause remains unknown. No derelict traversal or human input is currently required. Detailed measured/inferred separation: agent-patches/seed-lineage/SEED_B_ANALYSIS_20261002.json.
