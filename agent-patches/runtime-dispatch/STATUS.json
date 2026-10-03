@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "lane": "runtime-dispatch",
+  "updated_utc": "2026-10-01T15:30:30Z",
+  "state": "waiting_on_user",
+  "status": "Needs one short live owner+0x10 capture",
+  "summary": "Measured: the 2026-10-01 03:33Z Runtime-A upload observed root seed 9256392A2F5A74AC, owner 00000264633A5C00, descriptor 00000264633A5D28 (= owner+0x128), and caller return offset 02C0497A. It contains no live owner+0x10 slot value or target pointer. Its generation session recorded 0 dungeon scene instances, 0 logical chunks, and unresolved preset; that session did not reproduce the separate MEDI_FLOATERS layout capture. Inference: the repeated root seed is consistent with the known system but remains candidate/unverified.",
+  "next_action": "Obtain the live owner+0x10 slot value and target identity at the descriptor-correlated root event; stop there, no full traversal.",
+  "surveyor_request": "Run the existing Runtime-A build on the same known derelict. Stop as soon as Root dispatch +0x10 captured appears, then click Analyze generation + upload.",
+  "human_intervention_required": true,
+  "user_steps": [
+    "Fully exit NMS.",
+    "Extract and run NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip from the existing Runtime-A artifact.",
+    "Open Surveyor RUNTIME-A and click Start NMS.",
+    "Load the same known derelict; stop when Root dispatch +0x10 captured appears.",
+    "Click Analyze generation + upload.",
+    "Return to Main and write check."
+  ],
+  "success_condition": "The new upload contains the live owner+0x10 slot value and target pointer/identity at the descriptor-correlated root event, plus the descriptor recheck.",
+  "evidence_to_return": [
+    "Fresh exact-root-caller-latest.json and run-manifest.json.",
+    "Fresh capture field showing the owner+0x10 value and target identity."
+  ],
+  "full_derelict_required": false,
+  "chat_prompt": "After uploading the fresh Runtime-A capture, write check.",
+  "human_action": {
+    "required": true,
+    "surveyor_request": "Capture the live owner+0x10 slot value and target identity at the known derelict root event, then upload.",
+    "steps": [
+      "Fully exit NMS.",
+      "Extract and run NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip from the existing Runtime-A artifact.",
+      "Open Surveyor RUNTIME-A and click Start NMS.",
+      "Load the same known derelict; stop when Root dispatch +0x10 captured appears.",
+      "Click Analyze generation + upload.",
+      "Return to Main and write check."
+    ],
+    "success_condition": "The new upload contains the live owner+0x10 slot value and target pointer/identity at the descriptor-correlated root event, plus the descriptor recheck.",
+    "evidence_to_return": [
+      "Fresh exact-root-caller-latest.json and run-manifest.json.",
+      "Fresh capture field showing the owner+0x10 value and target identity."
+    ],
+    "full_derelict_required": false
+  }
+}
