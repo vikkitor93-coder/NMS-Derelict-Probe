@@ -49,5 +49,13 @@
   "human_validation": {
     "required": false,
     "reason": "The new computation is offline and verified against two known addresses; future seed-derivation work needs more runtime boundary evidence, but this variant itself does not require an NMS run."
+  },
+  "follow_up_analysis": {
+    "path": "agent-patches/seed-lineage/SEED_B_ANALYSIS_20261002.json",
+    "status": "completed-from-uploaded-evidence",
+    "root_seed": "9256392A2F5A74AC",
+    "boundary_failure_reproduced": false,
+    "human_intervention_required": false,
+    "derivation_status": "unknown-not-claimed"
   }
 }
