@@ -12,9 +12,8 @@ from tools import surveyor_controller as controller
 
 ROOT = Path(__file__).resolve().parents[1]
 LANE = "runtime-dispatch"
-PREVIOUS_VERSION = "1.0.0"
-VERSION = "1.0.1"
-HOST_VERSION = "0.3.41"
+VERSION = "1.0.2"
+HOST_VERSION = "0.3.53"
 EXTENSION_DIR = ROOT / "agent-ui" / "extensions" / LANE / VERSION
 
 
@@ -40,7 +39,7 @@ def build_manifest(version, panel_bytes):
         "version": version,
         "compatible_surveyor_api_version": "1.0",
         "min_surveyor_version": HOST_VERSION,
-        "dependencies": ["agent-console.ui.v1", "action.research.analyze_generation"],
+        "dependencies": ["agent-console.ui.v1", "action.research.analyze_generation", "action.research.upload_runtime_capture"],
         "entry_point": "panel.json",
         "files": [{"path": "panel.json", "sha256": hashlib.sha256(panel_bytes).hexdigest()}],
     }
@@ -71,11 +70,51 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
         self.assertIn("16 analyzer-predicted targets (not verified physical count)", panel["summary"])
         self.assertIn("not verified physical count", panel["summary"])
         self.assertIn("historical", panel["summary"])
-        self.assertEqual(["research.analyze_generation"], [a["action_id"] for a in panel["actions"]])
+        self.assertEqual(["research.analyze_generation", "research.upload_runtime_capture"], [a["action_id"] for a in panel["actions"]])
         self.assertIn(action["action_id"], extensions.HOST_ACTION_IDS)
         self.assertEqual({}, action["parameters"])
         self.assertEqual(LANE, action["evidence_namespace"])
         self.assertIn("action.research.analyze_generation", manifest["dependencies"])
+
+    def test_saved_capture_upload_is_available_after_game_closes(self):
+        _manifest, panel = read_extension()
+        action = panel["actions"][1]
+        self.assertEqual(["workflow.idle", "runtime.capture_saved"], action["preconditions"])
+        self.assertIn("action.research.upload_runtime_capture", _manifest["dependencies"])
+        self.assertIn(action["action_id"], extensions.HOST_ACTION_IDS)
+        self.assertEqual(
+            (False, "Needs: runtime.capture_saved"),
+            extensions.preconditions_met(action["preconditions"], {"workflow_idle": True, "runtime_capture_saved": False}),
+        )
+        self.assertEqual(
+            (True, ""),
+            extensions.preconditions_met(action["preconditions"], {"workflow_idle": True, "runtime_capture_saved": True, "nms_running": False, "probe_connected": False}),
+        )
+
+    def test_runtime_capture_saved_requires_a_valid_persisted_capture(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "capture.json"
+            self.assertFalse(controller._runtime_capture_saved(path))
+            path.write_text(json.dumps({"schema_version": 1, "owner_plus_0x10_capture": {"read_status": "captured"}}), encoding="utf-8")
+            self.assertTrue(controller._runtime_capture_saved(path))
+            path.write_text(json.dumps({"schema_version": 1, "owner_plus_0x10_capture": {"read_status": "pending"}}), encoding="utf-8")
+            self.assertFalse(controller._runtime_capture_saved(path))
+
+    def test_all_saved_evidence_upload_is_deduplicated_and_marks_producers(self):
+        paths, producers = github_integration.all_saved_evidence_outputs()
+        self.assertEqual(len(paths), len({str(p.resolve()) for p in paths}))
+        baseline_key = str((github_integration.WORK / "generation-baseline-latest.json").resolve())
+        self.assertIn("measure", producers[baseline_key])
+        self.assertIn("analyze-generation", producers[baseline_key])
+        summary_key = str((github_integration.WORK / "generation-measurements-summary.json").resolve())
+        self.assertIn("compare-measurements", producers[summary_key])
+        corr_key = str((github_integration.WORK / "seed-room-correlation.json").resolve())
+        self.assertIn("analyze-correlation", producers[corr_key])
+        self.assertIn("measure", producers[corr_key])
+        exact_key = str((github_integration.WORK / "exact-root-caller-latest.json").resolve())
+        self.assertIn("analyze-generation", producers[exact_key])
+        self.assertIn("upload-runtime-capture", producers[exact_key])
+        self.assertEqual(["exact-root-caller-latest.json"], [p.name for p in github_integration.ACTION_OUTPUTS["upload-runtime-capture"]])
 
     def test_action_preconditions_disable_until_workflow_nms_and_probe_are_ready(self):
         _manifest, panel = read_extension()
@@ -90,6 +129,25 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
         for state, expected in states:
             with self.subTest(state=state):
                 self.assertEqual(expected, extensions.preconditions_met(preconditions, state)[0])
+
+    def test_published_human_action_remains_clickable_without_a_prior_upload_receipt(self):
+        _manifest, panel = read_extension()
+        action = panel["actions"][0]
+        idle_without_nms = {"workflow_idle": True, "nms_running": False, "probe_connected": False, "upload_confirmed": True}
+        self.assertTrue(extensions.action_button_enabled(
+            action["preconditions"], idle_without_nms, request_only=True, requested=True,
+        ))
+        self.assertFalse(extensions.action_button_enabled(
+            action["preconditions"], idle_without_nms, request_only=True, requested=False,
+        ))
+        self.assertFalse(extensions.action_button_enabled(
+            action["preconditions"], {**idle_without_nms, "workflow_idle": False}, request_only=True, requested=True,
+        ))
+        # A previous receipt is informational; toggling it never changes readiness.
+        self.assertEqual(
+            extensions.action_button_enabled(action["preconditions"], idle_without_nms, request_only=True, requested=True),
+            extensions.action_button_enabled(action["preconditions"], {**idle_without_nms, "upload_confirmed": False}, request_only=True, requested=True),
+        )
 
     def test_unknown_or_executable_action_content_and_bad_namespace_are_rejected(self):
         manifest, panel = read_extension()
@@ -120,30 +178,30 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
             )
 
     def test_live_install_refresh_and_rollback_keep_old_version_available(self):
-        _current_manifest, panel = read_extension()
+        manifest, panel = read_extension()
         panel_bytes = (json.dumps(panel, sort_keys=True) + "\n").encode()
-        previous_manifest = build_manifest(PREVIOUS_VERSION, panel_bytes)
-        previous_entry = {"extension_id": LANE, "version": PREVIOUS_VERSION, "manifest_path": f"{LANE}/{PREVIOUS_VERSION}/manifest.json"}
+        manifest = build_manifest(VERSION, panel_bytes)
+        entry = {"extension_id": LANE, "version": VERSION, "manifest_path": f"{LANE}/{VERSION}/manifest.json"}
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            extensions.install_extension(root, previous_entry, HOST_VERSION, extensions.HOST_ACTION_IDS,
-                                         remote_package(previous_manifest, panel_bytes).__getitem__)
-            self.assertEqual(PREVIOUS_VERSION, extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)[0]["version"])
+            extensions.install_extension(root, entry, HOST_VERSION, extensions.HOST_ACTION_IDS,
+                                         remote_package(manifest, panel_bytes).__getitem__)
+            self.assertEqual(VERSION, extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)[0]["version"])
 
             refreshed_panel = copy.deepcopy(panel)
             refreshed_panel["summary"] = "Refreshed panel data"
             refreshed_bytes = (json.dumps(refreshed_panel, sort_keys=True) + "\n").encode()
-            refreshed_manifest = build_manifest(VERSION, refreshed_bytes)
-            refreshed_entry = {"extension_id": LANE, "version": VERSION, "manifest_path": f"{LANE}/{VERSION}/manifest.json"}
+            refreshed_manifest = build_manifest("1.0.3", refreshed_bytes)
+            refreshed_entry = {"extension_id": LANE, "version": "1.0.3", "manifest_path": f"{LANE}/1.0.3/manifest.json"}
             extensions.install_extension(root, refreshed_entry, HOST_VERSION, extensions.HOST_ACTION_IDS,
                                          remote_package(refreshed_manifest, refreshed_bytes).__getitem__)
             active, active_panel = extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)
-            self.assertEqual(VERSION, active["version"])
+            self.assertEqual("1.0.3", active["version"])
             self.assertEqual("Refreshed panel data", active_panel["summary"])
-            extensions.activate_installed_extension(root, LANE, PREVIOUS_VERSION, HOST_VERSION, extensions.HOST_ACTION_IDS)
+            extensions.activate_installed_extension(root, LANE, VERSION, HOST_VERSION, extensions.HOST_ACTION_IDS)
             rolled_back, _ = extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)
-            self.assertEqual(PREVIOUS_VERSION, rolled_back["version"])
-            self.assertEqual([VERSION, PREVIOUS_VERSION], extensions.installed_versions(root, LANE))
+            self.assertEqual(VERSION, rolled_back["version"])
+            self.assertEqual(["1.0.3", VERSION], extensions.installed_versions(root, LANE))
 
     def test_lane_action_records_are_namespaced_and_collision_safe(self):
         with tempfile.TemporaryDirectory() as tmp:
