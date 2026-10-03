@@ -3,7 +3,30 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.49**. Runtime-A probe: **0.3.34**.
+Current Surveyor package: **v0.3.53**. Runtime-A probe: **0.3.34**.
+
+## v0.3.53 — upload saved evidence together
+
+- Add **Upload all saved evidence** to Research. It uploads every existing output declared by Surveyor actions in one main-branch folder, includes overlapping files only once, and records the shared receipt on all four Agent Console cards.
+- Agent cards show that receipt; agents still need to be asked to inspect the shared main-branch folder. Uploading does not send a live message or update their separate status branches.
+- Add Runtime-A **Upload captured root event** so the probe's saved `exact-root-caller-latest.json` can be uploaded after NMS is closed. The probe already writes this file immediately when the exact root event is captured.
+- Research actions reuse a few local `*-latest` files: generation baseline (`measure` / `analyze-generation`), measurement summary and CSV (`measure` / `compare-measurements`), seed-room correlation (`measure` / `analyze-correlation`), and exact root caller (`analyze-generation` / Runtime-A capture upload). Re-running a producer replaces that local latest file; each successful GitHub upload is a timestamped snapshot and remains separate.
+- Tests: updated in this release.
+
+## v0.3.52 — safer local mod staging
+
+- Restrict archive and persisted-payload staging to the three expected EXML files, check XML validity and file sizes, and reject duplicate ZIP entries before changing game files.
+- The app still does not redistribute the mod archive. NMS 7.05 behavior remains to be verified.
+- Tests: 175 passing.
+
+
+## v0.3.51 — local DerelictFreighterFarming installer
+
+- Surveyor does not redistribute the mod files. Download the archive for your own use and click **Install Derelict Farming archive** in the GitHub / updates section to select it.
+- The installer validates the three expected EXML paths and XML contents, then stages them under `GAMEDATA/MODS/DerelictFreighterFarming`. It backs up pre-existing files and supports rollback with `python tools/github_integration.py rollback-derelict-farming`.
+- The archive supplied here targets 7.04; it has not been runtime-validated on NMS 7.05. Fully restart NMS after installation.
+- Tests: 175 passing; Windows/NMS behavior remains for live verification.
+
 
 ## v0.3.49 — Runtime-A owner+0x10 capture
 
@@ -111,7 +134,7 @@ The injected `DerelictBaselineProbe` is now a headless backend (`@no_gui`). It c
 
 ### Updating
 
-**Check for update** shows the exact source and available versions. **Install update** updates the extracted project and stages the probe backend when its MODS location is known. Then use **Restart Surveyor** to load a new controller version. NMS can remain open; backend probe code changes take effect the next time NMS is launched.
+**Check for update** shows the exact source and available versions. **Install update** updates the extracted project and stages the probe backend when its MODS location is known. Then use **Restart Surveyor** to load a new controller version. NMS can remain open during update; the backend probe and DerelictFreighterFarming overrides take effect after NMS is fully restarted.
 
 ## Current research checkpoint
 
