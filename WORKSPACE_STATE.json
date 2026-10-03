@@ -1,15 +1,15 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-02T00:00:00Z",
+  "updated_utc": "2026-10-03T00:00:00Z",
   "integration": {
     "branch": "main",
-    "canonical_version": "0.3.48",
-    "current_objective": "Install v0.3.48 on Windows and verify transparent overlay controls, agent objective updates, and game rendering.",
+    "canonical_version": "0.3.53",
+    "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.48",
-    "candidate_branch": "codex/transparent-objective-overlay-20261002",
+    "candidate_version": "0.3.53",
+    "candidate_branch": "codex/upload-all-evidence-0.3.53",
     "candidate_base": "main@f1052e2bae98df16baf365934e821fdc9e5232cd",
-    "candidate_status": "release-candidate-ready-for-main"
+    "candidate_status": "release-ready-pending-pr"
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
@@ -81,13 +81,11 @@
   },
   "cross_mode_rule": "Normal ChatGPT and Work/Codex must treat committed GitHub state as authoritative and may switch roles without relying on hidden conversation context.",
   "candidate_integration": {
-    "issue": 8,
-    "branch": "integration/issue-8-ui-extensions",
+    "branch": "feature/derelict-farming-0.3.53",
     "base_branch": "main",
-    "version": "0.3.41",
-    "status": "published-partial-issue-8",
-    "next_action": "Visually verify extension refresh and rollback on Windows. Separately complete the Runtime-A owner+0x10 capture check; no full derelict traversal is required.",
-    "test_button_changes": "none; issues 13 and 14 are closed and their button patches are excluded from this source.",
-    "base_commit": "f17617abe19d8164892988e1f873353c8f95d49f"
+    "version": "0.3.53",
+    "status": "release-candidate-pending-windows-mod-validation",
+    "next_action": "Use the Surveyor archive installer with the mod archive downloaded for personal use, restart NMS, and verify same-system repeat derelict behavior.",
+    "compatibility": "Mod source is 7.04; NMS 7.05 runtime not yet verified."
   }
 }
