@@ -342,3 +342,6 @@ The first delivered launcher produced the Windows path-syntax error on the user'
 The offline target exporter now scans for raw `E8` bytes and includes helper bodies only when the resulting candidate target maps to an executable section and `.pdata` function. Results are capped (128 call candidates, 12 bodies, 512 KiB total) and marked heuristic because instruction boundaries are not decoded. The fresh 2026-10-04 capture ties the callback's all-four-fields boolean return to caller-side record removal; exact class and indirect slot destination remain unknown. Focused tests: 8/8; full suite: 177/177; compileall passed.
 
 Next: user runs the updated extractor and shares the regenerated supported caller-code evidence. No NMS launch or traversal is needed.
+
+
+The main app's current version metadata is split: `VERSION.txt` and `WORKSPACE_STATE.json` say 0.3.57, while `update-manifest.json` advertises full package 0.3.58 (SHA-256 `f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24`). That 0.3.58 managed-file list does not include the DUNGEON-C helper exporter, so it does not unblock helper-body extraction; the separate v0.3.50 DUNGEON-C helper-export ZIP remains the relevant tool.
