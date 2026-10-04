@@ -129,5 +129,13 @@
       "Helper 00637DB0 passes that input through to initializer 006377E0; at 006377E0, code forms destination object+0x128 and calls 00227A40 with the source pointer from its fifth stack argument."
     ],
     "interpretation": "This narrows the primary seed source to an upstream-supplied descriptor argument before the 00637660 wrapper path. The bytes do not identify which higher-level caller initializes that descriptor or prove any transform from universe address to root seed. The next target is callers/function-pointer slots referencing 00637660 in the same NMS.exe."
+  },
+  "static_scanner": {
+    "path": "agent-patches/seed-lineage/seed_b_trace_static_callers.py",
+    "commit": "6243812f4e7b94c75f0d6055055c2fdd947e7f76",
+    "sha256": "7fa2dca6a6ab02caec5601b9549cf1d352da78dbc4539cb12d3c2e12255f4d20",
+    "verification": "python3 -m py_compile passed; synthetic PE fixture detected expected E8 rel32 target and .rdata absolute-VA slot.",
+    "behavior": "Read-only. Select NMS.exe in a file picker, then save a JSON report of rel32 call/jump references and matching absolute function-pointer slots for fixed Seed-B RVAs; report is written to Downloads.",
+    "requested_target_rva": "00637660"
   }
 }
