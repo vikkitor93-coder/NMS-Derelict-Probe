@@ -197,6 +197,15 @@
     "code_export_tool_version": "0.3.37",
     "helper_call_candidates_present": false,
     "helper_bodies_present": false,
-    "user_action": "No new capture or traversal. Run the offline v0.3.39 helper exporter against the matching installed NMS.exe, then upload the generated artifact."
+    "user_action": "No new capture or traversal. Run the offline v0.3.39 helper exporter against the matching installed NMS.exe, then upload the generated artifact.",
+    "repeated_zero_samples": 3
+  },
+  "main_package_update_check": {
+    "version_file": "main VERSION.txt: 0.3.57",
+    "workspace_state": "main WORKSPACE_STATE.json: 0.3.57",
+    "updater_manifest": "main update-manifest.json advertises full package 0.3.58",
+    "updater_package_sha256": "f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24",
+    "helper_exporter_in_managed_files": false,
+    "interpretation": "The v0.3.58 app package does not contain the DUNGEON-C helper exporter; use the separate v0.3.50 helper-export build for this blocked offline step."
   }
 }
