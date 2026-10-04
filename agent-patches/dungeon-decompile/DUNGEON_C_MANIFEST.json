@@ -39,7 +39,7 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "The 2026-10-04 exact-root bounded function is now disassembled from its .pdata start. 33 decoded direct E8 sites map to 7 distinct unnamed targets; use CALLBACK_DIRECT_CALL_INVENTORY.json. Next obtain helper .pdata ranges/bodies from the v0.3.39 exporter and matching NMS.exe, then analyze record updates at RSI+0x48 and availability bits.",
+    "next_method": "The bounded callback's 33 E8 sites across seven targets are validated and published. Next run the v0.3.58-based helper-export build, then match candidate call sites and helper .pdata ranges to CALLBACK_DIRECT_CALL_INVENTORY.json before any semantic naming.",
     "candidate_identity_rule": "Candidate RVAs remain unnamed until full helper bodies and call semantics are validated; the runtime owner+0x10 field is not the caller's vtable slot.",
     "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/"
   },
@@ -48,15 +48,15 @@
     "game_runtime_required": false,
     "full_derelict_traversal_required": false,
     "duplicate_capture_or_upload_required": false,
-    "dependency": "matching local NMS.exe needed for helper-body extraction; Library transfer into this workspace failed twice",
-    "asset": "NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-helper-export.zip",
-    "asset_sha256": "95d7ee614fa1d13bb342cb56949cddb5e4cbec0283ba871751d0ea614091f11f",
+    "asset": "NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
+    "asset_sha256": "a4a1336af1c61e4c2b2e0518da52b594b28a6e547bff911c9716d3a228f8830a",
     "steps": [
-      "Extract the complete helper-export package (not the GitHub agent branch archive) into a normal local folder.",
+      "Extract the complete DUNGEON-C helper-export ZIP to a normal local folder.",
       "Run Extract-Runtime-Target-Function.cmd from the extracted package root.",
-      "Confirm output exact-root-caller-code-latest.json has runtime_target_function.direct_call_candidates and bounded target_function_body entries.",
-      "In Surveyor, click GitHub / updates > Upload all saved evidence, then tell Main AI “check”."
-    ]
+      "Confirm exact-root-caller-code-latest.json contains runtime_target_function.direct_call_candidates and at least one bounded target_function_body.",
+      "In Surveyor click GitHub / updates > Upload all saved evidence, then write “check” in the research chat."
+    ],
+    "success_condition": "The shared upload contains helper candidate bodies and records the matching NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4."
   },
   "latest_scan": {
     "evidence_path": "research-uploads/20260930T172000Z-dungeon-decompile/dungeon-decompile-anchors-summary.json",
@@ -207,5 +207,34 @@
     "updater_package_sha256": "f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24",
     "helper_exporter_in_managed_files": false,
     "interpretation": "The v0.3.58 app package does not contain the DUNGEON-C helper exporter; use the separate v0.3.50 helper-export build for this blocked offline step."
+  },
+  "helper_export_build": {
+    "name": "NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
+    "base_surveyor_version": "0.3.58",
+    "base_package_sha256": "f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24",
+    "sha256": "a4a1336af1c61e4c2b2e0518da52b594b28a6e547bff911c9716d3a228f8830a",
+    "size_bytes": 413127,
+    "files": 160,
+    "extractor_version": "0.3.39",
+    "verification": {
+      "focused_helper_tests": "8/8 passed",
+      "full_regression_tests": "190/190 passed",
+      "compileall": "passed",
+      "json_files": "72 parsed",
+      "zip_integrity": "passed",
+      "windows_launcher": "static-checked only; not executable in Linux"
+    },
+    "included_dependencies": [
+      "tools/analyze_nms_seed_function.py",
+      "tools/extract_exact_root_caller_code.py",
+      "tools/extract_nms_caller_code.py"
+    ],
+    "launcher_changes": [
+      "No pushd/current-directory change",
+      "Does not read BOM-prone Surveyor saved Python path",
+      "Checks extractor file exists and explains complete-package requirement",
+      "Selects Python 3.13 then 3.12 then PATH python"
+    ],
+    "rollback": "Use the preceding NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-helper-export.zip (if available); no application files are installed by this research ZIP."
   }
 }
