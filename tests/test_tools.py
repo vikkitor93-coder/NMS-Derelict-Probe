@@ -687,12 +687,19 @@ class ToolTests(unittest.TestCase):
         self.assertIn("POI-UA",view["generation"])
         self.assertIn("00001A0004E84EFD",view["generation"])
 
-    def test_v0334_runtime_probe_captures_owner_slot_after_exact_root_match(self):
+    def test_v0336_runtime_probe_captures_owner_slot_at_entry_before_root_add(self):
         probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
-        self.assertIn('PROBE_VERSION = "0.3.35"', probe)
+        self.assertIn('PROBE_VERSION = "0.3.36"', probe)
         exact=probe.index('exact_external = self._logical_entry_external_match_for_descriptor(descriptor_ptr)')
-        capture=probe.index('exact_external["owner_plus_0x10_capture"] = _owner_plus_0x10_capture(owner_pointer)', exact)
-        self.assertGreater(capture, exact)
+        entry_capture=probe.index('phase="logical-entry-after-external-call"')
+        root_add_capture=probe.index('phase="root-resource-add"', exact)
+        self.assertLess(probe.index('def _trace_resource_descriptor_walk_entry'), entry_capture)
+        self.assertLess(entry_capture, root_add_capture)
+        self.assertIn('"capture_phase": phase', probe)
+        self.assertIn('"capture_utc": _utc_now()', probe)
+        self.assertIn('"external_owner_plus_0x10_capture_at_entry": frame.get("external_owner_plus_0x10_capture")', probe)
+        self.assertIn('exact_external["owner_plus_0x10_capture_at_root_add"]', probe)
+        self.assertIn('exact_external["owner_plus_0x10_capture_at_entry"] = entry_capture', probe)
         self.assertIn('"root_dispatch_capture": self._root_dispatch_capture_payload()', probe)
         self.assertIn('"last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture', probe)
         self.assertIn('kernel32.ReadProcessMemory(', probe)
@@ -1120,7 +1127,7 @@ class ToolTests(unittest.TestCase):
 
 
     def test_v0322_version_marker(self):
-        self.assertEqual("0.3.56", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.57", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
 
     def test_v0322_probe_exposes_background_research_buttons(self):
         source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
@@ -1352,7 +1359,7 @@ class ToolTests(unittest.TestCase):
         self.assertNotIn("Test-Runtime", start_nms)
         self.assertNotIn("Python.Python.3.12", start_nms)
         self.assertNotIn("import pymhf; import nmspy", start_nms)
-        self.assertIn('CONTROLLER_VERSION = "0.3.56"', controller)
+        self.assertIn('CONTROLLER_VERSION = "0.3.57"', controller)
         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
 
 
@@ -1406,7 +1413,7 @@ class ToolTests(unittest.TestCase):
             self.assertIn(token, probe)
 
     def test_v0330_version(self):
-        self.assertEqual("0.3.56", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.57", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
 
     def test_v0328_seed_function_relrefs_classify_recursion(self):
