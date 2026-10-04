@@ -71,7 +71,7 @@
       "the assigned lane manifest and only relevant files/evidence"
     ],
     "branch_rule": "For a new independent task, create a fresh branch from current main named agent/<short-lane-id>. Use agent/metadata only if it is still free when you begin.",
-    "output_rule": "Keep experimental Surveyor changes lane-specific, publish a manifest + reproducible patch + tests/evidence, and never push experimental changes directly to main.",
+    "output_rule": "Keep experimental Surveyor changes lane-specific while unfinished. Once a change is complete, validated, documented, and recoverable, publish it directly to main without waiting for a separate integration-agent merge or user approval. Update lane status/manifest, extension index and hashes when applicable, WORKSPACE_STATE.json, and AI_HANDOFF.md. A PR is optional or a fallback if direct push is unavailable. Preserve a backup branch or exact base commit and rollback steps.",
     "autonomy_rule": "Continue within the lane until the objective is complete, blocked on another lane, or genuine human/local-machine intervention is required."
   },
   "artifact_policy": {
@@ -87,5 +87,22 @@
     "status": "release-candidate-pending-windows-mod-validation",
     "next_action": "Use the Surveyor archive installer with the mod archive downloaded for personal use, restart NMS, and verify same-system repeat derelict behavior.",
     "compatibility": "Mod source is 7.04; NMS 7.05 runtime not yet verified."
+  },
+  "publish_policy": {
+    "default": "direct-to-main-for-completed-work",
+    "experiments": "keep on lane branches until complete and validated",
+    "approval_required": false,
+    "backup_required": true,
+    "pr_required": false,
+    "pr_fallback": "use a lane PR only if direct push is unavailable or rejected",
+    "documentation_required": [
+      "objective and result",
+      "files changed",
+      "exact tests and results",
+      "evidence and limitations",
+      "backup reference",
+      "rollback steps",
+      "resulting main commit"
+    ]
   }
 }
