@@ -320,3 +320,7 @@ The first delivered launcher produced the Windows path-syntax error on the user'
 - Disassembly around the hook shows four values conditionally stored at RSI+0x50/+0x54/+0x58/+0x5C with corresponding availability bits in RSI+0x1ED (bits 1/3/2/4; bit 0 always set). A boolean indicates all four nonzero while an input flag is clear. Repeated helper chains consume each present value and update RSI+0x48. This suggests a four-field record/metadata aggregation path; exact helper meanings and class identity remain unknown.
 - The owner-relative zero is not the raw qword at the vtable pointer used by `FF 52 10`; the actual indirect target remains unverified. Next: add conservative direct-call helper extraction/analysis from the bounded body and retain candidate labels until instruction boundaries and target ranges are confirmed.
 - Launcher run succeeded using Python on PATH after rejecting the BOM-prefixed saved interpreter path. The launcher now suppresses that nonfatal warning and includes it only if all interpreter fallbacks fail.
+
+## Callback return correlation (2026-10-04)
+
+- Caller-return correlation: the bounded function returns the four-field completion boolean in EAX; the external caller compares against 1, then unlinks and frees its 0x58-byte record. This supports a completion-check/record-processing callback interpretation; class/subsystem identity and raw dispatch target remain unknown.
