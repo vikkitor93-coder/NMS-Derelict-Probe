@@ -2,8 +2,8 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T20:56:00Z",
-  "state": "runtime-target-rva-confirmed-callback-semantics-under-analysis",
+  "reviewed_utc": "2026-10-04T20:59:00Z",
+  "state": "runtime-target-rva-confirmed-awaiting-pdata-bounded-body",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -259,6 +259,23 @@
       "samples_correlated": true,
       "comparison": "Entry-time and root-add owner+0x10 samples are both present and tied to the same descriptor and owner. Both are zero.",
       "interpretation_limit": "This confirms the samples were saved before the game closed. Artifact reports probe 0.3.35, so it does not validate that requested probe 0.3.36 was loaded. owner+0x10 is distinct from the [RDX+0x10] vtable dispatch slot."
+    },
+    "runtime_target_exporter": {
+      "command": "Extract-Runtime-Target-Function.cmd",
+      "script": "tools/extract_runtime_target_function.py",
+      "lane_manifest": "agent-patches/dungeon-decompile/DUNGEON_C_TARGET_EXTRACTOR_MANIFEST.json",
+      "package": "NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-source-target-extractor.zip",
+      "package_sha256": "90a91b9dc5cab508389c22904fc8c208ef7d5d2a12ea95dfe2e446402b36b8ba",
+      "input": "%LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1\\exact-root-caller-latest.json",
+      "target_rva": "00634BC0 (from current Angoto root event)",
+      "output": "%LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1\\exact-root-caller-code-latest.json#runtime_target_function",
+      "upload_route": "Upload all saved evidence; existing ACTION_OUTPUTS already includes exact-root-caller-code-latest.json",
+      "verification": {
+        "focused_tests": "6/6 passed",
+        "full_suite": "175/175 passed",
+        "compileall": "python -m compileall -q tools overlay tests mod passed",
+        "live_nms_test": "not run; not required for offline extraction"
+      }
     }
   },
   "evidence": {
@@ -285,11 +302,14 @@
     }
   },
   "blocked": {
-    "reason": "No user action is needed for the saved 20:53:18 capture: both owner+0x10 samples are present and same-descriptor correlated, and caller-return correlation identifies effective callee RVA 00634BC0. DUNGEON-C work remains static semantic analysis of that function body; raw [RDX+0x10] pointer sampling is still absent.",
-    "human_action_required": false,
+    "reason": "The effective runtime callee RVA 00634BC0 is proven by exact caller-return/entry-hook correlation. To continue semantic decompilation, its `.pdata`-bounded body must be extracted from the user's installed NMS.exe; the workspace contains the correlated caller window but not the game executable.",
+    "human_action_required": true,
     "full_traversal_required": false,
-    "duplicate_upload_required": false,
-    "needed": "The force-close did not erase the uploaded capture. A repeat short capture is only needed if validating probe 0.3.36 specifically, since this artifact identifies itself as probe 0.3.35. No full traversal is required."
+    "nms_runtime_required": false,
+    "duplicate_capture_or_upload_required": false,
+    "needed": "Use the complete updated source ZIP NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-source-target-extractor.zip (SHA-256 90a91b9dc5cab508389c22904fc8c208ef7d5d2a12ea95dfe2e446402b36b8ba). Extract it into a new folder; double-click Extract-Runtime-Target-Function.cmd. It reads the already-saved root capture and auto-detects NMS.exe. Confirm it reports target RVA 00634BC0 and a .pdata range, then use Surveyor → GitHub / updates → Upload all saved evidence and tell me “check”. No NMS launch or traversal is needed.",
+    "expected_output": "A regenerated exact-root-caller-code-latest.json containing runtime_target_function with .pdata range, body bytes, and matching NMS.exe SHA-256.",
+    "success_condition": "The shared upload contains the target body for 00634BC0; DUNGEON-C can disassemble/decompile its logic and compare descriptor/seed flow."
   },
-  "next_lane_owned_step": "Analyze the callee body at NMS.exe RVA 00634BC0 using available exact-build PE bytes and .pdata bounds. Keep its semantic identity provisional until the body supports a role."
+  "next_lane_owned_step": "After the uploaded runtime_target_function block arrives, disassemble the .pdata-bounded body at RVA 00634BC0, identify its observable data flow, and compare it with the exact Angoto descriptor/seed path. Keep source symbol/class names unassigned unless independently supported."
 }
