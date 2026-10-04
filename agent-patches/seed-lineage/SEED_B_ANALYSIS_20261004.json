@@ -137,5 +137,48 @@
     "verification": "python3 -m py_compile passed; synthetic PE fixture detected expected E8 rel32 target and .rdata absolute-VA slot.",
     "behavior": "Read-only. Select NMS.exe in a file picker, then save a JSON report of rel32 call/jump references and matching absolute function-pointer slots for fixed Seed-B RVAs; report is written to Downloads.",
     "requested_target_rva": "00637660"
+  },
+  "static_callers_00637660": {
+    "reviewed_utc": "2026-10-04T20:49:30Z",
+    "evidence_path": "User attachment: seed-b-static-callers-00637660.json (local chat attachment; not in research-uploads)",
+    "attachment_sha256": "312b409d39718caa49fa76a07bf07318b8bbddaeae390cc7bef9e4bf61d832eb",
+    "executable_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "executable_size_bytes": 88545352,
+    "pe_timestamp_hex": "6ABB9CC5",
+    "reported_reference_counts": {
+      "00637660": {
+        "direct_rel32_calls": 3,
+        "absolute_pointer_slots": 0
+      },
+      "006377E0": {
+        "direct_rel32_calls": 29,
+        "absolute_pointer_slots": 0
+      },
+      "00637DB0": {
+        "direct_rel32_calls": 46,
+        "absolute_pointer_slots": 0
+      },
+      "006388A0": {
+        "direct_rel32_calls": 52,
+        "absolute_pointer_slots": 0
+      },
+      "00227A40": {
+        "direct_rel32_calls": 9,
+        "absolute_pointer_slots": 0
+      }
+    },
+    "direct_callers_00637660": [
+      "001B2CF9",
+      "02D042E1",
+      "02D04AF8"
+    ],
+    "measured_callsite_notes": [
+      "At 02D042E1 the callsite stores an object pointer loaded from [rbp+0x238] into stack argument +0x28 before calling 00637660; it also copies 16-byte values from [r15] and [r15+0x10] into a local record.",
+      "At 02D04AF8 the callsite stores an object pointer loaded from [rbp+0x298] into stack argument +0x28; it similarly copies record halves from [r15] and [r15+0x10].",
+      "At 001B2CF9 the callsite prepares a different argument bundle, including a pointer from [rsp+0x70] passed in R8 and local pointers at [rbp+0x80] and [rbp+0x20].",
+      "All three are direct-call byte observations from static windows. The report says references alone do not prove runtime dispatch or semantics."
+    ],
+    "interpretation": "The existing descriptor-flow hypothesis can now be followed through three direct wrapper callers. The small windows do not yet identify how the input objects are initialized or prove that any callsite input is the universe-address-derived root seed. Root-seed derivation remains unproven.",
+    "next_lane_action": "Use the local hash-matched NMS.exe to disassemble broader caller function ranges and trace initialization of the source objects passed at the three 00637660 calls; follow to 006377E0/00227A40 and the descriptor copy. Continue offline before requesting any new capture."
   }
 }
