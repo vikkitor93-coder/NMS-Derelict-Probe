@@ -1,23 +1,23 @@
 {
   "schema_version": 2,
-  "version": "0.3.53",
+  "version": "0.3.56",
   "status": "release-candidate-pending-windows-mod-validation",
   "artifact": {
     "storage": "github-base64-chunks-and-sandbox-download",
-    "file_name": "NMS-Derelict-Probe-v0.3.53.zip"
+    "file_name": "NMS-Derelict-Probe-v0.3.56-source.zip"
   },
   "repository_transport": {
     "status": "reproducible-base64-chunks",
     "reason": "The complete source ZIP is delivered as the release artifact and reproducibly encoded in the repository package chunk format."
   },
   "verification": {
-    "unit_tests": "178/178 passed",
+    "unit_tests": "181/181 passed",
     "compileall": "passed: python -m compileall -q tools overlay tests mod",
     "zip_integrity": "passed: package generated and hash-verified",
     "windows_ui": "not run in Linux workspace",
     "nms_7_05_mod_runtime": "not run; user supplies own 7.04 archive",
-    "package_refresh": "v0.3.53 package chunks and update manifest prepared for release PR",
-    "package_files": "149"
+    "package_refresh": "v0.3.56 source package generated locally; GitHub release/branch not published",
+    "package_files": "151"
   },
   "resume": {
     "integration_agent": "Install v0.3.53, capture the Runtime-A root event if needed, close NMS, then use Upload captured root event or Upload all saved evidence. Continue Windows/NMS validation when available."
@@ -26,6 +26,7 @@
     "Constrains local archive staging to expected paths, regular XML files, and bounded sizes; rejects invalid or tampered content before touching game files.",
     "No third-party mod assets are bundled.",
     "The user-supplied mod archive targets 7.04; NMS 7.05 runtime behavior remains unverified.",
-    "178 unit tests pass; compileall passes. Windows UI and NMS 7.05 runtime validation remain unrun."
+    "178 unit tests pass; compileall passes. Windows UI and NMS 7.05 runtime validation remain unrun.",
+    "v0.3.56 adds a persisted toggle for automatic root-capture uploads and deduplicated all-lane evidence uploads after research workflows."
   ]
 }
