@@ -2,8 +2,8 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T10:14:00Z",
-  "state": "new-system-generation-captured-physical-count-unverified",
+  "reviewed_utc": "2026-10-04T10:26:00Z",
+  "state": "new-system-layout-and-container-model-user-validated",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -18,7 +18,7 @@
       "shuttle_bays": 1,
       "label": "historical; preserved without relabeling as current"
     },
-    "prior_post_update_model": {
+    "earlier_post_update_model": {
       "session_id": "20260930T173540Z_00001A0004E84EFD",
       "preset": "MEDI_FLOATERS",
       "preset_confidence": "high-inference",
@@ -30,7 +30,7 @@
       "room_model_status": "needs-review",
       "root_seed": "9256392A2F5A74AC (candidate/unverified)"
     },
-    "newly_traversed_system_capture": {
+    "validated_new_system_capture": {
       "session_id": "20261004T094357Z_0001BF0004E84EFD",
       "universe_address": "0001BF0004E84EFD",
       "probe_version": "0.3.34",
@@ -38,25 +38,28 @@
       "logical_generated_chunks": 11,
       "preset": "CARGO_FLOATERS",
       "preset_confidence": "high-inference",
-      "modeled_main_rooms": 11,
-      "modeled_dead_end_rooms": 0,
-      "modeled_total_rooms": 11,
-      "table_rooms": 7,
-      "room_model_status": "needs-review",
-      "analyzer_predicted_salvage": 30,
-      "analyzer_predicted_footlockers": 13,
-      "analyzer_predicted_targets": 43,
-      "manual_room_markers": {
-        "main_rooms_f6": 0,
-        "dead_ends_f5": 0
+      "rooms": {
+        "main": 11,
+        "dead_end": 0,
+        "total": 11,
+        "source": "generation model; matched user's physical traversal"
       },
-      "physical_room_layout_verified": false,
-      "physical_container_count_verified": false,
+      "container_counts": {
+        "salvage": 30,
+        "footlockers": 13,
+        "total": 43,
+        "source": "analyzer prediction; matched user's physical traversal"
+      },
+      "user_confirmed_layout_and_counts": true,
+      "user_confirmation_utc": "2026-10-04T10:26Z",
+      "generation_table_rooms": 7,
+      "table_vs_generated_room_mismatch": "table specifies 7; model and user traversal confirm 11 main rooms",
+      "room_model_status": "validated-by-user-for-this-run; static table discrepancy remains",
       "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)"
     },
     "runtime_capture": {
       "utc": "2026-10-04T09:43:51.578Z",
-      "system": "0001BF0004E84EFD",
+      "universe_address": "0001BF0004E84EFD",
       "owner_plus_0x10_slot_value": "0000000000000000",
       "target_identity_status": "null-or-low-address",
       "runtime_target_resolved": false
@@ -80,14 +83,14 @@
       "dungeon-caller-code-latest.json",
       "dungeon-upstream-callers-latest.json"
     ],
-    "note": "This upload contains the first generation-baseline capture linked to the newly traversed system 0001BF0004E84EFD. Its room/container values are modeled/analyzer outputs. The measurement summary is unchanged older data; manual room-marker counters in the new baseline are zero."
+    "note": "Generation session is linked to system 0001BF0004E84EFD. The user confirms its room layout and crate counts matched physical traversal. Counts are now user-validated for this run, not presented as a directly recorded manual counter capture."
   },
   "blocked": {
-    "reason": "The new system capture is identifiable, but it has no manually recorded physical room markers or physical container tally; owner+0x10 is null, so no consumer target can be decompiled.",
+    "reason": "DUNGEON-C consumer analysis still lacks a valid Runtime-A owner+0x10 target; the captured slot is zero. The 7-room static-table versus 11-room generated-layout discrepancy also remains to explain.",
     "human_action_required": true,
     "full_traversal_required": false,
     "duplicate_upload_required": false,
-    "needed": "No repeat traversal is currently required. To validate the user's observed mod behavior against the model, provide the physical room/container counts/layout from the completed traversal if available. Runtime-A work remains blocked until a capture resolves owner+0x10 to a valid target."
+    "needed": "No further traversal is needed for the layout/container validation. Runtime-A needs a later capture that resolves owner+0x10 to a valid target before consumer decompilation can proceed."
   },
-  "next_lane_owned_step": "Keep the 43 target total and 11-room layout labeled as analyzer model output. Compare against physical counts if supplied; resume consumer analysis only after Runtime-A resolves a valid owner+0x10 target."
+  "next_lane_owned_step": "Record this run as a successful validation of the 11-room/43-container model. Investigate why the selected CARGO_FLOATERS table's Rooms=7 parameter coexists with 11 generated main rooms; resume consumer analysis if Runtime-A supplies a valid target."
 }
