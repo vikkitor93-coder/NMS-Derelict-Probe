@@ -94,3 +94,6 @@ After `Analyze generation + upload` has captured an exact root caller, use **Ext
 
 ### Exact root vtable resolution (v0.3.38)
 After **Extract exact root caller + upload** reports the virtual call shape (`FF 52 10`), use **Resolve root vtable + upload**. It scans the installed `NMS.exe` offline for vtable entries whose `+0x10` slot points to the verified `0x00634BC0` function, records neighbouring virtual methods, tries to decode MSVC RTTI/class metadata, and records RIP-relative code references to candidate vtables. It does not launch NMS or write to the game.
+
+
+**Extractor launcher troubleshooting:** the current launcher prefers Surveyor's saved Python interpreter, then tries `py -3` and `python.exe` on `PATH`. If neither the project folder nor a Python runtime is usable, it prints the exact failing path/runtime. Extract the package to a normal local folder and retry.
