@@ -1,40 +1,31 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-04T09:55:34Z",
-  "state": "waiting_on_user",
-  "status": "New-system root captured; owner+0x10 is null; generation analysis for that traversal is not in the shared batch",
-  "summary": "Measured in the newest shared batch research-uploads/20261004T095443Z-all-saved-evidence-af87032b/: exact-root-caller-latest.json records a probe 0.3.34 root event at 2026-10-04T09:43:51.578Z with root seed 5B4AE67D9C2A8F61, owner 000001D026704000, descriptor 000001D026704128 (= owner+0x128), caller return 02C0497A, and owner+0x10 raw bytes/value 0000000000000000. target_identity reports null-or-low-address at 0000000000000000. The exact-root file has no universe address, so its association with the new system is based on the user's report, not independently verifiable from that file. This differs from the 09:17 known-system capture in research-uploads/20261004T091916Z-runtime-dispatch-upload-runtime-capture-a865d799/, where root seed 9256392A2F5A74AC had owner+0x10 value FFFFFFFF00000000 and target_identity not-in-loaded-module. The latest all-saved run-manifest includes the 09:43 root file but its generation-baseline-latest.json is session 20261004T091738Z_00001A0004E84EFD for the known system: MEDI_FLOATERS high-confidence inference, 16 analyzer-predicted targets, 150 scene instances, 10 generated chunks. Those are analysis outputs, not verified physical counts for the newly traversed system. No generation baseline paired to the 09:43 new-system capture is present in the shared batch. User reports the access mod did not behave as intended; this evidence does not identify why. Root seed 9256392A2F5A74AC remains candidate/unverified for the known system.",
-  "next_action": "Lane-owned: inspect the captured call at 02C0497A with the zero-slot result and compare it with the earlier FFFFFFFF00000000 capture; do not treat either value as a resolved callable target. Reassess once generation analysis for the new-system session is uploaded.",
-  "surveyor_request": "For the already completed new-system traversal, run Analyze generation + upload and verify that its manifest/session corresponds to that traversal; then click Upload all saved evidence once so the new generation output is shared.",
-  "human_intervention_required": true,
-  "user_steps": [
-    "In Surveyor, click Analyze generation + upload for the completed new-system run; check that the resulting run manifest/session corresponds to that traversal rather than session 20261004T091738Z_00001A0004E84EFD.",
-    "When the new-system generation output is present, click Upload all saved evidence once.",
-    "Tell Main AI: check."
-  ],
-  "success_condition": "The shared evidence includes a generation baseline for the same new-system traversal as the 2026-10-04T09:43:51.578Z root capture, with its universe/system address and session ID; Runtime-A remains incomplete until owner+0x10 yields an identified destination rather than null-or-low-address or not-in-loaded-module.",
+  "updated_utc": "2026-10-04T10:13:29Z",
+  "state": "working",
+  "status": "New-system root and generation outputs paired; owner+0x10 is null; target unresolved",
+  "summary": "Verified in research-uploads/20261004T101244Z-all-saved-evidence-2a766630/: the generation baseline session is 20261004T094357Z_0001BF0004E84EFD (system 0001BF0004E84EFD). Its root event at 09:43:51.577Z has seed 5B4AE67D9C2A8F61, matching the 09:43:51.578Z Runtime-A capture. Probe 0.3.34 captured owner 000001D026704000 and owner+0x10 raw/value 0000000000000000; target_identity is null-or-low-address at zero, so no destination is identified and the lane is not complete. Analyzer outputs: CARGO_FLOATERS high-confidence inference, 30 predicted Salvage + 13 predicted Footlockers = 43 predicted targets, 11 modeled main rooms, 0 modeled dead ends; the table says 7 rooms and room_model_status is needs-review. These are model-derived, not physical counts. Root seed remains candidate/unverified. The batch does not establish why the access mod behaved unexpectedly.",
+  "progress": "The batch now contains paired new-system root and generation evidence; prior known-system MEDI_FLOATERS/16-target analysis remains separate and historical to that session.",
+  "next_action": "Inspect the decoded call at RVA 02C04977 (FF 52 10, indirect call through [RDX+0x10]) and establish whether RDX is the captured owner pointer before interpreting the zero slot. The published caller-code artifact is from an earlier capture; do not assume register identity.",
+  "surveyor_request": "No additional Surveyor capture is needed for the current batch.",
+  "human_intervention_required": false,
+  "user_steps": [],
+  "success_condition": "Resolve whether the captured owner+0x10 slot is the object used by the indirect call and identify a valid destination; until then keep Runtime-A incomplete.",
   "evidence_to_return": [
-    "research-uploads/20261004T095443Z-all-saved-evidence-af87032b/run-manifest.json",
-    "research-uploads/20261004T095443Z-all-saved-evidence-af87032b/exact-root-caller-latest.json",
-    "research-uploads/20261004T095443Z-all-saved-evidence-af87032b/generation-baseline-latest.json",
-    "research-uploads/20261004T091916Z-runtime-dispatch-upload-runtime-capture-a865d799/exact-root-caller-latest.json"
+    "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json",
+    "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/exact-root-caller-latest.json",
+    "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/generation-baseline-latest.json",
+    "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/exact-root-caller-code-latest.json"
   ],
   "full_derelict_required": false,
-  "chat_prompt": "After uploading the paired new-system analysis, tell Main AI: check.",
+  "chat_prompt": "No further game action is required for this batch; Runtime-A will continue the caller/register analysis.",
   "human_action": {
-    "required": true,
-    "surveyor_request": "Analyze and share the completed new-system traversal; do not repeat the traversal unless Surveyor cannot analyze its saved session.",
-    "steps": [
-      "In Surveyor, click Analyze generation + upload for the completed new-system run.",
-      "Verify the resulting output/run manifest corresponds to that traversal and not the known-system session 20261004T091738Z_00001A0004E84EFD.",
-      "Click Upload all saved evidence once after the correct output is saved.",
-      "Tell Main AI: check."
-    ],
-    "success_condition": "A fresh shared generation baseline is tied to the new-system run and can be compared with its root capture; physical counts remain distinct from analyzer-predicted counts.",
+    "required": false,
+    "surveyor_request": "No additional user action required.",
+    "steps": [],
+    "success_condition": "Lane-owned static analysis continues from the captured caller offset and current paired root evidence.",
     "evidence_to_return": [
-      "Fresh run-manifest.json",
-      "Fresh generation-baseline-latest.json for the new system"
+      "Current paired shared evidence batch"
     ],
     "full_derelict_required": false
   }
