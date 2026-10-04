@@ -117,5 +117,17 @@
       "older_static_artifact_context": "exact-root-caller-code-latest.json carries old capture metadata (probe 0.3.34/root seed 9256392A2F5A74AC), but its caller bytes match the new live window byte-for-byte and its executable SHA-256 matches the fresh same-session static extraction."
     },
     "interpretation": "The root-seed candidate association for this system is reconfirmed, and the same executable/caller code is now tied to the fresh probe 0.3.35 session. This does not establish how the root seed is derived from the universe address; the candidate remains unverified as a derivation."
+  },
+  "data_flow_followup": {
+    "reviewed_utc": "2026-10-04T15:41:32Z",
+    "evidence_batch": "research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726",
+    "executable_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "measured_static_facts": [
+      "Logical generator candidate 006388A0 receives the generated object as its second argument. The embedded descriptor is at object+0x128; primary seed is object+0x138 and use_seed is object+0x140. Existing analysis records reads of the primary seed and use_seed flag before root Engine::AddResource and no possible writes in the scanned prefix.",
+      "Direct calls at 006377B6 and 00637D86 enter 006388A0 with RCX=RSI and RDX=RBX.",
+      "In the 00637660 function, the argument at entry stack offset +0x38 (argument 7) is forwarded to helper 00637DB0 as its fifth stack argument.",
+      "Helper 00637DB0 passes that input through to initializer 006377E0; at 006377E0, code forms destination object+0x128 and calls 00227A40 with the source pointer from its fifth stack argument."
+    ],
+    "interpretation": "This narrows the primary seed source to an upstream-supplied descriptor argument before the 00637660 wrapper path. The bytes do not identify which higher-level caller initializes that descriptor or prove any transform from universe address to root seed. The next target is callers/function-pointer slots referencing 00637660 in the same NMS.exe."
   }
 }
