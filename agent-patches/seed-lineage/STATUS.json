@@ -1,25 +1,21 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-04T09:58:29Z",
-  "state": "waiting_on_user",
-  "status": "Fresh root capture found; system association needs reanalysis",
-  "summary": "Reviewed newest main batch research-uploads/20261004T095443Z-all-saved-evidence-af87032b/run-manifest.json and fetched generation-baseline-latest.json, dungeon-seed-function-analysis-latest.json, dungeon-upstream-callers-latest.json, exact-root-caller-latest.json, and seed-room-correlation.json. Fresh baseline session 20261004T091738Z is explicitly universe 00001A0004E84EFD and still records candidate root seed 9256392A2F5A74AC with use_seed=true. It reports MEDI_FLOATERS at high inference confidence, 150 scene instances, 10 generated chunks, modeled 8 main + 2 dead-end rooms, 11 predicted salvage + 5 predicted footlockers (16 targets), while the table says 7 rooms; these are analyzer/model results, not verified physical counts. A separate root capture at 2026-10-04T09:43:51Z reports seed 5B4AE67D9C2A8F61 and owner+0x10 raw zero/null-or-low-address, but the file contains no universe address or session ID, so it cannot be assigned to the user's new system or compared to that system seed. The correlation report is unchanged from the previous batch and provides no new-system seed correlation. The user reports the farming mod did not work as intended; this batch does not diagnose the mod. No seed derivation is proven.",
-  "next_action": "Reanalyze the latest saved survey session after NMS is closed, then upload all saved evidence again. Compare any root event from the new system only after the resulting baseline ties its universe address to the captured root seed. No new traversal is needed for this lane if the saved session contains the event.",
-  "surveyor_request": "With NMS closed, run Analyze generation + upload on the latest saved session, then click Upload all saved evidence. This is to associate the 09:43 root seed 5B4AE67D9C2A8F61 with its system address. Do not repeat the traversal unless the latest saved session lacks that event.",
-  "human_intervention_required": true,
-  "user_steps": [
-    "Close NMS if it is still open.",
-    "In Surveyor, click Analyze generation + upload to analyze the latest saved session.",
-    "After it finishes, click Upload all saved evidence once.",
-    "Tell Seed-B to check the new shared-folder path."
-  ],
-  "success_condition": "A newly uploaded baseline ties the 09:43 root capture and its descriptor seed to a universe address; compare that pair with the known-system candidate without claiming a derivation unless direct evidence proves one.",
+  "updated_utc": "2026-10-04T10:15:00Z",
+  "state": "active",
+  "status": "New-system root seed associated with address; candidate differs from known system",
+  "summary": "Reviewed newest main batch research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json and fetched generation-baseline-latest.json, exact-root-caller-latest.json, and seed-room-correlation.json. New session 20261004T094357Z is explicitly universe 0001BF0004E84EFD. The generation baseline associates one MODELS/SPACE/POI/DUNGEON.SCENE.MBIN descriptor seed, 5B4AE67D9C2A8F61 (use_seed=true), with captured_universe_addresses=[0001BF0004E84EFD]; status remains candidate-captured-unverified. The matching exact-root capture at 2026-10-04T09:43:51Z records owner+0x10 as eight zero bytes and target identity null-or-low-address. For comparison, the known system 00001A0004E84EFD has repeated historical/post-update candidate root seed 9256392A2F5A74AC; the new system's candidate is different. This is evidence of differing per-system candidate values, not proof of the derivation function or that either candidate controls layout. The new baseline infers CARGO_FLOATERS at high confidence, reports 164 scene instances, 11 logical chunks, 11 modeled main rooms and 0 dead ends versus a generation-table count of 7, with model status needs-review. It predicts 30 Salvage + 13 Footlockers = 43 targets; these are analyzer predictions, not a physical count. No evidence here diagnoses the mod's behavior. The all-saved upload's seed-room-correlation.json is unchanged and covers older measurements only; it does not independently add a correlation record for this new address.",
+  "next_action": "Continue Seed-B offline comparison: inspect the root-seed function analysis and upstream callers against the new 5B4AE67D9C2A8F61 capture and the known-system 9256392A2F5A74AC candidate. Identify whether direct code/dataflow evidence proves the address-to-descriptor seed transform; until then preserve both as candidates. No user action or additional traversal is currently required.",
+  "surveyor_request": "None. The newest all-saved batch contains a generation baseline for the new system and associates the root seed candidate with its universe address.",
+  "human_intervention_required": false,
+  "user_steps": [],
+  "success_condition": "Direct code/dataflow evidence establishes how the system address or another input produces the root descriptor seed, validated against both system captures. Do not claim a derivation from correlation alone.",
   "evidence_to_return": [
-    "Reviewed batch: research-uploads/20261004T095443Z-all-saved-evidence-af87032b/run-manifest.json",
-    "Fresh known-system baseline: session 20261004T091738Z_00001A0004E84EFD, candidate seed 9256392A2F5A74AC",
-    "Unassociated root capture: exact-root-caller-latest.json at 2026-10-04T09:43:51Z, seed 5B4AE67D9C2A8F61; universe/session identity absent",
-    "Next required artifact: new shared-batch generation-baseline-latest.json covering the 09:43 root event"
+    "Newest reviewed batch on main: research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json",
+    "New system session: 20261004T094357Z_0001BF0004E84EFD; candidate root seed 5B4AE67D9C2A8F61; use_seed=true; captured_universe_addresses includes 0001BF0004E84EFD",
+    "Runtime root capture: exact-root-caller-latest.json at 2026-10-04T09:43:51Z; owner+0x10 raw bytes zero; target identity null-or-low-address",
+    "Known-system comparator: universe 00001A0004E84EFD; candidate root seed 9256392A2F5A74AC",
+    "New-system model only: CARGO_FLOATERS high-confidence inference; 11 modeled main rooms, 0 modeled dead ends, 43 analyzer-predicted targets; generation-table count 7; room model needs review"
   ],
   "full_derelict_required": false
 }
