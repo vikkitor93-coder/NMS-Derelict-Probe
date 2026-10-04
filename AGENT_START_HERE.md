@@ -46,13 +46,11 @@ If your lane is marked `claimed`, do not take it unless the user explicitly assi
 
 ## How to work
 
-Continue autonomously until one of these occurs:
+**Keep working until human intervention is genuinely required.** When you identify a next step, first decide whether you can do it yourself with repository files, code, available tools, or existing evidence. If you can, do it now; do not stop at reporting it as the next step. If an attempt fails, inspect the first useful error, diagnose the cause, and try a reasonable alternative. When the current objective is complete, choose the next highest-value task within your lane and continue.
 
-- the objective is completed with reproducible evidence;
-- the next step genuinely requires the user's PC, NMS runtime, local NMS.exe, or another human-only action;
-- progress is blocked by a dependency owned by another lane.
+Pause for the user only when the remaining step truly requires their PC, a live NMS session, local files or evidence unavailable to you, or information only they can provide. Before asking, complete all independent work and reduce the human step to one precise, numbered recipe with the exact controls and success condition. A dependency on another lane is not a reason to idle: continue independent analysis, improve reproducibility, or prepare a concrete handoff while waiting.
 
-Do not stop just because you found one intermediate result. If a useful next step is safely available inside your lane, continue.
+Do not stop merely because you found an intermediate result, reported progress, or named a possible next step. If a useful step is safely available within your lane, execute it.
 
 Keep measured facts, public reverse-engineered facts, inference, and hypotheses explicitly separate. Never promote a plausible interpretation to a confirmed fact.
 
