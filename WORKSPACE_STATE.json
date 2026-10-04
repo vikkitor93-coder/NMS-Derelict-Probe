@@ -112,6 +112,7 @@
     "shared_steps": [
       "Run a fresh full survey of the same known system on the current game build and record physical layout/container count separately from analyzer predictions.",
       "During that run, capture the exact root event and owner+0x10 value/target if the installed probe records it; only mark Runtime-A complete when saved evidence proves the slot and target.",
+      "After all required analysis workflows have produced their files, click the main Surveyor Upload all saved evidence button. It uploads each existing supported output once into a timestamped folder on main and its run manifest lists the files and lanes. Agents should fetch the relevant files from that shared folder, then publish their lane status referencing the folder; this button does not run analysis or send a live notification.",
       "After quitting NMS, analyze the newly recorded latest session and upload the new outputs; preserve existing historical uploads."
     ],
     "lane_guidance": {
