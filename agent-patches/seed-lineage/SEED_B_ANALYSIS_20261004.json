@@ -92,5 +92,30 @@
     "measured_static_behavior": "The captured routine reads a callback return value after the indirect dispatch and branches on it; the caller window does not show construction/assignment of the derelict root seed.",
     "seed_consumer_scan": "The saved seed-function analysis records descriptor primary seed reads at descriptor+0x10 and use-seed flag reads at descriptor+0x18; it reports no possible descriptor-field writes.",
     "limitation": "The caller return RVA agrees between new runtime capture and older static code, but the new runtime capture does not include the loaded NMS.exe SHA-256. Equality of RVAs alone does not prove the executable build is identical."
+  },
+  "latest_validation": {
+    "reviewed_utc": "2026-10-04T15:29:51Z",
+    "evidence_batch": "research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726",
+    "dedicated_action_upload": "research-uploads/20261004T152610Z-seed-lineage-extract-caller-883e6d9e/run-manifest.json",
+    "measured_runtime": {
+      "source_probe_version": "0.3.35",
+      "source_session_id": "20261004T094357Z_0001BF0004E84EFD",
+      "universe_address_hex": "0001BF0004E84EFD",
+      "dungeon_root_seed_hex": "5B4AE67D9C2A8F61",
+      "use_seed": true,
+      "caller_return_rva_hex": "02C0497A"
+    },
+    "static_binary_validation": {
+      "source_probe_version": "0.3.35",
+      "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "size_bytes": 88545352,
+      "pe_timestamp_hex": "6ABB9CC5",
+      "baseline_window_matches_exe": true,
+      "live_caller_window_start_rva_hex": "02C048FA",
+      "live_caller_window_byte_count": 224,
+      "exact_match_to_static_window": true,
+      "older_static_artifact_context": "exact-root-caller-code-latest.json carries old capture metadata (probe 0.3.34/root seed 9256392A2F5A74AC), but its caller bytes match the new live window byte-for-byte and its executable SHA-256 matches the fresh same-session static extraction."
+    },
+    "interpretation": "The root-seed candidate association for this system is reconfirmed, and the same executable/caller code is now tied to the fresh probe 0.3.35 session. This does not establish how the root seed is derived from the universe address; the candidate remains unverified as a derivation."
   }
 }
