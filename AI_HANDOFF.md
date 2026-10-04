@@ -19,6 +19,10 @@
 - **Start overlay** and **Stop overlay** sit beside the existing **Game overlay** auto-start toggle. Stop closes the titled overlay window and signals the local stop-request file, including overlays started by the NMS launcher.
 - The package carries DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, and Seed-B 1.0.2, with prior installed versions retained for rollback. The Runtime-A panel stays data-only; its analyze/upload action is unchanged.
 
+## Publishing workflow
+
+Agents may publish completed, tested, and documented changes directly to `main`; a separate integration-agent merge or user approval is not required. Keep unfinished experiments on lane branches. Before direct publishing, preserve a backup branch or exact base commit, run relevant checks, publish the full consistent change (including extension index/hash updates when applicable), update lane status and workspace handoff files, and report the main commit plus rollback steps. A PR is optional or a fallback if direct pushing is unavailable.
+
 ## Purpose and architecture
 
 Reverse engineer No Man’s Sky abandoned-freighter generation using static and runtime evidence while keeping Surveyor independent from the game. `tools/surveyor_controller.py` is the Windows Tk app and action host; `mod/derelict_baseline_probe.py` collects read-only process evidence; `overlay/derelict_overlay.py` formats live status. `tools/agent_console.py` reads public GitHub lane status. `tools/agent_ui_extensions.py` validates and installs data-only JSON panels.
