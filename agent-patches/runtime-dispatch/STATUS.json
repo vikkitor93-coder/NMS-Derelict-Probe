@@ -1,28 +1,28 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-04T14:50:00Z",
+  "updated_utc": "2026-10-04T14:54:00Z",
   "state": "working",
-  "status": "v0.3.57 entry-time capture PR published; live validation pending",
+  "status": "v0.3.57 merged to main; awaiting one live root capture",
   "summary": "Evidence at research-uploads/20261004T101244Z-all-saved-evidence-2a766630/: system 0001BF0004E84EFD, root seed candidate 5B4AE67D9C2A8F61, external return RVA 02C0497A, owner 000001D026704000, descriptor owner+0x128. The root-add sample read owner+0x10 as zero; the matched logical-entry record was 1.383 ms old. User confirms the 11-room/43-target model matched physical traversal. The root seed remains candidate/unverified. Main v0.3.56 still reads the slot at root addition; v0.3.57 candidate samples it at logical entry and preserves the separate root-add reading.",
-  "progress": "PR #47 is open and mergeable: https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/47. v0.3.57 is based on current main v0.3.56. Targeted tests 2/2, full tests 181/181, compileall, patch reproduction, package checksum, base64 round-trip, and ZIP integrity pass. Windows/NMS live behavior remains unverified.",
+  "progress": "PR #47 was merged to main at 35d77ce4c89815313cfcdcedcfed22410fb4c126. Main update-manifest.json now offers app 0.3.57 with probe 0.3.36. All 181 tests, compileall, patch reproduction, package hash, base64 reconstruction, and archive integrity pass. Live Windows/NMS behavior is not yet verified.",
   "blockers": [
-    "PR #47 must be reviewed and merged before the updater can offer v0.3.57.",
-    "Live Windows/NMS capture requires one root event after the update and a full NMS restart."
+    "A new root event must occur while probe 0.3.36 is loaded; old captures cannot supply the entry-time sample."
   ],
-  "next_action": "After PR #47 is merged and the updater offers v0.3.57, capture and upload one exact-root event; compare the entry-time owner+0x10 value/identity with the separate root-add sample. No full traversal is required.",
+  "next_action": "Review the next uploaded exact-root event for the entry-time owner+0x10 raw value and target identity against the separate root-add sample.",
   "human_intervention_required": true,
   "human_action": {
     "required": true,
-    "surveyor_request": "After PR #47 is merged and v0.3.57 is available, install it, restart NMS, capture one root event, and upload that saved event.",
+    "surveyor_request": "Install Surveyor v0.3.57, fully restart Surveyor and NMS, capture just the root event in any accessible derelict, and upload the saved exact-root event.",
     "steps": [
-      "After PR #47 is merged and v0.3.57 appears in Surveyor, click Check for updates and install v0.3.57.",
-      "Fully exit NMS.",
-      "Start NMS from Surveyor and load only until the root event is captured; a full traversal is not needed.",
-      "Close NMS, then click Upload captured root event or Upload all saved evidence.",
-      "Tell Runtime-A/Main to check the new upload."
+      "Open Surveyor → GitHub / updates → Check for updates → install v0.3.57.",
+      "Close and reopen Surveyor so it runs the updated app files.",
+      "Fully exit NMS, then start NMS from updated Surveyor so probe 0.3.36 loads.",
+      "Enter an accessible derelict only until the root event is recorded; do not do a full traversal.",
+      "Close NMS. In Surveyor click Upload captured root event, or Upload all saved evidence if auto-upload has not already sent it.",
+      "Tell Runtime-A/Main to check; I will fetch the shared upload and compare entry-time capture with root-add capture."
     ],
-    "success_condition": "The uploaded exact-root event contains the entry-time owner+0x10 raw value and target identity, plus a separately labeled root-add sample correlated to the same descriptor.",
+    "success_condition": "The uploaded exact-root artifact contains owner+0x10 raw value and target identity sampled at logical entry, plus separate root-add sample correlated to the same descriptor.",
     "evidence_to_return": [
       "run-manifest.json",
       "exact-root-caller-latest.json"
