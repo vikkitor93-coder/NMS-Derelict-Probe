@@ -72,7 +72,7 @@
     ],
     "branch_rule": "For a new independent task, create a fresh branch from current main named agent/<short-lane-id>. Use agent/metadata only if it is still free when you begin.",
     "output_rule": "Keep experimental Surveyor changes lane-specific while unfinished. Once a change is complete, validated, documented, and recoverable, publish it directly to main without waiting for a separate integration-agent merge or user approval. Update lane status/manifest, extension index and hashes when applicable, WORKSPACE_STATE.json, and AI_HANDOFF.md. A PR is optional or a fallback if direct push is unavailable. Preserve a backup branch or exact base commit and rollback steps.",
-    "autonomy_rule": "Continue within the lane until the objective is complete, blocked on another lane, or genuine human/local-machine intervention is required."
+    "autonomy_rule": "Keep working until human intervention is genuinely required. For every identified next step, first determine whether it can be done with repository files, code, available tools, or existing evidence; execute it if possible instead of merely reporting it. Diagnose failed attempts and try reasonable alternatives. After completing the objective, choose the next highest-value useful lane task. Ask the user only for a true human-only dependency; finish independent work first and provide one exact numbered recipe. If another lane blocks progress, continue independent work and prepare a concrete handoff instead of idling."
   },
   "artifact_policy": {
     "complete_zip_storage": "ChatGPT Library",
