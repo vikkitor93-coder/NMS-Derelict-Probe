@@ -12,8 +12,7 @@ set "PYEXE="
 set "PYFILE=%LOCALAPPDATA%\NMSDerelictSurveyor\python-executable.txt"
 if exist "%PYFILE%" for /f "usebackq delims=" %%I in ("%PYFILE%") do if not defined PYEXE set "PYEXE=%%~I"
 if defined PYEXE if not exist "%PYEXE%" (
-  echo Surveyor's saved Python interpreter was not found:
-  echo   "%PYEXE%"
+  set "SAVED_PYEXE=%PYEXE%"
   set "PYEXE="
 )
 if not defined PYEXE (
@@ -28,6 +27,7 @@ if not defined PYEXE (
     goto :finished
   )
   echo ERROR: Could not find Surveyor's Python, the Python launcher, or python.exe on PATH.
+  if defined SAVED_PYEXE echo Surveyor's saved path was not usable: "%SAVED_PYEXE%"
   echo Start Surveyor once to create its managed Python path, or install Python 3 and retry.
   goto :failed
 )
