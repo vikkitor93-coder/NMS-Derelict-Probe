@@ -139,7 +139,7 @@
     "requested_target_rva": "00637660"
   },
   "static_callers_00637660": {
-    "reviewed_utc": "2026-10-04T20:51:20Z",
+    "reviewed_utc": "2026-10-04T20:57:50Z",
     "evidence_path": "User attachment: seed-b-static-callers-00637660.json (local chat attachment; not in research-uploads)",
     "attachment_sha256": "312b409d39718caa49fa76a07bf07318b8bbddaeae390cc7bef9e4bf61d832eb",
     "executable_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
@@ -179,19 +179,70 @@
       "All three are direct-call byte observations from static windows. The report says references alone do not prove runtime dispatch or semantics."
     ],
     "interpretation": "The existing descriptor-flow hypothesis can now be followed through three direct wrapper callers. The small windows do not yet identify how the input objects are initialized or prove that any callsite input is the universe-address-derived root seed. Root-seed derivation remains unproven.",
-    "next_lane_action": "The hash-matched NMS.exe is not present in the shared workspace, and the report contains only 160 bytes before/after each reference. To keep work offline, ask for a small read-only code-window export from the already-selected local NMS.exe around the three callers (001B2CF9, 02D042E1, 02D04AF8), ideally at least 0x600 bytes before and 0x300 bytes after each call, plus the executable SHA-256. Also capture the 006377E0 callsite at 00637F1F if feasible. No launch, traversal, or probe restart is required.",
+    "next_lane_action": "Continue offline from the three local source records: trace the producer calls 002D63670 and its downstream 002D641C0 path, then identify whether any caller route feeds the root-resource descriptor observed at runtime. Use .pdata boundaries to avoid heuristic function splits. If the static callsites cannot be tied to the runtime root event, use exact runtime caller/descriptor correlation as the criterion for requesting a small targeted live capture; no traversal is currently justified.",
     "limitations": [
-      "No NMS.exe is available in the shared workspace for full local disassembly.",
-      "The attached report captures only 160 bytes before and after each callsite; the call at each site is at the exact window midpoint.",
-      "Consequently the caller function prologue, earlier object initialization, and upstream seed construction are not visible in the current evidence."
+      "Static callers and descriptor copy are measured; function semantics and their relation to the runtime root-resource event are not proven.",
+      "The three direct callers' source records are local temporaries; the inspected code does not show a direct assignment from universe address or root seed.",
+      "The local executable attachment is available for continued analysis; additional RVA exports are unnecessary."
     ],
-    "human_intervention_required": true,
+    "human_intervention_required": false,
     "user_steps": [
       "Keep NMS closed.",
       "Open the standalone Surveyor and use its local offline RVA code-window extractor (or the bundled extract_nms_rva_window.py tool) against the same NMS.exe whose SHA-256 is 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4.",
       "Export code windows centered at RVA 001B2CF9, 02D042E1, and 02D04AF8, with at least 0x600 bytes before and 0x300 bytes after each center; if the tool only supports symmetric windows, use 0x600 bytes on each side.",
       "Also export a window centered at RVA 00637F1F if convenient, to inspect an additional caller of initializer 006377E0.",
       "Attach the resulting JSON files here. Do not run a derelict or change probe/game files."
-    ]
+    ],
+    "executable_analysis": {
+      "source_attachment": "NMS(1).exe",
+      "sha256_verified": true,
+      "sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "size_bytes": 88545352,
+      "method": "Parsed PE32+ .pdata runtime-function table and disassembled code ranges from the supplied executable; read-only.",
+      "runtime_function_ranges": {
+        "001B2CF9": {
+          "start": "001B27A0",
+          "end_exclusive": "001B2D68"
+        },
+        "02D042E1": {
+          "start": "02D0400B",
+          "end_exclusive": "02D0455C"
+        },
+        "02D04AF8": {
+          "start": "02D04690",
+          "end_exclusive": "02D04F47"
+        },
+        "00637660": {
+          "start": "00637660",
+          "end_exclusive": "006377DC"
+        },
+        "00637DB0": {
+          "start": "00637DB0",
+          "end_exclusive": "006381A2"
+        },
+        "006377E0": {
+          "start": "006377E0",
+          "end_exclusive": "00637AB4"
+        },
+        "00227A40": {
+          "start": "00227A40",
+          "end_exclusive": "00227AA9"
+        },
+        "006388A0": {
+          "start": "006388A0",
+          "end_exclusive": "006388F9"
+        }
+      },
+      "measured_dataflow": [
+        "Function 00637660 saves its incoming R9 in RBX and supplies that same value as R9 when calling 00637DB0 at 006377A3.",
+        "Function 00637DB0 saves incoming R9 in R14, then passes R14 as the first stack argument to 006377E0 at 00637F1F.",
+        "At entry to 006377E0, that value is read from its first stack argument into RDX and passed as the source pointer to 00227A40 at 00637892; destination is object+0x128.",
+        "Function 00227A40 reads source descriptor fields at offsets +0x4, +0x8, +0x10 and +0x20 while initializing/copying into the destination object.",
+        "Thus the descriptor copied into object+0x128 comes from the R9 input to 00637660 along the observed static call chain.",
+        "The direct caller at 02D042E1 sets R9 to local address [rbp-0x28]; the direct caller at 02D04AF8 sets R9 to [rbp-0x38]; the caller at 001B2CF9 sets R9 to [rbp-0x20].",
+        "At 02D042E1 the local source record is populated from a preceding 32-byte copy and zero-initialized fields; at 02D04AF8 a local 32-byte record is assembled from a calculated 16-byte value and zeroed fields. The visible code does not identify these records as the live derelict root descriptor."
+      ],
+      "interpretation": "The static data flow now identifies the wrapper's descriptor-source parameter precisely: it is the incoming R9 pointer, forwarded through 00637DB0 to 006377E0 and copied by 00227A40. This is a more specific conclusion than the earlier generic 'upstream descriptor argument' description. The three callers prepare distinct local records. No evidence yet ties any of those three caller paths to the live NMS root-resource event, current root seed 5B4AE67D9C2A8F61, or the universe address. The candidate remains unverified as a derivation."
+    }
   }
 }
