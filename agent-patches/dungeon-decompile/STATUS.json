@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T20:55:00Z",
+  "reviewed_utc": "2026-10-04T20:56:00Z",
   "state": "runtime-target-rva-confirmed-callback-semantics-under-analysis",
   "verified": {
     "historical_baseline": {
@@ -231,11 +231,39 @@
       "multiset_signature_sha256": "d7c0b57221282039c6b97c7851945365c552939bb8d4326a189b829d44306f8a",
       "generation_signature_sha256": "bdf33257e83d2b02d161e69ab72c64cbeb274c019031214007aa3babdc6a0c8a",
       "signature_comparison": "All three signatures and the canonical room sequence exactly match the prior user-validated 09:43:57 capture. This is repeatability of analyzer output, not a second physical count."
+    },
+    "latest_runtime_capture": {
+      "capture_utc": "2026-10-04T20:53:18.173Z",
+      "root_event_utc": "2026-10-04T20:53:18.172Z",
+      "probe_version": "0.3.35",
+      "capture_version": 2,
+      "universe_address": "0001BF0004E84EFD",
+      "system_name": "Angoto",
+      "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
+      "descriptor_pointer": "000001192EBECD28",
+      "exact_caller_return_rva": "02C0497A",
+      "entry_sample": {
+        "utc": "2026-10-04T20:53:18.171Z",
+        "owner_pointer": "000001192EBECC00",
+        "slot_offset": "0x10",
+        "raw_value": "0000000000000000",
+        "target_identity": "null-or-low-address"
+      },
+      "root_add_sample": {
+        "utc": "2026-10-04T20:53:18.172Z",
+        "owner_pointer": "000001192EBECC00",
+        "slot_offset": "0x10",
+        "raw_value": "0000000000000000",
+        "target_identity": "null-or-low-address"
+      },
+      "samples_correlated": true,
+      "comparison": "Entry-time and root-add owner+0x10 samples are both present and tied to the same descriptor and owner. Both are zero.",
+      "interpretation_limit": "This confirms the samples were saved before the game closed. Artifact reports probe 0.3.35, so it does not validate that requested probe 0.3.36 was loaded. owner+0x10 is distinct from the [RDX+0x10] vtable dispatch slot."
     }
   },
   "evidence": {
-    "shared_upload_path": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/",
-    "manifest": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/run-manifest.json",
+    "shared_upload_path": "research-uploads/20261004T205413Z-all-saved-evidence-4ad05293/",
+    "manifest": "research-uploads/20261004T205413Z-all-saved-evidence-4ad05293/run-manifest.json",
     "reviewed_files": [
       "run-manifest.json",
       "generation-baseline-latest.json",
@@ -248,8 +276,8 @@
       "dungeon-upstream-callers-latest.json",
       "dungeon-generation-table.json"
     ],
-    "note": "The newest shared batch adds a 15:12 root capture from probe 0.3.35, capture_version 2, and a generation rerun whose layout and generation signatures exactly match the user-validated 09:43:57 run. The new batch still has zero manual room markers; its rerun does not independently record a second physical count.",
-    "run_manifest_sha256": "9cb9a7c4169432385e1f24435a5ab990b9b03645",
+    "note": "The 20:53:18 root event was saved and uploaded before force-close. The artifact contains logical-entry and root-add owner+0x10 samples, both zero and correlated to descriptor 000001192EBECD28. The file reports probe 0.3.35, so it does not verify that 0.3.36 was loaded.",
+    "run_manifest_sha256": "115ee274f26bb0fb6a342a4371f7750b4ac05da6",
     "direct_user_attachment": {
       "file": "exact-root-caller-code-latest(1).json",
       "sha256": "3942f011ded5cbab7025546b9caa6bcde7d21c950193faf755839c9470dca694",
@@ -257,11 +285,11 @@
     }
   },
   "blocked": {
-    "reason": "The effective runtime callee RVA 00634BC0 is now identified by the exact logical-entry hook and caller-return match. DUNGEON-C still lacks a semantic identity and an isolated function body for that callee; the caller code window only identifies the surrounding callback/queue behavior. The raw RDX slot pointer is absent but no longer required to establish the effective target RVA.",
+    "reason": "No user action is needed for the saved 20:53:18 capture: both owner+0x10 samples are present and same-descriptor correlated, and caller-return correlation identifies effective callee RVA 00634BC0. DUNGEON-C work remains static semantic analysis of that function body; raw [RDX+0x10] pointer sampling is still absent.",
     "human_action_required": false,
     "full_traversal_required": false,
     "duplicate_upload_required": false,
-    "needed": "No additional user action is required for the finding in this attachment. DUNGEON-C's next work is to obtain/decompile the target body at RVA 00634BC0 from NMS.exe and keep semantic naming tentative. A later Runtime-A [RDX+0x10] sample would provide direct pointer-level confirmation, but it is separate from this lane's target-RVA proof."
+    "needed": "The force-close did not erase the uploaded capture. A repeat short capture is only needed if validating probe 0.3.36 specifically, since this artifact identifies itself as probe 0.3.35. No full traversal is required."
   },
-  "next_lane_owned_step": "Use the new runtime-corroborated target RVA 00634BC0 to focus DUNGEON-C static analysis on that callee. Find or add a reproducible PE .pdata-bounded target-body extractor for the current NMS.exe, then compare target instructions with descriptor/seed flow without assigning an unsupported class name."
+  "next_lane_owned_step": "Analyze the callee body at NMS.exe RVA 00634BC0 using available exact-build PE bytes and .pdata bounds. Keep its semantic identity provisional until the body supports a role."
 }
