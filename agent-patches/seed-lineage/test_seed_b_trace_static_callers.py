@@ -54,6 +54,28 @@ class RuntimeFunctionBoundaryTests(unittest.TestCase):
         xref = result[0x1010]["direct_xrefs"][0]
         self.assertNotIn("containing_function", xref)
 
+    def test_reports_chained_runtime_function_parent(self):
+        data, pe = self.fixture()
+        mutable = bytearray(data)
+        # UNW_FLAG_CHAININFO points from .pdata function 0x1000..0x1040 to
+        # its primary fragment 0x1000..0x1008.
+        mutable.extend(bytes(0x40))
+        mutable[0xA0:0xA4] = bytes((0x21, 0, 0, 0))
+        struct.pack_into("<III", mutable, 0xA4, 0x1000, 0x1008, 0x3010)
+        mutable[0xB0:0xB4] = bytes((0x01, 0, 0, 0))
+        pe["sections"].append(
+            {"name": ".xdata", "virtual_address": 0x3000,
+             "virtual_size": 0x20, "raw_pointer": 0xA0,
+             "raw_size": 0x20, "characteristics": 0x40000040}
+        )
+        result = scanner.scan_references(bytes(mutable), pe, target_rvas=(0x1010,))
+        xref = result[0x1010]["direct_xrefs"][0]
+        self.assertEqual(
+            xref["containing_function"]["chained_function_candidate"],
+            {"begin_rva_hex": "00001000", "end_rva_exclusive_hex": "00001008",
+             "unwind_info_rva_hex": "00003010"},
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
