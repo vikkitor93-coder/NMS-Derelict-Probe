@@ -136,7 +136,33 @@
     "sha256": "7fa2dca6a6ab02caec5601b9549cf1d352da78dbc4539cb12d3c2e12255f4d20",
     "verification": "python3 -m py_compile passed; synthetic PE fixture detected expected E8 rel32 target and .rdata absolute-VA slot.",
     "behavior": "Read-only. Select NMS.exe in a file picker, then save a JSON report of rel32 call/jump references and matching absolute function-pointer slots for fixed Seed-B RVAs; report is written to Downloads.",
-    "requested_target_rva": "00637660"
+    "requested_target_rva": "00637660",
+    "chained_unwind_followup": {
+      "reviewed_utc": "2026-10-04T21:51:44Z",
+      "scanner_commit": "5b3c76a420ccc7e0543cb38f4984a18cffe185e1",
+      "scanner_sha256": "6f508e70d84a8d031430a1af974e8fe1dd120cf1b633e1238a48f36783520987",
+      "tests_commit": "cf143e3631be5d610364ec4428b2d0e87768d07d",
+      "tests_sha256": "7c7b156c9d2d5dbda9a5b5eaad2e32047a4cc04a6f4ffa8b41516dd2156032a1",
+      "test_result": "3/3 focused tests passed; py_compile passed; actual EXE scan verified chained runtime-function parent annotations.",
+      "measured_ranges": [
+        {
+          "site": "00638DF0",
+          "runtime_fragment": "00638D3C..0063921E",
+          "unwind_chain_parent": "006388A0..006388F9"
+        },
+        {
+          "site": "02D042E1",
+          "runtime_fragment": "02D0400B..02D0455C",
+          "unwind_chain_parent": "02D03EE0..02D0400B"
+        },
+        {
+          "site": "02D04AF8",
+          "runtime_fragment": "02D04690..02D04F47",
+          "unwind_chain_parent": null
+        }
+      ],
+      "interpretation": "PE UNW_FLAG_CHAININFO links the root AddResource fragment and the 02D042E1 fragment to earlier runtime-function fragments. This verifies unwind relationships and gives a defensible parent fragment for the static code trace; it does not independently establish C++ function semantics or connect 02D042E1/02D04AF8 to the live root constructor."
+    }
   },
   "static_callers_00637660": {
     "reviewed_utc": "2026-10-04T21:45:37Z",
@@ -287,7 +313,22 @@
           "unknown": "Static data does not reveal dynamic values behind the context pointers or establish whether either call creates the live derelict root resource.",
           "conclusion": "Neither path proves a universe-address-to-root-seed derivation. A runtime observation of descriptor input during the root event may be needed if further static dispatch analysis does not establish object identity."
         },
-        "next_step": "Trace how functions 02D03CCA and 02D053A0 are dispatched and whether their context arguments can be statically tied to the captured root resource consumer. Do not infer live root identity from shared helper use alone."
+        "next_step": "Trace constructor callsites into 006388A0 and determine which, if any, corresponds to the exact root descriptor. If the static callers cannot be tied to the runtime root owner, a runtime correlation at 00637660 or 006388A0 is needed; preserve the existing saved capture and avoid asking for another traversal.",
+        "unwind_chain_facts": [
+          "At 00638DF0, .pdata fragment 00638D3C..0063921E has UNW_FLAG_CHAININFO linking to 006388A0..006388F9; this corroborates the earlier padding-based start candidate 006388A0.",
+          "At 02D042E1, .pdata fragment 02D0400B..02D0455C has UNW_FLAG_CHAININFO linking to 02D03EE0..02D0400B, so the direct wrapper call is in a continuation associated with that earlier fragment.",
+          "At 02D04AF8, the containing .pdata entry has no chained parent in the parsed metadata."
+        ],
+        "runtime_root_correlation": {
+          "evidence_path": "research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726/exact-root-caller-latest.json",
+          "root_seed_hex": "5B4AE67D9C2A8F61",
+          "root_add_return_rva": "00638DF5",
+          "exact_external_walker_return_rva": "02C0497A",
+          "exact_match_age_ms": 1.782,
+          "caller_class": "external",
+          "known_static_candidate": false,
+          "interpretation": "The probe ties this caller to the live root descriptor by pointer and seed, but 02C0497A is a generic indirect callback into the resource walk. It is not one of the direct callsites to wrapper 00637660, so it does not identify which wrapper caller initialized the root descriptor."
+        }
       }
     }
   }
