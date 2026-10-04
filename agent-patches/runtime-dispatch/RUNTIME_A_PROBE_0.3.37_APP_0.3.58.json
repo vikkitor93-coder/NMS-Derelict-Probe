@@ -1,0 +1,78 @@
+{
+  "schema_version": 3,
+  "variant_id": "RUNTIME-A",
+  "lane": "agent/runtime-dispatch",
+  "lane_id": "runtime-dispatch",
+  "base": "main v0.3.57",
+  "base_version": "0.3.57",
+  "probe_version": "0.3.37",
+  "surveyor_app_version": "0.3.58",
+  "purpose": "Extend the existing shared logical-entry hook to snapshot RCX, RDX, and raw [RDX+0x10] together for every seeded external caller, preserve the snapshot through recursive calls, and correlate it with the exact root descriptor.",
+  "integration_patch": {
+    "path": "agent-patches/runtime-dispatch/runtime-a-probe-0.3.37-from-v0.3.57.patch",
+    "sha256": "597b9e2a9c320d66a74d897cab07b820e250b12d0eaa6c21e6ee7677c78f6783",
+    "size_bytes": 12171,
+    "base_version": "0.3.57"
+  },
+  "capture_design": {
+    "method": "single shared logical-entry hook; capture first two x64 argument registers at callee entry and reuse the entry-time [RDX+0x10] read",
+    "register_fields": ["rcx_hex", "rdx_hex", "rdx_plus_0x10_capture"],
+    "caller_coverage": "all runtime callers pass through the shared hook; retains caller return RVA and 52-static-candidate classification; recursive entries inherit the external caller snapshot",
+    "timing_limit": "snapshot is at shared callee entry immediately after the call, before the hooked function body proceeds; it is not a pre-instruction breakpoint snapshot",
+    "writes_game_state": false
+  },
+  "changed_files": [
+    "mod/derelict_baseline_probe.py",
+    "tests/test_tools.py",
+    "tools/surveyor_controller.py",
+    "VERSION.txt",
+    "CHANGELOG.md",
+    "README.md",
+    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.37-from-v0.3.57.patch",
+    "agent-patches/runtime-dispatch/RUNTIME_A_PROBE_0.3.37_APP_0.3.58.json"
+  ],
+  "verification": {
+    "focused_tests": "python -m unittest discover -s tests -p test_tools.py -k v0337 -v — 4 passed",
+    "full_tests": "python -m unittest discover -s tests -q — 181 passed",
+    "compileall": "python -m compileall -q tools overlay tests mod — passed",
+    "patch_reproduction": "git apply --check and git apply against clean v0.3.57 source — passed; focused 4 tests and full 181 tests passed on applied tree",
+    "live_nms": "pending; requires app/probe integration and NMS restart"
+  },
+  "evidence": {
+    "shared_upload": "research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726/",
+    "runtime_file": "exact-root-caller-latest.json",
+    "run_manifest": "run-manifest.json",
+    "runtime_capture_utc": "2026-10-04T15:12:15.673Z",
+    "source_probe_version": "0.3.35",
+    "root_system": "0001BF0004E84EFD",
+    "root_seed_candidate": "5B4AE67D9C2A8F61",
+    "root_descriptor": "000001F9A4546928",
+    "caller_return_rva": "02C0497A",
+    "runtime_distinct_caller_return_count": 10,
+    "static_caller_candidate_count": 52,
+    "root_add_rdx_plus_0x10_raw_value": "0000000000000000",
+    "entry_register_snapshot": "absent in uploaded artifact; this is the measurement the patch adds"
+  },
+  "interpretation": {
+    "measured": "The latest all-saved upload reuses exact-root artifact SHA-256 962b9b43a3fd64a3bea20c0b8e76ddb965347979eb55bb56c28274c4c34a439b; its embedded runtime event remains timestamped 15:12:15.673Z and reports probe 0.3.35. It includes 52 static caller candidates and 10 distinct runtime caller return offsets; 02C0497A is marked outside the static candidates.",
+    "inference": "One hook at the shared entry can observe all dynamically reaching caller sites in one run. The x64 argument registers are available as the hook's first two arguments; the [RDX+0x10] value is already sampled there by the current lane probe.",
+    "hypothesis": "For the target indirect dispatch, the callee-entry RCX/RDX snapshot will preserve the relevant call-boundary values; validate this against a live 0.3.37 capture before treating the slot as the resolved dispatch target."
+  },
+  "human_validation": {
+    "required": true,
+    "full_derelict_traversal_required": false,
+    "steps": [
+      "After the probe 0.3.37 / Surveyor 0.3.58 build is integrated and offered, install it.",
+      "Close and reopen Surveyor, then fully exit NMS.",
+      "Start NMS from Surveyor and enter any accessible derelict only until the root event is captured.",
+      "Close NMS and upload the captured root event or all saved evidence.",
+      "Ask Runtime-A to check; correlate the call-entry registers with the same root descriptor."
+    ],
+    "success_condition": "The runtime artifact reports probe 0.3.37 and includes RCX, RDX, and [RDX+0x10] from the shared entry hook, tagged with caller return RVA, then correlated to the root event descriptor."
+  },
+  "rollback": [
+    "Use Surveyor rollback or reinstall v0.3.57.",
+    "Fully exit and restart NMS so probe 0.3.36 is reloaded.",
+    "No saved-evidence migration is required; the new register snapshot fields are additive."
+  ]
+}
