@@ -1,0 +1,13 @@
+{
+  "action": "upload-runtime-capture",
+  "evidence_namespace": "runtime-dispatch",
+  "files": [
+    {
+      "name": "exact-root-caller-latest.json",
+      "sha256": "36889f67d251cb6f14f2da1d43747a7b5e42c65b887ce7ebcd8f1208197c6f02",
+      "size": 2347
+    }
+  ],
+  "utc": "20261004T101153Z",
+  "version": 1
+}
