@@ -97,3 +97,6 @@ After **Extract exact root caller + upload** reports the virtual call shape (`FF
 
 
 **Extractor launcher troubleshooting:** the current launcher prefers Surveyor's saved Python interpreter, then tries `py -3` and `python.exe` on `PATH`. If neither the project folder nor a Python runtime is usable, it prints the exact failing path/runtime. Extract the package to a normal local folder and retry.
+
+
+The logical-entry RVA may point inside the containing `.pdata` function rather than at its start. The output reports both addresses; analyze the full bounded body while keeping the observed hook RVA distinct from the function start.
