@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T23:25:58Z",
+  "reviewed_utc": "2026-10-04T23:26:56Z",
   "state": "callback-direct-call-inventory-reviewed-awaiting-helper-bodies",
   "verified": {
     "historical_baseline": {
@@ -268,7 +268,27 @@
       },
       "samples_correlated": true,
       "comparison": "Entry-time and root-add owner+0x10 samples are both present and tied to the same descriptor and owner. Both are zero.",
-      "interpretation_limit": "This confirms the samples were saved before the game closed. Artifact reports probe 0.3.35, so it does not validate that requested probe 0.3.36 was loaded. owner+0x10 is distinct from the [RDX+0x10] vtable dispatch slot."
+      "interpretation_limit": "This confirms the samples were saved before the game closed. Artifact reports probe 0.3.35, so it does not validate that requested probe 0.3.36 was loaded. owner+0x10 is distinct from the [RDX+0x10] vtable dispatch slot.",
+      "repeated_owner_slot_observation": {
+        "captures": [
+          {
+            "utc": "2026-10-04T15:12:15.676Z",
+            "root_seed": "5B4AE67D9C2A8F61",
+            "owner_plus_0x10": "0000000000000000"
+          },
+          {
+            "utc": "2026-10-04T22:41:40.242Z",
+            "root_seed": "5B4AE67D9C2A8F61",
+            "owner_plus_0x10": "0000000000000000"
+          },
+          {
+            "utc": "2026-10-04T23:17:15.825Z",
+            "root_seed": "5B4AE67D9C2A8F61",
+            "owner_plus_0x10": "0000000000000000"
+          }
+        ],
+        "interpretation": "Three captures from separate sessions on system 0001BF0004E84EFD report zero at owner+0x10 while the captured owner pointer changes. This repeatability does not make it the vtable slot or identify the callback target; the raw caller dispatch target remains unresolved."
+      }
     },
     "runtime_target_exporter": {
       "command": "Extract-Runtime-Target-Function.cmd",
@@ -404,5 +424,13 @@
     "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-code-latest.json",
     "agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json",
     "/NMS modding/exact-root-caller-code-latest(2).json (SHA-256 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2)"
-  ]
+  ],
+  "main_package_update_check": {
+    "version_file": "main VERSION.txt: 0.3.57",
+    "workspace_state_version": "main WORKSPACE_STATE.json: 0.3.57",
+    "updater_manifest": "main update-manifest.json advertises full package 0.3.58",
+    "updater_package_sha256": "f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24",
+    "dungeon_helper_in_managed_files": false,
+    "disposition": "The 0.3.58 package does not include tools/extract_runtime_target_function.py; it is not a replacement for the separate DUNGEON-C v0.3.50 helper-export package."
+  }
 }
