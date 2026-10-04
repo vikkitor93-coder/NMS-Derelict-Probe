@@ -1,44 +1,44 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-01T15:30:30Z",
+  "updated_utc": "2026-10-04T08:52:46Z",
   "state": "waiting_on_user",
-  "status": "Needs one short live owner+0x10 capture",
-  "summary": "Measured: the 2026-10-01 03:33Z Runtime-A upload observed root seed 9256392A2F5A74AC, owner 00000264633A5C00, descriptor 00000264633A5D28 (= owner+0x128), and caller return offset 02C0497A. It contains no live owner+0x10 slot value or target pointer. Its generation session recorded 0 dungeon scene instances, 0 logical chunks, and unresolved preset; that session did not reproduce the separate MEDI_FLOATERS layout capture. Inference: the repeated root seed is consistent with the known system but remains candidate/unverified.",
-  "next_action": "Obtain the live owner+0x10 slot value and target identity at the descriptor-correlated root event; stop there, no full traversal.",
-  "surveyor_request": "Run the existing Runtime-A build on the same known derelict. Stop as soon as Root dispatch +0x10 captured appears, then click Analyze generation + upload.",
+  "status": "Owner+0x10 read captured; target identity unresolved; awaiting fresh post-update root capture",
+  "summary": "Measured in the shared batch: at 2026-10-02T21:30:46.109Z, probe 0.3.34 captured owner 000002432608FC00, descriptor 000002432608FD28 (= owner+0x128), root seed 9256392A2F5A74AC, and caller return offset 02C0497A. The 8-byte owner+0x10 read is present: slot address 000002432608FC10, raw bytes 00000000FFFFFFFF, decoded slot value FFFFFFFF00000000. The capture's target_identity is present but reports not-in-loaded-module at FFFFFFFF00000000; this does not resolve to a callable target, so Runtime-A is not complete. The latest Upload all saved evidence folder is research-uploads/20261004T084829Z-all-saved-evidence-5a094647/; its root capture is dated Oct 2, and its same-system generation baseline (session 20261002T213412Z_00001A0004E84EFD) has 0 dungeon scene instances and an unresolved preset. It is a snapshot of saved outputs, not evidence of the intended fresh Oct 4 traversal. The seed remains candidate/unverified.",
+  "next_action": "Lane-owned: inspect the captured caller/consumer around return RVA 02C0497A and establish whether FFFFFFFF00000000 is a sentinel or an unusable slot before interpreting it as a dispatch target. Then compare against the owner+0x10 value in a fresh current-build root capture.",
+  "surveyor_request": "During the planned current-build survey, use compatible Runtime-A probe 0.3.34; at root entry preserve the exact-root capture, then complete the traversal. After NMS exits, click Analyze generation + upload, then Upload all saved evidence once the new outputs exist.",
   "human_intervention_required": true,
   "user_steps": [
-    "Fully exit NMS.",
-    "Extract and run NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip from the existing Runtime-A artifact.",
-    "Open Surveyor RUNTIME-A and click Start NMS.",
-    "Load the same known derelict; stop when Root dispatch +0x10 captured appears.",
-    "Click Analyze generation + upload.",
-    "Return to Main and write check."
+    "Use the installed current Surveyor build with compatible Runtime-A probe 0.3.34; fully restart NMS after any probe update.",
+    "Load the known system 00001A0004E84EFD with the access-restoring mod, let Surveyor capture the root, and complete the planned full derelict survey.",
+    "After exiting NMS, click Analyze generation + upload.",
+    "When the fresh outputs are present, click Upload all saved evidence once; keep the existing Oct 4 folder as historical.",
+    "Tell Main AI: check."
   ],
-  "success_condition": "The new upload contains the live owner+0x10 slot value and target pointer/identity at the descriptor-correlated root event, plus the descriptor recheck.",
+  "success_condition": "A fresh current-build capture for system 00001A0004E84EFD includes the descriptor-correlated owner+0x10 slot read and enough target identity to establish the destination; a raw sentinel/unresolved address alone does not complete Runtime-A.",
   "evidence_to_return": [
-    "Fresh exact-root-caller-latest.json and run-manifest.json.",
-    "Fresh capture field showing the owner+0x10 value and target identity."
+    "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/run-manifest.json",
+    "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/exact-root-caller-latest.json",
+    "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/generation-baseline-latest.json"
   ],
-  "full_derelict_required": false,
-  "chat_prompt": "After uploading the fresh Runtime-A capture, write check.",
+  "full_derelict_required": true,
+  "chat_prompt": "After the new survey outputs are uploaded, tell Main AI: check.",
   "human_action": {
     "required": true,
-    "surveyor_request": "Capture the live owner+0x10 slot value and target identity at the known derelict root event, then upload.",
+    "surveyor_request": "Complete the planned current-build survey while preserving a fresh Runtime-A root capture; upload the resulting saved evidence once.",
     "steps": [
-      "Fully exit NMS.",
-      "Extract and run NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip from the existing Runtime-A artifact.",
-      "Open Surveyor RUNTIME-A and click Start NMS.",
-      "Load the same known derelict; stop when Root dispatch +0x10 captured appears.",
-      "Click Analyze generation + upload.",
-      "Return to Main and write check."
+      "Use the installed current Surveyor build with compatible Runtime-A probe 0.3.34; fully restart NMS after any probe update.",
+      "Load system 00001A0004E84EFD with the access-restoring mod, let Surveyor capture the root, and finish the derelict traversal to record physical layout/counts.",
+      "Exit NMS and click Analyze generation + upload.",
+      "Click Upload all saved evidence once after new outputs are present.",
+      "Tell Main AI: check."
     ],
-    "success_condition": "The new upload contains the live owner+0x10 slot value and target pointer/identity at the descriptor-correlated root event, plus the descriptor recheck.",
+    "success_condition": "The shared run manifest points to fresh post-update files for the known system, and exact-root evidence includes owner+0x10 plus resolved destination identity or explicitly records why it remains unresolved.",
     "evidence_to_return": [
-      "Fresh exact-root-caller-latest.json and run-manifest.json.",
-      "Fresh capture field showing the owner+0x10 value and target identity."
+      "Fresh run-manifest.json",
+      "Fresh exact-root-caller-latest.json",
+      "Fresh generation-baseline-latest.json with current session ID"
     ],
-    "full_derelict_required": false
+    "full_derelict_required": true
   }
 }
