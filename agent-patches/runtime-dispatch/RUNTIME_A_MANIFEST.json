@@ -1,95 +1,89 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "variant_id": "RUNTIME-A",
   "lane": "agent/runtime-dispatch",
-  "base": "canonical v0.3.38",
-  "base_version": "0.3.38",
-  "purpose": "Capture the live owner+0x10 dispatch target at the exact descriptor-correlated derelict root event.",
+  "lane_id": "runtime-dispatch",
+  "base": "main v0.3.53",
+  "base_version": "0.3.53",
+  "probe_version": "0.3.35",
+  "surveyor_app_version": "0.3.54",
+  "extension_version": "1.0.2",
+  "purpose": "Capture the owner+0x10 slot at the external logical-entry hook, preserve that value through recursive entries, and compare it with a separate root-resource-add sample.",
   "complete_zip": {
-    "storage": "chatgpt-library",
-    "library_path": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
-    "name": "NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
-    "sha256": "9cfc13d13f72d8c72038cc40878c3401aa52d89f901f3adc055ba50fb29744a8",
-    "size_bytes": 309909,
-    "files": 104,
-    "cache_files": 0,
-    "provenance": "Reconstructed by integration AI from the exact published Runtime-A patch against the verified canonical v0.3.38 Library artifact."
+    "storage": "GitHub full-package chunks",
+    "name": "NMS-Derelict-Probe-v0.3.54.zip",
+    "sha256": "32bf1650d27f6a54d35e685b3962cf1e7bd80238e9b7dd561084361d489e8494",
+    "size_bytes": 400289,
+    "files": 151,
+    "repository_path": "packages/v0.3.54-full/",
+    "sandbox_artifact": "/workspace/scratch/e4f8b6da9bc9/NMS-Derelict-Probe-v0.3.54.zip"
   },
   "integration_patch": {
-    "path": "agent-patches/runtime-dispatch/runtime-a.patch.gz.b64",
-    "encoded_sha256": "b11252280ed84902015c3cb690c59ce2540b2f60e54ab6b0f6450a0518312027",
-    "decoded_patch_sha256": "e03b30f847a119f50086ece40d86ab88b329537bdcaf2ccfde730861c176e024",
-    "decoded_size_bytes": 31100,
-    "decode": "base64-decode, then gzip-decompress",
-    "apply_against": "canonical v0.3.38 package"
+    "path": "agent-patches/runtime-dispatch/runtime-a-probe-0.3.35-from-v0.3.53.patch",
+    "sha256": "70c4171d94f0b8705f93df80d3f5421029478a9f11dc37d8caa57342e5d06095",
+    "size_bytes": 35670,
+    "base_version": "0.3.53"
   },
   "changed_files": [
-    "AGENT_VARIANT.md",
-    "AI_HANDOFF.md",
-    "CHANGELOG.md",
     "mod/derelict_baseline_probe.py",
     "tests/test_tools.py",
-    "tools/github_integration.py",
-    "tools/surveyor_controller.py"
+    "tests/test_agent_ui_runtime_dispatch_extension.py",
+    "tools/surveyor_controller.py",
+    "VERSION.txt",
+    "CHANGELOG.md",
+    "README.md",
+    "AI_HANDOFF.md",
+    "RESEARCH_INDEX.md",
+    "WORKSPACE_STATE.json",
+    "CANONICAL_SOURCE.json",
+    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.35-from-v0.3.53.patch",
+    "agent-patches/runtime-dispatch/RUNTIME_A_PROBE_0.3.35_APP_0.3.54.json"
   ],
   "verification": {
-    "unit_regression_tests": "115/115 passed",
-    "compileall": "passed",
-    "json_files_parsed": 35,
-    "game_memory_write_api_added": false,
-    "integration_reconstruction_verified": true
+    "targeted_test": "python -m unittest discover -s tests -p test_tools.py -k v0335 -q — 2 tests passed",
+    "unit_regression_tests": "python -m unittest discover -s tests -q — 178/178 passed",
+    "compileall": "python -m compileall -q tools overlay tests mod — passed",
+    "patch_reproduction": "dry-run/apply against v0.3.53; 149 existing files reproduced byte-identically — passed",
+    "json": "lane manifest and workspace state parse — passed",
+    "zip_integrity": "151 files; 400289 bytes; SHA-256 verified — passed",
+    "runtime": "Windows UI and NMS 7.05 live validation pending"
   },
   "evidence": {
-    "local_file": "%LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1\\exact-root-dispatch-latest.json",
-    "upload_branch": "agent/runtime-dispatch",
-    "upload_namespace": "research-uploads/<timestamp>-runtime-a-<action>/"
+    "shared_folder": "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/",
+    "root_event": "exact-root-caller-latest.json",
+    "probe_version": "0.3.34",
+    "external_caller_return_rva": "02C0497A",
+    "owner": "000001D026704000",
+    "descriptor": "000001D026704128",
+    "root_seed_candidate": "5B4AE67D9C2A8F61",
+    "root_add_slot_value": "0000000000000000"
   },
   "human_validation": {
     "required": true,
-    "purpose": "Capture the live owner+0x10 dispatch slot value and target identity at the exact descriptor-correlated root event; recent upload captured root/owner/descriptor but omitted the live slot value.",
     "steps": [
-      "Fully exit NMS.",
-      "Extract and run NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip from the existing Runtime-A artifact.",
-      "In Surveyor RUNTIME-A, click Start NMS.",
-      "Load the same known derelict and stop when Root dispatch +0x10 captured appears.",
-      "Click Analyze generation + upload.",
-      "Return to Main and write check."
+      "After v0.3.54 is available in Surveyor's updater, click Check for updates and install v0.3.54.",
+      "Fully exit NMS so the old probe is unloaded.",
+      "Start NMS from Surveyor and load the derelict only until the exact root event and entry-time Root dispatch +0x10 capture appear.",
+      "Close NMS, then click Upload captured root event.",
+      "Tell the Runtime-A/Main agent check so it can compare the entry-time slot with the root-add sample."
     ],
-    "success_condition": "The new upload includes the live owner+0x10 slot value and target pointer/identity together with the descriptor recheck.",
-    "evidence_to_return": [
-      "Fresh exact-root-caller-latest.json and its run-manifest.json.",
-      "Fresh capture indicating whether owner+0x10 value and target identity were captured."
-    ],
-    "full_derelict_traversal_required": false,
-    "if_probe_change_needed": "Use a compatible probe build and fully restart NMS; never hot-swap probe code."
+    "success_condition": "Uploaded exact-root evidence includes the entry-time owner+0x10 raw value and target identity, separately labeled root-add read, and matching descriptor correlation.",
+    "full_derelict_traversal_required": false
   },
+  "rollback": [
+    "Use Surveyor rollback/reinstall to return to complete v0.3.53.",
+    "Fully exit and restart NMS to reload probe 0.3.34.",
+    "Saved evidence remains readable; no protocol/schema migration."
+  ],
   "latest_capture_review": {
-    "reviewed_utc": "2026-10-01T15:30:30Z",
-    "uploads": [
-      "research-uploads/20261001T033336Z-runtime-dispatch-analyze-generation-62f7020f/",
-      "research-uploads/20261001T033416Z-measure/"
+    "evidence_path": "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/",
+    "measured_facts": [
+      "owner+0x10 read zero at root-resource addition",
+      "entry event age at root-add was 1.383 ms",
+      "user confirms modeled rooms/crates matched traversal"
     ],
-    "measured_facts": {
-      "root_seed": "9256392A2F5A74AC",
-      "probe_version": "0.3.33",
-      "exact_root_capture_utc": "2026-10-01T03:33:10.459Z",
-      "owner_pointer": "00000264633A5C00",
-      "descriptor_pointer": "00000264633A5D28",
-      "descriptor_offset_from_owner": "+0x128",
-      "external_caller_return_offset": "02C0497A",
-      "live_owner_plus_0x10_slot_value_present": false,
-      "live_owner_plus_0x10_target_pointer_present": false,
-      "generation_session": "20261001T033313Z_00001A0004E84EFD",
-      "dungeon_scene_instances": 0,
-      "logical_generated_chunks": 0,
-      "preset": null,
-      "preset_confidence": "unresolved",
-      "observed_rooms": 0,
-      "predicted_target_containers": 0
-    },
-    "interpretation": "The known root was observed again, but this upload does not validate the live owner+0x10 dispatch value/target. This Runtime-A session did not reproduce the separate post-7.05 MEDI_FLOATERS layout evidence.",
-    "evidence_qualification": "Root seed remains candidate-captured-unverified; zero scene/count values mean no generation capture in this session, not evidence that the derelict layout is empty.",
-    "next_action": "Repeat the exact short Runtime-A capture and obtain a live owner+0x10 slot value and target identity at the descriptor-correlated root event; no full traversal.",
+    "interpretation": "The later zero does not determine the call-time target.",
+    "next_action": "Use candidate 0.3.35 to capture at entry and upload one root event; no full traversal.",
     "human_action_required": true
   }
 }
