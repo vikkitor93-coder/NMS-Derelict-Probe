@@ -44,9 +44,9 @@
     "compileall": "python -m compileall -q tools overlay tests mod — passed",
     "patch_reproduction": "dry-run and apply to v0.3.56; eight changed source/docs files reproduced byte-identically — passed",
     "json": "workspace, canonical source, and lane manifest parse — passed",
-    "package_transport": "12 base64 chunks round-trip to exact package bytes — passed",
+    "package_transport": "12 base64 chunks round-trip to exact package bytes; remote chunks verified byte-for-byte — passed",
     "zip_integrity": "153 files; 398312 bytes; SHA-256 a29c4863f9321dce98fa5e07c5178fce433d4d212debdd402730ffa48541e4c5 — passed",
-    "runtime": "Windows UI refresh/rollback and NMS 7.05 live validation pending"
+    "runtime": "Windows UI refresh/rollback and NMS 7.05 live validation pending one human root capture"
   },
   "evidence": {
     "shared_folder": "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/",
@@ -57,19 +57,22 @@
     "descriptor": "000001D026704128",
     "root_seed_candidate": "5B4AE67D9C2A8F61",
     "root_add_slot_value": "0000000000000000",
-    "entry_match_age_at_root_add_ms": 1.383
+    "entry_match_age_at_root_add_ms": 1.383,
+    "current_main_app": "0.3.57",
+    "current_main_probe": "0.3.36"
   },
   "human_validation": {
     "required": true,
-    "surveyor_request": "After PR #47 is merged and v0.3.57 is available, install it, restart NMS, capture one root event, and upload that saved event.",
+    "surveyor_request": "Install Surveyor v0.3.57, fully restart Surveyor and NMS, capture just the root event in any accessible derelict, and upload the saved exact-root event.",
     "steps": [
-      "After PR #47 is merged and v0.3.57 appears in Surveyor, click Check for updates and install v0.3.57.",
-      "Fully exit NMS.",
-      "Start NMS from Surveyor and load only until the root event is captured; a full traversal is not needed.",
-      "Close NMS, then click Upload captured root event or Upload all saved evidence.",
-      "Tell Runtime-A/Main to check the new upload."
+      "Open Surveyor → GitHub / updates → Check for updates → install v0.3.57.",
+      "Close and reopen Surveyor so it runs the updated app files.",
+      "Fully exit NMS, then start NMS from updated Surveyor so probe 0.3.36 loads.",
+      "Enter an accessible derelict only until the root event is recorded; do not do a full traversal.",
+      "Close NMS. In Surveyor click Upload captured root event, or Upload all saved evidence if auto-upload has not already sent it.",
+      "Tell Runtime-A/Main to check; I will fetch the shared upload and compare entry-time capture with root-add capture."
     ],
-    "success_condition": "The uploaded exact-root event contains the entry-time owner+0x10 raw value and target identity, plus a separately labeled root-add sample correlated to the same descriptor.",
+    "success_condition": "The uploaded exact-root artifact contains owner+0x10 raw value and target identity sampled at logical entry, plus separate root-add sample correlated to the same descriptor.",
     "evidence_to_return": [
       "run-manifest.json",
       "exact-root-caller-latest.json"
@@ -90,7 +93,7 @@
     ],
     "inference": "The delayed zero does not establish the entry-time value.",
     "hypothesis": "The slot may be cleared or repurposed before the later root-add event.",
-    "next_action": "Install v0.3.57 after merge; capture and upload one root event, without traversing the full derelict.",
+    "next_action": "Install v0.3.57, capture and upload one root event, then compare entry-time slot/identity with root-add sample.",
     "human_action_required": true
   },
   "pull_request": {
@@ -98,7 +101,7 @@
     "branch": "agent/runtime-dispatch-entry-capture-v0.3.57",
     "head_commit": "efc809c85768dfc4db62c8b9b919f882720d97f5",
     "base": "main",
-    "state": "open",
-    "mergeable": true
+    "state": "merged",
+    "merge_commit": "35d77ce4c89815313cfcdcedcfed22410fb4c126"
   }
 }
