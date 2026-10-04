@@ -139,7 +139,7 @@
     "requested_target_rva": "00637660"
   },
   "static_callers_00637660": {
-    "reviewed_utc": "2026-10-04T20:49:30Z",
+    "reviewed_utc": "2026-10-04T20:51:20Z",
     "evidence_path": "User attachment: seed-b-static-callers-00637660.json (local chat attachment; not in research-uploads)",
     "attachment_sha256": "312b409d39718caa49fa76a07bf07318b8bbddaeae390cc7bef9e4bf61d832eb",
     "executable_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
@@ -179,6 +179,19 @@
       "All three are direct-call byte observations from static windows. The report says references alone do not prove runtime dispatch or semantics."
     ],
     "interpretation": "The existing descriptor-flow hypothesis can now be followed through three direct wrapper callers. The small windows do not yet identify how the input objects are initialized or prove that any callsite input is the universe-address-derived root seed. Root-seed derivation remains unproven.",
-    "next_lane_action": "Use the local hash-matched NMS.exe to disassemble broader caller function ranges and trace initialization of the source objects passed at the three 00637660 calls; follow to 006377E0/00227A40 and the descriptor copy. Continue offline before requesting any new capture."
+    "next_lane_action": "The hash-matched NMS.exe is not present in the shared workspace, and the report contains only 160 bytes before/after each reference. To keep work offline, ask for a small read-only code-window export from the already-selected local NMS.exe around the three callers (001B2CF9, 02D042E1, 02D04AF8), ideally at least 0x600 bytes before and 0x300 bytes after each call, plus the executable SHA-256. Also capture the 006377E0 callsite at 00637F1F if feasible. No launch, traversal, or probe restart is required.",
+    "limitations": [
+      "No NMS.exe is available in the shared workspace for full local disassembly.",
+      "The attached report captures only 160 bytes before and after each callsite; the call at each site is at the exact window midpoint.",
+      "Consequently the caller function prologue, earlier object initialization, and upstream seed construction are not visible in the current evidence."
+    ],
+    "human_intervention_required": true,
+    "user_steps": [
+      "Keep NMS closed.",
+      "Open the standalone Surveyor and use its local offline RVA code-window extractor (or the bundled extract_nms_rva_window.py tool) against the same NMS.exe whose SHA-256 is 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4.",
+      "Export code windows centered at RVA 001B2CF9, 02D042E1, and 02D04AF8, with at least 0x600 bytes before and 0x300 bytes after each center; if the tool only supports symmetric windows, use 0x600 bytes on each side.",
+      "Also export a window centered at RVA 00637F1F if convenient, to inspect an additional caller of initializer 006377E0.",
+      "Attach the resulting JSON files here. Do not run a derelict or change probe/game files."
+    ]
   }
 }
