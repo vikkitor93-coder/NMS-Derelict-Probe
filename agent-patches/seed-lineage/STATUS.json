@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-04T10:27:00Z",
+  "updated_utc": "2026-10-04T10:40:00Z",
   "state": "active",
   "status": "New-system layout/count model physically confirmed; root seed candidates differ",
-  "summary": "Reviewed main batch research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json and its generation-baseline-latest.json, exact-root-caller-latest.json, and seed-room-correlation.json. User confirms the new-system survey's room count and crate/container count were accurate: 11 rooms and 43 containers. The generation baseline identifies session 20261004T094357Z_0001BF0004E84EFD and address 0001BF0004E84EFD; its model records 11 main rooms, 0 dead ends, 30 predicted Salvage and 13 predicted Footlockers (43 total). The analyzer's 5B4AE67D9C2A8F61 root descriptor seed candidate is associated with that address and use_seed=true, but remains unverified as the layout-seed derivation. The exact root capture records owner+0x10 as eight zero bytes and target identity null-or-low-address. Historical known-system address 00001A0004E84EFD retains candidate 9256392A2F5A74AC; the new system candidate differs. User confirmation establishes the model's room and total-container predictions matched the physical survey; it does not prove a seed derivation. New system preset remains a high-confidence CARGO_FLOATERS inference. The batch's seed-room-correlation file has no new per-address correlation for this system. No evidence diagnoses the mod behavior.",
+  "summary": "Reviewed main batch research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json and its generation-baseline-latest.json, exact-root-caller-latest.json, and seed-room-correlation.json. User confirms the new-system survey's room count and crate/container count were accurate: 11 rooms and 43 containers. The generation baseline identifies session 20261004T094357Z_0001BF0004E84EFD and address 0001BF0004E84EFD; its model records 11 main rooms, 0 dead ends, 30 predicted Salvage and 13 predicted Footlockers (43 total). The analyzer's 5B4AE67D9C2A8F61 root descriptor seed candidate is associated with that address and use_seed=true, but remains unverified as the layout-seed derivation. The exact root capture records owner+0x10 as eight zero bytes and target identity null-or-low-address. Historical known-system address 00001A0004E84EFD retains candidate 9256392A2F5A74AC; the new system candidate differs. User confirmation establishes the model's room and total-container predictions matched the physical survey; it does not prove a seed derivation. New system preset remains a high-confidence CARGO_FLOATERS inference. The batch's seed-room-correlation file has no new per-address correlation for this system. No evidence diagnoses the mod behavior. User correction: installed Surveyor is v0.3.56. This is distinct from the new batch's probe_version v0.3.34. The checked main branch VERSION.txt still says v0.3.53, so the local installed Surveyor is newer than the checked-in main package label; do not conflate these versions.",
   "next_action": "Continue Seed-B offline comparison of the root-seed function and upstream callers against the two address-associated root descriptor candidates (00001A0004E84EFD -> 9256392A2F5A74AC; 0001BF0004E84EFD -> 5B4AE67D9C2A8F61). Seek direct dataflow/code evidence for the transform; preserve candidate/unverified status until established.",
   "surveyor_request": "None. The latest captured session is already associated with the new system address, and the user confirms the modeled 11 rooms and 43 containers matched the physical traversal.",
   "human_intervention_required": false,
@@ -16,7 +16,9 @@
     "New-system root descriptor candidate: 5B4AE67D9C2A8F61; use_seed=true; captured_universe_addresses includes 0001BF0004E84EFD; status candidate-captured-unverified",
     "Runtime root capture: exact-root-caller-latest.json at 2026-10-04T09:43:51Z; owner+0x10 raw bytes zero; target identity null-or-low-address",
     "Known-system comparator: universe 00001A0004E84EFD; candidate root seed 9256392A2F5A74AC",
-    "No direct derivation proven; no more traversal or user action required at this stage"
+    "No direct derivation proven; no more traversal or user action required at this stage",
+    "Version provenance: user reports installed Surveyor v0.3.56; uploaded evidence probe_version v0.3.34; checked main VERSION.txt is v0.3.53.",
+    "Cross-system computation recorded in agent-patches/seed-lineage/SEED_B_ANALYSIS_20261004.json."
   ],
   "full_derelict_required": false
 }
