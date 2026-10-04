@@ -345,3 +345,10 @@ Next: user runs the updated extractor and shares the regenerated supported calle
 
 
 The main app's current version metadata is split: `VERSION.txt` and `WORKSPACE_STATE.json` say 0.3.57, while `update-manifest.json` advertises full package 0.3.58 (SHA-256 `f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24`). That 0.3.58 managed-file list does not include the DUNGEON-C helper exporter, so it does not unblock helper-body extraction; the separate v0.3.50 DUNGEON-C helper-export ZIP remains the relevant tool.
+
+
+## Corrected complete helper build — 2026-10-04
+
+The ready-to-run helper source ZIP is `NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip` (SHA-256 `a4a1336af1c61e4c2b2e0518da52b594b28a6e547bff911c9716d3a228f8830a`, 160 files). It is based on the advertised Surveyor 0.3.58 source package and includes the complete sibling modules required by `tools/extract_runtime_target_function.py`, plus the DUNGEON-C launcher and tests. It supersedes the earlier v0.3.50 helper-export handoff. The launcher no longer changes the current directory or reads the BOM-corrupted Surveyor Python path; it checks for the extractor script and selects Python 3.13, 3.12, or PATH Python.
+
+Verified on the exact extracted package: 8/8 focused helper tests, 190/190 full tests, compileall passed, 72 JSON files parsed, and ZIP integrity passed. Windows batch execution and actual NMS.exe scanning remain unverified here. Running the helper is offline and requires no NMS launch, new capture, or derelict traversal. Exact steps and success condition are in `README-DUNGEON-C-HELPER-EXPORT.md` and lane `STATUS.json`.
