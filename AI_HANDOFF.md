@@ -1,5 +1,16 @@
 # AI handoff — NMS Derelict Probe v0.3.41 candidate
 
+## DUNGEON-C current follow-up — 2026-10-04
+
+The newest shared Surveyor upload reviewed for this lane is `research-uploads/20261004T224430Z-all-saved-evidence-f138ff45/`. Its 0.3.37 root capture is for Angoto, universe address `0001BF0004E84EFD`, with candidate root seed `5B4AE67D9C2A8F61`. The root seed remains unverified. The event records owner+0x10 as zero; this does not expose the separate runtime caller target at `[RDX+0x10]`.
+
+The user-confirmed layout/count run is separate from the historical 35-container baseline. For the fresh Angoto traversal, the modeled 11 main rooms and predicted 43 containers (30 Salvage + 13 Footlockers) matched the user's physical survey. The user attributes generation/replayability changes to the game update. This is a user-provided explanation; do not relabel the historical 35-container record or treat predicted counts as measurements in unrelated captures. The separate same-address post-update MEDI_FLOATERS model remains 8 main + 2 dead-end modeled rooms and 16 analyzer-predicted targets; its generation table still lists Rooms=7.
+
+The latest user attachment `exact-root-caller-code-latest(2).json` (SHA-256 `207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2`) contains the complete .pdata-bounded function at `00634930..00634E03` (1,235 bytes; target hook `00634BC0`; NMS.exe SHA-256 `671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4`). A linear x86-64 disassembly from the body start decoded 33 direct E8 call sites, independently recomputed all relative targets, and grouped them into seven unnamed targets. The inventory is published at `agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json`. It validates call instruction boundaries from the bounded body, but the attachment contains no helper .pdata ranges or bodies; no helper identities are claimed.
+
+The next DUNGEON-C step is to receive an export from the v0.3.39 helper-body extractor and validate each candidate against the call inventory and actual .pdata range before tracing data flow. The saved matching NMS.exe could not be transferred into this workspace. The full helper-export package is `NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-helper-export.zip` (SHA-256 `95d7ee614fa1d13bb342cb56949cddb5e4cbec0283ba871751d0ea614091f11f`). Run it from the complete extracted package, not the GitHub lane branch archive that lacks imported sibling modules. This is offline work: no NMS launch, fresh capture, or full traversal is needed. Exact steps and success condition are in `agent-patches/dungeon-decompile/STATUS.json`.
+
+
 ## Current handoff state
 
 This is the current continuation point for the main integration worker. The candidate is based on the v0.3.40 Live Output package and is prepared on `integration/issue-8-ui-extensions`; it is not yet the installed `main` release.
