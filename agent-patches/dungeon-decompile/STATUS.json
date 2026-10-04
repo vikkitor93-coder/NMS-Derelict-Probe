@@ -156,7 +156,8 @@
         "length_bytes": 1235,
         "behavior_inference": "Four conditionally stored values at RSI+0x50/+0x54/+0x58/+0x5C; corresponding availability bits at RSI+0x1ED (bits 1/3/2/4), bit 0 set unconditionally; all-four-present boolean when an input flag is clear; repeated helper chains update RSI+0x48.",
         "limits": "Helper semantics, class identity, and the actual qword [RDX+0x10] dispatch target remain unresolved. Owner+0x10 zero is a separate measurement and is not the vtable slot."
-      }
+      },
+      "callback_return_correlation": "Combined body/caller evidence supports a completion-check/record-processing callback: this function returns the all-four-fields-present boolean in EAX, and the exact external caller compares it with 1 before unlinking/freeing the corresponding 0x58-byte record. Exact class/subsystem and raw [RDX+0x10] target remain unresolved."
     },
     "user_explanation_update": {
       "explanation": "The user says the game update changed dungeon generation and replayability, explaining why the old seven-room/35-container result and the newer generated layout differ.",
@@ -330,14 +331,14 @@
     }
   },
   "blocked": {
-    "reason": "No immediate user action is needed for the next lane-owned offline step. The function body is available directly in the attached evidence. The actual indirect dispatch destination and helper semantics remain unresolved, but DUNGEON-C can continue with conservative static call/helper analysis.",
+    "reason": "No immediate user action is needed. Directly attached target-body evidence has been reviewed; static caller/body data supports a completion-check callback interpretation. Helper semantics and the actual raw indirect dispatch destination remain unresolved, and DUNGEON-C can continue with offline call/helper analysis.",
     "human_action_required": false,
     "full_traversal_required": false,
     "nms_runtime_required": false,
     "duplicate_capture_or_upload_required": false,
-    "needed": "None for the next offline analysis step; do not request a duplicate upload. Later live evidence may be useful for resolving the raw qword [RDX+0x10], but is not needed to continue static work.",
+    "needed": "None for the next lane-owned offline step; do not request a duplicate upload. Live evidence for the raw qword [RDX+0x10] may help later but is not required to continue.",
     "expected_output": "Either a specific launcher diagnostic, or a regenerated exact-root-caller-code-latest.json containing runtime_target_function with .pdata range, body bytes, and matching NMS.exe SHA-256.",
     "success_condition": "The shared upload contains the target body for 00634BC0; DUNGEON-C can disassemble/decompile its logic and compare descriptor/seed flow."
   },
-  "next_lane_owned_step": "Conservatively enumerate direct E8 calls in the .pdata-bounded body, resolve candidate target RVAs against .pdata, and prepare an offline helper-body extraction with instruction-boundary caveats. Then compare helper behavior with the four-field output record; do not label the class or callback without stronger evidence."
+  "next_lane_owned_step": "Implement a conservative inventory of direct E8 callsites in the .pdata-bounded callback, validate candidate RVAs against .pdata, and extract candidate helper bodies for analysis. Preserve candidate/heuristic labels until instruction boundaries and helper semantics are confirmed."
 }
