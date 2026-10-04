@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "lane": "runtime-dispatch",
+  "updated_utc": "2026-10-04T21:08:00Z",
+  "state": "working",
+  "status": "Runtime-A probe 0.3.37 is verified against the exact published v0.3.57 updater payload. Corrected patch and 0.3.58 package candidate are being prepared on PR #48; main updater remains 0.3.57 until integration.",
+  "summary": "Main update-manifest.json points to a full 389848-byte, 29-chunk package with SHA-256 eb8fbc66c20f6dd976018d35fc89aac11023360e5dc3f40c0164be7452fd2126. Reconstructed the ZIP from main chunks and verified hash, size, and archive integrity. It embeds Runtime-A probe 0.3.35. The separate local source ZIP labelled v0.3.57 was 398312 bytes, SHA-256 a29c4863f9321dce98fa5e07c5178fce433d4d212debdd402730ffa48541e4c5, and embeds 0.3.36; it is not the published updater package. The new reproducible patch combines the existing shared-entry owner+0x10 capture with RCX/RDX/[RDX+0x10] snapshot at the same logical-entry hook, preserving separate root-add measurement. Latest upload remains the 0.3.35 artifact and has no registers.",
+  "progress": "Reconstructed the official 29-chunk package (389848 bytes; SHA-256 eb8fbc66c20f6dd976018d35fc89aac11023360e5dc3f40c0164be7452fd2126), found embedded probe 0.3.35, and verified the combined patch against those exact bytes. Focused tests 4/4, full suite 182/182, and compileall pass. PR #1 is draft/superseded because its base source ZIP did not match the updater.",
+  "blockers": [
+    "PR #48 must be reviewed and merged before Surveyor can offer v0.3.58; updater refresh has not been validated on Windows.",
+    "Live NMS validation requires one short root event after installation."
+  ],
+  "next_action": "Complete and verify the full v0.3.58 updater package/chunks/manifest in PR #48. After it is merged and offered, inspect one fresh root event for RCX, RDX, and [RDX+0x10] correlated to the same descriptor.",
+  "human_intervention_required": false,
+  "human_action": {
+    "required": false,
+    "reason": "The live capture is not useful until the corrected package is published; no repeat upload is needed for the already-reviewed probe 0.3.35 artifact.",
+    "after_build_steps": [
+      "Surveyor → GitHub / updates → Check for updates → install v0.3.58.",
+      "Restart Surveyor; fully exit NMS, then launch NMS from Surveyor.",
+      "Enter an accessible derelict only until the root event is captured; a full traversal is not needed.",
+      "Close NMS and upload the captured root event or all saved evidence.",
+      "Tell Runtime-A to check."
+    ]
+  },
+  "evidence_to_return": [
+    "research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726/run-manifest.json",
+    "research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726/exact-root-caller-latest.json",
+    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.37-from-published-v0.3.57.patch",
+    "agent-patches/runtime-dispatch/RUNTIME_A_PROBE_0.3.37_APP_0.3.58.json"
+  ],
+  "extension_version": "1.0.2",
+  "full_derelict_required": false
+}

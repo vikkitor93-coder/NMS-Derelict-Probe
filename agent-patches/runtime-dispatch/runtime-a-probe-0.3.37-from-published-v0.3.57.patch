@@ -1,0 +1,354 @@
+diff --git a/AI_HANDOFF.md b/AI_HANDOFF.md
+index edd3e983a032cf70f0025298bb4e05f49d1cc0a6..026ab199085cc00a316e80c99114112f9c2b3451 100644
+--- a/AI_HANDOFF.md
++++ b/AI_HANDOFF.md
+@@ -1,5 +1,14 @@
+ # NMS Derelict Probe — AI handoff
+ 
++## Latest Runtime-A candidate — 2026-10-04
++
++The verified published updater manifest is Surveyor 0.3.57, but its official chunked ZIP contains probe 0.3.35. The separate 0.3.57 source ZIP previously used for development had probe 0.3.36 and did not match the published ZIP hash. Use the official 0.3.57 package as the true integration base.
++
++Runtime-A probe 0.3.37 now combines the existing shared-entry owner+0x10 capture with RCX/RDX and raw [RDX+0x10] capture at that same entry hook. The later root-add sample remains separate. The lane patch and manifest must state the official package SHA-256 and the embedded base probe version (0.3.35).
++
++The 0.3.37 source candidate is not published as a Surveyor update. Main integration must build a canonical 0.3.58 full package, update package chunks and updater manifest together, and validate updater refresh/rollback. Live NMS validation needs one short root event after release, not a full traversal.
++
++
+ ## Current state
+ 
+ - Current package: **v0.3.57**. It fixes startup by placing the GitHub buttons in a nested frame, keeping geometry managers separate. The automatic upload toggle and v0.3.56 behavior remain.
+diff --git a/CANONICAL_SOURCE.json b/CANONICAL_SOURCE.json
+index 67ba911516beacbbc3ed4300078ef0bb2fa52794..b5228acb5ec2611578711206efb782bf4f3b5a76 100644
+--- a/CANONICAL_SOURCE.json
++++ b/CANONICAL_SOURCE.json
+@@ -1,32 +1,40 @@
+ {
+   "schema_version": 2,
+-  "version": "0.3.57",
+-  "status": "release-candidate-pending-windows-mod-validation",
++  "version": "0.3.58",
++  "status": "Runtime-A source candidate pending Main updater integration and live NMS validation",
+   "artifact": {
+     "storage": "github-base64-chunks-and-sandbox-download",
+-    "file_name": "NMS-Derelict-Probe-v0.3.57-source.zip"
++    "file_name": "NMS-Derelict-Probe-v0.3.58-runtime-a-review-source.zip"
+   },
+   "repository_transport": {
+     "status": "reproducible-base64-chunks",
+     "reason": "The complete source ZIP is delivered as the release artifact and reproducibly encoded in the repository package chunk format."
+   },
+   "verification": {
+-    "unit_tests": "182/182 passed",
++    "unit_tests": "182/182 passed on verified v0.3.57 updater package after Runtime-A probe 0.3.37 patch",
+     "compileall": "passed: python -m compileall -q tools overlay tests mod",
+-    "zip_integrity": "passed: package generated and hash-verified",
++    "zip_integrity": "pending review source ZIP build",
+     "windows_ui": "not run in Linux workspace",
+-    "nms_7_05_mod_runtime": "not run; user supplies own 7.04 archive",
+-    "package_refresh": "v0.3.57 source package distributed through the updater manifest",
+-    "package_files": "151"
++    "nms_7_05_mod_runtime": "pending Runtime-A short root capture",
++    "package_refresh": "not published; main updater manifest is 0.3.57, package SHA-256 eb8fbc66c20f6dd976018d35fc89aac11023360e5dc3f40c0164be7452fd2126",
++    "package_files": 154
+   },
+   "resume": {
+-    "integration_agent": "Install v0.3.53, capture the Runtime-A root event if needed, close NMS, then use Upload captured root event or Upload all saved evidence. Continue Windows/NMS validation when available."
++    "integration_agent": "Apply the Runtime-A 0.3.37 patch in agent-patches/runtime-dispatch/ to the official v0.3.57 updater ZIP identified by source_base; build a new canonical 0.3.58 full package, regenerate package chunks and updater manifest, then run refresh/rollback checks. This review source ZIP is not an updater installer."
+   },
+   "notes": [
+     "Constrains local archive staging to expected paths, regular XML files, and bounded sizes; rejects invalid or tampered content before touching game files.",
+     "No third-party mod assets are bundled.",
+     "The user-supplied mod archive targets 7.04; NMS 7.05 runtime behavior remains unverified.",
+     "182 unit tests pass; compileall passes. Windows UI and NMS 7.05 runtime validation remain unrun.",
+-    "v0.3.56 adds the persisted auto-upload toggle and deduplicated all-lanes evidence; v0.3.57 fixes the Surveyor startup geometry-manager conflict."
+-  ]
++    "v0.3.56 adds the persisted auto-upload toggle and deduplicated all-lanes evidence; v0.3.57 fixes the Surveyor startup geometry-manager conflict.",
++    "The separate development source ZIP labelled v0.3.57 used during initial local verification had a different SHA-256 and embedded probe 0.3.36; it is not the official updater base. The lane patch now targets the verified official updater ZIP, which embeds probe 0.3.35.",
++    "Runtime-A probe 0.3.37 captures RCX, RDX, and [RDX+0x10] in one shared logical-entry hook. This is additive, read-only, and awaits live NMS validation."
++  ],
++  "source_base": {
++    "surveyor_version": "0.3.57",
++    "embedded_probe_version": "0.3.35",
++    "official_updater_package_size": 389848,
++    "official_updater_package_sha256": "eb8fbc66c20f6dd976018d35fc89aac11023360e5dc3f40c0164be7452fd2126"
++  }
+ }
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 8b9294011389aa43ce86710dce8589909b2b4658..0e581931949a004d4ab4d32da852f47b49c67ef3 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -530,6 +530,12 @@
+ - `Prepare-Crate-Assets.cmd` now also extracts `BASEBUILDINGOBJECTSTABLE.MBIN`, `BASEBUILDINGPARTSTABLE.MBIN`, and `FREIGHTERDUNGEONSTABLE.MBIN`, then emits `crate-target-discovery.json`.
+ - Adds a permanent v0.3.6 research fixture recording that 126/126 used dungeon scene instances resolved, but the static index predicted 0 Salvage Crates + 19 Crew Footlockers. The 19 result is explicitly diagnostic, not accepted as the true target total.
+ - Regression suite expanded to cover entity-reference discovery and the v0.3.6 salvage-gap failure mode.
++# 0.3.58 — one-pass caller register snapshot
++
++- Build Runtime-A probe 0.3.37 from the verified Surveyor 0.3.57 updater payload, which contains probe 0.3.35.
++- Retain the shared logical-entry owner+0x10 sample and add RCX/RDX snapshots for all callers through one hook; keep root-add capture distinct.
++- Package publication and live Windows/NMS validation remain pending.
++
+ # 0.3.57 — fix startup layout conflict
+ 
+ - Put GitHub update buttons in their own child frame, avoiding the Tk `pack`/`grid` parent conflict that prevented Surveyor from starting.
+diff --git a/README.md b/README.md
+index 783c8a39f07b5f527f9ddd16f458e7a2f3dbe1c6..72d5e748a67f270e8b854876fcdda48c4894a7d0 100644
+--- a/README.md
++++ b/README.md
+@@ -3,7 +3,13 @@
+ > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
+ 
+ 
+-Current Surveyor package: **v0.3.57**. Runtime-A probe: **0.3.35**.
++Current Surveyor package candidate: **v0.3.58**. Runtime-A probe candidate: **0.3.37**. The published v0.3.57 updater payload contains probe **0.3.35**; this candidate patch starts from that verified payload.
++
++## v0.3.58 — one-pass caller register snapshot
++
++- Starting from the verified v0.3.57 updater ZIP (which contains probe 0.3.35), carry forward Runtime-A shared logical-entry capture and add RCX, RDX, and raw [RDX+0x10] in one hook.
++- Preserve call-entry and later root-add samples separately and correlate the snapshot with the exact root descriptor.
++- This is a source candidate; updater package publication and live NMS validation remain pending.
+ 
+ ## v0.3.57 — fix startup layout conflict
+ 
+diff --git a/VERSION.txt b/VERSION.txt
+index f6f4908c9d602b7d8add0413c5c0b24e47542915..6d716d9087ad3bd73664d3f3992ad41acc43457b 100644
+--- a/VERSION.txt
++++ b/VERSION.txt
+@@ -1 +1 @@
+-0.3.57
++0.3.58
+diff --git a/mod/derelict_baseline_probe.py b/mod/derelict_baseline_probe.py
+index 900e36796dc7e2ed82e07844a47ed0c46438250c..390cfbcb9f8ba3ef30b88a6ab8657d367287432d 100644
+--- a/mod/derelict_baseline_probe.py
++++ b/mod/derelict_baseline_probe.py
+@@ -33,7 +33,7 @@ from nmspy.common import gameData
+ from nmspy.decorators import main_loop
+ from nmspy.engine import GetNodeAbsoluteTransMatrix
+ 
+-PROBE_VERSION = "0.3.35"
++PROBE_VERSION = "0.3.37"
+ SCHEMA_VERSION = 1
+ ABANDONED_FREIGHTER_LOCATION_VALUE = 0xB
+ ABANDONED_FREIGHTER_POI_TYPE_VALUE = 0x6
+@@ -261,8 +261,13 @@ def _loaded_module_identity(address: int) -> dict[str, Any]:
+         }
+ 
+ 
+-def _owner_plus_0x10_capture(owner_pointer: int) -> dict[str, Any]:
+-    """Read owner+0x10 once at the exact descriptor-correlated root event."""
++def _owner_plus_0x10_capture(
++    owner_pointer: int,
++    phase: str,
++    *,
++    resolve_identity: bool = True,
++) -> dict[str, Any]:
++    """Read owner+0x10 at a named phase of exact root-call correlation."""
+     owner = int(owner_pointer)
+     slot_address = owner + 0x10
+     raw = _read_process_bytes(slot_address, 8)
+@@ -270,6 +275,8 @@ def _owner_plus_0x10_capture(owner_pointer: int) -> dict[str, Any]:
+         "owner_pointer_hex": f"{owner:016X}",
+         "slot_offset_hex": "00000010",
+         "slot_address_hex": f"{slot_address:016X}",
++        "capture_phase": phase,
++        "capture_utc": _utc_now(),
+         "read_status": "captured" if raw is not None and len(raw) == 8 else "unreadable",
+         "raw_bytes_hex": (raw.hex().upper() if raw is not None else None),
+         "slot_value_hex": None,
+@@ -279,7 +286,8 @@ def _owner_plus_0x10_capture(owner_pointer: int) -> dict[str, Any]:
+         return result
+     value = int.from_bytes(raw, "little", signed=False)
+     result["slot_value_hex"] = f"{value:016X}"
+-    result["target_identity"] = _loaded_module_identity(value)
++    if resolve_identity:
++        result["target_identity"] = _loaded_module_identity(value)
+     return result
+ 
+ 
+@@ -2056,6 +2064,7 @@ class DerelictBaselineProbe(Mod):
+             "exact_external_caller": exact,
+             "owner_plus_0x10_capture": exact.get("owner_plus_0x10_capture"),
+             "exact_external_caller_return_offset_hex": exact.get("resolved_external_caller_return_offset_hex") or exact.get("external_origin_caller_return_offset_hex") or exact.get("caller_return_offset_hex"),
++            "external_call_register_snapshot_at_entry": exact.get("external_call_register_snapshot_at_entry"),
+             "unique_callers_observed": len(self._logical_entry_caller_hits),
+             "caller_hit_counts": dict(sorted(self._logical_entry_caller_hits.items())),
+             "interpretation": "All shared-entry callers are observed at once; exact descriptor identity selects the derelict path and the verified self-recursive edge is excluded.",
+@@ -2092,12 +2101,22 @@ class DerelictBaselineProbe(Mod):
+                 self._logical_entry_tls.stack = stack
+             if caller_offset == CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA and stack:
+                 external_origin = int(stack[-1].get("external_origin_caller_offset") or 0)
++                external_owner_pointer_hex = stack[-1].get("external_owner_pointer_hex")
++                external_slot_capture = stack[-1].get("external_owner_plus_0x10_capture")
++                external_register_snapshot = stack[-1].get("external_call_register_snapshot")
+             else:
+                 external_origin = caller_offset
+-            stack.append({
++                external_owner_pointer_hex = None
++                external_slot_capture = None
++                external_register_snapshot = None
++            frame = {
+                 "caller_offset": caller_offset,
+                 "external_origin_caller_offset": external_origin,
+-            })
++                "external_owner_pointer_hex": external_owner_pointer_hex,
++                "external_owner_plus_0x10_capture": external_slot_capture,
++                "external_call_register_snapshot": external_register_snapshot,
++            }
++            stack.append(frame)
+ 
+             caller_hex = f"{caller_offset:08X}" if caller_offset else ""
+             if caller_hex:
+@@ -2113,6 +2132,28 @@ class DerelictBaselineProbe(Mod):
+             primary_hex = str(seed.get("primary_seed_hex") or "").upper()
+             if primary_hex in {"", "0000000000000000", "FFFFFFFFFFFFFFFF"}:
+                 return
++            if caller_offset != CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA:
++                # At the callee entry the indirect call has just happened, before
++                # later root-resource work can clear or repurpose this slot.
++                frame["external_owner_pointer_hex"] = f"{owner_pointer:016X}"
++                frame["external_owner_plus_0x10_capture"] = _owner_plus_0x10_capture(
++                    owner_pointer,
++                    phase="logical-entry-after-external-call",
++                    resolve_identity=False,
++                )
++                # The hook runs at the shared callee entry, immediately after
++                # its caller's instruction. Under the Windows x64 ABI, the first
++                # two integer/pointer arguments arrive in RCX and RDX. Capture
++                # those values with the already-read [RDX+0x10] slot so every
++                # caller is observed through this one hook, not 52 breakpoints.
++                frame["external_call_register_snapshot"] = {
++                    "capture_phase": "shared-entry-hook-after-call",
++                    "capture_utc": _utc_now(),
++                    "caller_return_rva_hex": (f"{caller_offset:08X}" if caller_offset else None),
++                    "rcx_hex": (f"{_raw_u64_bits(context):016X}" if _raw_u64_bits(context) is not None else None),
++                    "rdx_hex": f"{owner_pointer:016X}",
++                    "rdx_plus_0x10_capture": frame["external_owner_plus_0x10_capture"],
++                }
+             self._remember_logical_entry_event({
+                 "utc": _utc_now(),
+                 "context_pointer_hex": (f"{_raw_u64_bits(context):016X}" if _raw_u64_bits(context) is not None else None),
+@@ -2124,6 +2165,9 @@ class DerelictBaselineProbe(Mod):
+                 "caller_return_offset_hex": (f"{caller_offset:08X}" if caller_offset else None),
+                 "external_origin_caller_return_offset_hex": (f"{external_origin:08X}" if external_origin else None),
+                 "recursion_depth": max(0, len(stack) - 1),
++                "external_owner_pointer_hex": frame.get("external_owner_pointer_hex"),
++                "external_owner_plus_0x10_capture_at_entry": frame.get("external_owner_plus_0x10_capture"),
++                "external_call_register_snapshot_at_entry": frame.get("external_call_register_snapshot"),
+             })
+         except Exception as exc:
+             self._write_log("trace_logical_entry_error", {"error": repr(exc)})
+@@ -2514,8 +2558,38 @@ class DerelictBaselineProbe(Mod):
+                         owner_pointer = int(owner_hex, 16)
+                     except ValueError:
+                         owner_pointer = 0
+-                    if owner_pointer > 0x10000:
+-                        exact_external["owner_plus_0x10_capture"] = _owner_plus_0x10_capture(owner_pointer)
++                    external_owner_hex = str(exact_external.get("external_owner_pointer_hex") or "")
++                    try:
++                        external_owner_pointer = int(external_owner_hex, 16)
++                    except ValueError:
++                        external_owner_pointer = 0
++                    if external_owner_pointer > 0x10000:
++                        exact_external["owner_plus_0x10_capture_at_root_add"] = _owner_plus_0x10_capture(
++                            external_owner_pointer,
++                            phase="root-resource-add",
++                        )
++                    if owner_pointer > 0x10000 and owner_pointer != external_owner_pointer:
++                        exact_external["matched_descriptor_owner_plus_0x10_capture_at_root_add"] = _owner_plus_0x10_capture(
++                            owner_pointer,
++                            phase="root-resource-add-descriptor-owner",
++                        )
++                    entry_capture = exact_external.get("external_owner_plus_0x10_capture_at_entry")
++                    if isinstance(entry_capture, dict):
++                        entry_capture = dict(entry_capture)
++                        entry_value = entry_capture.get("slot_value_hex")
++                        if entry_capture.get("read_status") == "captured" and entry_value:
++                            try:
++                                entry_capture["target_identity"] = _loaded_module_identity(int(str(entry_value), 16))
++                            except ValueError:
++                                entry_capture["target_identity"] = {"status": "invalid-address", "address_hex": str(entry_value)}
++                    register_snapshot = exact_external.get("external_call_register_snapshot_at_entry")
++                    if isinstance(register_snapshot, dict):
++                        register_snapshot = dict(register_snapshot)
++                        register_snapshot["rdx_plus_0x10_capture"] = entry_capture
++                        exact_external["external_call_register_snapshot_at_entry"] = register_snapshot
++                    exact_external["owner_plus_0x10_capture"] = entry_capture
++                    exact_external["owner_plus_0x10_capture_at_entry"] = entry_capture
++                    event["owner_plus_0x10_capture"] = entry_capture
+                     event["logical_entry_exact_external_match"] = exact_external
+                     event["owner_plus_0x10_capture"] = exact_external.get("owner_plus_0x10_capture")
+                     exact_offset = (
+diff --git a/tests/test_tools.py b/tests/test_tools.py
+index 7b5464ca94beec07d8d67a81c24664991aff4bd4..4b06d084bb1b7483df9da7391d2adc2826b5498b 100644
+--- a/tests/test_tools.py
++++ b/tests/test_tools.py
+@@ -687,12 +687,26 @@ class ToolTests(unittest.TestCase):
+         self.assertIn("POI-UA",view["generation"])
+         self.assertIn("00001A0004E84EFD",view["generation"])
+ 
+-    def test_v0334_runtime_probe_captures_owner_slot_after_exact_root_match(self):
++    def test_v0337_runtime_probe_captures_all_call_registers_at_shared_entry(self):
+         probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+-        self.assertIn('PROBE_VERSION = "0.3.35"', probe)
++        self.assertIn('PROBE_VERSION = "0.3.37"', probe)
+         exact=probe.index('exact_external = self._logical_entry_external_match_for_descriptor(descriptor_ptr)')
+-        capture=probe.index('exact_external["owner_plus_0x10_capture"] = _owner_plus_0x10_capture(owner_pointer)', exact)
+-        self.assertGreater(capture, exact)
++        entry_capture=probe.index('phase="logical-entry-after-external-call"')
++        root_add_capture=probe.index('phase="root-resource-add"', exact)
++        self.assertLess(probe.index('def _trace_resource_descriptor_walk_entry'), entry_capture)
++        self.assertLess(entry_capture, root_add_capture)
++        self.assertIn('"capture_phase": phase', probe)
++        self.assertIn('"capture_utc": _utc_now()', probe)
++        self.assertIn('"external_owner_plus_0x10_capture_at_entry": frame.get("external_owner_plus_0x10_capture")', probe)
++        self.assertIn('exact_external["owner_plus_0x10_capture_at_root_add"]', probe)
++        self.assertIn('exact_external["owner_plus_0x10_capture_at_entry"] = entry_capture', probe)
++        self.assertIn('"external_call_register_snapshot_at_entry": frame.get("external_call_register_snapshot")', probe)
++        self.assertIn('"rcx_hex":', probe)
++        self.assertIn('"rdx_hex": f"{owner_pointer:016X}"', probe)
++        self.assertIn('"rdx_plus_0x10_capture": frame["external_owner_plus_0x10_capture"]', probe)
++        self.assertIn('"external_call_register_snapshot_at_entry": exact.get("external_call_register_snapshot_at_entry")', probe)
++        self.assertIn('"static_direct_reference_count": len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS)', probe)
++        self.assertIn('not 52 breakpoints', probe)
+         self.assertIn('"root_dispatch_capture": self._root_dispatch_capture_payload()', probe)
+         self.assertIn('"last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture', probe)
+         self.assertIn('kernel32.ReadProcessMemory(', probe)
+@@ -1120,7 +1134,7 @@ class ToolTests(unittest.TestCase):
+ 
+ 
+     def test_v0322_version_marker(self):
+-        self.assertEqual("0.3.57", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
++        self.assertEqual("0.3.58", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+ 
+     def test_v0322_probe_exposes_background_research_buttons(self):
+         source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+@@ -1352,7 +1366,7 @@ class ToolTests(unittest.TestCase):
+         self.assertNotIn("Test-Runtime", start_nms)
+         self.assertNotIn("Python.Python.3.12", start_nms)
+         self.assertNotIn("import pymhf; import nmspy", start_nms)
+-        self.assertIn('CONTROLLER_VERSION = "0.3.57"', controller)
++        self.assertIn('CONTROLLER_VERSION = "0.3.58"', controller)
+         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
+ 
+     def test_github_update_buttons_use_a_separate_geometry_parent(self):
+@@ -1413,7 +1427,7 @@ class ToolTests(unittest.TestCase):
+             self.assertIn(token, probe)
+ 
+     def test_v0330_version(self):
+-        self.assertEqual("0.3.57", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
++        self.assertEqual("0.3.58", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
+ 
+     def test_v0328_seed_function_relrefs_classify_recursion(self):
+diff --git a/tools/surveyor_controller.py b/tools/surveyor_controller.py
+index 154d22276d2e2bcee00b62d03039bfe3d134c475..9695d587eab24f8495c9c7714729a3e725a8cc29 100644
+--- a/tools/surveyor_controller.py
++++ b/tools/surveyor_controller.py
+@@ -33,7 +33,7 @@ except ImportError:  # Running surveyor_controller.py directly from the tools fo
+     import agent_console
+     import agent_ui_extensions
+ 
+-CONTROLLER_VERSION = "0.3.57"
++CONTROLLER_VERSION = "0.3.58"
+ AGENT_REFRESH_INTERVALS_MS = {
+     "20 seconds": 20_000,
+     "1 minute": 60_000,
