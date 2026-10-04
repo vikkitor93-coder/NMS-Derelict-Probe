@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "branch": "agent/dungeon-decompile",
+  "reviewed_utc": "2026-10-04T00:00:00Z",
+  "state": "blocked-on-fresh-current-build-survey",
+  "verified": {
+    "historical_baseline": {
+      "system": "00001A0004E84EFD",
+      "class": "S",
+      "containers_total": 35,
+      "salvage": 31,
+      "footlockers": 4,
+      "main_rooms": 7,
+      "dead_end_rooms": 1,
+      "dead_end_room_label": "Room 0",
+      "vertical_transitions": 2,
+      "shuttle_bays": 1,
+      "label": "historical; preserve without relabeling as current"
+    },
+    "later_post_update_observation": {
+      "session_id": "20260930T173540Z_00001A0004E84EFD",
+      "preset": "MEDI_FLOATERS",
+      "preset_confidence": "high-inference",
+      "modeled_main_rooms": 8,
+      "modeled_dead_end_rooms": 2,
+      "analyzer_predicted_targets": 16,
+      "physical_count_verified": false,
+      "generation_table_rooms": 7,
+      "room_model_status": "needs-review"
+    },
+    "root_seed": {
+      "hex": "9256392A2F5A74AC",
+      "status": "candidate-unverified"
+    },
+    "latest_uploaded_capture": {
+      "session_id": "20261002T213412Z_00001A0004E84EFD",
+      "probe_version": "0.3.34",
+      "dungeon_scene_instances": 0,
+      "logical_generated_chunks": 0,
+      "physical_survey_present": false,
+      "owner_plus_0x10": {
+        "slot_value_hex": "FFFFFFFF00000000",
+        "target_identity_status": "not-in-loaded-module"
+      }
+    },
+    "runtime_consumer_analysis": {
+      "runtime_owner_plus_0x10_target_resolved": false,
+      "consumer_function_found": false,
+      "vtable_analysis": "indirect call at RVA 02C04977 decoded as FF 52 10; offline resolver returned zero candidates"
+    }
+  },
+  "evidence": {
+    "shared_upload_path": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/",
+    "manifest": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/run-manifest.json",
+    "reviewed_files": [
+      "generation-baseline-latest.json",
+      "generation-measurements-summary.json",
+      "generation-measurements.csv",
+      "dungeon-generation-table.json",
+      "exact-root-caller-latest.json",
+      "exact-root-vtable-latest.json",
+      "dungeon-caller-code-latest.json",
+      "dungeon-upstream-callers-latest.json"
+    ],
+    "note": "Upload occurred 2026-10-04, but its generation/runtime source sessions are dated 2026-09-30 and 2026-10-02; no new full survey is included."
+  },
+  "blocked": {
+    "reason": "No fresh current-game-build full traversal or verified physical count/layout is present in the shared upload. The root owner+0x10 live value and target identity are also unresolved.",
+    "human_action_required": true,
+    "full_traversal_required": true,
+    "duplicate_upload_required": false
+  },
+  "next_lane_owned_step": "When a fresh current-build full traversal and a valid Runtime-A owner+0x10 target identity are uploaded to main, compare the verified physical room/container/layout counts against the preserved historical baseline and the 2026-09-30 predicted model; continue consumer analysis only if a live target is resolved."
+}
