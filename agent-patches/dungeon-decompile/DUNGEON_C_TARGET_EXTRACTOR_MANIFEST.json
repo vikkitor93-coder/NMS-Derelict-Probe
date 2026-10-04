@@ -34,5 +34,13 @@
     "compileall": "python -m compileall -q tools overlay tests mod passed",
     "live_executable_validation": "not run; installed NMS.exe is not available in this workspace"
   },
-  "rollback": "Delete Extract-Runtime-Target-Function.cmd, tools/extract_runtime_target_function.py, this manifest, and tests/test_runtime_target_function.py; remove the additive README/CHANGELOG/AI_HANDOFF notes. Existing caller extraction and upload schema remain unchanged."
+  "rollback": "Delete Extract-Runtime-Target-Function.cmd, tools/extract_runtime_target_function.py, this manifest, and tests/test_runtime_target_function.py; remove the additive README/CHANGELOG/AI_HANDOFF notes. Existing caller extraction and upload schema remain unchanged.",
+  "launcher": {
+    "python_resolution_order": [
+      "Surveyor python-executable.txt",
+      "py -3",
+      "python.exe on PATH"
+    ],
+    "path_diagnostics": "Launcher validates project folder and interpreter; failure identifies the unavailable path or runtime."
+  }
 }
