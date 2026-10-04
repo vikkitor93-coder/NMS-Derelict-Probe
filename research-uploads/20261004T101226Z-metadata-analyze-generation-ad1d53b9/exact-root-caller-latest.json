@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "probe_version": "0.3.34",
+  "utc": "2026-10-04T09:43:51.578Z",
+  "method": "all-callers-single-hook-exact-descriptor-correlation",
+  "logical_entry_rva_hex": "00634BC0",
+  "static_direct_reference_count": 52,
+  "recursive_return_rva_hex": "00634C63",
+  "root_resource": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+  "root_descriptor_pointer_hex": "000001D026704128",
+  "root_seed_hex": "5B4AE67D9C2A8F61",
+  "exact_external_caller": {
+    "utc": "2026-10-04T09:43:51.576Z",
+    "context_pointer_hex": "000001D168DA9960",
+    "owner_pointer_hex": "000001D026704000",
+    "descriptor_pointer_hex": "000001D026704128",
+    "primary_seed_hex": "5B4AE67D9C2A8F61",
+    "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+    "caller_return_offset_hex": "02C0497A",
+    "external_origin_caller_return_offset_hex": "02C0497A",
+    "recursion_depth": 0,
+    "caller_class": "external",
+    "known_static_candidate": false,
+    "age_ms_at_root_add": 1.383,
+    "resolved_external_caller_return_offset_hex": "02C0497A",
+    "owner_plus_0x10_capture": {
+      "owner_pointer_hex": "000001D026704000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "000001D026704010",
+      "read_status": "captured",
+      "raw_bytes_hex": "0000000000000000",
+      "slot_value_hex": "0000000000000000",
+      "target_identity": {
+        "status": "null-or-low-address",
+        "address_hex": "0000000000000000"
+      }
+    }
+  },
+  "owner_plus_0x10_capture": {
+    "owner_pointer_hex": "000001D026704000",
+    "slot_offset_hex": "00000010",
+    "slot_address_hex": "000001D026704010",
+    "read_status": "captured",
+    "raw_bytes_hex": "0000000000000000",
+    "slot_value_hex": "0000000000000000",
+    "target_identity": {
+      "status": "null-or-low-address",
+      "address_hex": "0000000000000000"
+    }
+  },
+  "exact_external_caller_return_offset_hex": "02C0497A",
+  "unique_callers_observed": 11,
+  "caller_hit_counts": {
+    "0055A35B": 1843,
+    "0061E54F": 337,
+    "00638943": 16713,
+    "0123DFCB": 124,
+    "0153DDA0": 87,
+    "0153DE10": 88,
+    "01586FE0": 96,
+    "016C3930": 18948,
+    "017E0E70": 15,
+    "02C0497A": 90810,
+    "02C04ACD": 46461
+  },
+  "interpretation": "All shared-entry callers are observed at once; exact descriptor identity selects the derelict path and the verified self-recursive edge is excluded."
+}
