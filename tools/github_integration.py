@@ -1,4 +1,445 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éí×]zá:-jZ.¶›­–)Þ³Vg&öÒõögWGW&Uõò–×÷'Bææ÷FF–öç0 ¦–×÷'B&w'6P¦–×÷'B&6Sc@¦–×÷'B†6†Æ– ¦–×÷'B§6öà¦–×÷'B÷0¦–×÷'B&P¦–×÷'B6‡WF–À¦–×÷'B7V'&ö6W70¦–×÷'B7—0¦–×÷'BFV×f–ÆP¦–×÷'BWV–@¦–×÷'BG&6V&6°¦–×÷'BW&ÆÆ–"æW'&÷ ¦–×÷'BW&ÆÆ–"ç&WVW7@¦–×÷'B¦—f–ÆP¦g&öÒFFWF–ÖR–×÷'BFFWF–ÖRÂF–ÖW¦öæP¦g&öÒF†Æ–"–×÷'BF€ ¥$UòÒ'f–¶¶—F÷#“2Ö6öFW"ôäÕ2ÔFW&VÆ–7BÕ&ö&R ¤%$ä4‚Ò&Ö–â ¥$uô$4RÒb&‡GG3¢ò÷&ræv—F‡V'W6W&6öçFVçBæ6öÒ÷µ$U÷Ò÷´%$ä4‡Ò ¥$ôõBÒF‚†÷2æVçf—&öâævWB‚$Äô4ÄDD"’÷"F‚æ†öÖR‚’’ò$äÕ4FW&VÆ–7E7W'fW–÷" ¥tõ$²Ò$ôõBò&76WB×v÷&²×c ¥$ô¤T5Eõ$ôõEôd”ÄRÒ$ôõBò'&ö¦V7B×&ö÷BçG‡B ¤ÄôuôD•"Ò$ôõBò&wV’Ö7F–öç2 ¤„TÅU%ôÄôrÒÄôuôD•"ò&v—F‡V"Ö–çFVw&F–öâæÆör ¤t•D…T%ôD”täõ5D”2ÒÄôuôD•"ò&v—F‡V"ÖF–væ÷7F–2ÖÆFW7BçG‡B ¤ÄÅôUd”DTä4UõUÄôEõ$T4T•BÒ$ôõBò&ÆÂ×6fVBÖWf–FVæ6R×WÆöB×&V6V—Bæ§6öâ  ¤5D”ôåôõUEUE2Ò°¢&ÆÂ×6fVBÖWf–FVæ6R#¢µÒÀ¢&ÖV7W&R#¢µtõ$²ò&vVæW&F–öâÖ&6VÆ–æRÖÆFW7Bæ§6öâ"Âtõ$²ò&vVæW&F–öâÖÖV7W&VÖVçG2×7VÖÖ'’æ§6öâ"Âtõ$²ò&vVæW&F–öâÖÖV7W&VÖVçG2æ77b"Âtõ$²ò'6VVB×&ööÒÖ6÷'&VÆF–öâæ§6öâ%ÒÀ¢&W‡G&7BÖ6ÆÆW"#¢µtõ$²ò&GVævVöâÖ6ÆÆW"Ö6öFRÖÆFW7Bæ§6öâ%ÒÀ¢&W‡G&7B×W7G&VÒ#¢µtõ$²ò&GVævVöâ×W7G&VÒÖ6ÆÆW'2ÖÆFW7Bæ§6öâ%ÒÀ¢&W‡G&7BÖW†7B×&ö÷BÖ6ÆÆW"#¢µtõ$²ò&W†7B×&ö÷BÖ6ÆÆW"Ö6öFRÖÆFW7Bæ§6öâ%ÒÀ¢'&W6öÇfR×&ö÷B×gF&ÆR#¢µtõ$²ò&W†7B×&ö÷B×gF&ÆRÖÆFW7Bæ§6öâ%ÒÀ¢&æÇ—¦R×6VVBÖgVæ7F–öâ#¢µtõ$²ò&GVævVöâ×6VVBÖgVæ7F–öâÖæÇ—6—2ÖÆFW7Bæ§6öâ%ÒÀ¢'&W&RÖ76WG2#¢µtõ$²ò'&ööÒÖ7&FRÖ–æFW‚æ§6öâ"Âtõ$²ò&76WBÖ6Æ7VÆF–öâÖÆFW7Bæ§6öâ"Âtõ$²ò&7&FR×F&vWBÖF—66÷fW'’æ§6öâ%ÒÀ¢&æÇ—¦RÖvVæW&F–öâ#¢µtõ$²ò&vVæW&F–öâÖ&6VÆ–æRÖÆFW7Bæ§6öâ"Âtõ$²ò&W†7B×&ö÷BÖ6ÆÆW"ÖÆFW7Bæ§6öâ%ÒÀ¢2F—&V7FÇ’WÆöBF†R&ö&Rw2FöÖ–6ÆÇ’6fVB&ö÷BWfVçBgFW"äÕ2W†—G2à¢'WÆöB×'VçF–ÖRÖ6GW&R#¢µtõ$²ò&W†7B×&ö÷BÖ6ÆÆW"ÖÆFW7Bæ§6öâ%ÒÀ¢&æÇ—¦RÖGVævVöâ#¢µtõ$²ò&GVævVöâÖvVæW&F–öâ×F&ÆRæ§6öâ%ÒÀ¢&æÇ—¦RÖ7&FW2#¢µ$ôõBò&7&FR×&W6V&6‚ÖÆFW7Bæ§6öâ%ÒÀ¢&æÇ—¦RÖ6÷'&VÆF–öâ#¢µtõ$²ò'6VVB×&ööÒÖ6÷'&VÆF–öâæ§6öâ%ÒÀ¢&6ö×&RÖÖV7W&VÖVçG2#¢µtõ$²ò&vVæW&F–öâÖÖV7W&VÖVçG2×7VÖÖ'’æ§6öâ"Âtõ$²ò&vVæW&F–öâÖÖV7W&VÖVçG2æ77b%ÒÀ§Ð  ¦FVbÆÅ÷6fVEöWf–FVæ6Uö÷WGWG2‚’ÓâGWÆU¶Æ—7EµF…ÒÂF–7E·7G"ÂÆ—7E·7G%ÕÕÓ ¢""%&WGW&âW†—7F–ær7F–öâ÷WGWG2öæ6RV6‚ÂÇW2F†R7F–öç2F†B&öGV6RV6‚F‚â"" ¢Væ—VS¢F–7E·7G"ÂF…ÒÒ·Ð¢&öGV6W'3¢F–7E·7G"ÂÆ—7E·7G%ÕÒÒ·Ð¢f÷"7F–öâÂF‡2–â5D”ôåôõUEUE2æ—FV×2‚“ ¢–b7F–öâÓÒ&ÆÂ×6fVBÖWf–FVæ6R# ¢6öçF–çVP¢f÷"F‚–âF‡3 ¢¶W’Ò÷2çF‚ææ÷&Ö66R‡7G"‡F‚ç&W6öÇfR‚’’¢Væ—VRç6WFFVfVÇB†¶W’ÂF‚¢&öGV6W'2ç6WFFVfVÇB†¶W’ÂµÒ’æVæB†7F–öâ¢&WGW&âÆ—7B‡Væ—VRçfÇVW2‚’’Â&öGV6W'0 ¤DU$TÄ”5Eôd$Ô”äuôd”ÄU2Ò°¢$ÔUDDDõ$TÄ•E’õD$ÄU2õ$Ut$ED$ÄRäU„ÔÂ"À¢$ÔUDDDõ4”ÕTÄD”ôâôÔ•54”ôå2õD$ÄU2õ54Uô”Ô•54”ôåD$ÄRäU„ÔÂ"À¢$ÔUDDDõ4”ÕTÄD”ôâõ44TäRôU…U$”Tä4U5tåD$ÄRäU„ÔÂ"À§Ð  ¦FVb÷WF2‚’Óâ7G# ¢&WGW&âFFWF–ÖRææ÷r‡F–ÖW¦öæRçWF2’æ—6öf÷&ÖB‡F–ÖW7V3Ò&Ö–ÆÆ—6V6öæG2"’ç&WÆ6R‚"³£"Â%¢"  ¦FVb÷&VEö§6öåöf–ÆR‡Fƒ¢F‚’ÓâF–7C ¢G'“ ¢fÇVRÒ§6öâæÆöG2‡F‚ç&VE÷FW‡B†Væ6öF–æsÒ'WFbÓ‚"’¢W†6WB„õ4W'&÷"ÂVæ–6öFTFV6öFTW'&÷"Â§6öâä¥4ôäFV6öFTW'&÷"“ ¢&WGW&â·Ð¢&WGW&âfÇVR–b—6–ç7Fæ6R‡fÇVRÂF–7B’VÇ6R·Ð  ¦FVböf–ævW'&–çE÷WÆöEöf–ÆW2†f–ÆW3¢Æ—7EµF…Ò’Óâ7G# ¢&WGW&âöf–ævW'&–çE÷WÆöE÷6æ6†÷G2…²‡F‚ÂF‚ç&VEö'—FW2‚’’f÷"F‚–âf–ÆW5Ò  ¦FVböf–ævW'&–çE÷WÆöE÷6æ6†÷G2‡6æ6†÷G3¢Æ—7E·GWÆUµF‚Â'—FW5ÕÒ’Óâ7G# ¢F–vW7BÒ†6†Æ–"ç6†#Sb‚¢f÷"F‚ÂFF–â6÷'FVB‡6æ6†÷G2Â¶W“ÖÆÖ&F—FVÓ¢†—FVÕ³ÒææÖRæÆ÷vW"‚’Â7G"†—FVÕ³Ò’æÆ÷vW"‚’’“ ¢F–vW7BçWFFR‡F‚ææÖRæVæ6öFR‚'WFbÓ‚"’¢F–vW7BçWFFR†"%Ã"¢F–vW7BçWFFR†FF¢F–vW7BçWFFR†"%Ã"¢&WGW&âF–vW7Bæ†W†F–vW7B‚  ¦FVb÷6fR‡fÇVS¢ö&¦V7B’Óâ7G# ¢FW‡BÒ7G"‡fÇVR–bfÇVR—2æ÷BæöæRVÇ6R""¢f÷"VçeöæÖRÂFö¶Vâ–â‚‚%U4U%$ôd”ÄR"Â"UU4U%$ôd”ÄRR"’Â‚$Äô4ÄDD"Â"TÄô4ÄDDR"’“ ¢&rÒ÷2æVçf—&öâævWB†VçeöæÖR¢–b&s ¢FW‡BÒFW‡Bç&WÆ6R‡&rÂFö¶Vâ’ç&WÆ6R‡&rç&WÆ6R‚%ÅÂ"Â"ò"’ÂFö¶Vâ¢&WGW&âFW‡@  ¦FVböÆör†WfVçC¢7G"Â¢¦f–VÆG3¢ö&¦V7B’ÓâæöæS ¢G'“ ¢ÄôuôD•"æÖ¶F—"‡&VçG3ÕG'VRÂW†—7Eöö³ÕG'VR¢&V6÷&BÒ²'WF2#¢÷WF2‚’Â&WfVçB#¢WfVçBÂ¢§¶³¢÷6fR‡b’f÷"²Âb–âf–VÆG2æ—FV×2‚—×Ð¢v—F‚„TÅU%ôÄôræ÷Vâ‚&"ÂVæ6öF–æsÒ'WFbÓ‚"ÂæWvÆ–æSÒ%Æâ"’2fƒ ¢f‚çw&—FR†§6öâæGV×2‡&V6÷&BÂVç7W&Uö66–“ÔfÇ6RÂ6W&F÷'3Ò‚"Â"Â#¢"’’²%Æâ"¢W†6WBW†6WF–öã ¢70  ¦FVb÷F–Â‡FW‡C¢7G"ÂÆ–Ö—C¢–çBÒ#’Óâ7G# ¢FW‡BÒ÷6fR‡FW‡B÷"""’ç7G&—‚¢&WGW&âFW‡E²ÖÆ–Ö—C¥Ð  ¦FVböF—7Æ•ö6ÖB†6ÖC¢Æ—7E·7G%Ò’Óâ7G# ¢&WGW&â""æ¦ö–â…÷6fR‡‚’f÷"‚–â6ÖB  ¦FVb÷'Vâ†6ÖC¢Æ—7E·7G%ÒÂ¢Â–çWE÷FW‡C¢7G"ÂæöæRÒæöæRÂ6†V6³¢&ööÂÒG'VRÂÆöuö÷WGWC¢&ööÂÒG'VR’Óâ7V'&ö6W72ä6ö×ÆWFVE&ö6W75·7G%Ó ¢öÆör‚&6öÖÖæE÷7F'B"Â6öÖÖæCÕöF—7Æ•ö6ÖB†6ÖB’¢G'“ ¢&W7VÇBÒ7V'&ö6W72ç'Vâ†6ÖBÂ–çWCÖ–çWE÷FW‡BÂFW‡CÕG'VRÂ6GW&Uö÷WGWCÕG'VRÂ6†V6³ÔfÇ6R¢W†6WBW†6WF–öâ2W†3 ¢öÆör‚&6öÖÖæEöW†6WF–öâ"Â6öÖÖæCÕöF—7Æ•ö6ÖB†6ÖB’ÂW'&÷#Öb'·G—R†W†2’åõöæÖUõ÷Ó¢¶W†7Ò"¢&—6P¢f–VÆG3¢F–7E·7G"Âö&¦V7EÒÒ²&6öÖÖæB#¢öF—7Æ•ö6ÖB†6ÖB’Â'&WGW&æ6öFR#¢&W7VÇBç&WGW&æ6öFWÐ¢–bÆöuö÷WGWBæB&W7VÇBç&WGW&æ6öFRÒ ¢f–VÆG5²'7FF÷WE÷F–Â%ÒÒ÷F–Â‡&W7VÇBç7FF÷WB¢f–VÆG5²'7FFW'%÷F–Â%ÒÒ÷F–Â‡&W7VÇBç7FFW'"¢öÆör‚&6öÖÖæEöVæB"Â¢¦f–VÆG2¢–b6†V6²æB&W7VÇBç&WGW&æ6öFRÒ ¢Æ7BÒ÷F–Â‡&W7VÇBç7FFW'"÷"&W7VÇBç7FF÷WB÷"&6öÖÖæBf–ÆVB"ÂS¢&—6R'VçF–ÖTW'&÷"†b$6öÖÖæBf–ÆVB‡·&W7VÇBç&WGW&æ6öFWÒ“¢¶Æ7GÒ"¢&WGW&â&W7VÇ@  ¦FVböv‚‚’Óâ7G"ÂæöæS ¢f÷VæBÒ6‡WF–Âçv†–6‚‚&v‚"¢–bf÷VæC ¢öÆör‚&v…öF—66÷fW'’"ÂÖWF†öCÒ%D‚"Âf÷VæCÕG'VRÂW†V7WF&ÆSÖf÷VæB¢&WGW&âf÷Væ@¢–b÷2ææÖRÓÒ&çB# ¢f÷"&6UöæÖRÂ&6R–â‚‚%&öw&Ôf–ÆW2"Â÷2æVçf—&öâævWB‚%&öw&Ôf–ÆW2"’’Â‚$Äô4ÄDD"Â÷2æVçf—&öâævWB‚$Äô4ÄDD"’’“ ¢–bæ÷B&6S ¢6öçF–çVP¢f÷"&VÂ–â‚$v—D‡V"4Ä•ÅÆv‚æW†R"Â%&öw&×5ÅÄv—D‡V"4Ä•ÅÆv‚æW†R"“ ¢6æF–FFRÒF‚†&6R’ò&VÀ¢–b6æF–FFRæ—5öf–ÆR‚“ ¢öÆör‚&v…öF—66÷fW'’"ÂÖWF†öCÖ&6UöæÖRÂf÷VæCÕG'VRÂW†V7WF&ÆSÖ6æF–FFR¢&WGW&â7G"†6æF–FFR¢öÆör‚&v…öF—66÷fW'’"Âf÷VæCÔfÇ6R¢&WGW&âæöæP  ¦FVböWF…÷7FGW2†vƒ¢7G"’Óâ7V'&ö6W72ä6ö×ÆWFVE&ö6W75·7G%Ó ¢2Fòæ÷BW'6—7BF†Ræ÷&ÖÂ7V66W76gVÂWF‚÷WGWB&V6W6R—BÖ’–æ6ÇVFRF†P¢2v—D‡V"66÷VçBæÖRâ&WGW&â6öFR—2Væ÷Vv‚f÷"F–væ÷7F–72à¢&WGW&â÷'Vâ…¶v‚Â&WF‚"Â'7FGW2"Â"ÒÖ†÷7FæÖR"Â&v—F‡V"æ6öÒ%ÒÂ6†V6³ÔfÇ6RÂÆöuö÷WGWCÔfÇ6R  ¦FVbö–çFW&7F—fUöWF‚†vƒ¢7G"’ÓâæöæS ¢6ÖBÒ¶v‚Â&WF‚"Â&Æöv–â"Â"ÒÖ†÷7FæÖR"Â&v—F‡V"æ6öÒ"Â"ÒÖv—B×&÷Fö6öÂ"Â&‡GG2"Â"Ò×vV"%Ð¢öÆör‚&WF…öÆöv–å÷7F'B"Â6öÖÖæCÕöF—7Æ•ö6ÖB†6ÖB’ÂÖöFSÒ'f—6–&ÆRÖ6öç6öÆR"–b÷2ææÖRÓÒ&çB"VÇ6R'FW&Ö–æÂ"¢–b÷2ææÖRÓÒ&çB# ¢fÆw2ÒvWFGG"‡7V'&ö6W72Â$5$TDUôäUuô4ôå4ôÄR"Â¢&W7VÇBÒ7V'&ö6W72ç'Vâ†6ÖBÂ7&VF–öæfÆw3ÖfÆw2Â6†V6³ÔfÇ6R¢VÇ6S ¢&W7VÇBÒ7V'&ö6W72ç'Vâ†6ÖBÂ6†V6³ÔfÇ6R¢öÆör‚&WF…öÆöv–åöVæB"Â&WGW&æ6öFS×&W7VÇBç&WGW&æ6öFR¢–b&W7VÇBç&WGW&æ6öFRÒ ¢&—6R'VçF–ÖTW'&÷"†b$v—D‡V"4Ä’WF†VçF–6F–öâW†—FVBv—F‚6öFR·&W7VÇBç&WGW&æ6öFWÒâ"  ¦FVb6WGWöv—F‡V"‚’ÓâæöæS ¢öÆör‚'6WGW÷7F'B"Â—F†öã×7—2çfW'6–öâç7Æ—B‚•³Ò¢v‚Òöv‚‚¢–bæ÷Bv‚æB÷2ææÖRÓÒ&çB"æB6‡WF–Âçv†–6‚‚'v–ævWB"“ ¢öÆör‚'v–ævWEö–ç7FÆÅ÷7F'B"Â6¶vSÒ$v—D‡V"æ6Æ’"¢–ç7FÆÂÒ÷'Vâ…°¢'v–ævWB"Â&–ç7FÆÂ"Â"ÒÖ–B"Â$v—D‡V"æ6Æ’"Â"ÖR"Â"Ò×6÷W&6R"Â'v–ævWB"À¢"ÒÖ66WB×6¶vRÖw&VVÖVçG2"Â"ÒÖ66WB×6÷W&6RÖw&VVÖVçG2"À¢ÒÂ6†V6³ÔfÇ6R¢öÆör‚'v–ævWEö–ç7FÆÅöVæB"Â&WGW&æ6öFSÖ–ç7FÆÂç&WGW&æ6öFRÂ7FFW'%÷F–ÃÕ÷F–Â†–ç7FÆÂç7FFW'"Âc’¢v‚Òöv‚‚¢–bæ÷Bvƒ ¢&—6R'VçF–ÖTW'&÷"‚$v—D‡V"4Ä’†v‚’—2æ÷B–ç7FÆÆVBâF†RF–væ÷7F–2Æör&V6÷&G2v†WF†W"v–ævWBv2f–Æ&ÆRâ"¢7FGW2ÒöWF…÷7FGW2†v‚¢öÆör‚&WF…÷7FGW2"Â†6SÒ&&Vf÷&R"Â&WGW&æ6öFS×7FGW2ç&WGW&æ6öFR¢–b7FGW2ç&WGW&æ6öFRÒ ¢ö–çFW&7F—fUöWF‚†v‚¢7FGW2ÒöWF…÷7FGW2†v‚¢öÆör‚&WF…÷7FGW2"Â†6SÒ&gFW""Â&WGW&æ6öFS×7FGW2ç&WGW&æ6öFR¢–b7FGW2ç&WGW&æ6öFRÒ ¢&—6R'VçF–ÖTW'&÷"‚$v—D‡V"4Ä’WF†VçF–6F–öâF–Bæ÷B6ö×ÆWFRâ"¢&–çB‚$v—D‡V"WÆöG2&VG’â"¢öÆör‚'6WGWö6ö×ÆWFR"  ¦FVbö§6öåö6ÖB†6ÖC¢Æ—7E·7G%Ò’Óâö&¦V7C ¢Ò÷'Vâ†6ÖB¢G'“ ¢&WGW&â§6öâæÆöG2‡ç7FF÷WB¢W†6WBW†6WF–öâ2W†3 ¢öÆör‚&§6öå÷'6Uöf–ÇW&R"Â6öÖÖæCÕöF—7Æ•ö6ÖB†6ÖB’Â7FF÷WE÷F–ÃÕ÷F–Â‡ç7FF÷WBÂ#’ÂW'&÷#×&W"†W†2’¢&—6R'VçF–ÖTW'&÷"‚$v—D‡V"4Ä’&WGW&æVBFFF†Bv2æ÷BfÆ–B¥4ôââ"’g&öÒW†0  ¦FVbö•ö§6öâ†vƒ¢7G"ÂÖWF†öC¢7G"ÂVæGö–çC¢7G"Â–ÆöC¢ö&¦V7BÂæöæRÒæöæR’Óâö&¦V7C ¢öÆör‚&v—F‡V%ö•÷7F'B"ÂÖWF†öCÖÖWF†öBÂVæGö–çCÖVæGö–çB¢6ÖBÒ¶v‚Â&’"Â"ÒÖÖWF†öB"ÂÖWF†öBÂVæGö–çEÐ¢G'“ ¢–b–ÆöB—2æöæS ¢&W7VÇBÒö§6öåö6ÖB†6ÖB¢VÇ6S ¢Ò÷'Vâ†6ÖB²²"ÒÖ–çWB"Â"Ò%ÒÂ–çWE÷FW‡CÖ§6öâæGV×2‡–ÆöB’¢&W7VÇBÒ§6öâæÆöG2‡ç7FF÷WB¢öÆör‚&v—F‡V%ö•ö6ö×ÆWFR"ÂÖWF†öCÖÖWF†öBÂVæGö–çCÖVæGö–çB¢&WGW&â&W7VÇ@¢W†6WBW†6WF–öâ2W†3 ¢öÆör‚&v—F‡V%ö•öf–ÇW&R"ÂÖWF†öCÖÖWF†öBÂVæGö–çCÖVæGö–çBÂW'&÷#Öb'·G—R†W†2’åõöæÖUõ÷Ó¢¶W†7Ò"¢&—6P  ¦FVbWÆöEö7F–öâ†7F–öã¢7G"Â6GW&Uöf–ÆS¢7G"ÂæöæRÒæöæRÂöæÇ•ö–eö6†ævVC¢&ööÂÒfÇ6R’ÓâæöæS ¢öÆör‚'WÆöE÷7F'B"Â7F–öãÖ7F–öâ¢v‚Òöv‚‚¢–bæ÷Bvƒ ¢&—6R'VçF–ÖTW'&÷"‚$v—D‡V"4Ä’—2Ö—76–ærâW6R6WBWv—D‡V"WÆöG2f—'7Bâ"¢WF‚ÒöWF…÷7FGW2†v‚¢öÆör‚&WF…÷7FGW2"Â†6SÒ'WÆöB"Â&WGW&æ6öFSÖWF‚ç&WGW&æ6öFR¢–bWF‚ç&WGW&æ6öFRÒ ¢&—6R'VçF–ÖTW'&÷"‚$v—D‡V"4Ä’—2æ÷BWF†VçF–6FVBâW6R6WBWv—D‡V"WÆöG2f—'7Bâ"¢W‡V7FVBÒ5D”ôåôõUEUE2ævWB†7F–öâ¢&öGV6W'3¢F–7E·7G"ÂÆ—7E·7G%ÕÒÒ·Ð¢–b6GW&Uöf–ÆS ¢–b7F–öâÒ'WÆöB×'VçF–ÖRÖ6GW&R# ¢&—6R'VçF–ÖTW'&÷"‚"ÒÖ6GW&RÖf–ÆR—27W÷'FVBöæÇ’f÷"WÆöB×'VçF–ÖRÖ6GW&Râ"¢6GW&U÷F‚ÒF‚†6GW&Uöf–ÆR¢G'“ ¢6GW&VBÒ§6öâæÆöG2†6GW&U÷F‚ç&VE÷FW‡B†Væ6öF–æsÒ'WFbÓ‚"’¢W†6WB„õ4W'&÷"ÂVæ–6öFTFV6öFTW'&÷"Â§6öâä¥4ôäFV6öFTW'&÷"’2W†3 ¢&—6R'VçF–ÖTW'&÷"‚%F†R6fVB'VçF–ÖR6GW&Rf–ÆR—2Ö—76–ær÷"–çfÆ–B¥4ôââ"’g&öÒW†0¢6Æ÷BÒ6GW&VBævWB‚&÷væW%÷ÇW5óƒö6GW&R"’–b—6–ç7Fæ6R†6GW&VBÂF–7B’VÇ6RæöæP¢–bæ÷B—6–ç7Fæ6R†6GW&VBÂF–7B’÷"6GW&VBævWB‚'66†VÖ÷fW'6–öâ"’Ò÷"æ÷B—6–ç7Fæ6R‡6Æ÷BÂF–7B“ ¢&—6R'VçF–ÖTW'&÷"‚%F†R6VÆV7FVBf–ÆR—2æ÷BfÆ–B6fVB&ö÷BÖWfVçB6GW&Râ"¢W‡V7FVBÒ¶6GW&U÷F…Ð¢–b7F–öâÓÒ&ÆÂ×6fVBÖWf–FVæ6R# ¢W‡V7FVBÂ&öGV6W'2ÒÆÅ÷6fVEöWf–FVæ6Uö÷WGWG2‚¢–bæ÷BW‡V7FVC ¢&—6R'VçF–ÖTW'&÷"†b%Væ¶æ÷vâ7F–öã¢¶7F–öçÒ"¢f–ÆW2Ò·f÷"–âW‡V7FVB–bæ—5öf–ÆR‚•Ð¢öÆör‚'WÆöEö÷WGWG2"Â7F–öãÖ7F–öâÂW‡V7FVCÖÆVâ†W‡V7FVB’Âf÷VæCÖÆVâ†f–ÆW2’Âf–ÆW3Ò"Â"æ¦ö–â‡ææÖRf÷"–âf–ÆW2’¢–bæ÷Bf–ÆW3 ¢&—6R'VçF–ÖTW'&÷"‚%F†R7F–öâ6ö×ÆWFVB'WBæöæRöb—G2W‡V7FVB&W6V&6‚÷WGWG2W†—7Bâ"¢6æ6†÷G2Ò²‡F‚ÂF‚ç&VEö'—FW2‚’’f÷"F‚–âf–ÆW5Ð¢Wf–FVæ6U÷6†Òöf–ævW'&–çE÷WÆöE÷6æ6†÷G2‡6æ6†÷G2’–b7F–öâÓÒ&ÆÂ×6fVBÖWf–FVæ6R"VÇ6R" ¢–böæÇ•ö–eö6†ævVC ¢–b7F–öâÒ&ÆÂ×6fVBÖWf–FVæ6R# ¢&—6R'VçF–ÖTW'&÷"‚"ÒÖöæÇ’Ö–bÖ6†ævVB—27W÷'FVBöæÇ’f÷"ÆÂ×6fVBÖWf–FVæ6Râ"¢Æ7E÷&V6V—BÒ÷&VEö§6öåöf–ÆR„ÄÅôUd”DTä4UõUÄôEõ$T4T•B¢–bÆ7E÷&V6V—BævWB‚'6†#Sb"’ÓÒWf–FVæ6U÷6† ¢&–çB‚%6fVBWf–FVæ6R†2æ÷B6†ævVB6–æ6RF†RÆ7B6†&VBWÆöC²6¶—–ærGWÆ–6FR&F6‚â"¢–bÆ7E÷&V6V—BævWB‚&föÆFW""“ ¢&–çB†b$ÆFW7B6†&VBWÆöC¢‡GG3¢òöv—F‡V"æ6öÒ÷µ$Uõë‹h‘éì¶»§q«^vwrite_text(json.dumps({"version": 1, "files": installed}, indent=2) + "\n", encoding="utf-8")
+from __future__ import annotations
+
+import argparse
+import base64
+import hashlib
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import uuid
+import traceback
+import urllib.error
+import urllib.request
+import zipfile
+from datetime import datetime, timezone
+from pathlib import Path
+
+REPO = "vikkitor93-coder/NMS-Derelict-Probe"
+BRANCH = "main"
+RAW_BASE = f"https://raw.githubusercontent.com/{REPO}/{BRANCH}"
+ROOT = Path(os.environ.get("LOCALAPPDATA") or Path.home()) / "NMSDerelictSurveyor"
+WORK = ROOT / "asset-work-v1"
+PROJECT_ROOT_FILE = ROOT / "project-root.txt"
+LOG_DIR = ROOT / "gui-actions"
+HELPER_LOG = LOG_DIR / "github-integration.log"
+GITHUB_DIAGNOSTIC = LOG_DIR / "github-diagnostic-latest.txt"
+ALL_EVIDENCE_UPLOAD_RECEIPT = ROOT / "all-saved-evidence-upload-receipt.json"
+
+ACTION_OUTPUTS = {
+    "all-saved-evidence": [],
+    "measure": [WORK / "generation-baseline-latest.json", WORK / "generation-measurements-summary.json", WORK / "generation-measurements.csv", WORK / "seed-room-correlation.json"],
+    "extract-caller": [WORK / "dungeon-caller-code-latest.json"],
+    "extract-upstream": [WORK / "dungeon-upstream-callers-latest.json"],
+    "extract-exact-root-caller": [WORK / "exact-root-caller-code-latest.json"],
+    "resolve-root-vtable": [WORK / "exact-root-vtable-latest.json"],
+    "analyze-seed-function": [WORK / "dungeon-seed-function-analysis-latest.json"],
+    "prepare-assets": [WORK / "room-crate-index.json", WORK / "asset-calculation-latest.json", WORK / "crate-target-discovery.json"],
+    "analyze-generation": [WORK / "generation-baseline-latest.json", WORK / "exact-root-caller-latest.json"],
+    # Directly upload the probe's atomically saved root event after NMS exits.
+    "upload-runtime-capture": [WORK / "exact-root-caller-latest.json"],
+    "analyze-dungeon": [WORK / "dungeon-generation-table.json"],
+    "analyze-crates": [ROOT / "crate-research-latest.json"],
+    "analyze-correlation": [WORK / "seed-room-correlation.json"],
+    "compare-measurements": [WORK / "generation-measurements-summary.json", WORK / "generation-measurements.csv"],
+}
+
+
+def all_saved_evidence_outputs() -> tuple[list[Path], dict[str, list[str]]]:
+    """Return existing action outputs once each, plus the actions that produce each path."""
+    unique: dict[str, Path] = {}
+    producers: dict[str, list[str]] = {}
+    for action, paths in ACTION_OUTPUTS.items():
+        if action == "all-saved-evidence":
+            continue
+        for path in paths:
+            key = os.path.normcase(str(path.resolve()))
+            unique.setdefault(key, path)
+            producers.setdefault(key, []).append(action)
+    return list(unique.values()), producers
+
+DERELICT_FARMING_FILES = {
+    "METADATA/REALITY/TABLES/REWARDTABLE.EXML",
+    "METADATA/SIMULATION/MISSIONS/TABLES/SPACEPOIMISSIONTABLE.EXML",
+    "METADATA/SIMULATION/SCENE/EXPERIENCESPAWNTABLE.EXML",
+}
+
+
+def _utc() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+
+
+def _read_json_file(path: Path) -> dict:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
+def _fingerprint_upload_files(files: list[Path]) -> str:
+    return _fingerprint_upload_snapshots([(path, path.read_bytes()) for path in files])
+
+
+def _fingerprint_upload_snapshots(snapshots: list[tuple[Path, bytes]]) -> str:
+    digest = hashlib.sha256()
+    for path, data in sorted(snapshots, key=lambda item: (item[0].name.lower(), str(item[0]).lower())):
+        digest.update(path.name.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(data)
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
+def _safe(value: object) -> str:
+    text = str(value if value is not None else "")
+    for env_name, token in (("USERPROFILE", "%USERPROFILE%"), ("LOCALAPPDATA", "%LOCALAPPDATA%")):
+        raw = os.environ.get(env_name)
+        if raw:
+            text = text.replace(raw, token).replace(raw.replace("\\", "/"), token)
+    return text
+
+
+def _log(event: str, **fields: object) -> None:
+    try:
+        LOG_DIR.mkdir(parents=True, exist_ok=True)
+        record = {"utc": _utc(), "event": event, **{k: _safe(v) for k, v in fields.items()}}
+        with HELPER_LOG.open("a", encoding="utf-8", newline="\n") as fh:
+            fh.write(json.dumps(record, ensure_ascii=False, separators=(",", ":")) + "\n")
+    except Exception:
+        pass
+
+
+def _tail(text: str, limit: int = 1200) -> str:
+    text = _safe(text or "").strip()
+    return text[-limit:]
+
+
+def _display_cmd(cmd: list[str]) -> str:
+    return " ".join(_safe(x) for x in cmd)
+
+
+def _run(cmd: list[str], *, input_text: str | None = None, check: bool = True, log_output: bool = True) -> subprocess.CompletedProcess[str]:
+    _log("command_start", command=_display_cmd(cmd))
+    try:
+        result = subprocess.run(cmd, input=input_text, text=True, capture_output=True, check=False)
+    except Exception as exc:
+        _log("command_exception", command=_display_cmd(cmd), error=f"{type(exc).__name__}: {exc}")
+        raise
+    fields: dict[str, object] = {"command": _display_cmd(cmd), "returncode": result.returncode}
+    if log_output and result.returncode != 0:
+        fields["stdout_tail"] = _tail(result.stdout)
+        fields["stderr_tail"] = _tail(result.stderr)
+    _log("command_end", **fields)
+    if check and result.returncode != 0:
+        last = _tail(result.stderr or result.stdout or "command failed", 500)
+        raise RuntimeError(f"Command failed ({result.returncode}): {last}")
+    return result
+
+
+def _gh() -> str | None:
+    found = shutil.which("gh")
+    if found:
+        _log("gh_discovery", method="PATH", found=True, executable=found)
+        return found
+    if os.name == "nt":
+        for base_name, base in (("ProgramFiles", os.environ.get("ProgramFiles")), ("LOCALAPPDATA", os.environ.get("LOCALAPPDATA"))):
+            if not base:
+                continue
+            for rel in ("GitHub CLI\\gh.exe", "Programs\\GitHub CLI\\gh.exe"):
+                candidate = Path(base) / rel
+                if candidate.is_file():
+                    _log("gh_discovery", method=base_name, found=True, executable=candidate)
+                    return str(candidate)
+    _log("gh_discovery", found=False)
+    return None
+
+
+def _auth_status(gh: str) -> subprocess.CompletedProcess[str]:
+    # Do not persist the normal successful auth output because it may include the
+    # GitHub account name. Return code is enough for diagnostics.
+    return _run([gh, "auth", "status", "--hostname", "github.com"], check=False, log_output=False)
+
+
+def _interactive_auth(gh: str) -> None:
+    cmd = [gh, "auth", "login", "--hostname", "github.com", "--git-protocol", "https", "--web"]
+    _log("auth_login_start", command=_display_cmd(cmd), mode="visible-console" if os.name == "nt" else "terminal")
+    if os.name == "nt":
+        flags = getattr(subprocess, "CREATE_NEW_CONSOLE", 0)
+        result = subprocess.run(cmd, creationflags=flags, check=False)
+    else:
+        result = subprocess.run(cmd, check=False)
+    _log("auth_login_end", returncode=result.returncode)
+    if result.returncode != 0:
+        raise RuntimeError(f"GitHub CLI authentication exited with code {result.returncode}.")
+
+
+def setup_github() -> None:
+    _log("setup_start", python=sys.version.split()[0])
+    gh = _gh()
+    if not gh and os.name == "nt" and shutil.which("winget"):
+        _log("winget_install_start", package="GitHub.cli")
+        install = _run([
+            "winget", "install", "--id", "GitHub.cli", "-e", "--source", "winget",
+            "--accept-package-agreements", "--accept-source-agreements",
+        ], check=False)
+        _log("winget_install_end", returncode=install.returncode, stderr_tail=_tail(install.stderr, 600))
+        gh = _gh()
+    if not gh:
+        raise RuntimeError("GitHub CLI (gh) is not installed. The diagnostic log records whether Winget was available.")
+    status = _auth_status(gh)
+    _log("auth_status", phase="before", returncode=status.returncode)
+    if status.returncode != 0:
+        _interactive_auth(gh)
+    status = _auth_status(gh)
+    _log("auth_status", phase="after", returncode=status.returncode)
+    if status.returncode != 0:
+        raise RuntimeError("GitHub CLI authentication did not complete.")
+    print("GitHub uploads ready.")
+    _log("setup_complete")
+
+
+def _json_cmd(cmd: list[str]) -> object:
+    p = _run(cmd)
+    try:
+        return json.loads(p.stdout)
+    except Exception as exc:
+        _log("json_parse_failure", command=_display_cmd(cmd), stdout_tail=_tail(p.stdout, 1200), error=repr(exc))
+        raise RuntimeError("GitHub CLI returned data that was not valid JSON.") from exc
+
+
+def _api_json(gh: str, method: str, endpoint: str, payload: object | None = None) -> object:
+    _log("github_api_start", method=method, endpoint=endpoint)
+    cmd = [gh, "api", "--method", method, endpoint]
+    try:
+        if payload is None:
+            result = _json_cmd(cmd)
+        else:
+            p = _run(cmd + ["--input", "-"], input_text=json.dumps(payload))
+            result = json.loads(p.stdout)
+        _log("github_api_complete", method=method, endpoint=endpoint)
+        return result
+    except Exception as exc:
+        _log("github_api_failure", method=method, endpoint=endpoint, error=f"{type(exc).__name__}: {exc}")
+        raise
+
+
+def upload_action(action: str, capture_file: str | None = None, only_if_changed: bool = False) -> None:
+    _log("upload_start", action=action)
+    gh = _gh()
+    if not gh:
+        raise RuntimeError("GitHub CLI is missing. Use Set up GitHub uploads first.")
+    auth = _auth_status(gh)
+    _log("auth_status", phase="upload", returncode=auth.returncode)
+    if auth.returncode != 0:
+        raise RuntimeError("GitHub CLI is not authenticated. Use Set up GitHub uploads first.")
+    expected = ACTION_OUTPUTS.get(action)
+    producers: dict[str, list[str]] = {}
+    if capture_file:
+        if action != "upload-runtime-capture":
+            raise RuntimeError("--capture-file is supported only for upload-runtime-capture.")
+        capture_path = Path(capture_file)
+        try:
+            captured = json.loads(capture_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise RuntimeError("The saved runtime capture file is missing or invalid JSON.") from exc
+        slot = captured.get("owner_plus_0x10_capture") if isinstance(captured, dict) else None
+        if not isinstance(captured, dict) or captured.get("schema_version") != 1 or not isinstance(slot, dict):
+            raise RuntimeError("The selected file is not a valid saved root-event capture.")
+        expected = [capture_path]
+    if action == "all-saved-evidence":
+        expected, producers = all_saved_evidence_outputs()
+    if not expected:
+        raise RuntimeError(f"Unknown action: {action}")
+    files = [p for p in expected if p.is_file()]
+    _log("upload_outputs", action=action, expected=len(expected), found=len(files), files=",".join(p.name for p in files))
+    if not files:
+        raise RuntimeError("The action completed but none of its expected research outputs exist.")
+    snapshots = [(path, path.read_bytes()) for path in files]
+    evidence_sha = _fingerprint_upload_snapshots(snapshots) if action == "all-saved-evidence" else ""
+    if only_if_changed:
+        if action != "all-saved-evidence":
+            raise RuntimeError("--only-if-changed is supported only for all-saved-evidence.")
+        last_receipt = _read_json_file(ALL_EVIDENCE_UPLOAD_RECEIPT)
+        if last_receipt.get("sha256") == evidence_sha:
+            print("Saved evidence has not changed since the last shared upload; skipping duplicate batch.")
+            if last_receipt.get("folder"):
+                print(f"Latest shared upload: https://github.com/{REPO}/tree/{BRANCH}/{last_receipt['folder']}")
+            print("NMSDS_STATUS=Evidence unchanged")
+            return
+    now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    namespace = os.environ.get("NMSDS_EVIDENCE_NAMESPACE", "").strip()
+    folder = evidence_folder(now, action, namespace)
+    if action == "all-saved-evidence":
+        # This action creates a single deduplicated snapshot for all lanes.
+        folder += "-" + uuid.uuid4().hex[:8]
+    manifest = {"version": 1, "utc": now, "action": action, "files": []}
+    if action == "all-saved-evidence":
+        manifest["uploaded_for_lanes"] = ["runtime-dispatch", "seed-lineage", "dungeon-decompile", "metadata"]
+        manifest["selection"] = "All existing unique files declared by ACTION_OUTPUTS; overlapping outputs are included once."
+    if namespace:
+        manifest["evidence_namespace"] = namespace
+    ref = _api_json(gh, "GET", f"repos/{REPO}/git/ref/heads/{BRANCH}")
+    parent = ref["object"]["sha"]
+    commit = _api_json(gh, "GET", f"repos/{REPO}/git/commits/{parent}")
+    base_tree = commit["tree"]["sha"]
+    entries = []
+    used: dict[str, int] = {}
+    for p, data in snapshots:
+        digest = hashlib.sha256(data).hexdigest()
+        name = p.name
+        n = used.get(name, 0)
+        used[name] = n + 1
+        if n:
+            name = f"{p.stem}-{n + 1}{p.suffix}"
+        _log("upload_blob_start", file=name, size=len(data), sha256=digest)
+        blob = _api_json(gh, "POST", f"repos/{REPO}/git/blobs", {"content": base64.b64encode(data).decode("ascii"), "encoding": "base64"})
+        entries.append({"path": f"{folder}/{name}", "mode": "100644", "type": "blob", "sha": blob["sha"]})
+        record = {"name": name, "size": len(data), "sha256": digest}
+        if action == "all-saved-evidence":
+            record["produced_by"] = producers.get(os.path.normcase(str(p.resolve())), [])
+            record["visible_to_lanes"] = manifest["uploaded_for_lanes"]
+        manifest["files"].append(record)
+    mbytes = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
+    mblob = _api_json(gh, "POST", f"repos/{REPO}/git/blobs", {"content": base64.b64encode(mbytes).decode("ascii"), "encoding": "base64"})
+    entries.append({"path": f"{folder}/run-manifest.json", "mode": "100644", "type": "blob", "sha": mblob["sha"]})
+    tree = _api_json(gh, "POST", f"repos/{REPO}/git/trees", {"base_tree": base_tree, "tree": entries})
+    new_commit = _api_json(gh, "POST", f"repos/{REPO}/git/commits", {"message": f"Add {action} research evidence {now}", "tree": tree["sha"], "parents": [parent]})
+    _api_json(gh, "PATCH", f"repos/{REPO}/git/refs/heads/{BRANCH}", {"sha": new_commit["sha"], "force": False})
+    if action == "all-saved-evidence":
+        try:
+            ALL_EVIDENCE_UPLOAD_RECEIPT.parent.mkdir(parents=True, exist_ok=True)
+            tmp = ALL_EVIDENCE_UPLOAD_RECEIPT.with_suffix(".json.tmp")
+            tmp.write_text(json.dumps({"schema_version": 1, "sha256": evidence_sha, "uploaded_utc": now, "folder": folder}, indent=2) + "\n", encoding="utf-8")
+            os.replace(tmp, ALL_EVIDENCE_UPLOAD_RECEIPT)
+        except OSError as exc:
+            _log("all_evidence_receipt_write_failed", error=repr(exc))
+    print(f"Complete + uploaded: https://github.com/{REPO}/tree/{BRANCH}/{folder}")
+    _log("upload_complete", action=action, folder=folder, commit=new_commit["sha"])
+
+
+def evidence_folder(timestamp: str, action: str, namespace: str = "") -> str:
+    """Return a safe, backwards-compatible evidence folder for an upload."""
+    if namespace and not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,47}", namespace):
+        raise RuntimeError("Invalid agent evidence namespace.")
+    suffix = f"{namespace}-{action}-{uuid.uuid4().hex[:8]}" if namespace else action
+    return f"research-uploads/{timestamp}-{suffix}"
+
+
+def _fetch_json(url: str) -> object:
+    _log("http_json_start", url=url)
+    try:
+        with urllib.request.urlopen(url, timeout=30) as response:
+            result = json.load(response)
+        _log("http_json_complete", url=url)
+        return result
+    except urllib.error.HTTPError as exc:
+        _log("http_json_failure", url=url, status=exc.code, reason=exc.reason)
+        raise RuntimeError(f"HTTP {exc.code} while reading the update manifest.") from exc
+    except Exception as exc:
+        _log("http_json_failure", url=url, error=f"{type(exc).__name__}: {exc}")
+        raise
+
+
+def project_root() -> Path:
+    if PROJECT_ROOT_FILE.is_file():
+        p = Path(PROJECT_ROOT_FILE.read_text(encoding="utf-8-sig").strip())
+        if p.is_dir() and (p / "VERSION.txt").is_file():
+            return p
+    raise RuntimeError("Source project folder is unknown. Relaunch using Start-Surveyor.cmd from the extracted project once.")
+
+
+def check_update() -> None:
+    root = project_root()
+    local = (root / "VERSION.txt").read_text(encoding="utf-8-sig").strip()
+    remote = _fetch_json(f"{RAW_BASE}/update-manifest.json")
+    remote_version = str(remote.get("version") or "unknown")
+    available = local != remote_version
+    print(json.dumps({"local": local, "remote": remote_version, "update_available": available}, indent=2))
+    print(f"NMSDS_REMOTE_VERSION={remote_version}")
+    if available:
+        print(f"NMSDS_STATUS=Update: {local} -> {remote_version}")
+        print(f"NMSDS_DETAIL=Available {remote_version}. Loaded/source currently {local}.")
+    else:
+        print(f"NMSDS_STATUS=Up to date: {local}")
+        print(f"NMSDS_DETAIL=Installed and remote version are both {local}.")
+    _log("check_update_complete", local=local, remote=remote_version, update_available=available)
+
+
+def _stage_installed_mod(root: Path) -> tuple[bool, str]:
+    """Copy the updated probe into the pyMHF MODS location when known."""
+    source = root / "mod" / "derelict_baseline_probe.py"
+    installed_file = ROOT / "installed-mod-file.txt"
+    if not source.is_file():
+        return False, "updated mod source missing"
+    if not installed_file.is_file():
+        return False, "installed mod path not recorded yet"
+    try:
+        dest = Path(installed_file.read_text(encoding="utf-8-sig").strip())
+        if not dest.parent.is_dir():
+            return False, "recorded installed mod folder no longer exists"
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, dest)
+        return True, str(dest)
+    except Exception as exc:
+        return False, f"{type(exc).__name__}: {exc}"
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _stage_derelict_farming_mod(root: Path, mods_root: Path) -> tuple[bool, str]:
+    """Install a user-supplied loose-file mod, keeping existing files recoverable."""
+    payload_root = root / "user-mods" / "DerelictFreighterFarming" / "payload"
+    state_path = root / "data" / "optional-mods" / "DerelictFreighterFarming.json"
+    backup_root = root / "data" / "optional-mod-backups" / "DerelictFreighterFarming"
+    if not payload_root.is_dir():
+        return False, "user-supplied DerelictFreighterFarming archive has not been imported"
+    files = sorted(p for p in payload_root.rglob("*") if p.is_file())
+    if not files:
+        return False, "user-supplied DerelictFreighterFarming payload is empty"
+    relative_files = {p.relative_to(payload_root).as_posix() for p in files}
+    if relative_files != DERELICT_FARMING_FILES or any(p.is_symlink() for p in files):
+        return False, "user-supplied payload must contain only the three expected regular EXML files"
+    try:
+        import xml.etree.ElementTree as ET
+        for source in files:
+            if source.stat().st_size > 2_000_000:
+                return False, f"mod file exceeds size limit: {source.name}"
+            ET.parse(source)
+        state = json.loads(state_path.read_text(encoding="utf-8")) if state_path.is_file() else {"files": {}}
+        previous = state.get("files", {}) if isinstance(state, dict) else {}
+        installed: dict[str, dict[str, str | None]] = {}
+        for source in files:
+            rel = source.relative_to(payload_root)
+            rel_key = rel.as_posix()
+            destination = mods_root / "DerelictFreighterFarming" / Path(*rel.parts)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            source_hash = _sha256_file(source)
+            old = previous.get(rel_key, {}) if isinstance(previous, dict) else {}
+            backup_rel = old.get("backup") if isinstance(old, dict) else None
+            if destination.is_file():
+                destination_hash = _sha256_file(destination)
+                prior_hash = old.get("sha256") if isinstance(old, dict) else None
+                if (prior_hash is None or destination_hash not in (source_hash, prior_hash)) and not backup_rel:
+                    backup = backup_root / Path(*rel.parts)
+                    if not backup.exists():
+                        backup.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(destination, backup)
+                    backup_rel = backup.relative_to(root).as_posix()
+            shutil.copy2(source, destination)
+            installed[rel_key] = {"sha256": source_hash, "backup": backup_rel}
+        state_path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = state_path.with_suffix(".tmp")
+        temporary.write_text(json.dumps({"version": 1, "files": installed}, indent=2) + "\n", encoding="utf-8")
         temporary.replace(state_path)
         return True, f"installed {len(installed)} files to {mods_root / 'DerelictFreighterFarming'}"
     except Exception as exc:
