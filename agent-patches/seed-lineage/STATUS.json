@@ -1,29 +1,25 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-04T15:21:03Z",
-  "state": "waiting_on_user",
-  "status": "New live root capture confirms the 5B4AE67D9C2A8F61 candidate for system 0001BF0004E84EFD; current-binary static caller extraction is still missing",
-  "summary": "Reviewed the newest shared evidence at research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/run-manifest.json on main. The Oct 4 15:12:15Z exact-root runtime capture (probe 0.3.35) records root seed 5B4AE67D9C2A8F61 for universe address 0001BF0004E84EFD, with use_seed=true and the same descriptor/root event. This independently reconfirms the earlier address-to-candidate association. The user previously confirmed the matching model's 11 rooms and 43 containers; that validates observed prediction accuracy for this run, not the seed derivation. The candidate remains unverified as a derivation. The new exact-root capture again records owner+0x10 as zero/null. Static evidence did not refresh: the dedicated 20261004T151459Z-seed-lineage-extract-caller-5f65c57c/run-manifest.json says action=extract-caller and contains only dungeon-caller-code-latest.json. In the newest all-saved batch, exact-root-caller-code-latest.json still identifies source_probe_version 0.3.34, root seed 9256392A2F5A74AC, and the Oct 2 executable SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; it is not code from the new 0.3.35 capture. The new runtime artifact itself has no NMS.exe hash. Thus current-binary caller/code identity and upstream seed initialization remain unverified. No further derelict traversal is needed.",
-  "next_action": "After a fresh exact-root-caller extraction bound to the Oct 4 15:12:15Z capture, compare the reported NMS.exe hash, call site, and bytes; if the binary is the same, trace static references upstream toward descriptor seed initialization. Keep the address-derived seed equality results negative and do not claim a derivation.",
-  "surveyor_request": "Use the installed Surveyor v0.3.56. In Agent Console, open the seed-lineage lane card and run its exact-root-caller action (not Extract caller). It must consume the saved root capture whose seed is 5B4AE67D9C2A8F61, address 0001BF0004E84EFD, probe 0.3.35. Upload all saved evidence after the action completes.",
-  "human_intervention_required": true,
-  "user_steps": [
-    "Leave NMS closed; no derelict run or traversal is needed.",
-    "Open Surveyor v0.3.56 and go to Agent Console.",
-    "On the seed-lineage card, click the action named “Extract exact root caller + upload” (do not click “Extract caller”).",
-    "Check that its result identifies root seed 5B4AE67D9C2A8F61 and capture time 2026-10-04 15:12:15Z, and reports an NMS.exe SHA-256 plus the caller code around return RVA 02C0497A. If the action reports a different seed/time or no hash, stop and send me that result text.",
-    "After success, click “Upload all saved evidence” once, then tell me “check”."
-  ],
-  "success_condition": "A fresh exact-root-caller-code artifact sourced from the Oct 4 15:12:15Z probe 0.3.35 capture records the matching root seed/address and an NMS.exe SHA-256/code window for caller return RVA 02C0497A. No traversal required.",
+  "updated_utc": "2026-10-04T15:29:51Z",
+  "state": "in_progress",
+  "status": "Runtime candidate reconfirmed; current binary and external caller bytes validated; continuing static seed-lineage analysis",
+  "summary": "Reviewed the newest Seed-B evidence on main: research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726/run-manifest.json. Its dedicated extraction folder 20261004T152610Z-seed-lineage-extract-caller-883e6d9e contains dungeon-caller-code-latest.json from source probe 0.3.35/session 20261004T094357Z_0001BF0004E84EFD. It records root seed 5B4AE67D9C2A8F61 for universe address 0001BF0004E84EFD, NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4, and baseline_window_matches_exe=true. The live exact-root capture's 224 bytes at external caller 02C048FA–02C0497A match byte-for-byte the old static exact-root-caller window; the same executable hash is confirmed by the current session. This ties the static callsite to the fresh runtime capture despite stale metadata in the old exact-root-code file. The 5B4AE67D9C2A8F61 address-to-root-capture association is now strongly confirmed, but its derivation remains unverified; public system-seed and initial-RNG direct equality remain false. User-confirmed 11 rooms/43 containers remain a validation of the model's prediction accuracy, not seed provenance.",
+  "next_action": "Continue offline tracing from the confirmed executable: inspect static callers/data flow upstream of the logical dungeon entry and descriptor setup to identify where descriptor primary seed (+0x10) and use_seed (+0x18) are initialized. Compare only code from executable SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4. Do not claim a derivation until an address-to-descriptor seed transform is directly evidenced.",
+  "surveyor_request": "",
+  "human_intervention_required": false,
+  "user_steps": [],
+  "success_condition": "A reproducible static data-flow path directly links the universe address or a proven intermediate value to the dungeon descriptor primary seed; until then retain the candidate label.",
   "evidence_to_return": [
-    "Newest reviewed batch: research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/run-manifest.json on main.",
-    "Fresh runtime measurement: exact-root-caller-latest.json; probe 0.3.35; root seed 5B4AE67D9C2A8F61; address 0001BF0004E84EFD; use_seed=true; UTC 2026-10-04T15:12:15.676Z.",
-    "Matching layout model remains 11 rooms and 43 containers, user-confirmed physically; predictions are not derivation evidence.",
-    "Latest dedicated Seed-B extraction manifest: research-uploads/20261004T151459Z-seed-lineage-extract-caller-5f65c57c/run-manifest.json; action extract-caller; only dungeon-caller-code-latest.json produced.",
-    "Stale exact-root static file in the newest batch: source probe 0.3.34, root seed 9256392A2F5A74AC, NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4.",
-    "No seed derivation proven; repeated address-to-candidate capture strengthens association only.",
-    "Installed Surveyor reported by user: v0.3.56; current live evidence reports probe v0.3.35."
+    "Latest reviewed batch: research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726/run-manifest.json.",
+    "Dedicated extract upload: research-uploads/20261004T152610Z-seed-lineage-extract-caller-883e6d9e/run-manifest.json; it is action extract-caller, but its generated dungeon-caller-code artifact is fresh for probe 0.3.35 and the matching 0001BF0004E84EFD session.",
+    "Fresh static executable identity: NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; size 88,545,352; timestamp 6ABB9CC5; extracted caller baseline window matches executable.",
+    "Fresh runtime exact-root capture: root seed 5B4AE67D9C2A8F61 for universe address 0001BF0004E84EFD; caller return RVA 02C0497A.",
+    "Byte comparison performed: live 224-byte caller window beginning at 02C048FA exactly matches the corresponding bytes in the static exact-root caller artifact; artifact's older capture metadata is stale, but the code bytes and executable hash are now corroborated.",
+    "Seed derivation from universe address remains unproven; user-confirmed 11-room/43-container agreement validates model accuracy only.",
+    "Installed Surveyor reported by user: v0.3.56; probe reported by fresh evidence: v0.3.35.",
+    "Full derelict traversal and additional human action are not required for the current offline analysis."
   ],
-  "full_derelict_required": false
+  "full_derelict_required": false,
+  "evidence_path": "research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726/run-manifest.json"
 }
