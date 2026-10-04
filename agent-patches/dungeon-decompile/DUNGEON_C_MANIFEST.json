@@ -41,7 +41,7 @@
     "published_consumer_function_found": false,
     "next_method": "The 2026-10-04 exact-root bounded function is now disassembled from its .pdata start. 33 decoded direct E8 sites map to 7 distinct unnamed targets; use CALLBACK_DIRECT_CALL_INVENTORY.json. Next obtain helper .pdata ranges/bodies from the v0.3.39 exporter and matching NMS.exe, then analyze record updates at RSI+0x48 and availability bits.",
     "candidate_identity_rule": "Candidate RVAs remain unnamed until full helper bodies and call semantics are validated; the runtime owner+0x10 field is not the caller's vtable slot.",
-    "post_update_evidence": "research-uploads/20261004T224430Z-all-saved-evidence-f138ff45/"
+    "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/"
   },
   "human_validation": {
     "required": true,
@@ -169,7 +169,7 @@
     "fresh_user_validated_run": "System 0001BF0004E84EFD / Angoto: CARGO_FLOATERS high-confidence inference; modeled 11 main rooms and 43 predicted containers (30 Salvage + 13 Footlockers) matched the user's physical traverse. User attributes changes from old system/run generation and replayability to the game update. Root seed 5B4AE67D9C2A8F61 remains candidate/unverified."
   },
   "latest_callback_analysis": {
-    "evidence_path": "agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json",
+    "evidence_path": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-code-latest.json",
     "source_attachment": "exact-root-caller-code-latest(2).json",
     "source_attachment_sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
     "source_nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
@@ -181,6 +181,22 @@
       "No helper target .pdata ranges/bodies were in the attachment.",
       "The newer v0.3.39 helper exporter has not yet produced/uploaded its candidate bodies.",
       "owner+0x10 = 0 in the 2026-10-04 capture and does not identify the runtime caller's [RDX+0x10] dispatch slot."
-    ]
+    ],
+    "attachment_shared_as": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-code-latest.json"
+  },
+  "current_shared_upload_review": {
+    "manifest": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/run-manifest.json",
+    "uploaded_utc": "2026-10-04T23:17:27Z",
+    "root_capture_utc": "2026-10-04T23:17:15.827Z",
+    "probe_version": "0.3.37",
+    "universe_address": "0001BF0004E84EFD",
+    "system_name": "Angoto",
+    "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
+    "owner_plus_0x10": "0000000000000000",
+    "target_identity": "null-or-low-address",
+    "code_export_tool_version": "0.3.37",
+    "helper_call_candidates_present": false,
+    "helper_bodies_present": false,
+    "user_action": "No new capture or traversal. Run the offline v0.3.39 helper exporter against the matching installed NMS.exe, then upload the generated artifact."
   }
 }
