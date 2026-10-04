@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T23:18:26Z",
+  "reviewed_utc": "2026-10-04T23:25:58Z",
   "state": "callback-direct-call-inventory-reviewed-awaiting-helper-bodies",
   "verified": {
     "historical_baseline": {
@@ -346,37 +346,52 @@
     }
   },
   "blocked": {
-    "reason": "The user-provided bounded callback body is accessible and its 33 direct E8 call sites across 7 targets are now inventoried. The attached export is tool_version 0.3.37 and lacks helper candidates/bodies; collecting target .pdata ranges and bytes requires the v0.3.39 helper exporter plus matching NMS.exe. NMS.exe exists in the user's Library but transfer to this workspace failed twice, so local binary scanning cannot be done here.",
+    "reason": "The latest shared upload includes a fresh 0.3.37 root event and the full bounded function, but the code export still lacks the v0.3.39 helper candidate bodies. The matching NMS.exe cannot be transferred into this workspace (Library download helper failed twice). The 33 direct call sites across seven unnamed targets are already inventoried and validated from the bounded body.",
     "human_action_required": true,
     "full_traversal_required": false,
     "nms_runtime_required": false,
     "duplicate_capture_or_upload_required": false,
-    "needed": "Use the complete helper-export build NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-helper-export.zip (SHA-256 95d7ee614fa1d13bb342cb56949cddb5e4cbec0283ba871751d0ea614091f11f), not the GitHub agent/dungeon-decompile branch archive. Extract it to a normal local folder; run Extract-Runtime-Target-Function.cmd from the extracted package root. The saved NMS.exe is auto-detected from Surveyor's settings; no NMS launch is needed. If it completes, click Surveyor → GitHub / updates → Upload all saved evidence. Return “check”.",
-    "expected_output": "exact-root-caller-code-latest.json with runtime_target_function.direct_call_candidates and bounded target_function_body entries (tool_version 0.3.39); candidates remain heuristic until boundaries and .pdata ranges are independently checked.",
-    "success_condition": "The new shared upload includes at least one candidate helper body and records the NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4."
+    "needed": "Use the complete helper-export build NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-helper-export.zip (SHA-256 95d7ee614fa1d13bb342cb56949cddb5e4cbec0283ba871751d0ea614091f11f), not the GitHub agent/dungeon-decompile branch archive. Extract it to a normal local folder and run Extract-Runtime-Target-Function.cmd from the extracted package root. No NMS launch or traversal is needed. Confirm the output contains runtime_target_function.direct_call_candidates and bounded target_function_body entries; then click Surveyor → GitHub / updates → Upload all saved evidence. Tell me “check”.",
+    "expected_output": "A helper-exported exact-root-caller-code-latest.json with runtime_target_function.direct_call_candidates and bounded target_function_body entries; candidates remain heuristic until matched to decoded instruction boundaries and each target .pdata range.",
+    "success_condition": "The next shared upload contains candidate helper bodies and confirms NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4."
   },
-  "next_lane_owned_step": "When helper bodies arrive, compare their .pdata ranges with the independently disassembled E8 sites in CALLBACK_DIRECT_CALL_INVENTORY.json, reject any byte-scan candidates not at decoded boundaries, and trace only bodies that write/replace RSI+0x48 or set availability bits on the four-field record.",
+  "next_lane_owned_step": "After helper bodies arrive, compare the helper exporter’s raw E8 candidates with CALLBACK_DIRECT_CALL_INVENTORY.json and validate exact sites, target RVAs, and .pdata ranges; then trace only routines affecting RSI+0x48 and the four-field completion record.",
   "latest_shared_upload_review": {
-    "path": "research-uploads/20261004T224430Z-all-saved-evidence-f138ff45/",
-    "manifest": "research-uploads/20261004T224430Z-all-saved-evidence-f138ff45/run-manifest.json",
-    "uploaded_utc": "2026-10-04T22:44:30Z",
-    "runtime_capture": {
+    "path": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/",
+    "manifest": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/run-manifest.json",
+    "uploaded_utc": "2026-10-04T23:17:27Z",
+    "exact_root_event": {
+      "utc": "2026-10-04T23:17:15.827Z",
       "probe_version": "0.3.37",
-      "capture_utc": "2026-10-04T22:41:40.245Z",
-      "root_event_utc": "2026-10-04T22:41:40.244Z",
       "universe_address": "0001BF0004E84EFD",
       "system_name": "Angoto",
       "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
-      "descriptor_pointer": "00000254AAE08D28",
-      "logical_entry_rcx": "00000255EB129960",
-      "logical_entry_rdx": "00000254AAE08C00",
-      "rdx_plus_0x10": "0000000000000000",
-      "owner_plus_0x10": "0000000000000000",
+      "descriptor_pointer": "0000015E2450A928",
       "caller_return_rva": "02C0497A",
+      "owner_pointer": "0000015E2450A800",
+      "owner_plus_0x10": "0000000000000000",
       "target_identity": "null-or-low-address"
     },
-    "shared_code_export": "exact-root-caller-code-latest.json is still sourced from probe 0.3.35 and does not contain the fresh 0.3.37 runtime_target_function.",
-    "direct_attachment": "The separately attached exact-root-caller-code-latest(2).json (SHA-256 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2) contains the 0.3.37 .pdata-bounded body and was reviewed; it is not in this shared upload folder."
+    "exported_code": {
+      "path": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-code-latest.json",
+      "sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
+      "tool_version": "0.3.37",
+      "runtime_function_range": "00634930..00634E03",
+      "function_sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5",
+      "direct_call_candidates_present": false,
+      "helper_bodies_present": false
+    },
+    "generation_summary": {
+      "source": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/generation-baseline-latest.json",
+      "session": "20261004T151219Z_0001BF0004E84EFD",
+      "source_probe_version": "0.3.35",
+      "system": "0001BF0004E84EFD / Angoto",
+      "preset": "CARGO_FLOATERS (high-confidence inference)",
+      "modeled_rooms": "11 main, 0 dead-end",
+      "predicted_containers": "43 (30 Salvage + 13 Footlockers)",
+      "user_physical_confirmation": "matched user's physical traversal",
+      "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)"
+    }
   },
   "launcher_error_review": {
     "observed": "Windows launcher reported a saved Python path prefixed by UTF-8 BOM display bytes, then import failure for analyze_nms_seed_function.",
@@ -384,9 +399,10 @@
     "disposition": "This failure explains the branch-archive attempt. The separate 0.3.37 bounded-function attachment confirms the extraction later succeeded; do not request a duplicate run or upload."
   },
   "evidence_paths": [
-    "research-uploads/20261004T224430Z-all-saved-evidence-f138ff45/run-manifest.json",
-    "research-uploads/20261004T224430Z-all-saved-evidence-f138ff45/exact-root-caller-latest.json",
+    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/run-manifest.json",
+    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-latest.json",
+    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-code-latest.json",
     "agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json",
-    "/NMS modding/exact-root-caller-code-latest(2).json (user attachment; SHA-256 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2)"
+    "/NMS modding/exact-root-caller-code-latest(2).json (SHA-256 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2)"
   ]
 }
