@@ -1,32 +1,38 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-04T10:26:17Z",
+  "updated_utc": "2026-10-04T10:35:56Z",
   "state": "working",
-  "status": "Traversal confirms new-system room and crate model; owner+0x10 target unresolved",
-  "summary": "In research-uploads/20261004T101244Z-all-saved-evidence-2a766630/, generation session 20261004T094357Z_0001BF0004E84EFD is system 0001BF0004E84EFD. Root event at 09:43:51.577Z has seed 5B4AE67D9C2A8F61 and matches the 09:43:51.578Z Runtime-A capture. User confirms the rooms and crate counts in this generation model matched their physical traversal. The analyzed layout is 11 main rooms, 0 dead ends; analyzer predicts 30 Salvage + 13 Footlockers = 43 targets. These counts are now user-confirmed for this run. CARGO_FLOATERS remains a high-confidence preset inference; table says 7 rooms and room_model_status is needs-review. Runtime-A captured owner 000001D026704000, but owner+0x10 is zero and target_identity is null-or-low-address; no callable destination is identified. Root seed remains candidate/unverified. The evidence does not establish why the access mod behaved unexpectedly.",
-  "progress": "The new-system generation room/crate model is confirmed against the user's traversal. Runtime-A call-target identification remains open; no more game capture is required for this run.",
-  "next_action": "Inspect the decoded call at RVA 02C04977 (FF 52 10, indirect call through [RDX+0x10]) and establish whether RDX is the captured owner pointer before interpreting the zero slot. The published caller-code artifact is from an earlier capture; do not assume register identity.",
-  "surveyor_request": "No additional Surveyor capture is needed for the current batch.",
-  "human_intervention_required": false,
-  "user_steps": [],
-  "success_condition": "Determine whether the captured owner+0x10 slot is the object used by the indirect call and identify a valid destination; keep Runtime-A incomplete until then.",
+  "status": "Entry-time dispatch capture built; awaiting live verification",
+  "summary": "Evidence from research-uploads/20261004T101244Z-all-saved-evidence-2a766630/: system 0001BF0004E84EFD, seed candidate 5B4AE67D9C2A8F61, external return RVA 02C0497A, owner 000001D026704000, descriptor owner+0x128. The root-add sample read owner+0x10 as zero; the matched logical-entry record was 1.383 ms old. Static bytes at 02C04977 are 48 8B 11 FF 52 10. Inference: the delayed zero does not identify the call-time value and upload timing is not indicated. Probe 0.3.35 captures the external-entry slot through recursive calls and separately samples root addition. User confirms the 11-room/43-target model matched their physical traversal; the root seed remains candidate/unverified.",
+  "progress": "Candidate app v0.3.54 / probe 0.3.35 is built. Patch is reproducible against v0.3.53; 178 tests and compileall pass; ZIP integrity passes. PR publication and live Windows/NMS validation remain.",
+  "blockers": [
+    "Live validation requires the v0.3.54 app update to be available, NMS fully restarted, and one root event captured."
+  ],
+  "next_action": "Publish the v0.3.54 candidate PR. After it is merged and the updater offers the build, review one uploaded root event for entry-time slot value/identity and compare it with the root-add sample.",
+  "human_intervention_required": true,
+  "human_action": {
+    "required": true,
+    "surveyor_request": "Install Runtime-A 0.3.35 and capture one root event with the game restarted.",
+    "steps": [
+      "After v0.3.54 is available in Surveyor's updater, click Check for updates and install v0.3.54.",
+      "Fully exit NMS so the old probe is unloaded.",
+      "Start NMS from Surveyor and load the derelict only until the exact root event and entry-time Root dispatch +0x10 capture appear.",
+      "Close NMS, then click Upload captured root event.",
+      "Tell the Runtime-A/Main agent check so it can compare the entry-time slot with the root-add sample."
+    ],
+    "success_condition": "Uploaded exact-root evidence includes the entry-time owner+0x10 raw value and target identity, separately labeled root-add read, and matching descriptor correlation.",
+    "evidence_to_return": [
+      "run-manifest.json",
+      "exact-root-caller-latest.json"
+    ],
+    "full_derelict_required": false
+  },
   "evidence_to_return": [
     "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json",
     "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/exact-root-caller-latest.json",
-    "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/generation-baseline-latest.json",
     "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/exact-root-caller-code-latest.json"
   ],
-  "full_derelict_required": false,
-  "chat_prompt": "No further game action is required for this batch; Runtime-A will continue the caller/register analysis.",
-  "human_action": {
-    "required": false,
-    "surveyor_request": "No additional user action required.",
-    "steps": [],
-    "success_condition": "Lane-owned static analysis continues from the captured caller offset and current paired root evidence.",
-    "evidence_to_return": [
-      "Current paired shared evidence batch and user's physical-traversal confirmation"
-    ],
-    "full_derelict_required": false
-  }
+  "extension_version": "1.0.2",
+  "full_derelict_required": false
 }
