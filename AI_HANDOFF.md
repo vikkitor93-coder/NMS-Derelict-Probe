@@ -324,3 +324,10 @@ The first delivered launcher produced the Windows path-syntax error on the user'
 ## Callback return correlation (2026-10-04)
 
 - Caller-return correlation: the bounded function returns the four-field completion boolean in EAX; the external caller compares against 1, then unlinks and frees its 0x58-byte record. This supports a completion-check/record-processing callback interpretation; class/subsystem identity and raw dispatch target remain unknown.
+
+
+## DUNGEON-C tool 0.3.39
+
+The offline target exporter now scans for raw `E8` bytes and includes helper bodies only when the resulting candidate target maps to an executable section and `.pdata` function. Results are capped (128 call candidates, 12 bodies, 512 KiB total) and marked heuristic because instruction boundaries are not decoded. The fresh 2026-10-04 capture ties the callback's all-four-fields boolean return to caller-side record removal; exact class and indirect slot destination remain unknown. Focused tests: 8/8; full suite: 177/177; compileall passed.
+
+Next: user runs the updated extractor and shares the regenerated supported caller-code evidence. No NMS launch or traversal is needed.
