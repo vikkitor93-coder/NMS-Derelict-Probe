@@ -33,7 +33,7 @@ except ImportError:  # Running surveyor_controller.py directly from the tools fo
     import agent_console
     import agent_ui_extensions
 
-CONTROLLER_VERSION = "0.3.56"
+CONTROLLER_VERSION = "0.3.57"
 AGENT_REFRESH_INTERVALS_MS = {
     "20 seconds": 20_000,
     "1 minute": 60_000,
