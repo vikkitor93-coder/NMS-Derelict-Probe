@@ -6,7 +6,7 @@ Allow multiple AI coding/research agents to work simultaneously without blocking
 
 ## Branch ownership
 
-- `main`: integration-only stable line.
+- `main`: stable shared line. Completed, validated lane changes may be pushed directly to `main`; a PR or separate integration-agent merge is optional. Keep unfinished experiments on the lane branch.
 - `agent/runtime-dispatch`: live dispatch/caller/object classification.
 - `agent/seed-lineage`: address/system/POI/root seed derivation and RNG research.
 - `agent/dungeon-decompile`: historical/current binary mapping and `GcDungeonGenerationParams` consumer discovery.
@@ -28,9 +28,22 @@ Each lane may modify its own Surveyor immediately. It must:
 6. preserve read-only NMS behavior unless a separate explicit design review approves a game-state write;
 7. ship its own complete variant ZIP and tests in the PR.
 
-## PR contract
+## Direct publish contract
 
-Every agent PR must include:
+Agents are authorized to publish their own completed changes directly to `main`; do not stop for a separate integration-agent merge or ask the user to approve the push. Use a lane branch while exploring or when a change is incomplete. Before publishing directly to `main`:
+
+1. Inspect the current `main` and confirm the change does not overwrite newer work.
+2. Create a recoverable backup branch from the current `main` (or record the exact base commit and preserve a revert path).
+3. Run the relevant tests and checks; report exact results and any checks that require the user's Windows/NMS environment.
+4. Publish the smallest complete change set to `main`, including the lane evidence/status/extension manifest and index updates when those are part of the task. Never publish a half-updated extension index or mismatched hashes.
+5. Update `WORKSPACE_STATE.json`, the lane manifest/status, and `AI_HANDOFF.md` as applicable so the Agent Console and the next AI see the published state.
+6. Report the resulting main commit, backup reference, tests, limitations, and rollback command/steps.
+
+If a direct push is unavailable or rejected by repository permissions, finish the commit on the lane branch and open a PR as a fallback. A PR is not the default required extra step.
+
+## Publish record
+
+Every direct publish or PR must include:
 
 - objective and result;
 - files changed;
@@ -41,7 +54,7 @@ Every agent PR must include:
 - migration/rollback notes;
 - proposed integration subset (the smallest useful change main should take).
 
-The integration agent may merge only the useful subset; experimental UI/tools can remain lane-specific until proven.
+Only publish a completed, tested change. Keep experiments lane-specific until they are proven; when proven, publish the smallest useful subset directly to `main` and preserve the lane branch if it is still useful.
 
 ## Runtime test handoff
 
