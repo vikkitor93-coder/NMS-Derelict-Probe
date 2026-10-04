@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T15:17:40Z",
+  "reviewed_utc": "2026-10-04T15:20:00Z",
   "state": "new-system-identity-captured-layout-user-validated-dispatch-target-unresolved",
   "verified": {
     "historical_baseline": {
@@ -128,7 +128,7 @@
       "session_id": "20261004T151219Z_0001BF0004E84EFD",
       "universe_address": "0001BF0004E84EFD",
       "system_name": "Angoto",
-      "probe_version": "0.3.34",
+      "probe_version": "0.3.35",
       "preset": "CARGO_FLOATERS",
       "preset_confidence": "high-inference",
       "modeled_rooms": {
@@ -148,7 +148,12 @@
         "dead_ends": 0
       },
       "physical_counts_in_this_capture": false,
-      "relation_to_user_confirmed_run": "same universe address and root seed; the user previously confirmed 11 rooms and 30 Salvage + 13 Footlockers for this system"
+      "relation_to_user_confirmed_run": "same universe address and root seed; the user previously confirmed 11 rooms and 30 Salvage + 13 Footlockers for this system",
+      "analyzer_room_model_status": "needs-review",
+      "layout_signature_sha256": "bdf33257e83d2b02d161e69ab72c64cbeb274c019031214007aa3babdc6a0c8a",
+      "multiset_signature_sha256": "d7c0b57221282039c6b97c7851945365c552939bb8d4326a189b829d44306f8a",
+      "generation_signature_sha256": "bdf33257e83d2b02d161e69ab72c64cbeb274c019031214007aa3babdc6a0c8a",
+      "signature_comparison": "All three signatures and the canonical room sequence exactly match the prior user-validated 09:43:57 capture. This is repeatability of analyzer output, not a second physical count."
     }
   },
   "evidence": {
@@ -166,15 +171,15 @@
       "dungeon-upstream-callers-latest.json",
       "dungeon-generation-table.json"
     ],
-    "note": "The newest shared batch adds a 15:12 root capture from probe 0.3.35, capture_version 2. It records universe_address_hex_at_capture and runtime metadata for system 0001BF0004E84EFD (Angoto), correlating the root event and seed 5B4AE67D9C2A8F61. The generation model is unchanged and matches the physical counts/layout the user confirmed earlier; this batch's measurement summary/CSV are unchanged and manual room markers remain zero.",
-    "run_manifest_sha256": "f06defdaf8913504ad6fce108958159aef2f26e3"
+    "note": "The newest shared batch adds a 15:12 root capture from probe 0.3.35, capture_version 2, and a generation rerun whose layout and generation signatures exactly match the user-validated 09:43:57 run. The new batch still has zero manual room markers; its rerun does not independently record a second physical count.",
+    "run_manifest_sha256": "9cb9a7c4169432385e1f24435a5ab990b9b03645"
   },
   "blocked": {
-    "reason": "System identity is now captured, and the 11-room/43-container model was user-validated earlier. Consumer analysis remains blocked because the latest root capture still has owner+0x10=0 and omits the actual [RDX+0x10] dispatch target.",
+    "reason": "System identity and a second generation-analysis capture are now available. The latter exactly matches the earlier user-validated analyzer signatures, but it has no manual room tally. Runtime consumer analysis remains blocked: probe 0.3.35 captures owner+0x10=0 and does not include RCX/RDX or the qword at [RDX+0x10]. Runtime-A's published current request is for probe 0.3.36 entry-time owner+0x10 capture; DUNGEON-C still needs the actual virtual-dispatch target or sufficient receiver/vtable evidence.",
     "human_action_required": true,
     "full_traversal_required": false,
     "duplicate_upload_required": false,
-    "needed": "Runtime-A needs to capture RCX, RDX and qword [RDX+0x10] at the decoded callsite. After that code is installed, a live NMS root event is required to validate the target; no full traversal is needed."
+    "needed": "No full traversal or duplicate upload is needed. Runtime-A's published short-capture request still requires Surveyor 0.3.57/probe 0.3.36; the new capture is probe 0.3.35. Resolving this lane's call target will additionally require the actual FF 52 10 target ([RDX+0x10]) or equivalent receiver/vtable evidence."
   },
-  "next_lane_owned_step": "Carry the latest runtime-linked callsite analysis forward: universe identity is fixed, but the target is not. Continue DUNGEON-C consumer analysis when Runtime-A publishes a capture containing the actual [RDX+0x10] function pointer and resolved module/RVA. Preserve the user's physical validation and historical 35-container baseline separately."
+  "next_lane_owned_step": "Continue consumer analysis when a shared capture provides the actual [RDX+0x10] dispatch target or equivalent receiver/vtable evidence. In parallel, compare that result with Runtime-A's 0.3.36 logical-entry sample; no further physical count/traversal is required."
 }
