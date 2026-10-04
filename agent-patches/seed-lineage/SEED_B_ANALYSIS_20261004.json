@@ -139,7 +139,7 @@
     "requested_target_rva": "00637660"
   },
   "static_callers_00637660": {
-    "reviewed_utc": "2026-10-04T20:57:50Z",
+    "reviewed_utc": "2026-10-04T21:45:37Z",
     "evidence_path": "User attachment: seed-b-static-callers-00637660.json (local chat attachment; not in research-uploads)",
     "attachment_sha256": "312b409d39718caa49fa76a07bf07318b8bbddaeae390cc7bef9e4bf61d832eb",
     "executable_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
@@ -179,7 +179,7 @@
       "All three are direct-call byte observations from static windows. The report says references alone do not prove runtime dispatch or semantics."
     ],
     "interpretation": "The existing descriptor-flow hypothesis can now be followed through three direct wrapper callers. The small windows do not yet identify how the input objects are initialized or prove that any callsite input is the universe-address-derived root seed. Root-seed derivation remains unproven.",
-    "next_lane_action": "Continue offline from the three local source records: trace the producer calls 002D63670 and its downstream 002D641C0 path, then identify whether any caller route feeds the root-resource descriptor observed at runtime. Use .pdata boundaries to avoid heuristic function splits. If the static callsites cannot be tied to the runtime root event, use exact runtime caller/descriptor correlation as the criterion for requesting a small targeted live capture; no traversal is currently justified.",
+    "next_lane_action": "Continue tracing the remaining 02D042E1 and 02D04AF8 records upstream, including their function entry contexts and inputs to the stack record construction. Check whether either is statically linked to the runtime root-resource caller/descriptor. If no static path proves that link, design a narrowly filtered, read-only runtime sample of incoming R9 at 00637660 (source bytes +0x10/+0x18 and caller return RVA) and compare it with the captured root seed. Do not request a traversal unless the needed hook requires a new session.",
     "limitations": [
       "Static callers and descriptor copy are measured; function semantics and their relation to the runtime root-resource event are not proven.",
       "The three direct callers' source records are local temporaries; the inspected code does not show a direct assignment from universe address or root seed.",
@@ -242,7 +242,36 @@
         "The direct caller at 02D042E1 sets R9 to local address [rbp-0x28]; the direct caller at 02D04AF8 sets R9 to [rbp-0x38]; the caller at 001B2CF9 sets R9 to [rbp-0x20].",
         "At 02D042E1 the local source record is populated from a preceding 32-byte copy and zero-initialized fields; at 02D04AF8 a local 32-byte record is assembled from a calculated 16-byte value and zeroed fields. The visible code does not identify these records as the live derelict root descriptor."
       ],
-      "interpretation": "The static data flow now identifies the wrapper's descriptor-source parameter precisely: it is the incoming R9 pointer, forwarded through 00637DB0 to 006377E0 and copied by 00227A40. This is a more specific conclusion than the earlier generic 'upstream descriptor argument' description. The three callers prepare distinct local records. No evidence yet ties any of those three caller paths to the live NMS root-resource event, current root seed 5B4AE67D9C2A8F61, or the universe address. The candidate remains unverified as a derivation."
+      "interpretation": "The static data flow now identifies the wrapper's descriptor-source parameter precisely: it is the incoming R9 pointer, forwarded through 00637DB0 to 006377E0 and copied by 00227A40. This is a more specific conclusion than the earlier generic 'upstream descriptor argument' description. The three callers prepare distinct local records. No evidence yet ties any of those three caller paths to the live NMS root-resource event, current root seed 5B4AE67D9C2A8F61, or the universe address. The candidate remains unverified as a derivation.",
+      "scanner_enhancement": {
+        "path": "agent-patches/seed-lineage/seed_b_trace_static_callers.py",
+        "commit": "53d9d1c79329752461564f396e2e98115dc644a8",
+        "sha256": "423b2215488b017d7ddfb289d212cca110b18301dbbd984e15313a237f089ca9",
+        "tests_path": "agent-patches/seed-lineage/test_seed_b_trace_static_callers.py",
+        "tests_commit": "7e56392e49058f3471d47a79eb1ec620cc34c831",
+        "tests_sha256": "c0ade179da036ebfa852d3c662c4b9f338ffb0d194978db008bd8b11563466ac",
+        "test_result": "2/2 passed; py_compile passed; scanner run against supplied NMS.exe reproduced the three 00637660 caller function ranges from .pdata."
+      }
+    },
+    "caller_path_analysis": {
+      "reviewed_utc": "2026-10-04T21:45:37Z",
+      "direct_seed_consumer": "The call from 00637660 to 006388A0 can fall through the adjacent .pdata code fragment at 006388F9. That fragment reads 16 bytes from object+0x138 and tests object+0x140, matching the documented seed/use-seed fields in the constructed object.",
+      "direct_flow": "R9 input to 00637660 is preserved through 00637DB0 and copied by 00227A40 into object+0x128. 00637660 then passes the generated object as the second argument to 006388A0.",
+      "caller_001B2CF9": {
+        "measured": "Its R9 points to local record [rbp-0x20]. Before the wrapper call, helper 002D63670 fills the record's +0x10/+0x18 bytes from [rbp-0x60]. That local qword was computed from the sign-extended 32-bit value at global-manager pointer 0x145029FC0+0x74 through xor-right-33 / multiply-by-0x64DD81482CBD31D7 / xor-right-33 / multiply-by-0xE36AA5C613612997 / xor-right-33. The +0x18 byte is initialized to 1.",
+        "derived_check": "Inverting this exact mixer for root candidates 5B4AE67D9C2A8F61, 9256392A2F5A74AC, and 00C9E8DF0327789E yields inverse inputs 378CE29B6CD8B212, 6ECEE5395C48AD87, and F86D1AC5581C5D11. None is a sign-extended 32-bit integer.",
+        "interpretation": "Assuming the static copy flow is unchanged, this specific caller/mixer path cannot directly emit those root candidates from its 32-bit input. It is excluded as a direct source for those candidate values; this does not exclude the other wrapper callers or a later transform."
+      },
+      "caller_02D042E1": {
+        "measured": "R9 points to local record [rbp-0x28]. Its seed field bytes are copied from a stack qword computed in the same routine using a context value, loop/index data, and multipliers including 0x5A76F899. The exact values of those runtime inputs are not present in the static executable.",
+        "interpretation": "The routine computes a candidate seed-like value from runtime context. No direct relationship to the captured universe address or root-seed candidates is proven."
+      },
+      "caller_02D04AF8": {
+        "measured": "R9 points to local record [rbp-0x38]. The caller assembles a 16-byte pair from a base value plus offsets, and the record is routed through the wrapper.",
+        "interpretation": "The value source and its relationship to the live derelict root seed remain unresolved."
+      },
+      "direct_callers": "Only 02D042E1 and 02D04AF8 remain plausible among the three direct callers for continued tracing; 001B2CF9 is ruled out as a direct emitter of the known candidate values under the observed copy/mixer path.",
+      "evidence_quality": "The first caller formula and copy path are static byte-derived facts. Exclusion is a conditional inference assuming the observed copy is used without a later transform."
     }
   }
 }
