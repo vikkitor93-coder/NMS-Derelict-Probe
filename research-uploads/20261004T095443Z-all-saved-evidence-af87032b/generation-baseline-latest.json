@@ -1,0 +1,2287 @@
+{
+  "version": 1,
+  "analysis_tool_version": "0.3.24",
+  "session_id": "20261004T091738Z_00001A0004E84EFD",
+  "probe_version": "0.3.34",
+  "universe_address_hex": "00001A0004E84EFD",
+  "reality_index": 0,
+  "galactic_address": {
+    "planet_index": 0,
+    "solar_system_index": 26,
+    "voxel_x": -259,
+    "voxel_y": 4,
+    "voxel_z": -380
+  },
+  "dungeon_scene_instances": 150,
+  "logical_generated_chunks": 10,
+  "predicted_salvage_crates": 11,
+  "predicted_crew_footlockers": 5,
+  "predicted_target_containers": 16,
+  "preset_inference": {
+    "preset": "MEDI_FLOATERS",
+    "confidence": "high",
+    "candidates": [
+      "MEDI_FLOATERS"
+    ],
+    "family": "MEDI",
+    "hazard": "FLOATERS",
+    "family_scene_counts": {
+      "CARG": 0,
+      "MEDI": 34
+    },
+    "all_scene_family_counts": {
+      "BARRACKS": 8,
+      "COMM": 12,
+      "EMPTY": 83,
+      "END": 5,
+      "INFESTATION": 7,
+      "MEDI": 34,
+      "SPAWNERS": 1
+    },
+    "hazard_evidence": [
+      "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FLOATER.SCENE.MBIN"
+    ]
+  },
+  "selected_preset_config": {
+    "name": "MEDI_FLOATERS",
+    "size": {
+      "x": 13,
+      "y": 4,
+      "z": 13
+    },
+    "entrance": {
+      "x": 6,
+      "y": 3,
+      "z": 0
+    },
+    "rooms": 7,
+    "probability": {
+      "x": 1.0,
+      "y": 0.5,
+      "z": 1.0,
+      "straight": null,
+      "straight_multiplier": 1.25
+    },
+    "main_room_types": [
+      {
+        "room_id": "R_END",
+        "branch_probability": 0.0,
+        "raw_type": "GcDungeonRoomParams",
+        "raw": {
+          "name": "MainRoomTypes",
+          "value": "GcDungeonRoomParams",
+          "children": [
+            {
+              "name": "RoomId",
+              "value": "R_END",
+              "children": []
+            },
+            {
+              "name": "BranchProbability",
+              "value": 0.0,
+              "children": []
+            }
+          ]
+        }
+      },
+      {
+        "room_id": "R_FLO_BARR",
+        "branch_probability": 0.75,
+        "raw_type": "GcDungeonRoomParams",
+        "raw": {
+          "name": "MainRoomTypes",
+          "value": "GcDungeonRoomParams",
+          "children": [
+            {
+              "name": "RoomId",
+              "value": "R_FLO_BARR",
+              "children": []
+            },
+            {
+              "name": "BranchProbability",
+              "value": 0.75,
+              "children": []
+            }
+          ]
+        }
+      },
+      {
+        "room_id": "R_S_FLO_BARR",
+        "branch_probability": 0.33,
+        "raw_type": "GcDungeonRoomParams",
+        "raw": {
+          "name": "MainRoomTypes",
+          "value": "GcDungeonRoomParams",
+          "children": [
+            {
+              "name": "RoomId",
+              "value": "R_S_FLO_BARR",
+              "children": []
+            },
+            {
+              "name": "BranchProbability",
+              "value": 0.33,
+              "children": []
+            }
+          ]
+        }
+      },
+      {
+        "room_id": "R_FLO_MEDI",
+        "branch_probability": 0.8,
+        "raw_type": "GcDungeonRoomParams",
+        "raw": {
+          "name": "MainRoomTypes",
+          "value": "GcDungeonRoomParams",
+          "children": [
+            {
+              "name": "RoomId",
+              "value": "R_FLO_MEDI",
+              "children": []
+            },
+            {
+              "name": "BranchProbability",
+              "value": 0.8,
+              "children": []
+            }
+          ]
+        }
+      },
+      {
+        "room_id": "R_S_FLO_MEDI",
+        "branch_probability": 0.33,
+        "raw_type": "GcDungeonRoomParams",
+        "raw": {
+          "name": "MainRoomTypes",
+          "value": "GcDungeonRoomParams",
+          "children": [
+            {
+              "name": "RoomId",
+              "value": "R_S_FLO_MEDI",
+              "children": []
+            },
+            {
+              "name": "BranchProbability",
+              "value": 0.33,
+              "children": []
+            }
+          ]
+        }
+      }
+    ],
+    "branch_room_types": [
+      "B_FLO_MEDI"
+    ],
+    "quests": [
+      {
+        "Probability": 1.0,
+        "QuestItems": {
+          "QuestItems": "R_W_CAPT"
+        },
+        "__type__": "GcDungeonQuestParams"
+      },
+      {
+        "Probability": 1.0,
+        "QuestItems": {
+          "QuestItems": "R_W_CREW"
+        },
+        "__type__": "GcDungeonQuestParams"
+      },
+      {
+        "Probability": 1.0,
+        "QuestItems": {
+          "QuestItems": "R_W_END"
+        },
+        "__type__": "GcDungeonQuestParams"
+      }
+    ],
+    "generation_rules": [
+      {
+        "type": "GcRoomCountRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcRoomCountRule",
+          "children": [
+            {
+              "name": "GcRoomCountRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "RoomID",
+                  "value": "R_FLO_BARR",
+                  "children": []
+                },
+                {
+                  "name": "Min",
+                  "value": 1,
+                  "children": []
+                },
+                {
+                  "name": "Max",
+                  "value": 1,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "room_id": "R_FLO_BARR",
+        "min": 1,
+        "max": 1
+      },
+      {
+        "type": "GcRoomCountRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcRoomCountRule",
+          "children": [
+            {
+              "name": "GcRoomCountRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "RoomID",
+                  "value": "R_S_FLO_BARR",
+                  "children": []
+                },
+                {
+                  "name": "Min",
+                  "value": 1,
+                  "children": []
+                },
+                {
+                  "name": "Max",
+                  "value": 1,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "room_id": "R_S_FLO_BARR",
+        "min": 1,
+        "max": 1
+      },
+      {
+        "type": "GcRoomSequenceRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcRoomSequenceRule",
+          "children": [
+            {
+              "name": "GcRoomSequenceRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "RoomID",
+                  "value": "R_END",
+                  "children": []
+                },
+                {
+                  "name": "MinRoomIndex",
+                  "value": 6,
+                  "children": []
+                },
+                {
+                  "name": "MustBeBeforeRoom",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "MustBeAfterRoom",
+                  "value": "",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "room_id": "R_END",
+        "min_room_index": 6,
+        "must_be_before_room": "",
+        "must_be_after_room": ""
+      },
+      {
+        "type": "GcRoomCountRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcRoomCountRule",
+          "children": [
+            {
+              "name": "GcRoomCountRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "RoomID",
+                  "value": "R_END",
+                  "children": []
+                },
+                {
+                  "name": "Min",
+                  "value": 1,
+                  "children": []
+                },
+                {
+                  "name": "Max",
+                  "value": 1,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "room_id": "R_END",
+        "min": 1,
+        "max": 1
+      },
+      {
+        "type": "GcQuestItemPlacementRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcQuestItemPlacementRule",
+          "children": [
+            {
+              "name": "GcQuestItemPlacementRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "QuestItemID",
+                  "value": "R_W_END",
+                  "children": []
+                },
+                {
+                  "name": "MinRoomIndex",
+                  "value": 6,
+                  "children": []
+                },
+                {
+                  "name": "MaxRoomIndex",
+                  "value": 100,
+                  "children": []
+                },
+                {
+                  "name": "MustBeBeforeQuestItem",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "MustBeAfterQuestItem",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "ValidRoomIDs",
+                  "value": null,
+                  "children": [
+                    {
+                      "name": "ValidRoomIDs",
+                      "value": "R_END",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "quest_item_id": "R_W_END",
+        "min_room_index": 6,
+        "max_room_index": 100,
+        "must_be_before_quest_item": "",
+        "must_be_after_quest_item": "",
+        "valid_room_ids": [
+          "R_END"
+        ]
+      },
+      {
+        "type": "GcQuestItemPlacementRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcQuestItemPlacementRule",
+          "children": [
+            {
+              "name": "GcQuestItemPlacementRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "QuestItemID",
+                  "value": "R_W_CAPT",
+                  "children": []
+                },
+                {
+                  "name": "MinRoomIndex",
+                  "value": 0,
+                  "children": []
+                },
+                {
+                  "name": "MaxRoomIndex",
+                  "value": 100,
+                  "children": []
+                },
+                {
+                  "name": "MustBeBeforeQuestItem",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "MustBeAfterQuestItem",
+                  "value": "R_W_CREW",
+                  "children": []
+                },
+                {
+                  "name": "ValidRoomIDs",
+                  "value": null,
+                  "children": [
+                    {
+                      "name": "ValidRoomIDs",
+                      "value": "R_FLO_BARR",
+                      "children": []
+                    },
+                    {
+                      "name": "ValidRoomIDs",
+                      "value": "R_FLO_MEDI",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "quest_item_id": "R_W_CAPT",
+        "min_room_index": 0,
+        "max_room_index": 100,
+        "must_be_before_quest_item": "",
+        "must_be_after_quest_item": "R_W_CREW",
+        "valid_room_ids": [
+          "R_FLO_BARR",
+          "R_FLO_MEDI"
+        ]
+      },
+      {
+        "type": "GcQuestItemPlacementRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcQuestItemPlacementRule",
+          "children": [
+            {
+              "name": "GcQuestItemPlacementRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "QuestItemID",
+                  "value": "R_W_CREW",
+                  "children": []
+                },
+                {
+                  "name": "MinRoomIndex",
+                  "value": 1,
+                  "children": []
+                },
+                {
+                  "name": "MaxRoomIndex",
+                  "value": 100,
+                  "children": []
+                },
+                {
+                  "name": "MustBeBeforeQuestItem",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "MustBeAfterQuestItem",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "ValidRoomIDs",
+                  "value": null,
+                  "children": [
+                    {
+                      "name": "ValidRoomIDs",
+                      "value": "R_FLO_BARR",
+                      "children": []
+                    },
+                    {
+                      "name": "ValidRoomIDs",
+                      "value": "R_FLO_MEDI",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "quest_item_id": "R_W_CREW",
+        "min_room_index": 1,
+        "max_room_index": 100,
+        "must_be_before_quest_item": "",
+        "must_be_after_quest_item": "",
+        "valid_room_ids": [
+          "R_FLO_BARR",
+          "R_FLO_MEDI"
+        ]
+      }
+    ],
+    "pruning_rules": [
+      "STANDINGLIGHT1",
+      "STANDINGLIGHT2",
+      "STANDINGLIGHT3",
+      "DATAPAD",
+      "LARGEDEBRIS",
+      "SALVAGESHIP"
+    ]
+  },
+  "reward_seed_candidates": [],
+  "dungeon_root_seed_candidates": [
+    {
+      "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+      "seed_hex": "9256392A2F5A74AC",
+      "seed_u64": 10544678430880461996,
+      "use_seed_value": true,
+      "observations": 1,
+      "captured_universe_addresses": [
+        "00001A0004E84EFD"
+      ],
+      "interpretation": "dungeon-root-resource-descriptor-seed-candidate"
+    }
+  ],
+  "dungeon_root_seed_status": "candidate-captured-unverified",
+  "resource_seed_lineage": {
+    "status": "captured",
+    "event_count": 1,
+    "ordered_signature_sha256": "1c170e4adea39c940d218df40b49a222c5ade702ff2664501d6c5dbac736cfe1",
+    "unique_primary_seed_hexes": [
+      "9256392A2F5A74AC"
+    ],
+    "unique_secondary_seed_hexes": [],
+    "events": [
+      {
+        "event_order": 600,
+        "trace_sequence": 949,
+        "utc": "2026-10-04T09:17:31.390Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "9256392A2F5A74AC",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      }
+    ],
+    "scope": "dungeon-only",
+    "interpretation": "ordered non-zero descriptor seeds on dungeon resource events; correlation evidence only"
+  },
+  "resource_seed_lineage_status": "captured",
+  "resource_seed_context_lineage": {
+    "status": "captured",
+    "event_count": 58,
+    "ordered_signature_sha256": "fb0d7e94ac0051840fbc66ce83c0a3942006a2ae27373868e30d18c6d66acf5f",
+    "unique_primary_seed_hexes": [
+      "0AD621B873019F4F",
+      "B4B85467860660FD",
+      "B9BBC13335D522C2",
+      "00001A0004E84EFD",
+      "A837B97723290E5C",
+      "6E121336ADC5FFBF",
+      "A664CB025DBA7179",
+      "FC41CDC809FBC08F",
+      "A85ACCEFA42959CA",
+      "175E0D95A065E2C5",
+      "19DBCF77B6216CC4",
+      "37A9C675256DD71A",
+      "CCB012823ED907F8",
+      "0664401C5D00D463",
+      "96BCA4561148F642",
+      "25CEBF1D6EA8AA2A",
+      "64C8FB7BA73C8925",
+      "6DEB159B045A85CD",
+      "CCC0C03A583EBB5D",
+      "9256392A2F5A74AC"
+    ],
+    "unique_secondary_seed_hexes": [],
+    "events": [
+      {
+        "event_order": 44,
+        "trace_sequence": 393,
+        "utc": "2026-10-04T09:16:44.364Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/DOORMODULE_ANIMATEDDOORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 45,
+        "trace_sequence": 394,
+        "utc": "2026-10-04T09:16:44.456Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_RIGHTROOMABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 48,
+        "trace_sequence": 397,
+        "utc": "2026-10-04T09:16:44.612Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_LEFTROOMABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 49,
+        "trace_sequence": 398,
+        "utc": "2026-10-04T09:16:44.612Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_BARAABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 50,
+        "trace_sequence": 399,
+        "utc": "2026-10-04T09:16:44.613Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_LEFTROOMBABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 51,
+        "trace_sequence": 400,
+        "utc": "2026-10-04T09:16:44.613Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_LEFTROOMCABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "0AD621B873019F4F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 383,
+        "trace_sequence": 732,
+        "utc": "2026-10-04T09:16:46.775Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/EXTLAYOUT_ABANDONED1.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 384,
+        "trace_sequence": 733,
+        "utc": "2026-10-04T09:16:46.776Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/EXTLAYOUT_ABANDONED2.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 385,
+        "trace_sequence": 734,
+        "utc": "2026-10-04T09:16:46.843Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/EXTLAYOUT_ABANDONED3.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 386,
+        "trace_sequence": 735,
+        "utc": "2026-10-04T09:16:46.864Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/EXTLAYOUT_ABANDONED4.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 387,
+        "trace_sequence": 736,
+        "utc": "2026-10-04T09:16:46.865Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_CAPBUNKABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 388,
+        "trace_sequence": 737,
+        "utc": "2026-10-04T09:16:46.865Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_DOORWAYINTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 392,
+        "trace_sequence": 741,
+        "utc": "2026-10-04T09:16:46.899Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/DOORMODULE_ANIMATEDDOORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 393,
+        "trace_sequence": 742,
+        "utc": "2026-10-04T09:16:46.899Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/DOORMODULE_EXTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 394,
+        "trace_sequence": 743,
+        "utc": "2026-10-04T09:16:46.900Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/CORRIDORMODULE_STRAIGHTINTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 425,
+        "trace_sequence": 774,
+        "utc": "2026-10-04T09:16:46.967Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_DOORWAYINABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 426,
+        "trace_sequence": 775,
+        "utc": "2026-10-04T09:16:46.968Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_ABANDONED1.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 427,
+        "trace_sequence": 776,
+        "utc": "2026-10-04T09:16:46.968Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_ABANDONED2.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 511,
+        "trace_sequence": 860,
+        "utc": "2026-10-04T09:16:47.066Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_ABANDONED3.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 512,
+        "trace_sequence": 861,
+        "utc": "2026-10-04T09:16:47.067Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_ABANDONED4.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 516,
+        "trace_sequence": 865,
+        "utc": "2026-10-04T09:16:47.090Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/LAYOUT_ABANDONED5.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 517,
+        "trace_sequence": 866,
+        "utc": "2026-10-04T09:16:47.091Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PROPS/ABANDONED/INTERIOR_TENTACLEPLANT.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 520,
+        "trace_sequence": 869,
+        "utc": "2026-10-04T09:16:47.126Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/COMMONPARTS/ABANDONEDTERMINAL.SCENE.MBIN",
+        "primary_seed_hex": "B4B85467860660FD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 560,
+        "trace_sequence": 909,
+        "utc": "2026-10-04T09:16:48.591Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/LAYOUTS/EXTLAYOUT_UNDERWATERABANDONED1.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 561,
+        "trace_sequence": 910,
+        "utc": "2026-10-04T09:16:48.591Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_CAPBUNKABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 562,
+        "trace_sequence": 911,
+        "utc": "2026-10-04T09:16:48.592Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_DOORWAYINTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 563,
+        "trace_sequence": 912,
+        "utc": "2026-10-04T09:16:48.593Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/DOORMODULE_EXTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 564,
+        "trace_sequence": 913,
+        "utc": "2026-10-04T09:16:48.651Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/CORRIDORMODULE_STRAIGHTINTERIORABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 565,
+        "trace_sequence": 914,
+        "utc": "2026-10-04T09:16:48.652Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/TRADERPARTS/MODULES/WALLMODULE_DOORWAYINABANDONED.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 566,
+        "trace_sequence": 915,
+        "utc": "2026-10-04T09:16:48.809Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PROPS/ABANDONED/INTERIOR_TENTACLEPLANT.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 567,
+        "trace_sequence": 916,
+        "utc": "2026-10-04T09:16:48.844Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/COMMONPARTS/ABANDONEDTERMINAL.SCENE.MBIN",
+        "primary_seed_hex": "B9BBC13335D522C2",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 572,
+        "trace_sequence": 921,
+        "utc": "2026-10-04T09:17:07.279Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/SPACE/HULKPRESSUREELECTRICALARC.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 573,
+        "trace_sequence": 922,
+        "utc": "2026-10-04T09:17:07.291Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/HULKPIECEEXPLOSION.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 574,
+        "trace_sequence": 923,
+        "utc": "2026-10-04T09:17:07.294Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/HULKREACTOREXPLOSION.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 575,
+        "trace_sequence": 924,
+        "utc": "2026-10-04T09:17:07.298Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/HULKPARTEXPLOSION.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 576,
+        "trace_sequence": 925,
+        "utc": "2026-10-04T09:17:07.317Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/HULKMODULEEXPLOSION.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 577,
+        "trace_sequence": 926,
+        "utc": "2026-10-04T09:17:07.322Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/HULKMELTDOWNEXPLOSION.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 578,
+        "trace_sequence": 927,
+        "utc": "2026-10-04T09:17:07.955Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/EXPLOSION/ABANDRONEEXPLODE.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 579,
+        "trace_sequence": 928,
+        "utc": "2026-10-04T09:17:08.937Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/SPACE/HULKPANELVENT.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 580,
+        "trace_sequence": 929,
+        "utc": "2026-10-04T09:17:08.986Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/SPACE/HULKELECTRICALARC.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 581,
+        "trace_sequence": 930,
+        "utc": "2026-10-04T09:17:08.989Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/SPACE/HULKPARTDETACH.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 582,
+        "trace_sequence": 931,
+        "utc": "2026-10-04T09:17:09.613Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/EFFECTS/STATION/ABANDONEDSTATIONELEC.SCENE.MBIN",
+        "primary_seed_hex": "00001A0004E84EFD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 583,
+        "trace_sequence": 932,
+        "utc": "2026-10-04T09:17:16.780Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKENICE.SCENE.MBIN",
+        "primary_seed_hex": "A837B97723290E5C",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 584,
+        "trace_sequence": 933,
+        "utc": "2026-10-04T09:17:16.781Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKENICE.SCENE.MBIN",
+        "primary_seed_hex": "6E121336ADC5FFBF",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 585,
+        "trace_sequence": 934,
+        "utc": "2026-10-04T09:17:16.782Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKENICE.SCENE.MBIN",
+        "primary_seed_hex": "A664CB025DBA7179",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 586,
+        "trace_sequence": 935,
+        "utc": "2026-10-04T09:17:16.783Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKENICE.SCENE.MBIN",
+        "primary_seed_hex": "FC41CDC809FBC08F",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 587,
+        "trace_sequence": 936,
+        "utc": "2026-10-04T09:17:16.784Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKENICE.SCENE.MBIN",
+        "primary_seed_hex": "A85ACCEFA42959CA",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 588,
+        "trace_sequence": 937,
+        "utc": "2026-10-04T09:17:16.784Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKEN.SCENE.MBIN",
+        "primary_seed_hex": "175E0D95A065E2C5",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 589,
+        "trace_sequence": 938,
+        "utc": "2026-10-04T09:17:16.785Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKEN.SCENE.MBIN",
+        "primary_seed_hex": "19DBCF77B6216CC4",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 590,
+        "trace_sequence": 939,
+        "utc": "2026-10-04T09:17:16.785Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKEN.SCENE.MBIN",
+        "primary_seed_hex": "37A9C675256DD71A",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 591,
+        "trace_sequence": 940,
+        "utc": "2026-10-04T09:17:16.785Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKEN.SCENE.MBIN",
+        "primary_seed_hex": "CCB012823ED907F8",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 592,
+        "trace_sequence": 941,
+        "utc": "2026-10-04T09:17:16.786Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/ASTEROIDBELT/ASTEROID_CRYSTAL_BROKEN.SCENE.MBIN",
+        "primary_seed_hex": "0664401C5D00D463",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 593,
+        "trace_sequence": 942,
+        "utc": "2026-10-04T09:17:16.817Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/HULK/PARTS/GRABBABLES/JUNKPROC.SCENE.MBIN",
+        "primary_seed_hex": "96BCA4561148F642",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 594,
+        "trace_sequence": 943,
+        "utc": "2026-10-04T09:17:16.818Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/HULK/PARTS/GRABBABLES/JUNKPROC.SCENE.MBIN",
+        "primary_seed_hex": "25CEBF1D6EA8AA2A",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 595,
+        "trace_sequence": 944,
+        "utc": "2026-10-04T09:17:16.818Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/HULK/PARTS/GRABBABLES/JUNKPROC.SCENE.MBIN",
+        "primary_seed_hex": "64C8FB7BA73C8925",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 596,
+        "trace_sequence": 945,
+        "utc": "2026-10-04T09:17:16.818Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/HULK/PARTS/GRABBABLES/JUNKPROC.SCENE.MBIN",
+        "primary_seed_hex": "6DEB159B045A85CD",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 597,
+        "trace_sequence": 946,
+        "utc": "2026-10-04T09:17:16.819Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/HULK/PARTS/GRABBABLES/JUNKPROC.SCENE.MBIN",
+        "primary_seed_hex": "CCC0C03A583EBB5D",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      },
+      {
+        "event_order": 600,
+        "trace_sequence": 949,
+        "utc": "2026-10-04T09:17:31.390Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "9256392A2F5A74AC",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      }
+    ],
+    "scope": "recorded-derelict-poi-context",
+    "interpretation": "ordered non-zero descriptor seeds across all derelict/POI resource events already captured by the probe; correlation evidence only"
+  },
+  "resource_seed_context_lineage_status": "captured",
+  "poi_generation_trace": {
+    "status": "captured",
+    "description_input_count": 2,
+    "description_result_count": 2,
+    "description_return_hexes": [
+      "00000070F33ED430"
+    ],
+    "description_results": [
+      {
+        "event_order": 1,
+        "trace_sequence": null,
+        "utc": null,
+        "poi_type_value": 6,
+        "poi_type_name": "AbandonedFreighter",
+        "component_address_hex": "00000070F33ED430",
+        "raw_argument_hex": "00001A0004E84EFD",
+        "return_value_hex": "00000070F33ED430",
+        "return_matches_universe_address": false,
+        "return_matches_dungeon_root_seed": false
+      },
+      {
+        "event_order": 571,
+        "trace_sequence": 920,
+        "utc": "2026-10-04T09:17:06.933Z",
+        "poi_type_value": 6,
+        "poi_type_name": "AbandonedFreighter",
+        "component_address_hex": "00000070F33ED430",
+        "raw_argument_hex": "00001A0004E84EFD",
+        "return_value_hex": "00000070F33ED430",
+        "return_matches_universe_address": false,
+        "return_matches_dungeon_root_seed": false
+      }
+    ],
+    "prepare_event_count": 0,
+    "prepare_events": [],
+    "activation_event_count": 0,
+    "activation_events": [],
+    "lifecycle_event_count": 0,
+    "lifecycle_events": [],
+    "dungeon_root_inside_prepare": false,
+    "dungeon_root_prepare_scope_events": [],
+    "dungeon_root_inside_activation": false,
+    "dungeon_root_activation_scope_events": [],
+    "dungeon_root_inside_lifecycle": false,
+    "dungeon_root_lifecycle_scope_events": [],
+    "dungeon_root_resource_events": [
+      {
+        "event_order": 600,
+        "trace_sequence": 949,
+        "utc": "2026-10-04T09:17:31.390Z",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "9256392A2F5A74AC",
+        "descriptor_pointer_hex": "000001A1CED23128",
+        "caller_return_offset_hex": "00638DF5",
+        "caller_code_window": {
+          "start_offset_hex": "00638DC5",
+          "return_offset_hex": "00638DF5",
+          "return_index": 48,
+          "byte_count": 80,
+          "bytes_hex": "0400004C89751841B900040004488D8DE0000000440F44C8BA01000000488D45E0488944242848897C2420E8BB392001488BD0488D8ECC010000E80C88B9FF488D8DE0000000E8D08E7202B201488D8D"
+        },
+        "caller_decoded": {
+          "encoding": "E8 rel32",
+          "call_instruction_offset_hex": "00638DF0",
+          "call_target_offset_hex": "0183C7B0",
+          "descriptor_argument_source_register": "RDI",
+          "descriptor_passed_unchanged_to_engine": true
+        },
+        "logical_entry_match_count": 1,
+        "logical_entry_matches": [
+          {
+            "utc": "2026-10-04T09:17:31.390Z",
+            "context_pointer_hex": "000001A2EE4F9960",
+            "owner_pointer_hex": "000001A1CED23000",
+            "descriptor_pointer_hex": "000001A1CED23128",
+            "primary_seed_hex": "9256392A2F5A74AC",
+            "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+            "caller_return_offset_hex": "02C0497A",
+            "external_origin_caller_return_offset_hex": "02C0497A",
+            "recursion_depth": 0,
+            "caller_class": "external",
+            "known_static_candidate": false,
+            "age_ms_at_root_add": 0.238
+          }
+        ],
+        "logical_entry_nearest_caller_return_offset_hex": "02C0497A",
+        "logical_entry_nearest_caller_code_window": {
+          "start_offset_hex": "02C0491A",
+          "return_offset_hex": "02C0497A",
+          "return_index": 96,
+          "byte_count": 160,
+          "bytes_hex": "BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95"
+        },
+        "logical_entry_exact_external_caller_return_offset_hex": "02C0497A",
+        "logical_entry_exact_external_caller_code_window": {
+          "start_offset_hex": "02C048FA",
+          "return_offset_hex": "02C0497A",
+          "return_index": 128,
+          "byte_count": 224,
+          "bytes_hex": "33FF4C897B38EB034533FFBA58000000488BCFE85E480100488B8E1801000048BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95C2FF50204C897F38BA58000000488BCBE8A1470100488BDDEB0748014350488B"
+        },
+        "logical_entry_exact_external_match": {
+          "utc": "2026-10-04T09:17:31.390Z",
+          "context_pointer_hex": "000001A2EE4F9960",
+          "owner_pointer_hex": "000001A1CED23000",
+          "descriptor_pointer_hex": "000001A1CED23128",
+          "primary_seed_hex": "9256392A2F5A74AC",
+          "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+          "caller_return_offset_hex": "02C0497A",
+          "external_origin_caller_return_offset_hex": "02C0497A",
+          "recursion_depth": 0,
+          "caller_class": "external",
+          "known_static_candidate": false,
+          "age_ms_at_root_add": 0.419,
+          "resolved_external_caller_return_offset_hex": "02C0497A",
+          "owner_plus_0x10_capture": {
+            "owner_pointer_hex": "000001A1CED23000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "000001A1CED23010",
+            "read_status": "captured",
+            "raw_bytes_hex": "00000000FFFFFFFF",
+            "slot_value_hex": "FFFFFFFF00000000",
+            "target_identity": {
+              "status": "not-in-loaded-module",
+              "address_hex": "FFFFFFFF00000000"
+            }
+          }
+        },
+        "logical_entry_unique_callers_observed": 9,
+        "logical_entry_static_candidate_count": 52,
+        "poi_prepare_scope_component_hexes": [],
+        "poi_activation_scope_component_hexes": [],
+        "poi_lifecycle_scope_component_hexes": []
+      }
+    ],
+    "resource_manager_root_event_count": 0,
+    "resource_manager_root_events": [],
+    "dungeon_root_engine_caller_offsets": [
+      "00638DF5"
+    ],
+    "dungeon_root_manager_caller_offsets": [],
+    "dungeon_root_engine_call_sites": [
+      {
+        "encoding": "E8 rel32",
+        "call_instruction_offset_hex": "00638DF0",
+        "call_target_offset_hex": "0183C7B0",
+        "descriptor_argument_source_register": "RDI",
+        "descriptor_passed_unchanged_to_engine": true
+      }
+    ],
+    "dungeon_logical_entry_caller_offsets": [
+      "02C0497A"
+    ],
+    "dungeon_logical_entry_nearest_callers": [
+      {
+        "caller_return_offset_hex": "02C0497A",
+        "caller_code_window": {
+          "start_offset_hex": "02C0491A",
+          "return_offset_hex": "02C0497A",
+          "return_index": 96,
+          "byte_count": 160,
+          "bytes_hex": "BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95"
+        }
+      }
+    ],
+    "dungeon_logical_entry_exact_external_callers": [
+      {
+        "caller_return_offset_hex": "02C0497A",
+        "caller_code_window": {
+          "start_offset_hex": "02C048FA",
+          "return_offset_hex": "02C0497A",
+          "return_index": 128,
+          "byte_count": 224,
+          "bytes_hex": "33FF4C897B38EB034533FFBA58000000488BCFE85E480100488B8E1801000048BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95C2FF50204C897F38BA58000000488BCBE8A1470100488BDDEB0748014350488B"
+        },
+        "match": {
+          "utc": "2026-10-04T09:17:31.390Z",
+          "context_pointer_hex": "000001A2EE4F9960",
+          "owner_pointer_hex": "000001A1CED23000",
+          "descriptor_pointer_hex": "000001A1CED23128",
+          "primary_seed_hex": "9256392A2F5A74AC",
+          "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+          "caller_return_offset_hex": "02C0497A",
+          "external_origin_caller_return_offset_hex": "02C0497A",
+          "recursion_depth": 0,
+          "caller_class": "external",
+          "known_static_candidate": false,
+          "age_ms_at_root_add": 0.419,
+          "resolved_external_caller_return_offset_hex": "02C0497A",
+          "owner_plus_0x10_capture": {
+            "owner_pointer_hex": "000001A1CED23000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "000001A1CED23010",
+            "read_status": "captured",
+            "raw_bytes_hex": "00000000FFFFFFFF",
+            "slot_value_hex": "FFFFFFFF00000000",
+            "target_identity": {
+              "status": "not-in-loaded-module",
+              "address_hex": "FFFFFFFF00000000"
+            }
+          }
+        },
+        "unique_callers_observed": 9,
+        "static_candidate_count": 52
+      }
+    ],
+    "interpretation": "target-POI description/lifecycle plus dungeon-root resource boundaries, direct Engine caller, and exact descriptor-correlated all-callers logical-entry evidence; the verified self-recursive edge is excluded from the exact external caller"
+  },
+  "poi_generation_trace_status": "captured",
+  "poi_seed_candidates": [
+    {
+      "poi_type_value": 6,
+      "poi_type_name": "AbandonedFreighter",
+      "raw_argument_hex": "00001A0004E84EFD",
+      "raw_argument_u64": 28587384655613,
+      "interpretation": "universe-address-confirmed",
+      "observations": 2,
+      "matches_universe_address": true
+    }
+  ],
+  "poi_context_arguments": [
+    {
+      "poi_type_value": 6,
+      "poi_type_name": "AbandonedFreighter",
+      "raw_argument_hex": "00001A0004E84EFD",
+      "raw_argument_u64": 28587384655613,
+      "interpretation": "universe-address-confirmed",
+      "observations": 2,
+      "matches_universe_address": true
+    }
+  ],
+  "discarded_poi_context_arguments": [],
+  "poi_context_status": "universe-address-confirmed",
+  "layout_seed_status": "dungeon-root-resource-seed-candidate",
+  "generation_signature_sha256": "53c7cc058100d09de4f1d7633f23379a6bd66dc6c82af96ebf5d053746636be4",
+  "layout_signature_sha256": "53c7cc058100d09de4f1d7633f23379a6bd66dc6c82af96ebf5d053746636be4",
+  "layout_multiset_signature_sha256": "2f8395fe9f2cef2f93ebaae548885fa8b15faea36a59e3c771297038b04b8f70",
+  "legacy_stream_signature_sha256": "c5d8e91e406aa21c0b85fe81b734a30157c66ebc0baedb0e6b6cb40e346d9dc7",
+  "historical_16_system_block_hypothesis": {
+    "solar_system_index_decimal": 26,
+    "solar_system_index_hex": "0x01A",
+    "block_start_hex": "0x010",
+    "block_end_hex": "0x01F",
+    "status": "historical-community-hypothesis-not-yet-validated-on-cosmos"
+  },
+  "base_room_count_from_table": 7,
+  "observed_main_rooms": 8,
+  "observed_dead_end_rooms": 2,
+  "observed_total_rooms": 10,
+  "main_room_count_matches_table": false,
+  "manual_room_markers": {
+    "main_rooms_f6": 0,
+    "dead_ends_f5": 0
+  },
+  "room_model_status": "needs-review",
+  "room_parent_index_coverage": 10,
+  "canonical_room_sequence": [
+    {
+      "room_index": 0,
+      "room_label": "Room 0",
+      "room_kind": "main_room",
+      "dominant_family": "MEDI",
+      "salvage_crates": 1,
+      "crew_footlockers": 1,
+      "target_containers": 2,
+      "stream_order": 7
+    },
+    {
+      "room_index": 1,
+      "room_label": "Room 1",
+      "room_kind": "main_room",
+      "dominant_family": "MEDI",
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "stream_order": 8
+    },
+    {
+      "room_index": 2,
+      "room_label": "Room 2",
+      "room_kind": "main_room",
+      "dominant_family": "MEDI",
+      "salvage_crates": 2,
+      "crew_footlockers": 0,
+      "target_containers": 2,
+      "stream_order": 3
+    },
+    {
+      "room_index": 3,
+      "room_label": "Room 3",
+      "room_kind": "main_room",
+      "dominant_family": "MEDI",
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "stream_order": 9
+    },
+    {
+      "room_index": 4,
+      "room_label": "Room 4",
+      "room_kind": "main_room",
+      "dominant_family": "BARRACKS",
+      "salvage_crates": 1,
+      "crew_footlockers": 1,
+      "target_containers": 2,
+      "stream_order": 4
+    },
+    {
+      "room_index": 5,
+      "room_label": "Room 5",
+      "room_kind": "main_room",
+      "dominant_family": "BARRACKS",
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1,
+      "stream_order": 1
+    },
+    {
+      "room_index": 6,
+      "room_label": "Room 6",
+      "room_kind": "dead_end",
+      "dominant_family": "BARRACKS",
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1,
+      "stream_order": 5
+    },
+    {
+      "room_index": 7,
+      "room_label": "Room 7",
+      "room_kind": "main_room",
+      "dominant_family": "MEDI",
+      "salvage_crates": 4,
+      "crew_footlockers": 2,
+      "target_containers": 6,
+      "stream_order": 2
+    },
+    {
+      "room_index": 8,
+      "room_label": "Room 8",
+      "room_kind": "dead_end",
+      "dominant_family": "BARRACKS",
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "stream_order": 6
+    },
+    {
+      "room_index": 9,
+      "room_label": "Room 9",
+      "room_kind": "main_room",
+      "dominant_family": "END",
+      "salvage_crates": 1,
+      "crew_footlockers": 1,
+      "target_containers": 2,
+      "stream_order": 10
+    }
+  ],
+  "logical_groups": [
+    {
+      "parent_key": "00395EEE",
+      "parent_node_names": [
+        "Room 5"
+      ],
+      "room_index": 5,
+      "room_label": "Room 5",
+      "first_event_index": 0,
+      "first_seen_utc": "2026-10-04T09:17:47.672Z",
+      "last_seen_utc": "2026-10-04T09:17:48.370Z",
+      "scene_instances": 24,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "BARRACKS",
+      "scene_family_counts": {
+        "BARRACKS": 4,
+        "COMM": 2,
+        "EMPTY": 15,
+        "INFESTATION": 2,
+        "SPAWNERS": 1
+      },
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/PODS/ROOM_WALL0.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/SLIME/ROOM_FLOOR0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/SLIME/ROOM_WALL0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_CREWTERMINAL.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT06.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_LSHAPE.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_C_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_R_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNERTRI_RC_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_2.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_2.SCENE.MBIN",
+          "instances": 4
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/STAIRS_DOWN.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/STAIRS_UP.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/INFESTATION/DOOR_BRANCH_SLIME.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/INFESTATION/DOOR_PATH_SLIME.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FLOATER.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 1,
+      "stream_order": 1
+    },
+    {
+      "parent_key": "00395EFA",
+      "parent_node_names": [
+        "Room 7"
+      ],
+      "room_index": 7,
+      "room_label": "Room 7",
+      "first_event_index": 2,
+      "first_seen_utc": "2026-10-04T09:17:47.674Z",
+      "last_seen_utc": "2026-10-04T09:17:48.387Z",
+      "scene_instances": 40,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "MEDI",
+      "scene_family_counts": {
+        "COMM": 5,
+        "EMPTY": 23,
+        "INFESTATION": 2,
+        "MEDI": 10
+      },
+      "salvage_crates": 4,
+      "crew_footlockers": 2,
+      "target_containers": 6,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_CAPTTERMINAL.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT05A.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT06A.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT07A.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT08A.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_LSHAPE.SCENE.MBIN",
+          "instances": 3
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+          "instances": 4
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_C_1.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_1.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNERADJACENT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_1.SCENE.MBIN",
+          "instances": 3
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_1.SCENE.MBIN",
+          "instances": 5
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/STAIRS_DOWN.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/STAIRS_UP.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/INFESTATION/DOOR_BRANCH_SLIME.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/INFESTATION/DOOR_PATH_SLIME.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/PODS/ROOM_FLOOR0.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/PODS/ROOM_WALL0.SCENE.MBIN",
+          "instances": 3
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/SLIME/ROOM_WALL0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/SLIME/ROOM_WALLOUTCORNERLEFT_C_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/SLIME/ROOM_WALLOUTCORNERRIGHT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/SLIME/ROOM_WALLOUTCORNERRIGHT_C_2.SCENE.MBIN",
+          "instances": 2
+        }
+      ],
+      "generation_order": 2,
+      "stream_order": 2
+    },
+    {
+      "parent_key": "00395EEB",
+      "parent_node_names": [
+        "Room 2"
+      ],
+      "room_index": 2,
+      "room_label": "Room 2",
+      "first_event_index": 4,
+      "first_seen_utc": "2026-10-04T09:17:47.693Z",
+      "last_seen_utc": "2026-10-04T09:17:48.353Z",
+      "scene_instances": 35,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "MEDI",
+      "scene_family_counts": {
+        "COMM": 2,
+        "EMPTY": 18,
+        "INFESTATION": 1,
+        "MEDI": 14
+      },
+      "salvage_crates": 2,
+      "crew_footlockers": 0,
+      "target_containers": 2,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT05.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT06A.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_1.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_1.SCENE.MBIN",
+          "instances": 4
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNER_1.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_1.SCENE.MBIN",
+          "instances": 6
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/INFESTATION/DOOR_PATH_SLIME.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/PODS/ROOM_INCORNER_1_0.SCENE.MBIN",
+          "instances": 3
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/PODS/ROOM_INCORNER_1_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/PODS/ROOM_WALL0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/SLIME/ROOM_FLOOR0.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/SLIME/ROOM_WALL0.SCENE.MBIN",
+          "instances": 5
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/SLIME/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+          "instances": 2
+        }
+      ],
+      "generation_order": 3,
+      "stream_order": 3
+    },
+    {
+      "parent_key": "00395EED",
+      "parent_node_names": [
+        "Room 4"
+      ],
+      "room_index": 4,
+      "room_label": "Room 4",
+      "first_event_index": 6,
+      "first_seen_utc": "2026-10-04T09:17:47.694Z",
+      "last_seen_utc": "2026-10-04T09:17:48.369Z",
+      "scene_instances": 9,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "BARRACKS",
+      "scene_family_counts": {
+        "BARRACKS": 2,
+        "COMM": 1,
+        "EMPTY": 5,
+        "INFESTATION": 1
+      },
+      "salvage_crates": 1,
+      "crew_footlockers": 1,
+      "target_containers": 2,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/PODS/ROOM_INCORNER_1_0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/PODS/ROOM_INCORNER_1_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT07A.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_2.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_2.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/INFESTATION/DOOR_PATH_SLIME.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 4,
+      "stream_order": 4
+    },
+    {
+      "parent_key": "00395EF9",
+      "parent_node_names": [
+        "Room 6"
+      ],
+      "room_index": 6,
+      "room_label": "Room 6",
+      "first_event_index": 9,
+      "first_seen_utc": "2026-10-04T09:17:47.715Z",
+      "last_seen_utc": "2026-10-04T09:17:48.370Z",
+      "scene_instances": 4,
+      "room_kind": "dead_end",
+      "dead_end_evidence": [
+        "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN"
+      ],
+      "dominant_family": "BARRACKS",
+      "scene_family_counts": {
+        "BARRACKS": 1,
+        "COMM": 1,
+        "EMPTY": 2
+      },
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT08.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_LSHAPE.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 5,
+      "stream_order": 5
+    },
+    {
+      "parent_key": "00295EFB",
+      "parent_node_names": [
+        "Room 8"
+      ],
+      "room_index": 8,
+      "room_label": "Room 8",
+      "first_event_index": 18,
+      "first_seen_utc": "2026-10-04T09:17:47.755Z",
+      "last_seen_utc": "2026-10-04T09:17:48.011Z",
+      "scene_instances": 2,
+      "room_kind": "dead_end",
+      "dead_end_evidence": [
+        "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN"
+      ],
+      "dominant_family": "BARRACKS",
+      "scene_family_counts": {
+        "BARRACKS": 1,
+        "EMPTY": 1
+      },
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_LSHAPE.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 6,
+      "stream_order": 6
+    },
+    {
+      "parent_key": "00395EE9",
+      "parent_node_names": [
+        "Room 0"
+      ],
+      "room_index": 0,
+      "room_label": "Room 0",
+      "first_event_index": 19,
+      "first_seen_utc": "2026-10-04T09:17:47.770Z",
+      "last_seen_utc": "2026-10-04T09:17:48.125Z",
+      "scene_instances": 13,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "MEDI",
+      "scene_family_counts": {
+        "EMPTY": 8,
+        "MEDI": 5
+      },
+      "salvage_crates": 1,
+      "crew_footlockers": 1,
+      "target_containers": 2,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_BRANCH_UNLOCKED.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_1.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNERADJACENT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_INCORNER_1_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_INCORNER_1_6.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLOUTCORNERLEFT_C_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLOUTCORNERRIGHT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALL_1_2.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 7,
+      "stream_order": 7
+    },
+    {
+      "parent_key": "00395EEA",
+      "parent_node_names": [
+        "Room 1"
+      ],
+      "room_index": 1,
+      "room_label": "Room 1",
+      "first_event_index": 25,
+      "first_seen_utc": "2026-10-04T09:17:47.786Z",
+      "last_seen_utc": "2026-10-04T09:17:48.127Z",
+      "scene_instances": 2,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "MEDI",
+      "scene_family_counts": {
+        "EMPTY": 1,
+        "MEDI": 1
+      },
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_DEADEND5.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 8,
+      "stream_order": 8
+    },
+    {
+      "parent_key": "00395EEC",
+      "parent_node_names": [
+        "Room 3"
+      ],
+      "room_index": 3,
+      "room_label": "Room 3",
+      "first_event_index": 42,
+      "first_seen_utc": "2026-10-04T09:17:47.848Z",
+      "last_seen_utc": "2026-10-04T09:17:48.231Z",
+      "scene_instances": 9,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "MEDI",
+      "scene_family_counts": {
+        "EMPTY": 4,
+        "INFESTATION": 1,
+        "MEDI": 4
+      },
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_1.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/INFESTATION/DOOR_PATH_SLIME.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/PODS/ROOM_INCORNER_1_0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/SLIME/ROOM_INCORNER_1_0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/SLIME/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/MEDI/SLIME/ROOM_WALLOUTCORNERRIGHT_C_1.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 9,
+      "stream_order": 9
+    },
+    {
+      "parent_key": "00295EFC",
+      "parent_node_names": [
+        "Room 9"
+      ],
+      "room_index": 9,
+      "room_label": "Room 9",
+      "first_event_index": 77,
+      "first_seen_utc": "2026-10-04T09:17:48.012Z",
+      "last_seen_utc": "2026-10-04T09:17:48.352Z",
+      "scene_instances": 12,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "END",
+      "scene_family_counts": {
+        "COMM": 1,
+        "EMPTY": 6,
+        "END": 5
+      },
+      "salvage_crates": 1,
+      "crew_footlockers": 1,
+      "target_containers": 2,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_FINALTERMINAL.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_4.SCENE.MBIN",
+          "instances": 3
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_4.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_4.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_6.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_7.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_WALLOUTCORNERLEFT_C_4_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_WALL_4_4.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 10,
+      "stream_order": 10
+    }
+  ]
+}
