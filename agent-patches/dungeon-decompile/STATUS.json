@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T16:04:00Z",
+  "reviewed_utc": "2026-10-04T16:06:00Z",
   "state": "new-system-identity-captured-layout-user-validated-dispatch-target-unresolved",
   "verified": {
     "historical_baseline": {
@@ -99,6 +99,19 @@
         "current_capture": "Angoto run: owner+0x10 captured as 0000000000000000",
         "earlier_capture": "older 9256392A2F5A74AC event: owner+0x10 captured as FFFFFFFF00000000",
         "implication": "The owner-relative value differs between captures and is not the callsite's vtable slot. Treat owner+0x10 as an unrelated/unstable field until semantics are established."
+      },
+      "receiver_provenance_static": {
+        "evidence": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/exact-root-caller-latest.json, logical_entry_exact_external_caller_code_window (160 bytes; runtime-correlated caller return 02C0497A)",
+        "decoded_sequence": [
+          "48 8B 86 10 01 00 00: RAX = [RSI+0x110]",
+          "48 8B 18: RBX = [RAX]",
+          "48 83 7B 48 00: compare qword [RBX+0x48] with zero",
+          "48 8B 4B 48: RCX = [RBX+0x48]",
+          "48 8B 11; FF 52 10: RDX = [RCX]; call qword [RDX+0x10]"
+        ],
+        "inference": "The receiver is reached through a field on an element obtained from [RSI+0x110]. The receiver path is consistent with a collection/iterator-like traversal, but the window alone does not prove the base type or semantic role.",
+        "confidence": "instruction decode high; semantic interpretation low",
+        "limitation": "The capture is a bounded caller window, not a function-boundary-validated decompilation. It does not include runtime RSI/RAX/RBX/RCX/RDX values or the callback target."
       }
     },
     "user_explanation_update": {
@@ -207,5 +220,5 @@
     "duplicate_upload_required": false,
     "needed": "Continue static receiver provenance analysis in DUNGEON-C. To confirm the virtual target itself, Runtime-A must capture RCX, RDX and [RDX+0x10] at caller return RVA 02C0497A, plus resolved module/RVA; no full traversal is needed."
   },
-  "next_lane_owned_step": "Trace the [RBX+0x48] receiver backward within the exact caller and compare nearby references to the logical entry offline; use this to narrow receiver/callback role without naming it prematurely. Continue to correlate with Runtime-A live [RDX+0x10] evidence when available. No traversal is needed."
+  "next_lane_owned_step": "Obtain a function-boundary-validated, wider offline code window around caller return RVA 02C0497A from the current NMS.exe and resolve the control-flow/receiver provenance around [RSI+0x110]. Compare that with the logical-entry call graph, keeping the collection/interface interpretation tentative. Runtime-A target capture remains the route to identifying [RDX+0x10]."
 }
