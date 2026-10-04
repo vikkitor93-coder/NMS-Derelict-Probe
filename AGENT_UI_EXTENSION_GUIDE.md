@@ -58,7 +58,7 @@ Panels may update live. Changes to Surveyor host code require a normal Surveyor 
 1. Create a new semantic extension-version directory; never overwrite an already published version.
 2. Recompute SHA-256 for every file and update `manifest.json` and the shared index.
 3. Run the extension validation/update/rollback tests and include the exact results in the PR.
-4. Submit the manifest, panel JSON, index change, and any required tests in the lane PR. Keep the lane's standalone research workflow usable until integration accepts it.
+4. After validation, publish the manifest, panel JSON, index change, and required tests directly to `main` in one complete change. Create a backup branch from the pre-publish `main` commit first. Keep the lane's standalone research workflow usable. A lane PR is optional; do not wait for a separate integration merge.
 5. Integration reviews the action IDs and preconditions, file hashes, lane output namespace, host/API compatibility, and rollback. Do not combine different lane actions into an indiscriminate “Run All.”
 
 ## Copy/paste prompt for a lane agent
