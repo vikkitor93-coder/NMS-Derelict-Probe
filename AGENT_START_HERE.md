@@ -6,7 +6,7 @@ Read this file first when joining the project from normal ChatGPT, Work, Codex, 
 
 You are one autonomous research/coding agent in a parallel reverse-engineering project. You are **not** the only AI working on the repository. Your job is to advance one non-overlapping research lane toward the shared goal, publish reproducible evidence, and leave enough state in GitHub that another AI can continue without this chat history.
 
-Do not start by rereading the whole repository. Do not duplicate another claimed lane. Do not push experimental work directly to `main`.
+Do not start by rereading the whole repository or duplicate another claimed lane. Keep unfinished experiments on your lane branch. Once a change is complete, tested, documented, and recoverable, you are authorized to publish it directly to `main`; do not wait for a separate integration-agent merge or user approval. Follow `AGENT_WORKFLOW.md` for the backup, validation, and rollback steps.
 
 ## Shared goal
 
@@ -40,7 +40,7 @@ Current standard lanes are:
 - `agent/seed-lineage` — system/POI/root seed derivation and RNG research.
 - `agent/dungeon-decompile` — current/historical executable mapping and dungeon-generator discovery.
 - `agent/metadata` — abandoned-freighter DungeonOptions, weights, presets, schemas, and static assets.
-- `main` — integration only; combines proven results.
+- `main` — stable shared branch. Agents may publish completed, validated lane changes directly to `main` under `AGENT_WORKFLOW.md`; unfinished experiments remain on lane branches.
 
 If your lane is marked `claimed`, do not take it unless the user explicitly assigned you to that exact lane. For a new independent task, branch from current `main` as `agent/<short-lane-id>`.
 
@@ -69,17 +69,17 @@ Preserve stable launcher/controller/probe behavior and backwards-compatible prot
 Publish enough information for integration to reproduce your work:
 
 - objective and result;
-- exact branch/commit;
+- exact branch/commit (publish completed changes directly to `main`; a PR is optional, not a required approval hop);
 - changed files;
 - tests run and exact result;
 - evidence files/schema;
 - confirmed facts vs hypotheses;
 - human intervention required or not;
-- smallest proposed integration subset;
+- smallest published change set and how it was made recoverable;
 - rollback/migration notes when relevant;
 - lane manifest under `agent-patches/<lane>/` when code/tooling was produced.
 
-A complete experimental Surveyor build belongs in ChatGPT Library; GitHub stores manifests, reproducible patches, evidence, branches, PRs, and state summaries.
+A complete Surveyor build belongs in ChatGPT Library; GitHub stores source, manifests, reproducible patches, evidence, branches, optional PRs, and state summaries.
 
 ## Human intervention format
 
