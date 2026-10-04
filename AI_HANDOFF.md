@@ -306,3 +306,8 @@ The exact external call at `02BFCC17` decoded as `FF 52 10`, targeting the verif
 ## DUNGEON-C extension refresh — 2026-10-02
 
 Extension v1.0.2 is prepared as a version-only refresh of v1.0.1. The app reads its shared extension index from `main`, so the lane push is accompanied by a narrow integration PR; Surveyor can offer the refresh after that PR merges. Focused extension suite 6/6 and source suite 151/151 passed. Rollback remains v1.0.1.
+
+
+## 2026-10-04 extractor launcher correction
+
+The first delivered launcher produced the Windows path-syntax error on the user's machine. The corrected launcher uses `pushd`, validates and de-quotes Surveyor's saved interpreter path, falls back through `py -3` and `python.exe`, and reports a specific folder/runtime error. The updated complete source ZIP is `NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-launcher-fix-source.zip` (SHA-256 `bee57a5f135f34a16879f3ba047c5831b4974d77176cd830d2641a9e9b74f568`). Regression suite remains 175/175; compileall passes. Next: user reruns the corrected command and reports the output; if successful, upload all saved evidence for offline decompilation. No NMS launch or traversal is needed.
