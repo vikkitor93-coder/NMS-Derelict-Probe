@@ -311,3 +311,12 @@ Extension v1.0.2 is prepared as a version-only refresh of v1.0.1. The app reads 
 ## 2026-10-04 extractor launcher correction
 
 The first delivered launcher produced the Windows path-syntax error on the user's machine. The corrected launcher uses `pushd`, validates and de-quotes Surveyor's saved interpreter path, falls back through `py -3` and `python.exe`, and reports a specific folder/runtime error. The updated complete source ZIP is `NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-launcher-fix-source.zip` (SHA-256 `bee57a5f135f34a16879f3ba047c5831b4974d77176cd830d2641a9e9b74f568`). Regression suite remains 175/175; compileall passes. Next: user reruns the corrected command and reports the output; if successful, upload all saved evidence for offline decompilation. No NMS launch or traversal is needed.
+
+
+## Fresh target-body analysis (2026-10-04)
+
+- Direct attachment `exact-root-caller-code-latest(2).json`, SHA-256 `207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2`, probe 0.3.37: seed `5B4AE67D9C2A8F61`, descriptor `00000254AAE08D28`, exact external return `02C0497A` after `FF 52 10` at `02C04977`. Owner+0x10 is zero at logical entry and root add; target identity remains null/low-address. This artifact was attached directly; it is not claimed to be in the shared upload folder.
+- NMS.exe SHA-256 `671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4`. Extracted body hash `902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5`; .pdata function is `00634930..00634E03` (1,235 bytes). Hook RVA `00634BC0` is interior offset `0x290`, not the function start.
+- Disassembly around the hook shows four values conditionally stored at RSI+0x50/+0x54/+0x58/+0x5C with corresponding availability bits in RSI+0x1ED (bits 1/3/2/4; bit 0 always set). A boolean indicates all four nonzero while an input flag is clear. Repeated helper chains consume each present value and update RSI+0x48. This suggests a four-field record/metadata aggregation path; exact helper meanings and class identity remain unknown.
+- The owner-relative zero is not the raw qword at the vtable pointer used by `FF 52 10`; the actual indirect target remains unverified. Next: add conservative direct-call helper extraction/analysis from the bounded body and retain candidate labels until instruction boundaries and target ranges are confirmed.
+- Launcher run succeeded using Python on PATH after rejecting the BOM-prefixed saved interpreter path. The launcher now suppresses that nonfatal warning and includes it only if all interpreter fallbacks fail.
