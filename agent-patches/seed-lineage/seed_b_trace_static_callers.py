@@ -76,10 +76,39 @@ def parse_pe(data: bytes) -> dict:
     }
 
 
+def _runtime_function_ranges(data: bytes, pe: dict) -> list[tuple[int, int, int]]:
+    """Read Windows x64 RUNTIME_FUNCTION triples from the .pdata section."""
+    section = next((s for s in pe["sections"] if s["name"] == ".pdata"), None)
+    if section is None:
+        return []
+    start = section["raw_pointer"]
+    size = section["raw_size"]
+    ranges = []
+    # IMAGE_RUNTIME_FUNCTION_ENTRY is three 32-bit RVAs (12 bytes).
+    for offset in range(start, start + size - 11, 12):
+        begin, end, unwind = struct.unpack_from("<III", data, offset)
+        if begin < end:
+            ranges.append((begin, end, unwind))
+    return ranges
+
+
+def _containing_function(rva: int, ranges: list[tuple[int, int, int]]) -> dict | None:
+    """Return the exact .pdata function boundary containing an RVA, if present."""
+    for begin, end, unwind in ranges:
+        if begin <= rva < end:
+            return {
+                "begin_rva_hex": f"{begin:08X}",
+                "end_rva_exclusive_hex": f"{end:08X}",
+                "unwind_info_rva_hex": f"{unwind:08X}",
+            }
+    return None
+
+
 def scan_references(data: bytes, pe: dict, target_rvas=TARGET_RVAS) -> dict:
-    """Find direct E8/E9 rel32 refs in executable sections and VA slots elsewhere."""
+    """Find direct E8/E9 refs and VA slots, annotating exact .pdata caller bounds."""
     targets = {int(rva): {"direct_xrefs": [], "pointer_slots": []} for rva in target_rvas}
     image_base = pe["image_base"]
+    function_ranges = _runtime_function_ranges(data, pe)
 
     for section in pe["sections"]:
         raw_start = section["raw_pointer"]
@@ -99,17 +128,19 @@ def scan_references(data: bytes, pe: dict, target_rvas=TARGET_RVAS) -> dict:
                 win_start = max(0, index - WINDOW_BEFORE)
                 win_end = min(len(chunk), index + 5 + WINDOW_AFTER)
                 code_window = chunk[win_start:win_end]
-                targets[target_rva]["direct_xrefs"].append(
-                    {
-                        "kind": "call-rel32" if opcode == 0xE8 else "jump-rel32",
-                        "instruction_rva_hex": f"{instruction_rva:08X}",
-                        "return_or_next_rva_hex": f"{instruction_rva + 5:08X}",
-                        "section": section["name"],
-                        "window_start_rva_hex": f"{va_start + win_start:08X}",
-                        "window_sha256": hashlib.sha256(code_window).hexdigest(),
-                        "window_bytes_hex": code_window.hex().upper(),
-                    }
-                )
+                reference = {
+                    "kind": "call-rel32" if opcode == 0xE8 else "jump-rel32",
+                    "instruction_rva_hex": f"{instruction_rva:08X}",
+                    "return_or_next_rva_hex": f"{instruction_rva + 5:08X}",
+                    "section": section["name"],
+                    "window_start_rva_hex": f"{va_start + win_start:08X}",
+                    "window_sha256": hashlib.sha256(code_window).hexdigest(),
+                    "window_bytes_hex": code_window.hex().upper(),
+                }
+                containing = _containing_function(instruction_rva, function_ranges)
+                if containing is not None:
+                    reference["containing_function"] = containing
+                targets[target_rva]["direct_xrefs"].append(reference)
         else:
             for target_rva in targets:
                 needle = struct.pack("<Q", image_base + target_rva)
