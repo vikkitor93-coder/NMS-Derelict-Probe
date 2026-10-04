@@ -92,6 +92,50 @@ def _runtime_function_ranges(data: bytes, pe: dict) -> list[tuple[int, int, int]
     return ranges
 
 
+def _read_rva(data: bytes, pe: dict, rva: int, size: int) -> bytes:
+    """Read bytes at an RVA from a mapped PE section, returning empty if absent."""
+    for section in pe["sections"]:
+        start = section["virtual_address"]
+        delta = rva - start
+        if 0 <= delta and delta + size <= section["raw_size"]:
+            offset = section["raw_pointer"] + delta
+            return data[offset:offset + size]
+    return b""
+
+
+def _unwind_chain(data: bytes, pe: dict, unwind_rva: int) -> list[dict]:
+    """Follow UNW_FLAG_CHAININFO to the primary runtime-function entry, if present."""
+    chain = []
+    seen = set()
+    current = unwind_rva
+    for _ in range(16):
+        if current in seen:
+            break
+        seen.add(current)
+        header = _read_rva(data, pe, current, 4)
+        if len(header) != 4:
+            break
+        version_flags, _prolog_size, code_count, _frame = header
+        flags = version_flags >> 3
+        if not flags & 0x04:  # UNW_FLAG_CHAININFO
+            break
+        chained_offset = 4 + ((code_count + 1) & ~1) * 2
+        record = _read_rva(data, pe, current + chained_offset, 12)
+        if len(record) != 12:
+            break
+        begin, end, parent_unwind = struct.unpack("<III", record)
+        if begin >= end:
+            break
+        entry = {
+            "begin_rva_hex": f"{begin:08X}",
+            "end_rva_exclusive_hex": f"{end:08X}",
+            "unwind_info_rva_hex": f"{parent_unwind:08X}",
+        }
+        chain.append(entry)
+        current = parent_unwind
+    return chain
+
+
 def _containing_function(rva: int, ranges: list[tuple[int, int, int]]) -> dict | None:
     """Return the exact .pdata function boundary containing an RVA, if present."""
     for begin, end, unwind in ranges:
@@ -139,6 +183,10 @@ def scan_references(data: bytes, pe: dict, target_rvas=TARGET_RVAS) -> dict:
                 }
                 containing = _containing_function(instruction_rva, function_ranges)
                 if containing is not None:
+                    unwind_chain = _unwind_chain(data, pe, int(containing["unwind_info_rva_hex"], 16))
+                    if unwind_chain:
+                        containing["unwind_chain"] = unwind_chain
+                        containing["chained_function_candidate"] = unwind_chain[-1]
                     reference["containing_function"] = containing
                 targets[target_rva]["direct_xrefs"].append(reference)
         else:
