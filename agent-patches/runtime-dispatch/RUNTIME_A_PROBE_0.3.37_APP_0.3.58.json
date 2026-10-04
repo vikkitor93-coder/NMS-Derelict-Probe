@@ -1,0 +1,94 @@
+{
+  "schema_version": 3,
+  "variant_id": "RUNTIME-A",
+  "lane": "agent/runtime-dispatch-published-057",
+  "lane_id": "runtime-dispatch",
+  "base": "verified main updater package v0.3.57",
+  "base_version": "0.3.57",
+  "base_probe_version": "0.3.35",
+  "base_package": {
+    "source": "packages/v0.3.57-full/",
+    "sha256": "eb8fbc66c20f6dd976018d35fc89aac11023360e5dc3f40c0164be7452fd2126",
+    "size_bytes": 389848,
+    "chunk_count": 29,
+    "verification": "reconstructed from main updater chunks; SHA-256, byte count, and ZIP integrity verified"
+  },
+  "probe_version": "0.3.37",
+  "surveyor_app_version": "0.3.58",
+  "purpose": "Extend the verified published v0.3.57 payload's shared logical-entry capture to record RCX, RDX, and raw [RDX+0x10] together, preserve the entry snapshot through recursive calls, and correlate it with the exact root descriptor. The published payload embeds probe 0.3.35, so the patch also carries forward the shared-entry capture introduced by the 0.3.36 lane patch.",
+  "integration_patch": {
+    "path": "agent-patches/runtime-dispatch/runtime-a-probe-0.3.37-from-published-v0.3.57.patch",
+    "sha256": "b7bf7fd3b6267fb5eeb01bcf1a0f8be2b5d8254b2f5b61d7c8fd8b5f6ba54437",
+    "size_bytes": 22459,
+    "base_version": "0.3.57",
+    "base_probe_version": "0.3.35",
+    "base_package_sha256": "eb8fbc66c20f6dd976018d35fc89aac11023360e5dc3f40c0164be7452fd2126"
+  },
+  "capture_design": {
+    "method": "single shared logical-entry hook; captures the first two x64 arguments and the entry-time raw [RDX+0x10] value; preserves caller RVA and descriptor correlation through verified self-recursion",
+    "register_fields": [
+      "rcx_hex",
+      "rdx_hex",
+      "rdx_plus_0x10_capture"
+    ],
+    "caller_coverage": "all runtime callers entering the shared hook; retains the 52-static-candidate count; no per-caller breakpoints",
+    "timing_limit": "callee-entry snapshot immediately after call, not a pre-instruction breakpoint snapshot; the later root-add sample remains separate",
+    "writes_game_state": false
+  },
+  "changed_files": [
+    "AI_HANDOFF.md",
+    "CANONICAL_SOURCE.json",
+    "CHANGELOG.md",
+    "README.md",
+    "VERSION.txt",
+    "mod/derelict_baseline_probe.py",
+    "tests/test_tools.py",
+    "tools/surveyor_controller.py",
+    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.37-from-published-v0.3.57.patch",
+    "agent-patches/runtime-dispatch/RUNTIME_A_PROBE_0.3.37_APP_0.3.58.json"
+  ],
+  "verification": {
+    "focused_tests": "python -m unittest discover -s tests -p test_tools.py -k v0337 -v — 4 passed",
+    "full_tests": "python -m unittest discover -s tests -q — 182 passed",
+    "compileall": "python -m compileall -q tools overlay tests mod — passed",
+    "patch_reproduction": "combined patch applies cleanly to reconstructed official v0.3.57 updater ZIP; focused 4 tests, full 182 tests, and compileall pass on applied tree",
+    "updater_refresh": "not run; 0.3.58 package chunks/manifest have not been published",
+    "live_nms": "pending one short root event after app/probe integration"
+  },
+  "evidence": {
+    "shared_upload": "research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726/",
+    "runtime_file": "exact-root-caller-latest.json",
+    "run_manifest": "run-manifest.json",
+    "runtime_capture_utc": "2026-10-04T15:12:15.673Z",
+    "source_probe_version": "0.3.35",
+    "root_system": "0001BF0004E84EFD",
+    "root_seed_candidate": "5B4AE67D9C2A8F61",
+    "root_descriptor": "000001F9A4546928",
+    "caller_return_rva": "02C0497A",
+    "runtime_distinct_caller_return_count": 10,
+    "static_caller_candidate_count": 52,
+    "entry_register_snapshot": "absent in uploaded artifact; added by probe 0.3.37"
+  },
+  "interpretation": {
+    "measured": "The main updater's v0.3.57 manifest points to a 389848-byte ZIP with SHA-256 eb8fbc66c20f6dd976018d35fc89aac11023360e5dc3f40c0164be7452fd2126. Reconstructed bytes pass hash/size and ZIP integrity checks. The embedded probe reports 0.3.35. The separate local source ZIP was 398312 bytes with SHA-256 a29c4863f9321dce98fa5e07c5178fce433d4d212debdd402730ffa48541e4c5 and is not the published package.",
+    "inference": "The verified updater payload is the correct patch base; the patch bundles the prior shared-entry capture so it reaches the requested 0.3.37 instrumentation from published probe 0.3.35.",
+    "hypothesis": "The call-entry RCX/RDX values preserve the relevant dispatch arguments; validate with a live probe 0.3.37 event before assigning semantic meaning to the slot."
+  },
+  "human_validation": {
+    "required": true,
+    "full_derelict_traversal_required": false,
+    "steps": [
+      "After Main integration publishes Surveyor 0.3.58 / probe 0.3.37, open Surveyor → GitHub / updates → Check for updates and install 0.3.58.",
+      "Restart Surveyor; fully exit NMS, then launch NMS from Surveyor so probe 0.3.37 loads at process start.",
+      "Enter any accessible derelict only until the root event is captured; no full traversal is needed.",
+      "Close NMS and upload the captured root event or all saved evidence.",
+      "Tell Runtime-A to check; correlate RCX, RDX, and [RDX+0x10] with the same root descriptor and caller RVA."
+    ],
+    "success_condition": "A fresh probe 0.3.37 artifact contains non-null or explicitly failed RCX, RDX, and [RDX+0x10] fields at shared entry, with caller RVA and matching root descriptor; later root-add value remains separately labeled."
+  },
+  "rollback": [
+    "Use Surveyor rollback or reinstall v0.3.57.",
+    "Fully exit and restart NMS to reload the published payload's probe 0.3.35.",
+    "No saved-evidence migration is required; the new fields are additive."
+  ]
+}
