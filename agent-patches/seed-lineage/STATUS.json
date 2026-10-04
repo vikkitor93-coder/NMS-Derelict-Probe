@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-04T09:00:00Z",
+  "updated_utc": "2026-10-04T08:59:36Z",
   "state": "waiting_on_user",
   "status": "Waiting for fresh current-build root-seed evidence",
   "summary": "Reviewed the newest shared batch on main: research-uploads/20261004T084829Z-all-saved-evidence-5a094647/run-manifest.json and lane-relevant generation-baseline-latest.json, dungeon-seed-function-analysis-latest.json, dungeon-upstream-callers-latest.json, exact-root-caller-latest.json, and seed-room-correlation.json. The baseline artifact is session 20261002T213412Z_00001A0004E84EFD (probe 0.3.34), with zero dungeon scene instances and unresolved preset; it is not the fresh post-update survey. It records root seed 9256392A2F5A74AC as a candidate with use_seed=true. The correlation file groups 9 measurements for this address, lists the same candidate root seed with coverage 7, and reports seed stability as null. The seed-function/upstream reports are from session 20261002T213047Z and show the candidate descriptor seed being read before AddResource, but no derivation. Historical 35-container evidence remains historical. The later MEDI_FLOATERS/10-room/16-target result remains an inference/model prediction, not a verified physical count. No seed derivation is claimed.",
