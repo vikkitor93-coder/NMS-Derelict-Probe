@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "version": "0.3.57",
-  "status": "locally-tested-candidate-pending-publication-and-live-validation",
+  "status": "release-candidate-pending-windows-mod-validation",
   "artifact": {
     "storage": "github-base64-chunks-and-sandbox-download",
     "file_name": "NMS-Derelict-Probe-v0.3.57-source.zip"
@@ -11,23 +11,22 @@
     "reason": "The complete source ZIP is delivered as the release artifact and reproducibly encoded in the repository package chunk format."
   },
   "verification": {
-    "unit_tests": "181/181 passed",
+    "unit_tests": "182/182 passed",
     "compileall": "passed: python -m compileall -q tools overlay tests mod",
-    "zip_integrity": "pending package build",
+    "zip_integrity": "passed: package generated and hash-verified",
     "windows_ui": "not run in Linux workspace",
     "nms_7_05_mod_runtime": "not run; user supplies own 7.04 archive",
-    "package_refresh": "v0.3.57 source package generated from main v0.3.56; PR publication pending",
-    "package_files": "153"
+    "package_refresh": "v0.3.57 source package distributed through the updater manifest",
+    "package_files": "151"
   },
   "resume": {
     "integration_agent": "Install v0.3.53, capture the Runtime-A root event if needed, close NMS, then use Upload captured root event or Upload all saved evidence. Continue Windows/NMS validation when available."
   },
   "notes": [
-    "Runtime-A 0.3.36 captures owner+0x10 at logical entry and preserves a distinct root-add sample; live Windows/NMS validation is required.",
-    "181 unit tests pass; compileall passes. Windows UI and NMS 7.05 live validation remain unrun.",
     "Constrains local archive staging to expected paths, regular XML files, and bounded sizes; rejects invalid or tampered content before touching game files.",
     "No third-party mod assets are bundled.",
     "The user-supplied mod archive targets 7.04; NMS 7.05 runtime behavior remains unverified.",
-    "v0.3.56 adds a persisted toggle for automatic root-capture uploads and deduplicated all-lane evidence uploads after research workflows."
+    "182 unit tests pass; compileall passes. Windows UI and NMS 7.05 runtime validation remain unrun.",
+    "v0.3.56 adds the persisted auto-upload toggle and deduplicated all-lanes evidence; v0.3.57 fixes the Surveyor startup geometry-manager conflict."
   ]
 }

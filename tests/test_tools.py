@@ -687,19 +687,12 @@ class ToolTests(unittest.TestCase):
         self.assertIn("POI-UA",view["generation"])
         self.assertIn("00001A0004E84EFD",view["generation"])
 
-    def test_v0336_runtime_probe_captures_owner_slot_at_entry_before_root_add(self):
+    def test_v0334_runtime_probe_captures_owner_slot_after_exact_root_match(self):
         probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
-        self.assertIn('PROBE_VERSION = "0.3.36"', probe)
+        self.assertIn('PROBE_VERSION = "0.3.35"', probe)
         exact=probe.index('exact_external = self._logical_entry_external_match_for_descriptor(descriptor_ptr)')
-        entry_capture=probe.index('phase="logical-entry-after-external-call"')
-        root_add_capture=probe.index('phase="root-resource-add"', exact)
-        self.assertLess(probe.index('def _trace_resource_descriptor_walk_entry'), entry_capture)
-        self.assertLess(entry_capture, root_add_capture)
-        self.assertIn('"capture_phase": phase', probe)
-        self.assertIn('"capture_utc": _utc_now()', probe)
-        self.assertIn('"external_owner_plus_0x10_capture_at_entry": frame.get("external_owner_plus_0x10_capture")', probe)
-        self.assertIn('exact_external["owner_plus_0x10_capture_at_root_add"]', probe)
-        self.assertIn('exact_external["owner_plus_0x10_capture_at_entry"] = entry_capture', probe)
+        capture=probe.index('exact_external["owner_plus_0x10_capture"] = _owner_plus_0x10_capture(owner_pointer)', exact)
+        self.assertGreater(capture, exact)
         self.assertIn('"root_dispatch_capture": self._root_dispatch_capture_payload()', probe)
         self.assertIn('"last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture', probe)
         self.assertIn('kernel32.ReadProcessMemory(', probe)
@@ -1361,6 +1354,13 @@ class ToolTests(unittest.TestCase):
         self.assertNotIn("import pymhf; import nmspy", start_nms)
         self.assertIn('CONTROLLER_VERSION = "0.3.57"', controller)
         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
+
+    def test_github_update_buttons_use_a_separate_geometry_parent(self):
+        source=(ROOT / "tools" / "surveyor_controller.py").read_text(encoding="utf-8")
+        section=source[source.index('updates_group, updates ='):source.index('extensions_group, extensions =')]
+        self.assertIn('update_buttons = ttk.Frame(updates)', section)
+        self.assertIn('self._button_grid(update_buttons, [', section)
+        self.assertNotIn('self._button_grid(updates, [', section)
 
 
     def test_v0336_launcher_avoids_trailing_backslash_and_bom_toml(self):

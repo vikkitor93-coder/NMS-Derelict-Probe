@@ -431,7 +431,9 @@ class SurveyorController:
             text="When enabled, a captured root event uploads in the background; completed research and lane actions also publish a deduplicated all-lanes evidence batch.",
             wraplength=690,
         ).pack(anchor="w", pady=(0, 6))
-        self._button_grid(updates, [
+        update_buttons = ttk.Frame(updates)
+        update_buttons.pack(fill="x")
+        self._button_grid(update_buttons, [
             ("Set up GitHub uploads", lambda: self._integration("GitHub setup", "setup", visible=True)),
             ("Run GitHub diagnostic", lambda: self._integration("GitHub diagnostic", "diagnose")),
             ("Check app update", lambda: self._integration("Check update", "check-update")),

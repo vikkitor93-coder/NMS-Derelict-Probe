@@ -17,10 +17,27 @@
     "packages/v0.3.57-full/part-008.b64",
     "packages/v0.3.57-full/part-009.b64",
     "packages/v0.3.57-full/part-010.b64",
-    "packages/v0.3.57-full/part-011.b64"
+    "packages/v0.3.57-full/part-011.b64",
+    "packages/v0.3.57-full/part-012.b64",
+    "packages/v0.3.57-full/part-013.b64",
+    "packages/v0.3.57-full/part-014.b64",
+    "packages/v0.3.57-full/part-015.b64",
+    "packages/v0.3.57-full/part-016.b64",
+    "packages/v0.3.57-full/part-017.b64",
+    "packages/v0.3.57-full/part-018.b64",
+    "packages/v0.3.57-full/part-019.b64",
+    "packages/v0.3.57-full/part-020.b64",
+    "packages/v0.3.57-full/part-021.b64",
+    "packages/v0.3.57-full/part-022.b64",
+    "packages/v0.3.57-full/part-023.b64",
+    "packages/v0.3.57-full/part-024.b64",
+    "packages/v0.3.57-full/part-025.b64",
+    "packages/v0.3.57-full/part-026.b64",
+    "packages/v0.3.57-full/part-027.b64",
+    "packages/v0.3.57-full/part-028.b64"
   ],
-  "package_sha256": "a29c4863f9321dce98fa5e07c5178fce433d4d212debdd402730ffa48541e4c5",
-  "package_size": 398312,
+  "package_sha256": "eb8fbc66c20f6dd976018d35fc89aac11023360e5dc3f40c0164be7452fd2126",
+  "package_size": 389848,
   "managed_files": [
     ".gitignore",
     "AGENT_START_HERE.md",
@@ -172,8 +189,6 @@
     "tools/resolve_exact_root_vtable.py",
     "tools/surveyor_controller.py",
     "update-manifest.json",
-    "update-manifest.remote.json",
-    "agent-patches/runtime-dispatch/RUNTIME_A_PROBE_0.3.36_APP_0.3.57.json",
-    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.36-from-v0.3.56.patch"
+    "update-manifest.remote.json"
   ]
 }
