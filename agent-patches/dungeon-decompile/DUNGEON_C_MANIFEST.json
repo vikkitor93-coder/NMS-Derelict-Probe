@@ -39,20 +39,23 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "Post-7.05 capture analysis is published. Static scan still has no consumer candidate; await the RUNTIME-A owner+0x10 live capture, then decompile the newly resolved target/caller path. Treat MEDI_FLOATERS as the current high-confidence preset inference, but its 8-main/2-dead-end capture versus table Rooms=7 is flagged needs-review.",
-    "candidate_identity_rule": "triage-only until decompiler/runtime evidence proves a function role",
-    "post_update_evidence": "research-uploads/20260930T181100Z-dungeon-decompile/post-7.05-capture-analysis.json"
+    "next_method": "The 2026-10-04 exact-root bounded function is now disassembled from its .pdata start. 33 decoded direct E8 sites map to 7 distinct unnamed targets; use CALLBACK_DIRECT_CALL_INVENTORY.json. Next obtain helper .pdata ranges/bodies from the v0.3.39 exporter and matching NMS.exe, then analyze record updates at RSI+0x48 and availability bits.",
+    "candidate_identity_rule": "Candidate RVAs remain unnamed until full helper bodies and call semantics are validated; the runtime owner+0x10 field is not the caller's vtable slot.",
+    "post_update_evidence": "research-uploads/20261004T224430Z-all-saved-evidence-f138ff45/"
   },
   "human_validation": {
     "required": true,
-    "game_runtime_required": true,
-    "blocking_dependency": "agent/runtime-dispatch",
+    "game_runtime_required": false,
+    "full_derelict_traversal_required": false,
+    "duplicate_capture_or_upload_required": false,
+    "dependency": "matching local NMS.exe needed for helper-body extraction; Library transfer into this workspace failed twice",
+    "asset": "NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-helper-export.zip",
+    "asset_sha256": "95d7ee614fa1d13bb342cb56949cddb5e4cbec0283ba871751d0ea614091f11f",
     "steps": [
-      "Open Surveyor RUNTIME-A.",
-      "Start NMS and load the known derelict in system 00001A0004E84EFD.",
-      "Wait for the visible Root dispatch +0x10 captured success status; do not traverse the derelict.",
-      "Click Analyze generation + upload.",
-      "Tell Main AI: check."
+      "Extract the complete helper-export package (not the GitHub agent branch archive) into a normal local folder.",
+      "Run Extract-Runtime-Target-Function.cmd from the extracted package root.",
+      "Confirm output exact-root-caller-code-latest.json has runtime_target_function.direct_call_candidates and bounded target_function_body entries.",
+      "In Surveyor, click GitHub / updates > Upload all saved evidence, then tell Main AI “check”."
     ]
   },
   "latest_scan": {
@@ -159,5 +162,25 @@
     ],
     "focused_tests": "6/6 passed",
     "rollback": "Activate the retained v1.0.1 panel in Surveyor."
+  },
+  "historical_and_post_update_validation": {
+    "historical_baseline": "System 00001A0004E84EFD: S-class; 35 containers (31 Salvage + 4 Footlockers); 7 main rooms plus Room 0 dead-end; 2 vertical transitions; 1 Shuttle Bay. Preserve as historical.",
+    "later_same_address_model": "MEDI_FLOATERS is a high-confidence inference; 8 modeled main + 2 modeled dead-end rooms; 16 analyzer-predicted targets; generation table Rooms=7. Predicted counts are not physical measurements.",
+    "fresh_user_validated_run": "System 0001BF0004E84EFD / Angoto: CARGO_FLOATERS high-confidence inference; modeled 11 main rooms and 43 predicted containers (30 Salvage + 13 Footlockers) matched the user's physical traverse. User attributes changes from old system/run generation and replayability to the game update. Root seed 5B4AE67D9C2A8F61 remains candidate/unverified."
+  },
+  "latest_callback_analysis": {
+    "evidence_path": "agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json",
+    "source_attachment": "exact-root-caller-code-latest(2).json",
+    "source_attachment_sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
+    "source_nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "runtime_correlated_target_function": "00634BC0",
+    "pdata_range": "00634930..00634E03",
+    "direct_callsites": 33,
+    "unique_unnamed_targets": 7,
+    "limitations": [
+      "No helper target .pdata ranges/bodies were in the attachment.",
+      "The newer v0.3.39 helper exporter has not yet produced/uploaded its candidate bodies.",
+      "owner+0x10 = 0 in the 2026-10-04 capture and does not identify the runtime caller's [RDX+0x10] dispatch slot."
+    ]
   }
 }
