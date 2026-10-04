@@ -1,27 +1,28 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-04T10:35:56Z",
+  "updated_utc": "2026-10-04T14:50:00Z",
   "state": "working",
-  "status": "Entry-time dispatch capture built; awaiting live verification",
-  "summary": "Evidence from research-uploads/20261004T101244Z-all-saved-evidence-2a766630/: system 0001BF0004E84EFD, seed candidate 5B4AE67D9C2A8F61, external return RVA 02C0497A, owner 000001D026704000, descriptor owner+0x128. The root-add sample read owner+0x10 as zero; the matched logical-entry record was 1.383 ms old. Static bytes at 02C04977 are 48 8B 11 FF 52 10. Inference: the delayed zero does not identify the call-time value and upload timing is not indicated. Probe 0.3.35 captures the external-entry slot through recursive calls and separately samples root addition. User confirms the 11-room/43-target model matched their physical traversal; the root seed remains candidate/unverified.",
-  "progress": "Candidate app v0.3.54 / probe 0.3.35 is built. Patch is reproducible against v0.3.53; 178 tests and compileall pass; ZIP integrity passes. PR publication and live Windows/NMS validation remain.",
+  "status": "v0.3.57 entry-time capture PR published; live validation pending",
+  "summary": "Evidence at research-uploads/20261004T101244Z-all-saved-evidence-2a766630/: system 0001BF0004E84EFD, root seed candidate 5B4AE67D9C2A8F61, external return RVA 02C0497A, owner 000001D026704000, descriptor owner+0x128. The root-add sample read owner+0x10 as zero; the matched logical-entry record was 1.383 ms old. User confirms the 11-room/43-target model matched physical traversal. The root seed remains candidate/unverified. Main v0.3.56 still reads the slot at root addition; v0.3.57 candidate samples it at logical entry and preserves the separate root-add reading.",
+  "progress": "PR #47 is open and mergeable: https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/47. v0.3.57 is based on current main v0.3.56. Targeted tests 2/2, full tests 181/181, compileall, patch reproduction, package checksum, base64 round-trip, and ZIP integrity pass. Windows/NMS live behavior remains unverified.",
   "blockers": [
-    "Live validation requires the v0.3.54 app update to be available, NMS fully restarted, and one root event captured."
+    "PR #47 must be reviewed and merged before the updater can offer v0.3.57.",
+    "Live Windows/NMS capture requires one root event after the update and a full NMS restart."
   ],
-  "next_action": "Publish the v0.3.54 candidate PR. After it is merged and the updater offers the build, review one uploaded root event for entry-time slot value/identity and compare it with the root-add sample.",
+  "next_action": "After PR #47 is merged and the updater offers v0.3.57, capture and upload one exact-root event; compare the entry-time owner+0x10 value/identity with the separate root-add sample. No full traversal is required.",
   "human_intervention_required": true,
   "human_action": {
     "required": true,
-    "surveyor_request": "Install Runtime-A 0.3.35 and capture one root event with the game restarted.",
+    "surveyor_request": "After PR #47 is merged and v0.3.57 is available, install it, restart NMS, capture one root event, and upload that saved event.",
     "steps": [
-      "After v0.3.54 is available in Surveyor's updater, click Check for updates and install v0.3.54.",
-      "Fully exit NMS so the old probe is unloaded.",
-      "Start NMS from Surveyor and load the derelict only until the exact root event and entry-time Root dispatch +0x10 capture appear.",
-      "Close NMS, then click Upload captured root event.",
-      "Tell the Runtime-A/Main agent check so it can compare the entry-time slot with the root-add sample."
+      "After PR #47 is merged and v0.3.57 appears in Surveyor, click Check for updates and install v0.3.57.",
+      "Fully exit NMS.",
+      "Start NMS from Surveyor and load only until the root event is captured; a full traversal is not needed.",
+      "Close NMS, then click Upload captured root event or Upload all saved evidence.",
+      "Tell Runtime-A/Main to check the new upload."
     ],
-    "success_condition": "Uploaded exact-root evidence includes the entry-time owner+0x10 raw value and target identity, separately labeled root-add read, and matching descriptor correlation.",
+    "success_condition": "The uploaded exact-root event contains the entry-time owner+0x10 raw value and target identity, plus a separately labeled root-add sample correlated to the same descriptor.",
     "evidence_to_return": [
       "run-manifest.json",
       "exact-root-caller-latest.json"
