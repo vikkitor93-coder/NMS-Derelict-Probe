@@ -179,7 +179,7 @@
       "All three are direct-call byte observations from static windows. The report says references alone do not prove runtime dispatch or semantics."
     ],
     "interpretation": "The existing descriptor-flow hypothesis can now be followed through three direct wrapper callers. The small windows do not yet identify how the input objects are initialized or prove that any callsite input is the universe-address-derived root seed. Root-seed derivation remains unproven.",
-    "next_lane_action": "Continue tracing the remaining 02D042E1 and 02D04AF8 records upstream, including their function entry contexts and inputs to the stack record construction. Check whether either is statically linked to the runtime root-resource caller/descriptor. If no static path proves that link, design a narrowly filtered, read-only runtime sample of incoming R9 at 00637660 (source bytes +0x10/+0x18 and caller return RVA) and compare it with the captured root seed. Do not request a traversal unless the needed hook requires a new session.",
+    "next_lane_action": "Trace dispatch and context ownership for caller functions 02D03CCA and 02D053A0. If static analysis cannot tie either path to the live root resource, use a minimal read-only runtime capture of the source descriptor bytes at 00637660 during the root event, including seed field, use_seed byte, and return RVA. No new derelict traversal is needed unless attaching that capture requires a fresh probe session.",
     "limitations": [
       "Static callers and descriptor copy are measured; function semantics and their relation to the runtime root-resource event are not proven.",
       "The three direct callers' source records are local temporaries; the inspected code does not show a direct assignment from universe address or root seed.",
@@ -254,7 +254,7 @@
       }
     },
     "caller_path_analysis": {
-      "reviewed_utc": "2026-10-04T21:45:37Z",
+      "reviewed_utc": "2026-10-04T21:51:44Z",
       "direct_seed_consumer": "The call from 00637660 to 006388A0 can fall through the adjacent .pdata code fragment at 006388F9. That fragment reads 16 bytes from object+0x138 and tests object+0x140, matching the documented seed/use-seed fields in the constructed object.",
       "direct_flow": "R9 input to 00637660 is preserved through 00637DB0 and copied by 00227A40 into object+0x128. 00637660 then passes the generated object as the second argument to 006388A0.",
       "caller_001B2CF9": {
@@ -270,8 +270,25 @@
         "measured": "R9 points to local record [rbp-0x38]. The caller assembles a 16-byte pair from a base value plus offsets, and the record is routed through the wrapper.",
         "interpretation": "The value source and its relationship to the live derelict root seed remain unresolved."
       },
-      "direct_callers": "Only 02D042E1 and 02D04AF8 remain plausible among the three direct callers for continued tracing; 001B2CF9 is ruled out as a direct emitter of the known candidate values under the observed copy/mixer path.",
-      "evidence_quality": "The first caller formula and copy path are static byte-derived facts. Exclusion is a conditional inference assuming the observed copy is used without a later transform."
+      "direct_callers": "Caller 001B2CF9 excluded as a direct emitter for known candidates under the observed mixer/copy path; 02D042E1 and 02D04AF8 both enter shared helper 02D03EE0 but remain untied to the live root resource.",
+      "evidence_quality": "The first caller formula and copy path are static byte-derived facts. Exclusion is a conditional inference assuming the observed copy is used without a later transform.",
+      "shared_helper_followup": {
+        "reviewed_utc": "2026-10-04T21:51:44Z",
+        "executable_sha256": "671de22649274b49fa76f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+        "measured_static_facts": [
+          "Caller site 02D042E1 is inside .pdata range 02D0400B..02D0455C and calls wrapper 00637660 with R9 pointing to local record [rbp-0x28].",
+          "Caller site 02D04AF8 is inside .pdata range 02D04690..02D04F47 and calls wrapper 00637660 with R9 pointing to local record [rbp-0x38].",
+          "Both caller paths assemble a seed-like 64-bit value and call shared helper 02D03EE0. This helper is in .pdata range 02D03EE0..02D0400B.",
+          "The caller of helper 02D03EE0 at 02D03D41 belongs to .pdata range 02D03CCA..02D03ECC; it passes a context pointer loaded from [rbp+0x148] in R9 and an integer loaded from [rbp+0x150] as a stack argument.",
+          "The enclosing function for 02D04AF8 is called from function range 02D053A0..02D05DC0 at 02D0552D; that enclosing function calls helper 02D03EE0 again at 02D05ACE."
+        ],
+        "interpretation": {
+          "inference": "The remaining wrapper callers share a context-based seed-building/helper path and appear to serve generated-resource processing.",
+          "unknown": "Static data does not reveal dynamic values behind the context pointers or establish whether either call creates the live derelict root resource.",
+          "conclusion": "Neither path proves a universe-address-to-root-seed derivation. A runtime observation of descriptor input during the root event may be needed if further static dispatch analysis does not establish object identity."
+        },
+        "next_step": "Trace how functions 02D03CCA and 02D053A0 are dispatched and whether their context arguments can be statically tied to the captured root resource consumer. Do not infer live root identity from shared helper use alone."
+      }
     }
   }
 }
