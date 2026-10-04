@@ -2,8 +2,8 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T00:00:00Z",
-  "state": "blocked-on-fresh-current-build-survey",
+  "reviewed_utc": "2026-10-04T09:55:00Z",
+  "state": "new-root-captured-physical-survey-unlinked",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -16,9 +16,9 @@
       "dead_end_room_label": "Room 0",
       "vertical_transitions": 2,
       "shuttle_bays": 1,
-      "label": "historical; preserve without relabeling as current"
+      "label": "historical; preserved without relabeling as current"
     },
-    "later_post_update_observation": {
+    "prior_post_update_model": {
       "session_id": "20260930T173540Z_00001A0004E84EFD",
       "preset": "MEDI_FLOATERS",
       "preset_confidence": "high-inference",
@@ -27,32 +27,42 @@
       "analyzer_predicted_targets": 16,
       "physical_count_verified": false,
       "generation_table_rooms": 7,
-      "room_model_status": "needs-review"
+      "room_model_status": "needs-review",
+      "root_seed": "9256392A2F5A74AC (candidate/unverified)"
     },
-    "root_seed": {
-      "hex": "9256392A2F5A74AC",
-      "status": "candidate-unverified"
+    "current_known_system_measurement": {
+      "session_id": "20261004T091738Z_00001A0004E84EFD",
+      "universe_address": "00001A0004E84EFD",
+      "dungeon_scene_instances": 150,
+      "logical_generated_chunks": 10,
+      "preset": "MEDI_FLOATERS (high-confidence inference)",
+      "analyzer_predicted_salvage": 11,
+      "analyzer_predicted_footlockers": 5,
+      "analyzer_predicted_targets": 16,
+      "physical_counts_verified": false,
+      "root_seed": "9256392A2F5A74AC (candidate/unverified)",
+      "table_rooms": 7,
+      "modeled_rooms": "8 main + 2 dead-end"
     },
-    "latest_uploaded_capture": {
-      "session_id": "20261002T213412Z_00001A0004E84EFD",
-      "probe_version": "0.3.34",
-      "dungeon_scene_instances": 0,
-      "logical_generated_chunks": 0,
-      "physical_survey_present": false,
-      "owner_plus_0x10": {
-        "slot_value_hex": "FFFFFFFF00000000",
-        "target_identity_status": "not-in-loaded-module"
-      }
+    "separate_exact_root_capture": {
+      "utc": "2026-10-04T09:43:51.578Z",
+      "root_resource": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+      "root_seed": "5B4AE67D9C2A8F61",
+      "owner_plus_0x10_slot_value": "0000000000000000",
+      "target_identity_status": "null-or-low-address",
+      "universe_address_in_file": false,
+      "likely_new_derelict_link": "seed differs from known-system capture, but exact system association is unproven from this file"
     },
     "runtime_consumer_analysis": {
-      "runtime_owner_plus_0x10_target_resolved": false,
+      "live_target_resolved": false,
       "consumer_function_found": false,
-      "vtable_analysis": "indirect call at RVA 02C04977 decoded as FF 52 10; offline resolver returned zero candidates"
+      "static_call": "RVA 02C04977, FF 52 10",
+      "offline_vtable_candidates": 0
     }
   },
   "evidence": {
-    "shared_upload_path": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/",
-    "manifest": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/run-manifest.json",
+    "shared_upload_path": "research-uploads/20261004T095443Z-all-saved-evidence-af87032b/",
+    "manifest": "research-uploads/20261004T095443Z-all-saved-evidence-af87032b/run-manifest.json",
     "reviewed_files": [
       "generation-baseline-latest.json",
       "generation-measurements-summary.json",
@@ -61,15 +71,19 @@
       "exact-root-caller-latest.json",
       "exact-root-vtable-latest.json",
       "dungeon-caller-code-latest.json",
-      "dungeon-upstream-callers-latest.json"
+      "dungeon-upstream-callers-latest.json",
+      "room-crate-index.json",
+      "asset-calculation-latest.json",
+      "crate-target-discovery.json"
     ],
-    "note": "Upload occurred 2026-10-04, but its generation/runtime source sessions are dated 2026-09-30 and 2026-10-02; no new full survey is included."
+    "note": "The generation baseline is a new capture from the known system. The separate exact-root capture has a different root seed but no universe address. The measurement summary and asset calculations in this upload are older snapshots; no verified physical count/layout for the user's newly traversed system is present."
   },
   "blocked": {
-    "reason": "No fresh current-game-build full traversal or verified physical count/layout is present in the shared upload. The root owner+0x10 live value and target identity are also unresolved.",
+    "reason": "Cannot associate the separate exact-root capture to a universe or compare physical room/container counts for the newly traversed system from the uploaded files. Its owner+0x10 slot is zero, so Runtime-A target resolution and DUNGEON-C consumer analysis remain blocked.",
     "human_action_required": true,
-    "full_traversal_required": true,
-    "duplicate_upload_required": false
+    "full_traversal_required": false,
+    "duplicate_upload_required": false,
+    "needed": "Provide the new system address and observed physical count/layout, if recorded, or run the current-system measure/analyze workflow and upload its outputs. The user reports the traversal is already complete; do not repeat it solely on this evidence."
   },
-  "next_lane_owned_step": "When a fresh current-build full traversal and a valid Runtime-A owner+0x10 target identity are uploaded to main, compare the verified physical room/container/layout counts against the preserved historical baseline and the 2026-09-30 predicted model; continue consumer analysis only if a live target is resolved."
+  "next_lane_owned_step": "Once the new-system identity and physical observations are available in a published capture, compare those physical results with the historical baseline and model without treating predictions as measurements; continue consumer analysis only if Runtime-A resolves a non-null target identity."
 }
