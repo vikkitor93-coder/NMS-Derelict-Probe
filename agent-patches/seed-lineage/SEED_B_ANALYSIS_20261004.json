@@ -70,5 +70,11 @@
   },
   "next_lane_action": "Search the captured upstream caller / root-construction code and public system generator for a direct dataflow edge from system/POI state into cTkResourceDescriptor seed. The current root consumer only reads the embedded descriptor seed before AddResource, so continue upstream of that consumer. If the captured NMS.exe hash is not the current 7.05 build, obtain a current executable for address/build-specific static confirmation.",
   "human_intervention_required": false,
-  "full_traversal_required": false
+  "full_traversal_required": false,
+  "versions": {
+    "user_reported_surveyor": "0.3.56",
+    "uploaded_capture_probe": "0.3.34",
+    "repository_main_version_file_at_check": "0.3.53",
+    "note": "These are separate component/version facts. The user identifies their installed Surveyor as 0.3.56. The uploaded evidence declares probe_version 0.3.34. The checked main branch's VERSION.txt still says 0.3.53; that repo label does not override the installed Surveyor version."
+  }
 }
