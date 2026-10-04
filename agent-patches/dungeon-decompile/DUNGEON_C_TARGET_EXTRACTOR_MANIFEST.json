@@ -32,7 +32,7 @@
     "focused_tests": "6/6 passed",
     "full_suite": "175/175 passed",
     "compileall": "python -m compileall -q tools overlay tests mod passed",
-    "live_executable_validation": "not run; installed NMS.exe is not available in this workspace"
+    "live_executable_validation": "User ran extractor successfully on NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; extracted 1235-byte .pdata range 00634930..00634E03. Hook RVA 00634BC0 is interior offset 0x290."
   },
   "rollback": "Delete Extract-Runtime-Target-Function.cmd, tools/extract_runtime_target_function.py, this manifest, and tests/test_runtime_target_function.py; remove the additive README/CHANGELOG/AI_HANDOFF notes. Existing caller extraction and upload schema remain unchanged.",
   "launcher": {
@@ -41,6 +41,12 @@
       "py -3",
       "python.exe on PATH"
     ],
-    "path_diagnostics": "Launcher validates project folder and interpreter; failure identifies the unavailable path or runtime."
+    "path_diagnostics": "Launcher validates project folder and interpreter; an unusable saved path is silent if fallback succeeds and included in the error if no runtime is available."
+  },
+  "latest_direct_evidence": {
+    "file": "exact-root-caller-code-latest(2).json",
+    "sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
+    "uploaded_to_shared_folder": false,
+    "body_sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5"
   }
 }
