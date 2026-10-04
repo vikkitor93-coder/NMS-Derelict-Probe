@@ -19,6 +19,10 @@
 - **Start overlay** and **Stop overlay** sit beside the existing **Game overlay** auto-start toggle. Stop closes the titled overlay window and signals the local stop-request file, including overlays started by the NMS launcher.
 - The package carries DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, and Seed-B 1.0.2, with prior installed versions retained for rollback. The Runtime-A panel stays data-only; its analyze/upload action is unchanged.
 
+## Autonomous progress
+
+Agents must keep working until human intervention is genuinely required. A reported next step is not a stopping point: first check whether it can be done with repository files, code, available tools, or existing evidence and execute it if possible. Diagnose failures and try reasonable alternatives. After completing the assigned objective, continue with the next highest-value task in the lane. Ask the user to act only for a true human-only dependency, after completing independent work and preparing one exact numbered recipe. Another lane's dependency is not a reason to idle; continue independent work and prepare a concrete handoff.
+
 ## Publishing workflow
 
 Agents may publish completed, tested, and documented changes directly to `main`; a separate integration-agent merge or user approval is not required. Keep unfinished experiments on lane branches. Before direct publishing, preserve a backup branch or exact base commit, run relevant checks, publish the full consistent change (including extension index/hash updates when applicable), update lane status and workspace handoff files, and report the main commit plus rollback steps. A PR is optional or a fallback if direct pushing is unavailable.
