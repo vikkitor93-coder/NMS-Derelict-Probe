@@ -2,8 +2,8 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T22:02:00Z",
-  "state": "runtime-target-rva-confirmed-launcher-fix-awaiting-retest",
+  "reviewed_utc": "2026-10-04T22:47:00Z",
+  "state": "runtime-target-body-extracted-consumer-analysis-in-progress",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -147,6 +147,15 @@
           "A second vcall at 02C04ACA uses RCX=[RDI+0x40] and the same vtable slot; its result similarly controls removal/update in a ring-buffer-like structure."
         ],
         "inference": "This code behaves like callback-driven timed/queue maintenance. The result==1 completion/removal interpretation is plausible from control flow, but class, callback, and subsystem names remain unknown."
+      },
+      "extracted_body": {
+        "status": "reviewed",
+        "function_start_rva": "00634930",
+        "hook_rva": "00634BC0",
+        "function_end_exclusive_rva": "00634E03",
+        "length_bytes": 1235,
+        "behavior_inference": "Four conditionally stored values at RSI+0x50/+0x54/+0x58/+0x5C; corresponding availability bits at RSI+0x1ED (bits 1/3/2/4), bit 0 set unconditionally; all-four-present boolean when an input flag is clear; repeated helper chains update RSI+0x48.",
+        "limits": "Helper semantics, class identity, and the actual qword [RDX+0x10] dispatch target remain unresolved. Owner+0x10 zero is a separate measurement and is not the vtable slot."
       }
     },
     "user_explanation_update": {
@@ -299,17 +308,36 @@
       "file": "exact-root-caller-code-latest(1).json",
       "sha256": "3942f011ded5cbab7025546b9caa6bcde7d21c950193faf755839c9470dca694",
       "note": "Direct conversation attachment; it has not yet been placed in the shared main all-saved-evidence folder. The correlated summary and code-window hashes are recorded above."
+    },
+    "latest_direct_attachment": {
+      "file": "exact-root-caller-code-latest(2).json",
+      "sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
+      "uploaded_to_shared_folder": false,
+      "source_probe_version": "0.3.37",
+      "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
+      "universe_address": "0001BF0004E84EFD / Angoto",
+      "descriptor_pointer": "00000254AAE08D28",
+      "external_caller_return_rva": "02C0497A",
+      "call_instruction": "02C04977: FF 52 10",
+      "owner_plus_0x10_logical_entry": "0000000000000000",
+      "owner_plus_0x10_root_add": "0000000000000000",
+      "target_identity": "null-or-low-address",
+      "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "body_sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5",
+      "pdata_range": "00634930..00634E03",
+      "hook_rva": "00634BC0 (interior offset 0x290; not function start)",
+      "note": "Direct attachment reviewed. Not claimed as present in a shared research-uploads folder."
     }
   },
   "blocked": {
-    "reason": "The effective runtime callee RVA 00634BC0 is proven by exact caller-return/entry-hook correlation. To continue semantic decompilation, its `.pdata`-bounded body must be extracted from the user's installed NMS.exe; the workspace contains the correlated caller window but not the game executable.",
-    "human_action_required": true,
+    "reason": "No immediate user action is needed for the next lane-owned offline step. The function body is available directly in the attached evidence. The actual indirect dispatch destination and helper semantics remain unresolved, but DUNGEON-C can continue with conservative static call/helper analysis.",
+    "human_action_required": false,
     "full_traversal_required": false,
     "nms_runtime_required": false,
     "duplicate_capture_or_upload_required": false,
-    "needed": "Use the updated complete source ZIP NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-launcher-fix-source.zip (SHA-256 bee57a5f135f34a16879f3ba047c5831b4974d77176cd830d2641a9e9b74f568). Extract it to a normal local folder and run Extract-Runtime-Target-Function.cmd again. The launcher now validates its folder, uses Surveyor's interpreter when valid, then falls back to py -3 or python.exe, and prints a specific error if startup still fails. If extraction succeeds, use Surveyor → GitHub / updates → Upload all saved evidence and tell me “check”. No game launch or traversal is needed.",
+    "needed": "None for the next offline analysis step; do not request a duplicate upload. Later live evidence may be useful for resolving the raw qword [RDX+0x10], but is not needed to continue static work.",
     "expected_output": "Either a specific launcher diagnostic, or a regenerated exact-root-caller-code-latest.json containing runtime_target_function with .pdata range, body bytes, and matching NMS.exe SHA-256.",
     "success_condition": "The shared upload contains the target body for 00634BC0; DUNGEON-C can disassemble/decompile its logic and compare descriptor/seed flow."
   },
-  "next_lane_owned_step": "After the corrected launcher succeeds and the user uploads all saved evidence, fetch the shared upload, disassemble the .pdata-bounded body at RVA 00634BC0, identify observable data flow, and compare it with the exact Angoto descriptor/seed path. Keep source symbol/class names unassigned unless independently supported."
+  "next_lane_owned_step": "Conservatively enumerate direct E8 calls in the .pdata-bounded body, resolve candidate target RVAs against .pdata, and prepare an offline helper-body extraction with instruction-boundary caveats. Then compare helper behavior with the four-field output record; do not label the class or callback without stronger evidence."
 }
