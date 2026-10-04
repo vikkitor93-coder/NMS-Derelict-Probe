@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T11:02:00Z",
+  "reviewed_utc": "2026-10-04T11:08:00Z",
   "state": "new-system-layout-and-container-model-user-validated",
   "verified": {
     "historical_baseline": {
@@ -68,7 +68,16 @@
     "runtime_consumer_analysis": {
       "consumer_function_found": false,
       "static_call": "RVA 02C04977, FF 52 10",
-      "offline_vtable_candidates": 0
+      "offline_vtable_candidates": 0,
+      "candidate_containing_routine": {
+        "start_rva": "02C04720",
+        "boundary_evidence": "Five 0xCC bytes immediately precede RVA 02C04720 in the published exact-root caller code window; heuristic boundary only, since PE runtime-function/unwind range is unavailable.",
+        "observed_pattern": "The call occurs during an apparent linked-list walk. Code loads an object from a node field, reads a virtual method result through [object_vtable+0x10], checks the result, and conditionally unlinks/frees a node or updates elapsed-time state.",
+        "interpretation": "Likely a polling/completion-check list routine.",
+        "confidence": "low-to-moderate behavioral inference; exact function start, name, class, and dungeon-generation role are unproven.",
+        "evidence_window": "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/exact-root-caller-code-latest.json",
+        "code_window_sha256": "f84b1791a2c7fa411381ca837c8ad4497c9570216435ce1e988020d7d949a00d"
+      }
     },
     "user_explanation_update": {
       "explanation": "The user says the game update changed dungeon generation and replayability, explaining why the old seven-room/35-container result and the newer generated layout differ.",
@@ -114,5 +123,5 @@
     "duplicate_upload_required": false,
     "needed": "No further traversal is needed to validate the new system's rooms or counts. Runtime-A must instrument the actual dispatch object/vtable slot or record the resolved call target during the live root event; after that build is ready, a short live event capture may be needed."
   },
-  "next_lane_owned_step": "Use the static call-site distinction in the Runtime-A handoff: capture the RCX receiver, its vtable pointer, and [vtable+0x10] or the resolved target at the exact FF 52 10 call; then decompile the resolved target/caller path. Keep owner+0x10 and the vtable slot as separate fields."
+  "next_lane_owned_step": "If an already available PE unwind/function-range scan for this NMS.exe can be recovered, cross-check the candidate routine boundary and caller xrefs offline. Otherwise continue consumer resolution when Runtime-A publishes the receiver/vtable slot or actual target from the exact FF 52 10 dispatch. Keep owner+0x10 and the vtable slot separate; no additional physical traversal is needed."
 }
