@@ -1,12 +1,23 @@
 {
   "schema_version": 1,
-  "status": "in_progress",
-  "state": "offline_follow_up",
-  "human_intervention_required": false,
-  "surveyor_request": null,
-  "user_steps": [],
-  "success_condition": "Latest offline upstream-caller and seed-function evidence is recorded; continue static lineage analysis from helper RVA 00637DB0.",
-  "evidence_to_return": [],
-  "full_derelict_required": false,
-  "updated_utc": "2026-10-03T01:12:29Z"
+  "lane": "seed-lineage",
+  "updated_utc": "2026-10-04T09:00:00Z",
+  "state": "waiting_on_user",
+  "status": "Waiting for fresh current-build root-seed evidence",
+  "summary": "Reviewed the newest shared batch on main: research-uploads/20261004T084829Z-all-saved-evidence-5a094647/run-manifest.json and lane-relevant generation-baseline-latest.json, dungeon-seed-function-analysis-latest.json, dungeon-upstream-callers-latest.json, exact-root-caller-latest.json, and seed-room-correlation.json. The baseline artifact is session 20261002T213412Z_00001A0004E84EFD (probe 0.3.34), with zero dungeon scene instances and unresolved preset; it is not the fresh post-update survey. It records root seed 9256392A2F5A74AC as a candidate with use_seed=true. The correlation file groups 9 measurements for this address, lists the same candidate root seed with coverage 7, and reports seed stability as null. The seed-function/upstream reports are from session 20261002T213047Z and show the candidate descriptor seed being read before AddResource, but no derivation. Historical 35-container evidence remains historical. The later MEDI_FLOATERS/10-room/16-target result remains an inference/model prediction, not a verified physical count. No seed derivation is claimed.",
+  "next_action": "When the planned current-build survey produces a new root event, compare its captured descriptor seed and use-seed flag against 9256392A2F5A74AC. Keep the new event tied to its exact session, universe address, and NMS.exe fingerprint. Do not infer derivation from repeated equality alone.",
+  "surveyor_request": "Provide a fresh current-build root-resource capture for universe 00001A0004E84EFD through the planned survey, then upload the generated evidence with Upload all saved evidence. No additional Seed-B-only derelict run is needed.",
+  "human_intervention_required": true,
+  "user_steps": [
+    "During the already-planned fresh current-build survey, capture the root resource event for system 00001A0004E84EFD.",
+    "After NMS closes and the new analysis outputs are generated, click Surveyor > Upload all saved evidence once.",
+    "Tell Seed-B to check the newly created shared-folder path."
+  ],
+  "success_condition": "A newly uploaded current-build root event is tied to the same system and has a readable descriptor seed/use-seed value; compare it with the current candidate without claiming a derivation unless direct data proves one.",
+  "evidence_to_return": [
+    "Reviewed batch: research-uploads/20261004T084829Z-all-saved-evidence-5a094647/run-manifest.json",
+    "Relevant batch files: generation-baseline-latest.json, dungeon-seed-function-analysis-latest.json, dungeon-upstream-callers-latest.json, exact-root-caller-latest.json, seed-room-correlation.json",
+    "Next required artifact: fresh generation-baseline-latest.json or equivalent root capture in a new all-saved-evidence folder on main"
+  ],
+  "full_derelict_required": false
 }
