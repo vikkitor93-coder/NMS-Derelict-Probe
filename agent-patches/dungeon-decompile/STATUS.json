@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T11:08:00Z",
+  "reviewed_utc": "2026-10-04T11:15:00Z",
   "state": "new-system-layout-and-container-model-user-validated",
   "verified": {
     "historical_baseline": {
@@ -98,6 +98,17 @@
       "source_capture_utc": "2026-10-02T21:30:46.109Z",
       "applies_to_system": "00001A0004E84EFD",
       "separate_from_validated_new_system_session": "20261004T094357Z_0001BF0004E84EFD"
+    },
+    "prior_anchor_scan": {
+      "evidence_path": "research-uploads/20260930T172000Z-dungeon-decompile/dungeon-decompile-anchors-summary.json",
+      "evidence_commit": "5aa2f99015b0539ce2199a975a49197bcd6b4b6a",
+      "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "scan_exact_root_return_rva": "02BFCC1A",
+      "current_callsite_return_rva": "02C0497A",
+      "candidates": 38,
+      "candidate_at_current_callsite": false,
+      "multi_anchor_candidates": 0,
+      "conclusion": "No confirmed generator/consumer function. This scan is not sufficient to establish the candidate boundary near 02C04720 because its exact-root return RVA differs from the current caller evidence."
     }
   },
   "evidence": {
@@ -123,5 +134,5 @@
     "duplicate_upload_required": false,
     "needed": "No further traversal is needed to validate the new system's rooms or counts. Runtime-A must instrument the actual dispatch object/vtable slot or record the resolved call target during the live root event; after that build is ready, a short live event capture may be needed."
   },
-  "next_lane_owned_step": "If an already available PE unwind/function-range scan for this NMS.exe can be recovered, cross-check the candidate routine boundary and caller xrefs offline. Otherwise continue consumer resolution when Runtime-A publishes the receiver/vtable slot or actual target from the exact FF 52 10 dispatch. Keep owner+0x10 and the vtable slot separate; no additional physical traversal is needed."
+  "next_lane_owned_step": "If a matching offline PE runtime-function scan for the caller at RVA 02C0497A can be recovered, use it to confirm the routine boundary; otherwise continue consumer resolution after Runtime-A publishes the receiver/vtable slot or actual target from the exact FF 52 10 dispatch. No further physical traversal is required."
 }
