@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T10:26:00Z",
+  "reviewed_utc": "2026-10-04T10:36:00Z",
   "state": "new-system-layout-and-container-model-user-validated",
   "verified": {
     "historical_baseline": {
@@ -53,8 +53,8 @@
       "user_confirmed_layout_and_counts": true,
       "user_confirmation_utc": "2026-10-04T10:26Z",
       "generation_table_rooms": 7,
-      "table_vs_generated_room_mismatch": "table specifies 7; model and user traversal confirm 11 main rooms",
-      "room_model_status": "validated-by-user-for-this-run; static table discrepancy remains",
+      "table_vs_generated_room_mismatch": "User attributes the difference to the post-update changes in dungeon generation and replayability; it is not an unexplained discrepancy. Current run remains user-validated at 11 main rooms and 43 containers; older 35-container run remains historical.",
+      "room_model_status": "user-validated-for-this-run; update explains difference from historical generation",
       "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)"
     },
     "runtime_capture": {
@@ -68,6 +68,23 @@
       "consumer_function_found": false,
       "static_call": "RVA 02C04977, FF 52 10",
       "offline_vtable_candidates": 0
+    },
+    "user_explanation_update": {
+      "explanation": "The user says the game update changed dungeon generation and replayability, explaining why the old seven-room/35-container result and the newer generated layout differ.",
+      "attribution": "user-provided explanation; historical and current run measurements remain separate",
+      "disposition": "Do not treat the table-versus-generated room difference as an unexplained anomaly. Preserve the 35-container run as historical."
+    },
+    "runtime_callsite_analysis": {
+      "source_evidence": "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/exact-root-caller-code-latest.json",
+      "source_sha256": "67bc58aeb61167c27e639c44953410151315956ed0280861320fed68da373464",
+      "caller_return_rva": "02C0497A",
+      "call_instruction_rva": "02C04977",
+      "instruction": "FF 52 10",
+      "preceding_instruction_bytes": "48 8B 11 FF 52 10",
+      "interpretation": "48 8B 11 loads RDX from [RCX], then FF 52 10 calls through [RDX+0x10], i.e. the vtable slot at +0x10 for the object in RCX.",
+      "runtime_correlation": "The captured caller return RVA 02C0497A corresponds to the return from this call site when the hooked logical-entry function at NMS.exe RVA 00634BC0 is entered; for that observed event, the call reached the hooked function.",
+      "important_distinction": "The runtime capture reads owner_pointer+0x10. That is not the same address expression as [vtable+0x10]. Therefore owner+0x10=0 does not establish that the indirect call target was zero or absent.",
+      "offline_resolution": "The published offline vtable scan found zero static candidates; it did not capture the runtime vtable pointer or prove the slot is absent."
     }
   },
   "evidence": {
@@ -86,11 +103,11 @@
     "note": "Generation session is linked to system 0001BF0004E84EFD. The user confirms its room layout and crate counts matched physical traversal. Counts are now user-validated for this run, not presented as a directly recorded manual counter capture."
   },
   "blocked": {
-    "reason": "DUNGEON-C consumer analysis still lacks a valid Runtime-A owner+0x10 target; the captured slot is zero. The 7-room static-table versus 11-room generated-layout discrepancy also remains to explain.",
+    "reason": "The owner+0x10 capture is a distinct data-field read and currently resolves to zero/null; the runtime vtable slot/owner target needed for further consumer decompilation is not separately captured. Offline scan has no static vtable candidate.",
     "human_action_required": true,
     "full_traversal_required": false,
     "duplicate_upload_required": false,
-    "needed": "No further traversal is needed for the layout/container validation. Runtime-A needs a later capture that resolves owner+0x10 to a valid target before consumer decompilation can proceed."
+    "needed": "No further traversal is needed to validate the new system's rooms or counts. Runtime-A must instrument the actual dispatch object/vtable slot or record the resolved call target during the live root event; after that build is ready, a short live event capture may be needed."
   },
-  "next_lane_owned_step": "Record this run as a successful validation of the 11-room/43-container model. Investigate why the selected CARGO_FLOATERS table's Rooms=7 parameter coexists with 11 generated main rooms; resume consumer analysis if Runtime-A supplies a valid target."
+  "next_lane_owned_step": "Use the static call-site distinction in the Runtime-A handoff: capture the RCX receiver, its vtable pointer, and [vtable+0x10] or the resolved target at the exact FF 52 10 call; then decompile the resolved target/caller path. Keep owner+0x10 and the vtable slot as separate fields."
 }
