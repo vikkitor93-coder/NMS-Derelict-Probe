@@ -331,5 +331,33 @@
         }
       }
     }
+  },
+  "latest_shared_upload_review": {
+    "reviewed_utc": "2026-10-05T00:20:00Z",
+    "main_commit": "370d1a7eff808fba4a4b16202cd9b3e003e4b098",
+    "evidence_batch": "research-uploads/20261004T205413Z-all-saved-evidence-4ad05293",
+    "run_manifest": "research-uploads/20261004T205413Z-all-saved-evidence-4ad05293/run-manifest.json",
+    "fresh_runtime": {
+      "path": "research-uploads/20261004T205413Z-all-saved-evidence-4ad05293/exact-root-caller-latest.json",
+      "utc": "2026-10-04T20:53:18.173Z",
+      "probe_version": "0.3.35",
+      "universe_address_hex": "0001BF0004E84EFD",
+      "root_seed_hex": "5B4AE67D9C2A8F61",
+      "use_seed": true,
+      "root_descriptor_pointer_hex": "000001192EBECD28",
+      "root_add_return_rva_hex": "00638DF5",
+      "generic_callback_return_rva_hex": "02C0497A",
+      "owner_plus_0x10_hex": "0000000000000000",
+      "target_identity": "null-or-low-address"
+    },
+    "manifest_sha256": {
+      "generation-baseline-latest.json": "748b1850d01299edcd0cf8125597ea6b74cfc01ccd885828bc2cdde2e5c3e183",
+      "dungeon-upstream-callers-latest.json": "4e3e9e23e687672a364f217affa18cfe758d1d6b9dd4347cf6e063f0e4fc9163",
+      "dungeon-seed-function-analysis-latest.json": "228ca6872ec0f182efa419b284439d7110b63228738484f689405007ca6435e0",
+      "exact-root-caller-latest.json": "0ab8780f10ca99497bef698877cd783f0aac04e6ed67f4e878b3cab6b9e6d32a"
+    },
+    "measured": "A fresh runtime root event again associates this address with this seed and reports use_seed=true. The root event's exact external callback remains a generic indirect walk callback, not one of the three direct static callers of 00637660.",
+    "inference": "Because the main-batch upstream and seed analysis SHA-256 values match earlier outputs, the static trace itself was not refreshed in this upload.",
+    "hypothesis": "The fresh root-event repeat may enable future runtime caller-to-constructor correlation if a probe can capture 00637660/006388A0 during the event; not established yet."
   }
 }
