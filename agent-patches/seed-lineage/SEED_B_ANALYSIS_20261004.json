@@ -330,6 +330,35 @@
           "interpretation": "The probe ties this caller to the live root descriptor by pointer and seed, but 02C0497A is a generic indirect callback into the resource walk. It is not one of the direct callsites to wrapper 00637660, so it does not identify which wrapper caller initialized the root descriptor."
         }
       }
+    },
+    "second_wrapper_followup": {
+      "reviewed_utc": "2026-10-05T00:32:00Z",
+      "executable_sha256": "671de22649274b49fa76f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "measured": {
+        "wrapper_rva": "00637C40",
+        "direct_callers": [
+          {
+            "site_rva": "016867A4",
+            "parent_function_range": "016866EC..01686993",
+            "descriptor_local": "[rsp+0x68]",
+            "returned_object_slot": "[r15+0x4B0]+0x88"
+          },
+          {
+            "site_rva": "01686912",
+            "parent_function_range": "016866EC..01686993",
+            "descriptor_local": "[rbp-0x58]",
+            "returned_object_slot": "[r15+0x4B8]+0xD0"
+          }
+        ],
+        "wrapper_flow": "At wrapper entry, R9 is saved and forwarded to helper 00637DB0; its output object is passed to 006388A0. Direct call at 00637D86 enters 006388A0 with RCX=RSI and RDX=RBX.",
+        "static_reference_count_to_wrapper": 2
+      },
+      "interpretation": "This identifies an additional object/descriptor construction route sharing the downstream 00637DB0 and 006388A0 helpers. Its parent builds two descriptors and stores two returned objects in separate slots. The supplied bytes do not establish that the parent, either descriptor, or either object is the live DUNGEON.SCENE.MBIN root.",
+      "limitations": [
+        "No live descriptor/object pointer is present in these static callsite windows.",
+        "No symbols or verified runtime dispatch correlation identify parent function semantics."
+      ],
+      "next_step": "Trace the parent-owned structures and constructor context around 016866EC..01686993; determine whether either object reaches resource_add for the dungeon root, while checking the three 00637660 callers as a separate construction path."
     }
   },
   "latest_shared_upload_review": {
