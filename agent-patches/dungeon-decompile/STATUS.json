@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T19:40:00Z",
+  "reviewed_utc": "2026-10-04T20:42:00Z",
   "state": "new-system-identity-captured-layout-user-validated-dispatch-target-unresolved",
   "verified": {
     "historical_baseline": {
@@ -218,10 +218,11 @@
     "human_action_required": true,
     "full_traversal_required": false,
     "duplicate_upload_required": false,
-    "needed": "Run the offline DUNGEON-C scan on the current local NMS.exe: (1) locate and run Scan-Dungeon-Decompile-Anchors.cmd from the DUNGEON-C package; (2) let it write dungeon-decompile-anchors-summary.json; (3) publish/upload that JSON to main (use Surveyor Upload all saved evidence if the scanner leaves it among Surveyor saved outputs); (4) tell me “check”. No game launch or derelict traversal is required. If the command reports a missing path or produces no summary, share that error instead.",
-    "expected_evidence_path_or_file": "dungeon-decompile-anchors-summary.json",
+    "needed": "Run the existing offline exact-root caller extraction: from the extracted DUNGEON-C project folder, double-click Extract-Exact-Root-Caller-Code.cmd. It uses the latest saved exact-root capture and auto-detects the installed NMS.exe; NMS must be closed or can remain idle, but no launch/traversal is needed. Confirm it reports output exact-root-caller-code-latest.json, then in Surveyor use GitHub / updates → Upload all saved evidence and tell me “check”.",
+    "expected_evidence_path_or_file": "exact-root-caller-code-latest.json (produced_by extract-exact-root-caller; included in Upload all saved evidence)",
     "game_runtime_required": false,
-    "success_condition": "Shared evidence contains the anchor scan summary produced from the current NMS.exe; DUNGEON-C can then compare validated function boundaries and caller provenance at 02C0497A."
+    "success_condition": "The shared upload contains an exact-root-caller-code-latest.json regenerated from the 2026-10-04 Angoto capture, with current caller return RVA 02C0497A and current NMS.exe SHA/build metadata.",
+    "corrected_prior_instruction": "Scan-Dungeon-Decompile-Anchors.cmd is not present in the user's DUNGEON-C package. Use the included Extract-Exact-Root-Caller-Code.cmd instead."
   },
-  "next_lane_owned_step": "Obtain a function-boundary-validated, wider offline code window around caller return RVA 02C0497A from the current NMS.exe and resolve the control-flow/receiver provenance around [RSI+0x110]. Compare that with the logical-entry call graph, keeping the collection/interface interpretation tentative. Runtime-A target capture remains the route to identifying [RDX+0x10]."
+  "next_lane_owned_step": "Compare the regenerated wider exact-root caller window and its NMS.exe SHA against the current run's 02C0497A capture, then refine function-boundary/control-flow provenance offline. Runtime-A target capture remains necessary only to identify the actual [RDX+0x10] implementation."
 }
