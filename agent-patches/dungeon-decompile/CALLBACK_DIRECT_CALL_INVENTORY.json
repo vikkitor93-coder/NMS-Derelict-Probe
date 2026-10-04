@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "analysis_utc": "2026-10-04T23:17:21.143Z",
+  "source": {
+    "file_name": "exact-root-caller-code-latest(2).json",
+    "sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
+    "library_path": "/NMS modding/exact-root-caller-code-latest(2).json",
+    "tool_version": "0.3.37",
+    "source_probe_version": "0.3.37",
+    "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4"
+  },
+  "function": {
+    "runtime_correlated_target_rva": "00634BC0",
+    "start_rva": "00634930",
+    "end_rva_exclusive": "00634E03",
+    "byte_count": 1235,
+    "sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5"
+  },
+  "method": {
+    "decoder": "GNU objdump -D -b binary -m i386:x86-64",
+    "base_address": "0x634930",
+    "scope": "linear decode from the beginning of the complete bounded body; retain only decoded E8 rel32 calls",
+    "target_check": "Each decoded E8 relative displacement was independently recomputed and compared with objdump's target."
+  },
+  "result": {
+    "decoded_direct_call_sites": 33,
+    "independent_target_calculations_matching": 33,
+    "unique_targets": [
+      {
+        "target_rva": "033E0FE6",
+        "callsites": [
+          {
+            "call_site_rva": "006349C3",
+            "instruction_bytes": "E8 1E C6 DA 02"
+          }
+        ]
+      },
+      {
+        "target_rva": "001C6B30",
+        "callsites": [
+          {
+            "call_site_rva": "00634A4D",
+            "instruction_bytes": "E8 DE 20 B9 FF"
+          },
+          {
+            "call_site_rva": "00634A70",
+            "instruction_bytes": "E8 BB 20 B9 FF"
+          },
+          {
+            "call_site_rva": "00634A90",
+            "instruction_bytes": "E8 9B 20 B9 FF"
+          },
+          {
+            "call_site_rva": "00634AB0",
+            "instruction_bytes": "E8 7B 20 B9 FF"
+          }
+        ]
+      },
+      {
+        "target_rva": "02D627A0",
+        "callsites": [
+          {
+            "call_site_rva": "00634AEA",
+            "instruction_bytes": "E8 B1 DC 72 02"
+          },
+          {
+            "call_site_rva": "00634B2A",
+            "instruction_bytes": "E8 71 DC 72 02"
+          },
+          {
+            "call_site_rva": "00634B6C",
+            "instruction_bytes": "E8 2F DC 72 02"
+          },
+          {
+            "call_site_rva": "00634BAB",
+            "instruction_bytes": "E8 F0 DB 72 02"
+          }
+        ]
+      },
+      {
+        "target_rva": "02D65980",
+        "callsites": [
+          {
+            "call_site_rva": "00634C53",
+            "instruction_bytes": "E8 28 0D 73 02"
+          },
+          {
+            "call_site_rva": "00634CC2",
+            "instruction_bytes": "E8 B9 0C 73 02"
+          },
+          {
+            "call_site_rva": "00634D27",
+            "instruction_bytes": "E8 54 0C 73 02"
+          },
+          {
+            "call_site_rva": "00634D8C",
+            "instruction_bytes": "E8 EF 0B 73 02"
+          }
+        ]
+      },
+      {
+        "target_rva": "001AE230",
+        "callsites": [
+          {
+            "call_site_rva": "00634C5C",
+            "instruction_bytes": "E8 CF 95 B7 FF"
+          },
+          {
+            "call_site_rva": "00634C9C",
+            "instruction_bytes": "E8 8F 95 B7 FF"
+          },
+          {
+            "call_site_rva": "00634CA9",
+            "instruction_bytes": "E8 82 95 B7 FF"
+          },
+          {
+            "call_site_rva": "00634CCB",
+            "instruction_bytes": "E8 60 95 B7 FF"
+          },
+          {
+            "call_site_rva": "00634D07",
+            "instruction_bytes": "E8 24 95 B7 FF"
+          },
+          {
+            "call_site_rva": "00634D14",
+            "instruction_bytes": "E8 17 95 B7 FF"
+          },
+          {
+            "call_site_rva": "00634D30",
+            "instruction_bytes": "E8 FB 94 B7 FF"
+          },
+          {
+            "call_site_rva": "00634D6C",
+            "instruction_bytes": "E8 BF 94 B7 FF"
+          },
+          {
+            "call_site_rva": "00634D79",
+            "instruction_bytes": "E8 B2 94 B7 FF"
+          },
+          {
+            "call_site_rva": "00634D95",
+            "instruction_bytes": "E8 96 94 B7 FF"
+          },
+          {
+            "call_site_rva": "00634DD1",
+            "instruction_bytes": "E8 5A 94 B7 FF"
+          },
+          {
+            "call_site_rva": "00634DDE",
+            "instruction_bytes": "E8 4D 94 B7 FF"
+          }
+        ]
+      },
+      {
+        "target_rva": "0020D560",
+        "callsites": [
+          {
+            "call_site_rva": "00634C84",
+            "instruction_bytes": "E8 D7 88 BD FF"
+          },
+          {
+            "call_site_rva": "00634CEF",
+            "instruction_bytes": "E8 6C 88 BD FF"
+          },
+          {
+            "call_site_rva": "00634D54",
+            "instruction_bytes": "E8 07 88 BD FF"
+          },
+          {
+            "call_site_rva": "00634DB9",
+            "instruction_bytes": "E8 A2 87 BD FF"
+          }
+        ]
+      },
+      {
+        "target_rva": "02D61CE0",
+        "callsites": [
+          {
+            "call_site_rva": "00634C91",
+            "instruction_bytes": "E8 4A D0 72 02"
+          },
+          {
+            "call_site_rva": "00634CFC",
+            "instruction_bytes": "E8 DF CF 72 02"
+          },
+          {
+            "call_site_rva": "00634D61",
+            "instruction_bytes": "E8 7A CF 72 02"
+          },
+          {
+            "call_site_rva": "00634DC6",
+            "instruction_bytes": "E8 15 CF 72 02"
+          }
+        ]
+      }
+    ]
+  },
+  "all_callsites": [
+    {
+      "site_rva": "006349C3",
+      "bytes": "E8 1E C6 DA 02",
+      "target_rva": "033E0FE6",
+      "target_recomputed": true,
+      "target_recomputed_rva": "033E0FE6"
+    },
+    {
+      "site_rva": "00634A4D",
+      "bytes": "E8 DE 20 B9 FF",
+      "target_rva": "001C6B30",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001C6B30"
+    },
+    {
+      "site_rva": "00634A70",
+      "bytes": "E8 BB 20 B9 FF",
+      "target_rva": "001C6B30",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001C6B30"
+    },
+    {
+      "site_rva": "00634A90",
+      "bytes": "E8 9B 20 B9 FF",
+      "target_rva": "001C6B30",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001C6B30"
+    },
+    {
+      "site_rva": "00634AB0",
+      "bytes": "E8 7B 20 B9 FF",
+      "target_rva": "001C6B30",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001C6B30"
+    },
+    {
+      "site_rva": "00634AEA",
+      "bytes": "E8 B1 DC 72 02",
+      "target_rva": "02D627A0",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D627A0"
+    },
+    {
+      "site_rva": "00634B2A",
+      "bytes": "E8 71 DC 72 02",
+      "target_rva": "02D627A0",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D627A0"
+    },
+    {
+      "site_rva": "00634B6C",
+      "bytes": "E8 2F DC 72 02",
+      "target_rva": "02D627A0",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D627A0"
+    },
+    {
+      "site_rva": "00634BAB",
+      "bytes": "E8 F0 DB 72 02",
+      "target_rva": "02D627A0",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D627A0"
+    },
+    {
+      "site_rva": "00634C53",
+      "bytes": "E8 28 0D 73 02",
+      "target_rva": "02D65980",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D65980"
+    },
+    {
+      "site_rva": "00634C5C",
+      "bytes": "E8 CF 95 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    },
+    {
+      "site_rva": "00634C84",
+      "bytes": "E8 D7 88 BD FF",
+      "target_rva": "0020D560",
+      "target_recomputed": true,
+      "target_recomputed_rva": "0020D560"
+    },
+    {
+      "site_rva": "00634C91",
+      "bytes": "E8 4A D0 72 02",
+      "target_rva": "02D61CE0",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D61CE0"
+    },
+    {
+      "site_rva": "00634C9C",
+      "bytes": "E8 8F 95 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    },
+    {
+      "site_rva": "00634CA9",
+      "bytes": "E8 82 95 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    },
+    {
+      "site_rva": "00634CC2",
+      "bytes": "E8 B9 0C 73 02",
+      "target_rva": "02D65980",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D65980"
+    },
+    {
+      "site_rva": "00634CCB",
+      "bytes": "E8 60 95 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    },
+    {
+      "site_rva": "00634CEF",
+      "bytes": "E8 6C 88 BD FF",
+      "target_rva": "0020D560",
+      "target_recomputed": true,
+      "target_recomputed_rva": "0020D560"
+    },
+    {
+      "site_rva": "00634CFC",
+      "bytes": "E8 DF CF 72 02",
+      "target_rva": "02D61CE0",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D61CE0"
+    },
+    {
+      "site_rva": "00634D07",
+      "bytes": "E8 24 95 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    },
+    {
+      "site_rva": "00634D14",
+      "bytes": "E8 17 95 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    },
+    {
+      "site_rva": "00634D27",
+      "bytes": "E8 54 0C 73 02",
+      "target_rva": "02D65980",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D65980"
+    },
+    {
+      "site_rva": "00634D30",
+      "bytes": "E8 FB 94 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    },
+    {
+      "site_rva": "00634D54",
+      "bytes": "E8 07 88 BD FF",
+      "target_rva": "0020D560",
+      "target_recomputed": true,
+      "target_recomputed_rva": "0020D560"
+    },
+    {
+      "site_rva": "00634D61",
+      "bytes": "E8 7A CF 72 02",
+      "target_rva": "02D61CE0",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D61CE0"
+    },
+    {
+      "site_rva": "00634D6C",
+      "bytes": "E8 BF 94 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    },
+    {
+      "site_rva": "00634D79",
+      "bytes": "E8 B2 94 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    },
+    {
+      "site_rva": "00634D8C",
+      "bytes": "E8 EF 0B 73 02",
+      "target_rva": "02D65980",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D65980"
+    },
+    {
+      "site_rva": "00634D95",
+      "bytes": "E8 96 94 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    },
+    {
+      "site_rva": "00634DB9",
+      "bytes": "E8 A2 87 BD FF",
+      "target_rva": "0020D560",
+      "target_recomputed": true,
+      "target_recomputed_rva": "0020D560"
+    },
+    {
+      "site_rva": "00634DC6",
+      "bytes": "E8 15 CF 72 02",
+      "target_rva": "02D61CE0",
+      "target_recomputed": true,
+      "target_recomputed_rva": "02D61CE0"
+    },
+    {
+      "site_rva": "00634DD1",
+      "bytes": "E8 5A 94 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    },
+    {
+      "site_rva": "00634DDE",
+      "bytes": "E8 4D 94 B7 FF",
+      "target_rva": "001AE230",
+      "target_recomputed": true,
+      "target_recomputed_rva": "001AE230"
+    }
+  ],
+  "limits": [
+    "No helper .pdata function ranges or helper body bytes are present in the accessible attachment.",
+    "The NMS.exe saved in Library was not transferred into this workspace; the extractor's helper-body export cannot be independently rerun here.",
+    "Call targets are unnamed; no semantic role is assigned.",
+    "This does not resolve the runtime owner+0x10 field or the target of the separate caller dispatch slot."
+  ]
+}
