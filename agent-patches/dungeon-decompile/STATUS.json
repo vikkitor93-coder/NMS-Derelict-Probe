@@ -2,8 +2,8 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T20:42:00Z",
-  "state": "new-system-identity-captured-layout-user-validated-dispatch-target-unresolved",
+  "reviewed_utc": "2026-10-04T20:55:00Z",
+  "state": "runtime-target-rva-confirmed-callback-semantics-under-analysis",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -68,7 +68,16 @@
       "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
       "owner_plus_0x10_slot_value": "0000000000000000",
       "target_identity_status": "null-or-low-address",
-      "runtime_dispatch_registers_or_vtable_target_captured": false
+      "runtime_dispatch_registers_or_vtable_target_captured": false,
+      "exact_root_caller_code_attachment": "exact-root-caller-code-latest(1).json (user-attached 2026-10-04)",
+      "source_probe_version": "0.3.35",
+      "descriptor_pointer": "000001F9A4546928",
+      "system": "0001BF0004E84EFD / Angoto",
+      "caller_return_rva": "02C0497A",
+      "caller_instruction": "02C04977: FF 52 10 (call qword ptr [RDX+0x10])",
+      "runtime_target_rva": "00634BC0 (resolved by entry-hook caller-return correlation)",
+      "raw_rdx_slot_pointer_captured": false,
+      "semantic_function_identity": "unresolved"
     },
     "runtime_consumer_analysis": {
       "consumer_function_found": false,
@@ -112,6 +121,32 @@
         "inference": "The receiver is reached through a field on an element obtained from [RSI+0x110]. The receiver path is consistent with a collection/iterator-like traversal, but the window alone does not prove the base type or semantic role.",
         "confidence": "instruction decode high; semantic interpretation low",
         "limitation": "The capture is a bounded caller window, not a function-boundary-validated decompilation. It does not include runtime RSI/RAX/RBX/RCX/RDX values or the callback target."
+      },
+      "runtime_target_resolution": {
+        "target_function_rva": "00634BC0",
+        "status": "runtime-correlated effective target RVA resolved",
+        "proof": [
+          "Instrumented logical-entry RVA is 00634BC0.",
+          "The exact descriptor/root-seed entry record is external, recursion_depth=0, and records caller_return_offset=02C0497A.",
+          "Current static caller instruction at 02C04977 is FF 52 10; its fall-through/return RVA is 02C0497A."
+        ],
+        "interpretation": "Together, the runtime entry record and decoded indirect-call return address identify 00634BC0 as the effective callee for this event, even though the numeric RDX pointer and qword [RDX+0x10] were not separately sampled.",
+        "limits": [
+          "The function's semantic name/role is not established.",
+          "No offline vtable data candidates were found; direct raw vtable-slot capture remains absent."
+        ]
+      },
+      "callback_behavior_static": {
+        "source_attachment": "exact-root-caller-code-latest(1).json",
+        "executable_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+        "code_window_sha256": "f84b1791a2c7fa411381ca837c8ad4497c9570216435ce1e988020d7d949a00d",
+        "caller_region": "apparent function body 02C04730..02C04D90; preceding 02C04720 is a near-jump shim; no .pdata entry was included, so the function boundary is strongly suggested by code shape but not independently unwind-table validated",
+        "observed_patterns": [
+          "At 02C04977, the vcall uses RCX=[RBX+0x48], RDX=[RCX], then [RDX+0x10]; its result is compared with 1.",
+          "If result==1, the linked record is unlinked, the count at [RSI+0x118] is decremented, and a 0x58-byte record is freed; otherwise elapsed time is added to [RBX+0x50].",
+          "A second vcall at 02C04ACA uses RCX=[RDI+0x40] and the same vtable slot; its result similarly controls removal/update in a ring-buffer-like structure."
+        ],
+        "inference": "This code behaves like callback-driven timed/queue maintenance. The result==1 completion/removal interpretation is plausible from control flow, but class, callback, and subsystem names remain unknown."
       }
     },
     "user_explanation_update": {
@@ -137,14 +172,17 @@
         "resolved target module/RVA"
       ],
       "current_run_callsite_window": {
-        "evidence_path": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/exact-root-caller-latest.json",
-        "evidence_sha256": "962b9b43a3fd64a3bea20c0b8e76ddb965347979eb55bb56c28274c4c34a439b",
-        "exact_runtime_correlation": true,
-        "receiver_expression": "RCX = [RBX+0x48]",
-        "vtable_expression": "RDX = [RCX]",
-        "dispatch_expression": "call qword ptr [RDX+0x10]",
-        "return_use": "EDI = EAX",
-        "limitation": "Static instructions and runtime callsite correlation are captured, but RCX/RDX values, [RDX+0x10], and resolved callback identity are absent."
+        "source_attachment": "exact-root-caller-code-latest(1).json",
+        "attachment_sha256": "3942f011ded5cbab7025546b9caa6bcde7d21c950193faf755839c9470dca694",
+        "source_probe_version": "0.3.35",
+        "root_seed": "5B4AE67D9C2A8F61",
+        "descriptor_pointer": "000001F9A4546928",
+        "caller_return_rva": "02C0497A",
+        "call_instruction_rva": "02C04977",
+        "instruction_hex": "FF5210",
+        "instrumented_effective_target_rva": "00634BC0",
+        "target_resolution_basis": "runtime entry-hook caller-return matched to the exact fall-through of FF 52 10, for the same descriptor and seed",
+        "raw_rdx_vtable_pointer_or_slot_value_captured": false
       }
     },
     "prior_anchor_scan": {
@@ -211,18 +249,19 @@
       "dungeon-generation-table.json"
     ],
     "note": "The newest shared batch adds a 15:12 root capture from probe 0.3.35, capture_version 2, and a generation rerun whose layout and generation signatures exactly match the user-validated 09:43:57 run. The new batch still has zero manual room markers; its rerun does not independently record a second physical count.",
-    "run_manifest_sha256": "9cb9a7c4169432385e1f24435a5ab990b9b03645"
+    "run_manifest_sha256": "9cb9a7c4169432385e1f24435a5ab990b9b03645",
+    "direct_user_attachment": {
+      "file": "exact-root-caller-code-latest(1).json",
+      "sha256": "3942f011ded5cbab7025546b9caa6bcde7d21c950193faf755839c9470dca694",
+      "note": "Direct conversation attachment; it has not yet been placed in the shared main all-saved-evidence folder. The correlated summary and code-window hashes are recorded above."
+    }
   },
   "blocked": {
-    "reason": "The current run now supplies an exact runtime-correlated callsite window and static receiver chain (RBX+0x48 -> [RCX] -> vtable slot +0x10). Offline evidence still does not identify the receiver type or dispatch implementation because no runtime RCX/RDX/[RDX+0x10] values are present.",
-    "human_action_required": true,
+    "reason": "The effective runtime callee RVA 00634BC0 is now identified by the exact logical-entry hook and caller-return match. DUNGEON-C still lacks a semantic identity and an isolated function body for that callee; the caller code window only identifies the surrounding callback/queue behavior. The raw RDX slot pointer is absent but no longer required to establish the effective target RVA.",
+    "human_action_required": false,
     "full_traversal_required": false,
     "duplicate_upload_required": false,
-    "needed": "Run the existing offline exact-root caller extraction: from the extracted DUNGEON-C project folder, double-click Extract-Exact-Root-Caller-Code.cmd. It uses the latest saved exact-root capture and auto-detects the installed NMS.exe; NMS must be closed or can remain idle, but no launch/traversal is needed. Confirm it reports output exact-root-caller-code-latest.json, then in Surveyor use GitHub / updates → Upload all saved evidence and tell me “check”.",
-    "expected_evidence_path_or_file": "exact-root-caller-code-latest.json (produced_by extract-exact-root-caller; included in Upload all saved evidence)",
-    "game_runtime_required": false,
-    "success_condition": "The shared upload contains an exact-root-caller-code-latest.json regenerated from the 2026-10-04 Angoto capture, with current caller return RVA 02C0497A and current NMS.exe SHA/build metadata.",
-    "corrected_prior_instruction": "Scan-Dungeon-Decompile-Anchors.cmd is not present in the user's DUNGEON-C package. Use the included Extract-Exact-Root-Caller-Code.cmd instead."
+    "needed": "No additional user action is required for the finding in this attachment. DUNGEON-C's next work is to obtain/decompile the target body at RVA 00634BC0 from NMS.exe and keep semantic naming tentative. A later Runtime-A [RDX+0x10] sample would provide direct pointer-level confirmation, but it is separate from this lane's target-RVA proof."
   },
-  "next_lane_owned_step": "Compare the regenerated wider exact-root caller window and its NMS.exe SHA against the current run's 02C0497A capture, then refine function-boundary/control-flow provenance offline. Runtime-A target capture remains necessary only to identify the actual [RDX+0x10] implementation."
+  "next_lane_owned_step": "Use the new runtime-corroborated target RVA 00634BC0 to focus DUNGEON-C static analysis on that callee. Find or add a reproducible PE .pdata-bounded target-body extractor for the current NMS.exe, then compare target instructions with descriptor/seed flow without assigning an unsupported class name."
 }
