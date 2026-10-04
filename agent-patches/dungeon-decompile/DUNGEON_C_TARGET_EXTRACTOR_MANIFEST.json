@@ -29,9 +29,9 @@
     "function_boundary_source": "PE .pdata"
   },
   "verification": {
-    "focused_tests": "4/4 passed",
-    "full_suite": "173/173 passed",
-    "compileall": "passed",
+    "focused_tests": "6/6 passed",
+    "full_suite": "175/175 passed",
+    "compileall": "python -m compileall -q tools overlay tests mod passed",
     "live_executable_validation": "not run; installed NMS.exe is not available in this workspace"
   },
   "rollback": "Delete Extract-Runtime-Target-Function.cmd, tools/extract_runtime_target_function.py, this manifest, and tests/test_runtime_target_function.py; remove the additive README/CHANGELOG/AI_HANDOFF notes. Existing caller extraction and upload schema remain unchanged."
