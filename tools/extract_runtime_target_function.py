@@ -26,8 +26,12 @@ except ImportError:
     import extract_nms_caller_code as caller
 
 
-TOOL_VERSION = "0.3.38"
+TOOL_VERSION = "0.3.39"
 MAX_FUNCTION_BYTES = 1_048_576
+MAX_DIRECT_CALL_CANDIDATES = 128
+MAX_HELPER_FUNCTION_BYTES = 65_536
+MAX_HELPER_BYTES_TOTAL = 524_288
+MAX_HELPER_FUNCTIONS = 12
 
 
 def _default_evidence() -> Path:
@@ -49,6 +53,73 @@ def _load_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError(f"Expected a JSON object in {path.name}")
     return value
+
+
+def extract_direct_call_candidates(
+    function_bytes: bytes,
+    function_begin_rva: int,
+    exe_path: Path,
+    sections: list[dict[str, int | str]],
+) -> list[dict[str, Any]]:
+    """Extract bounded bodies for E8 candidates whose targets map to PE .pdata.
+
+    This is deliberately a byte scan, not a disassembler: instruction boundaries
+    are not proven, so every result remains a candidate even when its destination
+    falls inside an executable .pdata function.
+    """
+    out: list[dict[str, Any]] = []
+    seen_targets: set[int] = set()
+    total_bytes = 0
+    for offset in range(max(0, len(function_bytes) - 4)):
+        if function_bytes[offset] != 0xE8:
+            continue
+        call_rva = function_begin_rva + offset
+        displacement = int.from_bytes(function_bytes[offset + 1:offset + 5], "little", signed=True)
+        target_rva = call_rva + 5 + displacement
+        if target_rva < 0 or target_rva > 0xFFFFFFFF:
+            continue
+        target_section = next((
+            section for section in sections
+            if int(section["virtual_address"]) <= target_rva <
+            int(section["virtual_address"]) + max(int(section["virtual_size"]), int(section["raw_size"]))
+        ), None)
+        if target_section is None or not (int(target_section.get("characteristics", 0)) & 0x20000000):
+            continue
+        target_function = analysis.find_runtime_function(exe_path, sections, target_rva)
+        if target_function is None:
+            continue
+
+        row: dict[str, Any] = {
+            "instruction_rva_hex": f"{call_rva:08X}",
+            "instruction_bytes_hex": function_bytes[offset:offset + 5].hex().upper(),
+            "target_rva_hex": f"{target_rva:08X}",
+            "target_runtime_function": target_function,
+            "instruction_boundary_verified": False,
+            "classification": "heuristic-E8-byte-scan-candidate",
+        }
+        if target_rva not in seen_targets and len(seen_targets) < MAX_HELPER_FUNCTIONS:
+            begin = int(target_function["begin_rva_hex"], 16)
+            end = int(target_function["end_rva_exclusive_hex"], 16)
+            size = end - begin
+            if (
+                0 < size <= MAX_HELPER_FUNCTION_BYTES
+                and total_bytes + size <= MAX_HELPER_BYTES_TOTAL
+            ):
+                helper_bytes = analysis._read_rva(exe_path, sections, begin, size)
+                if len(helper_bytes) == size:
+                    row["target_function_body"] = {
+                        "start_rva_hex": f"{begin:08X}",
+                        "end_rva_exclusive_hex": f"{end:08X}",
+                        "byte_count": size,
+                        "sha256": hashlib.sha256(helper_bytes).hexdigest(),
+                        "bytes_hex": helper_bytes.hex().upper(),
+                    }
+                    seen_targets.add(target_rva)
+                    total_bytes += size
+        out.append(row)
+        if len(out) >= MAX_DIRECT_CALL_CANDIDATES:
+            break
+    return out
 
 
 def extract_target_function(evidence: dict[str, Any], exe_path: Path) -> dict[str, Any]:
@@ -76,6 +147,7 @@ def extract_target_function(evidence: dict[str, Any], exe_path: Path) -> dict[st
     if len(code) != size:
         raise ValueError(f"Could not read complete target function: expected {size} bytes, got {len(code)}")
 
+    direct_calls = extract_direct_call_candidates(code, begin, exe_path, sections)
     return {
         "status": "captured",
         "tool_version": TOOL_VERSION,
@@ -88,6 +160,12 @@ def extract_target_function(evidence: dict[str, Any], exe_path: Path) -> dict[st
             "byte_count": size,
             "sha256": hashlib.sha256(code).hexdigest(),
             "bytes_hex": code.hex().upper(),
+        },
+        "direct_call_candidates": {
+            "scan_method": "raw E8-byte scan; instruction boundaries are unverified",
+            "candidate_count": len(direct_calls),
+            "candidate_functions_with_bodies": sum("target_function_body" in item for item in direct_calls),
+            "items": direct_calls,
         },
         "nms_exe": {
             "file_name": exe_path.name,
