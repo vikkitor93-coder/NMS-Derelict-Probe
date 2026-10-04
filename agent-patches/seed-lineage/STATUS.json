@@ -1,15 +1,21 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-04T20:50:28Z",
-  "state": "in_progress",
-  "status": "Static caller report reviewed; proceeding with offline source and binary availability check",
-  "summary": "Reviewed the 15:26Z Seed-B uploads and continued static analysis. The latest runtime seed/address pair is 5B4AE67D9C2A8F61 / 0001BF0004E84EFD. Fresh caller extraction ties the session to NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; its caller window matches the live exact-root bytes. Disassembly of the hash-matched uploaded caller windows narrows the flow: function candidate 006388A0 reads the descriptor primary seed at object+0x138 (descriptor at +0x128) and use_seed at +0x140. Calls at 006377B6 and 00637D86 pass an object through as the second argument. In the 00637660 wrapper path, an incoming stack argument is forwarded through helper 00637DB0 and initializer 006377E0, which copies/initializes the embedded descriptor at +0x128 via call 00227A40. This is direct byte/argument-flow evidence that seed source is supplied upstream of 00637660; it is not evidence of how that value was generated. The available windows do not include callers or vtable slots for 00637660, so the universe-address-to-root-seed derivation remains unproven. A read-only static reference scanner is now committed on this lane at agent-patches/seed-lineage/seed_b_trace_static_callers.py (commit 6243812f4e7b94c75f0d6055055c2fdd947e7f76; SHA-256 7fa2dca6a6ab02caec5601b9549cf1d352da78dbc4539cb12d3c2e12255f4d20). It was syntax-checked and tested against a synthetic PE fixture for both a direct rel32 call and an absolute pointer slot.",
-  "next_action": "Check whether the lane has access to the corresponding NMS.exe or a repository copy, then continue function-range disassembly around the three caller sites. If the binary is inaccessible and existing uploaded windows do not cover function setup, request only the smallest missing caller-context extraction.",
-  "surveyor_request": "No human action currently required while checking available static evidence and tooling.",
-  "human_intervention_required": false,
-  "user_steps": [],
-  "success_condition": "A static reference report for the installed NMS.exe includes direct code references and/or function-pointer slots for RVA 00637660, with executable SHA-256 recorded.",
+  "updated_utc": "2026-10-04T20:51:20Z",
+  "state": "waiting_on_user",
+  "status": "Direct references found; broader function context required to trace descriptor initialization",
+  "summary": "Reviewed the 15:26Z Seed-B uploads and continued static analysis. The latest runtime seed/address pair is 5B4AE67D9C2A8F61 / 0001BF0004E84EFD. Fresh caller extraction ties the session to NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; its caller window matches the live exact-root bytes. Disassembly of the hash-matched uploaded caller windows narrows the flow: function candidate 006388A0 reads the descriptor primary seed at object+0x138 (descriptor at +0x128) and use_seed at +0x140. Calls at 006377B6 and 00637D86 pass an object through as the second argument. In the 00637660 wrapper path, an incoming stack argument is forwarded through helper 00637DB0 and initializer 006377E0, which copies/initializes the embedded descriptor at +0x128 via call 00227A40. This is direct byte/argument-flow evidence that seed source is supplied upstream of 00637660; it is not evidence of how that value was generated. The available windows do not include callers or vtable slots for 00637660, so the universe-address-to-root-seed derivation remains unproven. A read-only static reference scanner is now committed on this lane at agent-patches/seed-lineage/seed_b_trace_static_callers.py (commit 6243812f4e7b94c75f0d6055055c2fdd947e7f76; SHA-256 7fa2dca6a6ab02caec5601b9549cf1d352da78dbc4539cb12d3c2e12255f4d20). It was syntax-checked and tested against a synthetic PE fixture for both a direct rel32 call and an absolute pointer slot. The scan's 325-byte windows place each reference exactly at offset 160, so they omit the preceding function setup and do not show enough of the caller to identify source-object initialization. The matching NMS.exe is not present in the shared workspace. Existing lane tooling can extract bounded RVA windows locally without launching NMS. An additional offline export around the three caller sites is now the only blocker; no game traversal, probe restart, or controller capture is required.",
+  "next_action": "After receiving larger code windows for 001B2CF9, 02D042E1, and 02D04AF8 (and optionally 00637F1F), verify the executable hash, disassemble the caller functions, and trace object initialization into 00637660 / 006377E0 / 00227A40. Continue to label the root seed candidate as unverified absent direct derivation evidence.",
+  "surveyor_request": "Please export larger read-only NMS.exe code windows around the static caller RVAs, then attach them. NMS should remain closed; no traversal is needed.",
+  "human_intervention_required": true,
+  "user_steps": [
+    "Keep NMS closed.",
+    "Open the standalone Surveyor and use its local offline RVA code-window extractor (or the bundled extract_nms_rva_window.py tool) against the same NMS.exe whose SHA-256 is 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4.",
+    "Export code windows centered at RVA 001B2CF9, 02D042E1, and 02D04AF8, with at least 0x600 bytes before and 0x300 bytes after each center; if the tool only supports symmetric windows, use 0x600 bytes on each side.",
+    "Also export a window centered at RVA 00637F1F if convenient, to inspect an additional caller of initializer 006377E0.",
+    "Attach the resulting JSON files here. Do not run a derelict or change probe/game files."
+  ],
+  "success_condition": "Receive caller context windows from the same NMS.exe hash; use them to continue tracing upstream descriptor construction.",
   "evidence_to_return": [
     "Newest reviewed upload: research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726/run-manifest.json.",
     "Fresh root measurement: session 20261004T094357Z_0001BF0004E84EFD, probe 0.3.35, address 0001BF0004E84EFD, root seed 5B4AE67D9C2A8F61, use_seed=true.",
@@ -17,8 +23,9 @@
     "Live caller 224-byte window at RVA 02C048FA matches byte-for-byte with static code; static code call at 02C04977 is FF 52 10, return RVA 02C0497A.",
     "Data-flow narrowing: descriptor primary seed is read at object+0x138 (descriptor object+0x128); wrapper 00637660 forwards an upstream input descriptor argument through helper 00637DB0 and initializer 006377E0.",
     "Direct derivation from universe address remains unproven; user-confirmed 11 rooms / 43 containers validate predicted layout accuracy, not seed lineage.",
-    "Seed-B static scanner is committed on agent/seed-lineage at agent-patches/seed-lineage/seed_b_trace_static_callers.py; download and run it to produce the missing direct-reference/pointer-slot report."
+    "Attached static caller report: seed-b-static-callers-00637660.json; NMS.exe SHA-256 matches captured executable.",
+    "Each caller code window is 325 bytes with target call at byte offset 160, leaving no function prologue or broader initialization context."
   ],
   "full_derelict_required": false,
-  "evidence_path": "research-uploads/20261004T152617Z-seed-lineage-all-saved-evidence-a8a98352-811b3726/run-manifest.json"
+  "evidence_path": "User attachment: seed-b-static-callers-00637660.json (local chat attachment; not in research-uploads)"
 }
