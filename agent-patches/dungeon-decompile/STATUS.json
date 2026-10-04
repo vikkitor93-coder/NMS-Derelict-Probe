@@ -2,8 +2,8 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T20:59:00Z",
-  "state": "runtime-target-rva-confirmed-awaiting-pdata-bounded-body",
+  "reviewed_utc": "2026-10-04T22:02:00Z",
+  "state": "runtime-target-rva-confirmed-launcher-fix-awaiting-retest",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -307,9 +307,9 @@
     "full_traversal_required": false,
     "nms_runtime_required": false,
     "duplicate_capture_or_upload_required": false,
-    "needed": "Use the complete updated source ZIP NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-source-target-extractor.zip (SHA-256 90a91b9dc5cab508389c22904fc8c208ef7d5d2a12ea95dfe2e446402b36b8ba). Extract it into a new folder; double-click Extract-Runtime-Target-Function.cmd. It reads the already-saved root capture and auto-detects NMS.exe. Confirm it reports target RVA 00634BC0 and a .pdata range, then use Surveyor → GitHub / updates → Upload all saved evidence and tell me “check”. No NMS launch or traversal is needed.",
-    "expected_output": "A regenerated exact-root-caller-code-latest.json containing runtime_target_function with .pdata range, body bytes, and matching NMS.exe SHA-256.",
+    "needed": "Use the updated complete source ZIP NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-launcher-fix-source.zip (SHA-256 bee57a5f135f34a16879f3ba047c5831b4974d77176cd830d2641a9e9b74f568). Extract it to a normal local folder and run Extract-Runtime-Target-Function.cmd again. The launcher now validates its folder, uses Surveyor's interpreter when valid, then falls back to py -3 or python.exe, and prints a specific error if startup still fails. If extraction succeeds, use Surveyor → GitHub / updates → Upload all saved evidence and tell me “check”. No game launch or traversal is needed.",
+    "expected_output": "Either a specific launcher diagnostic, or a regenerated exact-root-caller-code-latest.json containing runtime_target_function with .pdata range, body bytes, and matching NMS.exe SHA-256.",
     "success_condition": "The shared upload contains the target body for 00634BC0; DUNGEON-C can disassemble/decompile its logic and compare descriptor/seed flow."
   },
-  "next_lane_owned_step": "After the uploaded runtime_target_function block arrives, disassemble the .pdata-bounded body at RVA 00634BC0, identify its observable data flow, and compare it with the exact Angoto descriptor/seed path. Keep source symbol/class names unassigned unless independently supported."
+  "next_lane_owned_step": "After the corrected launcher succeeds and the user uploads all saved evidence, fetch the shared upload, disassemble the .pdata-bounded body at RVA 00634BC0, identify observable data flow, and compare it with the exact Angoto descriptor/seed path. Keep source symbol/class names unassigned unless independently supported."
 }
