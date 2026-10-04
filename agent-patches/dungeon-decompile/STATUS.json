@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T15:20:00Z",
+  "reviewed_utc": "2026-10-04T16:04:00Z",
   "state": "new-system-identity-captured-layout-user-validated-dispatch-target-unresolved",
   "verified": {
     "historical_baseline": {
@@ -83,7 +83,23 @@
         "RDX vtable pointer loaded from [RCX]",
         "qword at RDX+0x10",
         "resolved target module/RVA"
-      ]
+      ],
+      "receiver_chain_static": {
+        "source": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/exact-root-caller-latest.json",
+        "caller_return_rva": "02C0497A",
+        "disassembly_bytes": [
+          "02C0496A: 48 8B 4B 48 (mov RCX,[RBX+0x48])",
+          "02C04974: 48 8B 11 (mov RDX,[RCX])",
+          "02C04977: FF 52 10 (call qword ptr [RDX+0x10])",
+          "02C0497A: 8B F8 (mov EDI,EAX)"
+        ],
+        "conclusion": "The callback receiver is the object at [RBX+0x48]; its vtable pointer is loaded from [RCX], and the qword at vtable+0x10 is called. EAX is consumed into EDI. This is exact current-run caller-window evidence; it does not identify the receiver type or callback implementation."
+      },
+      "owner_slot_comparison": {
+        "current_capture": "Angoto run: owner+0x10 captured as 0000000000000000",
+        "earlier_capture": "older 9256392A2F5A74AC event: owner+0x10 captured as FFFFFFFF00000000",
+        "implication": "The owner-relative value differs between captures and is not the callsite's vtable slot. Treat owner+0x10 as an unrelated/unstable field until semantics are established."
+      }
     },
     "user_explanation_update": {
       "explanation": "The user says the game update changed dungeon generation and replayability, explaining why the old seven-room/35-container result and the newer generated layout differ.",
@@ -106,7 +122,17 @@
         "RDX vtable pointer loaded from [RCX]",
         "qword at RDX+0x10",
         "resolved target module/RVA"
-      ]
+      ],
+      "current_run_callsite_window": {
+        "evidence_path": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/exact-root-caller-latest.json",
+        "evidence_sha256": "962b9b43a3fd64a3bea20c0b8e76ddb965347979eb55bb56c28274c4c34a439b",
+        "exact_runtime_correlation": true,
+        "receiver_expression": "RCX = [RBX+0x48]",
+        "vtable_expression": "RDX = [RCX]",
+        "dispatch_expression": "call qword ptr [RDX+0x10]",
+        "return_use": "EDI = EAX",
+        "limitation": "Static instructions and runtime callsite correlation are captured, but RCX/RDX values, [RDX+0x10], and resolved callback identity are absent."
+      }
     },
     "prior_anchor_scan": {
       "evidence_path": "research-uploads/20260930T172000Z-dungeon-decompile/dungeon-decompile-anchors-summary.json",
@@ -175,11 +201,11 @@
     "run_manifest_sha256": "9cb9a7c4169432385e1f24435a5ab990b9b03645"
   },
   "blocked": {
-    "reason": "System identity and a second generation-analysis capture are now available. The latter exactly matches the earlier user-validated analyzer signatures, but it has no manual room tally. Runtime consumer analysis remains blocked: probe 0.3.35 captures owner+0x10=0 and does not include RCX/RDX or the qword at [RDX+0x10]. Runtime-A's published current request is for probe 0.3.36 entry-time owner+0x10 capture; DUNGEON-C still needs the actual virtual-dispatch target or sufficient receiver/vtable evidence.",
+    "reason": "The current run now supplies an exact runtime-correlated callsite window and static receiver chain (RBX+0x48 -> [RCX] -> vtable slot +0x10). Offline evidence still does not identify the receiver type or dispatch implementation because no runtime RCX/RDX/[RDX+0x10] values are present.",
     "human_action_required": true,
     "full_traversal_required": false,
     "duplicate_upload_required": false,
-    "needed": "No full traversal or duplicate upload is needed. Runtime-A's published short-capture request still requires Surveyor 0.3.57/probe 0.3.36; the new capture is probe 0.3.35. Resolving this lane's call target will additionally require the actual FF 52 10 target ([RDX+0x10]) or equivalent receiver/vtable evidence."
+    "needed": "Continue static receiver provenance analysis in DUNGEON-C. To confirm the virtual target itself, Runtime-A must capture RCX, RDX and [RDX+0x10] at caller return RVA 02C0497A, plus resolved module/RVA; no full traversal is needed."
   },
-  "next_lane_owned_step": "Continue consumer analysis when a shared capture provides the actual [RDX+0x10] dispatch target or equivalent receiver/vtable evidence. In parallel, compare that result with Runtime-A's 0.3.36 logical-entry sample; no further physical count/traversal is required."
+  "next_lane_owned_step": "Trace the [RBX+0x48] receiver backward within the exact caller and compare nearby references to the logical entry offline; use this to narrow receiver/callback role without naming it prematurely. Continue to correlate with Runtime-A live [RDX+0x10] evidence when available. No traversal is needed."
 }
