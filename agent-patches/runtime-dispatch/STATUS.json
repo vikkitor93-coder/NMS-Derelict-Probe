@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-04T10:13:29Z",
+  "updated_utc": "2026-10-04T10:26:17Z",
   "state": "working",
-  "status": "New-system root and generation outputs paired; owner+0x10 is null; target unresolved",
-  "summary": "Verified in research-uploads/20261004T101244Z-all-saved-evidence-2a766630/: the generation baseline session is 20261004T094357Z_0001BF0004E84EFD (system 0001BF0004E84EFD). Its root event at 09:43:51.577Z has seed 5B4AE67D9C2A8F61, matching the 09:43:51.578Z Runtime-A capture. Probe 0.3.34 captured owner 000001D026704000 and owner+0x10 raw/value 0000000000000000; target_identity is null-or-low-address at zero, so no destination is identified and the lane is not complete. Analyzer outputs: CARGO_FLOATERS high-confidence inference, 30 predicted Salvage + 13 predicted Footlockers = 43 predicted targets, 11 modeled main rooms, 0 modeled dead ends; the table says 7 rooms and room_model_status is needs-review. These are model-derived, not physical counts. Root seed remains candidate/unverified. The batch does not establish why the access mod behaved unexpectedly.",
-  "progress": "The batch now contains paired new-system root and generation evidence; prior known-system MEDI_FLOATERS/16-target analysis remains separate and historical to that session.",
+  "status": "Traversal confirms new-system room and crate model; owner+0x10 target unresolved",
+  "summary": "In research-uploads/20261004T101244Z-all-saved-evidence-2a766630/, generation session 20261004T094357Z_0001BF0004E84EFD is system 0001BF0004E84EFD. Root event at 09:43:51.577Z has seed 5B4AE67D9C2A8F61 and matches the 09:43:51.578Z Runtime-A capture. User confirms the rooms and crate counts in this generation model matched their physical traversal. The analyzed layout is 11 main rooms, 0 dead ends; analyzer predicts 30 Salvage + 13 Footlockers = 43 targets. These counts are now user-confirmed for this run. MEDI/CARGO preset remains a high-confidence inference; table says 7 rooms and room_model_status is needs-review. Runtime-A captured owner 000001D026704000, but owner+0x10 is zero and target_identity is null-or-low-address; no callable destination is identified. Root seed remains candidate/unverified. The evidence does not establish why the access mod behaved unexpectedly.",
+  "progress": "The new-system generation room/crate model is confirmed against the user's traversal. Runtime-A call-target identification remains open; no more game capture is required for this run.",
   "next_action": "Inspect the decoded call at RVA 02C04977 (FF 52 10, indirect call through [RDX+0x10]) and establish whether RDX is the captured owner pointer before interpreting the zero slot. The published caller-code artifact is from an earlier capture; do not assume register identity.",
   "surveyor_request": "No additional Surveyor capture is needed for the current batch.",
   "human_intervention_required": false,
   "user_steps": [],
-  "success_condition": "Resolve whether the captured owner+0x10 slot is the object used by the indirect call and identify a valid destination; until then keep Runtime-A incomplete.",
+  "success_condition": "Determine whether the captured owner+0x10 slot is the object used by the indirect call and identify a valid destination; keep Runtime-A incomplete until then.",
   "evidence_to_return": [
     "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json",
     "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/exact-root-caller-latest.json",
@@ -25,7 +25,7 @@
     "steps": [],
     "success_condition": "Lane-owned static analysis continues from the captured caller offset and current paired root evidence.",
     "evidence_to_return": [
-      "Current paired shared evidence batch"
+      "Current paired shared evidence batch and user's physical-traversal confirmation"
     ],
     "full_derelict_required": false
   }
