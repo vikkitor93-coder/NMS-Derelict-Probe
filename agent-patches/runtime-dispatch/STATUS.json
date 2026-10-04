@@ -1,28 +1,28 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-04T14:54:00Z",
+  "updated_utc": "2026-10-04T15:16:56Z",
   "state": "working",
-  "status": "v0.3.57 merged to main; awaiting one live root capture",
-  "summary": "Evidence at research-uploads/20261004T101244Z-all-saved-evidence-2a766630/: system 0001BF0004E84EFD, root seed candidate 5B4AE67D9C2A8F61, external return RVA 02C0497A, owner 000001D026704000, descriptor owner+0x128. The root-add sample read owner+0x10 as zero; the matched logical-entry record was 1.383 ms old. User confirms the 11-room/43-target model matched physical traversal. The root seed remains candidate/unverified. Main v0.3.56 still reads the slot at root addition; v0.3.57 candidate samples it at logical entry and preserves the separate root-add reading.",
-  "progress": "PR #47 was merged to main at 35d77ce4c89815313cfcdcedcfed22410fb4c126. Main update-manifest.json now offers app 0.3.57 with probe 0.3.36. All 181 tests, compileall, patch reproduction, package hash, base64 reconstruction, and archive integrity pass. Live Windows/NMS behavior is not yet verified.",
+  "status": "New root capture uploaded, but it was recorded by probe 0.3.35; entry-time dispatch-slot instrumentation from probe 0.3.36 is still unverified.",
+  "summary": "Newest runtime-dispatch evidence is included in research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/ (run-manifest.json and exact-root-caller-latest.json). The root event was captured at 2026-10-04T15:12:15.673Z in system 0001BF0004E84EFD, root seed candidate 5B4AE67D9C2A8F61, descriptor 000001F9A4546928, external caller return RVA 02C0497A. The artifact reports probe_version 0.3.35. Its root-add owner+0x10 sample reads zero with target identity null-or-low-address; it has no logical-entry owner+0x10 sample. Thus this upload confirms capture/upload worked but cannot verify the new entry-time instrumentation. Root seed remains candidate/unverified. Historical physical traversal confirmation remains unchanged.",
+  "progress": "The newer 0.3.36 probe / Surveyor 0.3.57 instrumentation is merged to main at 35d77ce4c89815313cfcdcedcfed22410fb4c126. This uploaded capture is from 0.3.35, so it appears the updated probe was not loaded for this root event. Main package validation previously passed (181 tests, compileall, exact patch reproduction, package hash/base64 reconstruction/archive integrity); live 0.3.36 behavior is not verified.",
   "blockers": [
-    "A new root event must occur while probe 0.3.36 is loaded; old captures cannot supply the entry-time sample."
+    "A fresh root event must occur while probe 0.3.36 is loaded; this old capture cannot provide the entry-time sample."
   ],
-  "next_action": "Review the next uploaded exact-root event for the entry-time owner+0x10 raw value and target identity against the separate root-add sample.",
+  "next_action": "After app 0.3.57 and probe 0.3.36 are confirmed loaded, inspect the next exact-root event for logical-entry and root-add owner+0x10 samples correlated to the same descriptor.",
   "human_intervention_required": true,
   "human_action": {
     "required": true,
-    "surveyor_request": "Install Surveyor v0.3.57, fully restart Surveyor and NMS, capture just the root event in any accessible derelict, and upload the saved exact-root event.",
+    "surveyor_request": "Install Surveyor v0.3.57, verify it loads probe 0.3.36, fully restart Surveyor and NMS, capture a root event, and upload it.",
     "steps": [
       "Open Surveyor → GitHub / updates → Check for updates → install v0.3.57.",
-      "Close and reopen Surveyor so it runs the updated app files.",
-      "Fully exit NMS, then start NMS from updated Surveyor so probe 0.3.36 loads.",
-      "Enter an accessible derelict only until the root event is recorded; do not do a full traversal.",
+      "Close and reopen Surveyor. Verify the app reports v0.3.57 / probe 0.3.36 if that version display is available.",
+      "Fully exit NMS, then launch it from the updated Surveyor so the new probe loads at startup.",
+      "Enter any accessible derelict only until the root event is recorded; a full traversal is not needed.",
       "Close NMS. In Surveyor click Upload captured root event, or Upload all saved evidence if auto-upload has not already sent it.",
-      "Tell Runtime-A/Main to check; I will fetch the shared upload and compare entry-time capture with root-add capture."
+      "Tell me “check”; I will fetch the new shared upload and compare both slot samples."
     ],
-    "success_condition": "The uploaded exact-root artifact contains owner+0x10 raw value and target identity sampled at logical entry, plus separate root-add sample correlated to the same descriptor.",
+    "success_condition": "The uploaded exact-root artifact reports probe_version 0.3.36 and includes owner+0x10 raw value and target identity sampled at logical entry plus a separate root-add sample, correlated to the same descriptor.",
     "evidence_to_return": [
       "run-manifest.json",
       "exact-root-caller-latest.json"
@@ -30,9 +30,8 @@
     "full_derelict_required": false
   },
   "evidence_to_return": [
-    "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json",
-    "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/exact-root-caller-latest.json",
-    "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/exact-root-caller-code-latest.json"
+    "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/run-manifest.json",
+    "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/exact-root-caller-latest.json"
   ],
   "extension_version": "1.0.2",
   "full_derelict_required": false
