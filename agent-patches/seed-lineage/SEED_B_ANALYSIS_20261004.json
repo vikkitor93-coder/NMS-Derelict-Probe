@@ -68,13 +68,29 @@
     "new_system_repeated_computation": "passed; identical output",
     "root_candidate_direct_equality_checks": "3/3 pairs rejected both direct-equality hypotheses"
   },
-  "next_lane_action": "Search the captured upstream caller / root-construction code and public system generator for a direct dataflow edge from system/POI state into cTkResourceDescriptor seed. The current root consumer only reads the embedded descriptor seed before AddResource, so continue upstream of that consumer. If the captured NMS.exe hash is not the current 7.05 build, obtain a current executable for address/build-specific static confirmation.",
-  "human_intervention_required": false,
+  "next_lane_action": "Request one offline Extract exact root caller + upload run on Surveyor v0.3.56 against the saved 2026-10-04 root capture and local NMS.exe. Verify the output's executable SHA-256, exact caller bytes at 02C04977, and return RVA 02C0497A. No NMS launch or derelict traversal is needed. Then use that current-binary caller context to trace farther upstream from the callback consumer for descriptor seed construction; if it still only exposes dispatch, continue static xrefs from the allocation/descriptor initialization sites.",
+  "human_intervention_required": true,
   "full_traversal_required": false,
   "versions": {
     "user_reported_surveyor": "0.3.56",
     "uploaded_capture_probe": "0.3.34",
     "repository_main_version_file_at_check": "0.3.53",
     "note": "These are separate component/version facts. The user identifies their installed Surveyor as 0.3.56. The uploaded evidence declares probe_version 0.3.34. The checked main branch's VERSION.txt still says 0.3.53; that repo label does not override the installed Surveyor version."
+  },
+  "caller_code_review": {
+    "static_artifact": "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/exact-root-caller-code-latest.json",
+    "static_artifact_session_utc": "2026-10-02T21:30:46.109Z",
+    "static_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "new_runtime_capture_caller_return_rva": "02C0497A",
+    "new_runtime_capture_exe_hash": "not-present",
+    "decoded_call": {
+      "instruction_rva": "02C04977",
+      "bytes": "FF 52 10",
+      "mnemonic": "call qword ptr [rdx+0x10]",
+      "return_rva": "02C0497A"
+    },
+    "measured_static_behavior": "The captured routine reads a callback return value after the indirect dispatch and branches on it; the caller window does not show construction/assignment of the derelict root seed.",
+    "seed_consumer_scan": "The saved seed-function analysis records descriptor primary seed reads at descriptor+0x10 and use-seed flag reads at descriptor+0x18; it reports no possible descriptor-field writes.",
+    "limitation": "The caller return RVA agrees between new runtime capture and older static code, but the new runtime capture does not include the loaded NMS.exe SHA-256. Equality of RVAs alone does not prove the executable build is identical."
   }
 }
