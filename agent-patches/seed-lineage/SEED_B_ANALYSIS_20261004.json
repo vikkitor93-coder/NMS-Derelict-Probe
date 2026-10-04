@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "lane": "seed-lineage",
+  "created_utc": "2026-10-04T10:38:00Z",
+  "analysis_id": "SEED_B_ANALYSIS_20261004",
+  "objective": "Test whether newly associated derelict root seed candidates equal the public address-derived system seed or its initial RNG state; do not infer an unproven transform.",
+  "algorithm": {
+    "id": "nms-universal-address-iprng-public-reimplementation",
+    "source": "agent-patches/seed-lineage/seed-b.patch.gz.b64",
+    "extracted_module_sha256": "dc3ab70a9d115e210d954f662aaf54f8849c923d50bec716e8a3723ab43c0a85",
+    "validation": "Both prior published anchors matched their SEED_B_MANIFEST expected system seeds and initial RNG states; deterministic repeat verified for the new address."
+  },
+  "inputs": [
+    {
+      "universe_address_hex": "00001A0004E84EFD",
+      "root_seed_hex": "9256392A2F5A74AC",
+      "source": "SEED_B_MANIFEST.json; known-system post-update evidence",
+      "user_confirmed_physical_layout": "Known system historical results retained separately; post-update current layout known from prior shared evidence"
+    },
+    {
+      "universe_address_hex": "0001550006607CAC",
+      "root_seed_hex": "00C9E8DF0327789E",
+      "source": "SEED_B_MANIFEST.json; historical 51-target anchor"
+    },
+    {
+      "universe_address_hex": "0001BF0004E84EFD",
+      "root_seed_hex": "5B4AE67D9C2A8F61",
+      "source": "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/generation-baseline-latest.json; exact-root-caller-latest.json",
+      "session_id": "20261004T094357Z_0001BF0004E84EFD",
+      "physical_layout_confirmation": "User confirmed the model's 11 rooms and 43 total containers matched the traversal."
+    }
+  ],
+  "results": [
+    {
+      "universe_address_hex": "00001A0004E84EFD",
+      "system_seed_hex": "B006BAB6",
+      "initial_system_rng_state_hex": "3E342BADCF79F176",
+      "root_seed_hex": "9256392A2F5A74AC",
+      "equals_zero_extended_system_seed": false,
+      "equals_initial_system_rng_state": false
+    },
+    {
+      "universe_address_hex": "0001550006607CAC",
+      "system_seed_hex": "9E1A7905",
+      "initial_system_rng_state_hex": "37DEC848947D131C",
+      "root_seed_hex": "00C9E8DF0327789E",
+      "equals_zero_extended_system_seed": false,
+      "equals_initial_system_rng_state": false
+    },
+    {
+      "universe_address_hex": "0001BF0004E84EFD",
+      "system_seed_hex": "5CBC101F",
+      "initial_system_rng_state_hex": "20C536683CF0F72A",
+      "root_seed_hex": "5B4AE67D9C2A8F61",
+      "equals_zero_extended_system_seed": false,
+      "equals_initial_system_rng_state": false
+    }
+  ],
+  "interpretation": {
+    "measured": "The new evidence associates root descriptor seed 5B4AE67D9C2A8F61 with universe address 0001BF0004E84EFD. User confirms 11 rooms and 43 containers physically matched the analysis.",
+    "computed": "The existing public universal-address algorithm produces system seed 5CBC101F and initial system RNG state 20C536683CF0F72A for the new address. It produces the previously validated anchor values for the two older addresses.",
+    "negative_result": "The direct-equality hypotheses (zero-extended system seed == root seed; initial system RNG state == root seed) fail on all three pairs.",
+    "unresolved": "The evidence does not establish whether the derelict seed is derived through a different transform, from another RNG state, or via another input. No system-to-derelict formula is claimed."
+  },
+  "test_results": {
+    "prior_anchor_seed_and_rng_checks": "2/2 passed",
+    "new_system_seed_and_rng_expected_values": "passed",
+    "new_system_repeated_computation": "passed; identical output",
+    "root_candidate_direct_equality_checks": "3/3 pairs rejected both direct-equality hypotheses"
+  },
+  "next_lane_action": "Search the captured upstream caller / root-construction code and public system generator for a direct dataflow edge from system/POI state into cTkResourceDescriptor seed. The current root consumer only reads the embedded descriptor seed before AddResource, so continue upstream of that consumer. If the captured NMS.exe hash is not the current 7.05 build, obtain a current executable for address/build-specific static confirmation.",
+  "human_intervention_required": false,
+  "full_traversal_required": false
+}
