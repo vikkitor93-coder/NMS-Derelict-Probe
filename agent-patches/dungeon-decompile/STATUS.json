@@ -2,8 +2,8 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T10:36:11Z",
-  "state": "new-system-layout-and-container-model-user-validated",
+  "reviewed_utc": "2026-10-04T15:17:40Z",
+  "state": "new-system-identity-captured-layout-user-validated-dispatch-target-unresolved",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -59,11 +59,16 @@
       "generation_table_interpretation": "Rooms=7 is the value present in the extracted generation-table evidence. It is not a physical room measurement. The user attributes the difference from the current 11-room traversal to the game update's changes to generation and replayability; this is recorded as user-provided explanation, not an independently verified table-version/build comparison."
     },
     "runtime_capture": {
-      "utc": "2026-10-04T09:43:51.578Z",
+      "utc": "2026-10-04T15:12:15.676Z",
+      "probe_version": "0.3.35",
+      "capture_version": 2,
+      "root_event_utc": "2026-10-04T15:12:15.673Z",
       "universe_address": "0001BF0004E84EFD",
+      "system_name": "Angoto",
+      "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
       "owner_plus_0x10_slot_value": "0000000000000000",
       "target_identity_status": "null-or-low-address",
-      "runtime_target_resolved": false
+      "runtime_dispatch_registers_or_vtable_target_captured": false
     },
     "runtime_consumer_analysis": {
       "consumer_function_found": false,
@@ -86,19 +91,22 @@
       "disposition": "Do not treat the table-versus-generated room difference as an unexplained anomaly. Preserve the 35-container run as historical."
     },
     "runtime_callsite_analysis": {
-      "source_evidence": "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/exact-root-caller-code-latest.json",
-      "source_sha256": "67bc58aeb61167c27e639c44953410151315956ed0280861320fed68da373464",
+      "source_evidence": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/exact-root-caller-latest.json",
+      "source_sha256": "962b9b43a3fd64a3bea20c0b8e76ddb965347979eb55bb56c28274c4c34a439b",
       "caller_return_rva": "02C0497A",
       "call_instruction_rva": "02C04977",
       "instruction": "FF 52 10",
-      "preceding_instruction_bytes": "48 8B 11 FF 52 10",
-      "interpretation": "48 8B 11 loads RDX from [RCX], then FF 52 10 calls through [RDX+0x10], i.e. the vtable slot at +0x10 for the object in RCX.",
-      "runtime_correlation": "The captured caller return RVA 02C0497A corresponds to the return from this call site when the hooked logical-entry function at NMS.exe RVA 00634BC0 is entered; for that observed event, the call reached the hooked function.",
-      "important_distinction": "The runtime capture reads owner_pointer+0x10. That is not the same address expression as [vtable+0x10]. Therefore owner+0x10=0 does not establish that the indirect call target was zero or absent.",
-      "offline_resolution": "The published offline vtable scan found zero static candidates; it did not capture the runtime vtable pointer or prove the slot is absent.",
-      "source_capture_utc": "2026-10-02T21:30:46.109Z",
-      "applies_to_system": "00001A0004E84EFD",
-      "separate_from_validated_new_system_session": "20261004T094357Z_0001BF0004E84EFD"
+      "preceding_instruction": "02C04974: 48 8B 11 (mov RDX,[RCX])",
+      "interpretation": "The dispatch slot is [RDX+0x10] after RDX is loaded from [RCX]. The separately captured owner+0x10 value is zero and does not reveal the target pointer at [RDX+0x10].",
+      "new_capture_gap": "Probe 0.3.35 capture_version 2 now records the exact universe address and runtime metadata for this root event, but the uploaded record still has no RCX object, RDX vtable pointer, or dereferenced [RDX+0x10] target.",
+      "offline_vtable_candidates": 0,
+      "recommended_live_capture_fields": [
+        "exact callsite/caller return RVA",
+        "RCX object pointer",
+        "RDX vtable pointer loaded from [RCX]",
+        "qword at RDX+0x10",
+        "resolved target module/RVA"
+      ]
     },
     "prior_anchor_scan": {
       "evidence_path": "research-uploads/20260930T172000Z-dungeon-decompile/dungeon-decompile-anchors-summary.json",
@@ -115,30 +123,58 @@
       "statement": "User attributes the post-update room difference to the game update changing generation and rerollability.",
       "supported_observation": "The new system's CARGO_FLOATERS run has 11 user-confirmed main rooms while the current extracted generation table still lists 7.",
       "limitation": "No pre-update copy of the same extracted generation table was found among the published repository snapshots, so the table-change mechanism is not independently diff-verified."
+    },
+    "latest_repeat_capture": {
+      "session_id": "20261004T151219Z_0001BF0004E84EFD",
+      "universe_address": "0001BF0004E84EFD",
+      "system_name": "Angoto",
+      "probe_version": "0.3.34",
+      "preset": "CARGO_FLOATERS",
+      "preset_confidence": "high-inference",
+      "modeled_rooms": {
+        "main": 11,
+        "dead_end": 0,
+        "total": 11
+      },
+      "analyzer_predicted_targets": {
+        "salvage": 30,
+        "footlockers": 13,
+        "total": 43
+      },
+      "root_seed": "5B4AE67D9C2A8F61",
+      "root_seed_status": "candidate-unverified",
+      "manual_room_markers": {
+        "main_rooms": 0,
+        "dead_ends": 0
+      },
+      "physical_counts_in_this_capture": false,
+      "relation_to_user_confirmed_run": "same universe address and root seed; the user previously confirmed 11 rooms and 30 Salvage + 13 Footlockers for this system"
     }
   },
   "evidence": {
-    "shared_upload_path": "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/",
-    "manifest": "research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json",
+    "shared_upload_path": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/",
+    "manifest": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/run-manifest.json",
     "reviewed_files": [
+      "run-manifest.json",
       "generation-baseline-latest.json",
       "generation-measurements-summary.json",
       "generation-measurements.csv",
-      "dungeon-generation-table.json",
       "exact-root-caller-latest.json",
+      "exact-root-caller-code-latest.json",
       "exact-root-vtable-latest.json",
       "dungeon-caller-code-latest.json",
-      "dungeon-upstream-callers-latest.json"
+      "dungeon-upstream-callers-latest.json",
+      "dungeon-generation-table.json"
     ],
-    "note": "Generation session is linked to system 0001BF0004E84EFD. The user confirms its room layout and crate counts matched physical traversal. Counts are now user-validated for this run, not presented as a directly recorded manual counter capture.",
+    "note": "The newest shared batch adds a 15:12 root capture from probe 0.3.35, capture_version 2. It records universe_address_hex_at_capture and runtime metadata for system 0001BF0004E84EFD (Angoto), correlating the root event and seed 5B4AE67D9C2A8F61. The generation model is unchanged and matches the physical counts/layout the user confirmed earlier; this batch's measurement summary/CSV are unchanged and manual room markers remain zero.",
     "run_manifest_sha256": "f06defdaf8913504ad6fce108958159aef2f26e3"
   },
   "blocked": {
-    "reason": "The validated layout/count model is usable for this run, but target-specific consumer analysis remains blocked because owner+0x10 is zero and the live [RDX+0x10] dispatch target was not captured. The current table's Rooms=7 versus 11 user-confirmed rooms is attributed by the user to the game update; repository evidence lacks a pre-update table snapshot for an independent diff.",
+    "reason": "System identity is now captured, and the 11-room/43-container model was user-validated earlier. Consumer analysis remains blocked because the latest root capture still has owner+0x10=0 and omits the actual [RDX+0x10] dispatch target.",
     "human_action_required": true,
     "full_traversal_required": false,
     "duplicate_upload_required": false,
-    "needed": "No repeat traversal or upload is needed. Runtime-A should adjust capture to record the actual [RDX+0x10] target at the decoded dispatch site; a live NMS event will then be needed to validate it."
+    "needed": "Runtime-A needs to capture RCX, RDX and qword [RDX+0x10] at the decoded callsite. After that code is installed, a live NMS root event is required to validate the target; no full traversal is needed."
   },
-  "next_lane_owned_step": "Use this callsite analysis as the DUNGEON-C handoff: the owner+0x10 field is not the operand base of the FF 52 10 call. Continue consumer decompilation once Runtime-A provides RCX/RDX and the dereferenced [RDX+0x10] target. Preserve the user-validated 11-room/43-container result and historical 35-container baseline as separate runs."
+  "next_lane_owned_step": "Carry the latest runtime-linked callsite analysis forward: universe identity is fixed, but the target is not. Continue DUNGEON-C consumer analysis when Runtime-A publishes a capture containing the actual [RDX+0x10] function pointer and resolved module/RVA. Preserve the user's physical validation and historical 35-container baseline separately."
 }
