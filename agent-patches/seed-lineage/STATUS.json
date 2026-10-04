@@ -1,15 +1,21 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-04T10:40:00Z",
-  "state": "active",
-  "status": "New-system layout/count model physically confirmed; root seed candidates differ",
-  "summary": "Reviewed main batch research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json and its generation-baseline-latest.json, exact-root-caller-latest.json, and seed-room-correlation.json. User confirms the new-system survey's room count and crate/container count were accurate: 11 rooms and 43 containers. The generation baseline identifies session 20261004T094357Z_0001BF0004E84EFD and address 0001BF0004E84EFD; its model records 11 main rooms, 0 dead ends, 30 predicted Salvage and 13 predicted Footlockers (43 total). The analyzer's 5B4AE67D9C2A8F61 root descriptor seed candidate is associated with that address and use_seed=true, but remains unverified as the layout-seed derivation. The exact root capture records owner+0x10 as eight zero bytes and target identity null-or-low-address. Historical known-system address 00001A0004E84EFD retains candidate 9256392A2F5A74AC; the new system candidate differs. User confirmation establishes the model's room and total-container predictions matched the physical survey; it does not prove a seed derivation. New system preset remains a high-confidence CARGO_FLOATERS inference. The batch's seed-room-correlation file has no new per-address correlation for this system. No evidence diagnoses the mod behavior. User correction: installed Surveyor is v0.3.56. This is distinct from the new batch's probe_version v0.3.34. The checked main branch VERSION.txt still says v0.3.53, so the local installed Surveyor is newer than the checked-in main package label; do not conflate these versions.",
-  "next_action": "Continue Seed-B offline comparison of the root-seed function and upstream callers against the two address-associated root descriptor candidates (00001A0004E84EFD -> 9256392A2F5A74AC; 0001BF0004E84EFD -> 5B4AE67D9C2A8F61). Seek direct dataflow/code evidence for the transform; preserve candidate/unverified status until established.",
-  "surveyor_request": "None. The latest captured session is already associated with the new system address, and the user confirms the modeled 11 rooms and 43 containers matched the physical traversal.",
-  "human_intervention_required": false,
-  "user_steps": [],
-  "success_condition": "Direct code/dataflow evidence establishes how the system address or another input produces the root descriptor seed, validated against both system captures. The user's physical count confirmation validates the new session's model totals only; do not treat it as proof of seed derivation.",
+  "updated_utc": "2026-10-04T10:44:00Z",
+  "state": "waiting_on_user",
+  "status": "Cross-system comparison done; current-binary caller extraction needed",
+  "summary": "Reviewed main batch research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json and its generation-baseline-latest.json, exact-root-caller-latest.json, and seed-room-correlation.json. User confirms the new-system survey's room count and crate/container count were accurate: 11 rooms and 43 containers. The generation baseline identifies session 20261004T094357Z_0001BF0004E84EFD and address 0001BF0004E84EFD; its model records 11 main rooms, 0 dead ends, 30 predicted Salvage and 13 predicted Footlockers (43 total). The analyzer's 5B4AE67D9C2A8F61 root descriptor seed candidate is associated with that address and use_seed=true, but remains unverified as the layout-seed derivation. The exact root capture records owner+0x10 as eight zero bytes and target identity null-or-low-address. Historical known-system address 00001A0004E84EFD retains candidate 9256392A2F5A74AC; the new system candidate differs. User confirmation establishes the model's room and total-container predictions matched the physical survey; it does not prove a seed derivation. New system preset remains a high-confidence CARGO_FLOATERS inference. The batch's seed-room-correlation file has no new per-address correlation for this system. No evidence diagnoses the mod behavior. User correction: installed Surveyor is v0.3.56. This is distinct from the new batch's probe_version v0.3.34. The checked main branch VERSION.txt still says v0.3.53, so the local installed Surveyor is newer than the checked-in main package label; do not conflate these versions. Further offline review: exact-root-caller-code-latest.json contains a static code window for executable SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4. It decodes an indirect call FF 52 10 at RVA 02C04977 (return 02C0497A), then checks the callback return; this code window does not construct the root seed. dungeon-seed-function-analysis-latest.json records descriptor primary-seed reads at descriptor+0x10 and use-seed reads at +0x18, with no possible descriptor-field writes. The new 2026-10-04 capture has the same caller return RVA but no NMS.exe SHA-256, so current-binary identity is not proven. Need one offline extraction on the user's installed Surveyor v0.3.56 to bind current exe hash and caller bytes; no NMS run/traversal required.",
+  "next_action": "After receiving a current-binary exact caller extraction, confirm hash/RVA/instruction match and continue static xrefs upstream toward descriptor seed initialization. Do not stop at dispatch or claim a derivation from address correlations.",
+  "surveyor_request": "With NMS closed, run Extract exact root caller + upload in Surveyor v0.3.56 using the saved 2026-10-04 root capture. Confirm the output shows the NMS.exe SHA-256 and decoded caller instruction at 02C04977 returning at 02C0497A. Then click Upload all saved evidence once and tell Seed-B to check. No derelict traversal is needed.",
+  "human_intervention_required": true,
+  "user_steps": [
+    "Close NMS completely; leave Surveyor v0.3.56 open.",
+    "In Surveyor, click Extract exact root caller + upload. This should use the saved 2026-10-04 capture; do not start NMS or enter a derelict.",
+    "Wait for the action to finish and confirm the result includes the NMS.exe SHA-256 and caller instruction at 02C04977 / return 02C0497A.",
+    "Click Upload all saved evidence once.",
+    "Tell me “check”."
+  ],
+  "success_condition": "A new uploaded exact-root-caller-code artifact records the current NMS.exe SHA-256 and code window around caller RVA 02C04977/return 02C0497A, allowing current-binary identity and upstream seed-initialization analysis. Full derelict traversal is not required.",
   "evidence_to_return": [
     "Newest reviewed batch on main: research-uploads/20261004T101244Z-all-saved-evidence-2a766630/run-manifest.json",
     "New system session: 20261004T094357Z_0001BF0004E84EFD; user's physical confirmation: 11 rooms, 43 containers; model: 11 main, 0 dead ends, 30 Salvage + 13 Footlockers",
@@ -18,7 +24,9 @@
     "Known-system comparator: universe 00001A0004E84EFD; candidate root seed 9256392A2F5A74AC",
     "No direct derivation proven; no more traversal or user action required at this stage",
     "Version provenance: user reports installed Surveyor v0.3.56; uploaded evidence probe_version v0.3.34; checked main VERSION.txt is v0.3.53.",
-    "Cross-system computation recorded in agent-patches/seed-lineage/SEED_B_ANALYSIS_20261004.json."
+    "Cross-system computation recorded in agent-patches/seed-lineage/SEED_B_ANALYSIS_20261004.json.",
+    "Static code review: older exact-root caller code has FF 52 10 at 02C04977 and checks callback result; it does not expose seed construction.",
+    "Required next artifact: current-binary exact-root-caller-code output from installed Surveyor v0.3.56; no full traversal required."
   ],
   "full_derelict_required": false
 }
