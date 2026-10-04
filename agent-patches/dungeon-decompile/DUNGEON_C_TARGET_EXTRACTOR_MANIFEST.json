@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "tool_version": "0.3.38",
+  "package_base": "NMS-Derelict-Probe-v0.3.50 / DUNGEON-C 1.0.3 source",
+  "purpose": "Export the runtime-correlated logical-entry callee body from the installed NMS.exe using its PE .pdata function range.",
+  "files": [
+    "Extract-Runtime-Target-Function.cmd",
+    "tools/extract_runtime_target_function.py",
+    "tests/test_runtime_target_function.py",
+    "README.md",
+    "CHANGELOG.md",
+    "AI_HANDOFF.md"
+  ],
+  "input": {
+    "evidence": "%LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1\\exact-root-caller-latest.json",
+    "target_rva_field": "logical_entry_rva_hex",
+    "executable": "NMS.exe (auto-detected; optional --exe override)"
+  },
+  "output": {
+    "path": "%LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1\\exact-root-caller-code-latest.json",
+    "field": "runtime_target_function",
+    "upload_compatibility": "Existing ACTION_OUTPUTS entry exact-root-caller-code-latest.json; Upload all saved evidence remains unchanged."
+  },
+  "safety": {
+    "nms_runtime_required": false,
+    "game_memory_writes": false,
+    "max_function_bytes": 1048576,
+    "function_boundary_source": "PE .pdata"
+  },
+  "verification": {
+    "focused_tests": "4/4 passed",
+    "full_suite": "173/173 passed",
+    "compileall": "passed",
+    "live_executable_validation": "not run; installed NMS.exe is not available in this workspace"
+  },
+  "rollback": "Delete Extract-Runtime-Target-Function.cmd, tools/extract_runtime_target_function.py, this manifest, and tests/test_runtime_target_function.py; remove the additive README/CHANGELOG/AI_HANDOFF notes. Existing caller extraction and upload schema remain unchanged."
+}
