@@ -4,6 +4,12 @@
 
 Allow multiple AI coding/research agents to work simultaneously without blocking each other or corrupting the stable Surveyor.
 
+## Autonomous progress and human blockers
+
+Agents must keep working until a step genuinely requires human intervention. Naming a next step is not progress by itself: first check whether it can be completed with the repository, code, available tools, or existing evidence, and execute it if possible. After a failure, inspect the error and pursue a reasonable alternative. When the assigned objective is complete, select the next highest-value useful task in the lane and continue.
+
+Ask the user to act only for a true human-only dependency such as a live NMS capture, access to their local machine/files, or information unavailable from project evidence. Before asking, finish all independent work and provide one exact numbered recipe. If blocked by another lane, continue independent work and prepare a useful handoff; do not simply report the dependency and stop.
+
 ## Branch ownership
 
 - `main`: stable shared line. Completed, validated lane changes may be pushed directly to `main`; a PR or separate integration-agent merge is optional. Keep unfinished experiments on the lane branch.
