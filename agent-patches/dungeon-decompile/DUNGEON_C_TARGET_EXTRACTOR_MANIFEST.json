@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "tool_version": "0.3.38",
+  "tool_version": "0.3.39",
   "package_base": "NMS-Derelict-Probe-v0.3.50 / DUNGEON-C 1.0.3 source",
   "purpose": "Export the runtime-correlated logical-entry callee body from the installed NMS.exe using its PE .pdata function range.",
   "files": [
@@ -20,7 +20,8 @@
   "output": {
     "path": "%LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1\\exact-root-caller-code-latest.json",
     "field": "runtime_target_function",
-    "upload_compatibility": "Existing ACTION_OUTPUTS entry exact-root-caller-code-latest.json; Upload all saved evidence remains unchanged."
+    "upload_compatibility": "Existing ACTION_OUTPUTS entry exact-root-caller-code-latest.json; Upload all saved evidence remains unchanged.",
+    "direct_call_candidates": "Additive heuristic E8-byte scan; records only candidates whose targets map to executable section and .pdata range, includes bounded helper bodies under fixed count/size caps; instruction boundaries remain unverified."
   },
   "safety": {
     "nms_runtime_required": false,
@@ -29,10 +30,10 @@
     "function_boundary_source": "PE .pdata"
   },
   "verification": {
-    "focused_tests": "6/6 passed",
-    "full_suite": "175/175 passed",
+    "focused_tests": "8/8 passed",
+    "full_suite": "177/177 passed",
     "compileall": "python -m compileall -q tools overlay tests mod passed",
-    "live_executable_validation": "User ran extractor successfully on NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; extracted 1235-byte .pdata range 00634930..00634E03. Hook RVA 00634BC0 is interior offset 0x290."
+    "live_executable_validation": "User ran tool 0.3.38 successfully on NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; extracted 1235-byte .pdata range 00634930..00634E03. Tool 0.3.39 heuristic helper-body scan awaits local rerun."
   },
   "rollback": "Delete Extract-Runtime-Target-Function.cmd, tools/extract_runtime_target_function.py, this manifest, and tests/test_runtime_target_function.py; remove the additive README/CHANGELOG/AI_HANDOFF notes. Existing caller extraction and upload schema remain unchanged.",
   "launcher": {
@@ -41,7 +42,7 @@
       "py -3",
       "python.exe on PATH"
     ],
-    "path_diagnostics": "Launcher validates project folder and interpreter; an unusable saved path is silent if fallback succeeds and included in the error if no runtime is available."
+    "path_diagnostics": "Launcher validates project folder and interpreter; unusable saved path is silent if fallback succeeds and included in the error if no runtime is available."
   },
   "latest_direct_evidence": {
     "file": "exact-root-caller-code-latest(2).json",
