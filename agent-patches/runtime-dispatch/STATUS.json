@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-04T23:02:00Z",
+  "updated_utc": "2026-10-04T23:10:00Z",
   "state": "working",
-  "status": "Fresh probe 0.3.37 capture confirms RCX, RDX, and a successful raw [RDX+0x10] read at shared logical-entry hook, but the observed value is zero after the caller's indirect call. Static caller evidence decodes the callsite as CALL [RDX+0x10]; therefore this post-call sample does not identify the target used by the call.",
-  "summary": "Fresh root capture at 2026-10-04T22:41:40.245Z from probe 0.3.37: resource MODELS/SPACE/POI/DUNGEON.SCENE.MBIN; system Angoto, address 0001BF0004E84EFD; seed 5B4AE67D9C2A8F61; descriptor 00000254AAE08D28. Caller return RVA 02C0497A correlates with static instruction at RVA 02C04977, bytes FF 52 10 (indirect CALL [RDX+0x10]). Runtime RCX=00000255EB129960, RDX=00000254AAE08C00. The post-call slot read succeeded and returned 0000000000000000 at entry and again at root-add about 3 ms later.",
-  "progress": "Direct upload and all-saved batch agree on the same 15,461-byte runtime JSON, SHA-256 f02076a472d90bc9cb3d5b8b4ddb35bc35dea6865c983b992564618f7e6f97ef. This is a measured zero after the call, not a captured call target. Runtime and static evidence refer to system 0001BF0004E84EFD / seed 5B4AE67D9C2A8F61; keep separate from historical candidate seed 9256392A2F5A74AC.",
+  "status": "Fresh probe 0.3.37 captured RCX, RDX, and the raw [RDX+0x10] slot after the indirect call; the slot was zero. Correlated execution supports target RVA 00634BC0 by inference, but does not directly capture pre-call slot bytes.",
+  "summary": "Fresh root capture at 2026-10-04T22:41:40.245Z from probe 0.3.37: resource MODELS/SPACE/POI/DUNGEON.SCENE.MBIN; system Angoto, address 0001BF0004E84EFD; seed 5B4AE67D9C2A8F61; descriptor 00000254AAE08D28. Static caller bytes at 02C04977 are FF 52 10 (CALL [RDX+0x10]); the call returns at 02C0497A. The same descriptor/seed is observed on the shared logical-entry hook at RVA 00634BC0 with caller return 02C0497A. RCX=00000255EB129960; RDX=00000254AAE08C00; post-call [RDX+0x10] read succeeded as zero at entry and root-add.",
+  "progress": "Evidence files direct-upload and all-saved batch contain the same 15,461-byte capture, SHA-256 f02076a472d90bc9cb3d5b8b4ddb35bc35dea6865c983b992564618f7e6f97ef. Measured: post-call slot is zero; caller instruction is FF 52 10; matching shared-entry capture is at 00634BC0 and reports return RVA 02C0497A. Inference: the target reached for this invocation was the hooked logical-entry function at RVA 00634BC0. Limitation: this correlation is not a direct pre-call memory read, and it does not explain why the slot read is zero after execution.",
   "blockers": [],
-  "next_action": "Determine whether a safe, build-validated pre-call observation can be implemented using the pinned pyMHF 0.2.4 hook semantics. Its manual/offset hooks can attach at offsets, but available docs describe function hooks, not a supported arbitrary instruction breakpoint. Evaluate callsite detouring and a bounded hardware-breakpoint alternative offline; do not treat either as safe or ship it until ABI, trampoline, concurrency, and rollback behavior are demonstrated. Avoid installing 52 callsite hooks unless one site cannot cover the exact correlated runtime path.",
+  "next_action": "Do not add a normal pyMHF function detour at RVA 02C04977 as if it were a pre-call breakpoint: pinned pyMHF 0.2.4 manual/offset hooks use MinHook function detours and their trampoline executes displaced instructions as a callable; at this mid-function callsite the live stack and volatile register state are not safely represented by a normal function ABI. Investigate a narrowly scoped pre-instruction debugger/breakpoint capture for this one verified callsite, or a native register-preserving callsite stub, with offline validation and explicit rollback before requesting a game run. Do not instrument all 52 candidates unless evidence shows this exact runtime site is insufficient.",
   "human_intervention_required": false,
   "human_action": {
     "required": false,
-    "reason": "The latest capture is already available; remaining work is offline instrumentation feasibility and static/runtime interpretation.",
+    "reason": "Offline evidence correlation and hook feasibility analysis can continue without another game run.",
     "after_build_steps": []
   },
   "evidence_to_return": [
