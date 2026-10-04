@@ -2,8 +2,8 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T22:47:00Z",
-  "state": "callback-body-reviewed-awaiting-helper-body-candidates",
+  "reviewed_utc": "2026-10-04T23:18:26Z",
+  "state": "callback-direct-call-inventory-reviewed-awaiting-helper-bodies",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -286,6 +286,20 @@
         "compileall": "python -m compileall -q tools overlay tests mod passed",
         "live_nms_test": "not run; not required for offline extraction"
       }
+    },
+    "bounded_callback_call_inventory": {
+      "evidence_path": "agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json",
+      "source_attachment": "exact-root-caller-code-latest(2).json",
+      "source_attachment_sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
+      "source_probe_version": "0.3.37",
+      "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "function_range": "00634930..00634E03",
+      "function_bytes": 1235,
+      "function_sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5",
+      "decoded_direct_call_sites": 33,
+      "distinct_direct_call_targets": 7,
+      "boundary_check": "GNU objdump linear decode from the complete .pdata-bounded body start; independently recomputed all 33 E8 rel32 targets and matched decoded targets",
+      "conclusion": "Callsite boundaries/targets are enumerated. No target names or semantics assigned. The attachment has no helper .pdata ranges or helper-body bytes; user-attached bounded-body export is tool_version 0.3.37 and lacks direct_call_candidates/helper bodies from the v0.3.39 helper exporter."
     }
   },
   "evidence": {
@@ -332,16 +346,16 @@
     }
   },
   "blocked": {
-    "reason": "The direct caller and bounded callback body are reviewed. Further helper-body extraction requires rerunning the updated offline extractor against the installed NMS.exe; the executable itself is not available in this workspace.",
+    "reason": "The user-provided bounded callback body is accessible and its 33 direct E8 call sites across 7 targets are now inventoried. The attached export is tool_version 0.3.37 and lacks helper candidates/bodies; collecting target .pdata ranges and bytes requires the v0.3.39 helper exporter plus matching NMS.exe. NMS.exe exists in the user's Library but transfer to this workspace failed twice, so local binary scanning cannot be done here.",
     "human_action_required": true,
     "full_traversal_required": false,
     "nms_runtime_required": false,
     "duplicate_capture_or_upload_required": false,
-    "needed": "Use NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-helper-export.zip (SHA-256 95d7ee614fa1d13bb342cb56949cddb5e4cbec0283ba871751d0ea614091f11f). Extract it to a normal folder, run Extract-Runtime-Target-Function.cmd, then Surveyor → GitHub / updates → Upload all saved evidence. Tell me “check” after upload. Offline extraction only; no NMS launch or traversal.",
-    "expected_output": "Updated exact-root-caller-code-latest.json with runtime_target_function.direct_call_candidates and bounded candidate helper bodies, explicitly heuristic pending instruction-boundary validation.",
-    "success_condition": "The shared upload includes candidate helper bodies for the callback's direct E8 calls, allowing DUNGEON-C to validate sites and continue data-flow analysis."
+    "needed": "Use the complete helper-export build NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-helper-export.zip (SHA-256 95d7ee614fa1d13bb342cb56949cddb5e4cbec0283ba871751d0ea614091f11f), not the GitHub agent/dungeon-decompile branch archive. Extract it to a normal local folder; run Extract-Runtime-Target-Function.cmd from the extracted package root. The saved NMS.exe is auto-detected from Surveyor's settings; no NMS launch is needed. If it completes, click Surveyor → GitHub / updates → Upload all saved evidence. Return “check”.",
+    "expected_output": "exact-root-caller-code-latest.json with runtime_target_function.direct_call_candidates and bounded target_function_body entries (tool_version 0.3.39); candidates remain heuristic until boundaries and .pdata ranges are independently checked.",
+    "success_condition": "The new shared upload includes at least one candidate helper body and records the NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4."
   },
-  "next_lane_owned_step": "Fetch helper candidates, validate call instruction boundaries and .pdata body ranges against caller/callback disassembly, then identify which helper(s) implement the four-field completion record updates. Keep targets unnamed until validated.",
+  "next_lane_owned_step": "When helper bodies arrive, compare their .pdata ranges with the independently disassembled E8 sites in CALLBACK_DIRECT_CALL_INVENTORY.json, reject any byte-scan candidates not at decoded boundaries, and trace only bodies that write/replace RSI+0x48 or set availability bits on the four-field record.",
   "latest_shared_upload_review": {
     "path": "research-uploads/20261004T224430Z-all-saved-evidence-f138ff45/",
     "manifest": "research-uploads/20261004T224430Z-all-saved-evidence-f138ff45/run-manifest.json",
@@ -368,5 +382,11 @@
     "observed": "Windows launcher reported a saved Python path prefixed by UTF-8 BOM display bytes, then import failure for analyze_nms_seed_function.",
     "cause": "The trace path names the GitHub branch archive folder NMS-Derelict-Probe-agent-dungeon-decompile; that branch snapshot omits tools/analyze_nms_seed_function.py, a sibling imported by the extractor. The saved Python path has a BOM and fails validation, after which launcher fallback may select py/python.",
     "disposition": "This failure explains the branch-archive attempt. The separate 0.3.37 bounded-function attachment confirms the extraction later succeeded; do not request a duplicate run or upload."
-  }
+  },
+  "evidence_paths": [
+    "research-uploads/20261004T224430Z-all-saved-evidence-f138ff45/run-manifest.json",
+    "research-uploads/20261004T224430Z-all-saved-evidence-f138ff45/exact-root-caller-latest.json",
+    "agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json",
+    "/NMS modding/exact-root-caller-code-latest(2).json (user attachment; SHA-256 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2)"
+  ]
 }
