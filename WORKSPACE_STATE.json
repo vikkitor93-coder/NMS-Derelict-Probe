@@ -1,15 +1,15 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-04T10:30:00Z",
+  "updated_utc": "2026-10-04T16:36:00Z",
   "integration": {
     "branch": "main",
-    "canonical_version": "0.3.53",
+    "canonical_version": "0.3.56",
     "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.56",
-    "candidate_branch": "codex/upload-all-evidence-0.3.53",
-    "candidate_base": "main@f1052e2bae98df16baf365934e821fdc9e5232cd",
-    "candidate_status": "locally-tested-source-package; not published to GitHub"
+    "candidate_version": "0.3.57",
+    "candidate_branch": "agent/runtime-dispatch-entry-capture-v0.3.57",
+    "candidate_base": "main@v0.3.56",
+    "candidate_status": "candidate-built-pending-publication-and-live-validation"
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
@@ -20,11 +20,11 @@
   "lanes": {
     "runtime-dispatch": {
       "branch": "agent/runtime-dispatch",
-      "status": "build-ready-awaiting-live-validation",
+      "status": "entry-time capture candidate based on v0.3.56; live verification pending",
       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
       "pull_request": 1,
       "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
-      "next_action": "Run RUNTIME-A on the known derelict until owner+0x10 dispatch capture succeeds; no traversal required."
+      "next_action": "Publish and validate v0.3.57 candidate; review one uploaded exact-root event for entry-time slot and target identity separately from root-add sample."
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage",
@@ -87,5 +87,6 @@
     "status": "release-candidate-pending-windows-mod-validation",
     "next_action": "Use the Surveyor archive installer with the mod archive downloaded for personal use, restart NMS, and verify same-system repeat derelict behavior.",
     "compatibility": "Mod source is 7.04; NMS 7.05 runtime not yet verified."
-  }
+  },
+  "candidate_version": "0.3.57"
 }

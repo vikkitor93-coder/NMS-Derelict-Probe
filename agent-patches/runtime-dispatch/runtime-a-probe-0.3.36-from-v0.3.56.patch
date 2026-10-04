@@ -1,0 +1,288 @@
+--- a/mod/derelict_baseline_probe.py
++++ b/mod/derelict_baseline_probe.py
+@@ -33,7 +33,7 @@
+ from nmspy.decorators import main_loop
+ from nmspy.engine import GetNodeAbsoluteTransMatrix
+ 
+-PROBE_VERSION = "0.3.35"
++PROBE_VERSION = "0.3.36"
+ SCHEMA_VERSION = 1
+ ABANDONED_FREIGHTER_LOCATION_VALUE = 0xB
+ ABANDONED_FREIGHTER_POI_TYPE_VALUE = 0x6
+@@ -261,8 +261,13 @@
+         }
+ 
+ 
+-def _owner_plus_0x10_capture(owner_pointer: int) -> dict[str, Any]:
+-    """Read owner+0x10 once at the exact descriptor-correlated root event."""
++def _owner_plus_0x10_capture(
++    owner_pointer: int,
++    phase: str,
++    *,
++    resolve_identity: bool = True,
++) -> dict[str, Any]:
++    """Read owner+0x10 at a named phase of exact root-call correlation."""
+     owner = int(owner_pointer)
+     slot_address = owner + 0x10
+     raw = _read_process_bytes(slot_address, 8)
+@@ -270,6 +275,8 @@
+         "owner_pointer_hex": f"{owner:016X}",
+         "slot_offset_hex": "00000010",
+         "slot_address_hex": f"{slot_address:016X}",
++        "capture_phase": phase,
++        "capture_utc": _utc_now(),
+         "read_status": "captured" if raw is not None and len(raw) == 8 else "unreadable",
+         "raw_bytes_hex": (raw.hex().upper() if raw is not None else None),
+         "slot_value_hex": None,
+@@ -279,7 +286,8 @@
+         return result
+     value = int.from_bytes(raw, "little", signed=False)
+     result["slot_value_hex"] = f"{value:016X}"
+-    result["target_identity"] = _loaded_module_identity(value)
++    if resolve_identity:
++        result["target_identity"] = _loaded_module_identity(value)
+     return result
+ 
+ 
+@@ -2092,12 +2100,19 @@
+                 self._logical_entry_tls.stack = stack
+             if caller_offset == CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA and stack:
+                 external_origin = int(stack[-1].get("external_origin_caller_offset") or 0)
++                external_owner_pointer_hex = stack[-1].get("external_owner_pointer_hex")
++                external_slot_capture = stack[-1].get("external_owner_plus_0x10_capture")
+             else:
+                 external_origin = caller_offset
+-            stack.append({
++                external_owner_pointer_hex = None
++                external_slot_capture = None
++            frame = {
+                 "caller_offset": caller_offset,
+                 "external_origin_caller_offset": external_origin,
+-            })
++                "external_owner_pointer_hex": external_owner_pointer_hex,
++                "external_owner_plus_0x10_capture": external_slot_capture,
++            }
++            stack.append(frame)
+ 
+             caller_hex = f"{caller_offset:08X}" if caller_offset else ""
+             if caller_hex:
+@@ -2113,6 +2128,15 @@
+             primary_hex = str(seed.get("primary_seed_hex") or "").upper()
+             if primary_hex in {"", "0000000000000000", "FFFFFFFFFFFFFFFF"}:
+                 return
++            if caller_offset != CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA:
++                # At the callee entry the indirect call has just happened, before
++                # later root-resource work can clear or repurpose this slot.
++                frame["external_owner_pointer_hex"] = f"{owner_pointer:016X}"
++                frame["external_owner_plus_0x10_capture"] = _owner_plus_0x10_capture(
++                    owner_pointer,
++                    phase="logical-entry-after-external-call",
++                    resolve_identity=False,
++                )
+             self._remember_logical_entry_event({
+                 "utc": _utc_now(),
+                 "context_pointer_hex": (f"{_raw_u64_bits(context):016X}" if _raw_u64_bits(context) is not None else None),
+@@ -2124,6 +2148,8 @@
+                 "caller_return_offset_hex": (f"{caller_offset:08X}" if caller_offset else None),
+                 "external_origin_caller_return_offset_hex": (f"{external_origin:08X}" if external_origin else None),
+                 "recursion_depth": max(0, len(stack) - 1),
++                "external_owner_pointer_hex": frame.get("external_owner_pointer_hex"),
++                "external_owner_plus_0x10_capture_at_entry": frame.get("external_owner_plus_0x10_capture"),
+             })
+         except Exception as exc:
+             self._write_log("trace_logical_entry_error", {"error": repr(exc)})
+@@ -2514,8 +2540,33 @@
+                         owner_pointer = int(owner_hex, 16)
+                     except ValueError:
+                         owner_pointer = 0
+-                    if owner_pointer > 0x10000:
+-                        exact_external["owner_plus_0x10_capture"] = _owner_plus_0x10_capture(owner_pointer)
++                    external_owner_hex = str(exact_external.get("external_owner_pointer_hex") or "")
++                    try:
++                        external_owner_pointer = int(external_owner_hex, 16)
++                    except ValueError:
++                        external_owner_pointer = 0
++                    if external_owner_pointer > 0x10000:
++                        exact_external["owner_plus_0x10_capture_at_root_add"] = _owner_plus_0x10_capture(
++                            external_owner_pointer,
++                            phase="root-resource-add",
++                        )
++                    if owner_pointer > 0x10000 and owner_pointer != external_owner_pointer:
++                        exact_external["matched_descriptor_owner_plus_0x10_capture_at_root_add"] = _owner_plus_0x10_capture(
++                            owner_pointer,
++                            phase="root-resource-add-descriptor-owner",
++                        )
++                    entry_capture = exact_external.get("external_owner_plus_0x10_capture_at_entry")
++                    if isinstance(entry_capture, dict):
++                        entry_capture = dict(entry_capture)
++                        entry_value = entry_capture.get("slot_value_hex")
++                        if entry_capture.get("read_status") == "captured" and entry_value:
++                            try:
++                                entry_capture["target_identity"] = _loaded_module_identity(int(str(entry_value), 16))
++                            except ValueError:
++                                entry_capture["target_identity"] = {"status": "invalid-address", "address_hex": str(entry_value)}
++                    exact_external["owner_plus_0x10_capture"] = entry_capture
++                    exact_external["owner_plus_0x10_capture_at_entry"] = entry_capture
++                    event["owner_plus_0x10_capture"] = entry_capture
+                     event["logical_entry_exact_external_match"] = exact_external
+                     event["owner_plus_0x10_capture"] = exact_external.get("owner_plus_0x10_capture")
+                     exact_offset = (
+--- a/tests/test_tools.py
++++ b/tests/test_tools.py
+@@ -687,12 +687,19 @@
+         self.assertIn("POI-UA",view["generation"])
+         self.assertIn("00001A0004E84EFD",view["generation"])
+ 
+-    def test_v0334_runtime_probe_captures_owner_slot_after_exact_root_match(self):
++    def test_v0336_runtime_probe_captures_owner_slot_at_entry_before_root_add(self):
+         probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+-        self.assertIn('PROBE_VERSION = "0.3.35"', probe)
++        self.assertIn('PROBE_VERSION = "0.3.36"', probe)
+         exact=probe.index('exact_external = self._logical_entry_external_match_for_descriptor(descriptor_ptr)')
+-        capture=probe.index('exact_external["owner_plus_0x10_capture"] = _owner_plus_0x10_capture(owner_pointer)', exact)
+-        self.assertGreater(capture, exact)
++        entry_capture=probe.index('phase="logical-entry-after-external-call"')
++        root_add_capture=probe.index('phase="root-resource-add"', exact)
++        self.assertLess(probe.index('def _trace_resource_descriptor_walk_entry'), entry_capture)
++        self.assertLess(entry_capture, root_add_capture)
++        self.assertIn('"capture_phase": phase', probe)
++        self.assertIn('"capture_utc": _utc_now()', probe)
++        self.assertIn('"external_owner_plus_0x10_capture_at_entry": frame.get("external_owner_plus_0x10_capture")', probe)
++        self.assertIn('exact_external["owner_plus_0x10_capture_at_root_add"]', probe)
++        self.assertIn('exact_external["owner_plus_0x10_capture_at_entry"] = entry_capture', probe)
+         self.assertIn('"root_dispatch_capture": self._root_dispatch_capture_payload()', probe)
+         self.assertIn('"last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture', probe)
+         self.assertIn('kernel32.ReadProcessMemory(', probe)
+@@ -1120,7 +1127,7 @@
+ 
+ 
+     def test_v0322_version_marker(self):
+-        self.assertEqual("0.3.56", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
++        self.assertEqual("0.3.57", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+ 
+     def test_v0322_probe_exposes_background_research_buttons(self):
+         source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+@@ -1352,7 +1359,7 @@
+         self.assertNotIn("Test-Runtime", start_nms)
+         self.assertNotIn("Python.Python.3.12", start_nms)
+         self.assertNotIn("import pymhf; import nmspy", start_nms)
+-        self.assertIn('CONTROLLER_VERSION = "0.3.56"', controller)
++        self.assertIn('CONTROLLER_VERSION = "0.3.57"', controller)
+         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
+ 
+ 
+@@ -1406,7 +1413,7 @@
+             self.assertIn(token, probe)
+ 
+     def test_v0330_version(self):
+-        self.assertEqual("0.3.56", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
++        self.assertEqual("0.3.57", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
+ 
+     def test_v0328_seed_function_relrefs_classify_recursion(self):
+--- a/tools/surveyor_controller.py
++++ b/tools/surveyor_controller.py
+@@ -33,7 +33,7 @@
+     import agent_console
+     import agent_ui_extensions
+ 
+-CONTROLLER_VERSION = "0.3.56"
++CONTROLLER_VERSION = "0.3.57"
+ AGENT_REFRESH_INTERVALS_MS = {
+     "20 seconds": 20_000,
+     "1 minute": 60_000,
+--- a/VERSION.txt
++++ b/VERSION.txt
+@@ -1 +1 @@
+-0.3.56
++0.3.57
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -530,6 +530,12 @@
+ - `Prepare-Crate-Assets.cmd` now also extracts `BASEBUILDINGOBJECTSTABLE.MBIN`, `BASEBUILDINGPARTSTABLE.MBIN`, and `FREIGHTERDUNGEONSTABLE.MBIN`, then emits `crate-target-discovery.json`.
+ - Adds a permanent v0.3.6 research fixture recording that 126/126 used dungeon scene instances resolved, but the static index predicted 0 Salvage Crates + 19 Crew Footlockers. The 19 result is explicitly diagnostic, not accepted as the true target total.
+ - Regression suite expanded to cover entity-reference discovery and the v0.3.6 salvage-gap failure mode.
++# 0.3.57 — logical-entry dispatch capture
++
++- Bump Runtime-A to probe 0.3.36 and sample owner+0x10 at the shared logical-entry hook before later root-resource processing.
++- Preserve the entry sample across recursive calls and retain the separate root-add sample with phase/timestamp labels. Resolve target identity for the entry-time value.
++- This records timing evidence only; it does not establish the slot's semantic type or live-call register provenance.
++
+ # 0.3.56 — optional automatic evidence uploads
+ 
+ - Add a persistent main-window toggle for automatic root-capture and shared all-lanes evidence uploads.
+--- a/README.md
++++ b/README.md
+@@ -3,7 +3,13 @@
+ > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
+ 
+ 
+-Current Surveyor package: **v0.3.56**. Runtime-A probe: **0.3.35**.
++Current Surveyor package: **v0.3.57**. Runtime-A probe: **0.3.36**.
++
++## v0.3.57 — logical-entry dispatch capture
++
++- Sample owner+0x10 at the read-only shared logical-entry hook after the external dispatch call, and carry the capture through recursive entries.
++- Keep a separate root-resource-add sample to show whether the slot changed before the later scene event. Store phase and timestamp for each sample; resolve target module identity from the entry-time value.
++- This improves capture timing; it does not establish the slot value's semantic type or prove that the owner is the exact dispatch object.
+ 
+ ## v0.3.56 — optional automatic evidence uploads
+ 
+--- a/AI_HANDOFF.md
++++ b/AI_HANDOFF.md
+@@ -6,7 +6,8 @@
+ - **Upload all saved evidence** snapshots every existing research output declared by `ACTION_OUTPUTS` into one deduplicated `research-uploads/<timestamp>-all-saved-evidence-<id>/` folder on `main`. Its manifest lists which actions produced each file and marks it visible to all four lanes. The Surveyor writes a receipt to each lane card after success. This is a shared repository upload, not an automatic agent notification or a write to their status branches.
+ - Overlapping local `*-latest` outputs: `generation-baseline-latest.json` (measure/analyze-generation), `generation-measurements-summary.json` and `generation-measurements.csv` (measure/compare-measurements), `seed-room-correlation.json` (measure/analyze-correlation), and `exact-root-caller-latest.json` (analyze-generation/Runtime-A upload). Local latest files are replaced by a producer rerun; GitHub uploads are timestamped snapshots.
+ - Runtime-A can now upload its already-persisted root event after closing NMS via **Upload captured root event**; this panel action needs only the saved capture and an idle Surveyor workflow.
+-- Current source package: **v0.3.56**. Runtime-A probe is **0.3.35**; it captures owner+0x10 at the exact descriptor-correlated dungeon root event and atomically saves the full root event plus runtime metadata/universe address when available in `exact-root-caller-latest.json`. Upload all saved evidence includes this file. If the address is unavailable at root-load time, null/error metadata is saved rather than silently omitted. Capture still requires NMS running while the event occurs; upload/analysis can happen after quitting. Surveyor’s app updater stages the probe into the installed MODS folder; fully restart NMS after installing the app update.
++- Current source package: **v0.3.57**. Runtime-A probe is **0.3.36**; it samples owner+0x10 at the shared logical-entry hook after the external dispatch call, preserves the value through recursive entries, and separately records the later root-resource-add sample. Each sample has a phase and timestamp. Target module identity is resolved from the entry-time raw value when the exact root event is correlated. Live Windows/NMS verification is still required; no semantic meaning is claimed from the address alone.
++- Runtime-A current evidence remains `research-uploads/20261004T101244Z-all-saved-evidence-2a766630/`: the delayed owner+0x10 read was zero 1.383 ms after the matched logical-entry record. New main package v0.3.56 still performs the slot read only at root addition; v0.3.57 candidate moves the sample to logical entry. Root seed `5B4AE67D9C2A8F61` remains unverified.
+ - Surveyor does not redistribute DerelictFreighterFarming files. Download your own archive and use **Install Derelict Farming archive** in the GitHub / updates section. The installer accepts only three expected EXML files, validates their XML, stages them under `GAMEDATA/MODS/DerelictFreighterFarming`, and preserves conflicts. Roll back with `python tools/github_integration.py rollback-derelict-farming`. The supplied archive targets 7.04; NMS 7.05 behavior is not yet validated.
+ - Agent Console has four side-by-side lane cards. The fixed **NEEDED** box shows the published request, actual extension action, exact required prerequisite keys, and which prerequisites are currently missing. It does not contain generic step guidance. The actual host key is `probe.connected` (fresh probe heartbeat), not `probe.running`; the v1 extension contract is unchanged.
+ - Installed/published/reported versions remain immediately under NEEDED. Each evidence receipt checkbox stays fixed below its lane buttons.
+--- a/WORKSPACE_STATE.json
++++ b/WORKSPACE_STATE.json
+@@ -1,15 +1,15 @@
+ {
+   "schema_version": 3,
+-  "updated_utc": "2026-10-04T10:30:00Z",
++  "updated_utc": "2026-10-04T16:36:00Z",
+   "integration": {
+     "branch": "main",
+-    "canonical_version": "0.3.53",
++    "canonical_version": "0.3.56",
+     "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
+     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
+-    "candidate_version": "0.3.56",
+-    "candidate_branch": "codex/upload-all-evidence-0.3.53",
+-    "candidate_base": "main@f1052e2bae98df16baf365934e821fdc9e5232cd",
+-    "candidate_status": "locally-tested-source-package; not published to GitHub"
++    "candidate_version": "0.3.57",
++    "candidate_branch": "agent/runtime-dispatch-entry-capture-v0.3.57",
++    "candidate_base": "main@v0.3.56",
++    "candidate_status": "candidate-built-pending-publication-and-live-validation"
+   },
+   "lane_claims": {
+     "runtime-dispatch": "claimed",
+@@ -20,11 +20,11 @@
+   "lanes": {
+     "runtime-dispatch": {
+       "branch": "agent/runtime-dispatch",
+-      "status": "build-ready-awaiting-live-validation",
++      "status": "entry-time capture candidate based on v0.3.56; live verification pending",
+       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
+       "pull_request": 1,
+       "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
+-      "next_action": "Run RUNTIME-A on the known derelict until owner+0x10 dispatch capture succeeds; no traversal required."
++      "next_action": "Publish and validate v0.3.57 candidate; review one uploaded exact-root event for entry-time slot and target identity separately from root-add sample."
+     },
+     "seed-lineage": {
+       "branch": "agent/seed-lineage",
+@@ -87,5 +87,6 @@
+     "status": "release-candidate-pending-windows-mod-validation",
+     "next_action": "Use the Surveyor archive installer with the mod archive downloaded for personal use, restart NMS, and verify same-system repeat derelict behavior.",
+     "compatibility": "Mod source is 7.04; NMS 7.05 runtime not yet verified."
+-  }
++  },
++  "candidate_version": "0.3.57"
+ }

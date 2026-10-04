@@ -3,7 +3,13 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.56**. Runtime-A probe: **0.3.35**.
+Current Surveyor package: **v0.3.57**. Runtime-A probe: **0.3.36**.
+
+## v0.3.57 — logical-entry dispatch capture
+
+- Sample owner+0x10 at the read-only shared logical-entry hook after the external dispatch call, and carry the capture through recursive entries.
+- Keep a separate root-resource-add sample to show whether the slot changed before the later scene event. Store phase and timestamp for each sample; resolve target module identity from the entry-time value.
+- This improves capture timing; it does not establish the slot value's semantic type or prove that the owner is the exact dispatch object.
 
 ## v0.3.56 — optional automatic evidence uploads
 
