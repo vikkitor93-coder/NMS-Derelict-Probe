@@ -530,11 +530,10 @@
 - `Prepare-Crate-Assets.cmd` now also extracts `BASEBUILDINGOBJECTSTABLE.MBIN`, `BASEBUILDINGPARTSTABLE.MBIN`, and `FREIGHTERDUNGEONSTABLE.MBIN`, then emits `crate-target-discovery.json`.
 - Adds a permanent v0.3.6 research fixture recording that 126/126 used dungeon scene instances resolved, but the static index predicted 0 Salvage Crates + 19 Crew Footlockers. The 19 result is explicitly diagnostic, not accepted as the true target total.
 - Regression suite expanded to cover entity-reference discovery and the v0.3.6 salvage-gap failure mode.
-# 0.3.57 — logical-entry dispatch capture
+# 0.3.57 — fix startup layout conflict
 
-- Bump Runtime-A to probe 0.3.36 and sample owner+0x10 at the shared logical-entry hook before later root-resource processing.
-- Preserve the entry sample across recursive calls and retain the separate root-add sample with phase/timestamp labels. Resolve target identity for the entry-time value.
-- This records timing evidence only; it does not establish the slot's semantic type or live-call register provenance.
+- Put GitHub update buttons in their own child frame, avoiding the Tk `pack`/`grid` parent conflict that prevented Surveyor from starting.
+- Preserve the v0.3.56 automatic evidence upload controls.
 
 # 0.3.56 — optional automatic evidence uploads
 
