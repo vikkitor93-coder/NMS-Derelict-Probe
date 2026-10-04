@@ -60,6 +60,33 @@ class RuntimeTargetFunctionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "invalid range"):
                 target_tool.extract_target_function(self.evidence, self.exe)
 
+    def test_direct_call_scan_exports_pdata_bounded_candidate_body(self):
+        raw = b"\xE8\xFB\x0F\x00\x00"
+        section = {
+            "name": ".text", "virtual_address": 0x2000, "virtual_size": 0x100,
+            "raw_size": 0x100, "raw_offset": 0x400, "characteristics": 0x60000020,
+        }
+        helper_range = dict(self.pdata, begin_rva_hex="00002000", end_rva_exclusive_hex="00002004")
+        with patch.object(target_tool.analysis, "find_runtime_function", return_value=helper_range), \
+             patch.object(target_tool.analysis, "_read_rva", return_value=b"\xC3\x90\x90\x90"):
+            candidates = target_tool.extract_direct_call_candidates(raw, 0x1000, self.exe, [section])
+
+        self.assertEqual(len(candidates), 1)
+        self.assertEqual(candidates[0]["instruction_rva_hex"], "00001000")
+        self.assertEqual(candidates[0]["target_rva_hex"], "00002000")
+        self.assertFalse(candidates[0]["instruction_boundary_verified"])
+        self.assertEqual(candidates[0]["target_function_body"]["bytes_hex"], "C3909090")
+
+    def test_direct_call_scan_omits_nonexecutable_or_unbounded_targets(self):
+        raw = b"\xE8\xFB\x0F\x00\x00"
+        section = {
+            "name": ".text", "virtual_address": 0x2000, "virtual_size": 0x100,
+            "raw_size": 0x100, "raw_offset": 0x400, "characteristics": 0x40000040,
+        }
+        with patch.object(target_tool.analysis, "find_runtime_function", return_value=None):
+            candidates = target_tool.extract_direct_call_candidates(raw, 0x1000, self.exe, [section])
+        self.assertEqual(candidates, [])
+
     def test_run_preserves_supported_caller_artifact_fields(self):
         evidence_path = Path(self.temp.name) / "exact-root-caller-latest.json"
         output_path = Path(self.temp.name) / "exact-root-caller-code-latest.json"
