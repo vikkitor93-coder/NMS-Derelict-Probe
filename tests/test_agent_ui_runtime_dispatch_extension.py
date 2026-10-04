@@ -116,6 +116,31 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
         self.assertIn("upload-runtime-capture", producers[exact_key])
         self.assertEqual(["exact-root-caller-latest.json"], [p.name for p in github_integration.ACTION_OUTPUTS["upload-runtime-capture"]])
 
+    def test_all_saved_evidence_fingerprint_tracks_contents_and_ignores_input_order(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            first = Path(tmp) / "first.json"
+            second = Path(tmp) / "second.json"
+            first.write_text("one", encoding="utf-8")
+            second.write_text("two", encoding="utf-8")
+            initial = github_integration._fingerprint_upload_files([first, second])
+            self.assertEqual(initial, github_integration._fingerprint_upload_files([second, first]))
+            second.write_text("changed", encoding="utf-8")
+            self.assertNotEqual(initial, github_integration._fingerprint_upload_files([first, second]))
+
+    def test_auto_upload_preference_defaults_on_and_can_be_disabled_persistently(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            setting = Path(tmp) / "auto-upload-settings.json"
+            with mock.patch.object(controller, "AUTO_UPLOAD_SETTINGS", setting):
+                self.assertTrue(controller._load_auto_upload_setting())
+                setting.write_text(json.dumps({"schema_version": 1, "enabled": False}), encoding="utf-8")
+                self.assertFalse(controller._load_auto_upload_setting())
+
+    def test_controller_exposes_and_checks_the_auto_upload_toggle(self):
+        source = (ROOT / "tools" / "surveyor_controller.py").read_text(encoding="utf-8")
+        self.assertIn('text="Automatically upload new probe captures and share updated evidence with all lanes"', source)
+        self.assertIn('if not self.auto_upload_enabled.get():', source)
+        self.assertIn('"--only-if-changed"', source)
+
     def test_action_preconditions_disable_until_workflow_nms_and_probe_are_ready(self):
         _manifest, panel = read_extension()
         preconditions = panel["actions"][0]["preconditions"]

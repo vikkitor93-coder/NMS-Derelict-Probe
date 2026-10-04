@@ -3,7 +3,23 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.53**. Runtime-A probe: **0.3.34**.
+Current Surveyor package: **v0.3.56**. Runtime-A probe: **0.3.35**.
+
+## v0.3.56 — optional automatic evidence uploads
+
+- Add a remembered **Automatically upload new probe captures and share updated evidence with all lanes** setting under GitHub / updates.
+- When enabled, newly persisted root events upload automatically; completed research and agent-lane actions also upload the changed, deduplicated all-lanes evidence bundle.
+- Keep lane-specific action uploads and the manual **Upload all saved evidence** button. The shared batch is skipped when its saved-file fingerprint is unchanged.
+
+## v0.3.54 — persist complete root capture
+- Runtime-A root capture now saves the full root event, runtime metadata, and universe address (when available) in `exact-root-caller-latest.json`, which is already included in Upload all saved evidence.
+- Capture runtime metadata before persisting the root event so the address is not added too late for the upload artifact.
+- No live-capture guarantee is made when the game cannot provide the address at root-load time; the saved record retains an explicit null/error in that case.
+
+## v0.3.54 — persist complete root capture
+- Runtime-A now atomically saves the complete root event, runtime metadata, universe address (when available), event timestamp, caller evidence, and the raw `owner+0x10` read in `exact-root-caller-latest.json`.
+- Metadata is captured before the exact-root file is written, so **Upload captured root event** and **Upload all saved evidence** carry the saved address and capture details after NMS closes.
+- If the game cannot provide the address at that event, the file records null/error metadata; this update cannot manufacture unavailable game data. NMS must still be running while the root event occurs.
 
 ## v0.3.53 — upload saved evidence together
 

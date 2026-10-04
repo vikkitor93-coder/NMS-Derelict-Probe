@@ -1,15 +1,15 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-03T21:53:23Z",
+  "updated_utc": "2026-10-04T10:30:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.53",
-    "current_objective": "Revalidate the unlocked 35-container S-class derelict on the current post-update game build; compare fresh physical counts/layout with historical evidence and capture Runtime-A owner+0x10 if available.",
+    "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.53",
+    "candidate_version": "0.3.56",
     "candidate_branch": "codex/upload-all-evidence-0.3.53",
     "candidate_base": "main@f1052e2bae98df16baf365934e821fdc9e5232cd",
-    "candidate_status": "release-ready-pending-pr"
+    "candidate_status": "locally-tested-source-package; not published to GitHub"
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
@@ -87,40 +87,5 @@
     "status": "release-candidate-pending-windows-mod-validation",
     "next_action": "Use the Surveyor archive installer with the mod archive downloaded for personal use, restart NMS, and verify same-system repeat derelict behavior.",
     "compatibility": "Mod source is 7.04; NMS 7.05 runtime not yet verified."
-  },
-  "latest_user_direction": {
-    "updated_utc": "2026-10-03T21:53:23Z",
-    "request": "The user reports they have restored access to the known 35-container S-class derelict with a mod. The recent game update changed the observed layout, so a fresh run is wanted; do not say the historical 35-container run needs no repeat.",
-    "historical_baseline": {
-      "universe_address_hex": "00001A0004E84EFD",
-      "class": "S",
-      "containers": "35 total: 31 Salvage + 4 Footlockers",
-      "rooms": "7 main + Room 0 dead-end",
-      "vertical_transitions": 2,
-      "shuttle_bay": 1,
-      "treatment": "Preserve as historical baseline; do not overwrite or relabel as current."
-    },
-    "post_update_observation": {
-      "preset": "MEDI_FLOATERS (high-confidence inference)",
-      "modeled_rooms": "8 main + 2 dead-end = 10",
-      "analyzer_predicted_targets": 16,
-      "verified_physical_container_count": false,
-      "table_rooms": 7,
-      "seed": "9256392A2F5A74AC (candidate/unverified)",
-      "treatment": "A discrepancy requiring fresh validation, not proof that the physical count is 16."
-    },
-    "shared_steps": [
-      "Run a fresh full survey of the same known system on the current game build and record physical layout/container count separately from analyzer predictions.",
-      "During that run, capture the exact root event and owner+0x10 value/target if the installed probe records it; only mark Runtime-A complete when saved evidence proves the slot and target.",
-      "After all required analysis workflows have produced their files, click the main Surveyor Upload all saved evidence button. It uploads each existing supported output once into a timestamped folder on main and its run manifest lists the files and lanes. Agents should fetch the relevant files from that shared folder, then publish their lane status referencing the folder; this button does not run analysis or send a live notification.",
-      "After quitting NMS, analyze the newly recorded latest session and upload the new outputs; preserve existing historical uploads."
-    ],
-    "lane_guidance": {
-      "runtime-dispatch": "Use offline Upload captured root event after NMS closes; confirm the fresh JSON contains owner+0x10 and target identity.",
-      "seed-lineage": "Compare new post-update evidence against 9256392A2F5A74AC, but do not claim a derivation without direct evidence.",
-      "dungeon-decompile": "Compare measured current physical rooms/counts with historical baseline and predicted 16-target model; continue consumer analysis when Runtime-A supplies a target.",
-      "metadata": "Run Prepare assets + upload if the fresh survey creates current asset evidence."
-    },
-    "caution": "The new 35-container traversal is now an intended research task. Prefer combining it with Runtime-A capture in one game session only if both evidence outputs are actually produced and verified."
   }
 }
