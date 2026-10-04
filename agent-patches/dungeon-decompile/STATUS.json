@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-04T16:06:00Z",
+  "reviewed_utc": "2026-10-04T19:40:00Z",
   "state": "new-system-identity-captured-layout-user-validated-dispatch-target-unresolved",
   "verified": {
     "historical_baseline": {
@@ -218,7 +218,10 @@
     "human_action_required": true,
     "full_traversal_required": false,
     "duplicate_upload_required": false,
-    "needed": "Continue static receiver provenance analysis in DUNGEON-C. To confirm the virtual target itself, Runtime-A must capture RCX, RDX and [RDX+0x10] at caller return RVA 02C0497A, plus resolved module/RVA; no full traversal is needed."
+    "needed": "Run the offline DUNGEON-C scan on the current local NMS.exe: (1) locate and run Scan-Dungeon-Decompile-Anchors.cmd from the DUNGEON-C package; (2) let it write dungeon-decompile-anchors-summary.json; (3) publish/upload that JSON to main (use Surveyor Upload all saved evidence if the scanner leaves it among Surveyor saved outputs); (4) tell me “check”. No game launch or derelict traversal is required. If the command reports a missing path or produces no summary, share that error instead.",
+    "expected_evidence_path_or_file": "dungeon-decompile-anchors-summary.json",
+    "game_runtime_required": false,
+    "success_condition": "Shared evidence contains the anchor scan summary produced from the current NMS.exe; DUNGEON-C can then compare validated function boundaries and caller provenance at 02C0497A."
   },
   "next_lane_owned_step": "Obtain a function-boundary-validated, wider offline code window around caller return RVA 02C0497A from the current NMS.exe and resolve the control-flow/receiver provenance around [RSI+0x110]. Compare that with the logical-entry call graph, keeping the collection/interface interpretation tentative. Runtime-A target capture remains the route to identifying [RDX+0x10]."
 }
