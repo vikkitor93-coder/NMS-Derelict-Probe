@@ -33,7 +33,7 @@ except ImportError:  # Running surveyor_controller.py directly from the tools fo
     import agent_console
     import agent_ui_extensions
 
-CONTROLLER_VERSION = "0.3.57"
+CONTROLLER_VERSION = "0.3.59"
 AGENT_REFRESH_INTERVALS_MS = {
     "20 seconds": 20_000,
     "1 minute": 60_000,
@@ -56,6 +56,8 @@ NMS_EXE_FILE = ROOT / "nms-executable.txt"
 COMMAND_FILE = ROOT / "controller-command.json"
 RUNTIME_CAPTURE_FILE = ROOT / "asset-work-v1" / "exact-root-caller-latest.json"
 RUNTIME_CAPTURE_UPLOAD_RECEIPT = ROOT / "runtime-capture-upload-receipt.json"
+ROOT_EVENT_UPLOAD_RECEIPT = ROOT / "root-event-upload-receipt.json"
+ROOT_EVENT_FILE = WORK / "root-event-latest.json"
 RUNTIME_CAPTURE_OUTBOX = ROOT / "runtime-capture-outbox"
 AUTO_UPLOAD_SETTINGS = ROOT / "auto-upload-settings.json"
 
@@ -226,6 +228,9 @@ class SurveyorController:
         self.runtime_capture_candidate_since = 0.0
         self.runtime_capture_retry_after = 0.0
         self.runtime_capture_last_uploaded = str(_read_json(RUNTIME_CAPTURE_UPLOAD_RECEIPT).get("sha256") or "")
+        self.root_event_candidate = ""
+        self.root_event_candidate_since = 0.0
+        self.root_event_last_uploaded = str(_read_json(ROOT_EVENT_UPLOAD_RECEIPT).get("sha256") or "")
         self.auto_upload_enabled = tk.BooleanVar(value=_load_auto_upload_setting())
         self.last_nms_running = False
         self.last_probe_connected = False
@@ -1713,6 +1718,7 @@ class SurveyorController:
         snapshot = _runtime_capture_snapshot()
         if snapshot is None:
             self.runtime_capture_candidate = ""
+            self._maybe_auto_upload_root_event()
             return
         fingerprint, raw = snapshot
         if fingerprint == self.runtime_capture_last_uploaded:
@@ -1761,6 +1767,57 @@ class SurveyorController:
             upload_action="upload-runtime-capture",
             on_complete=lambda code, key=fingerprint: self._finish_runtime_capture_auto_upload(key, code),
         )
+
+    def _maybe_auto_upload_root_event(self) -> None:
+        """Share a durable root event even when exact-caller / +0x10 is pending."""
+        try:
+            raw = ROOT_EVENT_FILE.read_bytes()
+            value = json.loads(raw.decode("utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            self.root_event_candidate = ""
+            return
+        if not isinstance(value, dict) or value.get("schema_version") != 1:
+            return
+        fingerprint = hashlib.sha256(raw).hexdigest()
+        if fingerprint == self.root_event_last_uploaded:
+            self.root_event_candidate = ""
+            return
+        if fingerprint != self.root_event_candidate:
+            self.root_event_candidate = fingerprint
+            self.root_event_candidate_since = time.monotonic()
+            return
+        if (time.monotonic() - self.root_event_candidate_since < 2.0
+                or time.monotonic() < self.runtime_capture_retry_after
+                or self.workflow_running or self.runtime_capture_upload_inflight):
+            return
+        helper = self.project_root / "tools" / "github_integration.py"
+        command = [self.python_exe, str(helper), "upload", "--action", "all-saved-evidence", "--only-if-changed"]
+        self.runtime_capture_upload_inflight = fingerprint
+        _log("root_event_auto_upload_started", sha256=fingerprint)
+        self._run_steps(
+            "Auto-upload saved root recovery evidence",
+            [("Share saved run evidence with all lanes", command)],
+            upload_action="all-saved-evidence",
+            on_complete=lambda code, key=fingerprint: self._finish_root_event_auto_upload(key, code),
+        )
+
+    def _finish_root_event_auto_upload(self, fingerprint: str, returncode: int) -> None:
+        self.runtime_capture_upload_inflight = ""
+        if returncode != 0:
+            self.runtime_capture_retry_after = time.monotonic() + 60.0
+            _log("root_event_auto_upload_failed", sha256=fingerprint, returncode=returncode)
+            return
+        payload = {"schema_version": 1, "sha256": fingerprint, "uploaded_utc": _utc(), "automatic": True}
+        try:
+            temp_path = ROOT_EVENT_UPLOAD_RECEIPT.with_suffix(".json.tmp")
+            temp_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+            os.replace(temp_path, ROOT_EVENT_UPLOAD_RECEIPT)
+            self.root_event_last_uploaded = fingerprint
+            self.root_event_candidate = ""
+            self.runtime_capture_retry_after = 0.0
+            _log("root_event_auto_upload_complete", sha256=fingerprint)
+        except OSError as exc:
+            _log("root_event_upload_receipt_failed", sha256=fingerprint, error=repr(exc))
 
     def _finish_runtime_capture_auto_upload(self, fingerprint: str, returncode: int, automatic: bool = True) -> None:
         self.runtime_capture_upload_inflight = ""
