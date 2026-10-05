@@ -38,16 +38,18 @@
   "rollback": "The standalone research ZIP does not install or modify the game or canonical Surveyor package; discard the extracted folder to roll it back.",
   "launcher": {
     "python_resolution_order": [
-      "Surveyor python-executable.txt",
-      "py -3",
+      "py -3.13",
+      "py -3.12",
       "python.exe on PATH"
     ],
-    "path_diagnostics": "Launcher validates project folder and interpreter; unusable saved path is silent if fallback succeeds and included in the error if no runtime is available."
+    "path_diagnostics": "Does not read Surveyor's saved Python path and does not change the working directory. Checks the extractor path first; reports the missing complete-package dependency requirement."
   },
   "latest_direct_evidence": {
     "file": "exact-root-caller-code-latest(2).json",
     "sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
-    "uploaded_to_shared_folder": false,
-    "body_sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5"
+    "uploaded_to_shared_folder": true,
+    "body_sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5",
+    "shared_path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/exact-root-caller-code-latest.json",
+    "note": "Identical SHA-256 code window in the newest all-saved-evidence snapshot; contains the 0.3.38 bounded target body but no 0.3.39 helper candidates/bodies."
   }
 }
