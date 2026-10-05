@@ -3,7 +3,7 @@
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
   "reviewed_utc": "2026-10-05T01:55:00Z",
-  "state": "callback-direct-call-inventory-reviewed-awaiting-helper-bodies",
+  "state": "helper-export-ready-awaiting-local-offline-run",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
