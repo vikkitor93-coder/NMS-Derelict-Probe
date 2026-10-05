@@ -33,7 +33,7 @@ except ImportError:  # Running surveyor_controller.py directly from the tools fo
     import agent_console
     import agent_ui_extensions
 
-CONTROLLER_VERSION = "0.3.59"
+CONTROLLER_VERSION = "0.3.60"
 AGENT_REFRESH_INTERVALS_MS = {
     "20 seconds": 20_000,
     "1 minute": 60_000,
@@ -60,6 +60,7 @@ ROOT_EVENT_UPLOAD_RECEIPT = ROOT / "root-event-upload-receipt.json"
 ROOT_EVENT_FILE = WORK / "root-event-latest.json"
 RUNTIME_CAPTURE_OUTBOX = ROOT / "runtime-capture-outbox"
 AUTO_UPLOAD_SETTINGS = ROOT / "auto-upload-settings.json"
+AUTO_EVIDENCE_UPLOAD_INTERVAL_SECONDS = 30.0
 
 
 def _load_auto_upload_setting() -> bool:
@@ -230,7 +231,10 @@ class SurveyorController:
         self.runtime_capture_last_uploaded = str(_read_json(RUNTIME_CAPTURE_UPLOAD_RECEIPT).get("sha256") or "")
         self.root_event_candidate = ""
         self.root_event_candidate_since = 0.0
-        self.root_event_last_uploaded = str(_read_json(ROOT_EVENT_UPLOAD_RECEIPT).get("sha256") or "")
+        root_receipt = _read_json(ROOT_EVENT_UPLOAD_RECEIPT)
+        self.root_event_last_uploaded = str(root_receipt.get("root_sha256") or root_receipt.get("sha256") or "")
+        self.recovery_signature_last_uploaded = str(root_receipt.get("signature") or "")
+        self.recovery_evidence_last_upload = 0.0
         self.auto_upload_enabled = tk.BooleanVar(value=_load_auto_upload_setting())
         self.last_nms_running = False
         self.last_probe_connected = False
@@ -1723,6 +1727,7 @@ class SurveyorController:
         fingerprint, raw = snapshot
         if fingerprint == self.runtime_capture_last_uploaded:
             self.runtime_capture_candidate = ""
+            self._maybe_auto_upload_root_event()
             return
         if fingerprint != self.runtime_capture_candidate:
             self.runtime_capture_candidate = fingerprint
@@ -1769,55 +1774,75 @@ class SurveyorController:
         )
 
     def _maybe_auto_upload_root_event(self) -> None:
-        """Share a durable root event even when exact-caller / +0x10 is pending."""
+        """Share pending root evidence and batch ongoing journal growth safely."""
         try:
             raw = ROOT_EVENT_FILE.read_bytes()
-            value = json.loads(raw.decode("utf-8"))
+            root_doc = json.loads(raw.decode("utf-8"))
+            if not isinstance(root_doc, dict) or root_doc.get("schema_version") != 1:
+                raw = b""
         except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            raw = b""
+        root_sha = hashlib.sha256(raw).hexdigest() if raw else ""
+        journals = sorted(ROOT.glob("capture-journal-*.jsonl"), key=lambda path: path.stat().st_mtime_ns)
+        latest_journal = journals[-1] if journals else None
+        if not root_sha and latest_journal is None:
+            return
+        signature_hash = hashlib.sha256()
+        signature_hash.update(root_sha.encode("ascii"))
+        for path in journals:
+            try:
+                stat = path.stat()
+            except OSError:
+                continue
+            signature_hash.update(f"{path.name}:{stat.st_size}:{stat.st_mtime_ns}".encode("utf-8"))
+        signature = signature_hash.hexdigest()
+        if signature == self.recovery_signature_last_uploaded:
             self.root_event_candidate = ""
             return
-        if not isinstance(value, dict) or value.get("schema_version") != 1:
-            return
-        fingerprint = hashlib.sha256(raw).hexdigest()
-        if fingerprint == self.root_event_last_uploaded:
-            self.root_event_candidate = ""
-            return
-        if fingerprint != self.root_event_candidate:
-            self.root_event_candidate = fingerprint
+        if signature != self.root_event_candidate:
+            self.root_event_candidate = signature
             self.root_event_candidate_since = time.monotonic()
+        now = time.monotonic()
+        new_root = bool(root_sha and root_sha != self.root_event_last_uploaded)
+        settled = now - self.root_event_candidate_since >= 2.0
+        periodic_due = (self.recovery_evidence_last_upload == 0.0 or
+                        now - self.recovery_evidence_last_upload >= AUTO_EVIDENCE_UPLOAD_INTERVAL_SECONDS)
+        if not settled or (not new_root and not periodic_due):
             return
-        if (time.monotonic() - self.root_event_candidate_since < 2.0
-                or time.monotonic() < self.runtime_capture_retry_after
-                or self.workflow_running or self.runtime_capture_upload_inflight):
+        if (now < self.runtime_capture_retry_after or self.workflow_running or
+                self.runtime_capture_upload_inflight):
             return
         helper = self.project_root / "tools" / "github_integration.py"
         command = [self.python_exe, str(helper), "upload", "--action", "all-saved-evidence", "--only-if-changed"]
-        self.runtime_capture_upload_inflight = fingerprint
-        _log("root_event_auto_upload_started", sha256=fingerprint)
+        self.runtime_capture_upload_inflight = signature
+        _log("recovery_evidence_auto_upload_started", signature=signature, root_sha256=root_sha)
         self._run_steps(
-            "Auto-upload saved root recovery evidence",
+            "Auto-upload saved recovery evidence",
             [("Share saved run evidence with all lanes", command)],
             upload_action="all-saved-evidence",
-            on_complete=lambda code, key=fingerprint: self._finish_root_event_auto_upload(key, code),
+            on_complete=lambda code, key=signature, root=root_sha: self._finish_root_event_auto_upload(key, root, code),
         )
 
-    def _finish_root_event_auto_upload(self, fingerprint: str, returncode: int) -> None:
+    def _finish_root_event_auto_upload(self, signature: str, root_sha: str, returncode: int) -> None:
         self.runtime_capture_upload_inflight = ""
         if returncode != 0:
             self.runtime_capture_retry_after = time.monotonic() + 60.0
-            _log("root_event_auto_upload_failed", sha256=fingerprint, returncode=returncode)
+            _log("recovery_evidence_auto_upload_failed", signature=signature, returncode=returncode)
             return
-        payload = {"schema_version": 1, "sha256": fingerprint, "uploaded_utc": _utc(), "automatic": True}
+        payload = {"schema_version": 1, "signature": signature, "root_sha256": root_sha,
+                   "uploaded_utc": _utc(), "automatic": True}
         try:
             temp_path = ROOT_EVENT_UPLOAD_RECEIPT.with_suffix(".json.tmp")
             temp_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
             os.replace(temp_path, ROOT_EVENT_UPLOAD_RECEIPT)
-            self.root_event_last_uploaded = fingerprint
+            self.root_event_last_uploaded = root_sha
+            self.recovery_signature_last_uploaded = signature
+            self.recovery_evidence_last_upload = time.monotonic()
             self.root_event_candidate = ""
             self.runtime_capture_retry_after = 0.0
-            _log("root_event_auto_upload_complete", sha256=fingerprint)
+            _log("recovery_evidence_auto_upload_complete", signature=signature, root_sha256=root_sha)
         except OSError as exc:
-            _log("root_event_upload_receipt_failed", sha256=fingerprint, error=repr(exc))
+            _log("recovery_evidence_upload_receipt_failed", signature=signature, error=repr(exc))
 
     def _finish_runtime_capture_auto_upload(self, fingerprint: str, returncode: int, automatic: bool = True) -> None:
         self.runtime_capture_upload_inflight = ""
