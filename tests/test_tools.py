@@ -32,6 +32,7 @@ caller_extract = load_module("extract_nms_caller_code", ROOT / "tools" / "extrac
 upstream_extract = load_module("extract_nms_upstream_callers", ROOT / "tools" / "extract_nms_upstream_callers.py")
 exact_root_extract = load_module("extract_exact_root_caller_code", ROOT / "tools" / "extract_exact_root_caller_code.py")
 seed_function = load_module("analyze_nms_seed_function", ROOT / "tools" / "analyze_nms_seed_function.py")
+github_integration = load_module("github_integration_recovery_test", ROOT / "tools" / "github_integration.py")
 
 
 class ToolTests(unittest.TestCase):
@@ -687,17 +688,31 @@ class ToolTests(unittest.TestCase):
         self.assertIn("POI-UA",view["generation"])
         self.assertIn("00001A0004E84EFD",view["generation"])
 
-    def test_v0334_runtime_probe_captures_owner_slot_after_exact_root_match(self):
+    def test_v0337_runtime_probe_captures_all_call_registers_at_shared_entry(self):
         probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
-        self.assertIn('PROBE_VERSION = "0.3.35"', probe)
+        self.assertIn('PROBE_VERSION = "0.3.38"', probe)
         exact=probe.index('exact_external = self._logical_entry_external_match_for_descriptor(descriptor_ptr)')
-        capture=probe.index('exact_external["owner_plus_0x10_capture"] = _owner_plus_0x10_capture(owner_pointer)', exact)
-        self.assertGreater(capture, exact)
+        entry_capture=probe.index('phase="logical-entry-after-external-call"')
+        root_add_capture=probe.index('phase="root-resource-add"', exact)
+        self.assertLess(probe.index('def _trace_resource_descriptor_walk_entry'), entry_capture)
+        self.assertLess(entry_capture, root_add_capture)
+        self.assertIn('"capture_phase": phase', probe)
+        self.assertIn('"capture_utc": _utc_now()', probe)
+        self.assertIn('"external_owner_plus_0x10_capture_at_entry": frame.get("external_owner_plus_0x10_capture")', probe)
+        self.assertIn('exact_external["owner_plus_0x10_capture_at_root_add"]', probe)
+        self.assertIn('exact_external["owner_plus_0x10_capture_at_entry"] = entry_capture', probe)
+        self.assertIn('"external_call_register_snapshot_at_entry": frame.get("external_call_register_snapshot")', probe)
+        self.assertIn('"rcx_hex":', probe)
+        self.assertIn('"rdx_hex": f"{owner_pointer:016X}"', probe)
+        self.assertIn('"rdx_plus_0x10_capture": frame["external_owner_plus_0x10_capture"]', probe)
+        self.assertIn('"external_call_register_snapshot_at_entry": exact.get("external_call_register_snapshot_at_entry")', probe)
+        self.assertIn('"static_direct_reference_count": len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS)', probe)
+        self.assertIn('not 52 breakpoints', probe)
         self.assertIn('"root_dispatch_capture": self._root_dispatch_capture_payload()', probe)
         self.assertIn('"last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture', probe)
         self.assertIn('kernel32.ReadProcessMemory(', probe)
         self.assertNotIn('WriteProcessMemory', probe)
-        persist = probe[probe.index('def _persist_exact_root_caller'):probe.index('def _root_dispatch_capture_payload')]
+        persist = probe[probe.index('def _persist_root_event'):probe.index('def _persist_exact_root_caller')]
         self.assertIn('"universe_address_hex_at_capture": root_event.get("universe_address_hex_at_capture")', persist)
         self.assertIn('"runtime_metadata_at_capture": runtime_metadata', persist)
         self.assertIn('"root_event": root_event', persist)
@@ -1120,7 +1135,7 @@ class ToolTests(unittest.TestCase):
 
 
     def test_v0322_version_marker(self):
-        self.assertEqual("0.3.57", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.59", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
 
     def test_v0322_probe_exposes_background_research_buttons(self):
         source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
@@ -1352,7 +1367,7 @@ class ToolTests(unittest.TestCase):
         self.assertNotIn("Test-Runtime", start_nms)
         self.assertNotIn("Python.Python.3.12", start_nms)
         self.assertNotIn("import pymhf; import nmspy", start_nms)
-        self.assertIn('CONTROLLER_VERSION = "0.3.57"', controller)
+        self.assertIn('CONTROLLER_VERSION = "0.3.59"', controller)
         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
 
     def test_github_update_buttons_use_a_separate_geometry_parent(self):
@@ -1413,7 +1428,7 @@ class ToolTests(unittest.TestCase):
             self.assertIn(token, probe)
 
     def test_v0330_version(self):
-        self.assertEqual("0.3.57", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.59", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
 
     def test_v0328_seed_function_relrefs_classify_recursion(self):
@@ -1508,7 +1523,7 @@ class ToolTests(unittest.TestCase):
         self.assertIn("CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA = 0x00634C63", probe)
         self.assertIn("_logical_entry_caller_hits", probe)
         self.assertIn("_logical_entry_external_match_for_descriptor", probe)
-        self.assertIn('"method": "all-callers-single-hook-exact-descriptor-correlation"', probe)
+        self.assertIn('"all-callers-single-hook-exact-descriptor-correlation" if exact else', probe)
         self.assertNotIn("WriteProcessMemory", probe)
 
     def test_v0333_exact_external_caller_is_persisted_and_uploaded(self):
@@ -1519,6 +1534,35 @@ class ToolTests(unittest.TestCase):
         self.assertIn('logical_entry_exact_external_caller_return_offset_hex', probe)
         self.assertIn('logical_entry_exact_external_caller_return_offset_hex', analyzer)
         self.assertIn('WORK / "exact-root-caller-latest.json"', helper)
+
+    def test_crash_recovery_journals_events_and_preserves_pending_root_event(self):
+        probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+        controller=(ROOT / "tools" / "surveyor_controller.py").read_text(encoding="utf-8")
+        self.assertIn('self._append_capture_journal(event)', probe)
+        self.assertIn('os.fsync(fh.fileno())', probe)
+        self.assertIn('self._atomic_write_json(self._root_event_path, payload)', probe)
+        self.assertIn('"root-event-saved-caller-correlation-pending"', probe)
+        self.assertIn('self._persist_root_event(event)', probe)
+        self.assertIn('def _maybe_auto_upload_root_event(self)', controller)
+        self.assertIn('"all-saved-evidence", "--only-if-changed"', controller)
+
+    def test_upload_all_discovers_root_event_and_capture_journals(self):
+        with tempfile.TemporaryDirectory() as temp:
+            original_root, original_work = github_integration.ROOT, github_integration.WORK
+            try:
+                github_integration.ROOT = Path(temp)
+                github_integration.WORK = Path(temp) / "asset-work-v1"
+                github_integration.WORK.mkdir()
+                root_event = github_integration.WORK / "root-event-latest.json"
+                root_event.write_text("{}", encoding="utf-8")
+                journal = Path(temp) / "capture-journal-test.jsonl"
+                journal.write_text('{"kind":"resource_add"}\n', encoding="utf-8")
+                paths, producers = github_integration.all_saved_evidence_outputs()
+                self.assertIn(root_event, paths)
+                self.assertIn(journal, paths)
+                self.assertIn("runtime-probe", producers[str(root_event.resolve())])
+            finally:
+                github_integration.ROOT, github_integration.WORK = original_root, original_work
 
     def test_v0333_controller_exposes_all_at_once_progress(self):
         controller=(ROOT / "tools" / "surveyor_controller.py").read_text(encoding="utf-8")
