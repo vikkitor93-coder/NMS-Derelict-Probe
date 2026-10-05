@@ -3,7 +3,12 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.59**. Runtime-A probe: **0.3.38**. Version 0.3.59 adds crash-safe event journaling and always saves root-event evidence, including when exact caller or `+0x10` capture is pending.
+Current Surveyor package: **v0.3.60**. Runtime-A probe: **0.3.38**. Versions 0.3.59–0.3.60 add crash-safe event journaling, always save root-event evidence when exact caller or `+0x10` capture is pending, and batch changed evidence uploads every 30 seconds while automatic uploads are enabled.
+
+## v0.3.60 — paced recovery uploads
+
+- Keep root-event uploads prompt, then upload changed recovery evidence in 30-second batches while automatic uploads are enabled. This includes journal activity even when a valid `+0x10` capture has already been uploaded.
+- Use the existing **Automatic GitHub uploads** toggle to stop or resume background sharing. `--only-if-changed` prevents duplicate GitHub snapshots.
 
 ## v0.3.59 — crash-safe event recovery
 
