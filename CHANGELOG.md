@@ -1,3 +1,17 @@
+# 0.3.60 — paced recovery uploads
+
+- Keep root-event uploads prompt, then batch changed capture-journal and session evidence every 30 seconds while automatic uploads are enabled. This continues after a valid `+0x10` capture has already been uploaded.
+- Retain the existing auto-upload toggle and `--only-if-changed` deduplication.
+- Tests: 184 passed; compileall passed. Live Windows/NMS validation remains required.
+
+# 0.3.59 — crash-safe event journal and root-event recovery
+
+- Flush every trace event to a per-process JSONL journal immediately, including events observed before a recording session starts; fsync root events and other records in bounded batches.
+- Atomically save the dungeon root event, seed, and universe-address metadata even when exact caller correlation or the `+0x10` slot capture is still pending. Keep pending root evidence separate from the exact-slot capture.
+- Add root events and capture journals to Upload all saved evidence.
+- Keep the 5-second session snapshot and flush/fsync atomic JSON writes before replacement.
+- Tests: 184 passed; compileall passed.
+
 # 0.3.53 — upload all saved evidence
 
 - Add main-window **Upload all saved evidence**. It collects the unique existing outputs declared by research actions, uploads one shared snapshot to `main`, and records that shared upload path on all four Agent Console lane cards.
@@ -553,10 +567,4 @@
 - Persist the full root event, runtime metadata, event timestamp, and universe address in the atomically saved exact-root capture so Upload all saved evidence carries the live capture after NMS exits.
 - Capture runtime metadata before writing the exact-root artifact; preserve a null address and any capture error explicitly when unavailable.
 - Keep existing schema version 1 fields and upload paths backward compatible.
-# 0.3.59 — crash-safe event journal and root-event recovery
 
-- Flush every trace event to a per-process JSONL journal immediately, including events observed before a recording session starts; fsync root events and at bounded intervals to protect recovery data without forcing a disk sync for every hook callback.
-- Atomically save the dungeon root event, seed, and universe-address metadata even when exact caller correlation or the `+0x10` slot capture is still pending. Keep pending root evidence separate from the exact-slot capture so it cannot falsely satisfy Runtime-A's capture check.
-- Add root events and capture journals to Upload all saved evidence. When automatic uploads are enabled, Surveyor shares a newly saved pending root event with all lanes after a short debounce.
-- Keep the 5-second session snapshot and atomic writes, now with explicit flush/fsync before replacement.
-- Tests cover durable journal calls, pending root persistence, upload discovery, and automatic upload fallback. Live Windows/NMS validation remains required.
