@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "reviewed_utc": "2026-10-05T23:05:12Z",
+  "method": "Read the installed NMS.exe offline; map old exported function/caller byte windows to unique positions in the updated PE; verify .pdata boundaries; decode E8 calls in the mapped parent with iced_x86 and compare each instruction offset and target with the prior 33-site inventory.",
+  "old_build": {
+    "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "parent_pdata_range": [
+      "00634930",
+      "00634E03"
+    ],
+    "parent_sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5",
+    "runtime_correlated_hook_rva": "00634BC0",
+    "indirect_caller_rva": "02C04977",
+    "indirect_caller_return_rva": "02C0497A"
+  },
+  "current_build": {
+    "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "file_size_bytes": 88560712,
+    "pe_timestamp_hex": "6ABE9229",
+    "parent_pdata_range": [
+      "00636760",
+      "00636C33"
+    ],
+    "parent_byte_count": 1235,
+    "parent_sha256": "57ce8491eff5c0e38a33d1d91cbfde92cd41a15ca28d3e4d19fdd850e6d858f6",
+    "mapped_hook_rva": "006369F0",
+    "mapped_hook_offset_from_parent_start_hex": "0290",
+    "mapped_indirect_caller_rva": "02C08607",
+    "mapped_indirect_caller_bytes": "FF 52 10",
+    "mapped_indirect_caller_return_rva": "02C0860A",
+    "indirect_caller_pdata_range": [
+      "02C0840E",
+      "02C089DA"
+    ]
+  },
+  "direct_call_check": {
+    "old_inventory_sites": 33,
+    "current_decoded_E8_sites": 33,
+    "same_offsets_from_parent_start": true,
+    "target_map": [
+      {
+        "old": "001AE230",
+        "current": "001AE230",
+        "current_pdata_range": null,
+        "current_first_bytes": "C2 00 00"
+      },
+      {
+        "old": "001C6B30",
+        "current": "001C6B30",
+        "current_pdata_range": [
+          "001C6B30",
+          "001C6B7D"
+        ]
+      },
+      {
+        "old": "0020D560",
+        "current": "0020D560",
+        "current_pdata_range": [
+          "0020D560",
+          "0020D5D2"
+        ]
+      },
+      {
+        "old": "02D61CE0",
+        "current": "02D65A80",
+        "current_pdata_range": [
+          "02D65A80",
+          "02D65A8F"
+        ]
+      },
+      {
+        "old": "02D627A0",
+        "current": "02D66540",
+        "current_pdata_range": [
+          "02D66540",
+          "02D6656C"
+        ]
+      },
+      {
+        "old": "02D65980",
+        "current": "02D69720",
+        "current_pdata_range": [
+          "02D69720",
+          "02D69780"
+        ]
+      },
+      {
+        "old": "033E0FE6",
+        "current": "033E4B46",
+        "current_pdata_range": null,
+        "current_first_bytes": "FF 25 14 F6 02 00"
+      }
+    ]
+  },
+  "conclusion": "The old bounded parent and its 33 E8 sites map coherently to the updated executable. Addresses from the earlier runtime event and code export must not be used as current-build runtime evidence.",
+  "limitations": [
+    "This is an offline cross-build map. No new root event, dispatch-slot sample, or NMS gameplay validation was captured on the updated executable.",
+    "The mapped 006369F0 remains a byte-correlated position inside a function, not a proven indirect call destination.",
+    "The owner+0x10 field is distinct from the indirect caller [RDX+0x10] slot.",
+    "The helper target map identifies call destinations, not semantic function names."
+  ],
+  "next_step": "Continue static helper and parent dataflow on this build. Prove the indirect destination with a live [RDX+0x10] sample from the current executable when the runtime capture can be run."
+}

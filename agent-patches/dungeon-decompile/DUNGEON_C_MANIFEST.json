@@ -39,7 +39,7 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "Trace the five bounded helper bodies and their call sites against the parent function dataflow, especially RSI+0x48 and the four-field completion record. Keep names provisional; prove the indirect callback target only with a live [RDX+0x10] sample.",
+    "next_method": "Use CURRENT_BUILD_STATIC_MAP_20261005.json for current-build RVAs; continue helper dataflow. A live [RDX+0x10] sample is needed to prove indirect dispatch.",
     "candidate_identity_rule": "Candidate RVAs remain unnamed until full helper bodies and call semantics are validated; the runtime owner+0x10 field is not the caller's vtable slot.",
     "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/"
   },
@@ -251,5 +251,15 @@
     "helper_bodies_validated": 5,
     "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
     "excluded_calls_resolved": "12 calls to leaf ret 0 at 001AE230; one import thunk at 033E0FE6 resolves to VCRUNTIME140.dll!memcpy"
+  },
+  "current_build_static_map": {
+    "report": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
+    "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "parent_pdata_range": [
+      "00636760",
+      "00636C33"
+    ],
+    "direct_call_sites_matched": 33,
+    "runtime_target_proven": false
   }
 }
