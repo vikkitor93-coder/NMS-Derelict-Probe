@@ -89,10 +89,30 @@
         "byte_count": 15,
         "sha256": "f4da791a5919b8949802b7f70110415cbc1e7c60720925fc53b4ede026876e0e"
       }
+    ],
+    "excluded_target_followup": [
+      {
+        "target_rva": "001AE230",
+        "inventory_calls": 12,
+        "first_bytes": "C2 00 00",
+        "decode": "ret 0",
+        "pdata_entry": null,
+        "interpretation": "A tiny leaf return; no unwind entry is required to describe this local code slice. The helper exporter excluded it solely because it requires .pdata."
+      },
+      {
+        "target_rva": "033E0FE6",
+        "inventory_calls": 1,
+        "first_bytes": "FF 25 64 01 03 00",
+        "decode": "jmp qword ptr [RIP+0x00030164]",
+        "iat_rva": "03411150",
+        "import": "VCRUNTIME140.dll!memcpy",
+        "pdata_entry": null,
+        "interpretation": "Import jump thunk; it is not an internal helper body."
+      }
     ]
   },
   "interpretation": {
-    "confirmed": "The refreshed code export matches the uploaded 01:03 descriptor and supplies five byte-verified .pdata-bounded helper bodies. All 20 exported E8 sites are decoded instruction boundaries and appear in the prior call inventory.",
+    "confirmed": "The refreshed code export matches the uploaded 01:03 descriptor and supplies five byte-verified .pdata-bounded helper bodies. All 20 exported E8 sites are decoded instruction boundaries and appear in the prior call inventory. The 13 excluded calls resolve to a three-byte return leaf (12 sites) and a memcpy import thunk (one site).",
     "inference": "These helpers participate in the function containing the runtime-correlated 00634BC0 hook; their semantic role and the indirect caller destination remain unproven.",
     "limits": [
       "FF 52 10 at 02C04977 calls through [RDX+0x10]; the separately sampled owner+0x10 field is not that slot.",
@@ -102,5 +122,5 @@
       "The 35-container historical baseline, 16-target prediction, and user-confirmed newer room/crate counts remain separate."
     ]
   },
-  "next_lane_step": "Trace the five helper bodies and the 13 calls to targets without .pdata; keep semantic names provisional. A new live register/slot sample is required to prove the indirect callback target."
+  "next_lane_step": "Trace the five bounded helper bodies and their call sites against the parent function dataflow, especially RSI+0x48 and the four-field completion record. Keep names provisional; prove the indirect callback target only with a live [RDX+0x10] sample."
 }
