@@ -59,6 +59,15 @@ def all_saved_evidence_outputs() -> tuple[list[Path], dict[str, list[str]]]:
             key = os.path.normcase(str(path.resolve()))
             unique.setdefault(key, path)
             producers.setdefault(key, []).append(action)
+    for path in sorted(ROOT.glob("capture-journal-*.jsonl")):
+        key = os.path.normcase(str(path.resolve()))
+        unique.setdefault(key, path)
+        producers.setdefault(key, []).append("runtime-probe")
+    root_event = WORK / "root-event-latest.json"
+    if root_event.is_file():
+        key = os.path.normcase(str(root_event.resolve()))
+        unique.setdefault(key, root_event)
+        producers.setdefault(key, []).append("runtime-probe")
     return list(unique.values()), producers
 
 DERELICT_FARMING_FILES = {
