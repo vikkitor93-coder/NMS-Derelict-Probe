@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-05T23:05:12Z",
+  "reviewed_utc": "2026-10-05T23:08:33Z",
   "state": "current-build-static-map-validated",
   "verified": {
     "historical_baseline": {
@@ -471,10 +471,10 @@
     },
     "note": "Newest shared snapshot; root capture timestamp remains 2026-10-04T23:17:15.827Z. The exact-root-caller-code SHA-256 is still 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2. This is not a new runtime sample or a helper export."
   },
-  "updated_utc": "2026-10-05T23:05:12Z",
-  "status": "current executable statically mapped",
-  "summary": "Updated NMS.exe SHA 13d5060d...: old parent maps to 00636760..00636C33; all 33 decoded E8 sites retain their offsets and map to seven current targets. This is offline evidence only; indirect dispatch remains unresolved.",
-  "next_action": "Continue current-build helper dataflow; obtain a live [RDX+0x10] slot/register sample only when a current-build runtime capture is needed.",
+  "updated_utc": "2026-10-05T23:08:33Z",
+  "status": "current-build helper dataflow traced",
+  "summary": "Static map and helper flow checked: four nonzero 32-bit fields pass through reference-count operations into a resizable 32-bit list. Domain meaning and indirect callback target remain unresolved.",
+  "next_action": "Trace consumption of the four-field list; obtain a live current-build [RDX+0x10] sample to prove callback identity.",
   "human_intervention_required": false,
   "user_steps": [],
   "current_build_static_map": {
@@ -488,5 +488,10 @@
     "mapped_indirect_caller_rva": "02C08607",
     "direct_call_sites_matched": 33,
     "runtime_target_proven": false
+  },
+  "helper_dataflow_review": {
+    "report": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
+    "current_nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "semantic_identity_proven": false
   }
 }
