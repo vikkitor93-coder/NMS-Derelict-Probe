@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "source_base": {
+    "version": "0.3.58",
+    "package_sha256": "f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24",
+    "package_size_bytes": 402950
+  },
+  "overlay": {
+    "extractor": "tools/extract_runtime_target_function.py",
+    "tool_version": "0.3.39",
+    "launcher": "Extract-Runtime-Target-Function.cmd",
+    "tests": "tests/test_runtime_target_function.py"
+  },
+  "purpose": "Complete current-source research ZIP for exporting the .pdata-bounded runtime-correlated logical-entry function and heuristic direct-call helper bodies offline.",
+  "checks": {
+    "base_source_tests": "182/182 passed before overlay",
+    "focused_helper_tests": "8/8 passed",
+    "full_regression_tests": "190/190 passed",
+    "compileall": "passed for tools overlay tests mod",
+    "json_files": "72 parsed successfully in the final helper build",
+    "package_dependencies": "complete .0.3.58 source package includes all three imported sibling modules",
+    "zip_integrity": "verified on the exact final archive",
+    "windows_wrapper_execution": "not run in Linux workspace",
+    "nms_exe_analysis": "not run here; local Windows NMS.exe is still required for the output"
+  },
+  "evidence": {
+    "latest_shared_upload": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/",
+    "call_inventory": "agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json"
+  },
+  "limits": [
+    "No candidate helper bodies have been generated yet.",
+    "The exporter scans raw E8 bytes; instruction boundaries remain unverified until reconciled with CALLBACK_DIRECT_CALL_INVENTORY.json and verified helper .pdata ranges."
+  ]
+}

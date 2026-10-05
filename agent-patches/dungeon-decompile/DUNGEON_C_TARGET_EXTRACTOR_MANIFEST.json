@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "tool_version": "0.3.39",
+  "package_base": "Surveyor 0.3.58 source package SHA-256 f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24 plus DUNGEON-C helper-export overlay",
+  "purpose": "Export the runtime-correlated logical-entry callee body from the installed NMS.exe using its PE .pdata function range.",
+  "files": [
+    "Extract-Runtime-Target-Function.cmd",
+    "tools/extract_runtime_target_function.py",
+    "tests/test_runtime_target_function.py",
+    "README.md",
+    "CHANGELOG.md",
+    "AI_HANDOFF.md"
+  ],
+  "input": {
+    "evidence": "%LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1\\exact-root-caller-latest.json",
+    "target_rva_field": "logical_entry_rva_hex",
+    "executable": "NMS.exe (auto-detected; optional --exe override)"
+  },
+  "output": {
+    "path": "%LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1\\exact-root-caller-code-latest.json",
+    "field": "runtime_target_function",
+    "upload_compatibility": "Existing ACTION_OUTPUTS entry exact-root-caller-code-latest.json; Upload all saved evidence remains unchanged.",
+    "direct_call_candidates": "Additive heuristic E8-byte scan; records only candidates whose targets map to executable section and .pdata range, includes bounded helper bodies under fixed count/size caps; instruction boundaries remain unverified."
+  },
+  "safety": {
+    "nms_runtime_required": false,
+    "game_memory_writes": false,
+    "max_function_bytes": 1048576,
+    "function_boundary_source": "PE .pdata"
+  },
+  "verification": {
+    "focused_tests": "8/8 passed",
+    "full_suite": "190/190 passed",
+    "compileall": "python -m compileall -q tools overlay tests mod passed",
+    "live_executable_validation": "Tool 0.3.38 output validated against NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; tool 0.3.39 helper-body export still awaits local rerun."
+  },
+  "rollback": "The standalone research ZIP does not install or modify the game or canonical Surveyor package; discard the extracted folder to roll it back.",
+  "launcher": {
+    "python_resolution_order": [
+      "py -3.13",
+      "py -3.12",
+      "python.exe on PATH"
+    ],
+    "path_diagnostics": "Does not read Surveyor's saved Python path and does not change the working directory. Checks the extractor path first; reports the missing complete-package dependency requirement."
+  },
+  "latest_direct_evidence": {
+    "file": "exact-root-caller-code-latest(2).json",
+    "sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
+    "uploaded_to_shared_folder": true,
+    "body_sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5",
+    "shared_path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/exact-root-caller-code-latest.json",
+    "note": "Identical SHA-256 code window in the newest all-saved-evidence snapshot; contains the 0.3.38 bounded target body but no 0.3.39 helper candidates/bodies."
+  }
+}
