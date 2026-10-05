@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-04T14:53:00Z",
+  "updated_utc": "2026-10-05T02:12:02Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.60",
@@ -35,9 +35,11 @@
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
-      "status": "agent-output-published-do-not-duplicate",
+      "status": "helper-export-validated-static-analysis-continuing",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "Run the offline NMS.exe anchor scan from DUNGEON-C and upload the result; game runtime is not required."
+      "next_action": "Trace five validated helper bodies; a later live [RDX+0x10] sample is needed to prove the indirect callback target.",
+      "latest_evidence": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
+      "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json"
     },
     "metadata": {
       "branch": "agent/metadata",
@@ -52,11 +54,6 @@
         "lane": "runtime-dispatch",
         "kind": "live-game-short-capture",
         "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json"
-      },
-      {
-        "lane": "dungeon-decompile",
-        "kind": "offline-local-NMS-exe-scan",
-        "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json"
       }
     ]
   },
