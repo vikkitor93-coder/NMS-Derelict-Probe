@@ -1,13 +1,28 @@
 # NMS Derelict Probe — AI handoff
 
+## Current crash-recovery update — 2026-10-05
+
+The current source base is the verified v0.3.58 package from the main updater manifest. The working update is Surveyor **0.3.59** with probe **0.3.38**. It appends and flushes each trace event to a per-process JSONL journal, fsyncs root events immediately and other records in bounded batches, persists every dungeon root event (seed and universe metadata included) even if exact caller or `+0x10` capture is unavailable, and adds these artifacts to deduplicated Upload all saved evidence. Pending root evidence remains distinct from a successful slot capture. Session snapshots remain periodic and are atomically flushed before replacement. The Linux test suite passes; Windows UI and live NMS validation remain outstanding.
+
+The game must still be running while an event occurs for a runtime hook to observe it. Once observed, the journal and root-event artifact are local durable files and can be uploaded after the game exits or crashes. Automatic sharing follows the existing remembered auto-upload toggle.
+
+## Historical Runtime-A candidate — 2026-10-04
+
+This was the recorded 0.3.57 investigation state before the current v0.3.58 package was published. The old base-version and candidate notes below are retained as historical context.
+
+Runtime-A probe 0.3.37 now combines the existing shared-entry owner+0x10 capture with RCX/RDX and raw [RDX+0x10] capture at that same entry hook. The later root-add sample remains separate. The lane patch and manifest must state the official package SHA-256 and the embedded base probe version (0.3.35).
+
+Surveyor v0.3.58 and probe 0.3.37 are now the current published base. The current candidate is v0.3.59 / probe 0.3.38.
+
+
 ## Current state
 
-- Current package: **v0.3.57**. It fixes startup by placing the GitHub buttons in a nested frame, keeping geometry managers separate. The automatic upload toggle and v0.3.56 behavior remain.
+- Current package: **v0.3.59 candidate**. It retains the nested-frame startup fix, automatic upload toggle, and existing v0.3.58 behavior while adding crash recovery.
 - **Automatic GitHub evidence uploads** are controlled by a remembered checkbox under GitHub / updates. Enabled by default: a new persisted root capture is uploaded automatically, and after a research or lane action the Surveyor uploads a deduplicated all-lanes evidence batch if its contents changed. The lane-specific action upload remains part of its explicit action workflow. Uncheck the option to stop background root and shared-batch uploads; manual uploads remain available. The all-lanes fingerprint receipt is stored under `%LOCALAPPDATA%\NMSDerelictSurveyor`.
 - **Upload all saved evidence** snapshots every existing research output declared by `ACTION_OUTPUTS` into one deduplicated `research-uploads/<timestamp>-all-saved-evidence-<id>/` folder on `main`. Its manifest lists which actions produced each file and marks it visible to all four lanes. The Surveyor writes a receipt to each lane card after success. This is a shared repository upload, not an automatic agent notification or a write to their status branches.
 - Overlapping local `*-latest` outputs: `generation-baseline-latest.json` (measure/analyze-generation), `generation-measurements-summary.json` and `generation-measurements.csv` (measure/compare-measurements), `seed-room-correlation.json` (measure/analyze-correlation), and `exact-root-caller-latest.json` (analyze-generation/Runtime-A upload). Local latest files are replaced by a producer rerun; GitHub uploads are timestamped snapshots.
 - Runtime-A can now upload its already-persisted root event after closing NMS via **Upload captured root event**; this panel action needs only the saved capture and an idle Surveyor workflow.
-- Current source package: **v0.3.57**. Runtime-A probe is **0.3.35**; it captures owner+0x10 at the exact descriptor-correlated dungeon root event and atomically saves the full root event plus runtime metadata/universe address when available in `exact-root-caller-latest.json`. Upload all saved evidence includes this file. If the address is unavailable at root-load time, null/error metadata is saved rather than silently omitted. Capture still requires NMS running while the event occurs; upload/analysis can happen after quitting. Surveyor’s app updater stages the probe into the installed MODS folder; fully restart NMS after installing the app update.
+- Current source package: **v0.3.59 candidate**. Probe **0.3.38** preserves exact root caller and entry register capture, and now writes root-event recovery data even when caller correlation or the slot read is unavailable. Capture still requires NMS running while the event occurs; saved artifacts can be uploaded after quitting. Surveyor’s app updater stages the probe into the installed MODS folder; fully restart NMS after installing the app update.
 - Surveyor does not redistribute DerelictFreighterFarming files. Download your own archive and use **Install Derelict Farming archive** in the GitHub / updates section. The installer accepts only three expected EXML files, validates their XML, stages them under `GAMEDATA/MODS/DerelictFreighterFarming`, and preserves conflicts. Roll back with `python tools/github_integration.py rollback-derelict-farming`. The supplied archive targets 7.04; NMS 7.05 behavior is not yet validated.
 - Agent Console has four side-by-side lane cards. The fixed **NEEDED** box shows the published request, actual extension action, exact required prerequisite keys, and which prerequisites are currently missing. It does not contain generic step guidance. The actual host key is `probe.connected` (fresh probe heartbeat), not `probe.running`; the v1 extension contract is unchanged.
 - Installed/published/reported versions remain immediately under NEEDED. Each evidence receipt checkbox stays fixed below its lane buttons.
@@ -18,14 +33,6 @@
 - Main Status and the in-game overlay now show the exact root resource path and observed event count. `Root dispatch +0x10` is shown separately and uses the capture field emitted by Runtime-A probe 0.3.34.
 - **Start overlay** and **Stop overlay** sit beside the existing **Game overlay** auto-start toggle. Stop closes the titled overlay window and signals the local stop-request file, including overlays started by the NMS launcher.
 - The package carries DUNGEON-C 1.0.2, Metadata-D 1.0.1, Runtime-A 1.0.1, and Seed-B 1.0.2, with prior installed versions retained for rollback. The Runtime-A panel stays data-only; its analyze/upload action is unchanged.
-
-## Autonomous progress
-
-Agents must keep working until human intervention is genuinely required. A reported next step is not a stopping point: first check whether it can be done with repository files, code, available tools, or existing evidence and execute it if possible. Diagnose failures and try reasonable alternatives. After completing the assigned objective, continue with the next highest-value task in the lane. Ask the user to act only for a true human-only dependency, after completing independent work and preparing one exact numbered recipe. Another lane's dependency is not a reason to idle; continue independent work and prepare a concrete handoff.
-
-## Publishing workflow
-
-Agents may publish completed, tested, and documented changes directly to `main`; a separate integration-agent merge or user approval is not required. Keep unfinished experiments on lane branches. Before direct publishing, preserve a backup branch or exact base commit, run relevant checks, publish the full consistent change (including extension index/hash updates when applicable), update lane status and workspace handoff files, and report the main commit plus rollback steps. A PR is optional or a fallback if direct pushing is unavailable.
 
 ## Purpose and architecture
 
@@ -49,7 +56,7 @@ Reverse engineer No Man’s Sky abandoned-freighter generation using static and 
 
 ## Latest changes and verification
 
-- v0.3.57 fixes the startup `TclError` caused by mixing `pack` and `grid` in the GitHub / updates body.
+- v0.3.57 fixed the startup `TclError` caused by mixing `pack` and `grid` in the GitHub / updates body.
 - v0.3.56 adds a persistent auto-upload toggle. When on, saved Runtime-A captures upload automatically and changed all-lanes evidence is published after research/agent workflows. Batch fingerprints prevent repeated uploads of identical saved files.
 - v0.3.54 persists the complete runtime root event, metadata, and universe address in the existing atomically saved/uploaded capture artifact; schema and upload path remain compatible.
 - v0.3.48 adds main-window overlay display controls, live opacity/position settings, and published agent objectives. v0.3.47 adds visible root-resource and dispatch-capture status plus manual overlay lifecycle controls. v0.3.46 shows exact prerequisites and missing state in NEEDED, adds per-section +/− controls in both windows, and uses cached game/probe state for action readiness.
@@ -60,13 +67,3 @@ Reverse engineer No Man’s Sky abandoned-freighter generation using static and 
 
 - Roll back the app by reinstalling the previous complete v0.3.49 package. Roll back the installed farming mod with `python tools/github_integration.py rollback-derelict-farming`. No probe, session, extension API, or saved evidence migration is needed. Extension versions retain their individual rollback controls.
 - **Next action:** update Surveyor, select your downloaded mod ZIP with **Install Derelict Farming archive**, fully restart NMS, then test repeat derelicts in the same system. Confirm `+0x10` remains pending until a real capture is reported.
-
-## DUNGEON-C offline helper-export follow-up — 2026-10-05
-
-The newest shared saved-evidence snapshot is `research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/`. Its run manifest uploaded on 2026-10-05 00:29 UTC. The exact root capture inside it is still the 2026-10-04 23:17 Angoto event: candidate root seed `5B4AE67D9C2A8F61` (unverified), owner+0x10 = zero, and target identity null-or-low-address. The code export has the same SHA-256 as the preceding upload (`207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2`) and still contains no direct-call helper candidates or helper bodies. Treat this as the newest uploaded snapshot of saved evidence, not a new runtime sample or successful helper export.
-
-The separate current-run layout remains user-confirmed at 11 rooms and 43 containers (30 Salvage + 13 Footlockers). The historical result remains 35 containers (31 Salvage + 4 Footlockers), 7 main rooms plus Room 0 dead-end, two vertical transitions, and one Shuttle Bay. The older same-address MEDI_FLOATERS model remains 8 main + 2 dead-end modeled rooms and 16 analyzer-predicted targets; its generation table says Rooms=7. Predicted counts are not physical measurements. The user attributes changed generation/replayability to the game update; this remains user-provided explanation. Root seeds `9256392A2F5A74AC` and `5B4AE67D9C2A8F61` remain candidates, not proven derivations.
-
-The bounded function at `00634930..00634E03` has 33 direct E8 call sites grouped into seven unnamed targets; all relative targets were independently recalculated. Helper bodies are still unavailable. The matching local NMS.exe could not be transferred into this workspace. The standalone complete DUNGEON-C helper ZIP is based on the 0.3.58 source package plus extractor 0.3.39. Its launcher avoids the prior BOM-prone saved interpreter path, does not change directories, checks sibling imports, and selects Python 3.13/3.12/PATH Python. Focused tests passed 8/8; full suite 190/190; compileall passed; 72 JSON files parsed; ZIP integrity passed. Windows launcher execution and the local executable scan were not possible here. The stock updater archive omits this research tool; use the standalone ZIP listed in the DUNGEON-C manifest.
-
-**Human step (offline; no NMS launch or full traversal):** download and extract the complete helper ZIP to a normal local folder > run `Extract-Runtime-Target-Function.cmd` from its root > confirm the output `exact-root-caller-code-latest.json` contains `runtime_target_function.direct_call_candidates` and at least one .pdata-bounded `target_function_body` > in Surveyor click **GitHub / updates > Upload all saved evidence** > tell me “check”. Then I will reconcile candidates against the 33-site inventory and verified helper .pdata ranges before tracing or naming any consumer.
