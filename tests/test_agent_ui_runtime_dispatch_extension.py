@@ -1,6 +1,7 @@
 import copy
 import hashlib
 import json
+import os
 import tempfile
 import unittest
 from unittest import mock
@@ -103,15 +104,15 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
     def test_all_saved_evidence_upload_is_deduplicated_and_marks_producers(self):
         paths, producers = github_integration.all_saved_evidence_outputs()
         self.assertEqual(len(paths), len({str(p.resolve()) for p in paths}))
-        baseline_key = str((github_integration.WORK / "generation-baseline-latest.json").resolve())
+        baseline_key = os.path.normcase(str((github_integration.WORK / "generation-baseline-latest.json").resolve()))
         self.assertIn("measure", producers[baseline_key])
         self.assertIn("analyze-generation", producers[baseline_key])
-        summary_key = str((github_integration.WORK / "generation-measurements-summary.json").resolve())
+        summary_key = os.path.normcase(str((github_integration.WORK / "generation-measurements-summary.json").resolve()))
         self.assertIn("compare-measurements", producers[summary_key])
-        corr_key = str((github_integration.WORK / "seed-room-correlation.json").resolve())
+        corr_key = os.path.normcase(str((github_integration.WORK / "seed-room-correlation.json").resolve()))
         self.assertIn("analyze-correlation", producers[corr_key])
         self.assertIn("measure", producers[corr_key])
-        exact_key = str((github_integration.WORK / "exact-root-caller-latest.json").resolve())
+        exact_key = os.path.normcase(str((github_integration.WORK / "exact-root-caller-latest.json").resolve()))
         self.assertIn("analyze-generation", producers[exact_key])
         self.assertIn("upload-runtime-capture", producers[exact_key])
         self.assertEqual(["exact-root-caller-latest.json"], [p.name for p in github_integration.ACTION_OUTPUTS["upload-runtime-capture"]])
