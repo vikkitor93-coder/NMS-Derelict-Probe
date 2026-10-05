@@ -3,7 +3,7 @@
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
   "reviewed_utc": "2026-10-05T01:55:00Z",
-  "state": "helper-export-ready-awaiting-local-offline-run",
+  "state": "callback-direct-call-inventory-reviewed-awaiting-helper-bodies",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -323,8 +323,8 @@
     }
   },
   "evidence": {
-    "shared_upload_path": "research-uploads/20261004T205413Z-all-saved-evidence-4ad05293/",
-    "manifest": "research-uploads/20261004T205413Z-all-saved-evidence-4ad05293/run-manifest.json",
+    "shared_upload_path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/",
+    "manifest": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/run-manifest.json",
     "reviewed_files": [
       "run-manifest.json",
       "generation-baseline-latest.json",
@@ -335,10 +335,14 @@
       "exact-root-vtable-latest.json",
       "dungeon-caller-code-latest.json",
       "dungeon-upstream-callers-latest.json",
-      "dungeon-generation-table.json"
+      "dungeon-generation-table.json",
+      "dungeon-seed-function-analysis-latest.json",
+      "room-crate-index.json",
+      "asset-calculation-latest.json",
+      "crate-target-discovery.json",
+      "seed-room-correlation.json"
     ],
-    "note": "The 20:53:18 root event was saved and uploaded before force-close. The artifact contains logical-entry and root-add owner+0x10 samples, both zero and correlated to descriptor 000001192EBECD28. The file reports probe 0.3.35, so it does not verify that 0.3.36 was loaded.",
-    "run_manifest_sha256": "115ee274f26bb0fb6a342a4371f7750b4ac05da6",
+    "note": "Newest Upload all saved evidence snapshot, uploaded 2026-10-05 00:29Z. The exact root event is still from 2026-10-04 23:17Z and its code export SHA is byte-identical to the previous upload; no helper call candidates/bodies are present.",
     "direct_user_attachment": {
       "file": "exact-root-caller-code-latest(1).json",
       "sha256": "3942f011ded5cbab7025546b9caa6bcde7d21c950193faf755839c9470dca694",
@@ -347,7 +351,7 @@
     "latest_direct_attachment": {
       "file": "exact-root-caller-code-latest(2).json",
       "sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
-      "uploaded_to_shared_folder": false,
+      "uploaded_to_shared_folder": true,
       "source_probe_version": "0.3.37",
       "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
       "universe_address": "0001BF0004E84EFD / Angoto",
@@ -362,25 +366,25 @@
       "pdata_range": "00634930..00634E03",
       "hook_rva": "00634BC0 (interior offset 0x290; not function start)",
       "callback_return_inference": "returns four-field completion boolean; exact caller tests 1 then unlinks/frees the 0x58-byte record",
-      "note": "Direct attachment reviewed, not claimed in a shared research-uploads folder."
+      "note": "Direct attachment reviewed, not claimed in a shared research-uploads folder.",
+      "shared_path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/exact-root-caller-code-latest.json"
     }
   },
   "blocked": {
-    "reason": "The helper exporter and complete research ZIP are built and tested, but the matching NMS.exe is on the user's Windows PC and could not be transferred into this workspace. Running the offline exporter locally is required to produce helper function bodies.",
+    "reason": "The latest shared upload includes a fresh 0.3.37 root event and the full bounded function, but the code export still lacks the v0.3.39 helper candidate bodies. The matching NMS.exe cannot be transferred into this workspace (Library download helper failed twice). The 33 direct call sites across seven unnamed targets are already inventoried and validated from the bounded body.",
     "human_action_required": true,
     "full_traversal_required": false,
     "nms_runtime_required": false,
     "duplicate_capture_or_upload_required": false,
-    "needed": "Download the refreshed NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip (SHA-256 6fa8c84fc5d9c8060f86ad13e271e408487d7861f675c0830d5a6c6e6429da19). Extract the complete ZIP to a normal local folder and run Extract-Runtime-Target-Function.cmd from the extracted root. This build avoids the BOM-prone Surveyor saved Python path, does not change directories, checks required sibling tools, and selects Python 3.13, 3.12, then PATH Python. No NMS launch, fresh capture, or traversal is needed. When the output includes runtime_target_function.direct_call_candidates and at least one bounded target_function_body, click Surveyor > GitHub / updates > Upload all saved evidence, then tell me “check”.",
-    "expected_output": "A helper-exported exact-root-caller-code-latest.json containing direct_call_candidates and at least one .pdata-bounded target_function_body; candidate identities remain heuristic until checked against the call inventory and each function range.",
-    "success_condition": "The shared upload includes the helper-exported exact-root-caller-code-latest.json with matching NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4.",
-    "game_runtime_required": false
+    "needed": "Use NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip (SHA-256 94d158d2f70f09bb157f6be85537f9dfb1bbc53f5ef8c6147da882d3a41f2fed). Extract the complete ZIP to a normal local folder and run Extract-Runtime-Target-Function.cmd from its root. It includes all imported sibling tools and uses Python 3.13, then 3.12, then PATH Python. No NMS launch, fresh capture, or traversal is needed. When output contains runtime_target_function.direct_call_candidates and a bounded target_function_body, click Surveyor → GitHub / updates → Upload all saved evidence, then tell me “check”.",
+    "expected_output": "A helper-exported exact-root-caller-code-latest.json with candidate call sites plus at least one .pdata-bounded helper body; candidate identities remain heuristic pending inventory and .pdata validation.",
+    "success_condition": "The upload contains candidate helper bodies with NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4."
   },
-  "next_lane_owned_step": "After the helper output is uploaded, reconcile every candidate with CALLBACK_DIRECT_CALL_INVENTORY.json, validate exact call boundaries and .pdata ranges, and inspect the verified bodies' data flow before naming any helper or generator consumer.",
+  "next_lane_owned_step": "Validate helper exporter candidates against the decoded callsite inventory and each helper's .pdata range. Reject non-boundary E8 byte-scan hits; trace bodies affecting RSI+0x48 and the four-field completion record.",
   "latest_shared_upload_review": {
-    "path": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/",
-    "manifest": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/run-manifest.json",
-    "uploaded_utc": "2026-10-04T23:17:27Z",
+    "path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/",
+    "manifest": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/run-manifest.json",
+    "uploaded_utc": "2026-10-05T00:29:07Z",
     "exact_root_event": {
       "utc": "2026-10-04T23:17:15.827Z",
       "probe_version": "0.3.37",
@@ -412,16 +416,13 @@
       "predicted_containers": "43 (30 Salvage + 13 Footlockers)",
       "user_physical_confirmation": "matched user's physical traversal",
       "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)"
-    }
+    },
+    "note": "Newest shared snapshot; root capture timestamp remains 2026-10-04T23:17:15.827Z. The exact-root-caller-code SHA-256 is still 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2. This is not a new runtime sample or a helper export."
   },
   "launcher_error_review": {
-    "previous_failures": [
-      "BOM-prefixed invalid saved Python path",
-      "relative-import failure from an incomplete branch source archive",
-      "Windows filename/directory syntax error from prior launcher"
-    ],
-    "resolution": "The complete ZIP includes sibling imports; the launcher uses its own directory without pushd, ignores the saved Surveyor interpreter setting, checks for the script, and chooses Python 3.13, 3.12, then PATH Python.",
-    "windows_execution": "Not available in this Linux workspace; static checks passed."
+    "observed": "Windows launcher reported a saved Python path prefixed by UTF-8 BOM display bytes, then import failure for analyze_nms_seed_function.",
+    "cause": "The trace path names the GitHub branch archive folder NMS-Derelict-Probe-agent-dungeon-decompile; that branch snapshot omits tools/analyze_nms_seed_function.py, a sibling imported by the extractor. The saved Python path has a BOM and fails validation, after which launcher fallback may select py/python.",
+    "disposition": "This failure explains the branch-archive attempt. The separate 0.3.37 bounded-function attachment confirms the extraction later succeeded; do not request a duplicate run or upload."
   },
   "evidence_paths": [
     "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/run-manifest.json",
@@ -439,12 +440,12 @@
     "updater_manifest": "main update-manifest.json advertises full package 0.3.58",
     "updater_package_sha256": "f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24",
     "dungeon_helper_in_managed_files": false,
-    "disposition": "The stock updater package advertised as 0.3.58 omits the helper exporter. The standalone, complete 0.3.58-based DUNGEON-C research ZIP supplies it; the canonical version files are not changed by this lane build."
+    "disposition": "The 0.3.58 package does not include tools/extract_runtime_target_function.py; it is not a replacement for the separate DUNGEON-C v0.3.50 helper-export package."
   },
   "helper_export_build": {
     "name": "NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
-    "sha256": "6fa8c84fc5d9c8060f86ad13e271e408487d7861f675c0830d5a6c6e6429da19",
-    "size_bytes": 414185,
+    "sha256": "94d158d2f70f09bb157f6be85537f9dfb1bbc53f5ef8c6147da882d3a41f2fed",
+    "size_bytes": 414590,
     "files": 160,
     "base_surveyor_version": "0.3.58",
     "extractor_version": "0.3.39",
@@ -460,7 +461,6 @@
       "removed pushd directory change",
       "ignores saved Python path that contained a UTF-8 BOM",
       "checks complete package dependency script exists"
-    ],
-    "embedded_workspace_state_and_handoff": "Aligned with the current main publish"
+    ]
   }
 }
