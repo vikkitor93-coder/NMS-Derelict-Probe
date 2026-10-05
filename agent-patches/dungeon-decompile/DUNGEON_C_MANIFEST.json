@@ -39,7 +39,7 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "Trace the five helper bodies and the 13 calls to targets without .pdata; keep semantic names provisional. A new live register/slot sample is required to prove the indirect callback target.",
+    "next_method": "Trace the five bounded helper bodies and their call sites against the parent function dataflow, especially RSI+0x48 and the four-field completion record. Keep names provisional; prove the indirect callback target only with a live [RDX+0x10] sample.",
     "candidate_identity_rule": "Candidate RVAs remain unnamed until full helper bodies and call semantics are validated; the runtime owner+0x10 field is not the caller's vtable slot.",
     "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/"
   },
@@ -249,6 +249,7 @@
     "reviewed_utc": "2026-10-05T01:55:39Z",
     "report": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
     "helper_bodies_validated": 5,
-    "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4"
+    "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "excluded_calls_resolved": "12 calls to leaf ret 0 at 001AE230; one import thunk at 033E0FE6 resolves to VCRUNTIME140.dll!memcpy"
   }
 }

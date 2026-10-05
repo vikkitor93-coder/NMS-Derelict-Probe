@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-05T01:55:39Z",
+  "reviewed_utc": "2026-10-05T02:01:27Z",
   "state": "helper-export-validated-static-analysis-continuing",
   "verified": {
     "historical_baseline": {
@@ -374,7 +374,7 @@
     "human_action_required": false,
     "reason": "The requested offline export and shared upload are complete. Static helper analysis can continue without NMS. The indirect call target remains unproven and will eventually require a live slot/register capture."
   },
-  "next_lane_owned_step": "Trace the five helper bodies and the 13 calls to targets without .pdata; keep semantic names provisional. A new live register/slot sample is required to prove the indirect callback target.",
+  "next_lane_owned_step": "Trace the five bounded helper bodies and their call sites against the parent function dataflow, especially RSI+0x48 and the four-field completion record. Keep names provisional; prove the indirect callback target only with a live [RDX+0x10] sample.",
   "latest_shared_upload_review": {
     "path": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
     "root_event_utc": "2026-10-05T01:03:01.131Z",
@@ -471,10 +471,10 @@
     },
     "note": "Newest shared snapshot; root capture timestamp remains 2026-10-04T23:17:15.827Z. The exact-root-caller-code SHA-256 is still 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2. This is not a new runtime sample or a helper export."
   },
-  "updated_utc": "2026-10-05T01:56:58Z",
+  "updated_utc": "2026-10-05T02:01:27Z",
   "status": "static helper review complete",
-  "summary": "Matching fresh root/code export uploaded; 20 decoded call candidates agree with inventory and five bounded helper bodies validate. Indirect callback target remains unresolved.",
-  "next_action": "Trace the five helper bodies and the 13 calls to targets without .pdata; keep semantic names provisional. A new live register/slot sample is required to prove the indirect callback target.",
+  "summary": "Matching fresh root/code export uploaded; 20 decoded candidates and five bounded helper bodies validate. Other calls resolve to a return leaf and memcpy import thunk. Indirect callback target remains unresolved.",
+  "next_action": "Trace the five bounded helper bodies and their call sites against the parent function dataflow, especially RSI+0x48 and the four-field completion record. Keep names provisional; prove the indirect callback target only with a live [RDX+0x10] sample.",
   "human_intervention_required": false,
   "user_steps": []
 }
