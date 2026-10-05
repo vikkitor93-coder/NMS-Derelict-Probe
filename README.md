@@ -3,7 +3,20 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.57**. Runtime-A probe: **0.3.35**.
+Current Surveyor package: **v0.3.59**. Runtime-A probe: **0.3.38**. Version 0.3.59 adds crash-safe event journaling and always saves root-event evidence, including when exact caller or `+0x10` capture is pending.
+
+## v0.3.59 — crash-safe event recovery
+
+- Each observed trace event is appended and flushed to a per-process JSONL recovery journal immediately, independent of the 5-second session snapshot. Root events are fsynced at once; other records are fsynced in bounded batches.
+- Dungeon root events save their seed and captured universe-address metadata even if caller correlation or the owner `+0x10` read is unavailable. Pending root-event evidence does not count as a successful slot capture.
+- Upload all saved evidence includes root-event recovery JSON and the capture journal. With automatic uploads enabled, a newly saved root event is shared after a short debounce.
+- Atomic session and JSON snapshots flush data to disk before replacement. NMS/Windows runtime behavior still requires a live validation run.
+
+## v0.3.58 — one-pass caller register snapshot
+
+- Starting from the verified v0.3.57 updater ZIP (which contains probe 0.3.35), carry forward Runtime-A shared logical-entry capture and add RCX, RDX, and raw [RDX+0x10] in one hook.
+- Preserve call-entry and later root-add samples separately and correlate the snapshot with the exact root descriptor.
+- This is a source candidate; updater package publication and live NMS validation remain pending.
 
 ## v0.3.57 — fix startup layout conflict
 
