@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -1562,7 +1563,7 @@ class ToolTests(unittest.TestCase):
                 paths, producers = github_integration.all_saved_evidence_outputs()
                 self.assertIn(root_event, paths)
                 self.assertIn(journal, paths)
-                self.assertIn("runtime-probe", producers[str(root_event.resolve())])
+                self.assertIn("runtime-probe", producers[os.path.normcase(str(root_event.resolve()))])
             finally:
                 github_integration.ROOT, github_integration.WORK = original_root, original_work
 
