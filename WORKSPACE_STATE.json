@@ -1,15 +1,15 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-05T01:55:00Z",
+  "updated_utc": "2026-10-04T14:53:00Z",
   "integration": {
     "branch": "main",
-    "canonical_version": "0.3.57",
+    "canonical_version": "0.3.59",
     "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.57",
+    "candidate_version": "0.3.59",
     "candidate_branch": "main",
-    "candidate_base": "main@f1052e2bae98df16baf365934e821fdc9e5232cd",
-    "candidate_status": "tested locally; Windows UI verification pending"
+    "candidate_base": "main@12ffa582753da66651dd6db094fc562149a57b3f",
+    "candidate_status": "184 tests passed; Windows UI and live NMS validation pending"
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
@@ -35,13 +35,9 @@
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
-      "status": "helper-export-ready-awaiting-local-offline-run",
+      "status": "agent-output-published-do-not-duplicate",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "Run the DUNGEON-C v0.3.39 exporter from the complete 0.3.58-based helper ZIP against the matching installed NMS.exe; upload all saved evidence after helper bodies are produced. No game launch or traversal is needed.",
-      "artifact": "/NMS modding/NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
-      "result_summary": "Validated direct-call inventory: 33 call sites to 7 unnamed targets. Helper-body identities and the generator consumer remain unresolved; current offline helper export is ready for the matching local NMS.exe.",
-      "human_validation_required": true,
-      "latest_evidence_path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/"
+      "next_action": "Run the offline NMS.exe anchor scan from DUNGEON-C and upload the result; game runtime is not required."
     },
     "metadata": {
       "branch": "agent/metadata",
@@ -59,7 +55,7 @@
       },
       {
         "lane": "dungeon-decompile",
-        "kind": "local-offline-matching-NMS-exe-helper-export-and-upload",
+        "kind": "offline-local-NMS-exe-scan",
         "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json"
       }
     ]
@@ -75,8 +71,8 @@
       "the assigned lane manifest and only relevant files/evidence"
     ],
     "branch_rule": "For a new independent task, create a fresh branch from current main named agent/<short-lane-id>. Use agent/metadata only if it is still free when you begin.",
-    "output_rule": "Keep experimental Surveyor changes lane-specific while unfinished. Once a change is complete, validated, documented, and recoverable, publish it directly to main without waiting for a separate integration-agent merge or user approval. Update lane status/manifest, extension index and hashes when applicable, WORKSPACE_STATE.json, and AI_HANDOFF.md. A PR is optional or a fallback if direct push is unavailable. Preserve a backup branch or exact base commit and rollback steps.",
-    "autonomy_rule": "Keep working until human intervention is genuinely required. For every identified next step, first determine whether it can be done with repository files, code, available tools, or existing evidence; execute it if possible instead of merely reporting it. Diagnose failed attempts and try reasonable alternatives. After completing the objective, choose the next highest-value useful lane task. Ask the user only for a true human-only dependency; finish independent work first and provide one exact numbered recipe. If another lane blocks progress, continue independent work and prepare a concrete handoff instead of idling."
+    "output_rule": "Keep experimental Surveyor changes lane-specific, publish a manifest + reproducible patch + tests/evidence, and never push experimental changes directly to main.",
+    "autonomy_rule": "Continue within the lane until the objective is complete, blocked on another lane, or genuine human/local-machine intervention is required."
   },
   "artifact_policy": {
     "complete_zip_storage": "ChatGPT Library",
@@ -91,22 +87,5 @@
     "status": "release-candidate-pending-windows-mod-validation",
     "next_action": "Use the Surveyor archive installer with the mod archive downloaded for personal use, restart NMS, and verify same-system repeat derelict behavior.",
     "compatibility": "Mod source is 7.04; NMS 7.05 runtime not yet verified."
-  },
-  "publish_policy": {
-    "default": "direct-to-main-for-completed-work",
-    "experiments": "keep on lane branches until complete and validated",
-    "approval_required": false,
-    "backup_required": true,
-    "pr_required": false,
-    "pr_fallback": "use a lane PR only if direct push is unavailable or rejected",
-    "documentation_required": [
-      "objective and result",
-      "files changed",
-      "exact tests and results",
-      "evidence and limitations",
-      "backup reference",
-      "rollback steps",
-      "resulting main commit"
-    ]
   }
 }
