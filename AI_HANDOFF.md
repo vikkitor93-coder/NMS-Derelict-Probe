@@ -1,5 +1,9 @@
 # NMS Derelict Probe — AI handoff
 
+## DUNGEON-C helper dataflow — 2026-10-05
+
+The current-build parent conditionally processes four nonzero 32-bit fields in the order `RSI+0x50`, `+0x58`, `+0x54`, `+0x5C`. Each follows a retain-like helper, appends the value to a 32-bit resizable list at `RSI+0x40`/`+0x44`/`+0x48`, and then follows a release-like helper. The exact instruction evidence and `.pdata` limitations are in `agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json`. Field meanings, list consumers, and the actual indirect callback destination remain unproven.
+
 ## DUNGEON-C updated executable map — 2026-10-05
 
 The installed NMS.exe changed after the earlier runtime captures (current SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`). Offline byte matching and PE unwind ranges map the old bounded parent `00634930..00634E03` to current `00636760..00636C33`; its old hook offset maps to `006369F0`. The indirect caller bytes `FF 52 10` map from `02C04977` to `02C08607`. All 33 decoded direct calls retain the same position relative to the parent and map to seven current targets. See `agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json` for the target table and hashes.

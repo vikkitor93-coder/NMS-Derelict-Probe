@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-05T23:05:12Z",
+  "updated_utc": "2026-10-05T23:08:33Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.60",
@@ -35,12 +35,13 @@
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
-      "status": "current-build-static-map-validated",
+      "status": "current-build-helper-dataflow-traced",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "Continue current-build static helper dataflow; live [RDX+0x10] capture is still needed to prove indirect dispatch.",
+      "next_action": "Trace list consumption; prove indirect dispatch with live current-build [RDX+0x10] sample.",
       "latest_evidence": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
       "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
-      "current_build_static_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json"
+      "current_build_static_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
+      "helper_dataflow_review": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json"
     },
     "metadata": {
       "branch": "agent/metadata",

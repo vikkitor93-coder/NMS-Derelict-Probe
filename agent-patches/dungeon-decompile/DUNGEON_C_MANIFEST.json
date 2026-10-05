@@ -39,7 +39,7 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "Use CURRENT_BUILD_STATIC_MAP_20261005.json for current-build RVAs; continue helper dataflow. A live [RDX+0x10] sample is needed to prove indirect dispatch.",
+    "next_method": "Trace consumption of the four-field list using HELPER_DATAFLOW_20261005.json; obtain live current-build [RDX+0x10] evidence before naming indirect callback.",
     "candidate_identity_rule": "Candidate RVAs remain unnamed until full helper bodies and call semantics are validated; the runtime owner+0x10 field is not the caller's vtable slot.",
     "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/"
   },
@@ -261,5 +261,10 @@
     ],
     "direct_call_sites_matched": 33,
     "runtime_target_proven": false
+  },
+  "helper_dataflow_review": {
+    "report": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
+    "current_nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "semantic_identity_proven": false
   }
 }
