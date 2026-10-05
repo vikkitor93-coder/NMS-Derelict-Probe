@@ -2,8 +2,8 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-05T01:55:00Z",
-  "state": "helper-export-ready-awaiting-local-offline-run",
+  "reviewed_utc": "2026-10-05T01:55:39Z",
+  "state": "helper-export-validated-static-analysis-continuing",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -371,17 +371,69 @@
     }
   },
   "blocked": {
-    "reason": "The latest shared upload includes a fresh 0.3.37 root event and the full bounded function, but the code export still lacks the v0.3.39 helper candidate bodies. The matching NMS.exe cannot be transferred into this workspace (Library download helper failed twice). The 33 direct call sites across seven unnamed targets are already inventoried and validated from the bounded body.",
-    "human_action_required": true,
-    "full_traversal_required": false,
-    "nms_runtime_required": false,
-    "duplicate_capture_or_upload_required": false,
-    "needed": "Use NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip (SHA-256 94d158d2f70f09bb157f6be85537f9dfb1bbc53f5ef8c6147da882d3a41f2fed). Extract the complete ZIP to a normal local folder and run Extract-Runtime-Target-Function.cmd from its root. It includes all imported sibling tools and uses Python 3.13, then 3.12, then PATH Python. No NMS launch, fresh capture, or traversal is needed. When output contains runtime_target_function.direct_call_candidates and a bounded target_function_body, click Surveyor → GitHub / updates → Upload all saved evidence, then tell me “check”.",
-    "expected_output": "A helper-exported exact-root-caller-code-latest.json with candidate call sites plus at least one .pdata-bounded helper body; candidate identities remain heuristic pending inventory and .pdata validation.",
-    "success_condition": "The upload contains candidate helper bodies with NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4."
+    "human_action_required": false,
+    "reason": "The requested offline export and shared upload are complete. Static helper analysis can continue without NMS. The indirect call target remains unproven and will eventually require a live slot/register capture."
   },
-  "next_lane_owned_step": "Validate helper exporter candidates against the decoded callsite inventory and each helper's .pdata range. Reject non-boundary E8 byte-scan hits; trace bodies affecting RSI+0x48 and the four-field completion record.",
+  "next_lane_owned_step": "Trace the five helper bodies and the 13 calls to targets without .pdata; keep semantic names provisional. A new live register/slot sample is required to prove the indirect callback target.",
   "latest_shared_upload_review": {
+    "path": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
+    "root_event_utc": "2026-10-05T01:03:01.131Z",
+    "root_descriptor_pointer": "000001DCBF948128",
+    "code_export_sha256": "1f77e37699b97a802a768751bba4cc49cdbb1197dabc7dad73e479cdceaebf62",
+    "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "exported_call_candidates": 20,
+    "validated_helper_bodies": 5,
+    "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json"
+  },
+  "launcher_error_review": {
+    "observed": "Windows launcher reported a saved Python path prefixed by UTF-8 BOM display bytes, then import failure for analyze_nms_seed_function.",
+    "cause": "The trace path names the GitHub branch archive folder NMS-Derelict-Probe-agent-dungeon-decompile; that branch snapshot omits tools/analyze_nms_seed_function.py, a sibling imported by the extractor. The saved Python path has a BOM and fails validation, after which launcher fallback may select py/python.",
+    "disposition": "This failure explains the branch-archive attempt. The separate 0.3.37 bounded-function attachment confirms the extraction later succeeded; do not request a duplicate run or upload."
+  },
+  "evidence_paths": [
+    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/run-manifest.json",
+    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-latest.json",
+    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-code-latest.json",
+    "agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json",
+    "/NMS modding/exact-root-caller-code-latest(2).json (SHA-256 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2)",
+    "README-DUNGEON-C-HELPER-EXPORT.md",
+    "DUNGEON_C_BUILD.json",
+    "Extract-Runtime-Target-Function.cmd",
+    "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/run-manifest.json",
+    "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/exact-root-caller-latest.json",
+    "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/exact-root-caller-code-latest.json",
+    "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json"
+  ],
+  "main_package_update_check": {
+    "version_file": "main VERSION.txt: 0.3.57",
+    "workspace_state_version": "main WORKSPACE_STATE.json: 0.3.57",
+    "updater_manifest": "main update-manifest.json advertises full package 0.3.58",
+    "updater_package_sha256": "f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24",
+    "dungeon_helper_in_managed_files": false,
+    "disposition": "The 0.3.58 package does not include tools/extract_runtime_target_function.py; it is not a replacement for the separate DUNGEON-C v0.3.50 helper-export package."
+  },
+  "helper_export_build": {
+    "name": "NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
+    "sha256": "94d158d2f70f09bb157f6be85537f9dfb1bbc53f5ef8c6147da882d3a41f2fed",
+    "size_bytes": 414590,
+    "files": 160,
+    "base_surveyor_version": "0.3.58",
+    "extractor_version": "0.3.39",
+    "tests": {
+      "focused": "8/8 passed",
+      "full": "190/190 passed",
+      "compileall": "passed",
+      "json": "72 parsed",
+      "zip_integrity": "passed",
+      "windows_launcher": "static-checked only; Windows not available"
+    },
+    "launcher_fixes": [
+      "removed pushd directory change",
+      "ignores saved Python path that contained a UTF-8 BOM",
+      "checks complete package dependency script exists"
+    ]
+  },
+  "previous_shared_upload_review": {
     "path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/",
     "manifest": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/run-manifest.json",
     "uploaded_utc": "2026-10-05T00:29:07Z",
@@ -419,48 +471,10 @@
     },
     "note": "Newest shared snapshot; root capture timestamp remains 2026-10-04T23:17:15.827Z. The exact-root-caller-code SHA-256 is still 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2. This is not a new runtime sample or a helper export."
   },
-  "launcher_error_review": {
-    "observed": "Windows launcher reported a saved Python path prefixed by UTF-8 BOM display bytes, then import failure for analyze_nms_seed_function.",
-    "cause": "The trace path names the GitHub branch archive folder NMS-Derelict-Probe-agent-dungeon-decompile; that branch snapshot omits tools/analyze_nms_seed_function.py, a sibling imported by the extractor. The saved Python path has a BOM and fails validation, after which launcher fallback may select py/python.",
-    "disposition": "This failure explains the branch-archive attempt. The separate 0.3.37 bounded-function attachment confirms the extraction later succeeded; do not request a duplicate run or upload."
-  },
-  "evidence_paths": [
-    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/run-manifest.json",
-    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-latest.json",
-    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-code-latest.json",
-    "agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json",
-    "/NMS modding/exact-root-caller-code-latest(2).json (SHA-256 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2)",
-    "README-DUNGEON-C-HELPER-EXPORT.md",
-    "DUNGEON_C_BUILD.json",
-    "Extract-Runtime-Target-Function.cmd"
-  ],
-  "main_package_update_check": {
-    "version_file": "main VERSION.txt: 0.3.57",
-    "workspace_state_version": "main WORKSPACE_STATE.json: 0.3.57",
-    "updater_manifest": "main update-manifest.json advertises full package 0.3.58",
-    "updater_package_sha256": "f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24",
-    "dungeon_helper_in_managed_files": false,
-    "disposition": "The 0.3.58 package does not include tools/extract_runtime_target_function.py; it is not a replacement for the separate DUNGEON-C v0.3.50 helper-export package."
-  },
-  "helper_export_build": {
-    "name": "NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
-    "sha256": "94d158d2f70f09bb157f6be85537f9dfb1bbc53f5ef8c6147da882d3a41f2fed",
-    "size_bytes": 414590,
-    "files": 160,
-    "base_surveyor_version": "0.3.58",
-    "extractor_version": "0.3.39",
-    "tests": {
-      "focused": "8/8 passed",
-      "full": "190/190 passed",
-      "compileall": "passed",
-      "json": "72 parsed",
-      "zip_integrity": "passed",
-      "windows_launcher": "static-checked only; Windows not available"
-    },
-    "launcher_fixes": [
-      "removed pushd directory change",
-      "ignores saved Python path that contained a UTF-8 BOM",
-      "checks complete package dependency script exists"
-    ]
-  }
+  "updated_utc": "2026-10-05T01:56:58Z",
+  "status": "static helper review complete",
+  "summary": "Matching fresh root/code export uploaded; 20 decoded call candidates agree with inventory and five bounded helper bodies validate. Indirect callback target remains unresolved.",
+  "next_action": "Trace the five helper bodies and the 13 calls to targets without .pdata; keep semantic names provisional. A new live register/slot sample is required to prove the indirect callback target.",
+  "human_intervention_required": false,
+  "user_steps": []
 }
