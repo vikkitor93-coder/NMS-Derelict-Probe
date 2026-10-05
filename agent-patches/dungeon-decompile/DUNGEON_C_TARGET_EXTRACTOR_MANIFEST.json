@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "tool_version": "0.3.39",
-  "package_base": "NMS-Derelict-Probe-v0.3.50 / DUNGEON-C 1.0.3 source",
+  "package_base": "Surveyor 0.3.58 source package SHA-256 f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24 plus DUNGEON-C helper-export overlay",
   "purpose": "Export the runtime-correlated logical-entry callee body from the installed NMS.exe using its PE .pdata function range.",
   "files": [
     "Extract-Runtime-Target-Function.cmd",
@@ -31,11 +31,11 @@
   },
   "verification": {
     "focused_tests": "8/8 passed",
-    "full_suite": "177/177 passed",
+    "full_suite": "190/190 passed",
     "compileall": "python -m compileall -q tools overlay tests mod passed",
-    "live_executable_validation": "User ran tool 0.3.38 successfully on NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; extracted 1235-byte .pdata range 00634930..00634E03. Tool 0.3.39 heuristic helper-body scan awaits local rerun."
+    "live_executable_validation": "Tool 0.3.38 output validated against NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4; tool 0.3.39 helper-body export still awaits local rerun."
   },
-  "rollback": "Delete Extract-Runtime-Target-Function.cmd, tools/extract_runtime_target_function.py, this manifest, and tests/test_runtime_target_function.py; remove the additive README/CHANGELOG/AI_HANDOFF notes. Existing caller extraction and upload schema remain unchanged.",
+  "rollback": "The standalone research ZIP does not install or modify the game or canonical Surveyor package; discard the extracted folder to roll it back.",
   "launcher": {
     "python_resolution_order": [
       "Surveyor python-executable.txt",
