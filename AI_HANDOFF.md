@@ -1,5 +1,14 @@
 # NMS Derelict Probe — AI handoff
 
+## DUNGEON-C helper export review — 2026-10-05
+
+The offline helper export and shared upload are complete. The newest shared batch is `research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/`; its 01:03 root event and code export have matching descriptor `000001DCBF948128`. The 23:17 event was also exported separately for local review with matching descriptor `0000015E2450A928`; it was not the later shared batch's latest event.
+
+DUNGEON-C validated all 20 exported callsites against its 33-site decoded inventory and independently decoded their instruction boundaries. Five helper bodies match their declared byte counts, SHA-256 hashes, and `.pdata` ranges. The other 13 decoded calls reach a small `ret 0` leaf (12) and a `VCRUNTIME140.dll!memcpy` import thunk (one). See `agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json`. The indirect `FF 52 10` destination remains unproven; `00634BC0` is the runtime-correlated hook RVA within `.pdata` range `00634930..00634E03`, not that range's start. The historical 35-container baseline, earlier 16-target prediction, and user's newer physical layout/count confirmation remain separate.
+
+No further offline export or derelict traversal is needed for this step. The next DUNGEON-C work is static helper dataflow analysis; proving the indirect callback destination requires a later live slot/register capture in the runtime-dispatch lane.
+
+
 ## Current crash-recovery update — 2026-10-05
 
 The current published base is Surveyor **0.3.59**, built from v0.3.58. The working update is Surveyor **0.3.60** with probe **0.3.38**. It appends and flushes each trace event to a per-process JSONL journal, fsyncs root events immediately and other records in bounded batches, persists every dungeon root event (seed and universe metadata included) even if exact caller or `+0x10` capture is unavailable, and adds these artifacts to deduplicated Upload all saved evidence. With automatic uploads enabled, root evidence uploads after a short debounce and changed journal evidence is batched every 30 seconds, including after a successful slot capture. Pending root evidence remains distinct from a successful slot capture. Session snapshots remain periodic and are atomically flushed before replacement. The Linux test suite passes; Windows UI and live NMS validation remain outstanding.
