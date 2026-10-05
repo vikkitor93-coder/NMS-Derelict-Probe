@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-04T14:53:00Z",
+  "updated_utc": "2026-10-05T01:55:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.57",
@@ -35,9 +35,13 @@
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
-      "status": "agent-output-published-do-not-duplicate",
+      "status": "helper-export-ready-awaiting-local-offline-run",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "Run the offline NMS.exe anchor scan from DUNGEON-C and upload the result; game runtime is not required."
+      "next_action": "Run the DUNGEON-C v0.3.39 exporter from the complete 0.3.58-based helper ZIP against the matching installed NMS.exe; upload all saved evidence after helper bodies are produced. No game launch or traversal is needed.",
+      "artifact": "/NMS modding/NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
+      "result_summary": "Validated direct-call inventory: 33 call sites to 7 unnamed targets. Helper-body identities and the generator consumer remain unresolved; current offline helper export is ready for the matching local NMS.exe.",
+      "human_validation_required": true,
+      "latest_evidence_path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/"
     },
     "metadata": {
       "branch": "agent/metadata",
@@ -55,7 +59,7 @@
       },
       {
         "lane": "dungeon-decompile",
-        "kind": "offline-local-NMS-exe-scan",
+        "kind": "local-offline-matching-NMS-exe-helper-export-and-upload",
         "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json"
       }
     ]

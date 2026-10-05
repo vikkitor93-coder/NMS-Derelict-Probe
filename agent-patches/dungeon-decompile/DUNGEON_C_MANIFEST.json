@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "variant_id": "DUNGEON-C",
+  "lane": "agent/dungeon-decompile",
+  "base": "main canonical v0.3.38",
+  "base_version": "0.3.38",
+  "purpose": "Scan the installed NMS.exe offline for derelict/dungeon metadata anchors, simple RIP-relative xrefs, PE runtime-function ranges and bounded code windows for focused decompilation.",
+  "complete_zip": {
+    "name": "NMS-Derelict-Probe-v0.3.38-DUNGEON-C.zip",
+    "sha256": "06b9d015588b0ac470b4724e6fbe104d8e043a4a11ca8174c201f905b240520e",
+    "size_bytes": 313441,
+    "files": 107
+  },
+  "integration_patch": {
+    "path": "agent-patches/dungeon-decompile/dungeon-c.patch.gz.b64",
+    "encoded_sha256": "1e9291e6226ba1f76960451b862f08667039aafc25cf436d4659cb52a7455e45",
+    "decoded_patch_sha256": "c633e35c92784297ce1cccbfb210532d2541650d360b875efdbeee971c30213a",
+    "decoded_size_bytes": 30950,
+    "decode": "base64-decode, then gzip-decompress",
+    "apply_against": "canonical v0.3.38 package"
+  },
+  "changed_files": [
+    "AGENT_VARIANT.md",
+    "AI_HANDOFF.md",
+    "CHANGELOG.md",
+    "Scan-Dungeon-Decompile-Anchors.cmd",
+    "THIRD_PARTY_NOTICES.md",
+    "tests/test_tools.py",
+    "tools/github_integration.py",
+    "tools/scan_dungeon_decompile_anchors.py",
+    "tools/surveyor_controller.py"
+  ],
+  "verification": {
+    "unit_regression_tests": "116/116 passed",
+    "compileall": "passed",
+    "json_files_parsed": 35,
+    "cache_files_in_complete_zip": 0,
+    "game_memory_write_api_added": false
+  },
+  "research_status": {
+    "published_consumer_function_found": false,
+    "next_method": "The bounded callback's 33 E8 sites across seven targets are validated and published. Next run the v0.3.58-based helper-export build, then match candidate call sites and helper .pdata ranges to CALLBACK_DIRECT_CALL_INVENTORY.json before any semantic naming.",
+    "candidate_identity_rule": "Candidate RVAs remain unnamed until full helper bodies and call semantics are validated; the runtime owner+0x10 field is not the caller's vtable slot.",
+    "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/"
+  },
+  "human_validation": {
+    "required": true,
+    "game_runtime_required": false,
+    "full_derelict_traversal_required": false,
+    "duplicate_capture_or_upload_required": false,
+    "asset": "NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
+    "asset_sha256": "94d158d2f70f09bb157f6be85537f9dfb1bbc53f5ef8c6147da882d3a41f2fed",
+    "steps": [
+      "Extract the complete DUNGEON-C helper-export ZIP to a normal local folder.",
+      "Run Extract-Runtime-Target-Function.cmd from the extracted package root.",
+      "Confirm exact-root-caller-code-latest.json contains runtime_target_function.direct_call_candidates and at least one bounded target_function_body.",
+      "In Surveyor click GitHub / updates > Upload all saved evidence, then write “check” in the research chat."
+    ],
+    "success_condition": "The shared upload contains helper candidate bodies and records the matching NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4."
+  },
+  "latest_scan": {
+    "evidence_path": "research-uploads/20260930T172000Z-dungeon-decompile/dungeon-decompile-anchors-summary.json",
+    "evidence_commit": "5aa2f99015b0539ce2199a975a49197bcd6b4b6a",
+    "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "candidate_function_count": 38,
+    "multi_anchor_candidates": 0,
+    "consumer_identified": false
+  },
+  "latest_post_update_capture": {
+    "session_id": "20260930T173540Z_00001A0004E84EFD",
+    "evidence_path": "research-uploads/20260930T174712Z-analyze-generation/generation-baseline-latest.json",
+    "evidence_sha256": "22303225707d1dd8b08288c8bc2eacee70f11d64c9a6e2119a963fa9d72f4df0",
+    "universe_address_hex": "00001A0004E84EFD",
+    "root_seed_hex": "9256392A2F5A74AC",
+    "root_seed_status": "candidate-captured-unverified",
+    "inferred_preset": "MEDI_FLOATERS",
+    "preset_confidence": "high",
+    "observed_rooms": {
+      "main": 8,
+      "dead_end": 2,
+      "total": 10
+    },
+    "table_rooms_value": 7,
+    "room_model_status": "needs-review",
+    "analyzer_target_containers": 16,
+    "historical_pre_update": "CARGO_FLOATERS; 7 main + 1 dead end; 35 target containers; same root seed candidate"
+  },
+  "surveyor_ui_extension": {
+    "extension_id": "dungeon-decompile",
+    "version": "1.0.1",
+    "compatible_surveyor_api_version": "1.0",
+    "min_surveyor_version": "0.3.41",
+    "request_only": true,
+    "action_id": "research.analyze_generation",
+    "preconditions": [
+      "workflow.idle",
+      "nms.running",
+      "probe.connected"
+    ],
+    "evidence_namespace": "dungeon-decompile",
+    "index_path": "agent-ui/extensions/index.json",
+    "paths": {
+      "panel": "agent-ui/extensions/dungeon-decompile/1.0.1/panel.json",
+      "manifest": "agent-ui/extensions/dungeon-decompile/1.0.1/manifest.json",
+      "tests": "tests/test_dungeon_decompile_extension.py"
+    },
+    "sha256": {
+      "panel": "3d2a37f8331f35b1b7c3ce8e9bcf3786e8e02a822d7fc2bb5e9ff5cf24b56aff",
+      "manifest": "ba74a0d076b4d524fea3c1d65169e3065a825e85a17ae8b4471bf7d16f848c83",
+      "index": "e8c5c7553450958f573e47aca235b42ef1ad9c280317bc77535b46f555bd6152",
+      "test": "3c25783e228e6397157d82f818e187d4551dfece7a5e91c8ddfbe2e1851c201d"
+    },
+    "verification": {
+      "lane_extension_tests": "6/6 passed",
+      "host_extension_and_namespace_tests": "10/10 passed",
+      "full_host_candidate_suite": "136/136 passed",
+      "compileall": "passed",
+      "json_files_parsed": 46,
+      "tested_against": "Surveyor 0.3.41 candidate source with lane extension, manifest, evidence, and tests overlaid"
+    },
+    "rollback": "Restore index.json to dungeon-decompile/1.0.0/manifest.json, then in Surveyor Agent Console select DUNGEON-C and click Roll back to v1.0.0. Both versions remain installed; do not delete v1.0.1 files.",
+    "new_game_capture_produced_by_tests": false,
+    "parallel_index_reconciliation": {
+      "current_integration_index": [
+        {
+          "extension_id": "dungeon-decompile",
+          "version": "1.0.0",
+          "manifest_path": "dungeon-decompile/1.0.0/manifest.json"
+        }
+      ],
+      "open_lane_prs": [
+        {
+          "pr": 16,
+          "extension_id": "metadata",
+          "version": "1.0.0",
+          "manifest_path": "metadata/1.0.0/manifest.json"
+        },
+        {
+          "pr": 17,
+          "extension_id": "seed-lineage",
+          "version": "1.0.0",
+          "manifest_path": "seed-lineage/1.0.0/manifest.json"
+        },
+        {
+          "pr": 19,
+          "extension_id": "runtime-dispatch",
+          "version": "1.0.0",
+          "manifest_path": "runtime-dispatch/1.0.0/manifest.json"
+        }
+      ],
+      "integration_action": "After the companion PR extension files are present, preserve all three lane entries and replace the dungeon-decompile 1.0.0 row with 1.0.1. Exact combined index is recorded in PR #18."
+    }
+  },
+  "surveyor_ui_extension_update": {
+    "version": "1.0.2",
+    "manifest_path": "agent-ui/extensions/dungeon-decompile/1.0.2/manifest.json",
+    "panel_path": "agent-ui/extensions/dungeon-decompile/1.0.2/panel.json",
+    "panel_sha256": "3d2a37f8331f35b1b7c3ce8e9bcf3786e8e02a822d7fc2bb5e9ff5cf24b56aff",
+    "previous_versions_preserved": [
+      "1.0.0",
+      "1.0.1"
+    ],
+    "focused_tests": "6/6 passed",
+    "rollback": "Activate the retained v1.0.1 panel in Surveyor."
+  },
+  "historical_and_post_update_validation": {
+    "historical_baseline": "System 00001A0004E84EFD: S-class; 35 containers (31 Salvage + 4 Footlockers); 7 main rooms plus Room 0 dead-end; 2 vertical transitions; 1 Shuttle Bay. Preserve as historical.",
+    "later_same_address_model": "MEDI_FLOATERS is a high-confidence inference; 8 modeled main + 2 modeled dead-end rooms; 16 analyzer-predicted targets; generation table Rooms=7. Predicted counts are not physical measurements.",
+    "fresh_user_validated_run": "System 0001BF0004E84EFD / Angoto: CARGO_FLOATERS high-confidence inference; modeled 11 main rooms and 43 predicted containers (30 Salvage + 13 Footlockers) matched the user's physical traverse. User attributes changes from old system/run generation and replayability to the game update. Root seed 5B4AE67D9C2A8F61 remains candidate/unverified."
+  },
+  "latest_callback_analysis": {
+    "evidence_path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/exact-root-caller-code-latest.json",
+    "source_attachment": "exact-root-caller-code-latest(2).json",
+    "source_attachment_sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
+    "source_nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "runtime_correlated_target_function": "00634BC0",
+    "pdata_range": "00634930..00634E03",
+    "direct_callsites": 33,
+    "unique_unnamed_targets": 7,
+    "limitations": [
+      "No helper target .pdata ranges/bodies were in the attachment.",
+      "The newer v0.3.39 helper exporter has not yet produced/uploaded its candidate bodies.",
+      "owner+0x10 = 0 in the 2026-10-04 capture and does not identify the runtime caller's [RDX+0x10] dispatch slot."
+    ],
+    "attachment_shared_as": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/exact-root-caller-code-latest.json"
+  },
+  "current_shared_upload_review": {
+    "manifest": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/run-manifest.json",
+    "uploaded_utc": "2026-10-05T00:29:07Z",
+    "root_capture_utc": "2026-10-04T23:17:15.827Z",
+    "probe_version": "0.3.37",
+    "universe_address": "0001BF0004E84EFD",
+    "system_name": "Angoto",
+    "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
+    "owner_plus_0x10": "0000000000000000",
+    "target_identity": "null-or-low-address",
+    "code_export_tool_version": "0.3.37",
+    "helper_call_candidates_present": false,
+    "helper_bodies_present": false,
+    "user_action": "No new capture or traversal. Run the offline v0.3.39 helper exporter against the matching installed NMS.exe, then upload the generated artifact.",
+    "repeated_zero_samples": 3,
+    "path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/",
+    "note": "Root event remains timestamped 2026-10-04T23:17:15.827Z; its exact-root-caller-code file SHA-256 matches the preceding shared upload."
+  },
+  "main_package_update_check": {
+    "version_file": "main VERSION.txt: 0.3.57",
+    "workspace_state": "main WORKSPACE_STATE.json: 0.3.57",
+    "updater_manifest": "main update-manifest.json advertises full package 0.3.58",
+    "updater_package_sha256": "f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24",
+    "helper_exporter_in_managed_files": false,
+    "interpretation": "The v0.3.58 app package does not contain the DUNGEON-C helper exporter; use the separate v0.3.50 helper-export build for this blocked offline step."
+  },
+  "helper_export_build": {
+    "name": "NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
+    "base_surveyor_version": "0.3.58",
+    "base_package_sha256": "f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24",
+    "sha256": "94d158d2f70f09bb157f6be85537f9dfb1bbc53f5ef8c6147da882d3a41f2fed",
+    "size_bytes": 414590,
+    "files": 160,
+    "extractor_version": "0.3.39",
+    "verification": {
+      "focused_helper_tests": "8/8 passed",
+      "full_regression_tests": "190/190 passed",
+      "compileall": "passed",
+      "json_files": "72 parsed",
+      "zip_integrity": "passed",
+      "windows_launcher": "static-checked only; not executable in Linux",
+      "embedded_state_handoff": "Aligned with current main state and 2026-10-05T002907Z shared upload",
+      "library_artifact": "Updated existing Library item to version 3"
+    },
+    "included_dependencies": [
+      "tools/analyze_nms_seed_function.py",
+      "tools/extract_exact_root_caller_code.py",
+      "tools/extract_nms_caller_code.py"
+    ],
+    "launcher_changes": [
+      "No pushd/current-directory change",
+      "Does not read BOM-prone Surveyor saved Python path",
+      "Checks extractor file exists and explains complete-package requirement",
+      "Selects Python 3.13 then 3.12 then PATH python"
+    ],
+    "rollback": "Use the preceding NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-helper-export.zip (if available); no application files are installed by this research ZIP."
+  }
+}

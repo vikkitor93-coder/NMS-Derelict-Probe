@@ -1,0 +1,466 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "branch": "agent/dungeon-decompile",
+  "reviewed_utc": "2026-10-05T01:55:00Z",
+  "state": "callback-direct-call-inventory-reviewed-awaiting-helper-bodies",
+  "verified": {
+    "historical_baseline": {
+      "system": "00001A0004E84EFD",
+      "class": "S",
+      "containers_total": 35,
+      "salvage": 31,
+      "footlockers": 4,
+      "main_rooms": 7,
+      "dead_end_rooms": 1,
+      "dead_end_room_label": "Room 0",
+      "vertical_transitions": 2,
+      "shuttle_bays": 1,
+      "label": "historical; preserved without relabeling as current"
+    },
+    "earlier_post_update_model": {
+      "session_id": "20260930T173540Z_00001A0004E84EFD",
+      "preset": "MEDI_FLOATERS",
+      "preset_confidence": "high-inference",
+      "modeled_main_rooms": 8,
+      "modeled_dead_end_rooms": 2,
+      "analyzer_predicted_targets": 16,
+      "physical_count_verified": false,
+      "generation_table_rooms": 7,
+      "room_model_status": "needs-review",
+      "root_seed": "9256392A2F5A74AC (candidate/unverified)"
+    },
+    "validated_new_system_capture": {
+      "session_id": "20261004T094357Z_0001BF0004E84EFD",
+      "universe_address": "0001BF0004E84EFD",
+      "probe_version": "0.3.34",
+      "dungeon_scene_instances": 164,
+      "logical_generated_chunks": 11,
+      "preset": "CARGO_FLOATERS",
+      "preset_confidence": "high-inference",
+      "rooms": {
+        "main": 11,
+        "dead_end": 0,
+        "total": 11,
+        "source": "generation model; matched user's physical traversal"
+      },
+      "container_counts": {
+        "salvage": 30,
+        "footlockers": 13,
+        "total": 43,
+        "source": "analyzer prediction; matched user's physical traversal"
+      },
+      "user_confirmed_layout_and_counts": true,
+      "user_confirmation_utc": "2026-10-04T10:26Z",
+      "generation_table_rooms": 7,
+      "table_vs_generated_room_mismatch": "User attributes the difference to the post-update changes in dungeon generation and replayability; it is not an unexplained discrepancy. Current run remains user-validated at 11 main rooms and 43 containers; older 35-container run remains historical.",
+      "room_model_status": "user-validated-for-this-run; update explains difference from historical generation",
+      "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
+      "generation_table_interpretation": "Rooms=7 is the value present in the extracted generation-table evidence. It is not a physical room measurement. The user attributes the difference from the current 11-room traversal to the game update's changes to generation and replayability; this is recorded as user-provided explanation, not an independently verified table-version/build comparison."
+    },
+    "runtime_capture": {
+      "utc": "2026-10-04T15:12:15.676Z",
+      "probe_version": "0.3.35",
+      "capture_version": 2,
+      "root_event_utc": "2026-10-04T15:12:15.673Z",
+      "universe_address": "0001BF0004E84EFD",
+      "system_name": "Angoto",
+      "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
+      "owner_plus_0x10_slot_value": "0000000000000000",
+      "target_identity_status": "null-or-low-address",
+      "runtime_dispatch_registers_or_vtable_target_captured": false,
+      "exact_root_caller_code_attachment": "exact-root-caller-code-latest(1).json (user-attached 2026-10-04)",
+      "source_probe_version": "0.3.35",
+      "descriptor_pointer": "000001F9A4546928",
+      "system": "0001BF0004E84EFD / Angoto",
+      "caller_return_rva": "02C0497A",
+      "caller_instruction": "02C04977: FF 52 10 (call qword ptr [RDX+0x10])",
+      "runtime_target_rva": "00634BC0 (resolved by entry-hook caller-return correlation)",
+      "raw_rdx_slot_pointer_captured": false,
+      "semantic_function_identity": "unresolved"
+    },
+    "runtime_consumer_analysis": {
+      "consumer_function_found": false,
+      "static_call": "NMS+02C04977: FF 52 10 (call qword ptr [RDX+0x10])",
+      "preceding_instruction": "NMS+02C04974: 48 8B 11 (mov RDX,[RCX])",
+      "interpretation": "The indirect-call slot is based on the runtime pointer loaded into RDX from [RCX]. The captured owner+0x10 memory value is a separate address and does not establish the target of [RDX+0x10].",
+      "offline_vtable_candidates": 0,
+      "current_owner_slot": "Captured successfully as zero; this does not show a missed event, but supplies no callable target.",
+      "recommended_live_capture_fields": [
+        "exact callsite/caller return RVA",
+        "RCX object pointer",
+        "RDX vtable pointer loaded from [RCX]",
+        "qword at RDX+0x10",
+        "resolved target module/RVA"
+      ],
+      "receiver_chain_static": {
+        "source": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/exact-root-caller-latest.json",
+        "caller_return_rva": "02C0497A",
+        "disassembly_bytes": [
+          "02C0496A: 48 8B 4B 48 (mov RCX,[RBX+0x48])",
+          "02C04974: 48 8B 11 (mov RDX,[RCX])",
+          "02C04977: FF 52 10 (call qword ptr [RDX+0x10])",
+          "02C0497A: 8B F8 (mov EDI,EAX)"
+        ],
+        "conclusion": "The callback receiver is the object at [RBX+0x48]; its vtable pointer is loaded from [RCX], and the qword at vtable+0x10 is called. EAX is consumed into EDI. This is exact current-run caller-window evidence; it does not identify the receiver type or callback implementation."
+      },
+      "owner_slot_comparison": {
+        "current_capture": "Angoto run: owner+0x10 captured as 0000000000000000",
+        "earlier_capture": "older 9256392A2F5A74AC event: owner+0x10 captured as FFFFFFFF00000000",
+        "implication": "The owner-relative value differs between captures and is not the callsite's vtable slot. Treat owner+0x10 as an unrelated/unstable field until semantics are established."
+      },
+      "receiver_provenance_static": {
+        "evidence": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/exact-root-caller-latest.json, logical_entry_exact_external_caller_code_window (160 bytes; runtime-correlated caller return 02C0497A)",
+        "decoded_sequence": [
+          "48 8B 86 10 01 00 00: RAX = [RSI+0x110]",
+          "48 8B 18: RBX = [RAX]",
+          "48 83 7B 48 00: compare qword [RBX+0x48] with zero",
+          "48 8B 4B 48: RCX = [RBX+0x48]",
+          "48 8B 11; FF 52 10: RDX = [RCX]; call qword [RDX+0x10]"
+        ],
+        "inference": "The receiver is reached through a field on an element obtained from [RSI+0x110]. The receiver path is consistent with a collection/iterator-like traversal, but the window alone does not prove the base type or semantic role.",
+        "confidence": "instruction decode high; semantic interpretation low",
+        "limitation": "The capture is a bounded caller window, not a function-boundary-validated decompilation. It does not include runtime RSI/RAX/RBX/RCX/RDX values or the callback target."
+      },
+      "runtime_target_resolution": {
+        "target_function_rva": "00634BC0",
+        "status": "runtime-correlated effective target RVA resolved",
+        "proof": [
+          "Instrumented logical-entry RVA is 00634BC0.",
+          "The exact descriptor/root-seed entry record is external, recursion_depth=0, and records caller_return_offset=02C0497A.",
+          "Current static caller instruction at 02C04977 is FF 52 10; its fall-through/return RVA is 02C0497A."
+        ],
+        "interpretation": "Together, the runtime entry record and decoded indirect-call return address identify 00634BC0 as the effective callee for this event, even though the numeric RDX pointer and qword [RDX+0x10] were not separately sampled.",
+        "limits": [
+          "The function's semantic name/role is not established.",
+          "No offline vtable data candidates were found; direct raw vtable-slot capture remains absent."
+        ]
+      },
+      "callback_behavior_static": {
+        "source_attachment": "exact-root-caller-code-latest(1).json",
+        "executable_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+        "code_window_sha256": "f84b1791a2c7fa411381ca837c8ad4497c9570216435ce1e988020d7d949a00d",
+        "caller_region": "apparent function body 02C04730..02C04D90; preceding 02C04720 is a near-jump shim; no .pdata entry was included, so the function boundary is strongly suggested by code shape but not independently unwind-table validated",
+        "observed_patterns": [
+          "At 02C04977, the vcall uses RCX=[RBX+0x48], RDX=[RCX], then [RDX+0x10]; its result is compared with 1.",
+          "If result==1, the linked record is unlinked, the count at [RSI+0x118] is decremented, and a 0x58-byte record is freed; otherwise elapsed time is added to [RBX+0x50].",
+          "A second vcall at 02C04ACA uses RCX=[RDI+0x40] and the same vtable slot; its result similarly controls removal/update in a ring-buffer-like structure."
+        ],
+        "inference": "This code behaves like callback-driven timed/queue maintenance. The result==1 completion/removal interpretation is plausible from control flow, but class, callback, and subsystem names remain unknown."
+      },
+      "extracted_body": {
+        "status": "reviewed",
+        "function_start_rva": "00634930",
+        "hook_rva": "00634BC0",
+        "function_end_exclusive_rva": "00634E03",
+        "length_bytes": 1235,
+        "behavior_inference": "Four conditionally stored values at RSI+0x50/+0x54/+0x58/+0x5C; availability bits at RSI+0x1ED (bits 1/3/2/4), bit 0 set unconditionally; all-four-present boolean when an input flag is clear. Repeated helper chains update RSI+0x48. The function returns the boolean consumed by the caller-side record cleanup path.",
+        "limits": "Helper semantics, class identity, and the actual qword [RDX+0x10] dispatch target remain unresolved. Owner+0x10 zero is a separate measurement and is not the vtable slot."
+      },
+      "callback_return_correlation": "The bounded function returns the all-four-fields-present boolean in EAX; the exact external caller compares it with 1 and on true unlinks/decrements/frees the corresponding 0x58-byte record. Supports a completion-check/record-processing callback interpretation; class/subsystem identity and raw dispatch target remain unknown."
+    },
+    "user_explanation_update": {
+      "explanation": "The user says the game update changed dungeon generation and replayability, explaining why the old seven-room/35-container result and the newer generated layout differ.",
+      "attribution": "user-provided explanation; historical and current run measurements remain separate",
+      "disposition": "Do not treat the table-versus-generated room difference as an unexplained anomaly. Preserve the 35-container run as historical."
+    },
+    "runtime_callsite_analysis": {
+      "source_evidence": "research-uploads/20261004T151638Z-all-saved-evidence-6930f8b0/exact-root-caller-latest.json",
+      "source_sha256": "962b9b43a3fd64a3bea20c0b8e76ddb965347979eb55bb56c28274c4c34a439b",
+      "caller_return_rva": "02C0497A",
+      "call_instruction_rva": "02C04977",
+      "instruction": "FF 52 10",
+      "preceding_instruction": "02C04974: 48 8B 11 (mov RDX,[RCX])",
+      "interpretation": "The dispatch slot is [RDX+0x10] after RDX is loaded from [RCX]. The separately captured owner+0x10 value is zero and does not reveal the target pointer at [RDX+0x10].",
+      "new_capture_gap": "Probe 0.3.35 capture_version 2 now records the exact universe address and runtime metadata for this root event, but the uploaded record still has no RCX object, RDX vtable pointer, or dereferenced [RDX+0x10] target.",
+      "offline_vtable_candidates": 0,
+      "recommended_live_capture_fields": [
+        "exact callsite/caller return RVA",
+        "RCX object pointer",
+        "RDX vtable pointer loaded from [RCX]",
+        "qword at RDX+0x10",
+        "resolved target module/RVA"
+      ],
+      "current_run_callsite_window": {
+        "source_attachment": "exact-root-caller-code-latest(1).json",
+        "attachment_sha256": "3942f011ded5cbab7025546b9caa6bcde7d21c950193faf755839c9470dca694",
+        "source_probe_version": "0.3.35",
+        "root_seed": "5B4AE67D9C2A8F61",
+        "descriptor_pointer": "000001F9A4546928",
+        "caller_return_rva": "02C0497A",
+        "call_instruction_rva": "02C04977",
+        "instruction_hex": "FF5210",
+        "instrumented_effective_target_rva": "00634BC0",
+        "target_resolution_basis": "runtime entry-hook caller-return matched to the exact fall-through of FF 52 10, for the same descriptor and seed",
+        "raw_rdx_vtable_pointer_or_slot_value_captured": false
+      }
+    },
+    "prior_anchor_scan": {
+      "evidence_path": "research-uploads/20260930T172000Z-dungeon-decompile/dungeon-decompile-anchors-summary.json",
+      "evidence_commit": "5aa2f99015b0539ce2199a975a49197bcd6b4b6a",
+      "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "scan_exact_root_return_rva": "02BFCC1A",
+      "current_callsite_return_rva": "02C0497A",
+      "candidates": 38,
+      "candidate_at_current_callsite": false,
+      "multi_anchor_candidates": 0,
+      "conclusion": "No confirmed generator/consumer function. This scan is not sufficient to establish the candidate boundary near 02C04720 because its exact-root return RVA differs from the current caller evidence."
+    },
+    "user_interpretation_of_table_difference": {
+      "statement": "User attributes the post-update room difference to the game update changing generation and rerollability.",
+      "supported_observation": "The new system's CARGO_FLOATERS run has 11 user-confirmed main rooms while the current extracted generation table still lists 7.",
+      "limitation": "No pre-update copy of the same extracted generation table was found among the published repository snapshots, so the table-change mechanism is not independently diff-verified."
+    },
+    "latest_repeat_capture": {
+      "session_id": "20261004T151219Z_0001BF0004E84EFD",
+      "universe_address": "0001BF0004E84EFD",
+      "system_name": "Angoto",
+      "probe_version": "0.3.35",
+      "preset": "CARGO_FLOATERS",
+      "preset_confidence": "high-inference",
+      "modeled_rooms": {
+        "main": 11,
+        "dead_end": 0,
+        "total": 11
+      },
+      "analyzer_predicted_targets": {
+        "salvage": 30,
+        "footlockers": 13,
+        "total": 43
+      },
+      "root_seed": "5B4AE67D9C2A8F61",
+      "root_seed_status": "candidate-unverified",
+      "manual_room_markers": {
+        "main_rooms": 0,
+        "dead_ends": 0
+      },
+      "physical_counts_in_this_capture": false,
+      "relation_to_user_confirmed_run": "same universe address and root seed; the user previously confirmed 11 rooms and 30 Salvage + 13 Footlockers for this system",
+      "analyzer_room_model_status": "needs-review",
+      "layout_signature_sha256": "bdf33257e83d2b02d161e69ab72c64cbeb274c019031214007aa3babdc6a0c8a",
+      "multiset_signature_sha256": "d7c0b57221282039c6b97c7851945365c552939bb8d4326a189b829d44306f8a",
+      "generation_signature_sha256": "bdf33257e83d2b02d161e69ab72c64cbeb274c019031214007aa3babdc6a0c8a",
+      "signature_comparison": "All three signatures and the canonical room sequence exactly match the prior user-validated 09:43:57 capture. This is repeatability of analyzer output, not a second physical count."
+    },
+    "latest_runtime_capture": {
+      "capture_utc": "2026-10-04T20:53:18.173Z",
+      "root_event_utc": "2026-10-04T20:53:18.172Z",
+      "probe_version": "0.3.35",
+      "capture_version": 2,
+      "universe_address": "0001BF0004E84EFD",
+      "system_name": "Angoto",
+      "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
+      "descriptor_pointer": "000001192EBECD28",
+      "exact_caller_return_rva": "02C0497A",
+      "entry_sample": {
+        "utc": "2026-10-04T20:53:18.171Z",
+        "owner_pointer": "000001192EBECC00",
+        "slot_offset": "0x10",
+        "raw_value": "0000000000000000",
+        "target_identity": "null-or-low-address"
+      },
+      "root_add_sample": {
+        "utc": "2026-10-04T20:53:18.172Z",
+        "owner_pointer": "000001192EBECC00",
+        "slot_offset": "0x10",
+        "raw_value": "0000000000000000",
+        "target_identity": "null-or-low-address"
+      },
+      "samples_correlated": true,
+      "comparison": "Entry-time and root-add owner+0x10 samples are both present and tied to the same descriptor and owner. Both are zero.",
+      "interpretation_limit": "This confirms the samples were saved before the game closed. Artifact reports probe 0.3.35, so it does not validate that requested probe 0.3.36 was loaded. owner+0x10 is distinct from the [RDX+0x10] vtable dispatch slot.",
+      "repeated_owner_slot_observation": {
+        "captures": [
+          {
+            "utc": "2026-10-04T15:12:15.676Z",
+            "root_seed": "5B4AE67D9C2A8F61",
+            "owner_plus_0x10": "0000000000000000"
+          },
+          {
+            "utc": "2026-10-04T22:41:40.242Z",
+            "root_seed": "5B4AE67D9C2A8F61",
+            "owner_plus_0x10": "0000000000000000"
+          },
+          {
+            "utc": "2026-10-04T23:17:15.825Z",
+            "root_seed": "5B4AE67D9C2A8F61",
+            "owner_plus_0x10": "0000000000000000"
+          }
+        ],
+        "interpretation": "Three captures from separate sessions on system 0001BF0004E84EFD report zero at owner+0x10 while the captured owner pointer changes. This repeatability does not make it the vtable slot or identify the callback target; the raw caller dispatch target remains unresolved."
+      }
+    },
+    "runtime_target_exporter": {
+      "command": "Extract-Runtime-Target-Function.cmd",
+      "script": "tools/extract_runtime_target_function.py",
+      "lane_manifest": "agent-patches/dungeon-decompile/DUNGEON_C_TARGET_EXTRACTOR_MANIFEST.json",
+      "package": "NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-source-target-extractor.zip",
+      "package_sha256": "90a91b9dc5cab508389c22904fc8c208ef7d5d2a12ea95dfe2e446402b36b8ba",
+      "input": "%LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1\\exact-root-caller-latest.json",
+      "target_rva": "00634BC0 (from current Angoto root event)",
+      "output": "%LOCALAPPDATA%\\NMSDerelictSurveyor\\asset-work-v1\\exact-root-caller-code-latest.json#runtime_target_function",
+      "upload_route": "Upload all saved evidence; existing ACTION_OUTPUTS already includes exact-root-caller-code-latest.json",
+      "verification": {
+        "focused_tests": "6/6 passed",
+        "full_suite": "175/175 passed",
+        "compileall": "python -m compileall -q tools overlay tests mod passed",
+        "live_nms_test": "not run; not required for offline extraction"
+      }
+    },
+    "bounded_callback_call_inventory": {
+      "evidence_path": "agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json",
+      "source_attachment": "exact-root-caller-code-latest(2).json",
+      "source_attachment_sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
+      "source_probe_version": "0.3.37",
+      "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "function_range": "00634930..00634E03",
+      "function_bytes": 1235,
+      "function_sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5",
+      "decoded_direct_call_sites": 33,
+      "distinct_direct_call_targets": 7,
+      "boundary_check": "GNU objdump linear decode from the complete .pdata-bounded body start; independently recomputed all 33 E8 rel32 targets and matched decoded targets",
+      "conclusion": "Callsite boundaries/targets are enumerated. No target names or semantics assigned. The attachment has no helper .pdata ranges or helper-body bytes; user-attached bounded-body export is tool_version 0.3.37 and lacks direct_call_candidates/helper bodies from the v0.3.39 helper exporter."
+    }
+  },
+  "evidence": {
+    "shared_upload_path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/",
+    "manifest": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/run-manifest.json",
+    "reviewed_files": [
+      "run-manifest.json",
+      "generation-baseline-latest.json",
+      "generation-measurements-summary.json",
+      "generation-measurements.csv",
+      "exact-root-caller-latest.json",
+      "exact-root-caller-code-latest.json",
+      "exact-root-vtable-latest.json",
+      "dungeon-caller-code-latest.json",
+      "dungeon-upstream-callers-latest.json",
+      "dungeon-generation-table.json",
+      "dungeon-seed-function-analysis-latest.json",
+      "room-crate-index.json",
+      "asset-calculation-latest.json",
+      "crate-target-discovery.json",
+      "seed-room-correlation.json"
+    ],
+    "note": "Newest Upload all saved evidence snapshot, uploaded 2026-10-05 00:29Z. The exact root event is still from 2026-10-04 23:17Z and its code export SHA is byte-identical to the previous upload; no helper call candidates/bodies are present.",
+    "direct_user_attachment": {
+      "file": "exact-root-caller-code-latest(1).json",
+      "sha256": "3942f011ded5cbab7025546b9caa6bcde7d21c950193faf755839c9470dca694",
+      "note": "Direct conversation attachment; it has not yet been placed in the shared main all-saved-evidence folder. The correlated summary and code-window hashes are recorded above."
+    },
+    "latest_direct_attachment": {
+      "file": "exact-root-caller-code-latest(2).json",
+      "sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
+      "uploaded_to_shared_folder": true,
+      "source_probe_version": "0.3.37",
+      "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
+      "universe_address": "0001BF0004E84EFD / Angoto",
+      "descriptor_pointer": "00000254AAE08D28",
+      "external_caller_return_rva": "02C0497A",
+      "call_instruction": "02C04977: FF 52 10",
+      "owner_plus_0x10_logical_entry": "0000000000000000",
+      "owner_plus_0x10_root_add": "0000000000000000",
+      "target_identity": "null-or-low-address",
+      "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "body_sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5",
+      "pdata_range": "00634930..00634E03",
+      "hook_rva": "00634BC0 (interior offset 0x290; not function start)",
+      "callback_return_inference": "returns four-field completion boolean; exact caller tests 1 then unlinks/frees the 0x58-byte record",
+      "note": "Direct attachment reviewed, not claimed in a shared research-uploads folder.",
+      "shared_path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/exact-root-caller-code-latest.json"
+    }
+  },
+  "blocked": {
+    "reason": "The latest shared upload includes a fresh 0.3.37 root event and the full bounded function, but the code export still lacks the v0.3.39 helper candidate bodies. The matching NMS.exe cannot be transferred into this workspace (Library download helper failed twice). The 33 direct call sites across seven unnamed targets are already inventoried and validated from the bounded body.",
+    "human_action_required": true,
+    "full_traversal_required": false,
+    "nms_runtime_required": false,
+    "duplicate_capture_or_upload_required": false,
+    "needed": "Use NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip (SHA-256 94d158d2f70f09bb157f6be85537f9dfb1bbc53f5ef8c6147da882d3a41f2fed). Extract the complete ZIP to a normal local folder and run Extract-Runtime-Target-Function.cmd from its root. It includes all imported sibling tools and uses Python 3.13, then 3.12, then PATH Python. No NMS launch, fresh capture, or traversal is needed. When output contains runtime_target_function.direct_call_candidates and a bounded target_function_body, click Surveyor → GitHub / updates → Upload all saved evidence, then tell me “check”.",
+    "expected_output": "A helper-exported exact-root-caller-code-latest.json with candidate call sites plus at least one .pdata-bounded helper body; candidate identities remain heuristic pending inventory and .pdata validation.",
+    "success_condition": "The upload contains candidate helper bodies with NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4."
+  },
+  "next_lane_owned_step": "Validate helper exporter candidates against the decoded callsite inventory and each helper's .pdata range. Reject non-boundary E8 byte-scan hits; trace bodies affecting RSI+0x48 and the four-field completion record.",
+  "latest_shared_upload_review": {
+    "path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/",
+    "manifest": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/run-manifest.json",
+    "uploaded_utc": "2026-10-05T00:29:07Z",
+    "exact_root_event": {
+      "utc": "2026-10-04T23:17:15.827Z",
+      "probe_version": "0.3.37",
+      "universe_address": "0001BF0004E84EFD",
+      "system_name": "Angoto",
+      "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
+      "descriptor_pointer": "0000015E2450A928",
+      "caller_return_rva": "02C0497A",
+      "owner_pointer": "0000015E2450A800",
+      "owner_plus_0x10": "0000000000000000",
+      "target_identity": "null-or-low-address"
+    },
+    "exported_code": {
+      "path": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-code-latest.json",
+      "sha256": "207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2",
+      "tool_version": "0.3.37",
+      "runtime_function_range": "00634930..00634E03",
+      "function_sha256": "902813092d71c46ae1068923f0aa198e897ab219b3fe29fca1de52bd15b779d5",
+      "direct_call_candidates_present": false,
+      "helper_bodies_present": false
+    },
+    "generation_summary": {
+      "source": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/generation-baseline-latest.json",
+      "session": "20261004T151219Z_0001BF0004E84EFD",
+      "source_probe_version": "0.3.35",
+      "system": "0001BF0004E84EFD / Angoto",
+      "preset": "CARGO_FLOATERS (high-confidence inference)",
+      "modeled_rooms": "11 main, 0 dead-end",
+      "predicted_containers": "43 (30 Salvage + 13 Footlockers)",
+      "user_physical_confirmation": "matched user's physical traversal",
+      "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)"
+    },
+    "note": "Newest shared snapshot; root capture timestamp remains 2026-10-04T23:17:15.827Z. The exact-root-caller-code SHA-256 is still 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2. This is not a new runtime sample or a helper export."
+  },
+  "launcher_error_review": {
+    "observed": "Windows launcher reported a saved Python path prefixed by UTF-8 BOM display bytes, then import failure for analyze_nms_seed_function.",
+    "cause": "The trace path names the GitHub branch archive folder NMS-Derelict-Probe-agent-dungeon-decompile; that branch snapshot omits tools/analyze_nms_seed_function.py, a sibling imported by the extractor. The saved Python path has a BOM and fails validation, after which launcher fallback may select py/python.",
+    "disposition": "This failure explains the branch-archive attempt. The separate 0.3.37 bounded-function attachment confirms the extraction later succeeded; do not request a duplicate run or upload."
+  },
+  "evidence_paths": [
+    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/run-manifest.json",
+    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-latest.json",
+    "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/exact-root-caller-code-latest.json",
+    "agent-patches/dungeon-decompile/CALLBACK_DIRECT_CALL_INVENTORY.json",
+    "/NMS modding/exact-root-caller-code-latest(2).json (SHA-256 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2)",
+    "README-DUNGEON-C-HELPER-EXPORT.md",
+    "DUNGEON_C_BUILD.json",
+    "Extract-Runtime-Target-Function.cmd"
+  ],
+  "main_package_update_check": {
+    "version_file": "main VERSION.txt: 0.3.57",
+    "workspace_state_version": "main WORKSPACE_STATE.json: 0.3.57",
+    "updater_manifest": "main update-manifest.json advertises full package 0.3.58",
+    "updater_package_sha256": "f1425f534bc9b6f26f45f4c4311d56ce506bff5e29af9e3d0f3287fb8b207b24",
+    "dungeon_helper_in_managed_files": false,
+    "disposition": "The 0.3.58 package does not include tools/extract_runtime_target_function.py; it is not a replacement for the separate DUNGEON-C v0.3.50 helper-export package."
+  },
+  "helper_export_build": {
+    "name": "NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
+    "sha256": "94d158d2f70f09bb157f6be85537f9dfb1bbc53f5ef8c6147da882d3a41f2fed",
+    "size_bytes": 414590,
+    "files": 160,
+    "base_surveyor_version": "0.3.58",
+    "extractor_version": "0.3.39",
+    "tests": {
+      "focused": "8/8 passed",
+      "full": "190/190 passed",
+      "compileall": "passed",
+      "json": "72 parsed",
+      "zip_integrity": "passed",
+      "windows_launcher": "static-checked only; Windows not available"
+    },
+    "launcher_fixes": [
+      "removed pushd directory change",
+      "ignores saved Python path that contained a UTF-8 BOM",
+      "checks complete package dependency script exists"
+    ]
+  }
+}
