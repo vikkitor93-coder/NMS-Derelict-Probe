@@ -109,7 +109,27 @@
         "pdata_entry": null,
         "interpretation": "Import jump thunk; it is not an internal helper body."
       }
-    ]
+    ],
+    "parent_callsite_trace": {
+      "repeated_four_times": [
+        "001C6B30",
+        "02D627A0",
+        "02D65980",
+        "0020D560",
+        "02D61CE0"
+      ],
+      "observed_first_group": [
+        "00634C45: mov eax,[rsi+0x50]",
+        "00634C53: call 02D65980 with RCX=&[rbp+0x78] after storing EAX there",
+        "00634C5C: call 001AE230 (ret 0 leaf)",
+        "00634C61: mov r8,[rsi+0x48]",
+        "00634C84: call 0020D560",
+        "00634C8D: mov [rsi+0x48],rax",
+        "00634C91: call 02D61CE0",
+        "00634C9C: call 001AE230 (ret 0 leaf)"
+      ],
+      "observation": "The parent repeats this helper family around each of four conditional field values. It passes the current RSI+0x48 value to the 0020D560 call and stores the returned RAX back to RSI+0x48. The short .pdata ranges for 02D627A0 and 02D61CE0 branch beyond their exported slices; semantic names are not established."
+    }
   },
   "interpretation": {
     "confirmed": "The refreshed code export matches the uploaded 01:03 descriptor and supplies five byte-verified .pdata-bounded helper bodies. All 20 exported E8 sites are decoded instruction boundaries and appear in the prior call inventory. The 13 excluded calls resolve to a three-byte return leaf (12 sites) and a memcpy import thunk (one site).",
