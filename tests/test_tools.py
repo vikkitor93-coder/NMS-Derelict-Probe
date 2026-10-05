@@ -1135,7 +1135,7 @@ class ToolTests(unittest.TestCase):
 
 
     def test_v0322_version_marker(self):
-        self.assertEqual("0.3.59", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.60", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
 
     def test_v0322_probe_exposes_background_research_buttons(self):
         source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
@@ -1367,7 +1367,7 @@ class ToolTests(unittest.TestCase):
         self.assertNotIn("Test-Runtime", start_nms)
         self.assertNotIn("Python.Python.3.12", start_nms)
         self.assertNotIn("import pymhf; import nmspy", start_nms)
-        self.assertIn('CONTROLLER_VERSION = "0.3.59"', controller)
+        self.assertIn('CONTROLLER_VERSION = "0.3.60"', controller)
         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
 
     def test_github_update_buttons_use_a_separate_geometry_parent(self):
@@ -1428,7 +1428,7 @@ class ToolTests(unittest.TestCase):
             self.assertIn(token, probe)
 
     def test_v0330_version(self):
-        self.assertEqual("0.3.59", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.60", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
 
     def test_v0328_seed_function_relrefs_classify_recursion(self):
@@ -1545,6 +1545,8 @@ class ToolTests(unittest.TestCase):
         self.assertIn('self._persist_root_event(event)', probe)
         self.assertIn('def _maybe_auto_upload_root_event(self)', controller)
         self.assertIn('"all-saved-evidence", "--only-if-changed"', controller)
+        self.assertIn("AUTO_EVIDENCE_UPLOAD_INTERVAL_SECONDS = 30.0", controller)
+        self.assertIn("recovery_evidence_last_upload >= AUTO_EVIDENCE_UPLOAD_INTERVAL_SECONDS", controller)
 
     def test_upload_all_discovers_root_event_and_capture_journals(self):
         with tempfile.TemporaryDirectory() as temp:
