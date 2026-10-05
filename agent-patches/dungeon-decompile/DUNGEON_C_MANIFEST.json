@@ -39,24 +39,19 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "The bounded callback's 33 E8 sites across seven targets are validated and published. Next run the v0.3.58-based helper-export build, then match candidate call sites and helper .pdata ranges to CALLBACK_DIRECT_CALL_INVENTORY.json before any semantic naming.",
+    "next_method": "Trace the five helper bodies and the 13 calls to targets without .pdata; keep semantic names provisional. A new live register/slot sample is required to prove the indirect callback target.",
     "candidate_identity_rule": "Candidate RVAs remain unnamed until full helper bodies and call semantics are validated; the runtime owner+0x10 field is not the caller's vtable slot.",
     "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/"
   },
   "human_validation": {
-    "required": true,
+    "required": false,
     "game_runtime_required": false,
     "full_derelict_traversal_required": false,
     "duplicate_capture_or_upload_required": false,
     "asset": "NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
     "asset_sha256": "94d158d2f70f09bb157f6be85537f9dfb1bbc53f5ef8c6147da882d3a41f2fed",
-    "steps": [
-      "Extract the complete DUNGEON-C helper-export ZIP to a normal local folder.",
-      "Run Extract-Runtime-Target-Function.cmd from the extracted package root.",
-      "Confirm exact-root-caller-code-latest.json contains runtime_target_function.direct_call_candidates and at least one bounded target_function_body.",
-      "In Surveyor click GitHub / updates > Upload all saved evidence, then write “check” in the research chat."
-    ],
-    "success_condition": "The shared upload contains helper candidate bodies and records the matching NMS.exe SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4."
+    "steps": [],
+    "success_condition": "Completed: matching descriptor and five validated bounded helper bodies are in the shared upload."
   },
   "latest_scan": {
     "evidence_path": "research-uploads/20260930T172000Z-dungeon-decompile/dungeon-decompile-anchors-summary.json",
@@ -185,22 +180,12 @@
     "attachment_shared_as": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/exact-root-caller-code-latest.json"
   },
   "current_shared_upload_review": {
-    "manifest": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/run-manifest.json",
-    "uploaded_utc": "2026-10-05T00:29:07Z",
-    "root_capture_utc": "2026-10-04T23:17:15.827Z",
-    "probe_version": "0.3.37",
-    "universe_address": "0001BF0004E84EFD",
-    "system_name": "Angoto",
-    "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
-    "owner_plus_0x10": "0000000000000000",
-    "target_identity": "null-or-low-address",
-    "code_export_tool_version": "0.3.37",
-    "helper_call_candidates_present": false,
-    "helper_bodies_present": false,
-    "user_action": "No new capture or traversal. Run the offline v0.3.39 helper exporter against the matching installed NMS.exe, then upload the generated artifact.",
-    "repeated_zero_samples": 3,
-    "path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/",
-    "note": "Root event remains timestamped 2026-10-04T23:17:15.827Z; its exact-root-caller-code file SHA-256 matches the preceding shared upload."
+    "path": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
+    "root_event_utc": "2026-10-05T01:03:01.131Z",
+    "descriptor_pointer": "000001DCBF948128",
+    "helper_bodies_validated": 5,
+    "callsite_inventory_matches": 20,
+    "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json"
   },
   "main_package_update_check": {
     "version_file": "main VERSION.txt: 0.3.57",
@@ -240,5 +225,30 @@
       "Selects Python 3.13 then 3.12 then PATH python"
     ],
     "rollback": "Use the preceding NMS-Derelict-Probe-v0.3.50-DUNGEON-C-1.0.3-helper-export.zip (if available); no application files are installed by this research ZIP."
+  },
+  "previous_shared_upload_review": {
+    "manifest": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/run-manifest.json",
+    "uploaded_utc": "2026-10-05T00:29:07Z",
+    "root_capture_utc": "2026-10-04T23:17:15.827Z",
+    "probe_version": "0.3.37",
+    "universe_address": "0001BF0004E84EFD",
+    "system_name": "Angoto",
+    "root_seed": "5B4AE67D9C2A8F61 (candidate/unverified)",
+    "owner_plus_0x10": "0000000000000000",
+    "target_identity": "null-or-low-address",
+    "code_export_tool_version": "0.3.37",
+    "helper_call_candidates_present": false,
+    "helper_bodies_present": false,
+    "user_action": "No new capture or traversal. Run the offline v0.3.39 helper exporter against the matching installed NMS.exe, then upload the generated artifact.",
+    "repeated_zero_samples": 3,
+    "path": "research-uploads/20261005T002907Z-all-saved-evidence-96c22a7b/",
+    "note": "Root event remains timestamped 2026-10-04T23:17:15.827Z; its exact-root-caller-code file SHA-256 matches the preceding shared upload."
+  },
+  "helper_export_review": {
+    "status": "offline-export-and-upload-complete",
+    "reviewed_utc": "2026-10-05T01:55:39Z",
+    "report": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
+    "helper_bodies_validated": 5,
+    "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4"
   }
 }

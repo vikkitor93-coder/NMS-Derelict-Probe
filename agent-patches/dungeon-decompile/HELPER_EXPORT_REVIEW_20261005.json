@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "reviewed_utc": "2026-10-05T01:55:39Z",
+  "shared_upload": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5",
+  "source_root_event": {
+    "utc": "2026-10-05T01:03:01.131Z",
+    "descriptor_pointer": "000001DCBF948128"
+  },
+  "historical_2317_event": {
+    "utc": "2026-10-04T23:17:15.825Z",
+    "descriptor_pointer": "0000015E2450A928",
+    "local_export_sha256": "ecfae8e0f4f293cbe3d08ab02ef07aefc1e38063b8953f46fc8d400816221025",
+    "shared_upload_contains_this_export": false
+  },
+  "uploaded_code_export": {
+    "sha256": "1f77e37699b97a802a768751bba4cc49cdbb1197dabc7dad73e479cdceaebf62",
+    "descriptor_pointer": "000001DCBF948128",
+    "tool_version": "0.3.39",
+    "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "runtime_correlated_hook_rva": "00634BC0",
+    "hook_is_pdata_start": false,
+    "pdata_range": [
+      "00634930",
+      "00634E03"
+    ],
+    "caller_instruction_rva": "02C04977",
+    "caller_instruction_bytes": "FF5210",
+    "caller_return_rva": "02C0497A"
+  },
+  "validation": {
+    "method": "Compare exported callsite/target pairs to CALLBACK_DIRECT_CALL_INVENTORY.json; independently decode the bounded function with iced_x86 on Windows; validate every helper byte count, SHA-256, and .pdata start/end.",
+    "decoded_direct_calls": 33,
+    "inventory_matches": 33,
+    "exported_candidates": 20,
+    "exported_candidates_matching_inventory": 20,
+    "exported_nonboundary_hits": 0,
+    "bounded_helper_bodies": 5,
+    "helper_bodies_validated": 5,
+    "inventory_calls_not_exported": 13,
+    "excluded_targets_without_pdata": [
+      {
+        "rva": "033E0FE6",
+        "inventory_calls": 1
+      },
+      {
+        "rva": "001AE230",
+        "inventory_calls": 12
+      }
+    ],
+    "bounded_helpers": [
+      {
+        "target_rva": "001C6B30",
+        "callsite_rva": "00634A4D",
+        "pdata_begin_rva": "001C6B30",
+        "pdata_end_exclusive_rva": "001C6B7D",
+        "byte_count": 77,
+        "sha256": "fef4b6840c42e88f7156108d2fc9b0f8add13e1a87daa7fb1bee1ee217668202"
+      },
+      {
+        "target_rva": "02D627A0",
+        "callsite_rva": "00634AEA",
+        "pdata_begin_rva": "02D627A0",
+        "pdata_end_exclusive_rva": "02D627CC",
+        "byte_count": 44,
+        "sha256": "709476122eebe9b023d4389b4e46b04becf902d0b6aee86758492d5da4d8ebf5"
+      },
+      {
+        "target_rva": "02D65980",
+        "callsite_rva": "00634C53",
+        "pdata_begin_rva": "02D65980",
+        "pdata_end_exclusive_rva": "02D659E0",
+        "byte_count": 96,
+        "sha256": "1fcfd64dd08ae3bd873a5d3ee50d3a9cf6029a4b6e165aa6a41257a3a3b2ce9f"
+      },
+      {
+        "target_rva": "0020D560",
+        "callsite_rva": "00634C84",
+        "pdata_begin_rva": "0020D560",
+        "pdata_end_exclusive_rva": "0020D5D2",
+        "byte_count": 114,
+        "sha256": "43175ef895c68d4772d3e0e8d070c031beb5def668553fa0b0f22ff28799a53a"
+      },
+      {
+        "target_rva": "02D61CE0",
+        "callsite_rva": "00634C91",
+        "pdata_begin_rva": "02D61CE0",
+        "pdata_end_exclusive_rva": "02D61CEF",
+        "byte_count": 15,
+        "sha256": "f4da791a5919b8949802b7f70110415cbc1e7c60720925fc53b4ede026876e0e"
+      }
+    ]
+  },
+  "interpretation": {
+    "confirmed": "The refreshed code export matches the uploaded 01:03 descriptor and supplies five byte-verified .pdata-bounded helper bodies. All 20 exported E8 sites are decoded instruction boundaries and appear in the prior call inventory.",
+    "inference": "These helpers participate in the function containing the runtime-correlated 00634BC0 hook; their semantic role and the indirect caller destination remain unproven.",
+    "limits": [
+      "FF 52 10 at 02C04977 calls through [RDX+0x10]; the separately sampled owner+0x10 field is not that slot.",
+      "00634BC0 lies inside the .pdata range 00634930..00634E03, so it is a hook RVA, not the function start.",
+      "The exporter omits 13 decoded calls to two executable targets without .pdata entries.",
+      "A .pdata range can end before all branch destinations; do not name a helper based solely on this bounded slice.",
+      "The 35-container historical baseline, 16-target prediction, and user-confirmed newer room/crate counts remain separate."
+    ]
+  },
+  "next_lane_step": "Trace the five helper bodies and the 13 calls to targets without .pdata; keep semantic names provisional. A new live register/slot sample is required to prove the indirect callback target."
+}
