@@ -530,6 +530,12 @@
 - `Prepare-Crate-Assets.cmd` now also extracts `BASEBUILDINGOBJECTSTABLE.MBIN`, `BASEBUILDINGPARTSTABLE.MBIN`, and `FREIGHTERDUNGEONSTABLE.MBIN`, then emits `crate-target-discovery.json`.
 - Adds a permanent v0.3.6 research fixture recording that 126/126 used dungeon scene instances resolved, but the static index predicted 0 Salvage Crates + 19 Crew Footlockers. The 19 result is explicitly diagnostic, not accepted as the true target total.
 - Regression suite expanded to cover entity-reference discovery and the v0.3.6 salvage-gap failure mode.
+# 0.3.58 — one-pass caller register snapshot
+
+- Build Runtime-A probe 0.3.37 from the verified Surveyor 0.3.57 updater payload, which contains probe 0.3.35.
+- Retain the shared logical-entry owner+0x10 sample and add RCX/RDX snapshots for all callers through one hook; keep root-add capture distinct.
+- Package publication and live Windows/NMS validation remain pending.
+
 # 0.3.57 — fix startup layout conflict
 
 - Put GitHub update buttons in their own child frame, avoiding the Tk `pack`/`grid` parent conflict that prevented Surveyor from starting.
@@ -547,3 +553,10 @@
 - Persist the full root event, runtime metadata, event timestamp, and universe address in the atomically saved exact-root capture so Upload all saved evidence carries the live capture after NMS exits.
 - Capture runtime metadata before writing the exact-root artifact; preserve a null address and any capture error explicitly when unavailable.
 - Keep existing schema version 1 fields and upload paths backward compatible.
+# 0.3.59 — crash-safe event journal and root-event recovery
+
+- Flush every trace event to a per-process JSONL journal immediately, including events observed before a recording session starts; fsync root events and at bounded intervals to protect recovery data without forcing a disk sync for every hook callback.
+- Atomically save the dungeon root event, seed, and universe-address metadata even when exact caller correlation or the `+0x10` slot capture is still pending. Keep pending root evidence separate from the exact-slot capture so it cannot falsely satisfy Runtime-A's capture check.
+- Add root events and capture journals to Upload all saved evidence. When automatic uploads are enabled, Surveyor shares a newly saved pending root event with all lanes after a short debounce.
+- Keep the 5-second session snapshot and atomic writes, now with explicit flush/fsync before replacement.
+- Tests cover durable journal calls, pending root persistence, upload discovery, and automatic upload fallback. Live Windows/NMS validation remains required.
