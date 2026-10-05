@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "reviewed_utc": "2026-10-05T23:08:33Z",
+  "current_nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+  "source_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
+  "method": "Offline iced_x86 linear decode of the current executable, checked against the parent callsites and the helper instruction sequences. These are static observations, not runtime dispatch evidence.",
+  "parent": {
+    "pdata_range": [
+      "00636760",
+      "00636C33"
+    ],
+    "four_conditional_source_fields": [
+      "RSI+0x50",
+      "RSI+0x58",
+      "RSI+0x54",
+      "RSI+0x5C"
+    ],
+    "field_order_as_executed": [
+      "RSI+0x50",
+      "RSI+0x58",
+      "RSI+0x54",
+      "RSI+0x5C"
+    ],
+    "each_nonzero_path": [
+      "copy 32-bit field to temporary [RBP+0x78]",
+      "call 02D69720 with temporary address",
+      "pass temporary address as stack argument to 0020D560",
+      "store returned RAX at [RSI+0x48]",
+      "call 02D65A80 with temporary address"
+    ],
+    "list_layout_observed": {
+      "RSI+0x40": "32-bit capacity at helper RCX+0",
+      "RSI+0x44": "32-bit count at helper RCX+4",
+      "RSI+0x48": "backing-array pointer passed in R8 and replaced with helper return value"
+    },
+    "claim": "The function conditionally passes up to four nonzero 32-bit values through the same append path. Their domain meaning is not established."
+  },
+  "helpers": [
+    {
+      "rva": "02D69720",
+      "evidence": [
+        "reads 32-bit value from [RCX]",
+        "uses the value as a one-based index into a pointer table",
+        "on eligible entry, lock inc dword [entry+0x134]"
+      ],
+      "inference": "Looks like retaining or acquiring a referenced handle; eligibility checks and called subroutine remain unclassified."
+    },
+    {
+      "rva": "02D65A80",
+      "evidence": [
+        "reads 32-bit value from [RCX]",
+        "uses the value as a one-based index into the same pointer-table layout",
+        "lock xadd [entry+0x134], -1",
+        "takes extra path when the previous count was 1"
+      ],
+      "inference": "Looks like releasing a referenced handle; the later cleanup path has not been fully classified.",
+      "pdata_caveat": "Its .pdata range ends at 02D65A8F, but a branch at 02D65A89 reaches 02D65B8B; bounded exporter bytes alone do not cover the full control flow."
+    },
+    {
+      "rva": "0020D560",
+      "evidence": [
+        "reads capacity from [RCX] and count from [RCX+4]",
+        "uses count*4 to locate a 32-bit element",
+        "on spare-capacity path copies [stack argument] into the element, increments count, and returns the current backing pointer",
+        "on growth path calls 02BF9F00 then returns the new backing pointer in RAX"
+      ],
+      "inference": "Appends a 32-bit value to a resizable list.",
+      "pdata_caveat": "Its .pdata range ends at 0020D5D2, while control flow continues through the growth path to a return at 0020D728; the exporter body covers only the initial range."
+    },
+    {
+      "rva": "001AE230",
+      "evidence": [
+        "C2 00 00: ret 0"
+      ],
+      "inference": "The observed calls have no additional body in this build."
+    }
+  ],
+  "limits": [
+    "No semantic names for the four fields or list elements are established.",
+    "The parent was mapped from an older runtime-correlated function; the current indirect [RDX+0x10] destination remains unmeasured.",
+    "No current-build game event or physical derelict result was captured."
+  ],
+  "next_step": "Inspect how this populated list is consumed and obtain a live current-build [RDX+0x10] slot sample before asserting callback identity."
+}
