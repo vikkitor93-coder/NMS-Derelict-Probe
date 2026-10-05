@@ -1,5 +1,11 @@
 # NMS Derelict Probe — AI handoff
 
+## DUNGEON-C updated executable map — 2026-10-05
+
+The installed NMS.exe changed after the earlier runtime captures (current SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`). Offline byte matching and PE unwind ranges map the old bounded parent `00634930..00634E03` to current `00636760..00636C33`; its old hook offset maps to `006369F0`. The indirect caller bytes `FF 52 10` map from `02C04977` to `02C08607`. All 33 decoded direct calls retain the same position relative to the parent and map to seven current targets. See `agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json` for the target table and hashes.
+
+These are static cross-build mappings, not a new runtime root event or proof that `[RDX+0x10]` resolves to the mapped parent. Use current-build RVAs only with the matching executable; retain the earlier runtime and gameplay evidence as historical.
+
 ## DUNGEON-C helper export review — 2026-10-05
 
 The offline helper export and shared upload are complete. The newest shared batch is `research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/`; its 01:03 root event and code export have matching descriptor `000001DCBF948128`. The 23:17 event was also exported separately for local review with matching descriptor `0000015E2450A928`; it was not the later shared batch's latest event.

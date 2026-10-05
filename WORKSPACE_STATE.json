@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-05T02:12:02Z",
+  "updated_utc": "2026-10-05T23:05:12Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.60",
@@ -35,11 +35,12 @@
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
-      "status": "helper-export-validated-static-analysis-continuing",
+      "status": "current-build-static-map-validated",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "Trace five validated helper bodies; a later live [RDX+0x10] sample is needed to prove the indirect callback target.",
+      "next_action": "Continue current-build static helper dataflow; live [RDX+0x10] capture is still needed to prove indirect dispatch.",
       "latest_evidence": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
-      "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json"
+      "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
+      "current_build_static_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json"
     },
     "metadata": {
       "branch": "agent/metadata",
