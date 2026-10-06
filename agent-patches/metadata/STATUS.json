@@ -3,17 +3,20 @@
   "status": "needs-human-input",
   "state": "waiting_for_user",
   "human_intervention_required": true,
-  "surveyor_request": "Use the METADATA-D panel's Prepare assets + upload action to publish current freighter asset evidence in the metadata namespace.",
+  "summary": "METADATA-D 1.0.1 is published. Existing all-saved uploads are snapshots of prior outputs, not proof of a dedicated metadata Prepare assets action. Direct DungeonOptions/Weighting mapping and Windows refresh/rollback remain unverified.",
+  "surveyor_request": "Use the METADATA-D panel's Prepare assets + upload action once and return its completion result and run manifest.",
   "user_steps": [
-    "Open Surveyor 0.3.41 or later with shared Agent Console API 1.0.",
-    "Select the metadata lane in Agent Console.",
-    "Click Prepare assets + upload.",
-    "Wait for the completion result and return to Main with: check."
+    "Open the current Surveyor on Windows and click Check lane extensions.",
+    "Confirm METADATA-D 1.0.1 is active and select the metadata lane.",
+    "Click Prepare assets + upload and wait for Surveyor to report completion.",
+    "Return with the completion result and the new timestamped metadata prepare-assets folder or run manifest; if it fails, return the exact error text."
   ],
-  "success_condition": "Surveyor reports the action completed and GitHub contains a timestamped metadata/prepare-assets upload folder.",
+  "success_condition": "Surveyor reports completion and GitHub contains a new timestamped metadata prepare-assets upload with its run manifest.",
   "evidence_to_return": [
-    "The new timestamped metadata upload folder and run manifest."
+    "New timestamped metadata prepare-assets folder and run manifest",
+    "Surveyor completion result or exact error text"
   ],
   "full_derelict_required": false,
-  "updated_utc": "2026-10-01T01:12:53Z"
+  "evidence_review": "agent-patches/metadata/EVIDENCE_REVIEW_20261006.md",
+  "updated_utc": "2026-10-06T23:47:18Z"
 }
