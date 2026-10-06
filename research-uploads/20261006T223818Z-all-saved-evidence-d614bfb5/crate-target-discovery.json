@@ -1,0 +1,2039 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\Vikman\\AppData\\Local\\NMSDerelictSurveyor\\asset-work-v1\\extracted",
+  "session_id": "20260929T144401Z_0001550006607CAC",
+  "probe_version": "0.3.5",
+  "universe_address_hex": "0001550006607CAC",
+  "pre_entry_seconds": 15.0,
+  "used_dungeon_scene_types": 68,
+  "used_dungeon_scene_instances": 126,
+  "resolved_used_scene_types": 68,
+  "missing_used_scene_paths": [],
+  "metadata_target_windows": {
+    "ABAND_CRATE_M": [
+      {
+        "table": "METADATA/REALITY/TABLES/BASEBUILDINGOBJECTSTABLE.MBIN",
+        "offset": 6755576,
+        "nearby_asset_refs": [
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/CRATEM_PLACEMENT.SCENE.MBIN"
+        ]
+      },
+      {
+        "table": "METADATA/REALITY/TABLES/BASEBUILDINGOBJECTSTABLE.MBIN",
+        "offset": 6755622,
+        "nearby_asset_refs": [
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/CRATEM_PLACEMENT.SCENE.MBIN"
+        ]
+      },
+      {
+        "table": "METADATA/REALITY/TABLES/BASEBUILDINGPARTSTABLE.MBIN",
+        "offset": 1035646,
+        "nearby_asset_refs": [
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/CRATEM.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/HEATER.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/INTERACTIVE_CASE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/MEDTUBE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/PLANT_TUBE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/FOLIAGE/SHELLWHITE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/FOLIAGE/WEIRDCUBE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/FOLIAGE/WEIRDCUBE_LOD.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/BENCH.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/CRATE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/LARGE_CRATE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/LARGE_LIGHT.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/SHELVING.SCENE.MBIN"
+        ]
+      },
+      {
+        "table": "METADATA/REALITY/TABLES/BASEBUILDINGPARTSTABLE.MBIN",
+        "offset": 1035693,
+        "nearby_asset_refs": [
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/CRATEM.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/HEATER.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/INTERACTIVE_CASE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/MEDTUBE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/PLANT_TUBE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/FOLIAGE/SHELLWHITE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/FOLIAGE/WEIRDCUBE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/FOLIAGE/WEIRDCUBE_LOD.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/BENCH.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/CRATE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/LARGE_CRATE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/LARGE_LIGHT.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/SHELVING.SCENE.MBIN"
+        ]
+      }
+    ],
+    "FOOTLOCKER": [
+      {
+        "table": "METADATA/REALITY/TABLES/BASEBUILDINGOBJECTSTABLE.MBIN",
+        "offset": 6795460,
+        "nearby_asset_refs": [
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/FOOT_LOCKER_PLACEMENT.SCENE.MBIN"
+        ]
+      },
+      {
+        "table": "METADATA/REALITY/TABLES/BASEBUILDINGOBJECTSTABLE.MBIN",
+        "offset": 6795503,
+        "nearby_asset_refs": [
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/FOOT_LOCKER_PLACEMENT.SCENE.MBIN"
+        ]
+      },
+      {
+        "table": "METADATA/REALITY/TABLES/BASEBUILDINGPARTSTABLE.MBIN",
+        "offset": 1041321,
+        "nearby_asset_refs": [
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/FOOT_LOCKER.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/INTERACTIVE_CASE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/LOCKER2.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/BARREL.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/BENCH.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/CRATE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/LARGE_CRATE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/PALLET.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/SHELVING.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/UTILITYPARTS/MODULE_GASEXTRACTOR.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/UTILITYPARTS/MODULE_GASEXTRACTOR_LOD.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/UTILITYPARTS/MODULE_PUMPS.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/UTILITYPARTS/MODULE_PUMPS_LOD.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/UTILITYPARTS/MODULE_SILOS.SCENE.MBIN"
+        ]
+      },
+      {
+        "table": "METADATA/REALITY/TABLES/BASEBUILDINGPARTSTABLE.MBIN",
+        "offset": 1041365,
+        "nearby_asset_refs": [
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/FOOT_LOCKER.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/INTERACTIVE_CASE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/DECORATION/LOCKER2.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/BARREL.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/BENCH.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/CRATE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/LARGE_CRATE.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/PALLET.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/PROPS/SHELVING.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/UTILITYPARTS/MODULE_GASEXTRACTOR.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/UTILITYPARTS/MODULE_GASEXTRACTOR_LOD.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/UTILITYPARTS/MODULE_PUMPS.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/UTILITYPARTS/MODULE_PUMPS_LOD.SCENE.MBIN",
+          "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/UTILITYPARTS/MODULE_SILOS.SCENE.MBIN"
+        ]
+      }
+    ]
+  },
+  "weighted_entity_refs": [],
+  "weighted_crate_like_scene_refs": [],
+  "weighted_crate_like_tokens": [
+    {
+      "token": "CRATE",
+      "weighted_refs": 77
+    },
+    {
+      "token": "CRATEM",
+      "weighted_refs": 32
+    },
+    {
+      "token": "LOCKER",
+      "weighted_refs": 30
+    },
+    {
+      "token": "FOOT_LOCKER",
+      "weighted_refs": 19
+    },
+    {
+      "token": "REFCRATE4",
+      "weighted_refs": 17
+    },
+    {
+      "token": "REFCRATEM1",
+      "weighted_refs": 17
+    },
+    {
+      "token": "REFHORRIDORHATCHAABAND",
+      "weighted_refs": 15
+    },
+    {
+      "token": "REFWALLCORNERAABAND",
+      "weighted_refs": 15
+    },
+    {
+      "token": "REFFOOTLOCKER",
+      "weighted_refs": 12
+    },
+    {
+      "token": "LARGE_CRATE",
+      "weighted_refs": 11
+    },
+    {
+      "token": "REFCRATE",
+      "weighted_refs": 11
+    },
+    {
+      "token": "REFCRATE5",
+      "weighted_refs": 11
+    },
+    {
+      "token": "FLOATING_CRATE",
+      "weighted_refs": 10
+    },
+    {
+      "token": "REFCRATE3",
+      "weighted_refs": 10
+    },
+    {
+      "token": "REFCRATEM",
+      "weighted_refs": 10
+    },
+    {
+      "token": "REFFLOATINGCRATE1",
+      "weighted_refs": 9
+    },
+    {
+      "token": "REFLOCKER",
+      "weighted_refs": 8
+    },
+    {
+      "token": "REFCRATE6",
+      "weighted_refs": 8
+    },
+    {
+      "token": "REFCRATE7",
+      "weighted_refs": 7
+    },
+    {
+      "token": "STRAIGHT_2X2_ABAND",
+      "weighted_refs": 6
+    },
+    {
+      "token": "REFCRATE8",
+      "weighted_refs": 6
+    },
+    {
+      "token": "REFLARGECRATE",
+      "weighted_refs": 6
+    },
+    {
+      "token": "FLOATING_CRATELID",
+      "weighted_refs": 6
+    },
+    {
+      "token": "REFLOCKER1",
+      "weighted_refs": 5
+    },
+    {
+      "token": "CRATEM_LOOTED",
+      "weighted_refs": 5
+    },
+    {
+      "token": "REFCRATEM2",
+      "weighted_refs": 5
+    },
+    {
+      "token": "REFCRATE9",
+      "weighted_refs": 4
+    },
+    {
+      "token": "REFFLOATINGCRATELID1",
+      "weighted_refs": 4
+    },
+    {
+      "token": "REFFOOTLOCKER1",
+      "weighted_refs": 4
+    },
+    {
+      "token": "REFLARGECRATE1",
+      "weighted_refs": 4
+    },
+    {
+      "token": "REFCRATELOOTED",
+      "weighted_refs": 3
+    },
+    {
+      "token": "REFABANDFRIGATECAPTAIN",
+      "weighted_refs": 3
+    },
+    {
+      "token": "REFFOOTLOCKER2",
+      "weighted_refs": 3
+    },
+    {
+      "token": "REFWALLCORNERAABAND1",
+      "weighted_refs": 2
+    },
+    {
+      "token": "REFLOCKER8",
+      "weighted_refs": 2
+    },
+    {
+      "token": "REFLOCKER9",
+      "weighted_refs": 2
+    },
+    {
+      "token": "REFLOCKER13",
+      "weighted_refs": 2
+    },
+    {
+      "token": "REFLOCKER14",
+      "weighted_refs": 2
+    },
+    {
+      "token": "REFCRATELOOTED1",
+      "weighted_refs": 2
+    },
+    {
+      "token": "REFCRATELID",
+      "weighted_refs": 2
+    },
+    {
+      "token": "CRATELID_LOOTED",
+      "weighted_refs": 2
+    },
+    {
+      "token": "REFFLOATINGCRATELID",
+      "weighted_refs": 2
+    },
+    {
+      "token": "CORNER_CRATES00",
+      "weighted_refs": 2
+    },
+    {
+      "token": "REFCRATE1",
+      "weighted_refs": 2
+    },
+    {
+      "token": "REFLOCKER2",
+      "weighted_refs": 1
+    },
+    {
+      "token": "REFLOCKER3",
+      "weighted_refs": 1
+    },
+    {
+      "token": "REFLOCKER4",
+      "weighted_refs": 1
+    },
+    {
+      "token": "REFLOCKER5",
+      "weighted_refs": 1
+    },
+    {
+      "token": "REFLOCKER6",
+      "weighted_refs": 1
+    },
+    {
+      "token": "REFLOCKER7",
+      "weighted_refs": 1
+    },
+    {
+      "token": "REFLOCKER10",
+      "weighted_refs": 1
+    },
+    {
+      "token": "REFLOCKER11",
+      "weighted_refs": 1
+    },
+    {
+      "token": "REFLOCKER12",
+      "weighted_refs": 1
+    },
+    {
+      "token": "REFCRATE11",
+      "weighted_refs": 1
+    },
+    {
+      "token": "REFFLOATINGCRATE",
+      "weighted_refs": 1
+    },
+    {
+      "token": "REFLARGECRATE2",
+      "weighted_refs": 1
+    }
+  ],
+  "entity_details": [],
+  "per_used_scene": [
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_3.SCENE.MBIN",
+      "instances": 7,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+      "instances": 6,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_3.SCENE.MBIN",
+      "instances": 6,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_3.SCENE.MBIN",
+      "instances": 5,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFHORRIDORHATCHAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 5
+        },
+        {
+          "token": "REFWALLCORNERAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 5
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+      "instances": 5,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_3.SCENE.MBIN",
+      "instances": 4,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFHORRIDORHATCHAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 4
+        },
+        {
+          "token": "REFWALLCORNERAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 4
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLPILLAR_3.SCENE.MBIN",
+      "instances": 4,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_4.SCENE.MBIN",
+      "instances": 4,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/WALL_BUNK01.SCENE.MBIN",
+      "instances": 3,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 3
+        },
+        {
+          "token": "LOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 3
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+      "instances": 3,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "STRAIGHT_2X2_ABAND",
+          "refs_per_instance": 2,
+          "weighted_refs": 6
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_2.SCENE.MBIN",
+      "instances": 3,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_4.SCENE.MBIN",
+      "instances": 3,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_WALL_4_3.SCENE.MBIN",
+      "instances": 3,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "FOOT_LOCKER",
+          "refs_per_instance": 3,
+          "weighted_refs": 9
+        },
+        {
+          "token": "REFFOOTLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 3
+        },
+        {
+          "token": "REFFOOTLOCKER1",
+          "refs_per_instance": 1,
+          "weighted_refs": 3
+        },
+        {
+          "token": "REFFOOTLOCKER2",
+          "refs_per_instance": 1,
+          "weighted_refs": 3
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/CORNER_BUNK00.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFFOOTLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "FOOT_LOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER04.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 2,
+          "weighted_refs": 4
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 2,
+          "weighted_refs": 4
+        },
+        {
+          "token": "REFCRATE3",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFLARGECRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "LARGE_CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFFLOATINGCRATELID1",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "FLOATING_CRATELID",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFFLOATINGCRATE1",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "FLOATING_CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERLEFT_C_2.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "LOCKER",
+          "refs_per_instance": 2,
+          "weighted_refs": 4
+        },
+        {
+          "token": "REFLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFLOCKER1",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFFOOTLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "FOOT_LOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFFLOATINGCRATE1",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "FLOATING_CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERRIGHT_C_1.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 2,
+          "weighted_refs": 4
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE5",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFFLOATINGCRATE1",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "FLOATING_CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERRIGHT_C_2.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 5,
+          "weighted_refs": 10
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE6",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE7",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE8",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE9",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALL_1_4.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 3,
+          "weighted_refs": 6
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 2,
+          "weighted_refs": 4
+        },
+        {
+          "token": "LARGE_CRATE",
+          "refs_per_instance": 2,
+          "weighted_refs": 4
+        },
+        {
+          "token": "REFCRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE3",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFLARGECRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFLARGECRATE1",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATEM2",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT09A.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT_3.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_BRANCH_UNLOCKED.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_3.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNERADJACENT_C_2.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFHORRIDORHATCHAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFWALLCORNERAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFWALLCORNERAABAND1",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_2.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFHORRIDORHATCHAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFWALLCORNERAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 2
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_2.SCENE.MBIN",
+      "instances": 2,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/CORNER04.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "FOOT_LOCKER",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFFOOTLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFFOOTLOCKER1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/CORNER07.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFFLOATINGCRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FLOATING_CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFFLOATINGCRATELID",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FLOATING_CRATELID",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_FLOOR1.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "LOCKER",
+          "refs_per_instance": 4,
+          "weighted_refs": 4
+        },
+        {
+          "token": "REFLOCKER8",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER9",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER14",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER13",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFFOOTLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FOOT_LOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFFLOATINGCRATELID",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FLOATING_CRATELID",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_INCORNER_1_9.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "LOCKER",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFFOOTLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FOOT_LOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALL7.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "LOCKER",
+          "refs_per_instance": 15,
+          "weighted_refs": 15
+        },
+        {
+          "token": "REFLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER2",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER3",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER4",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER5",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER6",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER7",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER8",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER9",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER10",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER11",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER12",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER13",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER14",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFLARGECRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "LARGE_CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALLOUTCORNERRIGHT_C_0.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFCRATELOOTED1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATEM_LOOTED",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALLOUTCORNERRIGHT_C_2.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 5,
+          "weighted_refs": 5
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE6",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE7",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE8",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE9",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER01.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "LARGE_CRATE",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFLARGECRATE1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLARGECRATE2",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE5",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATELID",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATELID_LOOTED",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATELOOTED",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATEM_LOOTED",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFFLOATINGCRATE1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FLOATING_CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER02.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 7,
+          "weighted_refs": 7
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE3",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE5",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE6",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE7",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE8",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER03.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 6,
+          "weighted_refs": 6
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE3",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE5",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE6",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE7",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE8",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATELOOTED",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATEM_LOOTED",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFFLOATINGCRATELID1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FLOATING_CRATELID",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER_CRATES00.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 8,
+          "weighted_refs": 8
+        },
+        {
+          "token": "CORNER_CRATES00",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE3",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE5",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE6",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE7",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE8",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE9",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFFLOATINGCRATE1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FLOATING_CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER_SHELVE0.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE6",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE11",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFFLOATINGCRATELID1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FLOATING_CRATELID",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_FLOOR0.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM2",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFFLOATINGCRATE1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FLOATING_CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_FLOOR1.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "LARGE_CRATE",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFFOOTLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FOOT_LOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLARGECRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLARGECRATE1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERRIGHT_C_0.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATEM_LOOTED",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATELOOTED",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATELOOTED1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATELID",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATELID_LOOTED",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALL_1_3.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 4,
+          "weighted_refs": 4
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 3,
+          "weighted_refs": 3
+        },
+        {
+          "token": "REFCRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE3",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE5",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM2",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALL_1_6.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 6,
+          "weighted_refs": 6
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE3",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE5",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE6",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE7",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALL_1_7.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 4,
+          "weighted_refs": 4
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE3",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE5",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_CAPTTERMINAL.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFABANDFRIGATECAPTAIN",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_CREWTERMINAL.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFABANDFRIGATECAPTAIN",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_FINALTERMINAL.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFABANDFRIGATECAPTAIN",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT00.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE5",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT04.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE5",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT08A.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFCRATE4",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_R_3.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_2.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_4.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNER_3.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_2.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFHORRIDORHATCHAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFWALLCORNERAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_4.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "REFHORRIDORHATCHAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFWALLCORNERAABAND",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_R_3.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLPILLAR_2.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/STAIRS_DOWN.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_FLOOR_4_0.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "CRATE",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFCRATE",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATE1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM2",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_1.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_4.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_6.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_WALLOUTCORNERLEFT_C_4_2.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": [
+        {
+          "token": "LOCKER",
+          "refs_per_instance": 2,
+          "weighted_refs": 2
+        },
+        {
+          "token": "REFLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFLOCKER1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFFOOTLOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "FOOT_LOCKER",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "REFCRATEM1",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        },
+        {
+          "token": "CRATEM",
+          "refs_per_instance": 1,
+          "weighted_refs": 1
+        }
+      ]
+    },
+    {
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FLOATER.SCENE.MBIN",
+      "instances": 1,
+      "entity_refs": [],
+      "crate_like_tokens": []
+    }
+  ],
+  "diagnostic_only": true,
+  "note": "Counts in this file are correlations/reference counts only; they are not promoted to physical crate totals."
+}
