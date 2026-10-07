@@ -4,6 +4,8 @@ Last updated: 2026-10-01. This file is the short shared truth table for humans a
 
 ## Agent D static abandoned-freighter map (2026-10-07)
 
+- **Measured from installed game assets:** `DungeonRootScene` points to a scene with one `GeneratedBaseRoot` locator, whose attachment entity has gravity-volume and static-physics components. Neither the scene nor its direct attachment names a dungeon room scene. Ten preset main/branch room ID lists are recorded in `agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json`; mapping those IDs to actual runtime room scenes remains open.
+
 - **Measured from installed game assets:** the active `MODELS/SPACE/POI/PARTS/DUNGEON_ENTRANCE/ENTITIES/DUNGEONENTRANCE.ENTITY.MBIN` has `GcAbandonedFreighterComponentData`, ten weighted `DungeonOptions`, and `GcOutpostComponentData.AbandonedFreighter=true`. Its SHA-256 is `7ae4acec4521f5e8347b9d61514cf59dae7a24e722a7058a1126beb999b243e8`.
 - **Measured from installed game assets:** all ten option names match the ten current `FREIGHTERDUNGEONSTABLE.MBIN` presets. Each MEDI and CARGO set has TURRETS 0.66, FLOATERS 0.33, BUGS 1.00, SLIME 0.25, and MAZE 0.15. MAZE presets specify four rooms; the other eight specify seven. See `agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json`.
 - **Measured from installed game assets:** the component's `DungeonRootScene.Filename` is `MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/GENERATEDBASEROOT.SCENE.MBIN`. The similarly named spacecraft entrance entity has an empty options list and `AbandonedFreighter=false`.

@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-07T01:09:20Z",
+  "updated_utc": "2026-10-07T01:21:28Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -52,7 +52,8 @@
       "manifest": "agent-patches/metadata/METADATA_D_20261007_MANIFEST.json",
       "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
       "human_validation_required": false,
-      "next_action": "Inspect static scene and table relationships independently; coordinate before claiming runtime weighted-choice semantics."
+      "static_root_trace": "agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json",
+      "next_action": "Seek an explicit static mapping from table room IDs to room scene assets; coordinate before claiming runtime weighted-choice semantics."
     }
   },
   "human_intervention": {
