@@ -51,5 +51,10 @@
     "caller_instruction_ff52_10_verified": true,
     "precall_dispatch_slot_captured": false
   },
-  "rollback": "After NMS closes, restore the backed-up installed probe file."
+  "rollback": "After NMS closes, restore the backed-up installed probe file.",
+  "review": {
+    "pull_request": 50,
+    "url": "https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/50",
+    "state": "draft"
+  }
 }
