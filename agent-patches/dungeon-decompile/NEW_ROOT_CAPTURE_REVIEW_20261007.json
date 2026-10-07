@@ -54,5 +54,23 @@
     "correction": "The earlier static map of 00634BC0 to 006369F0 remains a valid byte-location map but must not be treated as the current root callback. The earlier five-helper dataflow describes that mapped function only; its relation to this root event is unproved.",
     "limit": "The hook snapshot is taken after the call and records the callee argument/owner pointer. Its zero at owner+0x10 is not the virtual dispatch slot value used before the call."
   },
-  "next_step": "Runtime-dispatch lane should refresh build-specific labels and capture the actual pre-call [RDX+0x10] slot at 02C08607 on a new event. DUNGEON-C can analyze the newly located 0063A6D0 function offline without another capture."
+  "next_step": "Runtime-dispatch lane should refresh build-specific labels and capture the actual pre-call [RDX+0x10] slot at 02C08607 on a new event. DUNGEON-C can analyze the newly located 0063A6D0 function offline without another capture.",
+  "offline_followup": {
+    "code_export": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
+    "corrected_hook_function_range": [
+      "0063A6D0",
+      "0063A729"
+    ],
+    "bounded_bytes": 89,
+    "bounded_sha256": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7",
+    "adjacent_branch_range": [
+      "0063A729",
+      "0063AB6C"
+    ],
+    "adjacent_range_bytes": 1091,
+    "adjacent_range_sha256": "89bbf61288fe4606e0de319a4b94f4c61a1979a6ce9ac3af9f9f0206f35074e0",
+    "self_call_rva": "0063A76E",
+    "self_call_return_rva": "0063A773",
+    "note": "The first .pdata slice branches to the adjacent range. The self call there independently confirms the current recursive return. No live pre-call dispatch slot was captured."
+  }
 }
