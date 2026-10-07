@@ -1,0 +1,9 @@
+diff --git a/Prepare-Crate-Assets.ps1 b/Prepare-Crate-Assets.ps1
+--- a/Prepare-Crate-Assets.ps1
++++ b/Prepare-Crate-Assets.ps1
+@@ -128,4 +128,4 @@ Ensure-DotNet8 $tools
+ $mbin = Ensure-MBINCompiler $tools
+ Write-Host 'Decompiling extracted MBIN scene files...' -ForegroundColor Cyan
+-& $mbin $extracted
++& $mbin --input-format=MBIN -y $extracted
+ if ($LASTEXITCODE -ne 0) { throw 'MBINCompiler failed to decompile the extracted assets.' }

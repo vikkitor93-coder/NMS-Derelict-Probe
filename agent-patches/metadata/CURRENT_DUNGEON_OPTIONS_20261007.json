@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "evidence_class": "measured-static-game-assets",
+  "component_source": "MODELS/SPACE/POI/PARTS/DUNGEON_ENTRANCE/ENTITIES/DUNGEONENTRANCE.ENTITY.MBIN",
+  "component_sha256": "7ae4acec4521f5e8347b9d61514cf59dae7a24e722a7058a1126beb999b243e8",
+  "table_source": "METADATA/REALITY/TABLES/FREIGHTERDUNGEONSTABLE.MBIN",
+  "table_sha256": "f5afb96f49560bf39a0ec6ffc295540ed4c38165e4458df2c7785fe391e1a82a",
+  "dungeon_root_scene": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/GENERATEDBASEROOT.SCENE.MBIN",
+  "dungeon_options": [
+    {
+      "index": 0,
+      "name": "MEDI_TURRETS",
+      "weighting": "0.660000",
+      "dungeon_params": {
+        "rooms": 7,
+        "size": [
+          13,
+          4,
+          13
+        ]
+      }
+    },
+    {
+      "index": 1,
+      "name": "MEDI_FLOATERS",
+      "weighting": "0.330000",
+      "dungeon_params": {
+        "rooms": 7,
+        "size": [
+          13,
+          4,
+          13
+        ]
+      }
+    },
+    {
+      "index": 2,
+      "name": "MEDI_BUGS",
+      "weighting": "1.000000",
+      "dungeon_params": {
+        "rooms": 7,
+        "size": [
+          13,
+          4,
+          13
+        ]
+      }
+    },
+    {
+      "index": 3,
+      "name": "MEDI_SLIME",
+      "weighting": "0.250000",
+      "dungeon_params": {
+        "rooms": 7,
+        "size": [
+          13,
+          4,
+          13
+        ]
+      }
+    },
+    {
+      "index": 4,
+      "name": "MEDI_MAZE",
+      "weighting": "0.150000",
+      "dungeon_params": {
+        "rooms": 4,
+        "size": [
+          13,
+          4,
+          13
+        ]
+      }
+    },
+    {
+      "index": 5,
+      "name": "CARGO_TURRETS",
+      "weighting": "0.660000",
+      "dungeon_params": {
+        "rooms": 7,
+        "size": [
+          13,
+          4,
+          13
+        ]
+      }
+    },
+    {
+      "index": 6,
+      "name": "CARGO_FLOATERS",
+      "weighting": "0.330000",
+      "dungeon_params": {
+        "rooms": 7,
+        "size": [
+          13,
+          4,
+          13
+        ]
+      }
+    },
+    {
+      "index": 7,
+      "name": "CARGO_BUGS",
+      "weighting": "1.000000",
+      "dungeon_params": {
+        "rooms": 7,
+        "size": [
+          13,
+          4,
+          13
+        ]
+      }
+    },
+    {
+      "index": 8,
+      "name": "CARGO_SLIME",
+      "weighting": "0.250000",
+      "dungeon_params": {
+        "rooms": 7,
+        "size": [
+          13,
+          4,
+          13
+        ]
+      }
+    },
+    {
+      "index": 9,
+      "name": "CARGO_MAZE",
+      "weighting": "0.150000",
+      "dungeon_params": {
+        "rooms": 4,
+        "size": [
+          13,
+          4,
+          13
+        ]
+      }
+    }
+  ],
+  "all_choices_match_table": true,
+  "selection_algorithm_verified": false
+}
