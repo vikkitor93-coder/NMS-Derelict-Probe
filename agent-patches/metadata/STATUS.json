@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
   "status": "working",
-  "state": "prepare-assets-repaired-direct-options-map-open",
+  "state": "static-options-map-complete",
   "human_intervention_required": false,
-  "summary": "The METADATA-D Prepare assets button was attempted repeatedly but failed at MBINCompiler because extracted MBIN and MXML files were mixed. The one-line input-format and overwrite fix completed the offline workflow and produced fresh metadata-namespaced evidence. Direct DungeonOptions/Weighting mapping remains open.",
+  "summary": "The Prepare assets failure was repaired, fresh metadata evidence was published, and the current abandoned-freighter entrance entity was mapped directly to all ten weighted dungeon-table presets. Runtime selection behavior remains unverified.",
   "completed_action": "Repaired Prepare-Crate-Assets.ps1 locally, ran it to completion without starting NMS, and published the resulting room/crate evidence in research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/ on this branch.",
-  "next_action": "Trace the current cGcAbandonedFreighterComponentData values to their source asset or runtime initialization and join its weighted DungeonOptions to the ten current FREIGHTERDUNGEONSTABLE presets. Do not claim measured weights from the crate preparation output.",
+  "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
+  "next_action": "Integrate the Prepare assets script fix into the canonical Surveyor package. Coordinate with seed-lineage and dungeon-decompile lanes before claiming how the ten static weights are used by the runtime selection algorithm.",
   "remaining_validation": [
     "Integrate the Prepare-Crate-Assets.ps1 fix into the canonical Surveyor package; local installed copy is repaired, but the published updater is not.",
     "Windows METADATA-D 1.0.1 refresh and rollback remain unverified."
@@ -14,6 +15,6 @@
     "research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/run-manifest.json"
   ],
   "full_derelict_required": false,
-  "evidence_review": "agent-patches/metadata/PREPARE_ASSETS_REPAIR_20261007.md",
-  "updated_utc": "2026-10-07T00:17:35Z"
+  "evidence_review": "agent-patches/metadata/STATIC_DUNGEON_OPTIONS_MAP_20261007.md",
+  "updated_utc": "2026-10-07T00:23:41Z"
 }
