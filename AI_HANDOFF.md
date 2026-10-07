@@ -6,7 +6,11 @@ Surveyor 0.3.61 repairs `Prepare-Crate-Assets.ps1` by passing `--input-format=MB
 
 The active abandoned-freighter entrance component has ten static `DungeonOptions` choices, all matched by name to current dungeon-table presets. The choices and exact source hashes are in `agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json`; method and limits are in `STATIC_DUNGEON_OPTIONS_MAP_20261007.md`. These weights do not prove runtime selection probabilities, seed input, or frequencies. The component's static `DungeonRootScene` field is not yet linked to the separately observed runtime `DUNGEON.SCENE.MBIN` resource. Seed-lineage and dungeon-decompile lanes own those other links.
 
-The source package is a complete 0.3.61 ZIP, encoded in `packages/v0.3.61-full/` and described by the root `update-manifest.json`. The previous main commit is preserved at `backup/main-before-metadata-d-20261007-current`. The smallest functional change from 0.3.60 is one line in `Prepare-Crate-Assets.ps1`; no extension panel, host action ID, probe protocol, or NMS write behavior changed. Next Agent D task: continue independent static metadata and asset relationship analysis; require a live capture only if a specific remaining claim cannot be resolved offline.
+The source package is a complete 0.3.61 ZIP, encoded in `packages/v0.3.61-full/` and described by the root `update-manifest.json`. The previous main commit is preserved at `backup/main-before-metadata-d-20261007-final`. The smallest functional change from 0.3.60 is one line in `Prepare-Crate-Assets.ps1`; no extension panel, host action ID, probe protocol, or NMS write behavior changed. Next Agent D task: continue independent static metadata and asset relationship analysis; require a live capture only if a specific remaining claim cannot be resolved offline.
+
+## DUNGEON-C current hook export — 2026-10-07
+
+Ran the v0.3.39 offline helper exporter on a derived copy of the October 6 event with its stale hook label corrected by the unique current executable signature. The original uploaded event is untouched. The resulting `agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json` contains the current `0063A6D0..0063A729` bounded hook bytes and explicit raw-source provenance. Its adjacent branch range `0063A729..0063AB6C` has a direct self call at `0063A76E`, returning at `0063A773`; this independently confirms the current recursive return. The actual pre-call dispatch slot remains uncaptured.
 
 ## DUNGEON-C October 6 root review — 2026-10-07
 
