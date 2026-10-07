@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "reviewed_utc": "2026-10-07T00:58:33Z",
+  "source_upload": "research-uploads/20261007T003628Z-metadata-all-saved-evidence-184fbfec-3215d687",
+  "event": {
+    "utc": "2026-10-06T22:38:07.571Z",
+    "descriptor_pointer": "00000112B726B528",
+    "root_seed": "5B4AE67D9C2A8F61",
+    "universe_address": "0001BF0004E84EFD",
+    "probe_version": "0.3.38",
+    "caller_return_rva": "02C0860A",
+    "caller_instruction_rva": "02C08607",
+    "caller_instruction_bytes": "FF 52 10",
+    "owner_plus_0x10_value": "0000000000000000",
+    "slot_capture_phase": "shared-entry-hook-after-call"
+  },
+  "current_exe": {
+    "sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "caller_pdata_range": [
+      "02C0840E",
+      "02C089DA"
+    ],
+    "unique_full_hook_signature_match_rva": "0063A6D0",
+    "hook_function_pdata_range": [
+      "0063A6D0",
+      "0063A729"
+    ],
+    "hook_function_bounded_sha256": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7",
+    "hook_function_bounded_bytes": 89,
+    "mapped_old_label_rva": "006369F0",
+    "mapped_old_label_pdata_range": [
+      "00636760",
+      "00636C33"
+    ]
+  },
+  "validation": {
+    "root_event_matches_current_caller_bytes": true,
+    "probe_hook_signature_matches_current_exe_at_one_rva": true,
+    "probe_published_logical_entry_rva_stale": "00634BC0",
+    "probe_published_recursive_return_rva_stale": "00634C63",
+    "observed_recursive_like_return_rva": "0063A773",
+    "uploaded_code_export_stale": {
+      "sha256": "1f77e37699b97a802a768751bba4cc49cdbb1197dabc7dad73e479cdceaebf62",
+      "exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "descriptor_pointer": "000001DCBF948128",
+      "does_not_describe_new_event": true
+    },
+    "uploaded_vtable_report_stale": true
+  },
+  "interpretation": {
+    "confirmed": "A fresh root event exists and records the current caller return at 02C0860A. The source hook byte signature has one match in the current executable at 0063A6D0, which is a .pdata function start. The published 00634BC0 logical-entry label and 00634C63 recursive-return label are old-build constants.",
+    "inference": "The unique signature and exact caller correlation strongly associate 0063A6D0 with the call at 02C08607, but a pre-call [RDX+0x10] pointer value was not captured.",
+    "correction": "The earlier static map of 00634BC0 to 006369F0 remains a valid byte-location map but must not be treated as the current root callback. The earlier five-helper dataflow describes that mapped function only; its relation to this root event is unproved.",
+    "limit": "The hook snapshot is taken after the call and records the callee argument/owner pointer. Its zero at owner+0x10 is not the virtual dispatch slot value used before the call."
+  },
+  "next_step": "Runtime-dispatch lane should refresh build-specific labels and capture the actual pre-call [RDX+0x10] slot at 02C08607 on a new event. DUNGEON-C can analyze the newly located 0063A6D0 function offline without another capture."
+}
