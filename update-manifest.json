@@ -39,8 +39,8 @@
     "packages/v0.3.61-full/part-030.b64",
     "packages/v0.3.61-full/part-031.b64"
   ],
-  "package_sha256": "b3d78e48f1beaf91a86754b30bc0d16db0e18f484a5faa203d7af73de88bb34c",
-  "package_size": 427117,
+  "package_sha256": "b24244579cf733aae4011c4d87879f255f58e6bc11114d765b59906e0475d160",
+  "package_size": 427370,
   "managed_files": [
     ".gitignore",
     "AGENT_START_HERE.md",

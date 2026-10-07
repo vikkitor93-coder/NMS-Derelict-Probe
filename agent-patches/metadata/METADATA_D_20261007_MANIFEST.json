@@ -33,6 +33,6 @@
   "confirmed": "The installed active entrance component contains ten static weighted choices and a DungeonRootScene field.",
   "unproven": "Runtime choice probabilities, seed input, actual frequencies, and the relationship between static DungeonRootScene and observed runtime DUNGEON.SCENE.MBIN.",
   "human_intervention_required": false,
-  "rollback": "Restore backup/main-before-metadata-d-20261007 or revert the publication commit; keep the dated research evidence for audit.",
+  "rollback": "Restore backup/main-before-metadata-d-20261007-final or revert the publication commit; keep the dated research evidence for audit.",
   "next_action": "Continue static asset relationship analysis within Agent D; coordinate with seed-lineage and dungeon-decompile before runtime claims."
 }
