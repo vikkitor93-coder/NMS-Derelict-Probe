@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "variant_id": "RUNTIME-A-HOOK-IDENTITY-CANDIDATE",
+  "created_utc": "2026-10-07T01:15:42Z",
+  "base_surveyor_version": "0.3.60",
+  "probe_version": "0.3.39",
+  "source_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+  "objective": "Replace stale hard-coded hook/recursive addresses with the target of the installed pyMHF hook and decoded current caller bytes. Preserve read-only capture and mark pre-call dispatch slot as not captured.",
+  "source_changes": [
+    "mod/derelict_baseline_probe.py",
+    "tests/test_probe_hook_identity.py",
+    "tests/test_tools.py"
+  ],
+  "verification": {
+    "full_candidate_unit_tests": "188/188 passed",
+    "compileall": "passed",
+    "live_nms": "pending"
+  },
+  "expected_new_evidence": {
+    "logical_entry_rva_source": "installed-pymhf-hook-target",
+    "logical_entry_rva_hex": "0063A6D0 if current build and signature unchanged",
+    "recursive_return_rva_hex": "0063A773 if recursive edge is observed",
+    "external_call_register_snapshot_at_entry.observed_hook_target_rva_hex": "0063A6D0 if hook manager resolves",
+    "external_call_register_snapshot_at_entry.caller_instruction_ff52_10_verified": true,
+    "precall_dispatch_slot_captured": false
+  },
+  "limits": [
+    "The entry hook observes the callee after the indirect CALL; it cannot read the pre-call vtable slot.",
+    "A live NMS root event is required to validate the new capture fields.",
+    "The historical direct-call candidate list is no longer presented as current-build data."
+  ],
+  "rollback": "Restore the backed-up installed derelict_baseline_probe.py after closing NMS.",
+  "package": {
+    "local_path": "C:\\Users\\Vikman\\Documents\\Codex\\2026-10-05\\you-x20\\outputs\\NMS-Derelict-Probe-v0.3.60-hook-identity-candidate.zip",
+    "sha256": "20d2d5b28316dd43febc5686e239d8816ec8a6425fef56e0498877503d7c591e",
+    "size_bytes": 408390,
+    "files": 156
+  },
+  "installed_probe_backup": {
+    "local_path": "C:\\Users\\Vikman\\Documents\\Codex\\2026-10-05\\you-x20\\work\\installed-probe-before-hook-identity-20261007.py",
+    "sha256": "b28cb0aabb886c71912ed91f1fcf071597ce56b85cfb08574ba195176a667114"
+  },
+  "installation": {
+    "state": "installed-locally-after-offline-tests",
+    "installed_probe_sha256": "1a9bb3d21b8f8dffa1e758e20c152a48b7c892cfc4ab65fccf0e7c6f99e194f0",
+    "game_running_at_install": false,
+    "live_capture_status": "not-yet-tested"
+  }
+}

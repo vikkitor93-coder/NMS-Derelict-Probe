@@ -669,7 +669,7 @@ class ToolTests(unittest.TestCase):
         self.assertIn("poi_lifecycle_scope_component_hexes", source)
         self.assertIn("@nms.cTkResourceManager.AddResource.before", source)
         self.assertIn("descriptor_pointer_hex", source)
-        self.assertIn("from pymhf.core.hooking import get_caller, on_key_pressed", source)
+        self.assertIn("from pymhf.core.hooking import get_caller, hook_manager, on_key_pressed", source)
         self.assertGreaterEqual(source.count("@get_caller"), 2)
         self.assertIn("caller_return_offset_hex", source)
         self.assertIn("caller_code_window", source)
@@ -689,9 +689,9 @@ class ToolTests(unittest.TestCase):
         self.assertIn("POI-UA",view["generation"])
         self.assertIn("00001A0004E84EFD",view["generation"])
 
-    def test_v0337_runtime_probe_captures_all_call_registers_at_shared_entry(self):
+    def test_runtime_probe_labels_observed_callee_and_keeps_slot_phase_explicit(self):
         probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
-        self.assertIn('PROBE_VERSION = "0.3.38"', probe)
+        self.assertIn('PROBE_VERSION = "0.3.39"', probe)
         exact=probe.index('exact_external = self._logical_entry_external_match_for_descriptor(descriptor_ptr)')
         entry_capture=probe.index('phase="logical-entry-after-external-call"')
         root_add_capture=probe.index('phase="root-resource-add"', exact)
@@ -707,8 +707,10 @@ class ToolTests(unittest.TestCase):
         self.assertIn('"rdx_hex": f"{owner_pointer:016X}"', probe)
         self.assertIn('"rdx_plus_0x10_capture": frame["external_owner_plus_0x10_capture"]', probe)
         self.assertIn('"external_call_register_snapshot_at_entry": exact.get("external_call_register_snapshot_at_entry")', probe)
-        self.assertIn('"static_direct_reference_count": len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS)', probe)
-        self.assertIn('not 52 breakpoints', probe)
+        self.assertIn('"observed_hook_target_rva_hex":', probe)
+        self.assertIn('"caller_instruction_ff52_10_verified": indirect_ff52_10', probe)
+        self.assertIn('"precall_dispatch_slot_captured": False', probe)
+        self.assertIn('"static_direct_reference_count": None', probe)
         self.assertIn('"root_dispatch_capture": self._root_dispatch_capture_payload()', probe)
         self.assertIn('"last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture', probe)
         self.assertIn('kernel32.ReadProcessMemory(', probe)
@@ -1518,10 +1520,11 @@ class ToolTests(unittest.TestCase):
         self.assertIn("stack.pop()", probe)
         self.assertIn("resolved_external_caller_return_offset_hex", probe)
 
-    def test_v0333_all_52_callers_are_observed_in_one_hook(self):
+    def test_runtime_probe_observes_callers_without_stale_build_constants(self):
         probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
-        self.assertIn("CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS", probe)
-        self.assertIn("CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA = 0x00634C63", probe)
+        self.assertIn("_observed_hook_rva()", probe)
+        self.assertIn("_caller_edges(caller_offset, self._observed_logical_entry_rva)", probe)
+        self.assertNotIn("CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA", probe)
         self.assertIn("_logical_entry_caller_hits", probe)
         self.assertIn("_logical_entry_external_match_for_descriptor", probe)
         self.assertIn('"all-callers-single-hook-exact-descriptor-correlation" if exact else', probe)
