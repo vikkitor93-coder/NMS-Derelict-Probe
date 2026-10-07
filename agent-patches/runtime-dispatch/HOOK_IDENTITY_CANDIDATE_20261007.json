@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "variant_id": "RUNTIME-A-HOOK-IDENTITY-CANDIDATE",
+  "created_utc": "2026-10-07T01:35:44Z",
+  "base": {
+    "branch": "main",
+    "commit": "5baf45306f6f7be44c4cd43a4570659ea24c1ee9",
+    "published_release_commit": "8b742d5",
+    "surveyor_version": "0.3.61",
+    "published_zip_sha256": "b24244579cf733aae4011c4d87879f255f58e6bc11114d765b59906e0475d160",
+    "original_probe_sha256": "b28cb0aabb886c71912ed91f1fcf071597ce56b85cfb08574ba195176a667114"
+  },
+  "probe_version": "0.3.39",
+  "objective": "Capture installed pyMHF hook target and current callsite bytes without old-build RVA labels; classify direct recursion from bytes; distinguish after-call owner field from unmeasured pre-call dispatch slot.",
+  "changes": [
+    "mod/derelict_baseline_probe.py",
+    "tests/test_tools.py",
+    "tests/test_probe_hook_identity.py"
+  ],
+  "package": {
+    "local_path": "C:/Users/Vikman/Documents/Codex/2026-10-05/you-x20/outputs/NMS-Derelict-Probe-v0.3.61-hook-identity-candidate.zip",
+    "sha256": "1cf627d33aa34a4fa4419f6674f2da75d59020b59ab30bfe6decc8672bc2b86c",
+    "size_bytes": 421950,
+    "files": 163
+  },
+  "verification": {
+    "full_windows_unit_tests": "188/188 passed",
+    "compileall": "passed",
+    "zip_integrity": "passed",
+    "live_nms_root_event": "pending"
+  },
+  "local_installation": {
+    "probe_sha256": "1a9bb3d21b8f8dffa1e758e20c152a48b7c892cfc4ab65fccf0e7c6f99e194f0",
+    "backup_path": "C:/Users/Vikman/Documents/Codex/2026-10-05/you-x20/work/installed-probe-before-hook-identity-20261007.py",
+    "backup_sha256": "b28cb0aabb886c71912ed91f1fcf071597ce56b85cfb08574ba195176a667114",
+    "game_running_during_install": false
+  },
+  "launch_attempt": {
+    "methods": [
+      "pyMHF CLI",
+      "visible classic launcher",
+      "Steam -applaunch 275850"
+    ],
+    "observed": "NMS.exe did not start; no new probe_started log. Earlier waiting processes stopped. A visible classic launcher was later opened for user interaction.",
+    "live_validation": "not performed"
+  },
+  "expected_new_capture": {
+    "logical_entry_rva_source": "installed-pymhf-hook-target",
+    "current_build_hook_rva_if_unchanged": "0063A6D0",
+    "current_recursive_return_if_seen": "0063A773",
+    "caller_instruction_ff52_10_verified": true,
+    "precall_dispatch_slot_captured": false
+  },
+  "rollback": "After NMS closes, restore the backed-up installed probe file."
+}
