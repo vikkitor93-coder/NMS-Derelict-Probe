@@ -45,5 +45,16 @@
     "installed_probe_sha256": "1a9bb3d21b8f8dffa1e758e20c152a48b7c892cfc4ab65fccf0e7c6f99e194f0",
     "game_running_at_install": false,
     "live_capture_status": "not-yet-tested"
+  },
+  "launch_attempt": {
+    "utc": "2026-10-07T01:29:36Z",
+    "methods": [
+      "pymhf run nmspy from candidate folder",
+      "existing visible launch-nms-classic.cmd",
+      "Steam -applaunch 275850 while classic launcher waited"
+    ],
+    "observed": "pyMHF launcher processes ran; NMS.exe did not start; no new probe_started log or live-status timestamp; waiting launcher processes were stopped",
+    "live_validation": "not performed",
+    "human_step": "Open NMS through the normal Steam UI with pyMHF enabled, then load the known Angoto derelict until the DUNGEON.SCENE.MBIN root event occurs."
   }
 }
