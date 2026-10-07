@@ -1,3 +1,9 @@
+# 0.3.61 — METADATA-D asset preparation repair
+
+- Give MBINCompiler an explicit MBIN input format and overwrite consent when the persistent asset directory also contains generated MXML files.
+- METADATA-D preparation and upload completed on Windows after the repair; the user confirmed visual refresh and rollback. No extension API or NMS process behavior changed.
+- Publish the current abandoned-freighter entrance's ten static weighted dungeon choices and matching table presets as research evidence. Runtime selection semantics remain open.
+
 # 0.3.60 — paced recovery uploads
 
 - Keep root-event uploads prompt, then batch changed capture-journal and session evidence every 30 seconds while automatic uploads are enabled. This continues after a valid `+0x10` capture has already been uploaded.

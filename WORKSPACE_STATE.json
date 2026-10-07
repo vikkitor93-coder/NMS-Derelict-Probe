@@ -1,21 +1,21 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-05T23:08:33Z",
+  "updated_utc": "2026-10-07T00:57:21Z",
   "integration": {
     "branch": "main",
-    "canonical_version": "0.3.60",
+    "canonical_version": "0.3.61",
     "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.60",
+    "candidate_version": "0.3.61",
     "candidate_branch": "main",
     "candidate_base": "main@a9dfd3f48a7f9b27ddd95ab3d61c630b6e2355f9",
-    "candidate_status": "184 tests passed; Windows UI and live NMS validation pending"
+    "candidate_status": "METADATA-D asset preparation, upload, visual refresh, and rollback verified; runtime NMS capture remains a separate lane"
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
     "seed-lineage": "claimed",
     "dungeon-decompile": "claimed",
-    "metadata": "free-at-last-sync"
+    "metadata": "claimed-agent-d-published"
   },
   "lanes": {
     "runtime-dispatch": {
@@ -44,9 +44,13 @@
       "helper_dataflow_review": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json"
     },
     "metadata": {
-      "branch": "agent/metadata",
-      "status": "free-ready-from-current-main-at-last-sync",
-      "objective": "Map abandoned-freighter component DungeonOptions/weights, DungeonRootScene, dungeon-table presets and static asset relationships without duplicating runtime/seed/decompile lanes."
+      "branch": "agent/metadata-evidence-status-20261006",
+      "status": "static-map-and-repair-published",
+      "objective": "Continue static abandoned-freighter asset relationship analysis without duplicating runtime, seed, or decompile lanes.",
+      "manifest": "agent-patches/metadata/METADATA_D_20261007_MANIFEST.json",
+      "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
+      "human_validation_required": false,
+      "next_action": "Inspect static scene and table relationships independently; coordinate before claiming runtime weighted-choice semantics."
     }
   },
   "human_intervention": {

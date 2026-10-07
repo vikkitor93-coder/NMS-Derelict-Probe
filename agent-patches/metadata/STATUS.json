@@ -1,20 +1,16 @@
 {
   "schema_version": 1,
-  "status": "needs-human-input",
-  "state": "draft-pr-open",
-  "human_intervention_required": true,
-  "summary": "METADATA-D 1.0.1 Prepare assets + upload completed end to end on Windows, and main has the dedicated metadata upload. The current entrance entity was mapped directly to all ten weighted dungeon-table presets. Draft PR #49 contains the source repair and evidence for integration review; runtime selection behavior remains unverified.",
+  "status": "complete",
+  "state": "published-to-main",
+  "human_intervention_required": false,
+  "summary": "METADATA-D 1.0.1 Prepare assets + upload completed on Windows. The user confirmed visual refresh and rollback. The active entrance entity maps directly to all ten weighted dungeon-table presets. The one-line MBINCompiler repair and full Surveyor 0.3.61 source package are published on main; runtime selection behavior remains unverified.",
   "completed_action": "Surveyor's 2026-10-07 00:35 UTC Prepare assets + upload run completed all three steps with exit status 0. Its extension action record is complete and main contains research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/.",
   "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
-  "next_action": "Review draft PR #49 for the source repair, direct options map, and evidence. Integrate the one-line repair into the canonical Surveyor package before publishing an updater. Coordinate with seed-lineage and dungeon-decompile lanes before claiming runtime selection semantics.",
-  "user_steps": [
-    "Open https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/49 when ready to review Agent D's repair and evidence.",
-    "Leave the PR unmerged until the canonical Surveyor package repair and Windows refresh/rollback check are reviewed."
-  ],
-  "success_condition": "Draft PR #49 is reviewed; the canonical Surveyor repair is verified before publication.",
+  "next_action": "Continue static metadata analysis of asset relationships. Coordinate with seed-lineage and dungeon-decompile lanes before claiming runtime selection semantics.",
+  "user_steps": [],
+  "success_condition": "The published package contains the repaired script and the metadata map remains reproducible from the hashed game assets.",
   "remaining_validation": [
-    "Integrate the Prepare-Crate-Assets.ps1 fix into the canonical Surveyor package; local installed copy is repaired, but the published updater is not.",
-    "Windows METADATA-D 1.0.1 refresh and rollback remain unverified; action execution and upload are verified."
+    "Runtime weighted-choice selection semantics, seed input, and actual selection frequencies remain unverified."
   ],
   "evidence_to_return": [
     "research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/run-manifest.json on main"
@@ -22,5 +18,5 @@
   "full_derelict_required": false,
   "evidence_review": "agent-patches/metadata/STATIC_DUNGEON_OPTIONS_MAP_20261007.md",
   "pull_request": "https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/49",
-  "updated_utc": "2026-10-07T00:45:27Z"
+  "updated_utc": "2026-10-07T00:57:21Z"
 }

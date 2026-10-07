@@ -1,5 +1,13 @@
 # NMS Derelict Probe — AI handoff
 
+## METADATA-D publication — 2026-10-07
+
+Surveyor 0.3.61 repairs `Prepare-Crate-Assets.ps1` by passing `--input-format=MBIN -y` to MBINCompiler. The persistent extraction directory may contain both MBIN and previously generated MXML files; the old command could stop at a prompt in the noninteractive METADATA-D action. The Windows action completed preparation and both uploads with exit status 0 after the local repair. The user subsequently confirmed the METADATA-D visual refresh and rollback check. This last check is user-reported; the action logs and main-branch run manifest are recorded separately in `agent-patches/metadata/PREPARE_ASSETS_REPAIR_20261007.md`.
+
+The active abandoned-freighter entrance component has ten static `DungeonOptions` choices, all matched by name to current dungeon-table presets. The choices and exact source hashes are in `agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json`; method and limits are in `STATIC_DUNGEON_OPTIONS_MAP_20261007.md`. These weights do not prove runtime selection probabilities, seed input, or frequencies. The component's static `DungeonRootScene` field is not yet linked to the separately observed runtime `DUNGEON.SCENE.MBIN` resource. Seed-lineage and dungeon-decompile lanes own those other links.
+
+The source package is a complete 0.3.61 ZIP, encoded in `packages/v0.3.61-full/` and described by the root `update-manifest.json`. The previous main commit is preserved at `backup/main-before-metadata-d-20261007`. The smallest functional change from 0.3.60 is one line in `Prepare-Crate-Assets.ps1`; no extension panel, host action ID, probe protocol, or NMS write behavior changed. Next Agent D task: continue independent static metadata and asset relationship analysis; require a live capture only if a specific remaining claim cannot be resolved offline.
+
 ## DUNGEON-C helper dataflow — 2026-10-05
 
 The current-build parent conditionally processes four nonzero 32-bit fields in the order `RSI+0x50`, `+0x58`, `+0x54`, `+0x5C`. Each follows a retain-like helper, appends the value to a 32-bit resizable list at `RSI+0x40`/`+0x44`/`+0x48`, and then follows a release-like helper. The exact instruction evidence and `.pdata` limitations are in `agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json`. Field meanings, list consumers, and the actual indirect callback destination remain unproven.

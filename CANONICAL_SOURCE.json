@@ -1,32 +1,29 @@
 {
   "schema_version": 2,
-  "version": "0.3.57",
-  "status": "release-candidate-pending-windows-mod-validation",
+  "version": "0.3.61",
+  "status": "published-source-package",
   "artifact": {
-    "storage": "github-base64-chunks-and-sandbox-download",
-    "file_name": "NMS-Derelict-Probe-v0.3.57-source.zip"
+    "storage": "github-base64-chunks-and-local-download",
+    "file_name": "NMS-Derelict-Probe-v0.3.61-source.zip"
   },
   "repository_transport": {
     "status": "reproducible-base64-chunks",
     "reason": "The complete source ZIP is delivered as the release artifact and reproducibly encoded in the repository package chunk format."
   },
   "verification": {
-    "unit_tests": "182/182 passed",
-    "compileall": "passed: python -m compileall -q tools overlay tests mod",
-    "zip_integrity": "passed: package generated and hash-verified",
-    "windows_ui": "not run in Linux workspace",
-    "nms_7_05_mod_runtime": "not run; user supplies own 7.04 archive",
-    "package_refresh": "v0.3.57 source package distributed through the updater manifest",
-    "package_files": "151"
+    "unit_tests": "184/184 passed on Windows Python 3.13",
+    "compileall": "passed: python -m compileall -q tools overlay tests mod agent-patches/metadata",
+    "zip_integrity": "passed: complete package decoded, hash-verified, and extracted",
+    "windows_ui": "METADATA-D 1.0.1 visual refresh and rollback confirmed by user on 2026-10-07",
+    "nms_7_05_mod_runtime": "separate integration objective; not claimed by Agent D",
+    "package_refresh": "v0.3.61 source package distributed through the updater manifest",
+    "package_files": 161
   },
   "resume": {
-    "integration_agent": "Install v0.3.53, capture the Runtime-A root event if needed, close NMS, then use Upload captured root event or Upload all saved evidence. Continue Windows/NMS validation when available."
+    "metadata_agent": "Continue static asset relationship analysis; do not claim runtime weighted-choice semantics from static weights."
   },
   "notes": [
-    "Constrains local archive staging to expected paths, regular XML files, and bounded sizes; rejects invalid or tampered content before touching game files.",
-    "No third-party mod assets are bundled.",
-    "The user-supplied mod archive targets 7.04; NMS 7.05 runtime behavior remains unverified.",
-    "182 unit tests pass; compileall passes. Windows UI and NMS 7.05 runtime validation remain unrun.",
-    "v0.3.56 adds the persisted auto-upload toggle and deduplicated all-lanes evidence; v0.3.57 fixes the Surveyor startup geometry-manager conflict."
+    "The only functional source change from v0.3.60 is the MBINCompiler argument line in Prepare-Crate-Assets.ps1.",
+    "The user confirmed the METADATA-D panel visual refresh and rollback test; the completed Windows action and uploads have separate run records."
   ]
 }
