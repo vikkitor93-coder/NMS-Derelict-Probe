@@ -100,5 +100,6 @@
     "The owner+0x10 field is distinct from the indirect caller [RDX+0x10] slot.",
     "The helper target map identifies call destinations, not semantic function names."
   ],
-  "next_step": "Continue static helper and parent dataflow on this build. Prove the indirect destination with a live [RDX+0x10] sample from the current executable when the runtime capture can be run."
+  "next_step": "Continue static helper and parent dataflow on this build. Prove the indirect destination with a live [RDX+0x10] sample from the current executable when the runtime capture can be run.",
+  "correction_20261007": "The mapped 006369F0 is an old evidence-label byte location, not the current hook signature. Current signature uniquely matches 0063A6D0; see NEW_ROOT_CAPTURE_REVIEW_20261007.json."
 }
