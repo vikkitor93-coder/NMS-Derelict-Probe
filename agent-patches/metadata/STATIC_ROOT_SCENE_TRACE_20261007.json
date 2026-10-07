@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "evidence_class": "measured-static-game-assets",
+  "scope": "Follow the active entrance component's DungeonRootScene asset one scene attachment deep; list table room identifiers without claiming runtime selection or scene resolution.",
+  "source_files": {
+    "root_scene": {
+      "path": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/GENERATEDBASEROOT.SCENE.MBIN",
+      "sha256": "10f5a1673f233b83907179c2e1b9d58284d81c9452dc1a173a00387f47d9a1d4"
+    },
+    "root_attachment_entity": {
+      "path": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/GENERATEDBASEROOT/ENTITIES/GENERATEDBASEROOT.ENTITY.MBIN",
+      "sha256": "f6f13430ceca02db0761f59b2eb3a310594db121237e078de6e7ec5201eb2fc3"
+    },
+    "dungeon_table": {
+      "path": "METADATA/REALITY/TABLES/FREIGHTERDUNGEONSTABLE.MBIN",
+      "sha256": "f5afb96f49560bf39a0ec6ffc295540ed4c38165e4458df2c7785fe391e1a82a"
+    }
+  },
+  "root_scene": {
+    "direct_child_count": 1,
+    "child_name": "GeneratedBaseRoot",
+    "child_type": "LOCATOR",
+    "attachment": "MODELS/PLANETS/BIOMES/COMMON/BUILDINGS/PARTS/BUILDABLEPARTS/SPACEBASE/GENERATEDBASEROOT/ENTITIES/GENERATEDBASEROOT.ENTITY.MBIN",
+    "direct_dungeon_room_scene_references": 0
+  },
+  "attachment_components": [
+    "GcGravityVolumesComponentData",
+    "TkStaticPhysicsComponentData"
+  ],
+  "presets": [
+    {
+      "name": "MEDI_TURRETS",
+      "rooms": 7,
+      "main_room_ids": [
+        "R_END",
+        "R_BARR",
+        "R_S_BARR",
+        "R_MEDI",
+        "R_S_MEDI",
+        "R_HANG"
+      ],
+      "branch_room_ids": [
+        "B_BARR",
+        "B_MEDI"
+      ]
+    },
+    {
+      "name": "MEDI_FLOATERS",
+      "rooms": 7,
+      "main_room_ids": [
+        "R_END",
+        "R_FLO_BARR",
+        "R_S_FLO_BARR",
+        "R_FLO_MEDI",
+        "R_S_FLO_MEDI"
+      ],
+      "branch_room_ids": [
+        "B_FLO_MEDI"
+      ]
+    },
+    {
+      "name": "MEDI_BUGS",
+      "rooms": 7,
+      "main_room_ids": [
+        "R_END",
+        "R_BUG_BARR",
+        "R_S_BUG_BARR",
+        "R_BUG_MEDI",
+        "R_S_BUG_MEDI",
+        "R_S_MEDI"
+      ],
+      "branch_room_ids": [
+        "B_BUG_BARR",
+        "B_BUG_MED"
+      ]
+    },
+    {
+      "name": "MEDI_SLIME",
+      "rooms": 7,
+      "main_room_ids": [
+        "R_END",
+        "R_SLI_BARR",
+        "R_S_SLI_BARR",
+        "R_SLI_MEDI",
+        "R_S_SLI_MEDI"
+      ],
+      "branch_room_ids": [
+        "B_SLI_MEDI"
+      ]
+    },
+    {
+      "name": "MEDI_MAZE",
+      "rooms": 4,
+      "main_room_ids": [
+        "R_END",
+        "R_BARR",
+        "R_S_BARR",
+        "R_MEDI",
+        "R_S_MEDI"
+      ],
+      "branch_room_ids": [
+        "R_S_MEDI",
+        "R_S_BARR",
+        "B_BARR",
+        "B_MEDI"
+      ]
+    },
+    {
+      "name": "CARGO_TURRETS",
+      "rooms": 7,
+      "main_room_ids": [
+        "R_END",
+        "R_BARR",
+        "R_S_BARR",
+        "R_CARG",
+        "R_S_CARG",
+        "R_HANG"
+      ],
+      "branch_room_ids": [
+        "B_BARR",
+        "B_CARG"
+      ]
+    },
+    {
+      "name": "CARGO_FLOATERS",
+      "rooms": 7,
+      "main_room_ids": [
+        "R_END",
+        "R_FLO_BARR",
+        "R_S_FLO_BARR",
+        "R_FLO_CARG",
+        "R_S_FLO_CARG"
+      ],
+      "branch_room_ids": [
+        "B_FLO_BARR",
+        "B_FLO_CARG"
+      ]
+    },
+    {
+      "name": "CARGO_BUGS",
+      "rooms": 7,
+      "main_room_ids": [
+        "R_END",
+        "R_BUG_BARR",
+        "R_S_BUG_BARR",
+        "R_BUG_CARG",
+        "R_S_BUG_CARG",
+        "R_S_CARG"
+      ],
+      "branch_room_ids": [
+        "B_BUG_BARR",
+        "B_BUG_CARG"
+      ]
+    },
+    {
+      "name": "CARGO_SLIME",
+      "rooms": 7,
+      "main_room_ids": [
+        "R_END",
+        "R_SLI_BARR",
+        "R_S_SLI_BARR",
+        "R_SLI_CARG",
+        "R_S_SLI_CARG"
+      ],
+      "branch_room_ids": [
+        "B_SLI_CARG"
+      ]
+    },
+    {
+      "name": "CARGO_MAZE",
+      "rooms": 4,
+      "main_room_ids": [
+        "R_END",
+        "R_BARR",
+        "R_S_BARR",
+        "R_CARG",
+        "R_S_CARG"
+      ],
+      "branch_room_ids": [
+        "R_S_BARR",
+        "R_S_CARG",
+        "B_BARR",
+        "B_CARG"
+      ]
+    }
+  ],
+  "limit": "The static root scene and its direct attachment do not resolve the runtime DUNGEON.SCENE.MBIN path or map room IDs to room scene assets. No runtime choice or seed claim follows from this report."
+}

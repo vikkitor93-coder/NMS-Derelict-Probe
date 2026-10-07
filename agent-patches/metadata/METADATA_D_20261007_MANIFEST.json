@@ -16,6 +16,8 @@
     "dedicated_upload": "research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/run-manifest.json",
     "sanitized_offline_run": "research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/run-manifest.json",
     "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
+    "static_root_trace": "agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json",
+    "complete_source_snapshot": "agent-patches/metadata/METADATA_SOURCE_SNAPSHOT_20261007.json",
     "source_hashes": {
       "entrance_entity_mbin_sha256": "7ae4acec4521f5e8347b9d61514cf59dae7a24e722a7058a1126beb999b243e8",
       "dungeon_table_mbin_sha256": "f5afb96f49560bf39a0ec6ffc295540ed4c38165e4458df2c7785fe391e1a82a"
@@ -28,11 +30,12 @@
     "windows_action": "three steps exited 0; local action record complete; dedicated upload hashes match fresh outputs",
     "windows_visual_refresh_and_rollback": "user confirmed on 2026-10-07; no separate screenshot or machine log supplied",
     "mapper": "ten unique choices and presets matched; inactive similarly named entity rejected",
+    "root_trace": "hashed root scene and attachment entity decompiled; one locator attachment, two component types, no direct room-scene reference; all ten preset room-ID lists parsed",
     "package": "exact v0.3.60 base hash verified; complete 161-file v0.3.61 ZIP and manifest hashes verified before publication; 184/184 Windows Python 3.13 tests passed"
   },
   "confirmed": "The installed active entrance component contains ten static weighted choices and a DungeonRootScene field.",
   "unproven": "Runtime choice probabilities, seed input, actual frequencies, and the relationship between static DungeonRootScene and observed runtime DUNGEON.SCENE.MBIN.",
   "human_intervention_required": false,
   "rollback": "Restore backup/main-before-metadata-d-20261007-final or revert the publication commit; keep the dated research evidence for audit.",
-  "next_action": "Continue static asset relationship analysis within Agent D; coordinate with seed-lineage and dungeon-decompile before runtime claims."
+  "next_action": "Seek an explicit static mapping from table room IDs to room scene assets; coordinate with seed-lineage and dungeon-decompile before runtime claims."
 }
