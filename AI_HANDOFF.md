@@ -1,5 +1,11 @@
 # NMS Derelict Probe — AI handoff
 
+## DUNGEON-C October 6 root review — 2026-10-07
+
+A fresh root event, descriptor `00000112B726B528`, records caller return `02C0860A` on the current executable; the bytes at `02C08607` are `FF 52 10`. The probe source hook signature matches uniquely at current `.pdata` function start `0063A6D0`. The report is `agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json`. The probe still publishes old-build labels `00634BC0` (logical entry) and `00634C63` (recursive return), and the uploaded code/vtable exports are from the older executable and descriptor. The prior map to `006369F0` remains a map of that old label only; its five-helper dataflow is not established as the root callback.
+
+The captured zero is owner+0x10 after the call, not a pre-call `[RDX+0x10]` dispatch target. Analyze `0063A6D0` offline; a future current-build event with a pre-call slot read is needed to prove the indirect target.
+
 ## DUNGEON-C helper dataflow — 2026-10-05
 
 The current-build parent conditionally processes four nonzero 32-bit fields in the order `RSI+0x50`, `+0x58`, `+0x54`, `+0x5C`. Each follows a retain-like helper, appends the value to a 32-bit resizable list at `RSI+0x40`/`+0x44`/`+0x48`, and then follows a release-like helper. The exact instruction evidence and `.pdata` limitations are in `agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json`. Field meanings, list consumers, and the actual indirect callback destination remain unproven.

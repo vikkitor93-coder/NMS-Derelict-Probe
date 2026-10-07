@@ -81,5 +81,6 @@
     "The parent was mapped from an older runtime-correlated function; the current indirect [RDX+0x10] destination remains unmeasured.",
     "No current-build game event or physical derelict result was captured."
   ],
-  "next_step": "Inspect how this populated list is consumed and obtain a live current-build [RDX+0x10] slot sample before asserting callback identity."
+  "next_step": "Inspect how this populated list is consumed and obtain a live current-build [RDX+0x10] slot sample before asserting callback identity.",
+  "correction_20261007": "This dataflow belongs to the function mapped from old 00634BC0. Its relationship to the new root event and actual callback is unproved; see NEW_ROOT_CAPTURE_REVIEW_20261007.json."
 }
