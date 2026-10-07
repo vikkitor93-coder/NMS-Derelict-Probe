@@ -1,5 +1,9 @@
 # NMS Derelict Probe — AI handoff
 
+## Runtime hook identity candidate — 2026-10-07
+
+Branch `agent/current-build-hook-identity` contains probe 0.3.39. It obtains the hook target from pyMHF, verifies current direct recursion and `FF 52 10` caller bytes, and marks pre-call dispatch slot uncaptured. The candidate full source ZIP is local at `outputs/NMS-Derelict-Probe-v0.3.60-hook-identity-candidate.zip` (SHA-256 `20d2d5b28316dd43febc5686e239d8816ec8a6425fef56e0498877503d7c591e`). The installed probe was backed up locally and replaced; installed SHA-256 is `1a9bb3d21b8f8dffa1e758e20c152a48b7c892cfc4ab65fccf0e7c6f99e194f0`. Full candidate test suite: 188/188 passed. Live NMS validation is pending. Attempts through pyMHF, the visible classic launcher, and Steam app launch did not start NMS; the waiting processes were stopped. See `agent-patches/runtime-dispatch/HOOK_IDENTITY_CANDIDATE_20261007.json`.
+
 ## DUNGEON-C current hook export — 2026-10-07
 
 Ran the v0.3.39 offline helper exporter on a derived copy of the October 6 event with its stale hook label corrected by the unique current executable signature. The original uploaded event is untouched. The resulting `agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json` contains the current `0063A6D0..0063A729` bounded hook bytes and explicit raw-source provenance. Its adjacent branch range `0063A729..0063AB6C` has a direct self call at `0063A76E`, returning at `0063A773`; this independently confirms the current recursive return. The actual pre-call dispatch slot remains uncaptured.
