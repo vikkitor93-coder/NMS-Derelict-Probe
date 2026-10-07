@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-07T00:58:33Z",
+  "updated_utc": "2026-10-07T01:05:50Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.60",
@@ -35,14 +35,15 @@
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
-      "status": "fresh-root-reviewed-current-hook-identified",
+      "status": "current-hook-function-exported",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
       "next_action": "Analyze 0063A6D0 offline; runtime lane must capture pre-call dispatch slot with refreshed labels.",
       "latest_evidence": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
       "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
       "current_build_static_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
       "helper_dataflow_review": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
-      "new_root_capture_review": "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json"
+      "new_root_capture_review": "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json",
+      "root_callback_code_export": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json"
     },
     "metadata": {
       "branch": "agent/metadata",

@@ -1,5 +1,9 @@
 # NMS Derelict Probe — AI handoff
 
+## DUNGEON-C current hook export — 2026-10-07
+
+Ran the v0.3.39 offline helper exporter on a derived copy of the October 6 event with its stale hook label corrected by the unique current executable signature. The original uploaded event is untouched. The resulting `agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json` contains the current `0063A6D0..0063A729` bounded hook bytes and explicit raw-source provenance. Its adjacent branch range `0063A729..0063AB6C` has a direct self call at `0063A76E`, returning at `0063A773`; this independently confirms the current recursive return. The actual pre-call dispatch slot remains uncaptured.
+
 ## DUNGEON-C October 6 root review — 2026-10-07
 
 A fresh root event, descriptor `00000112B726B528`, records caller return `02C0860A` on the current executable; the bytes at `02C08607` are `FF 52 10`. The probe source hook signature matches uniquely at current `.pdata` function start `0063A6D0`. The report is `agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json`. The probe still publishes old-build labels `00634BC0` (logical entry) and `00634C63` (recursive return), and the uploaded code/vtable exports are from the older executable and descriptor. The prior map to `006369F0` remains a map of that old label only; its five-helper dataflow is not established as the root callback.
