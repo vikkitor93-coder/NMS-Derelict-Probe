@@ -39,7 +39,7 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "Trace consumption of the four-field list using HELPER_DATAFLOW_20261005.json; obtain live current-build [RDX+0x10] evidence before naming indirect callback.",
+    "next_method": "Analyze current 0063A6D0 hook function offline. Do not link earlier 006369F0 helper dataflow to root callback. Runtime lane must refresh labels and capture pre-call dispatch slot.",
     "candidate_identity_rule": "Candidate RVAs remain unnamed until full helper bodies and call semantics are validated; the runtime owner+0x10 field is not the caller's vtable slot.",
     "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/"
   },
@@ -266,5 +266,11 @@
     "report": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
     "current_nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
     "semantic_identity_proven": false
+  },
+  "new_root_capture_review": {
+    "report": "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json",
+    "event_descriptor": "00000112B726B528",
+    "current_hook_signature_rva": "0063A6D0",
+    "precall_slot_captured": false
   }
 }
