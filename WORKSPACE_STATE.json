@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-07T00:57:21Z",
+  "updated_utc": "2026-10-07T01:09:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -35,13 +35,14 @@
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
-      "status": "current-build-helper-dataflow-traced",
+      "status": "fresh-root-reviewed-current-hook-identified",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "Trace list consumption; prove indirect dispatch with live current-build [RDX+0x10] sample.",
+      "next_action": "Analyze 0063A6D0 offline; runtime lane must capture pre-call dispatch slot with refreshed labels.",
       "latest_evidence": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
       "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
       "current_build_static_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
-      "helper_dataflow_review": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json"
+      "helper_dataflow_review": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
+      "new_root_capture_review": "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json"
     },
     "metadata": {
       "branch": "agent/metadata-evidence-status-20261006",

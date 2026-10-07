@@ -6,7 +6,13 @@ Surveyor 0.3.61 repairs `Prepare-Crate-Assets.ps1` by passing `--input-format=MB
 
 The active abandoned-freighter entrance component has ten static `DungeonOptions` choices, all matched by name to current dungeon-table presets. The choices and exact source hashes are in `agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json`; method and limits are in `STATIC_DUNGEON_OPTIONS_MAP_20261007.md`. These weights do not prove runtime selection probabilities, seed input, or frequencies. The component's static `DungeonRootScene` field is not yet linked to the separately observed runtime `DUNGEON.SCENE.MBIN` resource. Seed-lineage and dungeon-decompile lanes own those other links.
 
-The source package is a complete 0.3.61 ZIP, encoded in `packages/v0.3.61-full/` and described by the root `update-manifest.json`. The previous main commit is preserved at `backup/main-before-metadata-d-20261007`. The smallest functional change from 0.3.60 is one line in `Prepare-Crate-Assets.ps1`; no extension panel, host action ID, probe protocol, or NMS write behavior changed. Next Agent D task: continue independent static metadata and asset relationship analysis; require a live capture only if a specific remaining claim cannot be resolved offline.
+The source package is a complete 0.3.61 ZIP, encoded in `packages/v0.3.61-full/` and described by the root `update-manifest.json`. The previous main commit is preserved at `backup/main-before-metadata-d-20261007-current`. The smallest functional change from 0.3.60 is one line in `Prepare-Crate-Assets.ps1`; no extension panel, host action ID, probe protocol, or NMS write behavior changed. Next Agent D task: continue independent static metadata and asset relationship analysis; require a live capture only if a specific remaining claim cannot be resolved offline.
+
+## DUNGEON-C October 6 root review — 2026-10-07
+
+A fresh root event, descriptor `00000112B726B528`, records caller return `02C0860A` on the current executable; the bytes at `02C08607` are `FF 52 10`. The probe source hook signature matches uniquely at current `.pdata` function start `0063A6D0`. The report is `agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json`. The probe still publishes old-build labels `00634BC0` (logical entry) and `00634C63` (recursive return), and the uploaded code/vtable exports are from the older executable and descriptor. The prior map to `006369F0` remains a map of that old label only; its five-helper dataflow is not established as the root callback.
+
+The captured zero is owner+0x10 after the call, not a pre-call `[RDX+0x10]` dispatch target. Analyze `0063A6D0` offline; a future current-build event with a pre-call slot read is needed to prove the indirect target.
 
 ## DUNGEON-C helper dataflow — 2026-10-05
 
