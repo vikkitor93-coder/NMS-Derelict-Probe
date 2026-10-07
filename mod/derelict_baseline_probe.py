@@ -24,7 +24,7 @@ from pathlib import Path
 from typing import Any
 
 from pymhf import Mod
-from pymhf.core.hooking import get_caller, on_key_pressed, static_function_hook
+from pymhf.core.hooking import get_caller, hook_manager, on_key_pressed, static_function_hook
 from pymhf.gui.decorators import BOOLEAN, INTEGER, STRING, gui_button, no_gui
 
 import nmspy.data.basic_types as basic
@@ -33,7 +33,7 @@ from nmspy.common import gameData
 from nmspy.decorators import main_loop
 from nmspy.engine import GetNodeAbsoluteTransMatrix
 
-PROBE_VERSION = "0.3.38"
+PROBE_VERSION = "0.3.39"
 SCHEMA_VERSION = 1
 ABANDONED_FREIGHTER_LOCATION_VALUE = 0xB
 ABANDONED_FREIGHTER_POI_TYPE_VALUE = 0x6
@@ -59,17 +59,6 @@ DUNGEON_SEED_RETENTION_SECONDS = 1800.0
 MAX_PRESESSION_DUNGEON_SEEDS = 16
 LOGICAL_ENTRY_RETENTION_SECONDS = 30.0
 MAX_RECENT_LOGICAL_ENTRY_EVENTS = 512
-CURRENT_BUILD_LOGICAL_ENTRY_RVA = 0x00634BC0
-CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA = 0x00634C63
-CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS = frozenset(int(x, 16) for x in (
-    "001D4A20 001D4A86 00251D27 0055773B 00566C20 00566E7B 005CD2BB 005CD36B "
-    "005EFE10 005F396B 005F39E0 0061A87F 00633ADB 006340AB 00634C63 00671B1B "
-    "00671B9B 0068FD4B 006F602F 008E84FD 00AFED65 00AFED89 00B12122 00B1215E "
-    "00F895B8 00FB07C2 00FD2162 00FD43FB 0109E4DB 0109E55B 0109E5DB 010F175E "
-    "0110F88E 0114ADC4 0114C4D0 011FF3DD 01235CBB 01235D9B 012E8B34 013916AB "
-    "013918A0 01413A80 015347E0 01534850 0154FCB4 0157CC00 015D3E8F 016B9320 "
-    "016C6BF1 016CBA04 017D60D0 02D0574A"
-).split())
 MAX_AUTO_CRATE_EVENTS = 2000
 MAX_PRESESSION_AUTO_CRATE_EVENTS = 500
 MAX_SCENE_PROBE_EVENTS = 2000
@@ -97,8 +86,8 @@ def _resource_descriptor_walk_entry(
 ) -> ctypes.c_int32:
     """Current-build generic resource walk entry used for narrow caller tracing.
 
-    The signature is taken from the verified 0x00634BC0 logical entry in the
-    current NMS build.  The hook is read-only and is used only to remember the
+    The signature identifies the resource-walk entry across the observed NMS
+    builds. The hook is read-only and is used only to remember the
     caller/descriptor relationship long enough to correlate it with the later
     DUNGEON.SCENE.MBIN Engine::AddResource event.
     """
@@ -219,6 +208,47 @@ def _read_process_bytes(address: int, size: int) -> bytes | None:
         return bytes(buf)
     except Exception:
         return None
+
+
+def _observed_hook_rva() -> int | None:
+    """Use pyMHF's installed hook target, rather than an old build's RVA."""
+    try:
+        hook = next(
+            item for item in hook_manager.hooks.values()
+            if getattr(item, "_name", None) == "_resource_descriptor_walk_entry"
+        )
+        kernel32 = ctypes.windll.kernel32
+        kernel32.GetModuleHandleW.restype = ctypes.c_void_p
+        base = int(kernel32.GetModuleHandleW(None) or 0)
+        target = int(hook.target)
+        if base and base <= target < base + 0x8000000:
+            return target - base
+    except Exception:
+        pass
+    return None
+
+
+def _classify_caller_bytes(raw: bytes | None, caller_return_rva: int, hook_rva: int | None) -> tuple[bool, bool]:
+    if raw is None or len(raw) != 5 or hook_rva is None:
+        return False, False
+    direct_target = caller_return_rva + int.from_bytes(raw[1:5], "little", signed=True)
+    return raw[0] == 0xE8 and direct_target == hook_rva, raw[2:5] == b"\xFF\x52\x10"
+
+
+def _caller_edges(caller_return_rva: int, hook_rva: int | None) -> tuple[bool, bool]:
+    """Check a direct self-call and the observed indirect FF 52 10 call."""
+    if not caller_return_rva or hook_rva is None or os.name != "nt":
+        return False, False
+    try:
+        kernel32 = ctypes.windll.kernel32
+        kernel32.GetModuleHandleW.restype = ctypes.c_void_p
+        base = int(kernel32.GetModuleHandleW(None) or 0)
+        if not base or caller_return_rva < 5:
+            return False, False
+        raw = _read_process_bytes(base + caller_return_rva - 5, 5)
+        return _classify_caller_bytes(raw, caller_return_rva, hook_rva)
+    except Exception:
+        return False, False
 
 
 def _loaded_module_identity(address: int) -> dict[str, Any]:
@@ -577,6 +607,8 @@ class DerelictBaselineProbe(Mod):
         self._recent_logical_entry_events: list[dict[str, Any]] = []
         self._logical_entry_caller_hits: dict[str, int] = {}
         self._logical_entry_tls = threading.local()
+        self._observed_logical_entry_rva: int | None = None
+        self._observed_recursive_return_rva: int | None = None
         self._last_exact_root_caller: dict[str, Any] | None = None
         self._exact_root_caller_path = self._root / "asset-work-v1" / "exact-root-caller-latest.json"
         self._root_event_path = self._root / "asset-work-v1" / "root-event-latest.json"
@@ -1547,8 +1579,8 @@ class DerelictBaselineProbe(Mod):
                 "last_dungeon_logical_entry_exact_external_caller_offset_hex": None,
                 "last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture,
                 "logical_entry_unique_callers_observed": len(self._logical_entry_caller_hits),
-                "logical_entry_known_candidate_hits": sum(1 for key in self._logical_entry_caller_hits if int(key, 16) in CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
-                "logical_entry_candidate_count": len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
+                "logical_entry_known_candidate_hits": None,
+                "logical_entry_candidate_count": None,
             }
 
         scene_events = self._session.get("scene_probe", {}).get("events", [])
@@ -1668,8 +1700,8 @@ class DerelictBaselineProbe(Mod):
             "last_dungeon_logical_entry_exact_external_caller_offset_hex": (logical_entry_exact_external_offsets[-1] if logical_entry_exact_external_offsets else None),
             "last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture,
             "logical_entry_unique_callers_observed": len(self._logical_entry_caller_hits),
-            "logical_entry_known_candidate_hits": sum(1 for key in self._logical_entry_caller_hits if int(key, 16) in CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
-            "logical_entry_candidate_count": len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
+            "logical_entry_known_candidate_hits": None,
+            "logical_entry_candidate_count": None,
             "room_parent_names_seen": sum(1 for row in groups.values() if row["parent_node_names"]),
             "crate_index_status": crate_index_status,
             "crate_index_scene_count": len(crate_index),
@@ -1988,16 +2020,10 @@ class DerelictBaselineProbe(Mod):
 
     def _remember_logical_entry_event(self, event: dict[str, Any]) -> None:
         now = time.monotonic()
-        caller_hex = str(event.get("caller_return_offset_hex") or "").upper()
-        caller_value = 0
-        try:
-            caller_value = int(caller_hex, 16) if caller_hex else 0
-        except ValueError:
-            caller_value = 0
         event = {
             **event,
-            "caller_class": ("recursive-self" if caller_value == CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA else "external"),
-            "known_static_candidate": caller_value in CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS,
+            "caller_class": ("recursive-self" if event.get("recursive_self_call") else "external"),
+            "known_static_candidate": None,
         }
         with self._lock:
             kept = [
@@ -2034,11 +2060,11 @@ class DerelictBaselineProbe(Mod):
         """Return the nearest descriptor match with its inherited external caller.
 
         The shared walk is recursive. A nested invocation can own the exact
-        derelict descriptor while its immediate caller is the verified self edge
-        at 0x00634C63. The before/after hook pair maintains a tiny per-thread
+        derelict descriptor while its immediate caller is a verified self edge.
+        The before/after hook pair maintains a tiny per-thread
         call stack, so each seeded invocation inherits the original external
         caller which entered the recursive chain. This lets one hook distinguish
-        all 52 direct references in one run without placing 52 hooks.
+        callers in one run without a hook at every callsite.
         """
         if descriptor_pointer is None:
             return None
@@ -2075,9 +2101,11 @@ class DerelictBaselineProbe(Mod):
             "utc": _utc_now(),
             "method": ("all-callers-single-hook-exact-descriptor-correlation" if exact else "root-resource-event-capture"),
             "capture_status": "exact-caller-correlated" if exact else "root-event-saved-caller-correlation-pending",
-            "logical_entry_rva_hex": f"{CURRENT_BUILD_LOGICAL_ENTRY_RVA:08X}",
-            "static_direct_reference_count": len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS),
-            "recursive_return_rva_hex": f"{CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA:08X}",
+            "logical_entry_rva_hex": (f"{self._observed_logical_entry_rva:08X}" if self._observed_logical_entry_rva is not None else None),
+            "logical_entry_rva_source": "installed-pymhf-hook-target" if self._observed_logical_entry_rva is not None else "unavailable",
+            "static_direct_reference_count": None,
+            "static_direct_reference_count_status": "not-enumerated-for-this-build",
+            "recursive_return_rva_hex": (f"{self._observed_recursive_return_rva:08X}" if self._observed_recursive_return_rva is not None else None),
             "root_resource": DUNGEON_ROOT_SCENE,
             "root_descriptor_pointer_hex": root_event.get("descriptor_pointer_hex"),
             "root_seed_hex": str((root_event.get("primary_seed") or {}).get("seed_hex") or "").upper() or None,
@@ -2089,6 +2117,8 @@ class DerelictBaselineProbe(Mod):
             "owner_plus_0x10_capture": exact.get("owner_plus_0x10_capture") if exact else None,
             "exact_external_caller_return_offset_hex": ((exact.get("resolved_external_caller_return_offset_hex") or exact.get("external_origin_caller_return_offset_hex") or exact.get("caller_return_offset_hex")) if exact else None),
             "external_call_register_snapshot_at_entry": exact.get("external_call_register_snapshot_at_entry") if exact else None,
+            "observed_callee_hook_target_rva_hex": (f"{self._observed_logical_entry_rva:08X}" if self._observed_logical_entry_rva is not None else None),
+            "precall_dispatch_slot_captured": False,
             "unique_callers_observed": len(self._logical_entry_caller_hits),
             "caller_hit_counts": dict(sorted(self._logical_entry_caller_hits.items())),
             "interpretation": "All shared-entry callers are observed at once; exact descriptor identity selects the derelict path and the verified self-recursive edge is excluded.",
@@ -2129,7 +2159,12 @@ class DerelictBaselineProbe(Mod):
             if stack is None:
                 stack = []
                 self._logical_entry_tls.stack = stack
-            if caller_offset == CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA and stack:
+            if self._observed_logical_entry_rva is None:
+                self._observed_logical_entry_rva = _observed_hook_rva()
+            recursive_self_call, indirect_ff52_10 = _caller_edges(caller_offset, self._observed_logical_entry_rva)
+            if recursive_self_call:
+                self._observed_recursive_return_rva = caller_offset
+            if recursive_self_call and stack:
                 external_origin = int(stack[-1].get("external_origin_caller_offset") or 0)
                 external_owner_pointer_hex = stack[-1].get("external_owner_pointer_hex")
                 external_slot_capture = stack[-1].get("external_owner_plus_0x10_capture")
@@ -2145,6 +2180,7 @@ class DerelictBaselineProbe(Mod):
                 "external_owner_pointer_hex": external_owner_pointer_hex,
                 "external_owner_plus_0x10_capture": external_slot_capture,
                 "external_call_register_snapshot": external_register_snapshot,
+                "recursive_self_call": recursive_self_call,
             }
             stack.append(frame)
 
@@ -2162,7 +2198,7 @@ class DerelictBaselineProbe(Mod):
             primary_hex = str(seed.get("primary_seed_hex") or "").upper()
             if primary_hex in {"", "0000000000000000", "FFFFFFFFFFFFFFFF"}:
                 return
-            if caller_offset != CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA:
+            if not recursive_self_call:
                 # At the callee entry the indirect call has just happened, before
                 # later root-resource work can clear or repurpose this slot.
                 frame["external_owner_pointer_hex"] = f"{owner_pointer:016X}"
@@ -2175,11 +2211,15 @@ class DerelictBaselineProbe(Mod):
                 # its caller's instruction. Under the Windows x64 ABI, the first
                 # two integer/pointer arguments arrive in RCX and RDX. Capture
                 # those values with the already-read [RDX+0x10] slot so every
-                # caller is observed through this one hook, not 52 breakpoints.
+                # caller is observed through this one hook.
                 frame["external_call_register_snapshot"] = {
                     "capture_phase": "shared-entry-hook-after-call",
                     "capture_utc": _utc_now(),
                     "caller_return_rva_hex": (f"{caller_offset:08X}" if caller_offset else None),
+                    "observed_hook_target_rva_hex": (f"{self._observed_logical_entry_rva:08X}" if self._observed_logical_entry_rva is not None else None),
+                    "caller_instruction_ff52_10_verified": indirect_ff52_10,
+                    "precall_dispatch_slot_captured": False,
+                    "rdx_plus_0x10_interpretation": "callee-owner-field-after-call; not the pre-call virtual dispatch slot",
                     "rcx_hex": (f"{_raw_u64_bits(context):016X}" if _raw_u64_bits(context) is not None else None),
                     "rdx_hex": f"{owner_pointer:016X}",
                     "rdx_plus_0x10_capture": frame["external_owner_plus_0x10_capture"],
@@ -2195,6 +2235,7 @@ class DerelictBaselineProbe(Mod):
                 "caller_return_offset_hex": (f"{caller_offset:08X}" if caller_offset else None),
                 "external_origin_caller_return_offset_hex": (f"{external_origin:08X}" if external_origin else None),
                 "recursion_depth": max(0, len(stack) - 1),
+                "recursive_self_call": recursive_self_call,
                 "external_owner_pointer_hex": frame.get("external_owner_pointer_hex"),
                 "external_owner_plus_0x10_capture_at_entry": frame.get("external_owner_plus_0x10_capture"),
                 "external_call_register_snapshot_at_entry": frame.get("external_call_register_snapshot"),
@@ -2571,7 +2612,7 @@ class DerelictBaselineProbe(Mod):
                 event["logical_entry_matches"] = entry_matches
                 event["logical_entry_match_count"] = len(entry_matches)
                 event["logical_entry_unique_callers_observed"] = len(self._logical_entry_caller_hits)
-                event["logical_entry_static_candidate_count"] = len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS)
+                event["logical_entry_static_candidate_count"] = None
                 if entry_matches:
                     nearest = entry_matches[0]
                     nearest_offset = nearest.get("caller_return_offset_hex")

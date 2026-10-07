@@ -1,5 +1,9 @@
 # NMS Derelict Probe — AI handoff
 
+## Runtime hook identity candidate on Surveyor 0.3.61 — 2026-10-07
+
+`agent/current-build-hook-identity-0.3.61` starts from current main `5baf453`, after published 0.3.61 commit `8b742d5`. Probe 0.3.39 obtains the installed pyMHF hook target and classifies observed direct recursion and `FF 52 10` caller bytes without the stale old-build RVA table. It explicitly says the pre-call dispatch slot remains uncaptured. The full 0.3.61 candidate ZIP is local at `outputs/NMS-Derelict-Probe-v0.3.61-hook-identity-candidate.zip`, SHA-256 `1cf627d33aa34a4fa4419f6674f2da75d59020b59ab30bfe6decc8672bc2b86c`. Windows offline suite: 188/188 passed; compileall and ZIP integrity passed. The same updated probe is installed, with the original backed up. Attempts via pyMHF and Steam did not open NMS, so there is no live capture yet. See `agent-patches/runtime-dispatch/HOOK_IDENTITY_CANDIDATE_20261007.json`.
+
 ## METADATA-D publication — 2026-10-07
 
 Agent D followed the active component's `DungeonRootScene` asset through its direct scene attachment. The root scene contains one `GeneratedBaseRoot` locator, which attaches `GENERATEDBASEROOT.ENTITY.MBIN`; that entity contains gravity-volume and static-physics components. The root scene has no direct room-scene reference. `agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json` records exact MBIN hashes and the ten presets' main/branch room IDs. A complete source snapshot containing this handoff is encoded in `packages/v0.3.61-metadata-static-source/` with its own `agent-patches/metadata/METADATA_SOURCE_SNAPSHOT_20261007.json` manifest; it is not a new updater version. This narrows the static boundary but does not establish how the runtime `DUNGEON.SCENE.MBIN` resource or room assets are chosen.
