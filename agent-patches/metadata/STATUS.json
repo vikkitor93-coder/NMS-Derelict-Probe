@@ -1,20 +1,26 @@
 {
   "schema_version": 1,
-  "status": "working",
-  "state": "static-options-map-complete",
-  "human_intervention_required": false,
-  "summary": "The Prepare assets failure was repaired, fresh metadata evidence was published, and the current abandoned-freighter entrance entity was mapped directly to all ten weighted dungeon-table presets. Runtime selection behavior remains unverified.",
-  "completed_action": "Repaired Prepare-Crate-Assets.ps1 locally, ran it to completion without starting NMS, and published the resulting room/crate evidence in research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/ on this branch.",
+  "status": "needs-human-input",
+  "state": "verified-ready-for-integration-pr",
+  "human_intervention_required": true,
+  "summary": "METADATA-D 1.0.1 Prepare assets + upload completed end to end on Windows, and main has the dedicated metadata upload. The current entrance entity was mapped directly to all ten weighted dungeon-table presets. The source repair remains on this branch pending an integration PR; runtime selection behavior remains unverified.",
+  "completed_action": "Surveyor's 2026-10-07 00:35 UTC Prepare assets + upload run completed all three steps with exit status 0. Its extension action record is complete and main contains research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/.",
   "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
-  "next_action": "Integrate the Prepare assets script fix into the canonical Surveyor package. Coordinate with seed-lineage and dungeon-decompile lanes before claiming how the ten static weights are used by the runtime selection algorithm.",
+  "next_action": "Open an integration PR from agent/metadata-evidence-status-20261006 to main for review of the source repair, direct options map, and evidence. Do not merge the candidate package without integration review. Coordinate with seed-lineage and dungeon-decompile lanes before claiming runtime selection semantics.",
+  "user_steps": [
+    "Open https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/new/agent/metadata-evidence-status-20261006.",
+    "Set base to main and head to agent/metadata-evidence-status-20261006, then create a draft PR.",
+    "Share the PR link for review; leave it unmerged."
+  ],
+  "success_condition": "A draft PR exists for the Agent D branch against main and its link is available for review.",
   "remaining_validation": [
     "Integrate the Prepare-Crate-Assets.ps1 fix into the canonical Surveyor package; local installed copy is repaired, but the published updater is not.",
-    "Windows METADATA-D 1.0.1 refresh and rollback remain unverified."
+    "Windows METADATA-D 1.0.1 refresh and rollback remain unverified; action execution and upload are verified."
   ],
   "evidence_to_return": [
-    "research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/run-manifest.json"
+    "research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/run-manifest.json on main"
   ],
   "full_derelict_required": false,
   "evidence_review": "agent-patches/metadata/STATIC_DUNGEON_OPTIONS_MAP_20261007.md",
-  "updated_utc": "2026-10-07T00:23:41Z"
+  "updated_utc": "2026-10-07T00:37:14Z"
 }
