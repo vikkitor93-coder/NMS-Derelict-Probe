@@ -8,6 +8,8 @@ The latest Surveyor action log identifies the cause: MBINCompiler v7.4.1.3 encou
 
 The attached patch changes that call to `& $mbin --input-format=MBIN -y $extracted`. `--input-format=MBIN` resolves the mixed-format prompt; `-y` permits regeneration of previously generated MXML outputs. The patch applies cleanly to the installed v0.3.58 script. No game files or NMS process were changed.
 
+The user reran the METADATA-D 1.0.1 button at 2026-10-07 00:35 UTC after the local repair. Surveyor's action record reports `status: complete`, exit status 0, and no failed step. The action log shows preparation, the dedicated upload, and the changed-evidence upload each returned 0. The dedicated [main-branch run manifest](https://github.com/vikkitor93-coder/NMS-Derelict-Probe/blob/main/research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/run-manifest.json) records the metadata namespace and three output SHA-256 values matching the fresh offline outputs in the lane branch. This verifies the full action and upload path; it does not verify extension refresh or rollback behavior.
+
 ## Verification
 
 - PowerShell parsed the repaired script with zero errors. Its only source difference is the MBINCompiler argument line.
