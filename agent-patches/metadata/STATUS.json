@@ -1,22 +1,19 @@
 {
   "schema_version": 1,
-  "status": "needs-human-input",
-  "state": "waiting_for_user",
-  "human_intervention_required": true,
-  "summary": "METADATA-D 1.0.1 is published. Existing all-saved uploads are snapshots of prior outputs, not proof of a dedicated metadata Prepare assets action. Direct DungeonOptions/Weighting mapping and Windows refresh/rollback remain unverified.",
-  "surveyor_request": "Use the METADATA-D panel's Prepare assets + upload action once and return its completion result and run manifest.",
-  "user_steps": [
-    "Open the current Surveyor on Windows and click Check lane extensions.",
-    "Confirm METADATA-D 1.0.1 is active and select the metadata lane.",
-    "Click Prepare assets + upload and wait for Surveyor to report completion.",
-    "Return with the completion result and the new timestamped metadata prepare-assets folder or run manifest; if it fails, return the exact error text."
+  "status": "working",
+  "state": "prepare-assets-repaired-direct-options-map-open",
+  "human_intervention_required": false,
+  "summary": "The METADATA-D Prepare assets button was attempted repeatedly but failed at MBINCompiler because extracted MBIN and MXML files were mixed. The one-line input-format and overwrite fix completed the offline workflow and produced fresh metadata-namespaced evidence. Direct DungeonOptions/Weighting mapping remains open.",
+  "completed_action": "Repaired Prepare-Crate-Assets.ps1 locally, ran it to completion without starting NMS, and published the resulting room/crate evidence in research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/ on this branch.",
+  "next_action": "Trace the current cGcAbandonedFreighterComponentData values to their source asset or runtime initialization and join its weighted DungeonOptions to the ten current FREIGHTERDUNGEONSTABLE presets. Do not claim measured weights from the crate preparation output.",
+  "remaining_validation": [
+    "Integrate the Prepare-Crate-Assets.ps1 fix into the canonical Surveyor package; local installed copy is repaired, but the published updater is not.",
+    "Windows METADATA-D 1.0.1 refresh and rollback remain unverified."
   ],
-  "success_condition": "Surveyor reports completion and GitHub contains a new timestamped metadata prepare-assets upload with its run manifest.",
   "evidence_to_return": [
-    "New timestamped metadata prepare-assets folder and run manifest",
-    "Surveyor completion result or exact error text"
+    "research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/run-manifest.json"
   ],
   "full_derelict_required": false,
-  "evidence_review": "agent-patches/metadata/EVIDENCE_REVIEW_20261006.md",
-  "updated_utc": "2026-10-06T23:47:18Z"
+  "evidence_review": "agent-patches/metadata/PREPARE_ASSETS_REPAIR_20261007.md",
+  "updated_utc": "2026-10-07T00:17:35Z"
 }
