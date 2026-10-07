@@ -1136,7 +1136,7 @@ class ToolTests(unittest.TestCase):
 
 
     def test_v0322_version_marker(self):
-        self.assertEqual("0.3.60", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.61", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
 
     def test_v0322_probe_exposes_background_research_buttons(self):
         source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
@@ -1429,7 +1429,7 @@ class ToolTests(unittest.TestCase):
             self.assertIn(token, probe)
 
     def test_v0330_version(self):
-        self.assertEqual("0.3.60", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.61", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
 
     def test_v0328_seed_function_relrefs_classify_recursion(self):
