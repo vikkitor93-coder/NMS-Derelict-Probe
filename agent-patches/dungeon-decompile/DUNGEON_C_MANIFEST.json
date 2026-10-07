@@ -272,5 +272,11 @@
     "event_descriptor": "00000112B726B528",
     "current_hook_signature_rva": "0063A6D0",
     "precall_slot_captured": false
+  },
+  "root_callback_code_export": {
+    "path": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
+    "current_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "derived_from_raw_capture": true,
+    "precall_slot_captured": false
   }
 }
