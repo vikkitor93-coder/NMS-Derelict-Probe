@@ -1,19 +1,26 @@
 {
   "schema_version": 1,
   "status": "needs-human-input",
-  "state": "waiting_for_user",
+  "state": "draft-pr-open",
   "human_intervention_required": true,
-  "surveyor_request": "Use the METADATA-D panel's Prepare assets + upload action to publish current freighter asset evidence in the metadata namespace.",
+  "summary": "METADATA-D 1.0.1 Prepare assets + upload completed end to end on Windows, and main has the dedicated metadata upload. The current entrance entity was mapped directly to all ten weighted dungeon-table presets. Draft PR #49 contains the source repair and evidence for integration review; runtime selection behavior remains unverified.",
+  "completed_action": "Surveyor's 2026-10-07 00:35 UTC Prepare assets + upload run completed all three steps with exit status 0. Its extension action record is complete and main contains research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/.",
+  "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
+  "next_action": "Review draft PR #49 for the source repair, direct options map, and evidence. Integrate the one-line repair into the canonical Surveyor package before publishing an updater. Coordinate with seed-lineage and dungeon-decompile lanes before claiming runtime selection semantics.",
   "user_steps": [
-    "Open Surveyor 0.3.41 or later with shared Agent Console API 1.0.",
-    "Select the metadata lane in Agent Console.",
-    "Click Prepare assets + upload.",
-    "Wait for the completion result and return to Main with: check."
+    "Open https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/49 when ready to review Agent D's repair and evidence.",
+    "Leave the PR unmerged until the canonical Surveyor package repair and Windows refresh/rollback check are reviewed."
   ],
-  "success_condition": "Surveyor reports the action completed and GitHub contains a timestamped metadata/prepare-assets upload folder.",
+  "success_condition": "Draft PR #49 is reviewed; the canonical Surveyor repair is verified before publication.",
+  "remaining_validation": [
+    "Integrate the Prepare-Crate-Assets.ps1 fix into the canonical Surveyor package; local installed copy is repaired, but the published updater is not.",
+    "Windows METADATA-D 1.0.1 refresh and rollback remain unverified; action execution and upload are verified."
+  ],
   "evidence_to_return": [
-    "The new timestamped metadata upload folder and run manifest."
+    "research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/run-manifest.json on main"
   ],
   "full_derelict_required": false,
-  "updated_utc": "2026-10-01T01:12:53Z"
+  "evidence_review": "agent-patches/metadata/STATIC_DUNGEON_OPTIONS_MAP_20261007.md",
+  "pull_request": "https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/49",
+  "updated_utc": "2026-10-07T00:45:27Z"
 }

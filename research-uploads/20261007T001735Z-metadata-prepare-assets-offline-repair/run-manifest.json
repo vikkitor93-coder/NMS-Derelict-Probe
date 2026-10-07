@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "utc": "20261007T001735Z",
+  "action": "prepare-assets",
+  "evidence_namespace": "metadata",
+  "source": "Offline repair of the METADATA-D Prepare assets workflow after the Surveyor action failed at MBINCompiler; generated outputs copied from the completed local run and personal root paths sanitized.",
+  "repair": "Pass --input-format=MBIN -y to MBINCompiler.",
+  "full_derelict_traversal_required": false,
+  "files": [
+    {
+      "name": "room-crate-index.json",
+      "size": 806228,
+      "sha256": "99b9032211f6d8745f0a6a925e8452203455a576eefd00177c816ed68a1e5b8c"
+    },
+    {
+      "name": "asset-calculation-latest.json",
+      "size": 40901,
+      "sha256": "411439791bbe5827035a99475e4266b88bc6c67b9365a8842d4dd40af4b043df"
+    },
+    {
+      "name": "crate-target-discovery.json",
+      "size": 54688,
+      "sha256": "252d2a7b07af8f6efb5ea8c90e2c0f0058118f3755b92535d34c7d21b9153429"
+    }
+  ]
+}
