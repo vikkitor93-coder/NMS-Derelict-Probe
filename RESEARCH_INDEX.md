@@ -91,3 +91,11 @@ Last updated: 2026-10-08. This file is the short shared truth table for humans a
 Every conclusion must be tagged mentally as **measured**, **public-structure confirmed**, **inferred**, or **hypothesis**. Never promote an inference to measured fact merely because it fits the current model.
 
 \n
+
+
+## Seed-Lineage latest combined report — 2026-10-08 18:53 UTC
+
+- Main pointer run `20261008T185304Z-e95aae15` references `research-uploads/20261008T185341Z-parallel-action-test/combined-results.json`, SHA-256 `9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe`; hash verified. It is the sole results source for this run. The parallel actions were offline on a saved snapshot; the runtime upload action was disabled.
+- The fresh saved session is `20261008T185119Z_0001550006607CAC`, universe `0001550006607CAC`; one root resource event at 18:51:04.549Z contains candidate `00C9E8DF0327789E`. The seed's derivation is unknown. Analyzer inference is `MEDI_FLOATERS`, 10 logical rooms / 146 instances, with 14 asset-predicted targets (7 salvage + 7 footlockers), not an observed count. Keep separate from the previous `CARGO_FLOATERS` asset prediction of 43 (30 salvage + 13 footlockers).
+- Caller extraction cites older session `20261006T223811Z_0001BF0004E84EFD`; upstream cites `20261004T151219Z_0001BF0004E84EFD`; seed-function analysis cites `20261002T213047Z_00001A0004E84EFD`. None may be correlated as evidence for the fresh session. Static `FF 52 10` at `02C08607` returns at `02C0860A`; its target is unresolved. The separate zero-match resolver sample at `02C04977` / `02C0497A` is not dispatch evidence.
+- Next: upload the saved event via shared-main RUNTIME-A 1.0.6; rerun Seed-Lineage 1.0.3 caller then upstream actions and verify both cite the fresh session and hash-matched executable. No new NMS launch or traversal is required if the saved capture remains available. See Seed-B STATUS.json for the exact request.
