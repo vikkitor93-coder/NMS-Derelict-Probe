@@ -53,6 +53,38 @@ class AutoResearchQueueTests(unittest.TestCase):
             self.assertEqual("queued", records["sha-1"]["state"])
             self.assertEqual("not-started", records["sha-bad"]["state"])
 
+    def test_startup_backfills_unreported_saved_sessions_and_skips_existing_report(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            sessions = root / "sessions"
+            project = root / "project"
+            report_dir = project / "parallel-action-tests" / "old-run"
+            sessions.mkdir(parents=True)
+            report_dir.mkdir(parents=True)
+            items = []
+            for name, ended in (("one.json", "2026-10-08T10:00:00Z"), ("two.json", "2026-10-08T11:00:00Z"), ("three.json", "2026-10-08T12:00:00Z")):
+                path = sessions / name
+                path.write_text(json.dumps({"ended_utc": ended, "session_id": name}), encoding="utf-8")
+                signature = __import__("hashlib").sha256(path.read_bytes()).hexdigest()
+                items.append((signature, path))
+            report = {"run_id": "old-run", "report_path": "parallel-action-tests/old-run/combined-results.json",
+                      "trigger": {"kind": "automatic_saved_session", "session_sha256": items[1][0]}}
+            (report_dir / "combined-results.json").write_text(json.dumps(report), encoding="utf-8")
+            records = {}
+            pending = []
+            added = controller_module._reconcile_saved_session_queue(
+                records, pending, sessions, project, root / "latest.json",
+            )
+            self.assertEqual(2, added)
+            self.assertEqual([("one.json", items[0][0]), ("three.json", items[2][0])],
+                             [(path.name, signature) for signature, path in pending])
+            self.assertEqual("already-reported", records[items[1][0]]["state"])
+            self.assertEqual("old-run", records[items[1][0]]["run_id"])
+            self.assertEqual(0, controller_module._reconcile_saved_session_queue(
+                records, pending, sessions, project, root / "latest.json",
+            ))
+            self.assertEqual(2, len(pending))
+
     def test_persisted_queue_contains_each_session_record(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "auto-research-queue.json"
