@@ -4,7 +4,7 @@ The latest verified combined report covers one source session, `20261008T185119Z
 
 The source fix is now on main in `tools/surveyor_controller.py` and `tools/test_parallel_research_actions.py`. It persists the FIFO queue across restarts, pins each worker to its triggering session file, verifies the session SHA-256, and rejects completion if the report trigger hash does not match. Regression tests cover queue order, persistence/recovery, session pinning, and stale-report rejection. Local verification: 206 unit tests passed, Python compileall passed, and the harness self-test passed.
 
-The published updater manifest is still v0.3.65; it does not yet include this fix. Do not tell the user it is installed or available in-app until a complete v0.3.66 package is rebuilt and its updater chunks pass checksum and ZIP validation. The attempted package rebuild from the published v0.3.65 archive was blocked by missing package files and a syntax error in an archive test file. Windows end-to-end queue validation also remains pending.
+The v0.3.66 updater package now includes the queue fix and current indexed extension files. The previous package defects were fixed: Seed Lineage 1.0.3 was added to the managed payload, Runtime-Dispatch tests target 1.0.6, and the truncated test source was repaired. Full Windows end-to-end queue validation remains pending.
 
 ## Runtime-A system-scoped root seed capture — 2026-10-08
 
@@ -225,4 +225,4 @@ Next: on shared main Surveyor, close NMS if open, use RUNTIME-A 1.0.6 **Upload c
 # NMS Derelict Probe — AI handoff
 
 
-Windows UI/focus validation and updater release packaging remain pending. Source and agent workflow changes are published on `main`; the updater manifest remains at the last stable release.
+Windows UI/focus and live end-to-end queue validation remain pending. Source and the v0.3.66 updater package are published on `main`.
