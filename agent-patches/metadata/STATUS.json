@@ -1,16 +1,18 @@
 {
   "schema_version": 1,
   "status": "complete",
-  "state": "parallel-offline-evidence-reviewed",
+  "state": "fresh-capture-room-model-reviewed",
   "human_intervention_required": false,
-  "summary": "The attached October 8 combined report verifies an offline METADATA-D prepare-assets action against saved evidence: 164/164 scene instances resolved and 43 target containers predicted from assets. No new game capture, physical count, or GitHub upload occurred in that run. The static ten-choice map and Surveyor 0.3.61 repair remain published; runtime selection remains unverified.",
+  "summary": "Reviewed the latest main combined report, which includes a fresh saved NMS capture session. The captured evidence supports a 43-target asset prediction and reports an 11-versus-7 analyzer/static room-count discrepancy flagged needs-review; no physical count or selected DungeonOptions value is established.",
   "completed_action": "Surveyor's 2026-10-07 00:35 UTC Prepare assets + upload run completed all three steps with exit status 0. Its extension action record is complete and main contains research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/.",
   "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
-  "next_action": "Coordinate with dungeon-decompile on room-ID-to-scene resolution. The available combined-report room-family audit is complete; do not claim runtime selection semantics.",
+  "next_action": "Compare the eight CARG groups and 11 total parent groups with CARGO_FLOATERS Rooms=7 and dungeon-decompile room-ID evidence; determine whether the mismatch reflects model grouping or generator semantics.",
   "user_steps": [],
   "success_condition": "The published package contains the repaired script and the metadata map remains reproducible from the hashed game assets.",
   "remaining_validation": [
-    "Runtime weighted-choice selection semantics, seed input, actual selection frequencies, and an observed count for the saved October 6 session remain unverified."
+    "Explain the report's analyzer-reported 11 main rooms versus the static preset Rooms=7 parameter; room_model_status is needs-review and manual F6/F5 room markers are zero.",
+    "Runtime weighted-choice semantics and direct selected DungeonOptions value remain unverified.",
+    "The 43 asset-derived target prediction remains separate from physical counts."
   ],
   "evidence_to_return": [
     "research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/run-manifest.json on main"
@@ -21,10 +23,8 @@
   "parallel_action_review": "agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json",
   "parallel_source_snapshot": "agent-patches/metadata/METADATA_PARALLEL_SOURCE_SNAPSHOT_20261008.json",
   "extension_version": "1.0.1",
-  "progress": "Reviewed the attached combined offline report and cross-checked its 11 analyzer-derived room groups against the 43-target asset prediction. The attached 13:02 run pointer/report were not published by Agent D; main now points to a distinct 13:43 run.",
+  "progress": "Latest combined report 20261008T140207Z-d8e24197 (SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6) includes saved capture session 20261008T140041Z_0001BF0004E84EFD and an exact root event at 2026-10-08T14:00:37.544Z. Asset resolution is 164/164 and the target total remains a 43-item asset prediction. The report flags 11 analyzer main rooms versus static Rooms=7 as needs-review; this is not a verified physical room count.",
   "complete_source_snapshot": "agent-patches/metadata/METADATA_SOURCE_SNAPSHOT_20261007.json",
   "pull_request": "https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/49",
-  "updated_utc": "2026-10-08T13:44:18Z"
+  "updated_utc": "2026-10-08T14:18:40Z"
 }
-
-\n
