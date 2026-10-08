@@ -65,12 +65,12 @@ def _refresh_release_docs() -> None:
         heading = "## Runtime-A system-scoped root seed capture — 2026-10-08"
         if heading not in text:
             note = (
-                f"{heading}\\n\\n"
+                f"{heading}\n\n"
                 f"Probe {PROBE_VERSION} closes an active capture and clears live root-seed/caller buffers when the observed universe address changes. "
                 "Root captures are accepted into a session only when their capture address matches that session. Seed evidence now labels the raw value, "
                 "UseSeedValue, and effective state separately. The user's reported F-pattern is not itself evidence that the value was enabled. "
                 "Focused tests and package integrity checks are run by the build workflow; normal NMS system-switch verification remains pending. "
-                "The Oct 8 combined parallel-action report remains the sole authority for that run and is not altered by this change.\\n\\n"
+                "The Oct 8 combined parallel-action report remains the sole authority for that run and is not altered by this change.\n\n"
             )
             _write_text(handoff, note + text)
 
@@ -99,7 +99,7 @@ def _refresh_shared_status() -> None:
     })
     human = state.setdefault("human_intervention", {})
     human["required_now"] = True
-    human["pending"] = [{
+    human["pending"] = [item for item in human.get("pending", []) if item.get("lane") != "runtime-dispatch"] + [{
         "lane": "runtime-dispatch",
         "kind": "verify-system-change-seed-reset",
         "next_action": "Update Surveyor through its in-app updater. Enter a different system and confirm the previous root capture clears; on the next root capture, inspect raw seed, UseSeedValue, and effective state.",
