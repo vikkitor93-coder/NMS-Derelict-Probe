@@ -26,7 +26,7 @@
       "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008.md",
       "extension_version": "1.0.3",
       "human_validation_required": true,
-      "next_action": "With matching NMS.exe, capture RDX and [RDX+0x10] immediately before RVA 02C08607 (FF 52 10) during one root event; no full traversal required.",
+      "next_action": "Follow the numbered WinDbg recipe in AI_HANDOFF.md: verify NMS.exe SHA-256, attach WinDbg x64, break before NMS+0x02C08607, and return RDX/[RDX+0x10] output with the matching Surveyor root event; no full traversal required.",
       "latest_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
       "latest_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6"
     },
@@ -79,7 +79,7 @@
         "lane": "runtime-dispatch",
         "kind": "pre-instruction-dispatch-slot-capture",
         "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
-        "next_action": "With matching NMS.exe, capture RDX and [RDX+0x10] immediately before RVA 02C08607 (FF 52 10) during one root event; no full traversal required."
+        "next_action": "Follow the numbered WinDbg recipe in AI_HANDOFF.md and RUNTIME_A_MANIFEST.json; return the pre-call RDX/[RDX+0x10] output with its matching Surveyor root event. No full traversal required."
       },
       {
         "kind": "fresh-root-caller-and-upstream-evidence",
