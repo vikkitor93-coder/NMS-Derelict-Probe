@@ -33,7 +33,7 @@ from nmspy.common import gameData
 from nmspy.decorators import main_loop
 from nmspy.engine import GetNodeAbsoluteTransMatrix
 
-PROBE_VERSION = "0.3.39"
+PROBE_VERSION = "0.3.40"
 SCHEMA_VERSION = 1
 ABANDONED_FREIGHTER_LOCATION_VALUE = 0xB
 ABANDONED_FREIGHTER_POI_TYPE_VALUE = 0x6
@@ -56,6 +56,7 @@ POI_COMPONENT_RETENTION_SECONDS = 1800.0
 POI_PREPARE_SCOPE_MAX_SECONDS = 30.0
 DUNGEON_ROOT_SCENE = "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN"
 DUNGEON_SEED_RETENTION_SECONDS = 1800.0
+SYSTEM_SCOPE_CHECK_SECONDS = 1.0
 MAX_PRESESSION_DUNGEON_SEEDS = 16
 LOGICAL_ENTRY_RETENTION_SECONDS = 30.0
 MAX_RECENT_LOGICAL_ENTRY_EVENTS = 512
@@ -83,6 +84,49 @@ AUTO_CRATE_DISCOVERY_TOKENS = ("ABAND_CRATE", "SALVAGE_CRATE", "SALVAGECRATE", "
 DERELICT_RESOURCE_TOKENS = ("DUNGEON", "ABAND", "HULK", "MODELS/SPACE/POI", "MODELS\\SPACE\\POI")
 
 logger = logging.getLogger(__name__)
+
+
+def _normalize_universe_address(value: Any) -> str | None:
+    """Normalize a universe address; zero/absent values are transition gaps."""
+    if value is None:
+        return None
+    text = str(value).strip().upper()
+    if text.startswith("0X"):
+        text = text[2:]
+    try:
+        number = int(text, 16)
+    except (TypeError, ValueError):
+        return None
+    if number <= 0 or number > 0xFFFFFFFFFFFFFFFF:
+        return None
+    return f"{number:016X}"
+
+
+def _root_seed_effective_state(seed: Any) -> dict[str, Any]:
+    """Report raw seed activation separately from the descriptor's raw value."""
+    if not isinstance(seed, dict):
+        return {"root_seed_effective_hex": None, "root_seed_use_seed_value": None, "root_seed_state": "unavailable"}
+    raw = str(seed.get("seed_hex") or "").strip().upper()
+    use_value = bool(seed.get("use_seed_value"))
+    try:
+        number = int(raw, 16) if raw else None
+    except ValueError:
+        number = None
+    if number is None:
+        state, effective = "unavailable", None
+    elif not use_value:
+        state, effective = "disabled", None
+    elif number == 0:
+        state, effective = "enabled_zero", "0000000000000000"
+    elif number == 0xFFFFFFFFFFFFFFFF:
+        state, effective = "all_ones_sentinel", None
+    else:
+        state, effective = "enabled", f"{number & 0xFFFFFFFFFFFFFFFF:016X}"
+    return {
+        "root_seed_effective_hex": effective,
+        "root_seed_use_seed_value": use_value,
+        "root_seed_state": state,
+    }
 
 
 @static_function_hook(
@@ -578,6 +622,8 @@ class DerelictBaselineProbe(Mod):
         self._logical_entry_caller_hits: dict[str, int] = {}
         self._logical_entry_tls = threading.local()
         self._last_exact_root_caller: dict[str, Any] | None = None
+        self._current_universe_address_hex: str | None = None
+        self._last_system_scope_check_monotonic = 0.0
         self._exact_root_caller_path = self._root / "asset-work-v1" / "exact-root-caller-latest.json"
         self._root_event_path = self._root / "asset-work-v1" / "root-event-latest.json"
         self._pre_session_auto_crates: list[dict[str, Any]] = []
@@ -1971,6 +2017,7 @@ class DerelictBaselineProbe(Mod):
                 "trace": self._trace_summary(),
                 "generation_rooms": self._generation_room_summary(),
                 "root_dispatch_capture": self._root_dispatch_capture_payload(),
+                "current_universe_address_hex": self._current_universe_address_hex,
                 "hotkeys": {
                     "room_zero": "F5",
                     "room": "F6",
@@ -2081,6 +2128,7 @@ class DerelictBaselineProbe(Mod):
             "root_resource": DUNGEON_ROOT_SCENE,
             "root_descriptor_pointer_hex": root_event.get("descriptor_pointer_hex"),
             "root_seed_hex": str((root_event.get("primary_seed") or {}).get("seed_hex") or "").upper() or None,
+            **_root_seed_effective_state(root_event.get("primary_seed")),
             "root_event_utc": root_event.get("utc"),
             "universe_address_hex_at_capture": root_event.get("universe_address_hex_at_capture"),
             "runtime_metadata_at_capture": runtime_metadata,
@@ -2103,7 +2151,11 @@ class DerelictBaselineProbe(Mod):
         self._persist_root_event(root_event, exact)
 
     def _root_dispatch_capture_payload(self) -> dict[str, Any] | None:
-        capture = (self._last_exact_root_caller or {}).get("owner_plus_0x10_capture")
+        root_event = self._last_exact_root_caller or {}
+        captured_ua = _normalize_universe_address(root_event.get("universe_address_hex_at_capture"))
+        if self._current_universe_address_hex and captured_ua != self._current_universe_address_hex:
+            return None
+        capture = root_event.get("owner_plus_0x10_capture")
         if not isinstance(capture, dict):
             return None
         identity = capture.get("target_identity") if isinstance(capture.get("target_identity"), dict) else {}
@@ -2562,6 +2614,7 @@ class DerelictBaselineProbe(Mod):
             if upper == DUNGEON_ROOT_SCENE:
                 try:
                     runtime_metadata = self._capture_runtime_metadata()
+                    self._observe_system_scope(runtime_metadata.get("universe_address_hex"), source="root_resource")
                     event["runtime_metadata_at_capture"] = runtime_metadata
                     event["universe_address_hex_at_capture"] = runtime_metadata.get("universe_address_hex")
                 except Exception as exc:
@@ -2951,6 +3004,10 @@ class DerelictBaselineProbe(Mod):
         self._last_tick = now
         try:
             self._poll_controller_command(now)
+            if now - self._last_system_scope_check_monotonic >= SYSTEM_SCOPE_CHECK_SECONDS:
+                self._last_system_scope_check_monotonic = now
+                runtime = self._capture_runtime_metadata()
+                self._observe_system_scope(runtime.get("universe_address_hex"), source="poll")
             on_derelict = self._is_on_derelict()
             if on_derelict:
                 self._last_non_derelict_monotonic = None
@@ -3132,6 +3189,36 @@ class DerelictBaselineProbe(Mod):
             meta["system_name_error"] = repr(exc)
         return meta
 
+    def _observe_system_scope(self, value: Any, *, source: str) -> bool:
+        """Clear live root-seed state and close the active session at a system boundary."""
+        current = _normalize_universe_address(value)
+        if current is None:
+            return False
+        with self._lock:
+            previous = self._current_universe_address_hex
+            if previous is None:
+                self._current_universe_address_hex = current
+                return False
+            if current == previous:
+                return False
+            self._current_universe_address_hex = current
+            if self._session is not None:
+                self._end_session(reason="system_changed")
+            self._pre_session_trace.clear()
+            self._pre_session_dungeon_seeds.clear()
+            self._pre_session_poi_candidates.clear()
+            self._last_exact_root_caller = None
+            self._last_generation_room_summary = None
+            self._last_event = "System changed — prior root-seed capture cleared"
+            self._last_event_utc = _utc_now()
+            self._write_log("system_scope_changed", {
+                "previous_universe_address_hex": previous,
+                "current_universe_address_hex": current,
+                "source": source,
+            })
+        self._publish_live_status(force=True)
+        return True
+
     def _start_session(self, trigger: str):
         with self._lock:
             if self._session is not None:
@@ -3156,8 +3243,8 @@ class DerelictBaselineProbe(Mod):
             filtered_trace: list[dict[str, Any]] = []
             for event in trace_events:
                 if event.get("kind") == "space_poi_description" and current_ua:
-                    hx = str(event.get("raw_argument_hex") or "").upper().zfill(16)
-                    if hx and hx != current_ua:
+                    hx = _normalize_universe_address(event.get("raw_argument_hex"))
+                    if hx != current_ua:
                         poi_mismatches.append(event)
                         continue
                 filtered_trace.append(event)
@@ -3182,9 +3269,8 @@ class DerelictBaselineProbe(Mod):
                 and _normalize_scene_name(str(e.get("resource_name") or "")) == DUNGEON_ROOT_SCENE
             }
             for event in self._recent_pre_session_dungeon_seeds():
-                captured_raw = str(event.get("universe_address_hex_at_capture") or "").upper()
-                captured_ua = captured_raw.zfill(16) if captured_raw else ""
-                if current_ua and captured_ua and captured_ua != current_ua:
+                captured_ua = _normalize_universe_address(event.get("universe_address_hex_at_capture"))
+                if current_ua and captured_ua != current_ua:
                     continue
                 key = (event.get("kind"), (event.get("primary_seed") or {}).get("seed_hex"), str(event.get("universe_address_hex_at_capture") or "").upper())
                 if key not in seen_root:
