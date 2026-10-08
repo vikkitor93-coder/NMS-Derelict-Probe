@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "capture_version": 2,
+  "probe_version": "0.3.38",
+  "utc": "2026-10-08T18:47:31.448Z",
+  "method": "all-callers-single-hook-exact-descriptor-correlation",
+  "capture_status": "exact-caller-correlated",
+  "logical_entry_rva_hex": "00634BC0",
+  "static_direct_reference_count": 52,
+  "recursive_return_rva_hex": "00634C63",
+  "root_resource": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+  "root_descriptor_pointer_hex": "0000025CA41FE128",
+  "root_seed_hex": "00C9E8DF0327789E",
+  "root_event_utc": "2026-10-08T18:47:31.448Z",
+  "universe_address_hex_at_capture": "0001550006607CAC",
+  "runtime_metadata_at_capture": {
+    "environment_location": "Default",
+    "system_name": "Uzawan XI",
+    "reality_index": 0,
+    "galactic_address": {
+      "planet_index": 0,
+      "solar_system_index": 341,
+      "voxel_x": -852,
+      "voxel_y": 6,
+      "voxel_z": 1543
+    },
+    "universe_address_hex": "0001550006607CAC",
+    "environment_location_live": "Default",
+    "environment_location_stable": "Default"
+  },
+  "root_event": {
+    "utc": "2026-10-08T18:47:31.448Z",
+    "kind": "resource_add",
+    "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+    "resource_type": 1,
+    "resource_flags": 1024,
+    "descriptor_pointer_hex": "0000025CA41FE128",
+    "caller_return_offset_hex": "0063AC25",
+    "caller_code_window": {
+      "start_offset_hex": "0063ABF5",
+      "return_offset_hex": "0063AC25",
+      "return_index": 48,
+      "byte_count": 80,
+      "bytes_hex": "0400004C89751841B900040004488D8DE0000000440F44C8BA01000000488D45E0488944242848897C2420E84B3B2001488BD0488D8ECC010000E8DC69B9FF488D8DE0000000E840AE7202B201488D8D"
+    },
+    "primary_seed": {
+      "seed_signed": 56832514847111326,
+      "seed_u64": 56832514847111326,
+      "seed_hex": "00C9E8DF0327789E",
+      "use_seed_value": true
+    },
+    "secondary_seed": {
+      "seed_signed": -1,
+      "seed_u64": 18446744073709551615,
+      "seed_hex": "FFFFFFFFFFFFFFFF",
+      "use_seed_value": false
+    },
+    "poi_prepare_scope_component_hexes": [],
+    "poi_activation_scope_component_hexes": [],
+    "poi_lifecycle_scope_component_hexes": [],
+    "runtime_metadata_at_capture": {
+      "environment_location": "Default",
+      "system_name": "Uzawan XI",
+      "reality_index": 0,
+      "galactic_address": {
+        "planet_index": 0,
+        "solar_system_index": 341,
+        "voxel_x": -852,
+        "voxel_y": 6,
+        "voxel_z": 1543
+      },
+      "universe_address_hex": "0001550006607CAC",
+      "environment_location_live": "Default",
+      "environment_location_stable": "Default"
+    },
+    "universe_address_hex_at_capture": "0001550006607CAC",
+    "logical_entry_matches": [
+      {
+        "utc": "2026-10-08T18:47:31.446Z",
+        "context_pointer_hex": "0000025DEBFC9960",
+        "owner_pointer_hex": "0000025CA41FE000",
+        "descriptor_pointer_hex": "0000025CA41FE128",
+        "primary_seed_hex": "00C9E8DF0327789E",
+        "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+        "caller_return_offset_hex": "02C0860A",
+        "external_origin_caller_return_offset_hex": "02C0860A",
+        "recursion_depth": 0,
+        "external_owner_pointer_hex": "0000025CA41FE000",
+        "external_owner_plus_0x10_capture_at_entry": {
+          "owner_pointer_hex": "0000025CA41FE000",
+          "slot_offset_hex": "00000010",
+          "slot_address_hex": "0000025CA41FE010",
+          "capture_phase": "logical-entry-after-external-call",
+          "capture_utc": "2026-10-08T18:47:31.446Z",
+          "read_status": "captured",
+          "raw_bytes_hex": "0000000000000000",
+          "slot_value_hex": "0000000000000000",
+          "target_identity": null
+        },
+        "external_call_register_snapshot_at_entry": {
+          "capture_phase": "shared-entry-hook-after-call",
+          "capture_utc": "2026-10-08T18:47:31.446Z",
+          "caller_return_rva_hex": "02C0860A",
+          "rcx_hex": "0000025DEBFC9960",
+          "rdx_hex": "0000025CA41FE000",
+          "rdx_plus_0x10_capture": {
+            "owner_pointer_hex": "0000025CA41FE000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "0000025CA41FE010",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-08T18:47:31.446Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": null
+          }
+        },
+        "caller_class": "external",
+        "known_static_candidate": false,
+        "age_ms_at_root_add": 1.451
+      }
+    ],
+    "logical_entry_match_count": 1,
+    "logical_entry_unique_callers_observed": 11,
+    "logical_entry_static_candidate_count": 52,
+    "logical_entry_nearest_caller_return_offset_hex": "02C0860A",
+    "logical_entry_nearest_caller_code_window": {
+      "start_offset_hex": "02C085AA",
+      "return_offset_hex": "02C0860A",
+      "return_index": 96,
+      "byte_count": 160,
+      "bytes_hex": "BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95"
+    },
+    "owner_plus_0x10_capture": {
+      "owner_pointer_hex": "0000025CA41FE000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "0000025CA41FE010",
+      "capture_phase": "logical-entry-after-external-call",
+      "capture_utc": "2026-10-08T18:47:31.446Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "0000000000000000",
+      "slot_value_hex": "0000000000000000",
+      "target_identity": {
+        "status": "null-or-low-address",
+        "address_hex": "0000000000000000"
+      }
+    },
+    "logical_entry_exact_external_match": {
+      "utc": "2026-10-08T18:47:31.446Z",
+      "context_pointer_hex": "0000025DEBFC9960",
+      "owner_pointer_hex": "0000025CA41FE000",
+      "descriptor_pointer_hex": "0000025CA41FE128",
+      "primary_seed_hex": "00C9E8DF0327789E",
+      "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+      "caller_return_offset_hex": "02C0860A",
+      "external_origin_caller_return_offset_hex": "02C0860A",
+      "recursion_depth": 0,
+      "external_owner_pointer_hex": "0000025CA41FE000",
+      "external_owner_plus_0x10_capture_at_entry": {
+        "owner_pointer_hex": "0000025CA41FE000",
+        "slot_offset_hex": "00000010",
+        "slot_address_hex": "0000025CA41FE010",
+        "capture_phase": "logical-entry-after-external-call",
+        "capture_utc": "2026-10-08T18:47:31.446Z",
+        "read_status": "captured",
+        "raw_bytes_hex": "0000000000000000",
+        "slot_value_hex": "0000000000000000",
+        "target_identity": null
+      },
+      "external_call_register_snapshot_at_entry": {
+        "capture_phase": "shared-entry-hook-after-call",
+        "capture_utc": "2026-10-08T18:47:31.446Z",
+        "caller_return_rva_hex": "02C0860A",
+        "rcx_hex": "0000025DEBFC9960",
+        "rdx_hex": "0000025CA41FE000",
+        "rdx_plus_0x10_capture": {
+          "owner_pointer_hex": "0000025CA41FE000",
+          "slot_offset_hex": "00000010",
+          "slot_address_hex": "0000025CA41FE010",
+          "capture_phase": "logical-entry-after-external-call",
+          "capture_utc": "2026-10-08T18:47:31.446Z",
+          "read_status": "captured",
+          "raw_bytes_hex": "0000000000000000",
+          "slot_value_hex": "0000000000000000",
+          "target_identity": {
+            "status": "null-or-low-address",
+            "address_hex": "0000000000000000"
+          }
+        }
+      },
+      "caller_class": "external",
+      "known_static_candidate": false,
+      "age_ms_at_root_add": 1.576,
+      "resolved_external_caller_return_offset_hex": "02C0860A",
+      "owner_plus_0x10_capture_at_root_add": {
+        "owner_pointer_hex": "0000025CA41FE000",
+        "slot_offset_hex": "00000010",
+        "slot_address_hex": "0000025CA41FE010",
+        "capture_phase": "root-resource-add",
+        "capture_utc": "2026-10-08T18:47:31.448Z",
+        "read_status": "captured",
+        "raw_bytes_hex": "0000000000000000",
+        "slot_value_hex": "0000000000000000",
+        "target_identity": {
+          "status": "null-or-low-address",
+          "address_hex": "0000000000000000"
+        }
+      },
+      "owner_plus_0x10_capture": {
+        "owner_pointer_hex": "0000025CA41FE000",
+        "slot_offset_hex": "00000010",
+        "slot_address_hex": "0000025CA41FE010",
+        "capture_phase": "logical-entry-after-external-call",
+        "capture_utc": "2026-10-08T18:47:31.446Z",
+        "read_status": "captured",
+        "raw_bytes_hex": "0000000000000000",
+        "slot_value_hex": "0000000000000000",
+        "target_identity": {
+          "status": "null-or-low-address",
+          "address_hex": "0000000000000000"
+        }
+      },
+      "owner_plus_0x10_capture_at_entry": {
+        "owner_pointer_hex": "0000025CA41FE000",
+        "slot_offset_hex": "00000010",
+        "slot_address_hex": "0000025CA41FE010",
+        "capture_phase": "logical-entry-after-external-call",
+        "capture_utc": "2026-10-08T18:47:31.446Z",
+        "read_status": "captured",
+        "raw_bytes_hex": "0000000000000000",
+        "slot_value_hex": "0000000000000000",
+        "target_identity": {
+          "status": "null-or-low-address",
+          "address_hex": "0000000000000000"
+        }
+      }
+    },
+    "logical_entry_exact_external_caller_return_offset_hex": "02C0860A",
+    "logical_entry_exact_external_caller_code_window": {
+      "start_offset_hex": "02C0858A",
+      "return_offset_hex": "02C0860A",
+      "return_index": 128,
+      "byte_count": 224,
+      "bytes_hex": "33FF4C897B38EB034533FFBA58000000488BCFE86E480100488B8E1801000048BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95C2FF50204C897F38BA58000000488BCBE8B1470100488BDDEB0748014350488B"
+    }
+  },
+  "exact_external_caller": {
+    "utc": "2026-10-08T18:47:31.446Z",
+    "context_pointer_hex": "0000025DEBFC9960",
+    "owner_pointer_hex": "0000025CA41FE000",
+    "descriptor_pointer_hex": "0000025CA41FE128",
+    "primary_seed_hex": "00C9E8DF0327789E",
+    "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+    "caller_return_offset_hex": "02C0860A",
+    "external_origin_caller_return_offset_hex": "02C0860A",
+    "recursion_depth": 0,
+    "external_owner_pointer_hex": "0000025CA41FE000",
+    "external_owner_plus_0x10_capture_at_entry": {
+      "owner_pointer_hex": "0000025CA41FE000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "0000025CA41FE010",
+      "capture_phase": "logical-entry-after-external-call",
+      "capture_utc": "2026-10-08T18:47:31.446Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "0000000000000000",
+      "slot_value_hex": "0000000000000000",
+      "target_identity": null
+    },
+    "external_call_register_snapshot_at_entry": {
+      "capture_phase": "shared-entry-hook-after-call",
+      "capture_utc": "2026-10-08T18:47:31.446Z",
+      "caller_return_rva_hex": "02C0860A",
+      "rcx_hex": "0000025DEBFC9960",
+      "rdx_hex": "0000025CA41FE000",
+      "rdx_plus_0x10_capture": {
+        "owner_pointer_hex": "0000025CA41FE000",
+        "slot_offset_hex": "00000010",
+        "slot_address_hex": "0000025CA41FE010",
+        "capture_phase": "logical-entry-after-external-call",
+        "capture_utc": "2026-10-08T18:47:31.446Z",
+        "read_status": "captured",
+        "raw_bytes_hex": "0000000000000000",
+        "slot_value_hex": "0000000000000000",
+        "target_identity": {
+          "status": "null-or-low-address",
+          "address_hex": "0000000000000000"
+        }
+      }
+    },
+    "caller_class": "external",
+    "known_static_candidate": false,
+    "age_ms_at_root_add": 1.576,
+    "resolved_external_caller_return_offset_hex": "02C0860A",
+    "owner_plus_0x10_capture_at_root_add": {
+      "owner_pointer_hex": "0000025CA41FE000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "0000025CA41FE010",
+      "capture_phase": "root-resource-add",
+      "capture_utc": "2026-10-08T18:47:31.448Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "0000000000000000",
+      "slot_value_hex": "0000000000000000",
+      "target_identity": {
+        "status": "null-or-low-address",
+        "address_hex": "0000000000000000"
+      }
+    },
+    "owner_plus_0x10_capture": {
+      "owner_pointer_hex": "0000025CA41FE000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "0000025CA41FE010",
+      "capture_phase": "logical-entry-after-external-call",
+      "capture_utc": "2026-10-08T18:47:31.446Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "0000000000000000",
+      "slot_value_hex": "0000000000000000",
+      "target_identity": {
+        "status": "null-or-low-address",
+        "address_hex": "0000000000000000"
+      }
+    },
+    "owner_plus_0x10_capture_at_entry": {
+      "owner_pointer_hex": "0000025CA41FE000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "0000025CA41FE010",
+      "capture_phase": "logical-entry-after-external-call",
+      "capture_utc": "2026-10-08T18:47:31.446Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "0000000000000000",
+      "slot_value_hex": "0000000000000000",
+      "target_identity": {
+        "status": "null-or-low-address",
+        "address_hex": "0000000000000000"
+      }
+    }
+  },
+  "owner_plus_0x10_capture": {
+    "owner_pointer_hex": "0000025CA41FE000",
+    "slot_offset_hex": "00000010",
+    "slot_address_hex": "0000025CA41FE010",
+    "capture_phase": "logical-entry-after-external-call",
+    "capture_utc": "2026-10-08T18:47:31.446Z",
+    "read_status": "captured",
+    "raw_bytes_hex": "0000000000000000",
+    "slot_value_hex": "0000000000000000",
+    "target_identity": {
+      "status": "null-or-low-address",
+      "address_hex": "0000000000000000"
+    }
+  },
+  "exact_external_caller_return_offset_hex": "02C0860A",
+  "external_call_register_snapshot_at_entry": {
+    "capture_phase": "shared-entry-hook-after-call",
+    "capture_utc": "2026-10-08T18:47:31.446Z",
+    "caller_return_rva_hex": "02C0860A",
+    "rcx_hex": "0000025DEBFC9960",
+    "rdx_hex": "0000025CA41FE000",
+    "rdx_plus_0x10_capture": {
+      "owner_pointer_hex": "0000025CA41FE000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "0000025CA41FE010",
+      "capture_phase": "logical-entry-after-external-call",
+      "capture_utc": "2026-10-08T18:47:31.446Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "0000000000000000",
+      "slot_value_hex": "0000000000000000",
+      "target_identity": {
+        "status": "null-or-low-address",
+        "address_hex": "0000000000000000"
+      }
+    }
+  },
+  "unique_callers_observed": 11,
+  "caller_hit_counts": {
+    "005D16AB": 11,
+    "0061F4EF": 323,
+    "0063A773": 16324,
+    "0123FE7B": 99,
+    "0153FCB0": 221,
+    "0153FD20": 222,
+    "01588FA0": 74,
+    "016C58F0": 18067,
+    "017E2E30": 1271,
+    "02C0860A": 98776,
+    "02C0875D": 41960
+  },
+  "interpretation": "All shared-entry callers are observed at once; exact descriptor identity selects the derelict path and the verified self-recursive edge is excluded."
+}
