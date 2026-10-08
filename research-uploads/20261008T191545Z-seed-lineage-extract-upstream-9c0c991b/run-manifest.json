@@ -1,0 +1,13 @@
+{
+  "action": "extract-upstream",
+  "evidence_namespace": "seed-lineage",
+  "files": [
+    {
+      "name": "dungeon-upstream-callers-latest.json",
+      "sha256": "52cc2d87f86ecc26c88f56993ef36d4d8dc5b2e9c313054abb35c161c38264de",
+      "size": 161039
+    }
+  ],
+  "utc": "20261008T191545Z",
+  "version": 1
+}
