@@ -1,18 +1,24 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-08T13:43:08Z",
-  "state": "in_progress",
-  "status": "Combined-report review complete; root constructor identity remains unproven",
-  "summary": "Verified attached 0.3.62 local-candidate combined report SHA-256. Offline saved-record run only. 43 target containers are asset-predicted; historical 35 and post-update 16 are observations. Static descriptor paths do not identify the live root constructor or dispatch target.",
-  "next_action": "Find saved object-identity evidence; if absent, validate the read-only constructor capture against current source before a short live NMS run.",
-  "surveyor_request": "No action yet; current-source compatibility review remains.",
-  "human_intervention_required": false,
-  "user_steps": [],
-  "success_condition": "Identify the descriptor source and root object identity without claiming an unverified seed transform.",
+  "updated_utc": "2026-10-08T14:16:27Z",
+  "state": "awaiting_fresh_root_caller_evidence",
+  "status": "Latest saved root event reviewed; shared-build caller and upstream recapture prepared in extension 1.0.3",
+  "summary": "Verified main combined report 20261008T140207Z-d8e24197 SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6. Saved root event at 14:00:37Z ties descriptor 0000021C2457DD28 and seed candidate 5B4AE67D9C2A8F61 to direct Engine caller 0063AC20 -> 0183E770. Current upstream action result is from an older session; constructor identity and root-seed derivation remain unresolved.",
+  "next_action": "Refresh Seed-Lineage extension 1.0.3 on shared main Surveyor; capture a fresh root event, run Extract caller code + upload, then Extract upstream callers + upload; return both evidence records.",
+  "surveyor_request": "Use shared main Surveyor with Seed-Lineage 1.0.3. At system 0001BF0004E84EFD record a fresh derelict root event, run the two Seed-Lineage actions in order, and return their evidence paths. No traversal.",
+  "human_intervention_required": true,
+  "user_steps": [
+    "1. In the shared main Surveyor Agent Console, refresh extensions and confirm Seed-Lineage 1.0.3 is active.",
+    "2. Start or restart NMS from the installed executable, enter system 0001BF0004E84EFD, and load the derelict until its root resource event is saved. Do not traverse the derelict.",
+    "3. In the Seed-Lineage panel, run “1. Extract caller code + upload”, then “2. Extract upstream callers + upload”. Return both uploaded evidence paths or manifests."
+  ],
+  "success_condition": "Caller and upstream artifacts both cite the fresh root event/session; caller baseline bytes match installed NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499; upstream descriptor reads can then be compared to current caller context.",
   "evidence_to_return": [
-    "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md"
+    "Both action output paths and their run manifests",
+    "Caller output baseline_window_matches_exe and nms_exe SHA-256",
+    "Fresh root event timestamp and descriptor pointer"
   ],
   "full_derelict_required": false,
-  "evidence_path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md"
+  "evidence_path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_140207_20261008.md"
 }

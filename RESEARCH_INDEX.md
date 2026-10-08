@@ -1,3 +1,11 @@
+## Seed-B review of main's 14:02 combined report (2026-10-08)
+
+- **Saved root event:** session `20261008T140041Z_0001BF0004E84EFD` records the 14:00:37Z root resource event, descriptor `0000021C2457DD28`, seed candidate `5B4AE67D9C2A8F61`, and direct Engine caller `0063AC20` -> `0183E770`. The same saved trace records logical entry `02C08607: FF 52 10`, returning at `02C0860A`; both owner+0x10 reads are after-call zeros. The indirect dispatch target is unresolved.
+- **Asset prediction:** CARGO_FLOATERS is inferred at high confidence; 11 logical chunks and 164 scene instances yield an asset-derived prediction of 43 target containers (30 salvage, 13 footlockers), not a physical count.
+- **Seed boundary:** the POI description raw argument matches universe address `0001BF0004E84EFD`; the description return matches the POI component address, not the universe address or dungeon-root seed. The root seed remains a candidate; its derivation and constructor identity are unproven.
+- **Provenance:** main pointer `research/LATEST_PARALLEL_ACTION_TEST.json` names run `20261008T140207Z-d8e24197`, report SHA-256 `11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6`. Eight actions reanalyzed saved evidence offline; upload was skipped. Caller and upstream results in that report use older saved sessions, so do not join them to the 14:00:37Z event as one runtime trace.
+- **Next:** on the shared main Surveyor, capture a fresh root event, run Seed-Lineage extension 1.0.3 actions Extract caller code then Extract upstream callers, and return both evidence manifests. No traversal is required. Full review: `agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_140207_20261008.md`.
+
 ## DUNGEON-C parallel report review (2026-10-08)
 
 - **Source and provenance:** The user-provided local 0.3.62 candidate contained pointer research/LATEST_PARALLEL_ACTION_TEST.json and combined report research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json. Pointer SHA-256 matched the report bytes: 12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda. The candidate and shared report were not published or modified by DUNGEON-C. The combined report is the sole authority for the Oct 8 action results: 8 offline actions completed, upload skipped, no NMS session or new event.

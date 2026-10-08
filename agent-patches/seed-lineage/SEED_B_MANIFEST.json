@@ -59,11 +59,28 @@
     "derivation_status": "unknown-not-claimed"
   },
   "latest_research_review": {
-    "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md",
-    "source": "user-attached 0.3.62 local candidate ZIP combined report",
-    "report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
-    "published_report": false,
-    "live_validation": false,
-    "derivation_status": "unknown-not-claimed"
+    "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_140207_20261008.md",
+    "source": "main pointer and combined report; sole action-results source",
+    "run_id": "20261008T140207Z-d8e24197",
+    "report_path": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+    "report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+    "verified": true,
+    "actions_completed": 8,
+    "upload_action_skipped": 1,
+    "offline": true,
+    "constructor_identity": "unresolved",
+    "seed_derivation": "unknown-not-claimed"
+  },
+  "current_extension_candidate": {
+    "version": "1.0.3",
+    "panel": "agent-ui/extensions/seed-lineage/1.0.3/panel.json",
+    "manifest": "agent-ui/extensions/seed-lineage/1.0.3/manifest.json",
+    "actions": [
+      "research.extract_caller_code",
+      "research.extract_upstream_callers"
+    ],
+    "ui_api": "1.0",
+    "custom_host_action": false,
+    "probe_hook_added": false
   }
 }
