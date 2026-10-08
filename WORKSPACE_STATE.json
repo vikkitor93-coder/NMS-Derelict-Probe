@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T18:40:00Z",
+  "updated_utc": "2026-10-08T19:00:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -19,14 +19,14 @@
   },
   "lanes": {
     "runtime-dispatch": {
-      "branch": "agent/runtime-dispatch-20261008-latest-root-correlation",
-      "status": "Published hook-address correction: matching NMS.exe signature resolves the matched FF 52 10 event destination to 0063A6D0; owner+0x10 zero remains unexplained and is not target evidence.",
+      "branch": "agent/runtime-dispatch-system-reset-20261008",
+      "status": "Implemented a system-scope reset for live root-seed state and explicit raw/effective seed fields. Awaiting regression checks and package publication.",
       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
       "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
       "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
       "extension_version": "1.0.6",
       "human_validation_required": false,
-      "next_action": "Continue offline semantic analysis of 0063A6D0 and the owner+0x10 zero discrepancy; do not use WinDbg. Python regression test remains unexecuted because the local runner is unavailable; its five evidence/address assertions passed equivalent checks against branch artifacts.",
+      "next_action": "Publish the Probe 0.3.40 system-scope reset through the app package after regression checks; then perform a normal no-debugger system switch to confirm the displayed root seed clears.",
       "latest_report": "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json",
       "latest_report_sha256": "7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c"
     },
