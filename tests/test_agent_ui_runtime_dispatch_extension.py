@@ -13,7 +13,7 @@ from tools import surveyor_controller as controller
 
 ROOT = Path(__file__).resolve().parents[1]
 LANE = "runtime-dispatch"
-VERSION = "1.0.5"
+VERSION = "1.0.6"
 HOST_VERSION = "0.3.53"
 EXTENSION_DIR = ROOT / "agent-ui" / "extensions" / LANE / VERSION
 
@@ -64,14 +64,15 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
     def test_request_only_panel_uses_only_registered_empty_parameter_action(self):
         manifest, panel = read_extension()
         action = panel["actions"][0]
+        summary = panel["summary"]
         self.assertTrue(panel["request_only"])
-        self.assertIn("pyMHF 0.2.4 source confirms BEFORE hooks run before original", panel["summary"])
-        self.assertIn("exact root event enters 00634BC0 from 02C08607", panel["summary"])
-        self.assertIn("The +0x10 read is still zero at the before-hook", panel["summary"])
-        self.assertIn("02C04977 resolver is separate", panel["summary"])
-        self.assertIn("Do not use WinDbg", panel["summary"])
-        self.assertIn("not a physical count", panel["summary"])
-        self.assertIn("prior asset-derived 43 remains separate", panel["summary"])
+        self.assertIn("hash-verified NMS.exe", summary)
+        self.assertIn("02C08607: FF 52 10", summary)
+        self.assertIn("0063A6D0", summary)
+        self.assertIn("0063A773", summary)
+        self.assertIn("after-call +0x10 read remains zero", summary)
+        self.assertIn("No WinDbg", summary)
+        self.assertIn("43 figure remains an asset prediction", summary)
         self.assertEqual(["research.analyze_generation", "research.upload_runtime_capture"], [a["action_id"] for a in panel["actions"]])
         self.assertIn(action["action_id"], extensions.HOST_ACTION_IDS)
         self.assertEqual({}, action["parameters"])
@@ -218,17 +219,17 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
             refreshed_panel = copy.deepcopy(panel)
             refreshed_panel["summary"] = "Panel refreshed test summary"
             refreshed_bytes = (json.dumps(refreshed_panel, sort_keys=True) + "\n").encode()
-            refreshed_manifest = build_manifest("1.0.4", refreshed_bytes)
-            refreshed_entry = {"extension_id": LANE, "version": "1.0.4", "manifest_path": f"{LANE}/1.0.4/manifest.json"}
+            refreshed_manifest = build_manifest("1.0.7", refreshed_bytes)
+            refreshed_entry = {"extension_id": LANE, "version": "1.0.7", "manifest_path": f"{LANE}/1.0.7/manifest.json"}
             extensions.install_extension(root, refreshed_entry, HOST_VERSION, extensions.HOST_ACTION_IDS,
                                          remote_package(refreshed_manifest, refreshed_bytes).__getitem__)
             active, active_panel = extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)
-            self.assertEqual("1.0.4", active["version"])
+            self.assertEqual("1.0.7", active["version"])
             self.assertEqual("Panel refreshed test summary", active_panel["summary"])
             extensions.activate_installed_extension(root, LANE, VERSION, HOST_VERSION, extensions.HOST_ACTION_IDS)
             rolled_back, _ = extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)
             self.assertEqual(VERSION, rolled_back["version"])
-            self.assertEqual(["1.0.4", VERSION], extensions.installed_versions(root, LANE))
+            self.assertEqual(["1.0.7", VERSION], extensions.installed_versions(root, LANE))
 
     def test_lane_action_records_are_namespaced_and_collision_safe(self):
         with tempfile.TemporaryDirectory() as tmp:
