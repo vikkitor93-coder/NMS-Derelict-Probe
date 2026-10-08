@@ -1,3 +1,8 @@
+## v0.3.65 — system-scoped root seed state
+
+- Reset live Runtime-A root seed state on a known universe-address change.
+- Report raw seed value, UseSeedValue, and effective seed separately.
+
 # 0.3.64 — parallel research trigger provenance
 
 - Record whether a parallel research run came from the manual Surveyor button, automatic saved-session detection, or direct command-line execution in both `run_started` queue event and `combined-results.json`.

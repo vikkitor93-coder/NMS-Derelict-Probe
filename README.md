@@ -3,7 +3,13 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Published Surveyor package: **v0.3.61**. Current source candidate: **v0.3.64**; Runtime-A probe: **0.3.38**. The candidate adds a dedicated Surveyor panel to run all eight parallel research actions, optional automatic runs after a session is saved, explicit run-trigger provenance, NMS-only overlay visibility, agent-objective visibility control, and a validated queue for agent build requests.
+Published Surveyor package: **v0.3.65**. Current source candidate: **v0.3.65**; Runtime-A probe: **0.3.40**. The candidate adds a dedicated Surveyor panel to run all eight parallel research actions, optional automatic runs after a session is saved, explicit run-trigger provenance, NMS-only overlay visibility, agent-objective visibility control, and a validated queue for agent build requests.
+
+## v0.3.65 — system-scoped root seed state
+
+- End a capture session and clear live root-seed state when the observed universe address changes.
+- Keep raw descriptor seed bytes separate from the UseSeedValue flag and effective seed state.
+- No debugger or game-state writes are used. A normal live system switch is still needed to verify the runtime behavior.
 
 ## Parallel research action test
 

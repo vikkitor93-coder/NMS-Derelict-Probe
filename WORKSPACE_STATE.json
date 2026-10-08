@@ -1,15 +1,15 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T19:12:04Z",
+  "updated_utc": "2026-10-08T19:17:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
     "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.64",
+    "candidate_version": "0.3.65",
     "candidate_branch": "main",
-    "candidate_base": "main@ac5eda228d9ce87e2b70cf09a75fdfeb8d193a9a",
-    "candidate_status": "v0.3.64 source candidate published directly to main; unit tests pass; Windows UI/focus validation and updater release packaging remain pending."
+    "candidate_base": "main@3ec6153b6c7631a80f333c7c7f62d7e0e372192c",
+    "candidate_status": "Probe 0.3.40 system-scope reset and effective-seed reporting passed focused CI and package validation; one normal system-switch check remains."
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
@@ -19,14 +19,14 @@
   },
   "lanes": {
     "runtime-dispatch": {
-      "branch": "agent/runtime-dispatch-20261008-latest-root-correlation",
-      "status": "Published hook-address correction: matching NMS.exe signature resolves the matched FF 52 10 event destination to 0063A6D0; owner+0x10 zero remains unexplained and is not target evidence.",
+      "branch": "main",
+      "status": "Probe 0.3.40 resets live root-seed captures on system change and reports raw/effective seed state separately; normal runtime check pending.",
       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
       "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
       "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
       "extension_version": "1.0.6",
-      "human_validation_required": false,
-      "next_action": "Continue offline semantic analysis of 0063A6D0 and the owner+0x10 zero discrepancy; do not use WinDbg. Python regression test remains unexecuted because the local runner is unavailable; its five evidence/address assertions passed equivalent checks against branch artifacts.",
+      "human_validation_required": true,
+      "next_action": "Update Surveyor in-app, enter a different system, confirm the old root seed clears, then observe the next root capture's raw value, UseSeedValue, and effective state.",
       "latest_report": "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json",
       "latest_report_sha256": "7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c"
     },
@@ -78,12 +78,9 @@
     "required_now": true,
     "pending": [
       {
-        "lane": "seed-lineage",
-        "kind": "upload-saved-root-and-recapture-caller-upstream",
-        "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-        "next_action": "On shared main Surveyor, close NMS if open; RUNTIME-A 1.0.6 > Upload captured root event > wait for upload success. Then Seed-Lineage 1.0.3 > Extract caller code + upload > Extract upstream callers + upload. Return the upload, caller, and upstream evidence records.",
-        "report": "research-uploads/20261008T185341Z-parallel-action-test/combined-results.json",
-        "report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe",
+        "lane": "runtime-dispatch",
+        "kind": "verify-system-change-seed-reset",
+        "next_action": "Update Surveyor through its in-app updater. Enter a different system and confirm the previous root capture clears; on the next root capture, inspect raw seed, UseSeedValue, and effective state.",
         "full_derelict_required": false
       }
     ]
