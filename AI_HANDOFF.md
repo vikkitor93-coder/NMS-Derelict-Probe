@@ -1,3 +1,7 @@
+## v0.3.67 publication record — 2026-10-08
+
+Surveyor v0.3.67 and its full updater package are published on `main`. The release recovers unprocessed saved sessions at startup, checks exact source hashes against prior automatic reports, and runs each unprocessed session separately in FIFO order. The updater manifest points to 37 package chunks; each remote chunk was checked against the verified local package. Package SHA-256: `2a00db2de00b09f6b89685c0f0e302b731a0db0097a658d8242c249d524e5ca0`. Local verification: 210 unit tests, compileall, harness self-test, and ZIP/member/index/hash checks passed. Backup branch: `backup/main-before-saved-session-backfill-20261008` (based on main `fb1edd38c94774b3f4be08a198702840d1bdf559`). Windows backlog execution remains pending.
+
 ## Startup recovery for saved-session research — 2026-10-08
 
 The first queue fix restored persisted pending items but could not recover sessions queued by older builds, because those builds did not save the queue. Surveyor 0.3.67 now scans saved session JSON files on startup, verifies each file and its ended state, and queues files that lack both a persisted queue record and an automatic combined report with the same SHA-256. It orders recovered sessions by ended time and records any exact-hash prior report as already processed. This allows sessions from the earlier in-memory queue to be recovered after updating, while avoiding duplicates for the one session represented by the existing report.
