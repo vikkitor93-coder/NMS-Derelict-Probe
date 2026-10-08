@@ -1,0 +1,419 @@
+{
+  "version": 1,
+  "tool_version": "0.3.33",
+  "source_upstream_evidence": "dungeon-upstream-callers-latest.json",
+  "source_session_id": "20261002T213047Z_00001A0004E84EFD",
+  "universe_address_hex": "00001A0004E84EFD",
+  "dungeon_root_seed_hex": "9256392A2F5A74AC",
+  "nms_exe": {
+    "file_name": "NMS.exe",
+    "file_size": 88545352,
+    "sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "pe_timestamp_hex": "6ABB9CC5",
+    "preferred_image_base_hex": "0000000140000000"
+  },
+  "root_add_call_rva_hex": "00638DF0",
+  "previous_padding_candidate_rva_hex": "006388A0",
+  "logical_function_entry": {
+    "status": "candidate-from-int3-padding",
+    "function_start_rva_hex": "006388A0",
+    "padding_start_rva_hex": "0063889C",
+    "padding_byte_count": 4,
+    "prologue_hex": "488954241048894C24085553564155488DAC2448FFFFFF4881ECB80100004C8BE9488BF2488B4908",
+    "distance_to_root_add_call": 1360
+  },
+  "root_runtime_fragment": {
+    "begin_rva_hex": "00638D3C",
+    "end_rva_exclusive_hex": "0063921E",
+    "byte_count": 1250,
+    "unwind_info_rva_hex": "04C2BFC8",
+    "pdata_entry_rva_hex": "073C2790"
+  },
+  "root_fragment_is_logical_entry": false,
+  "root_runtime_fragment_sha256": "0f75efa3bbcf8793903ba80976d806fda50e46ea5d4263aaad2ad4052f7f31c6",
+  "root_runtime_fragment_bytes_hex": "33C00F57C00F57C90F114590488945910F1145808945990F114D816689459D88459F48398648020000754A4C39B64002000075414C39B6380200007538488B458048398630020000752B0F1005E30B3E04488DBE280100000F100DE50B3E04488D5580488BCF0F2945800F294D90E871E8BEFFEB07488DBE280100004438B6CA0100004C8D4628B8000400004C89751841B900040004488D8DE0000000440F44C8BA01000000488D45E0488944242848897C2420E8BB392001488BD0488D8ECC010000E80C88B9FF488D8DE0000000E8D08E7202B201488D8DE0000000E81254B7FF488D8DE00000004489B5E0000000E8FF53B7FF488D8ED0010000488D96CC010000E8CCA9B9FF33C0C7867C02000002000000E9AAFEFFFF8B8ECC010000E820452001898698020000F7D81BC083C00489867C02000033C0E985FEFFFF8B8ECC010000488D55A04533F64C8BEE4C8975A04C8975A8E8C94520018B869802000085C00F8E8F020000660F6F35C3794F048BC890488B45A8488B7CC8F84885FF0F844F020000418BDE443977180F8E42020000904863CB48C1E10548034F10E8102559014C8BF84885C0750CFFC33B5F187CE1E91D0200004883C0084489B5E8000000488985F00000004439300F8E020200004D8BE6498B07488D15E45340040F1086380100004C8975E04C8D4580F30F7F75E8448875F80F11458048C74500FFFFFFFF448875084C897424704C89742478498B0C04488D4424704885C94889442428488D058A0C3E04480F45D148894424204C8BC8488D4DE0E8F5A672028B44247485C0488B542478410F45C6894424744885D2741041B8FFFFFFFF488D4C2470E8BDDC5B020FB696C90100004C8D054F534004440FB68ECA01000033C0440FB696C80100000F57C0440FB69E900100000F57C9488B9E78010000488BBE580100000F114590488945918945996689459D88459F498B070F11458044897424700F114D81498B0C04488D45500F10458048894424684885C90F104D9088542460488D458044884C24584C0F45C1488B8DE00000004C8D4DE0448854245033D24889442448488D45B04889442440488D868001000044885C24380F2945500F10869801000048894424300F294D600F108EA801000048895C24280F2945800F1086B801000048897C242048C7442478BBBBBB000F294DB00F2945C0E814EDFFFF498B8D800200004885C9741548898880020000498B8D8002000048898188020000498985800200004C89A8880200004C8BE8443975E47604448975E4488B55E84885D2740F41B8FFFFFFFF488D4DE0E870DB5B028B9DE80000004983C428488B85F0000000FFC3899DE80000003B180F8C01FEFFFF8B8698020000FFC88BC88986980200004C39B680020000750885C90F8F7EFDFFFF85C07514C7867C02000004000000C78698020000FFFFFFFF8B45A485C0488B55A8410F45C68945A44885D20F84200F000041B8FFFFFFFF488D4DA0E8EEDA5B0233C0E986FBFFFF4883BE58010000007552488D0576514004C7442430040000004C8BC0C7442428100000004533C94889442420BA10000000488D0D9FCE9C04E82A405E02488986580100004533F6488BC84C89304489700866C7400C0001E85B50B7FF488B8658010000488D8ED8010000488941108B96CC010000E82E62FFFF33C0C7867C02000005000000E9FCFAFFFF488D8ED8010000E86159FFFF84C00F846C0E00000FB68690010000",
+  "known_prefix_start_rva_hex": "006388A0",
+  "known_prefix_end_rva_exclusive_hex": "00638DF5",
+  "known_prefix_sha256": "1878c2d0223c1938fa1a7928d96fadf4561efc2a295c808aec3cf55169d6295b",
+  "direct_references_to_logical_entry": [
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "001D4A1B",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "001D4A81",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "jump-rel32",
+      "instruction_rva_hex": "00251D22",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "0055A356",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00569E1B",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "0056A076",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "005D0706",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "005D07B6",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "005F393B",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "005F7496",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "005F750B",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "0061E54A",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "006377B6",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00637D86",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "0063893E",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": true
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "006757F6",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00675876",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00693946",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "006F9E1A",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "008EDA78",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00B04ABE",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00B04AE2",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00B1814D",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00B18189",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00F8FD23",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00FB704D",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00FD8A1D",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "00FDACB6",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "010A69D6",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "010A6A56",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "010A6AD6",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "010F9D39",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "01118479",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "01152D9F",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "011544AB",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "01207518",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "0123DEE6",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "0123DFC6",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "012F0CBF",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "01399A96",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "01399C8B",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "0141C03B",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "0153DD9B",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "0153DE0B",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "0155964F",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "01586FDB",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "015DE3EA",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "016C392B",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "016D11FC",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "016D623F",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "call-rel32",
+      "instruction_rva_hex": "017E0E6B",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    },
+    {
+      "kind": "jump-rel32",
+      "instruction_rva_hex": "02D0E805",
+      "target_rva_hex": "006388A0",
+      "source_inside_target_function": false
+    }
+  ],
+  "outside_known_prefix_direct_reference_count": 51,
+  "inside_known_prefix_direct_reference_count": 1,
+  "descriptor_field_references": [
+    {
+      "field": "primary_seed",
+      "displacement_hex": "00000138",
+      "displacement_rva_hex": "00638AA1",
+      "instruction_context_start_rva_hex": "00638A95",
+      "context_hex": "4DA0488B05EA0B85060F108638010000488B88B0AF7200488B867801",
+      "possible_memory_write": false
+    },
+    {
+      "field": "descriptor",
+      "displacement_hex": "00000128",
+      "displacement_rva_hex": "00638B02",
+      "instruction_context_start_rva_hex": "00638AF6",
+      "context_hex": "0100000F853D020000488D9E280100004438B6400100000F84290200",
+      "possible_memory_write": false
+    },
+    {
+      "field": "use_seed_flag",
+      "displacement_hex": "00000140",
+      "displacement_rva_hex": "00638B09",
+      "instruction_context_start_rva_hex": "00638AFD",
+      "context_hex": "0000488D9E280100004438B6400100000F8429020000488B0DF6307E",
+      "possible_memory_write": false
+    },
+    {
+      "field": "descriptor",
+      "displacement_hex": "00000128",
+      "displacement_rva_hex": "00638D90",
+      "instruction_context_start_rva_hex": "00638D84",
+      "context_hex": "752B0F1005E30B3E04488DBE280100000F100DE50B3E04488D558048",
+      "possible_memory_write": false
+    },
+    {
+      "field": "descriptor",
+      "displacement_hex": "00000128",
+      "displacement_rva_hex": "00638DB4",
+      "instruction_context_start_rva_hex": "00638DA8",
+      "context_hex": "4D90E871E8BEFFEB07488DBE280100004438B6CA0100004C8D4628B8",
+      "possible_memory_write": false
+    }
+  ],
+  "possible_descriptor_field_writes": [],
+  "nontext_function_pointer_references": [
+    {
+      "section": ".rdata",
+      "encoding": "rva32",
+      "reference_rva_hex": "04C2BFBC",
+      "context_hex": "307818002868190020F4340018E4350010C4360008743F00A0886300F988630090BFC20421000C00007818000068190000F4340000E4350000C4360000743F00"
+    },
+    {
+      "section": ".rdata",
+      "encoding": "rva32",
+      "reference_rva_hex": "04C2BFE4",
+      "context_hex": "007818000068190000F4340000E4350000C4360000743F00A0886300F988630090BFC20421090200098817003C8D63001E926300C8BFC204210000003C8D6300"
+    },
+    {
+      "section": ".pdata",
+      "encoding": "rva32",
+      "reference_rva_hex": "073C2778",
+      "context_hex": "B081630041826300F4B1BF04908263009C88630030BCC004A0886300F988630090BFC204F98863003C8D6300A0BFC2043C8D63001E926300C8BFC2041E926300"
+    }
+  ],
+  "msvc_rtti_candidates": [],
+  "interpretation": "PE .pdata is authoritative for the runtime fragment containing the root call, not necessarily the logical C++ function entry. v0.3.31 separately recovers the logical entry from compiler padding plus prologue evidence and scans the entry-to-root prefix. Descriptor-field occurrences are byte-level evidence only; possible writes are conservative common-store matches. RTTI recovery remains best-effort."
+}
