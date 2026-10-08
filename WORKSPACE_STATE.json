@@ -1,15 +1,15 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T19:08:07Z",
+  "updated_utc": "2026-10-08T19:12:04Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
     "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.61",
+    "candidate_version": "0.3.64",
     "candidate_branch": "main",
-    "candidate_base": "main@a9dfd3f48a7f9b27ddd95ab3d61c630b6e2355f9",
-    "candidate_status": "METADATA-D asset preparation, upload, visual refresh, and rollback verified; runtime NMS capture remains a separate lane"
+    "candidate_base": "main@ac5eda228d9ce87e2b70cf09a75fdfeb8d193a9a",
+    "candidate_status": "v0.3.64 source candidate published directly to main; unit tests pass; Windows UI/focus validation and updater release packaging remain pending."
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
@@ -99,7 +99,7 @@
       "the assigned lane manifest and only relevant files/evidence"
     ],
     "branch_rule": "For a new independent task, create a fresh branch from current main named agent/<short-lane-id>. Use agent/metadata only if it is still free when you begin.",
-    "output_rule": "Keep experimental Surveyor changes lane-specific, publish a manifest + reproducible patch + tests/evidence, and never push experimental changes directly to main.",
+    "output_rule": "Completed lane findings, status, evidence, tests, and complete build-request bundles may be published directly to main after creating a backup branch or recording the exact base commit and rollback path. Keep incomplete experiments on the assigned lane branch. Shared Surveyor releases are compiled and published by the primary integration assistant.",
     "autonomy_rule": "Continue within the lane until the objective is complete, blocked on another lane, or genuine human/local-machine intervention is required."
   },
   "artifact_policy": {
@@ -115,5 +115,13 @@
     "status": "release-candidate-pending-windows-mod-validation",
     "next_action": "Use the Surveyor archive installer with the mod archive downloaded for personal use, restart NMS, and verify same-system repeat derelict behavior.",
     "compatibility": "Mod source is 7.04; NMS 7.05 runtime not yet verified."
+  },
+  "last_source_candidate_publication": {
+    "version": "0.3.64",
+    "branch": "main",
+    "base_commit": "ac5eda228d9ce87e2b70cf09a75fdfeb8d193a9a",
+    "status": "source-and-workflow-files-published; updater-manifest-remains-0.3.61-pending-Windows-validation",
+    "backup_branch": "backup/main-before-v0.3.64-20261008",
+    "commit": "5c1a383d386e55678f23a608adb07075b4403d78"
   }
 }
