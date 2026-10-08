@@ -1,36 +1,33 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-08T19:25:08Z",
+  "updated_utc": "2026-10-08T23:32:22Z",
   "state": "waiting_on_user",
-  "status": "Probe 0.3.40 clears root-seed state at a system boundary and separates raw seed from UseSeedValue/effective state; one normal runtime check remains.",
-  "summary": "Implementation and focused regression tests are complete. No WinDbg was used. The reported F-pattern remains unclassified without its captured UseSeedValue field.",
-  "progress": "System-scoped reset, stale-capture filtering, effective-seed fields, and full updater package were built and verified by CI.",
+  "status": "Probe 0.3.40 clears root-seed state at system boundaries; the latest combined report provides saved-session analysis, while the live system-switch check remains pending.",
+  "summary": "The main report pointer and combined report SHA-256 match. The isolated saved-session run reports root candidate 00C9E8DF0327789E with UseSeedValue=true and predicts 14 targets from assets; neither is a live system-switch result or an observed container count. The exact caller decodes FF 52 10 at 02C08607 returning at 02C0860A with no target RVA; the 02C04977 resolver sample is separate and does not resolve it. No further WinDbg attempt is requested.",
+  "progress": "Probe 0.3.40 system-scoped reset and seed-state reporting are included in Surveyor 0.3.67; Runtime-A extension 1.0.6 is indexed. Focused tests and package integrity passed in GitHub Actions. The latest combined report was hash-verified and its caveats reconciled.",
   "blockers": [],
-  "next_action": "Update Surveyor in-app, switch systems, and confirm the displayed root capture clears; inspect raw seed and UseSeedValue on the next capture.",
+  "next_action": "Use Surveyor 0.3.67 / Runtime-A 1.0.6 for one normal system-switch check: confirm the prior root capture clears, then record raw seed, UseSeedValue, and effective state on the next root event. No WinDbg and no full derelict traversal.",
   "human_intervention_required": true,
   "evidence_to_return": [
+    "research/LATEST_PARALLEL_ACTION_TEST.json",
+    "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json (SHA-256 b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41; verified against pointer)",
     "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
-    "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json",
-    "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
-    "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json (SHA-256 7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c)",
-    "User-run signature scan: verified matching NMS.exe, one hook-signature match at RVA 0063A6D0 / file offset 0x639AD0",
-    "research-uploads/20261008T191019Z-parallel-action-test/combined-results.json (SHA-256 1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471; pointer hash verified; isolated saved-session run)"
+    "User-run matching NMS.exe signature scan: one match at RVA 0063A6D0; independent caller correlation only"
   ],
   "extension_version": "1.0.6",
   "full_derelict_required": false,
   "human_action": {
     "required": true,
-    "surveyor_request": "Verify root-seed reset after a system change using the updated Surveyor.",
+    "surveyor_request": "Verify the system-scoped root-capture reset with Surveyor 0.3.67 and Runtime-A 1.0.6.",
     "steps": [
-      "Use Surveyor's in-app updater to install the latest package.",
-      "Enter a different star system.",
-      "Confirm the old root-seed capture clears.",
-      "Wait for the next root capture and record its raw seed, UseSeedValue, and effective state."
+      "In Surveyor, use the in-app updater to install v0.3.67 and confirm the Runtime-A panel shows version 1.0.6.",
+      "Keep WinDbg closed. Launch NMS normally, use the in-game star map to warp into a different system, and check the Runtime-A live root-capture display.",
+      "Confirm the previous system's root capture is cleared. After the next root event is captured, record its raw seed, UseSeedValue, and effective seed/state."
     ],
-    "success_condition": "The old system's capture is cleared, and a new root event shows raw seed plus UseSeedValue/effective state.",
+    "success_condition": "After the system address changes, the prior root-capture fields are cleared; the next root event is associated with the new system and displays raw seed, UseSeedValue, and effective state.",
     "evidence_to_return": [
-      "latest run manifest or root-event JSON"
+      "Surveyor screenshot showing cleared old capture after the system change, plus the new root-event JSON or run manifest."
     ],
     "full_derelict_required": false
   }
