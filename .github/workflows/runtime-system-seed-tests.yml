@@ -11,6 +11,10 @@ on:
       - tools/build_full_source_package.py
       - .github/workflows/runtime-system-seed-tests.yml
 
+concurrency:
+  group: runtime-a-system-seed-package
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
