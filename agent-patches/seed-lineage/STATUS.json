@@ -1,18 +1,23 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-08T15:00:00Z",
-  "state": "in_progress",
-  "status": "Combined-report review complete; root constructor identity remains unproven",
+  "updated_utc": "2026-10-08T13:50:00Z",
+  "state": "awaiting_live_validation",
+  "status": "Read-only 0.3.62 constructor capture prepared; live object identity required",
   "summary": "Verified attached 0.3.62 local-candidate combined report SHA-256. Offline saved-record run only. 43 target containers are asset-predicted; historical 35 and post-update 16 are observations. Static descriptor paths do not identify the live root constructor or dispatch target.",
-  "next_action": "Find saved object-identity evidence; if absent, validate the read-only constructor capture against current source before a short live NMS run.",
-  "surveyor_request": "No action yet; current-source compatibility review remains.",
-  "human_intervention_required": false,
-  "user_steps": [],
-  "success_condition": "Identify the descriptor source and root object identity without claiming an unverified seed transform.",
+  "next_action": "Run the isolated Seed-B 0.3.62 candidate briefly on the known system and return root evidence with constructor counters and matches.",
+  "surveyor_request": "Use the Seed-B constructor 0.3.62 ZIP from the handoff; start Surveyor, start NMS, load the known derelict until its root event is captured, run Analyze generation + upload, then return the uploaded root event or path. No traversal.",
+  "human_intervention_required": true,
+  "user_steps": [
+    "1. Extract the Seed-B constructor 0.3.62 ZIP into a separate folder and open Start-Surveyor.cmd.",
+    "2. Select Start NMS; load the known derelict in system 0001BF0004E84EFD until the root resource appears.",
+    "3. Select Analyze generation + upload; close the game, then return the root-event-latest.json or uploaded evidence folder."
+  ],
+  "success_condition": "Root event for MODELS/SPACE/POI/DUNGEON.SCENE.MBIN has seed_b_variant_version, seed_b_constructor_calls_observed and seed_b_constructor_matches; report even empty matches.",
   "evidence_to_return": [
-    "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md"
+    "root-event-latest.json or the Analyze generation + upload evidence folder",
+    "The NMS.exe hash recorded in the evidence, if available"
   ],
   "full_derelict_required": false,
-  "evidence_path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md"
+  "evidence_path": "agent-patches/seed-lineage/SEED_B_CONSTRUCTOR_0362.md"
 }
