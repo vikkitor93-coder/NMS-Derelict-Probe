@@ -60,14 +60,16 @@
     },
     "metadata": {
       "branch": "agent/metadata-evidence-status-20261006",
-      "status": "parallel-offline-evidence-reviewed",
+      "status": "fresh-capture-room-model-reviewed",
       "objective": "Continue static abandoned-freighter asset relationship analysis without duplicating runtime, seed, or decompile lanes.",
       "manifest": "agent-patches/metadata/METADATA_D_20261007_MANIFEST.json",
       "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
       "human_validation_required": false,
       "static_root_trace": "agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json",
       "parallel_action_review": "agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json",
-      "next_action": "Coordinate with dungeon-decompile on room-ID-to-scene resolution; Agent D's combined-report room-family audit is complete and does not establish runtime preset selection."
+      "next_action": "Compare the eight CARG groups and 11 total parent groups with CARGO_FLOATERS Rooms=7 and dungeon-decompile room-ID evidence; determine whether the mismatch reflects model grouping or generator semantics.",
+      "latest_parallel_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+      "latest_parallel_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6"
     }
   },
   "human_intervention": {
