@@ -19,7 +19,7 @@
     "Caller source_session_id, universe address, baseline_window_matches_exe, and NMS.exe SHA-256"
   ],
   "full_derelict_required": false,
-  "evidence_path": "research-uploads/20261008T185341Z-parallel-action-test/combined-results.json",
+  "evidence_path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_185304_20261008.md",
   "parallel_report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe",
   "extension_version": "1.0.3",
   "runtime_extension_version": "1.0.6"
