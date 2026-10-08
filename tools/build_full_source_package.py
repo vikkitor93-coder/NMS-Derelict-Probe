@@ -8,7 +8,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-APP_VERSION = "0.3.66"
+APP_VERSION = "0.3.67"
 PART_SIZE = 18_000
 EXTRA_MANAGED_FILES = {
     "tools/build_full_source_package.py",
@@ -28,8 +28,8 @@ EXTRA_MANAGED_FILES = {
 def build() -> dict[str, object]:
     manifest_path = ROOT / "update-manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    if manifest.get("version") not in {"0.3.65", APP_VERSION}:
-        raise RuntimeError(f"Expected v0.3.65 or current v{APP_VERSION} base manifest, got {manifest.get('version')!r}")
+    if manifest.get("version") not in {"0.3.66", APP_VERSION}:
+        raise RuntimeError(f"Expected v0.3.66 or current v{APP_VERSION} base manifest, got {manifest.get('version')!r}")
 
     files = set(manifest.get("managed_files", [])) | EXTRA_MANAGED_FILES
     # The updater manifest is fetched before installation. Packaging stale copies
