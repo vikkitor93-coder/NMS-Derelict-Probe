@@ -1,3 +1,27 @@
+# 0.3.64 — parallel research trigger provenance
+
+- Record whether a parallel research run came from the manual Surveyor button, automatic saved-session detection, or direct command-line execution in both `run_started` queue event and `combined-results.json`.
+- Associate automatic runs with the triggering session filename and SHA-256, and include the completed report's run ID and path in the auto-research receipt.
+- Keep previous report and queue formats readable; provenance fields are additive.
+- Verification: trigger unit tests (3 passed), harness self-test, Python compilation, and full project suite (201 passed); Windows UI run remains pending.
+
+# 0.3.63 — automatic saved-run research and queued build requests
+
+- Add a remembered toggle that runs all eight research actions after Surveyor detects a newly saved session JSON and its workflow queue is idle. Existing saved sessions at startup are treated as already seen; report upload remains controlled by the separate automatic-upload toggle.
+- Keep the overlay visible only while the NMS process owns the foreground window; remove its always-on-top behavior while NMS is not active.
+- Add a persistent **Agent objectives** visibility toggle to the Surveyor overlay controls.
+- Add a shared `build-requests/<lane>/<request-id>/` contract and `tools/compile_build_requests.py` to stage valid ready requests into a disposable main-build tree. Validate paths, payload and base hashes, and cross-request conflicts; never execute request commands or process deletions.
+- Update agent directives so the main integration assistant compiles shared build requests into one tested release. Agents keep unfinished work on their lane and publish request bundles for the next main compile.
+- Verification: all 198 project unit tests passed; Python compilation passed. Windows UI, overlay focus, and updater installation require local validation. The latest uploaded 14:02 combined report and review are bundled in this candidate.
+
+# 0.3.62 — parallel research panel and combined report sharing
+
+- Adds a dedicated Surveyor panel to run the eight research actions concurrently with live per-action progress.
+- Uses the existing automatic-upload toggle to optionally publish only `combined-results.json` to all four agent lanes. The queue and individual action outputs remain local. The upload writes an immutable timestamped report and updates `research/LATEST_PARALLEL_ACTION_TEST.json`.
+- Records the latest completed report as the sole action-result source for agents, with source-session provenance and explicit predicted-vs-observed and callsite limitations.
+- Repairs extracted-assets worker setup when Windows blocks symlink creation by using hard links or per-file copies.
+- Verification: `python tools/test_parallel_research_actions.py --self-test` passed; all 185 unit tests passed; Python compilation passed. User's Windows run completed all eight actions. Windows Surveyor UI rendering and update installation still need a local validation after installing this candidate.
+
 # 0.3.61 — METADATA-D asset preparation repair
 
 - Give MBINCompiler an explicit MBIN input format and overwrite consent when the persistent asset directory also contains generated MXML files.
