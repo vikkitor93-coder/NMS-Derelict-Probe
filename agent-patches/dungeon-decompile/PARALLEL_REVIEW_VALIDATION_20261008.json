@@ -44,6 +44,14 @@
     {
       "name": "git diff whitespace validation",
       "result": "passed"
+    },
+    {
+      "expected": "3af46d71fbeabc5810f3c83dbdd93b59cc2cfd71358dbaa6bb9c35c398e38592",
+      "run_id": "20261008T134309Z-f2fd5cd2",
+      "report_path": "research-uploads/20261008T134355Z-parallel-action-test/combined-results.json",
+      "result": "passed",
+      "actual": "3af46d71fbeabc5810f3c83dbdd93b59cc2cfd71358dbaa6bb9c35c398e38592",
+      "name": "current main pointer report SHA-256"
     }
   ],
   "limitations": [
