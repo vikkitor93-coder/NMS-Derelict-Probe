@@ -643,10 +643,19 @@ class ToolTests(unittest.TestCase):
         self.assertEqual([1,15,10,3,4,0,1,1],[g["target_containers"] for g in canonical])
 
     def test_generation_measurement_summary_keeps_comparable_rows(self):
-        fixture = json.loads((ROOT / "corpus" / "research" / "baseline-002-generation-fingerprint-v0.3.11.json").read_text(encoding="…6581 tokens truncated…urce_name") or "") or "ABAND" in str(e.get("resource_name") or "") for e in address_events))
-        root=(fixture.get("dungeon_root_seed_candidates") or [])[0].get("seed_hex")
-        self.assertEqual("9256392A2F5A74AC",root)
-        self.assertNotEqual(fixture.get("universe_address_hex"),root)
+        fixture = json.loads((ROOT / "corpus" / "research" / "baseline-002-generation-fingerprint-v0.3.11.json").read_text(encoding="utf-8"))
+        row = generation_measure.compact_row(fixture)
+        self.assertEqual("00001A0004E84EFD", row["universe_address_hex"])
+        self.assertEqual("CARGO_FLOATERS", row["preset"])
+        self.assertEqual(7, row["main_rooms"])
+        self.assertEqual(1, row["dead_end_rooms"])
+        self.assertEqual(35, row["target_containers"])
+        self.assertEqual(8, len(row["room_sequence"]))
+        self.assertIn("layout_signature_sha256", row)
+        root_candidates = fixture.get("dungeon_root_seed_candidates") or []
+        self.assertTrue(root_candidates)
+        self.assertEqual("9256392A2F5A74AC", root_candidates[0].get("seed_hex"))
+        self.assertNotEqual(fixture.get("universe_address_hex"), root_candidates[0].get("seed_hex"))
 
     def test_poi_generation_summary_correlates_return_and_prepare_scope(self):
         session={"trace":{"events":[
