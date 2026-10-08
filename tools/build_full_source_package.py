@@ -93,7 +93,7 @@ def build() -> dict:
     missing = sorted(required - set(managed_files))
     if missing:
         raise RuntimeError(f"Required files not managed in package: {missing}")
-    tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).decode("utf-8").split("\\0")
+    tracked = subprocess.check_output(["git", "ls-files"], cwd=ROOT, text=True).splitlines()
     tracked_by_casefold = {relative.casefold(): ROOT / relative for relative in tracked if relative}
     def source_path(relative: str) -> Path:
         path = ROOT / relative
