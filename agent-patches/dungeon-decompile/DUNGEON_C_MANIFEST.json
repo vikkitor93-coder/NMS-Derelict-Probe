@@ -281,13 +281,14 @@
   },
   "latest_parallel_action_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json",
   "parallel_action_review": {
-    "run_id": "20261008T130233Z-755d4c43",
+    "run_id": "20261008T134309Z-f2fd5cd2",
     "count_limit": "43 is an asset-derived prediction, not a fresh observed count; historical 35 and separate post-update 16 observation remain distinct.",
-    "report_path": "research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json",
+    "report_path": "research-uploads/20261008T134355Z-parallel-action-test/combined-results.json",
     "results_authority": "combined report only",
-    "report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
+    "report_sha256": "3af46d71fbeabc5810f3c83dbdd93b59cc2cfd71358dbaa6bb9c35c398e38592",
     "human_input_required": "matching current NMS.exe SHA-256 or equivalent hash-matched .pdata/code export",
-    "review": "The 02C08607 caller extraction and 02C04977 resolver sample are distinct. Dispatch remains unresolved. Current bounded 0063A6D0 bytes contain a hash-verified E8 rel32 destination 033E1B60; its .pdata range/body remain unverified."
+    "review": "The 02C08607 caller extraction and 02C04977 resolver sample are distinct. Dispatch remains unresolved. Current bounded 0063A6D0 bytes contain a hash-verified E8 rel32 destination 033E1B60; its .pdata range/body remain unverified.",
+    "attached_candidate_run": "20261008T130233Z-755d4c43"
   },
   "parallel_review_validation": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_VALIDATION_20261008.json"
 }

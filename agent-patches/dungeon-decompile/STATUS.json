@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-report-review-20261008",
-  "reviewed_utc": "2026-10-08T13:46:03Z",
+  "reviewed_utc": "2026-10-08T13:51:21Z",
   "state": "oct8-parallel-review-complete-waiting-matching-executable",
   "verified": {
     "historical_baseline": {
@@ -472,9 +472,9 @@
     },
     "note": "Newest shared snapshot; root capture timestamp remains 2026-10-04T23:17:15.827Z. The exact-root-caller-code SHA-256 is still 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2. This is not a new runtime sample or a helper export."
   },
-  "updated_utc": "2026-10-08T13:46:03Z",
+  "updated_utc": "2026-10-08T13:51:21Z",
   "status": "offline-caller-review-updated",
-  "summary": "Reviewed the Oct 8 combined report with pointer hash verified. The 02C08607 caller remains unresolved; the separate 02C04977 resolver sample is not the same callsite. Rechecked the saved 0063A6D0 body and identified a hash-verified E8 call to 033E1B60; its target boundary/body are not verified.",
+  "summary": "Reviewed the attached 13:02 and current-main 13:43 Oct 8 combined reports separately, with both hashes verified. Both retain caller 02C08607 unresolved and resolver 02C04977 as a different callsite. The saved 0063A6D0 bytes encode E8 destination 033E1B60; its target boundary/body remain unverified.",
   "next_action": "Provide matching NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 (or a hash-matched bounded export with .pdata and target bytes) to validate 033E1B60 and resolve the candidate-list discrepancy; no game run or traversal is required.",
   "human_intervention_required": true,
   "user_steps": [
