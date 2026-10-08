@@ -1,0 +1,9 @@
+# Seed-B read-only constructor capture candidate
+
+`SEED_B_CONSTRUCTOR_0362.patch` applies to the probe file in the user-attached 0.3.62 **local source candidate**. It does not publish or replace the shared research pointer or combined report. The patch was transferred from the isolated 0.3.60 experiment because the baseline probe file is byte-identical in both source versions. The probe protocol version stays `0.3.38`; new root event fields are `seed_b_variant_version`, `seed_b_constructor_calls_observed`, and `seed_b_constructor_matches`.
+
+The patch adds a read-only hook for the current executable's descriptor-copy constructor at `00639610`. It samples source and destination descriptor fields and retains seeded copies for a pointer-and-seed join with a later exact root `Engine::AddResource` event. A match would show a copy into the root object's descriptor; it would **not** derive the seed from the universe address. An empty match list is inconclusive unless the hook count, executable identity, and root event are checked. No NMS memory write or extension change is included.
+
+Source executable SHA-256: `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`. Patch SHA-256: `6f33b100c6c97d350980e83237d6c12962d231ed2a9a4fd02497f4c5f7639ab1`.
+
+Offline checks: patch applies cleanly to the attached 0.3.62 probe; `py_compile` passed; `python -m unittest discover -s tests -p test_tools.py` passed 126/126 on Python 3.13. The first test attempt had one expected string-version failure when the experimental tag replaced `PROBE_VERSION`; the final patch retains the stable protocol version and adds a separate variant field. Live hook attachment and object matching remain untested. Keep this candidate on the lane branch until a short live run validates it. No derelict traversal is required.

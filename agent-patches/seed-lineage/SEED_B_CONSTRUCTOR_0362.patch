@@ -1,0 +1,137 @@
+diff --git a/mod/derelict_baseline_probe.py b/mod/derelict_baseline_probe.py
+index 805978d..56fd6c7 100644
+--- a/mod/derelict_baseline_probe.py
++++ b/mod/derelict_baseline_probe.py
+@@ -34,6 +34,7 @@ from nmspy.decorators import main_loop
+ from nmspy.engine import GetNodeAbsoluteTransMatrix
+ 
+ PROBE_VERSION = "0.3.38"
++SEED_B_VARIANT_VERSION = "constructor-capture-20261008"
+ SCHEMA_VERSION = 1
+ ABANDONED_FREIGHTER_LOCATION_VALUE = 0xB
+ ABANDONED_FREIGHTER_POI_TYPE_VALUE = 0x6
+@@ -105,6 +106,23 @@ def _resource_descriptor_walk_entry(
+     ...
+ 
+ 
++@static_function_hook(
++    signature=(
++        "48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? "
++        "57 41 54 41 55 41 56 41 57 48 83 EC 30 33 ED 4C 89 01"
++    )
++)
++def _seed_b_descriptor_constructor(
++    destination: ctypes.c_void_p,
++    argument_2: ctypes.c_void_p,
++    argument_3: ctypes.c_void_p,
++    argument_4: ctypes.c_void_p,
++    source_descriptor: ctypes.c_void_p,
++) -> ctypes.c_void_p:
++    """Current-build 00639610 descriptor-copy constructor; observations only."""
++    ...
++
++
+ def _utc_now() -> str:
+     return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+ 
+@@ -315,6 +333,19 @@ def _owner_descriptor_seed_payload(owner_pointer: int) -> dict[str, Any] | None:
+         return None
+ 
+ 
++def _seed_b_read_descriptor(pointer: int) -> dict[str, Any] | None:
++    raw = _read_process_bytes(pointer, 0x30)
++    if raw is None or len(raw) != 0x30:
++        return None
++    return {
++        "pointer_hex": f"{pointer:016X}",
++        "primary_seed_hex": f"{int.from_bytes(raw[0x10:0x18], 'little'):016X}",
++        "primary_use_seed_value": bool(raw[0x18]),
++        "secondary_seed_hex": f"{int.from_bytes(raw[0x20:0x28], 'little'):016X}",
++        "secondary_use_seed_value": bool(raw[0x28]),
++    }
++
++
+ def _safe_bool(value: Any) -> bool:
+     try:
+         raw = getattr(value, "value", value)
+@@ -575,6 +606,8 @@ class DerelictBaselineProbe(Mod):
+         self._poi_lifecycle_call_counts: dict[int, int] = {}
+         self._pre_session_dungeon_seeds: list[dict[str, Any]] = []
+         self._recent_logical_entry_events: list[dict[str, Any]] = []
++        self._seed_b_constructor_events: list[dict[str, Any]] = []
++        self._seed_b_constructor_calls = 0
+         self._logical_entry_caller_hits: dict[str, int] = {}
+         self._logical_entry_tls = threading.local()
+         self._last_exact_root_caller: dict[str, Any] | None = None
+@@ -2116,6 +2149,49 @@ class DerelictBaselineProbe(Mod):
+             "target_identity": identity,
+         }
+ 
++    @_seed_b_descriptor_constructor.after
++    def _seed_b_trace_descriptor_constructor(
++        self, destination, argument_2, argument_3, argument_4, source_descriptor
++    ):
++        """Keep seeded copies only; join them to the exact root descriptor later."""
++        try:
++            with self._lock:
++                self._seed_b_constructor_calls += 1
++            owner = _raw_u64_bits(destination)
++            source = _raw_u64_bits(source_descriptor)
++            if not owner or owner <= 0x10000 or not source or source <= 0x10000:
++                return
++            source_data = _seed_b_read_descriptor(source)
++            destination_data = _seed_b_read_descriptor(owner + 0x128)
++            if not source_data or not destination_data:
++                return
++            if not source_data["primary_use_seed_value"]:
++                return
++            if source_data["primary_seed_hex"] in {"0000000000000000", "FFFFFFFFFFFFFFFF"}:
++                return
++            row = {
++                "_monotonic": time.monotonic(),
++                "utc": _utc_now(),
++                "owner_pointer_hex": f"{owner:016X}",
++                "source": source_data,
++                "destination": destination_data,
++                "copy_verified": (
++                    source_data["primary_seed_hex"] == destination_data["primary_seed_hex"]
++                    and source_data["primary_use_seed_value"] == destination_data["primary_use_seed_value"]
++                    and source_data["secondary_seed_hex"] == destination_data["secondary_seed_hex"]
++                    and source_data["secondary_use_seed_value"] == destination_data["secondary_use_seed_value"]
++                ),
++            }
++            with self._lock:
++                recent = [
++                    old for old in self._seed_b_constructor_events
++                    if row["_monotonic"] - old["_monotonic"] <= 1800.0
++                ]
++                recent.append(row)
++                self._seed_b_constructor_events = recent[-2048:]
++        except Exception as exc:
++            self._write_log("seed_b_constructor_capture_error", {"error": repr(exc)})
++
+     @get_caller
+     @_resource_descriptor_walk_entry.before
+     def _trace_resource_descriptor_walk_entry(self, context, owner):
+@@ -2560,6 +2636,21 @@ class DerelictBaselineProbe(Mod):
+                 "poi_lifecycle_scope_component_hexes": active_lifecycle,
+             }
+             if upper == DUNGEON_ROOT_SCENE:
++                with self._lock:
++                    event["seed_b_variant_version"] = SEED_B_VARIANT_VERSION
++                    event["seed_b_constructor_calls_observed"] = self._seed_b_constructor_calls
++                    constructor_matches = [
++                        {
++                            **{key: value for key, value in row.items() if key != "_monotonic"},
++                            "age_seconds_at_root_add": round(time.monotonic() - row["_monotonic"], 3),
++                        }
++                        for row in self._seed_b_constructor_events
++                        if descriptor_ptr is not None
++                        and row["destination"]["pointer_hex"] == f"{descriptor_ptr:016X}"
++                        and row["destination"]["primary_seed_hex"]
++                        == str((desc.get("primary") or {}).get("seed_hex") or "").upper()
++                    ]
++                event["seed_b_constructor_matches"] = constructor_matches[-8:]
+                 try:
+                     runtime_metadata = self._capture_runtime_metadata()
+                     event["runtime_metadata_at_capture"] = runtime_metadata

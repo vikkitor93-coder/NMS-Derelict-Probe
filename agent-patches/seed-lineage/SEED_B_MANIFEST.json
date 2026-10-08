@@ -65,5 +65,15 @@
     "published_report": false,
     "live_validation": false,
     "derivation_status": "unknown-not-claimed"
+  },
+  "constructor_0362_candidate": {
+    "patch": "agent-patches/seed-lineage/SEED_B_CONSTRUCTOR_0362.patch",
+    "note": "agent-patches/seed-lineage/SEED_B_CONSTRUCTOR_0362.md",
+    "patch_sha256": "6f33b100c6c97d350980e83237d6c12962d231ed2a9a4fd02497f4c5f7639ab1",
+    "source": "user-attached 0.3.62 local source candidate",
+    "unit_tests": "test_tools.py 126/126 passed",
+    "compile": "passed",
+    "live_validation": "required",
+    "main_publish": false
   }
 }
