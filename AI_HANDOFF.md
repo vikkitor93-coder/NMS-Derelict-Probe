@@ -1,5 +1,9 @@
 # NMS Derelict Probe — AI handoff
 
+## Seed-B constructor capture candidate — 2026-10-08
+
+Seed-B has a tested read-only constructor-capture patch on `agent/seed-lineage` (`c429ff3`) and a local 0.3.62 candidate ZIP. It is not on main because live hook and object identity are unverified. The lane status gives a short root-capture recipe without traversal. The candidate keeps probe protocol `0.3.38` and marks root events with `seed_b_variant_version`; empty matches are diagnostic, not a negative proof. This is separate from the October 8 offline combined-report result.
+
 ## Seed-B combined-report review — 2026-10-08
 
 Seed-B verified the user-attached 0.3.62 local candidate's `research/LATEST_PARALLEL_ACTION_TEST.json` against its combined report (SHA-256 `12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda`). The report is not published here. It is the sole source for the October 8 parallel run: eight offline saved-evidence actions completed, one upload disabled, no new NMS event. Source sessions differ across generation/asset, seed-function, and upstream analysis. The 43 target containers are an asset-derived prediction (30 salvage crates + 13 footlockers), separate from historical observed 35 and post-update user-observed 16. The saved exact caller is `02C08607: FF 52 10`, return `02C0860A`; the zero owner `+0x10` read is not a pre-call slot target. The resolver's zero-match result comes from another caller sample (`02C04977`) and does not resolve current dispatch. See `agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md` for provenance, static constructor trace, and limitations. Root seed derivation remains unproven. No new extension or runtime behavior is published.
