@@ -121,7 +121,7 @@
       "old_recursive_return_rva": "00634C63",
       "new_recursive_return_rva": "0063A773",
       "test": "tests/test_runtime_hook_address_labels.py",
-      "test_status": "pending local execution",
+      "test_status": "Not run in the local shell; equivalent assertions passed 5/5 against the branch files, and focused tests/package integrity passed in GitHub Actions.",
       "test_command": "python -m unittest discover -s tests -p \"test_runtime_hook_address_labels.py\""
     }
   },
@@ -137,7 +137,7 @@
   "human_validation": {
     "required": true,
     "full_derelict_traversal_required": false,
-    "reason": "Only the focused regression test remains; the local command runner is unavailable. No live NMS or debugger action is required."
+    "reason": "The only human-only validation still pending is a normal NMS system-switch run to confirm the boundary clears the previous root capture and reports raw seed, UseSeedValue, and effective state. Focused test/package checks passed in GitHub Actions. No WinDbg or full derelict traversal is required."
   },
   "rollback": {
     "backup_ref": "backup/main-before-runtime-a-signature-correction-20261008-1820",
