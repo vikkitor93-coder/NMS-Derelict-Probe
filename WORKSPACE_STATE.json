@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T13:56:48Z",
+  "updated_utc": "2026-10-08T14:05:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -20,11 +20,15 @@
   "lanes": {
     "runtime-dispatch": {
       "branch": "agent/runtime-dispatch",
-      "status": "build-ready-awaiting-live-validation",
+      "status": "Latest main report reviewed; saved event still lacks pre-instruction dispatch slot",
       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
-      "pull_request": 1,
       "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
-      "next_action": "Run RUNTIME-A on the known derelict until owner+0x10 dispatch capture succeeds; no traversal required."
+      "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008.md",
+      "extension_version": "1.0.3",
+      "human_validation_required": true,
+      "next_action": "With matching NMS.exe, capture RDX and [RDX+0x10] immediately before RVA 02C08607 (FF 52 10) during one root event; no full traversal required.",
+      "latest_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+      "latest_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6"
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage",
@@ -67,8 +71,9 @@
     "pending": [
       {
         "lane": "runtime-dispatch",
-        "kind": "live-game-short-capture",
-        "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json"
+        "kind": "pre-instruction-dispatch-slot-capture",
+        "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
+        "next_action": "With matching NMS.exe, capture RDX and [RDX+0x10] immediately before RVA 02C08607 (FF 52 10) during one root event; no full traversal required."
       }
     ]
   },

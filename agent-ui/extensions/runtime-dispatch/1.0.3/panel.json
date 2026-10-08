@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "title": "RUNTIME-A — Live root dispatch",
+  "summary": "Saved root event 2026-10-08 14:00:37Z: 02C08607 FF 52 10 returns 02C0860A; hook is after dispatch and owner+0x10 is zero. Target remains unresolved. Separate resolver 02C04977/02C0497A found zero candidates. Latest 14:02 run was offline; no NMS attach, upload skipped. Assets predict 43 targets (30 crates+13 lockers) across 164 scenes; not observed. Historical 35 and post-update 16 remain separate. Need pre-instruction slot read; no traversal.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.analyze_generation",
+      "label": "Analyze generation + upload",
+      "description": "Run reviewed analysis and upload saved evidence. Latest combined report is offline reanalysis; it does not capture the dispatch slot before the call.",
+      "preconditions": [
+        "workflow.idle",
+        "nms.running",
+        "probe.connected"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.upload_runtime_capture",
+      "label": "Upload captured root event",
+      "description": "Upload the probe-saved root event after closing NMS. Entry/root-add zero reads are after dispatch and do not resolve its target.",
+      "preconditions": [
+        "workflow.idle",
+        "runtime.capture_saved"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    }
+  ]
+}

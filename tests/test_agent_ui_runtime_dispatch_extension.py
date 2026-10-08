@@ -13,7 +13,7 @@ from tools import surveyor_controller as controller
 
 ROOT = Path(__file__).resolve().parents[1]
 LANE = "runtime-dispatch"
-VERSION = "1.0.2"
+VERSION = "1.0.3"
 HOST_VERSION = "0.3.53"
 EXTENSION_DIR = ROOT / "agent-ui" / "extensions" / LANE / VERSION
 
@@ -65,12 +65,13 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
         manifest, panel = read_extension()
         action = panel["actions"][0]
         self.assertTrue(panel["request_only"])
-        self.assertIn("seed candidate 9256392A2F5A74AC", panel["summary"])
-        self.assertIn("MEDI_FLOATERS is a high-confidence preset inference", panel["summary"])
-        self.assertIn("10 modeled rooms (8 main + 2 dead-end; table Rooms=7)", panel["summary"])
-        self.assertIn("16 analyzer-predicted targets (not verified physical count)", panel["summary"])
-        self.assertIn("not verified physical count", panel["summary"])
-        self.assertIn("historical", panel["summary"])
+        self.assertIn("Saved root event 2026-10-08 14:00:37Z", panel["summary"])
+        self.assertIn("hook is after dispatch and owner+0x10 is zero", panel["summary"])
+        self.assertIn("Separate resolver 02C04977/02C0497A found zero candidates", panel["summary"])
+        self.assertIn("Latest 14:02 run was offline", panel["summary"])
+        self.assertIn("43 targets (30 crates+13 lockers)", panel["summary"])
+        self.assertIn("not observed", panel["summary"])
+        self.assertIn("Historical 35 and post-update 16 remain separate", panel["summary"])
         self.assertEqual(["research.analyze_generation", "research.upload_runtime_capture"], [a["action_id"] for a in panel["actions"]])
         self.assertIn(action["action_id"], extensions.HOST_ACTION_IDS)
         self.assertEqual({}, action["parameters"])
@@ -215,19 +216,19 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
             self.assertEqual(VERSION, extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)[0]["version"])
 
             refreshed_panel = copy.deepcopy(panel)
-            refreshed_panel["summary"] = "Refreshed panel data"
+            refreshed_panel["summary"] = "Panel refreshed test summary"
             refreshed_bytes = (json.dumps(refreshed_panel, sort_keys=True) + "\n").encode()
-            refreshed_manifest = build_manifest("1.0.3", refreshed_bytes)
-            refreshed_entry = {"extension_id": LANE, "version": "1.0.3", "manifest_path": f"{LANE}/1.0.3/manifest.json"}
+            refreshed_manifest = build_manifest("1.0.4", refreshed_bytes)
+            refreshed_entry = {"extension_id": LANE, "version": "1.0.4", "manifest_path": f"{LANE}/1.0.4/manifest.json"}
             extensions.install_extension(root, refreshed_entry, HOST_VERSION, extensions.HOST_ACTION_IDS,
                                          remote_package(refreshed_manifest, refreshed_bytes).__getitem__)
             active, active_panel = extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)
-            self.assertEqual("1.0.3", active["version"])
-            self.assertEqual("Refreshed panel data", active_panel["summary"])
+            self.assertEqual("1.0.4", active["version"])
+            self.assertEqual("Panel refreshed test summary", active_panel["summary"])
             extensions.activate_installed_extension(root, LANE, VERSION, HOST_VERSION, extensions.HOST_ACTION_IDS)
             rolled_back, _ = extensions.load_installed_extension(root, LANE, HOST_VERSION, extensions.HOST_ACTION_IDS)
             self.assertEqual(VERSION, rolled_back["version"])
-            self.assertEqual(["1.0.3", VERSION], extensions.installed_versions(root, LANE))
+            self.assertEqual(["1.0.4", VERSION], extensions.installed_versions(root, LANE))
 
     def test_lane_action_records_are_namespaced_and_collision_safe(self):
         with tempfile.TemporaryDirectory() as tmp:
