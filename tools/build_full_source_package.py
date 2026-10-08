@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import io
 import json
 import shutil
 import subprocess
@@ -95,17 +96,30 @@ def build() -> dict:
         raise RuntimeError(f"Required files not managed in package: {missing}")
     tracked = subprocess.check_output(["git", "ls-files"], cwd=ROOT, text=True).splitlines()
     tracked_by_casefold = {relative.casefold(): ROOT / relative for relative in tracked if relative}
-    def source_path(relative: str) -> Path:
+    old_parts = [ROOT / relative for relative in manifest.get("package_parts", [])]
+    if not old_parts:
+        raise RuntimeError("Current updater manifest has no base package parts")
+    old_zip_bytes = base64.b64decode("".join(path.read_text(encoding="ascii").strip() for path in old_parts))
+    with zipfile.ZipFile(io.BytesIO(old_zip_bytes), "r") as old_archive:
+        old_files = {name: old_archive.read(name) for name in old_archive.namelist()}
+    old_by_casefold = {name.casefold(): data for name, data in old_files.items()}
+
+    def source_bytes(relative: str) -> bytes:
         path = ROOT / relative
         if path.is_file():
-            return path
+            return path.read_bytes()
         fallback = tracked_by_casefold.get(relative.casefold())
         if fallback is not None and fallback.is_file():
-            return fallback
+            return fallback.read_bytes()
+        if relative in old_files:
+            return old_files[relative]
+        fallback_bytes = old_by_casefold.get(relative.casefold())
+        if fallback_bytes is not None:
+            return fallback_bytes
         raise FileNotFoundError(path)
 
     for relative in managed_files:
-        source_path(relative)
+        source_bytes(relative)
 
     _write_text(ROOT / "VERSION.txt", APP_VERSION + "\n")
     _prepare_metadata(managed_files, canonical)
@@ -123,7 +137,7 @@ def build() -> dict:
             info = zipfile.ZipInfo(relative, date_time=(2026, 10, 8, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
-            archive.writestr(info, source_path(relative).read_bytes(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
+            archive.writestr(info, source_bytes(relative), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
 
     with zipfile.ZipFile(zip_path, "r") as archive:
         bad_member = archive.testzip()
