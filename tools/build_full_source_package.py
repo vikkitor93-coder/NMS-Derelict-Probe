@@ -99,7 +99,7 @@ def _refresh_shared_status() -> None:
     })
     human = state.setdefault("human_intervention", {})
     human["required_now"] = True
-    human["pending"] = [{
+    human["pending"] = [item for item in human.get("pending", []) if item.get("lane") != "runtime-dispatch"] + [{
         "lane": "runtime-dispatch",
         "kind": "verify-system-change-seed-reset",
         "next_action": "Update Surveyor through its in-app updater. Enter a different system and confirm the previous root capture clears; on the next root capture, inspect raw seed, UseSeedValue, and effective state.",
