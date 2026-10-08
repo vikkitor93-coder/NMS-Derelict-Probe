@@ -4,6 +4,7 @@ import base64
 import hashlib
 import json
 import shutil
+import subprocess
 import zipfile
 from pathlib import Path
 
@@ -92,9 +93,19 @@ def build() -> dict:
     missing = sorted(required - set(managed_files))
     if missing:
         raise RuntimeError(f"Required files not managed in package: {missing}")
+    tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).decode("utf-8").split("\\0")
+    tracked_by_casefold = {relative.casefold(): ROOT / relative for relative in tracked if relative}
+    def source_path(relative: str) -> Path:
+        path = ROOT / relative
+        if path.is_file():
+            return path
+        fallback = tracked_by_casefold.get(relative.casefold())
+        if fallback is not None and fallback.is_file():
+            return fallback
+        raise FileNotFoundError(path)
+
     for relative in managed_files:
-        if not (ROOT / relative).is_file():
-            raise FileNotFoundError(ROOT / relative)
+        source_path(relative)
 
     _write_text(ROOT / "VERSION.txt", APP_VERSION + "\n")
     _prepare_metadata(managed_files, canonical)
@@ -112,7 +123,7 @@ def build() -> dict:
             info = zipfile.ZipInfo(relative, date_time=(2026, 10, 8, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
-            archive.writestr(info, (ROOT / relative).read_bytes(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
+            archive.writestr(info, source_path(relative).read_bytes(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
 
     with zipfile.ZipFile(zip_path, "r") as archive:
         bad_member = archive.testzip()
