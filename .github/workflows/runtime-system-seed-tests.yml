@@ -8,7 +8,11 @@ on:
     paths:
       - mod/derelict_baseline_probe.py
       - tests/test_system_scoped_root_capture.py
+      - tools/build_full_source_package.py
       - .github/workflows/runtime-system-seed-tests.yml
+
+permissions:
+  contents: write
 
 jobs:
   system-seed-regression:
@@ -21,4 +25,15 @@ jobs:
       - name: Run focused system and seed tests
         run: python -m unittest discover -s tests -p "test_system_scoped_root_capture.py"
       - name: Compile changed Python files
-        run: python -m py_compile mod/derelict_baseline_probe.py tests/test_system_scoped_root_capture.py
+        run: python -m py_compile mod/derelict_baseline_probe.py tests/test_system_scoped_root_capture.py tools/build_full_source_package.py
+      - name: Build app update package
+        if: github.event_name == 'push'
+        run: python tools/build_full_source_package.py
+      - name: Commit app update package
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add VERSION.txt README.md CHANGELOG.md CANONICAL_SOURCE.json update-manifest.json AI_HANDOFF.md packages/v0.3.63-full
+          git commit -m "Build Surveyor source package v0.3.63 with Probe 0.3.40"
+          git push
