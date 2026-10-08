@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-08T19:21:00Z",
+  "updated_utc": "2026-10-08T19:25:08Z",
   "state": "waiting_on_user",
   "status": "Probe 0.3.40 clears root-seed state at a system boundary and separates raw seed from UseSeedValue/effective state; one normal runtime check remains.",
   "summary": "Implementation and focused regression tests are complete. No WinDbg was used. The reported F-pattern remains unclassified without its captured UseSeedValue field.",
-  "progress": "Probe 0.3.40 system reset and raw/effective seed reporting are packaged as Surveyor 0.3.65. Focused CI and ZIP integrity passed. Latest combined report hash verified; it is saved-session analysis, not a new live capture.",
+  "progress": "System-scoped reset, stale-capture filtering, effective-seed fields, and full updater package were built and verified by CI.",
   "blockers": [],
   "next_action": "Update Surveyor in-app, switch systems, and confirm the displayed root capture clears; inspect raw seed and UseSeedValue on the next capture.",
   "human_intervention_required": true,

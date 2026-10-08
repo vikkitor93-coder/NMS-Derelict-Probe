@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T19:20:00Z",
+  "updated_utc": "2026-10-08T19:25:08Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.65",
@@ -26,7 +26,7 @@
       "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
       "extension_version": "1.0.6",
       "human_validation_required": true,
-      "next_action": "Use Surveyor's in-app updater, enter a different system, confirm the prior root capture clears, then inspect the next root event's raw seed, UseSeedValue, and effective state.",
+      "next_action": "Update Surveyor in-app, enter a different system, confirm the old root seed clears, then observe the next root capture's raw value, UseSeedValue, and effective state.",
       "latest_report": "research-uploads/20261008T191019Z-parallel-action-test/combined-results.json",
       "latest_report_sha256": "1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471"
     },
