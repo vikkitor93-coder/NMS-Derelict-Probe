@@ -39,8 +39,8 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "D-lane offline static-call boundary review completed against matching NMS.exe. Runtime dispatch remains unresolved and is owned by agent/runtime-dispatch.",
-    "candidate_identity_rule": "Candidate RVAs remain unnamed until full helper bodies and call semantics are validated; the runtime owner+0x10 field is not the caller's vtable slot.",
+    "next_method": "D-lane continues offline semantic analysis of the current hash-matched callback at 0063A6D0. Runtime-A signature-matched BEFORE-hook evidence correlates the effective dispatch destination for one event to 0063A6D0. The 0063A706 -> 033E1B60 -> 033E1A50 chain is an internal direct helper call within that callback. Callback semantic identity and raw [RDX+0x10] slot capture remain unresolved.",
+    "candidate_identity_rule": "Do not infer semantic identity from RVA. For the 2026-10-08 16:31:47.935Z event only, effective destination is signature-correlated to 0063A6D0; raw virtual slot value and callback semantic identity remain unresolved. owner+0x10 is a separate data read.",
     "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/"
   },
   "human_validation": {
@@ -283,18 +283,52 @@
   "current_hook_call_target_review": {
     "path": "agent-patches/dungeon-decompile/CURRENT_HOOK_CALL_TARGET_20261008.json",
     "exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
-    "finding": "0063A706 calls stub 033E1B60, which tail-jumps to 033E1A50; neither RVA is covered by a .pdata range",
-    "dispatch_resolved": false,
-    "runtime_dispatch_lane": "agent/runtime-dispatch"
+    "finding": "0063A706 calls stub 033E1B60, which tail-jumps to 033E1A50; neither target is covered by a .pdata runtime-function entry.",
+    "dispatch_resolved": true,
+    "runtime_dispatch_lane": "agent/runtime-dispatch",
+    "scope": "Event-scoped signature-correlated effective destination only; raw slot and semantic identity unresolved.",
+    "target_rva": "0063A6D0",
+    "runtime_evidence": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
+    "event_descriptor": "000002752ED7F928",
+    "event_utc": "2026-10-08T16:31:47.935Z",
+    "caller": "02C08607 FF 52 10 -> return 02C0860A",
+    "raw_vtable_slot_value_captured": false,
+    "semantic_identity": "unresolved",
+    "old_probe_label": "00634BC0"
   },
   "latest_parallel_action_review": {
-    "run_id": "20261008T140207Z-d8e24197",
-    "report_path": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
-    "report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
-    "pointer_report_sha256_verified": true,
-    "results_authority": "combined report only",
-    "summary": "8 complete, 0 failed, 1 upload skipped; saved-evidence offline run; no NMS event"
+    "path": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json",
+    "source": "research/LATEST_PARALLEL_ACTION_TEST.json",
+    "report_path": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
+    "report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
+    "report_sha256_verified": true,
+    "run_id": "20261008T195817Z-1b73e442",
+    "authority": "combined report is sole authority for this run",
+    "mode": "isolated_parallel_test_no_github_upload",
+    "summary": {
+      "total": 9,
+      "completed": 8,
+      "failed": 0,
+      "unsupported": 0,
+      "upload_actions_skipped": 1
+    },
+    "d_lane_artifact_sha256": [
+      "61dd89c0f690fd8b9e76977b276c09ae851bc935680c2665132bbbc97f507494",
+      "52cc2d87f86ecc26c88f56993ef36d4d8dc5b2e9c313054abb35c161c38264de",
+      "11279a87d723d2e6d4fa3cf0159ce0824f5092615dca1022346118488d4547d2"
+    ],
+    "queried_target": "00634BC0",
+    "resolver_matches": 0,
+    "interpretation": "Resolver output used stale 00634BC0 from an older build. Its zero-match result is scoped to that input and does not override Runtime-A later event correlation to 0063A6D0.",
+    "limits": [
+      "No fresh NMS event.",
+      "Upload skipped; embedded outputs were not separately uploaded.",
+      "43 is asset-derived prediction, not observed count.",
+      "Historical 35 and post-update 16 remain separate.",
+      "owner+0x10 zero and resolver sample do not identify dispatch target.",
+      "Semantic callback identity and raw [RDX+0x10] value remain unresolved."
+    ]
   },
-  "latest_parallel_action_run": "20261008T140207Z-d8e24197",
+  "latest_parallel_action_run": "20261008T195817Z-1b73e442",
   "branch": "agent/dungeon-current-target-20261008-reconciled"
 }
