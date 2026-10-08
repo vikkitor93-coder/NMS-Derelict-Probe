@@ -3,7 +3,22 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.60**. Runtime-A probe: **0.3.38**. Versions 0.3.59–0.3.60 add crash-safe event journaling, always save root-event evidence when exact caller or `+0x10` capture is pending, and batch changed evidence uploads every 30 seconds while automatic uploads are enabled.
+Published Surveyor package: **v0.3.61**. Current source candidate: **v0.3.64**; Runtime-A probe: **0.3.38**. The candidate adds a dedicated Surveyor panel to run all eight parallel research actions, optional automatic runs after a session is saved, explicit run-trigger provenance, NMS-only overlay visibility, agent-objective visibility control, and a validated queue for agent build requests.
+
+## Parallel research action test
+
+In Surveyor, use **Parallel research test → Run all research actions in parallel**. The button shows progress in **Current action**. Each run keeps an immutable `parallel-action-tests/<run-id>/combined-results.json` and local `queue.jsonl`; it also updates a local latest-result handoff for the uploader. With the existing automatic-upload checkbox enabled, Surveyor publishes only that combined JSON and updates `research/LATEST_PARALLEL_ACTION_TEST.json`. With the checkbox off, the run stays local. The queue and separate action outputs are never shared by this button.
+
+
+Run `Test-Parallel-Research-Actions.cmd` on Windows to execute the eight unique main Research handlers concurrently in isolated test data folders. The console shows an individual live row for each action; PowerShell workflows report phase milestones, and direct asset downloads show transfer percentage and bytes. The harness appends action status/progress events to `parallel-action-tests/<run-id>/queue.jsonl` and writes generated research JSON/CSV into `combined-results.json`. It does **not** upload to GitHub or overwrite installed Surveyor evidence. Actions read a start-of-run snapshot; this does not test passing one action's fresh outputs to dependent actions. Asset preparation can download/install tools in isolated worker data and may take a while. If Windows blocks junction/symlink creation, extracted assets are snapshotted with hard links when possible and regular copies otherwise. Run the portable queue/progress/JSON check with `python tools/test_parallel_research_actions.py --self-test`.
+
+## Automatic research after a saved session
+
+The **Automatically run all research actions after a derelict session is saved** checkbox in the Parallel research test panel is enabled by default and can be turned off. Surveyor waits for a newly saved session JSON and an idle workflow, then runs the same eight-action test once for that session. Uploading its combined report still follows the separate automatic-upload checkbox. Existing saved sessions present when Surveyor starts are treated as already seen.
+
+## Agent build requests
+
+Lane agents stage requested shared-build files in `build-requests/<lane-id>/<request-id>/` and publish the request bundle to `main`; they do not publish independent full Surveyor builds. The main compiler stages ready requests into a disposable main checkout before packaging. See `build-requests/README.md`; run `python tools/compile_build_requests.py --help` for the staging interface. Requests are hash-checked, stale-base and destination conflicts fail closed, and request payloads cannot run commands or delete files.
 
 ## v0.3.60 — paced recovery uploads
 
