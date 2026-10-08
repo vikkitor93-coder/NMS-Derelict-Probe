@@ -10,7 +10,7 @@ Surveyor 0.3.67 scans saved session JSON files at startup, queues those without 
 
 ## Surveyor saved-session queue — 2026-10-08
 
-The latest verified 19:10 combined report names one input session only; it does not prove all three queued sessions ran. Surveyor 0.3.66 now queues each saved file separately, persists the FIFO across restarts, pins each worker to its triggering session SHA-256, and requires a matching trigger hash before recording completion. Local regression suite and package integrity checks passed; Windows end-to-end validation is pending.
+The 19:10 queue-specific combined report named one input session; it did not prove all three queued sessions ran. The later 19:58 manual parallel report is a separate saved-session analysis and does not establish that the FIFO drained. Surveyor 0.3.66 now queues each saved file separately, persists the FIFO across restarts, pins each worker to its triggering session SHA-256, and requires a matching trigger hash before recording completion. Local regression suite and package integrity checks passed; Windows end-to-end validation is pending.
 
 ## Runtime-A system-scoped root seed capture — 2026-10-08
 
