@@ -1588,6 +1588,8 @@ class DerelictBaselineProbe(Mod):
                 "poi_context_matches_universe_address": False, "poi_system_address_hex": None,
                 "poi_description_return_candidates": [], "last_poi_description_return_hex": None,
                 "dungeon_root_seed_candidates": [], "last_dungeon_root_seed_hex": None,
+                "dungeon_root_seed_raw_candidates": [], "dungeon_root_seed_effective_candidates": [],
+                "last_dungeon_root_seed_raw_hex": None, "last_dungeon_root_seed_state": "unavailable",
                 "dungeon_logical_entry_caller_offsets": [], "last_dungeon_logical_entry_caller_offset_hex": None,
                 "dungeon_logical_entry_exact_external_caller_offsets": [],
                 "last_dungeon_logical_entry_exact_external_caller_offset_hex": None,
@@ -1676,6 +1678,9 @@ class DerelictBaselineProbe(Mod):
                 poi_return_hexes.append(hx)
 
         dungeon_seed_hexes: list[str] = []
+        dungeon_seed_raw_hexes: list[str] = []
+        dungeon_seed_effective_hexes: list[str] = []
+        last_root_seed_state = "unavailable"
         logical_entry_caller_offsets: list[str] = []
         logical_entry_exact_external_offsets: list[str] = []
         for event in self._session.get("trace", {}).get("events", []):
@@ -1685,8 +1690,15 @@ class DerelictBaselineProbe(Mod):
                 continue
             seed = event.get("primary_seed") or {}
             hx = str(seed.get("seed_hex") or "").upper()
+            if hx and hx not in dungeon_seed_raw_hexes:
+                dungeon_seed_raw_hexes.append(hx)
             if hx and hx not in ("0000000000000000", "FFFFFFFFFFFFFFFF") and hx not in dungeon_seed_hexes:
                 dungeon_seed_hexes.append(hx)
+            seed_state = _root_seed_effective_state(seed)
+            last_root_seed_state = str(seed_state.get("root_seed_state") or "unavailable")
+            effective_hx = seed_state.get("root_seed_effective_hex")
+            if effective_hx and effective_hx not in dungeon_seed_effective_hexes:
+                dungeon_seed_effective_hexes.append(str(effective_hx))
             for match in event.get("logical_entry_matches") or []:
                 caller = str(match.get("caller_return_offset_hex") or "").upper()
                 if caller and caller not in logical_entry_caller_offsets:
@@ -1706,7 +1718,11 @@ class DerelictBaselineProbe(Mod):
             "poi_description_return_candidates": poi_return_hexes,
             "last_poi_description_return_hex": (poi_return_hexes[-1] if poi_return_hexes else None),
             "dungeon_root_seed_candidates": dungeon_seed_hexes,
-            "last_dungeon_root_seed_hex": (dungeon_seed_hexes[-1] if dungeon_seed_hexes else None),
+            "dungeon_root_seed_raw_candidates": dungeon_seed_raw_hexes,
+            "dungeon_root_seed_effective_candidates": dungeon_seed_effective_hexes,
+            "last_dungeon_root_seed_hex": (dungeon_seed_effective_hexes[-1] if dungeon_seed_effective_hexes else None),
+            "last_dungeon_root_seed_raw_hex": (dungeon_seed_raw_hexes[-1] if dungeon_seed_raw_hexes else None),
+            "last_dungeon_root_seed_state": last_root_seed_state,
             "dungeon_root_resource_events_seen": dungeon_root_resource_events_seen,
             "dungeon_logical_entry_caller_offsets": logical_entry_caller_offsets,
             "last_dungeon_logical_entry_caller_offset_hex": (logical_entry_caller_offsets[-1] if logical_entry_caller_offsets else None),
@@ -1832,6 +1848,7 @@ class DerelictBaselineProbe(Mod):
         resource_count = 0
         reward_count = 0
         seeds: list[str] = []
+        last_seed_payload: dict[str, Any] | None = None
         for event in events:
             if event.get("kind") in {"resource_add", "resource_find"}:
                 resource_count += 1
@@ -1841,6 +1858,7 @@ class DerelictBaselineProbe(Mod):
                 value = event.get(key)
                 if isinstance(value, dict) and value.get("seed_hex"):
                     seeds.append(str(value["seed_hex"]))
+                    last_seed_payload = value
         unique = list(dict.fromkeys(seeds))
         poi_candidates: list[str] = []
         for event in events:
@@ -1853,6 +1871,9 @@ class DerelictBaselineProbe(Mod):
             "reward_events": reward_count,
             "unique_seed_count": len(unique),
             "last_seed_hex": unique[-1] if unique else None,
+            "last_seed_effective_hex": _root_seed_effective_state(last_seed_payload).get("root_seed_effective_hex"),
+            "last_seed_use_seed_value": _root_seed_effective_state(last_seed_payload).get("root_seed_use_seed_value"),
+            "last_seed_state": _root_seed_effective_state(last_seed_payload).get("root_seed_state"),
             "poi_seed_candidate_count": len(poi_candidates),
             "last_poi_seed_candidate_hex": poi_candidates[-1] if poi_candidates else None,
         }
