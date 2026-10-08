@@ -191,9 +191,17 @@
     "lane_backup_ref": "backup/runtime-dispatch-seed-status-fix-pre-reconcile-20261008",
     "lane_backup_commit": "7d0e77477de47c13ab8f751937110bbcee4dad35",
     "direct_main_publication": true,
-    "lane_branch_sync": "After reconciliation publishes to main, move the lane branch to the reconciled main commit using force-with-lease; its former head is preserved by the lane backup ref.",
-    "tests": "JSON parse and cross-reference assertions will be run before publishing. Pointer/report SHA-256 verified. Runtime/unit test results are inherited from the v0.3.67 CI record: 210 tests, compileall, harness self-test, and 37-part updater integrity.",
-    "rollback": "Restore the four reconciliation files from backup/main-before-runtime-reconcile-20261008-2330 or revert the reconciliation commits in reverse order; backup/runtime-dispatch-seed-status-fix-pre-reconcile-20261008 preserves pre-sync lane history."
+    "lane_branch_sync": "Update STATUS.json and RUNTIME_A_MANIFEST.json in place on agent/runtime-dispatch-seed-status-fix-20261008 after main publication; preserve the branch-only package/history and its backup reference.",
+    "tests": "Prepublish JSON parse and cross-reference assertions passed; latest report SHA-256 verified against the pointer. Runtime/unit test results come from the published v0.3.67 CI record: 210 tests, compileall, harness self-test, and 37-part updater integrity.",
+    "rollback": "Restore the four reconciliation files from backup/main-before-runtime-reconcile-20261008-2330 or revert the reconciliation commits in reverse order; backup/runtime-dispatch-seed-status-fix-pre-reconcile-20261008 preserves pre-sync lane history.",
+    "complete_lane_records_commit": "cdebd47b6a0aa32770bd3d8d958aa0929abc9eb0",
+    "main_file_commits": {
+      "RESEARCH_INDEX.md": "bff0effe7e535932b544e2c734109ff458c20f17",
+      "AI_HANDOFF.md": "4bccc753ab92f1cb25493c0c6906c19e7eb21843",
+      "WORKSPACE_STATE.json": "c4d32238ffce1077bd7097042383348d411ea438",
+      "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json": "fd799a4e5593245ee202fc6ee724251b2e453d7e",
+      "agent-patches/runtime-dispatch/STATUS.json": "cdebd47b6a0aa32770bd3d8d958aa0929abc9eb0"
+    }
   },
   "system_scope_seed_reset": {
     "probe_version": "0.3.40",
@@ -247,12 +255,13 @@
     "source": "update-manifest.json"
   },
   "reconciliation": {
-    "reconciled_utc": "2026-10-08T23:32:22Z",
+    "reconciled_utc": "2026-10-08T23:34:03Z",
     "main_base_commit": "1dc59cc0dc4be8338627da315c7082b44dbb1b51",
     "main_status_before_sha": "795c66b24da0d094f0b14aa68399693123cfec6a",
     "lane_status_before_sha": "795c66b24da0d094f0b14aa68399693123cfec6a",
     "main_manifest_before_sha": "484c0d2d7234d0fea02d29d02cbc008f52427363",
     "lane_manifest_before_sha": "74af42a92f36b2bd0037fa80d538f7b702ef8e74",
-    "resolution": "Main and lane status copies matched on the live reset gate, but the lane manifest/report reference was stale. Replaced Runtime-A report references with main's pointer-verified 19:58 combined report. A metadata lane commit advanced main during preparation; its changes are preserved. Lane branch will sync to reconciled main after publication."
+    "resolution": "Main and lane status copies matched on the live reset gate, but the lane manifest/report reference was stale. Replaced Runtime-A report references with main's pointer-verified 19:58 combined report. A metadata lane commit advanced main during preparation; its changes are preserved. Lane branch will sync to reconciled main after publication.",
+    "branch_relation": "The lane branch was 167 commits behind and 9 ahead of main. Preserve its branch-only package and history; synchronize the lane STATUS.json and RUNTIME_A_MANIFEST.json in place rather than force-moving the branch."
   }
 }
