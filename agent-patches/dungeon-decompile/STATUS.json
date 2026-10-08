@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "branch": "agent/dungeon-decompile",
-  "reviewed_utc": "2026-10-07T01:05:50Z",
-  "state": "fresh-root-reviewed-current-hook-identified",
+  "branch": "agent/dungeon-report-review-20261008",
+  "reviewed_utc": "2026-10-08T13:46:03Z",
+  "state": "oct8-parallel-review-complete-waiting-matching-executable",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -371,10 +371,10 @@
     }
   },
   "blocked": {
-    "human_action_required": false,
-    "reason": "The requested offline export and shared upload are complete. Static helper analysis can continue without NMS. The indirect call target remains unproven and will eventually require a live slot/register capture."
+    "human_action_required": true,
+    "reason": "Matching NMS.exe or equivalent hash-matched .pdata/code bytes are not available locally or in the repository. They are required to validate the byte-derived destination. No game runtime is needed."
   },
-  "next_lane_owned_step": "Trace the five bounded helper bodies and their call sites against the parent function dataflow, especially RSI+0x48 and the four-field completion record. Keep names provisional; prove the indirect callback target only with a live [RDX+0x10] sample.",
+  "next_lane_owned_step": "After receiving matching executable evidence, validate RVA 033E1B60 as a .pdata function, analyze its body and caller semantics, and correct the zero-candidate export discrepancy. Keep dispatch target unresolved unless actual pre-call slot data is supplied.",
   "latest_shared_upload_review": {
     "path": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
     "root_event_utc": "2026-10-05T01:03:01.131Z",
@@ -402,7 +402,8 @@
     "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/run-manifest.json",
     "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/exact-root-caller-latest.json",
     "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/exact-root-caller-code-latest.json",
-    "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json"
+    "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
+    "agent-patches/dungeon-decompile/PARALLEL_REVIEW_VALIDATION_20261008.json"
   ],
   "main_package_update_check": {
     "version_file": "main VERSION.txt: 0.3.57",
@@ -471,12 +472,14 @@
     },
     "note": "Newest shared snapshot; root capture timestamp remains 2026-10-04T23:17:15.827Z. The exact-root-caller-code SHA-256 is still 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2. This is not a new runtime sample or a helper export."
   },
-  "updated_utc": "2026-10-07T01:05:50Z",
-  "status": "current-hook-function-exported",
-  "summary": "Exported current 0063A6D0 hook function from October 6 root capture using validated signature correction; adjacent range contains self call returning at 0063A773. Original capture remains unchanged. Pre-call slot remains unmeasured.",
-  "next_action": "Analyze the current hook and adjacent control flow; runtime lane should refresh probe labels and capture pre-call dispatch slot.",
-  "human_intervention_required": false,
-  "user_steps": [],
+  "updated_utc": "2026-10-08T13:46:03Z",
+  "status": "offline-caller-review-updated",
+  "summary": "Reviewed the Oct 8 combined report with pointer hash verified. The 02C08607 caller remains unresolved; the separate 02C04977 resolver sample is not the same callsite. Rechecked the saved 0063A6D0 body and identified a hash-verified E8 call to 033E1B60; its target boundary/body are not verified.",
+  "next_action": "Provide matching NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 (or a hash-matched bounded export with .pdata and target bytes) to validate 033E1B60 and resolve the candidate-list discrepancy; no game run or traversal is required.",
+  "human_intervention_required": true,
+  "user_steps": [
+    "Provide the NMS.exe whose SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, or a hash-matched export containing its .pdata entry and bytes at RVA 033E1B60."
+  ],
   "current_build_static_map": {
     "report": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
     "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
@@ -505,5 +508,6 @@
     "current_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
     "derived_from_raw_capture": true,
     "precall_slot_captured": false
-  }
+  },
+  "parallel_action_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json"
 }

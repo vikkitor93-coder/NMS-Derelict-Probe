@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "verified_utc": "2026-10-08T13:48:19Z",
+  "review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json",
+  "checks": [
+    {
+      "name": "Oct 8 pointer report SHA-256",
+      "result": "passed",
+      "actual": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
+      "expected": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda"
+    },
+    {
+      "name": "saved 0063A6D0 bounded body SHA-256",
+      "result": "passed",
+      "bytes": 89,
+      "actual": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7",
+      "expected": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7"
+    },
+    {
+      "name": "E8 rel32 destination arithmetic",
+      "bytes": "E8 55 74 DA 02",
+      "result": "passed",
+      "destination_rva": "033E1B60",
+      "semantic_identity": "unverified",
+      "instruction_rva": "0063A706"
+    },
+    {
+      "name": "JSON parse and cross-file review assertions",
+      "result": "passed",
+      "assertions": [
+        "report SHA and authority references agree",
+        "count distinction is retained",
+        "resolver caller mismatch is explicit",
+        "human input and next step are recorded"
+      ],
+      "files": [
+        "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json",
+        "agent-patches/dungeon-decompile/STATUS.json",
+        "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
+        "WORKSPACE_STATE.json"
+      ]
+    },
+    {
+      "name": "git diff whitespace validation",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "The matching NMS.exe is unavailable; 033E1B60 .pdata range and function body were not verified.",
+    "No NMS runtime test was performed."
+  ],
+  "failed_checks": []
+}

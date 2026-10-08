@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "reviewed_utc": "2026-10-08T13:45:06Z",
+  "source": {
+    "pointer_report_hash_verified": true,
+    "report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
+    "report_path": "research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json",
+    "source_status": "user-provided local 0.3.62 candidate; not published to main",
+    "archive_sha256": "43a65ad2499717d1f1f35d707f0fb5e00496f9cab591b067108ea2e0ed2ac56b",
+    "pointer_path": "research/LATEST_PARALLEL_ACTION_TEST.json"
+  },
+  "run": {
+    "completed": 8,
+    "finished_utc": "2026-10-08T13:03:02.691Z",
+    "saved_evidence_snapshot": true,
+    "upload_actions_skipped": 1,
+    "total_including_skipped_upload": 9,
+    "run_id": "20261008T130233Z-755d4c43",
+    "started_utc": "2026-10-08T13:02:33.081Z",
+    "new_nms_event_captured": false,
+    "failed": 0,
+    "unsupported": 0,
+    "mode": "isolated_parallel_test_no_github_upload"
+  },
+  "authoritative_scope": "Combined report is sole authority for Oct 8 parallel-action results. No queue or per-action latest output used as a substitute.",
+  "dungeon_decompile_results": {
+    "offline_current_hook_recheck": {
+      "function_body_bytes": 89,
+      "semantics": "unnamed",
+      "function_body_sha256": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7",
+      "descriptor": "00000112B726B528",
+      "source": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
+      "discrepancy": "The byte-verified bounded function contains the E8 rel32 instruction, while its direct_call_candidates list reports zero. Record as an exporter/list inconsistency; no semantic target identity inferred.",
+      "body_hash_recomputed_matches": true,
+      "function_range": "0063A6D0..0063A729",
+      "hook_rva": "0063A6D0",
+      "flow": "cmp rax,rbx; conditional branch",
+      "following_bytes": "48 3B C3 75 12",
+      "direct_call": {
+        "bytes": "E8 55 74 DA 02",
+        "byte_derived_destination_rva": "033E1B60",
+        "instruction_rva": "0063A706",
+        "destination_pdata_and_body_verified": false
+      },
+      "existing_export_candidate_count": 0
+    },
+    "exact_caller_extraction": {
+      "status": "complete",
+      "runtime_target_function_body_in_combined_artifact": false,
+      "instruction": "FF 52 10",
+      "current_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+      "return_rva": "02C0860A",
+      "instruction_rva": "02C08607",
+      "dispatch_target_resolved": false
+    },
+    "resolver": {
+      "candidate_target_rva": "00634BC0",
+      "status": "complete",
+      "matches": 0,
+      "relation_to_02C08607": "separate caller sample; do not combine as same callsite",
+      "input_return": "02C0497A",
+      "input_callsite": "02C04977",
+      "current_dispatch_target_proven": false
+    }
+  },
+  "count_and_runtime_limits": {
+    "asset_prediction": "43 target containers = 30 salvage + 13 footlockers derived from 164 resolved scene instances; not a fresh physical count",
+    "resolver_sample": "different callsite; not dispatch proof",
+    "historical_measurement": "35-container historical measurement remains unchanged",
+    "post_update_observation": "separate 16-container user observation remains unchanged",
+    "repeatability": "offline comparison only; not an additional physical traversal",
+    "owner_plus_0x10": "zero observed after the call; not the pre-call virtual dispatch slot",
+    "dispatch": "unresolved"
+  },
+  "limits": [
+    "Combined run used saved evidence, did not attach to NMS, and captured no new event.",
+    "The referenced report was in the user-provided source candidate, not published to main; this lane note records its SHA and does not copy or replace the shared pointer/report.",
+    "NMS.exe matching SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 was not available in repository or standard checked Steam paths, so destination 033E1B60 .pdata boundary/body and adjacent continuation remain unverified."
+  ],
+  "next_action": "Obtain the matching NMS.exe or a hash-matched bounded export including .pdata and bytes at 033E1B60; validate the call target boundary/body and explain the zero-candidate export discrepancy. No NMS launch or derelict traversal is needed.",
+  "validation_artifact": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_VALIDATION_20261008.json"
+}

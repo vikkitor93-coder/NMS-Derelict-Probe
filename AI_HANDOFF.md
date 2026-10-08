@@ -1,3 +1,12 @@
+## DUNGEON-C Oct 8 combined report and current hook recheck — 2026-10-08
+
+The Oct 8 combined report was read from the user-provided local 0.3.62 candidate, and its bytes match the pointer SHA-256 12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda. The candidate/report are not published on main; DUNGEON-C did not publish or replace either shared file. The combined report alone is used for its run: 8 saved-evidence offline actions completed, upload was skipped, and there was no NMS attachment or new capture.
+
+The report's current caller is 02C08607: FF 52 10 / return 02C0860A. The separate resolver input is 02C04977 / 02C0497A and returns zero matches for 00634BC0; do not combine the samples or infer the target. Keep the 43 asset-derived prediction distinct from both the historical 35-container measurement and separate post-update 16-container observation.
+
+DUNGEON-C rechecked its saved 89-byte 0063A6D0 hook body: its verified hash still matches, and bytes at 0063A706 encode an E8 rel32 destination of 033E1B60, followed by cmp rax,rbx and a conditional branch. The existing export lists zero direct-call candidates, so the inconsistency is recorded without assigning semantics. RVA 033E1B60 has no verified .pdata range/body because the matching executable is absent from the repository and standard checked game paths. Review: agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json.
+
+Next D action: provide NMS.exe with SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, or a hash-matched export containing .pdata and code at 033E1B60. No live NMS session or traversal is needed for that offline validation.
 # NMS Derelict Probe — AI handoff
 
 ## METADATA-D combined offline action review — 2026-10-08
