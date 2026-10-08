@@ -1,21 +1,22 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-08T16:55:19Z",
+  "updated_utc": "2026-10-08T17:00:00Z",
   "state": "in_progress",
-  "status": "Latest combined report verifies a fresh saved root event. Logical entry 00634BC0 is correlated with exact caller return 02C0860A after 02C08607: FF 52 10, making it a strong runtime target candidate. The +0x10 zero was read after the call and is not a target; hook timing/capture semantics remain to be checked.",
-  "summary": "Main pointer/report SHA-256 7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c verified for run 20261008T163756Z-cd3dbef7. The 16:37 run was offline saved-evidence analysis: 8 complete, 1 upload skipped, no NMS attach. The 16:31:47.935Z root descriptor event ties logical entry 00634BC0 to caller return 02C0860A and call 02C08607 FF 52 10. The post-call +0x10 value is zero. The separate 02C04977 resolver sample is not dispatch proof. The separate 43 target prediction is from the distinct 14:02 report (SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6), not the latest 16:37 run and not an observed count; latest generation output has zero resolved instances under an unresolved preset.",
-  "progress": "Added a provenance-preserving review of the latest main combined report and versioned Runtime-A extension 1.0.4. No app/probe code changed. Corrected the unsupported 0063A6D0 inference; 00634BC0 is a strong runtime-correlated candidate, with hook timing and zero-slot discrepancy still open. WinDbg is unsuitable for this setup and is not requested.",
+  "status": "The 16:31 root event resolves this dispatch address to 00634BC0 by exact callee-entry/caller-return correlation. pyMHF source confirms the probe runs a BEFORE hook and records the return address. The owner+0x10 zero at that hook remains an unresolved capture/data inconsistency and is not target evidence.",
+  "summary": "Pointer/report SHA-256 7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c is verified for run 20261008T163756Z-cd3dbef7 (offline saved-evidence analysis, 8 complete, 1 upload skipped, no NMS attach). The matched root event has logical entry 00634BC0 and caller return 02C0860A after 02C08607 FF 52 10. pyMHF 0.2.4 BEFORE-hook/get_caller source confirms this resolves the destination address for this event. The zero +0x10 read is not used as target evidence; separate resolver 02C04977 is not confirmation. Latest unresolved-preset output of 0 scenes/targets is not a physical count. The separate 43 asset prediction is from the earlier 14:02 report and remains non-observed.",
+  "progress": "Validated the installed pyMHF hook timing and return-address capture from source hashes. Promoted 00634BC0 to the resolved dispatch address for the exact matched root event by direct control-flow correlation; left slot-read inconsistency and function semantics open. Published Runtime-A extension 1.0.5. No app/probe code changed.",
   "blockers": [
-    "The saved event correlates logical entry 00634BC0 with return 02C0860A, but the slot read at the logical-entry-after-external-call phase is zero. Validate hook/caller timing and register semantics before marking the dispatch target fully resolved."
+    "The BEFORE-hook owner+0x10 read is zero even though the exact entry/caller correlation resolves the target address. Determine whether this reflects argument mapping, concurrent mutation, or a probe capture issue; do not reinterpret the zero as the target."
   ],
-  "next_action": "Continue offline: inspect the installed pyMHF static_function_hook/get_caller wrapper timing and Runtime-A capture order. If semantics do not explain the zero slot, prototype a read-only callsite capture and test it before requesting a live NMS action. Do not use WinDbg; no full traversal is required.",
+  "next_action": "Continue offline: compare the exact 02C08607 caller argument flow, hook callback arguments, and pyMHF trampoline behavior; explain the zero slot discrepancy and identify the function semantics at 00634BC0. Do not use WinDbg. No full traversal is required.",
   "human_intervention_required": false,
   "evidence_to_return": [
     "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008_163756.md",
-    "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json (pointer SHA-256 verified: 7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c)",
+    "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json (SHA-256 verified: 7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c)",
+    "mod/derelict_baseline_probe.py (hook registration and logical-entry RVA)",
     "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json"
   ],
-  "extension_version": "1.0.4",
+  "extension_version": "1.0.5",
   "full_derelict_required": false
 }

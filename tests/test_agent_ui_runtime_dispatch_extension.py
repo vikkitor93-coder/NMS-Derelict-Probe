@@ -13,7 +13,7 @@ from tools import surveyor_controller as controller
 
 ROOT = Path(__file__).resolve().parents[1]
 LANE = "runtime-dispatch"
-VERSION = "1.0.4"
+VERSION = "1.0.5"
 HOST_VERSION = "0.3.53"
 EXTENSION_DIR = ROOT / "agent-ui" / "extensions" / LANE / VERSION
 
@@ -65,9 +65,9 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
         manifest, panel = read_extension()
         action = panel["actions"][0]
         self.assertTrue(panel["request_only"])
-        self.assertIn("Latest combined report 20261008T163756Z-cd3dbef7", panel["summary"])
-        self.assertIn("correlates entry 00634BC0 with return 02C0860A", panel["summary"])
-        self.assertIn("The +0x10 zero is post-call and not a target", panel["summary"])
+        self.assertIn("pyMHF 0.2.4 source confirms BEFORE hooks run before original", panel["summary"])
+        self.assertIn("exact root event enters 00634BC0 from 02C08607", panel["summary"])
+        self.assertIn("The +0x10 read is still zero at the before-hook", panel["summary"])
         self.assertIn("02C04977 resolver is separate", panel["summary"])
         self.assertIn("Do not use WinDbg", panel["summary"])
         self.assertIn("not a physical count", panel["summary"])
