@@ -1,13 +1,14 @@
 {
   "schema_version": 1,
   "lane_id": "runtime-dispatch",
-  "lane": "agent/runtime-dispatch-20261008-latest-root-correlation",
+  "lane": "agent/runtime-dispatch-seed-status-fix-20261008",
   "purpose": "Correct stale Runtime-A hook and recursive-return labels from the unique signature match in the hash-matched NMS.exe; preserve report provenance and continue offline without WinDbg.",
   "published_base": {
     "branch": "main",
     "commit": "3ec6153b6c7631a80f333c7c7f62d7e0e372192c",
     "app_version": "0.3.65",
-    "compatible_probe": "0.3.40"
+    "compatible_probe": "0.3.40",
+    "reconciliation_base_commit": "1dc59cc0dc4be8338627da315c7082b44dbb1b51"
   },
   "source_candidate": {
     "version": "0.3.62",
@@ -29,11 +30,14 @@
   },
   "latest_main_report": {
     "pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
-    "run_id": "20261008T163756Z-cd3dbef7",
-    "report": "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json",
-    "report_sha256": "7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c",
+    "run_id": "20261008T195817Z-1b73e442",
+    "report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
+    "report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
     "pointer_hash_verified": true,
     "mode": "isolated_parallel_test_no_github_upload",
+    "trigger": "manual_button; no session file or session SHA in trigger",
+    "input_snapshot_available": true,
+    "worker_data_retained": false,
     "actions": {
       "total": 9,
       "completed": 8,
@@ -41,19 +45,40 @@
       "unsupported": 0,
       "upload_actions_skipped": 1
     },
-    "nms_attached_during_run": false,
-    "saved_event_timestamp_utc": "2026-10-08T16:31:47.935Z",
-    "saved_event_session_id": "20261008T163203Z_0001BF0004E84EFD",
-    "saved_event_call_instruction_rva": "02C08607",
-    "instruction_bytes": "FF 52 10",
-    "saved_event_return_rva": "02C0860A",
-    "logical_entry_rva": "00634BC0",
-    "logical_entry_correlation": "The raw report value 00634BC0 is a stale probe constant. The source installs a static signature hook; the exact signature uniquely matches 0063A6D0 in the matching executable.",
-    "owner_plus_0x10_capture_phase": "logical-entry-after-external-call",
-    "owner_plus_0x10_value": "0000000000000000",
-    "dispatch_target_fully_resolved": true,
-    "resolved_dispatch_target_rva": "0063A6D0",
-    "resolution_basis": "The exact root event records caller return 02C0860A after FF 52 10 at 02C08607; a unique signature scan on the hash-matched NMS.exe resolves the BEFORE-hook address to 0063A6D0."
+    "source_session": "20261008T185119Z_0001550006607CAC",
+    "source_universe": "0001550006607CAC",
+    "source_probe_version": "0.3.38",
+    "root_seed_candidate": "00C9E8DF0327789E",
+    "use_seed_value": true,
+    "preset": "MEDI_FLOATERS",
+    "scene_instances": 146,
+    "logical_rooms": 10,
+    "predicted_target_containers": 14,
+    "observed_physical_count": false,
+    "caller_decode": {
+      "instruction_rva": "02C08607",
+      "instruction_bytes": "FF 52 10",
+      "return_rva": "02C0860A",
+      "target_rva_hex": null
+    },
+    "separate_resolver_sample": {
+      "instruction_rva": "02C04977",
+      "return_rva": "02C0497A",
+      "tested_candidate": "00634BC0",
+      "matches": 0,
+      "resolves_current_call": false
+    },
+    "upstream_action_source_session": "20261006T223811Z_0001BF0004E84EFD",
+    "upstream_action_seed": "5B4AE67D9C2A8F61",
+    "interpretation_limits": [
+      "Saved-session offline analysis only; no live system-switch validation.",
+      "The root seed is a one-observation descriptor candidate, not a proven derivation.",
+      "14 (7 salvage + 7 footlockers) is an asset prediction, not an observed physical count.",
+      "The separate asset-derived 43-target prediction (30 salvage + 13 footlockers over 164 scenes) remains separate from 14 and from observed counts.",
+      "The 02C08607 caller extraction has target_rva_hex null; zero +0x10 is not a dispatch target.",
+      "The zero-match 02C04977 resolver sample is a different callsite and does not resolve 02C08607.",
+      "The upstream-callers result in this combined report is from an older session and must not be correlated with the fresh 00C9 root event."
+    ]
   },
   "findings": {
     "runtime_entry_candidate": {
@@ -69,14 +94,24 @@
       "candidate_function_rva": "00634BC0",
       "vtable_matches": 0,
       "resolves_current_call_at_02C08607": false,
-      "interpretation": "A separate callsite tested a stale candidate address; its zero-match output does not resolve or refute the current 02C08607 event."
+      "interpretation": "The combined report's resolver action uses a separate callsite and stale candidate; it does not resolve or refute the 02C08607 call."
     },
     "latest_generation_analysis": {
-      "session_id": "20261008T163203Z_0001BF0004E84EFD",
-      "resolved_scene_instances": 0,
-      "predicted_target_containers": 0,
-      "preset": "unresolved",
-      "observed_physical_count": false
+      "session_id": "20261008T185119Z_0001550006607CAC",
+      "universe_address_hex": "0001550006607CAC",
+      "root_seed_candidate": "00C9E8DF0327789E",
+      "use_seed_value": true,
+      "preset": "MEDI_FLOATERS",
+      "preset_confidence": "high",
+      "resolved_scene_instances": 146,
+      "logical_generated_chunks": 10,
+      "predicted_salvage_crates": 7,
+      "predicted_footlockers": 7,
+      "predicted_target_containers": 14,
+      "observed_physical_count": false,
+      "source_report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
+      "source_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
+      "pointer_hash_verified": true
     },
     "prior_asset_prediction": {
       "source_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
@@ -86,7 +121,8 @@
       "predicted_footlockers": 13,
       "predicted_targets": 43,
       "observed_physical_count": false,
-      "replaced_by_latest_zero_output": false
+      "replaced_by_latest_zero_output": false,
+      "separated_from_latest_14_prediction": true
     },
     "dispatch_target_address_resolved": true,
     "dispatch_target_rva": "0063A6D0",
@@ -121,9 +157,11 @@
       "old_recursive_return_rva": "00634C63",
       "new_recursive_return_rva": "0063A773",
       "test": "tests/test_runtime_hook_address_labels.py",
-      "test_status": "pending local execution",
+      "test_status": "Not run in the local shell; equivalent assertions passed 5/5 against the branch files, and focused tests/package integrity passed in GitHub Actions.",
       "test_command": "python -m unittest discover -s tests -p \"test_runtime_hook_address_labels.py\""
-    }
+    },
+    "dispatch_target_address_basis": "Independent correlation: the user-run unique hook-signature match on hash-matched NMS.exe located the hooked function at RVA 0063A6D0, and the saved event's caller return is 02C0860A after FF 52 10 at 02C08607. This address correlation does not come from the zero +0x10 read or the separate resolver sample; semantic identity and pre-call slot value remain unverified.",
+    "latest_report_dispatch_target_status": "unresolved-from-this-report: exact caller extraction has target_rva_hex=null; do not promote the zero +0x10 read or separate resolver sample to target evidence."
   },
   "review": "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008_163756.md",
   "extension": {
@@ -137,22 +175,33 @@
   "human_validation": {
     "required": true,
     "full_derelict_traversal_required": false,
-    "reason": "Only the focused regression test remains; the local command runner is unavailable. No live NMS or debugger action is required."
+    "reason": "The only remaining human-only check is a normal NMS system-switch run on Surveyor 0.3.67 / Runtime-A 1.0.6. WinDbg is not requested; focused test/package checks passed in GitHub Actions."
   },
   "rollback": {
-    "backup_ref": "backup/main-before-runtime-a-signature-correction-20261008-1820",
-    "base_commit": "7b62524a018c52801084548d21b47b771683cc38",
-    "repository_rollback": "Revert the correction commit after it is published; the backup ref preserves pre-change main.",
-    "extension_rollback": "Select Runtime-A extension 1.0.5 in the index; its files remain available.",
-    "followup_base_commit": "7b62524a018c52801084548d21b47b771683cc38"
+    "backup_ref": "backup/main-before-runtime-reconcile-20261008-2330",
+    "base_commit": "1dc59cc0dc4be8338627da315c7082b44dbb1b51",
+    "repository_rollback": "Restore the reconciliation files from backup/main-before-runtime-reconcile-20261008-2330 (base 1dc59cc0dc4be8338627da315c7082b44dbb1b51) or revert the reconciliation commits in reverse order.",
+    "extension_rollback": "Runtime-A extension 1.0.5 remains available in the extension history; no extension files changed in this reconciliation."
   },
   "publication": {
-    "main_commit": "373a5e8247823ab5c1a5955d31c70bc25bb610e9",
-    "pull_request": 51,
-    "backup_ref": "backup/main-before-runtime-a-signature-correction-20261008-1820",
-    "backup_commit": "7b62524a018c52801084548d21b47b771683cc38",
-    "python_unittest": "not_run_local_runner_unavailable",
-    "equivalent_assertions": "5/5_passed_against_branch_files"
+    "reconciled_main_base": "1dc59cc0dc4be8338627da315c7082b44dbb1b51",
+    "backup_ref": "backup/main-before-runtime-reconcile-20261008-2330",
+    "backup_commit": "1dc59cc0dc4be8338627da315c7082b44dbb1b51",
+    "lane_branch": "agent/runtime-dispatch-seed-status-fix-20261008",
+    "lane_backup_ref": "backup/runtime-dispatch-seed-status-fix-pre-reconcile-20261008",
+    "lane_backup_commit": "7d0e77477de47c13ab8f751937110bbcee4dad35",
+    "direct_main_publication": true,
+    "lane_branch_sync": "Update STATUS.json and RUNTIME_A_MANIFEST.json in place on agent/runtime-dispatch-seed-status-fix-20261008 after main publication; preserve the branch-only package/history and its backup reference.",
+    "tests": "Prepublish JSON parse and cross-reference assertions passed; latest report SHA-256 verified against the pointer. Runtime/unit test results come from the published v0.3.67 CI record: 210 tests, compileall, harness self-test, and 37-part updater integrity.",
+    "rollback": "Restore the four reconciliation files from backup/main-before-runtime-reconcile-20261008-2330 or revert the reconciliation commits in reverse order; backup/runtime-dispatch-seed-status-fix-pre-reconcile-20261008 preserves pre-sync lane history.",
+    "complete_lane_records_commit": "cdebd47b6a0aa32770bd3d8d958aa0929abc9eb0",
+    "main_file_commits": {
+      "RESEARCH_INDEX.md": "bff0effe7e535932b544e2c734109ff458c20f17",
+      "AI_HANDOFF.md": "4bccc753ab92f1cb25493c0c6906c19e7eb21843",
+      "WORKSPACE_STATE.json": "c4d32238ffce1077bd7097042383348d411ea438",
+      "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json": "fd799a4e5593245ee202fc6ee724251b2e453d7e",
+      "agent-patches/runtime-dispatch/STATUS.json": "cdebd47b6a0aa32770bd3d8d958aa0929abc9eb0"
+    }
   },
   "system_scope_seed_reset": {
     "probe_version": "0.3.40",
@@ -163,19 +212,20 @@
       "effective_seed_hex",
       "effective_state"
     ],
-    "validation": "focused unit tests and package integrity in GitHub Actions; live NMS system-switch check pending",
+    "validation": "Focused system/seed tests and package integrity passed in GitHub Actions; one normal NMS system-switch validation remains pending.",
     "human_validation_required": true,
-    "combined_report_scope": "The 2026-10-08 combined parallel-action report remains the sole authority for that run; this user-run observation is separate."
+    "combined_report_scope": "The 19:58 combined report (pointer SHA verified) is authoritative for its offline run only; it does not test system reset."
   },
   "latest_combined_report_review": {
     "pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
-    "run_id": "20261008T190939Z-98545bb8",
-    "report": "research-uploads/20261008T191019Z-parallel-action-test/combined-results.json",
-    "report_sha256": "1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471",
+    "run_id": "20261008T195817Z-1b73e442",
+    "report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
+    "report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
     "pointer_hash_verified": true,
     "mode": "isolated_parallel_test_no_github_upload",
-    "source_session": "20261008T185119Z_Uzawan_XI.json",
-    "source_session_sha256": "ba1ebc2aa42772d03e9b4e66ed771839a7a74f5b6a4e4797f855eb7815ad5414",
+    "trigger": "manual_button",
+    "input_snapshot_available": true,
+    "worker_data_retained": false,
     "actions": {
       "total": 9,
       "completed": 8,
@@ -183,13 +233,35 @@
       "unsupported": 0,
       "upload_actions_skipped": 1
     },
-    "seed_result": "Saved-session analysis reports root seed candidate 00C9E8DF0327789E with UseSeedValue=true; status remains candidate-captured-unverified and it is separate from the user's reported F-pattern.",
-    "container_result": "14 (7 salvage plus 7 footlockers) is predicted from 146 scene instances, not observed. It remains separate from the asset-derived 43-target prediction.",
+    "source_session": "20261008T185119Z_0001550006607CAC",
+    "source_session_sha256": "ba1ebc2aa42772d03e9b4e66ed771839a7a74f5b6a4e4797f855eb7815ad5414",
+    "seed_result": "00C9E8DF0327789E with UseSeedValue=true from one saved root event; candidate only, derivation unproven.",
+    "container_result": "14 predicted (7 salvage + 7 footlockers) from 146 asset-resolved scene instances; not observed physically. Keep separate from the 43 CARGO_FLOATERS asset prediction.",
+    "caller_result": "02C08607 FF 52 10 returns at 02C0860A; static caller extraction has no target_rva_hex.",
+    "separate_resolver_result": "02C04977 FF 52 10 returns at 02C0497A; zero matches for candidate 00634BC0; unrelated to the target call.",
+    "upstream_result": "The combined report's upstream action cites older session 20261006T223811Z_0001BF0004E84EFD and seed 5B4AE67D9C2A8F61; do not join it to the fresh 00C9 event.",
     "interpretation_limits": [
-      "No fresh live NMS capture.",
-      "The zero +0x10 read is not a resolved dispatch target.",
+      "The combined report is the sole authority for results of this 19:58 run; individual latest files and queue.jsonl are not substitutes.",
+      "The 43 target number is an asset-derived prediction, not an observed count.",
+      "The zero +0x10 read is not dispatch-target evidence.",
       "The separate resolver sample is not the resolved dispatch target.",
-      "Do not infer the user's enabled seed from the F-pattern without its UseSeedValue flag."
+      "No live NMS system-switch run occurred in this report."
     ]
+  },
+  "current_shared_release": {
+    "surveyor_version": "0.3.67",
+    "probe_version": "0.3.40",
+    "extension_version": "1.0.6",
+    "source": "update-manifest.json"
+  },
+  "reconciliation": {
+    "reconciled_utc": "2026-10-08T23:34:03Z",
+    "main_base_commit": "1dc59cc0dc4be8338627da315c7082b44dbb1b51",
+    "main_status_before_sha": "795c66b24da0d094f0b14aa68399693123cfec6a",
+    "lane_status_before_sha": "795c66b24da0d094f0b14aa68399693123cfec6a",
+    "main_manifest_before_sha": "484c0d2d7234d0fea02d29d02cbc008f52427363",
+    "lane_manifest_before_sha": "74af42a92f36b2bd0037fa80d538f7b702ef8e74",
+    "resolution": "Main and lane status copies matched on the live reset gate, but the lane manifest/report reference was stale. Replaced Runtime-A report references with main's pointer-verified 19:58 combined report. A metadata lane commit advanced main during preparation; its changes are preserved. Lane branch will sync to reconciled main after publication.",
+    "branch_relation": "The lane branch was 167 commits behind and 9 ahead of main. Preserve its branch-only package and history; synchronize the lane STATUS.json and RUNTIME_A_MANIFEST.json in place rather than force-moving the branch."
   }
 }
