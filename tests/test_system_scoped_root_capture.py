@@ -77,6 +77,11 @@ class SystemScopedRootCaptureTests(unittest.TestCase):
         self.assertIn('"dungeon_root_seed_effective_candidates"', self.source)
         self.assertIn('"last_seed_use_seed_value"', self.source)
 
+    def test_root_dispatch_snapshot_is_hidden_when_it_belongs_to_another_system(self):
+        method = ast.unparse(self.method("_root_dispatch_capture_payload"))
+        self.assertIn("_normalize_universe_address", method)
+        self.assertIn("captured_ua != self._current_universe_address_hex", method)
+
 
 if __name__ == "__main__":
     unittest.main()
