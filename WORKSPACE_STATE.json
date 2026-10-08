@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T13:48:14Z",
+  "updated_utc": "2026-10-08T13:50:39Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -28,11 +28,12 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage",
-      "status": "combined-report-reviewed-seed-derivation-open",
+      "status": "constructor-capture-candidate-awaiting-live-validation",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-      "result_summary": "Verified attached local candidate combined-report SHA-256; 43 asset targets are predicted, 35 and 16 are observed counts; current dispatch and root seed derivation remain unresolved.",
-      "human_validation_required": false,
-      "review": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md"
+      "result_summary": "Combined-report review published; tested read-only constructor capture patch is isolated on agent/seed-lineage and awaits a short live NMS root event; seed derivation remains unproven.",
+      "human_validation_required": true,
+      "review": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md",
+      "next_action": "Run isolated Seed-B 0.3.62 candidate briefly on known derelict and return root event; no traversal."
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
