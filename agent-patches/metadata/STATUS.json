@@ -26,5 +26,5 @@
   "progress": "Latest combined report 20261008T140207Z-d8e24197 (SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6) includes saved capture session 20261008T140041Z_0001BF0004E84EFD and an exact root event at 2026-10-08T14:00:37.544Z. Asset resolution is 164/164 and the target total remains a 43-item asset prediction. The report flags 11 analyzer main rooms versus static Rooms=7 as needs-review; this is not a verified physical room count.",
   "complete_source_snapshot": "agent-patches/metadata/METADATA_SOURCE_SNAPSHOT_20261007.json",
   "pull_request": "https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/49",
-  "updated_utc": "2026-10-08T14:38:21Z"
+  "updated_utc": "2026-10-08T14:40:18Z"
 }
