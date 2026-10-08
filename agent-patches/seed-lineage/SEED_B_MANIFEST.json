@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "variant_id": "SEED-B",
+  "lane": "agent/seed-lineage",
+  "base": "main canonical v0.3.38",
+  "base_version": "0.3.38",
+  "purpose": "Compute deterministic public reverse-engineered system-seed anchors from captured universe addresses and correlate them with derelict root seeds without claiming an unproven derivation.",
+  "complete_zip": {
+    "name": "NMS-Derelict-Probe-v0.3.38-SEED-B.zip",
+    "sha256": "f7ec94a550b4776e02c11de797dce8af56e3872a47e5ec6bff51f2a8c31a88fb",
+    "size_bytes": 296507,
+    "files": 107
+  },
+  "integration_patch": {
+    "path": "agent-patches/seed-lineage/seed-b.patch.gz.b64",
+    "encoded_sha256": "683230fc6544ef7920e56681f2d6136cb4c4bbbafcfe2a95b0343ab8139799de",
+    "decoded_patch_sha256": "03c8eebd57f02037ad949eb804c9fdfc703f839e256ed3a1e97be49af6053009",
+    "decoded_size_bytes": 21700,
+    "decode": "base64-decode, then gzip-decompress",
+    "apply_against": "canonical v0.3.38 package"
+  },
+  "changed_files": [
+    "AGENT_VARIANT.md",
+    "AI_HANDOFF.md",
+    "Analyze-System-Seed.cmd",
+    "CHANGELOG.md",
+    "THIRD_PARTY_NOTICES.md",
+    "tests/test_tools.py",
+    "tools/analyze_generation_baseline.py",
+    "tools/github_integration.py",
+    "tools/nms_system_seed.py",
+    "tools/surveyor_controller.py"
+  ],
+  "verification": {
+    "unit_regression_tests": "116/116 passed",
+    "compileall": "passed",
+    "json_files_parsed": 35,
+    "cache_files_in_complete_zip": 0,
+    "game_memory_write_api_added": false,
+    "known_anchor_35": "00001A0004E84EFD -> B006BAB6 -> 3E342BADCF79F176",
+    "known_anchor_51": "0001550006607CAC -> 9E1A7905 -> 37DEC848947D131C"
+  },
+  "result": {
+    "baseline_35_root_seed": "9256392A2F5A74AC",
+    "baseline_51_root_seed": "00C9E8DF0327789E",
+    "direct_equality_found": false,
+    "derelict_relation_status": "unknown-not-claimed"
+  },
+  "human_validation": {
+    "required": false,
+    "reason": "The new computation is offline and verified against two known addresses; future seed-derivation work needs more runtime boundary evidence, but this variant itself does not require an NMS run."
+  },
+  "follow_up_analysis": {
+    "path": "agent-patches/seed-lineage/SEED_B_ANALYSIS_20261002.json",
+    "status": "completed-from-uploaded-evidence",
+    "root_seed": "9256392A2F5A74AC",
+    "boundary_failure_reproduced": false,
+    "human_intervention_required": false,
+    "derivation_status": "unknown-not-claimed"
+  },
+  "latest_research_review": {
+    "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md",
+    "source": "user-attached 0.3.62 local candidate ZIP combined report",
+    "report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
+    "published_report": false,
+    "live_validation": false,
+    "derivation_status": "unknown-not-claimed"
+  }
+}
