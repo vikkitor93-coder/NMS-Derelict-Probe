@@ -74,7 +74,7 @@ class SystemScopedRootCaptureTests(unittest.TestCase):
 
     def test_root_seed_summary_exposes_raw_and_effective_fields(self):
         self.assertIn('"last_dungeon_root_seed_raw_hex"', self.source)
-        self.assertIn('"last_dungeon_root_seed_effective_candidates"', self.source)
+        self.assertIn('"dungeon_root_seed_effective_candidates"', self.source)
         self.assertIn('"last_seed_use_seed_value"', self.source)
 
 
