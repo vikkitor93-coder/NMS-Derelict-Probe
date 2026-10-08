@@ -25,4 +25,4 @@ The old labels `00634BC0` (logical entry) and `00634C63` (recursive return) are 
 
 ## Next action
 
-Run `python -m unittest tests.test_runtime_hook_address_labels` from this Runtime-A branch. If it passes, publish the correction to main, then continue offline semantic analysis of `0063A6D0` and the zero-slot discrepancy.
+Run `python -m unittest discover -s tests -p "test_runtime_hook_address_labels.py"` from this Runtime-A branch. If it passes, publish the correction to main, then continue offline semantic analysis of `0063A6D0` and the zero-slot discrepancy.
