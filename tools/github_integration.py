@@ -31,6 +31,7 @@ ALL_EVIDENCE_UPLOAD_RECEIPT = ROOT / "all-saved-evidence-upload-receipt.json"
 
 ACTION_OUTPUTS = {
     "all-saved-evidence": [],
+    "parallel-action-test": [ROOT / "parallel-action-test-latest.json"],
     "measure": [WORK / "generation-baseline-latest.json", WORK / "generation-measurements-summary.json", WORK / "generation-measurements.csv", WORK / "seed-room-correlation.json"],
     "extract-caller": [WORK / "dungeon-caller-code-latest.json"],
     "extract-upstream": [WORK / "dungeon-upstream-callers-latest.json"],
@@ -53,7 +54,7 @@ def all_saved_evidence_outputs() -> tuple[list[Path], dict[str, list[str]]]:
     unique: dict[str, Path] = {}
     producers: dict[str, list[str]] = {}
     for action, paths in ACTION_OUTPUTS.items():
-        if action == "all-saved-evidence":
+        if action in {"all-saved-evidence", "parallel-action-test"}:
             continue
         for path in paths:
             key = os.path.normcase(str(path.resolve()))
@@ -87,6 +88,17 @@ def _read_json_file(path: Path) -> dict:
     except (OSError, UnicodeDecodeError, json.JSONDecodeError):
         return {}
     return value if isinstance(value, dict) else {}
+
+
+def _validated_parallel_action_report(path: Path) -> dict:
+    """Load the local combined report before publishing it to all lanes."""
+    report = _read_json_file(path)
+    if report.get("schema_version") != 1 or not report.get("run_id") or not isinstance(report.get("results"), list):
+        raise RuntimeError("The latest combined parallel research report is missing or invalid. Run the test first.")
+    summary = report.get("summary")
+    if not isinstance(summary, dict) or int(summary.get("failed", 0)) != 0:
+        raise RuntimeError("The parallel research report has failed actions; review it before sharing.")
+    return report
 
 
 def _fingerprint_upload_files(files: list[Path]) -> str:
@@ -261,6 +273,9 @@ def upload_action(action: str, capture_file: str | None = None, only_if_changed:
         expected = [capture_path]
     if action == "all-saved-evidence":
         expected, producers = all_saved_evidence_outputs()
+    if action == "parallel-action-test":
+        report_path = expected[0]
+        report = _validated_parallel_action_report(report_path)
     if not expected:
         raise RuntimeError(f"Unknown action: {action}")
     files = [p for p in expected if p.is_file()]
@@ -289,6 +304,10 @@ def upload_action(action: str, capture_file: str | None = None, only_if_changed:
     if action == "all-saved-evidence":
         manifest["uploaded_for_lanes"] = ["runtime-dispatch", "seed-lineage", "dungeon-decompile", "metadata"]
         manifest["selection"] = "All existing unique files declared by ACTION_OUTPUTS; overlapping outputs are included once."
+    if action == "parallel-action-test":
+        manifest["uploaded_for_lanes"] = ["runtime-dispatch", "seed-lineage", "dungeon-decompile", "metadata"]
+        manifest["selection"] = "Only the latest combined parallel research report; per-action files and queue are intentionally excluded."
+        manifest["run_id"] = report["run_id"]
     if namespace:
         manifest["evidence_namespace"] = namespace
     ref = _api_json(gh, "GET", f"repos/{REPO}/git/ref/heads/{BRANCH}")
@@ -299,7 +318,7 @@ def upload_action(action: str, capture_file: str | None = None, only_if_changed:
     used: dict[str, int] = {}
     for p, data in snapshots:
         digest = hashlib.sha256(data).hexdigest()
-        name = p.name
+        name = "combined-results.json" if action == "parallel-action-test" else p.name
         n = used.get(name, 0)
         used[name] = n + 1
         if n:
@@ -311,10 +330,26 @@ def upload_action(action: str, capture_file: str | None = None, only_if_changed:
         if action == "all-saved-evidence":
             record["produced_by"] = producers.get(os.path.normcase(str(p.resolve())), [])
             record["visible_to_lanes"] = manifest["uploaded_for_lanes"]
+        elif action == "parallel-action-test":
+            record["visible_to_lanes"] = manifest["uploaded_for_lanes"]
         manifest["files"].append(record)
     mbytes = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
     mblob = _api_json(gh, "POST", f"repos/{REPO}/git/blobs", {"content": base64.b64encode(mbytes).decode("ascii"), "encoding": "base64"})
     entries.append({"path": f"{folder}/run-manifest.json", "mode": "100644", "type": "blob", "sha": mblob["sha"]})
+    if action == "parallel-action-test":
+        latest_pointer = {
+            "schema_version": 1,
+            "run_id": report["run_id"],
+            "uploaded_utc": now,
+            "report_path": f"{folder}/combined-results.json",
+            "report_sha256": hashlib.sha256(snapshots[0][1]).hexdigest(),
+            "visible_to_lanes": manifest["uploaded_for_lanes"],
+        }
+        pointer_blob = _api_json(gh, "POST", f"repos/{REPO}/git/blobs", {
+            "content": base64.b64encode((json.dumps(latest_pointer, indent=2, sort_keys=True) + "\n").encode()).decode("ascii"),
+            "encoding": "base64",
+        })
+        entries.append({"path": "research/LATEST_PARALLEL_ACTION_TEST.json", "mode": "100644", "type": "blob", "sha": pointer_blob["sha"]})
     tree = _api_json(gh, "POST", f"repos/{REPO}/git/trees", {"base_tree": base_tree, "tree": entries})
     new_commit = _api_json(gh, "POST", f"repos/{REPO}/git/commits", {"message": f"Add {action} research evidence {now}", "tree": tree["sha"], "parents": [parent]})
     _api_json(gh, "PATCH", f"repos/{REPO}/git/refs/heads/{BRANCH}", {"sha": new_commit["sha"], "force": False})
@@ -327,6 +362,8 @@ def upload_action(action: str, capture_file: str | None = None, only_if_changed:
         except OSError as exc:
             _log("all_evidence_receipt_write_failed", error=repr(exc))
     print(f"Complete + uploaded: https://github.com/{REPO}/tree/{BRANCH}/{folder}")
+    if action == "parallel-action-test":
+        print(f"Latest combined research pointer: https://github.com/{REPO}/blob/{BRANCH}/research/LATEST_PARALLEL_ACTION_TEST.json")
     _log("upload_complete", action=action, folder=folder, commit=new_commit["sha"])
 
 
