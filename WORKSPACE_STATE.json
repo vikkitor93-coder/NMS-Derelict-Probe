@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T23:28:08Z",
+  "updated_utc": "2026-10-08T23:32:22Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.67",
@@ -19,16 +19,18 @@
   },
   "lanes": {
     "runtime-dispatch": {
-      "branch": "main",
-      "status": "Probe 0.3.40 resets live root-seed captures on system change and reports raw/effective seed state separately; normal runtime check pending.",
+      "branch": "agent/runtime-dispatch-seed-status-fix-20261008",
+      "status": "Probe 0.3.40 clears root-seed state at system boundaries; the latest combined report was reconciled and the normal system-switch runtime check remains pending.",
       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
-      "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
+      "artifact": "update-manifest.json (full Surveyor package v0.3.67; includes Probe 0.3.40)",
       "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
       "extension_version": "1.0.6",
       "human_validation_required": true,
-      "next_action": "Update Surveyor in-app, enter a different system, confirm the old root seed clears, then observe the next root capture's raw value, UseSeedValue, and effective state.",
-      "latest_report": "research-uploads/20261008T191019Z-parallel-action-test/combined-results.json",
-      "latest_report_sha256": "1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471"
+      "next_action": "In Surveyor 0.3.67 with Runtime-A 1.0.6, verify the previous root capture clears after switching systems, then record the next root event's raw seed, UseSeedValue, and effective state. No WinDbg or full traversal.",
+      "latest_report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
+      "latest_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
+      "surveyor_version": "0.3.67",
+      "probe_version": "0.3.40"
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage-update-20261008",
@@ -91,8 +93,10 @@
       {
         "lane": "runtime-dispatch",
         "kind": "verify-system-change-seed-reset",
-        "next_action": "Update Surveyor through its in-app updater. Enter a different system and confirm the previous root capture clears; on the next root capture, inspect raw seed, UseSeedValue, and effective state.",
-        "full_derelict_required": false
+        "next_action": "In Surveyor 0.3.67 with Runtime-A 1.0.6, verify the previous root capture clears after switching systems, then record the next root event's raw seed, UseSeedValue, and effective state. No WinDbg or full traversal.",
+        "full_derelict_required": false,
+        "report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
+        "report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41"
       },
       {
         "lane": "metadata",
