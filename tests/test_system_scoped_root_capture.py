@@ -57,7 +57,7 @@ class SystemScopedRootCaptureTests(unittest.TestCase):
     def test_system_transition_closes_session_and_clears_live_seed_buffers(self):
         method = ast.unparse(self.method("_observe_system_scope"))
         for required in (
-            'reason="system_changed"',
+            "reason='system_changed'",
             "self._pre_session_trace.clear()",
             "self._pre_session_dungeon_seeds.clear()",
             "self._pre_session_poi_candidates.clear()",
@@ -70,7 +70,7 @@ class SystemScopedRootCaptureTests(unittest.TestCase):
         tick = ast.unparse(self.method("_tick"))
         root_hook = ast.unparse(self.method("_trace_resource_add"))
         self.assertIn("_observe_system_scope", tick)
-        self.assertIn('source="root_resource"', root_hook)
+        self.assertIn("source='root_resource'", root_hook)
 
     def test_root_seed_summary_exposes_raw_and_effective_fields(self):
         self.assertIn('"last_dungeon_root_seed_raw_hex"', self.source)
