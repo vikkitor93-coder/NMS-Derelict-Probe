@@ -1,3 +1,11 @@
+## DUNGEON-C parallel report review (2026-10-08)
+
+- **Source and provenance:** The user-provided local 0.3.62 candidate contained pointer research/LATEST_PARALLEL_ACTION_TEST.json and combined report research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json. Pointer SHA-256 matched the report bytes: 12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda. The candidate and shared report were not published or modified by DUNGEON-C. The combined report is the sole authority for the Oct 8 action results: 8 offline actions completed, upload skipped, no NMS session or new event.
+- **Measured from the report:** the exact-caller extraction decodes 02C08607: FF 52 10, returning at 02C0860A, for executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. This does not resolve the indirect dispatch target. The resolver used a different saved callsite, 02C04977 / return 02C0497A, against candidate 00634BC0; zero offline matches there do not establish the current dispatch destination.
+- **Static byte recheck:** in the existing 89-byte, SHA-256-verified hook body at 0063A6D0, 0063A706 contains E8 55 74 DA 02, which calculates to relative-call destination 033E1B60; the following bytes compare RAX with RBX and conditionally branch. This is a byte-derived destination only. The saved export reports zero direct-call candidates despite this instruction; that discrepancy remains unresolved. The destination's .pdata boundary and body have not been checked against the matching executable.
+- **Count and dispatch limits:** 43 (= 30 Salvage + 13 Footlockers) is the asset-derived prediction for 164 scene instances, not a fresh physical count. Preserve the historical 35-container measurement and separate post-update 16-container user observation. The owner+0x10 zero is after-call and not the pre-call virtual slot; the separate resolver sample is not dispatch proof.
+- **Next:** provide NMS.exe with the recorded SHA-256, or an equivalent hash-matched .pdata and bounded-code export for RVA 033E1B60. No NMS launch or traversal is needed.
+- Full review and field-level evidence are in agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json.
 # NMS Derelict Probe — Research Index
 
 ## Agent D review of attached parallel-action report (2026-10-08)
