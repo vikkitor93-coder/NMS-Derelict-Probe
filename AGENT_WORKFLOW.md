@@ -4,6 +4,14 @@
 
 Allow multiple AI coding/research agents to work simultaneously without blocking each other or corrupting the stable Surveyor.
 
+## Autonomous execution and human gates
+
+Agents are expected to finish executable work, not merely describe what should happen next. At each apparent stopping point, inspect whether the next useful step is possible with available repository files, evidence, code, tests, or tools; if so, perform it. Diagnose failures from the first useful error and try a reasonable fix or fallback. Do not hand off agent-owned analysis, implementation, testing, documentation, or publishing as if it were user work.
+
+When the assigned objective is complete, continue with the next highest-value, non-duplicative task in the same lane that advances the shared goal. A dependency on another lane blocks only that path; record the dependency and continue independent work. Ask the user only for a genuine human-only step such as a live NMS/PC action, inaccessible local evidence, unavailable credentials/authorization, or information only the user can supply. Before asking, finish all independent work and send one precise numbered recipe with the exact Surveyor control/action, success condition, evidence to return, and whether a full traversal is required. Use `waiting_on_user` status only for that real gate.
+
+Lane status `next_action` must say what the agent will do next, not what the user or another agent should do, unless a genuine human gate is active. Keep status, manifest, handoff, and workspace registry aligned with the latest published evidence. Publish meaningful completed changes to GitHub `main` under the direct-publish policy below; do not wait for a conversational reminder. Publish milestone status to the lane branch for Agent Console and keep the main copy synchronized.
+
 ## Branch ownership
 
 - `main`: stable shared line. Lane authors publish completed lane research/status/evidence and complete build-request bundles directly to `main` after creating a backup reference or recording the exact base commit and rollback path. Shared Surveyor source and updater releases are published by the main compiler after request integration.
@@ -49,7 +57,7 @@ Every completed publish must include:
 - migration/rollback notes;
 - a backup reference or exact base commit and rollback path.
 
-Before publishing lane research or a request bundle, preserve a backup reference and include tests, evidence, and lane status/manifest. Do not publish incomplete experiments. Shared `WORKSPACE_STATE.json`, `AI_HANDOFF.md`, updater manifests, and full source ZIP are updated by the main compiler when it integrates build requests. A PR is a fallback only if direct push is unavailable or rejected.
+Before publishing lane research or a request bundle, preserve a backup reference and include tests, evidence, and lane status/manifest. Do not publish incomplete experiments. The lane author updates and publishes the lane's own manifest/status and affected lane-specific handoff/research records. Keep the main-branch copies of completed status/manifest changes synchronized so every agent can find one shared current state. Update `WORKSPACE_STATE.json` and relevant `AI_HANDOFF.md` sections in the same published change whenever lane ownership, objective, evidence pointer, blocker, next action, or shared research state changes; do not overwrite unrelated lane findings. The main compiler owns shared Surveyor integration/release fields, updater manifests, release version/changelog, and the complete source ZIP when compiling build requests. A PR is a fallback only if direct push is unavailable or rejected.
 
 ## Runtime test handoff
 
@@ -59,7 +67,7 @@ When human intervention is needed, the lane must reduce it to one explicit recip
 
 The repository, not any chat's hidden context, is the continuity layer. A task must be resumable from GitHub alone.
 
-Before yielding control or after any meaningful discovery, the active AI must update shared `main` (and its lane status branch when relevant) so another ChatGPT surface can continue without replaying the prior conversation. At minimum keep these current:
+Before a genuine human handoff and after each meaningful published milestone, update GitHub `main` and the lane status/manifest as applicable so another AI surface can continue without replaying private chat. Do not yield merely to announce an executable next step. At minimum keep these current when affected:
 
 - `AI_HANDOFF.md`: architecture, confirmed facts, latest changes, test state, exact next action;
 - `RESEARCH_INDEX.md`: measured/public-confirmed/inferred/hypothesis separation;
@@ -77,7 +85,7 @@ Surveyor's read-only Agent Console shows only status that has been published to 
 
 Update that file when starting work, when the state changes, and before asking the user to do anything. For a human request, include the exact Surveyor request, numbered user steps, the visible success condition, evidence to return, and whether a full derelict traversal is required. Clear the request when no longer needed. Never include tokens, local paths, device details, or personal data.
 
-The main compiler updates shared `WORKSPACE_STATE.json` and `AI_HANDOFF.md` when it integrates a build request. Lane agents update their own status/manifest as work changes and include request IDs/status where relevant. The console reads the main-branch registry and each lane's branch status/manifest with cache-busting requests. It displays the main registry age separately from each lane's heartbeat, marks lane status older than 15 minutes as stale, and keeps the last successful display if refresh fails. Do not treat an uncommitted chat update as visible or completed work.
+The main compiler reconciles shared `WORKSPACE_STATE.json` and release-level `AI_HANDOFF.md` fields when it integrates a build request. Lane agents update and publish their own status/manifest as work changes, keep the main copies synchronized, and update affected lane-specific handoff/research records; include build-request IDs and states where relevant. The console reads the main-branch registry and each lane's branch status/manifest with cache-busting requests. It displays the main registry age separately from each lane's heartbeat, marks lane status older than 15 minutes as stale, and keeps the last successful display if refresh fails. Do not treat an uncommitted chat update as visible or completed work.
 
 Publish again after each meaningful milestone: a new finding, a changed prerequisite, a generated/uploaded artifact, an extension version change, or a request being completed. Keep `updated_utc` current and use `progress` for what is happening now, `blockers` for concrete obstacles, `next_action` for the next agent-owned step, and `extension_version` when the lane has a published UI extension. Update `STATUS.json` on the lane branch as soon as the user-facing state changes, and carry completed status/manifest changes into the direct-to-main publish.
 

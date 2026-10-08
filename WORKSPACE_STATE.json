@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T20:12:00Z",
+  "updated_utc": "2026-10-08T21:37:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.67",
@@ -95,7 +95,7 @@
     ]
   },
   "new_agent_start": {
-    "rule": "Read AGENT_START_HERE.md first. You are one parallel agent, not the sole project owner. Do not claim or modify an occupied lane unless explicitly assigned.",
+    "rule": "Read AGENT_START_HERE.md first. Work only within your assigned, non-overlapping lane. Use the latest combined report pointer for the parallel run it identifies. Keep executing agent-owned work until complete or a genuine human-only gate remains; do not stop at an executable next-step description. For shared Surveyor changes, submit a complete build request under build-requests/<lane>/<request-id>/ and publish the request bundle; the primary integration assistant compiles ready requests into one tested release. Do not publish a competing full Surveyor build.",
     "resume_order": [
       "AGENT_START_HERE.md",
       "WORKSPACE_STATE.json",
@@ -105,13 +105,13 @@
       "the assigned lane manifest and only relevant files/evidence"
     ],
     "branch_rule": "For a new independent task, create a fresh branch from current main named agent/<short-lane-id>. Use agent/metadata only if it is still free when you begin.",
-    "output_rule": "Completed lane findings, status, evidence, tests, and complete build-request bundles may be published directly to main after creating a backup branch or recording the exact base commit and rollback path. Keep incomplete experiments on the assigned lane branch. Shared Surveyor releases are compiled and published by the primary integration assistant.",
-    "autonomy_rule": "Continue within the lane until the objective is complete, blocked on another lane, or genuine human/local-machine intervention is required."
+    "output_rule": "Keep unfinished experiments on your lane branch. Publish completed, tested, documented lane research and build-request bundles to main with tests, evidence, lane status/manifest, base commit, verified file hashes, and rollback notes. Publish lane status/manifest updates to the lane branch for Agent Console and keep the main copy synchronized. Update WORKSPACE_STATE.json and affected AI_HANDOFF.md/research records when lane facts or shared pointers change, without overwriting unrelated lane findings. Shared Surveyor application/updater releases are compiled and published by the primary integration assistant from ready build requests.",
+    "autonomy_rule": "Continue until the objective is complete or only a genuine human-only gate remains. At each apparent stopping point, do the next useful action available through repository history, code, evidence, tests, or tools; diagnose failures and try a reasonable fix/fallback. After completing the assigned objective, continue with the next useful non-duplicative task in the lane. A dependency blocks only dependent work. Ask the user only for live PC/NMS action, inaccessible local evidence, unavailable credentials/authorization, or information only they can provide; finish independent work first and provide one exact numbered recipe."
   },
   "artifact_policy": {
     "complete_zip_storage": "ChatGPT Library",
     "canonical_library_path": "/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip",
-    "github_role": "manifests, patches, evidence, branches, PRs, source-state summaries"
+    "github_role": "GitHub main is the shared continuity source for completed lane updates, manifests, status, handoffs, build requests, evidence, and integration history. Keep lane-branch status current for Agent Console as well."
   },
   "cross_mode_rule": "Normal ChatGPT and Work/Codex must treat committed GitHub state as authoritative and may switch roles without relying on hidden conversation context.",
   "candidate_integration": {
