@@ -1152,7 +1152,7 @@ class ToolTests(unittest.TestCase):
 
 
     def test_v0322_version_marker(self):
-        self.assertEqual("0.3.66", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.67", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
 
     def test_parallel_research_panel_runs_and_optionally_shares_only_combined_report(self):
         controller=(ROOT / "tools" / "surveyor_controller.py").read_text(encoding="utf-8")
@@ -1396,7 +1396,7 @@ class ToolTests(unittest.TestCase):
         self.assertNotIn("Test-Runtime", start_nms)
         self.assertNotIn("Python.Python.3.12", start_nms)
         self.assertNotIn("import pymhf; import nmspy", start_nms)
-        self.assertIn('CONTROLLER_VERSION = "0.3.66"', controller)
+        self.assertIn('CONTROLLER_VERSION = "0.3.67"', controller)
         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
 
     def test_github_update_buttons_use_a_separate_geometry_parent(self):
@@ -1457,7 +1457,7 @@ class ToolTests(unittest.TestCase):
             self.assertIn(token, probe)
 
     def test_v0330_version(self):
-        self.assertEqual("0.3.66", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.67", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
 
     def test_v0328_seed_function_relrefs_classify_recursion(self):
