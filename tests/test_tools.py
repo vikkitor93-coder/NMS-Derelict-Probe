@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 26581)
-Total output lines: 1662
-
 import importlib.util
 import json
 import os
