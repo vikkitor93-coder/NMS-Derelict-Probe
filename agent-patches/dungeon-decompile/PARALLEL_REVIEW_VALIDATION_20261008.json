@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "verified_utc": "2026-10-08T13:48:19Z",
+  "verified_utc": "2026-10-08T23:50:00Z",
   "review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json",
   "checks": [
     {
@@ -52,11 +52,54 @@
       "result": "passed",
       "actual": "3af46d71fbeabc5810f3c83dbdd93b59cc2cfd71358dbaa6bb9c35c398e38592",
       "name": "current main pointer report SHA-256"
+    },
+    {
+      "name": "Local NMS.exe SHA-256",
+      "result": "passed",
+      "expected": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+      "actual": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
+    },
+    {
+      "name": "Callback body bytes and SHA-256",
+      "result": "passed",
+      "rva": "0063A6D0",
+      "bytes": 89,
+      "expected": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7",
+      "actual": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7"
+    },
+    {
+      "name": "Helper call/jump bytes and rel32 destinations",
+      "result": "passed",
+      "call_rva": "0063A706",
+      "call_target": "033E1B60",
+      "jump_bytes": "E9 EB FE FF FF",
+      "jump_target": "033E1A50",
+      "source": "local executable parsed with pefile"
+    },
+    {
+      "name": "Helper RVA PE exception range lookup",
+      "result": "passed",
+      "rvas": [
+        "033E1B60",
+        "033E1A50"
+      ],
+      "containing_ranges": [],
+      "adjacent_function": "033E1B70..033E1C71"
+    },
+    {
+      "name": "Bounded helper windows",
+      "result": "passed",
+      "windows": [
+        "033E1B60: 16 bytes",
+        "033E1A50: 272 bytes",
+        "033E1B70: 257 bytes"
+      ],
+      "sha256_matches": true
     }
   ],
   "limitations": [
-    "The matching NMS.exe is unavailable; 033E1B60 .pdata range and function body were not verified.",
-    "No NMS runtime test was performed."
+    "No NMS runtime test was performed.",
+    "No live NMS runtime test was performed; WinDbg is ruled out by user report because it crashes NMS."
   ],
   "failed_checks": []
 }

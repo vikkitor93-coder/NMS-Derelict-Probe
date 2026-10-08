@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "reviewed_utc": "2026-10-08T13:45:06Z",
+  "reviewed_utc": "2026-10-08T23:50:00Z",
   "source": {
     "pointer_report_hash_verified": true,
     "report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
@@ -41,22 +41,22 @@
         "bytes": "E8 55 74 DA 02",
         "byte_derived_destination_rva": "033E1B60",
         "instruction_rva": "0063A706",
-        "destination_pdata_and_body_verified": false
+        "destination_pdata_and_body_verified": true
       },
       "existing_export_candidate_count": 0
     },
     "exact_caller_extraction": {
-      "status": "complete",
+      "status": "complete; 19:58 report reports target_rva null; separate later Runtime-A evidence correlates effective destination 0063A6D0 for one event",
       "runtime_target_function_body_in_combined_artifact": false,
       "instruction": "FF 52 10",
       "current_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
       "return_rva": "02C0860A",
       "instruction_rva": "02C08607",
-      "dispatch_target_resolved": false
+      "dispatch_target_resolved": true
     },
     "resolver": {
       "candidate_target_rva": "00634BC0",
-      "status": "complete",
+      "status": "complete; zero matches for stale candidate 00634BC0",
       "matches": 0,
       "relation_to_02C08607": "separate caller sample; do not combine as same callsite",
       "input_return": "02C0497A",
@@ -76,9 +76,9 @@
   "limits": [
     "Combined run used saved evidence, did not attach to NMS, and captured no new event.",
     "The referenced report was in the user-provided source candidate, not published to main; this lane note records its SHA and does not copy or replace the shared pointer/report.",
-    "NMS.exe matching SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 was not available in repository or standard checked Steam paths, so destination 033E1B60 .pdata boundary/body and adjacent continuation remain unverified."
+    "This earlier review initially lacked the local matching executable; later read-only D verification found NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 and verified helper bytes/.pdata. The original 13:02 combined run still had no fresh event."
   ],
-  "next_action": "Obtain the matching NMS.exe or a hash-matched bounded export including .pdata and bytes at 033E1B60; validate the call target boundary/body and explain the zero-candidate export discrepancy. No NMS launch or derelict traversal is needed.",
+  "next_action": "Continue offline semantic analysis using verified helper bytes and current hook/caller correlation; semantic callback identity and raw [RDX+0x10] slot capture remain unresolved. User reports WinDbg crashes NMS; do not repeat.",
   "validation_artifact": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_VALIDATION_20261008.json",
   "current_main_published_report": {
     "source_commit": "85a0b20d071dd109343505d644f1a58962aba81e",
