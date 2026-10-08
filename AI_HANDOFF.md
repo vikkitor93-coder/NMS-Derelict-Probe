@@ -25,6 +25,30 @@ The saved current caller is `02C08607: FF 52 10`, return `02C0860A`. In the late
 
 The latest saved event already repeats the post-call zero read. The remaining Runtime-A step is a pre-instruction observation at `NMS.exe+02C08607` (`FF 52 10`), recording `RDX` and `[RDX+0x10]` before execution; verify NMS.exe SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`. A debugger capture at one root event is sufficient; no full traversal is needed. The data-only panel is version 1.0.3 and preserves 1.0.2 for rollback. Probe/app code did not change.
 
+### Runtime-A live capture recipe
+
+1. On the PC running NMS, open **Windows PowerShell** and paste:
+
+   ```powershell
+   Get-FileHash "G:\SteamLibrary\steamapps\common\No Man's Sky\Binaries\NMS.exe" -Algorithm SHA256
+   ```
+
+   Continue only when `Hash` is `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`. If NMS.exe is installed elsewhere, replace the quoted path with its actual path. If the hash differs, stop and send the displayed hash.
+2. Open **WinDbg x64**. Select **File > Attach to process**, choose the running `NMS.exe` from that install, and attach.
+3. In the bottom **Command** pane, type `lm m NMS` and press Enter. Confirm that `NMS.exe` appears in the module list.
+4. In that pane, type `bp NMS+0x02C08607` and press Enter. Then type `g` and press Enter. If WinDbg cannot resolve `NMS`, type `lm`, find the `NMS.exe` row, and set the breakpoint using `bp <start-address>+0x02C08607` with that row's start address; then type `g`.
+5. Trigger one accessible derelict root event. When WinDbg stops, do not type `g` yet. In the Command pane, enter each line below separately, pressing Enter after each:
+
+   ```text
+   r rip
+   r rcx
+   r rdx
+   dq @rdx+0x10 L1
+   ```
+
+   `dq` prints the eight-byte slot value before `FF 52 10` executes. Optionally enter `u @rip L1` to verify the current instruction.
+6. Copy the command output and provide it with the matching Surveyor saved root-event JSON (or its event timestamp and root descriptor). Then enter `g` to resume NMS. If the breakpoint does not trigger or the read fails, provide the exact WinDbg message. No full traversal is required.
+
 ## METADATA-D combined offline action review — 2026-10-08
 
 The latest GitHub main pointer names run `20261008T140207Z-d8e24197` at `research-uploads/20261008T140254Z-parallel-action-test/combined-results.json`; the report SHA-256 matches the pointer: `11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6`. The report's parallel actions ran offline, but their saved input includes fresh NMS capture session `20261008T140041Z_0001BF0004E84EFD` at system address `0001BF0004E84EFD`. The exact root event is timestamped `2026-10-08T14:00:37.544Z` and records seed candidate `5B4AE67D9C2A8F61`; its derivation remains unverified. The earlier user-attached 13:02 candidate report is retained as historical provenance in `agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json`.
