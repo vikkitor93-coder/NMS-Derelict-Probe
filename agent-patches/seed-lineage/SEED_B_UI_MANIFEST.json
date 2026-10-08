@@ -3,73 +3,75 @@
   "lane_id": "seed-lineage",
   "extension": {
     "extension_id": "seed-lineage",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "compatible_surveyor_api_version": "1.0",
     "min_surveyor_version": "0.3.41",
-    "action_id": "research.extract_caller_code",
-    "preconditions": [
-      "workflow.idle"
+    "actions": [
+      "research.extract_caller_code",
+      "research.extract_upstream_callers",
+      "research.analyze_seed_function"
     ],
-    "evidence_namespace": "seed-lineage",
-    "parameters": {},
     "request_only": true,
     "files": [
       {
-        "path": "agent-ui/extensions/seed-lineage/1.0.2/panel.json",
-        "sha256": "967b94dd76a88e23c6c969a6839542d9caa1b34b0ab387682ec0fdf18bea40a5"
+        "path": "agent-ui/extensions/seed-lineage/1.0.4/panel.json",
+        "sha256": "3dfc00fc70b40a0dcad117328876eb509d15c26c23197f6f86407017a2cc7334"
       },
       {
-        "path": "agent-ui/extensions/seed-lineage/1.0.2/manifest.json",
-        "sha256": "8b486f3743adaa7e17e1ef204ace25f97b48f96061b04b3bd14af1db0ec9de8a"
+        "path": "agent-ui/extensions/seed-lineage/1.0.4/manifest.json",
+        "sha256": "872c2e183d6d5e5b623d2e3d72b440a34c11a8274b12eb87ac310cb05405d33a"
       }
     ]
   },
   "base": {
     "branch": "main",
-    "commit": "674bf46d8343551e6d74cf200a6ea76a6eacd419"
+    "commit": "9dd7aeba437b2d24ad5a5aa3d57cef21396550c2"
   },
   "changed_files": [
-    "agent-ui/extensions/seed-lineage/1.0.2/panel.json",
-    "agent-ui/extensions/seed-lineage/1.0.2/manifest.json",
+    "agent-ui/extensions/seed-lineage/1.0.4/panel.json",
+    "agent-ui/extensions/seed-lineage/1.0.4/manifest.json",
     "agent-ui/extensions/index.json",
     "tests/test_seed_lineage_ui_extension.py",
     "AI_HANDOFF.md",
-    "agent-patches/seed-lineage/SEED_B_UI_MANIFEST.json"
+    "RESEARCH_INDEX.md",
+    "WORKSPACE_STATE.json",
+    "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
+    "agent-patches/seed-lineage/STATUS.json"
   ],
   "evidence": {
     "measured_facts": [
-      "The prior caller capture reports baseline_window_matches_exe=false.",
-      "The current post-7.05 capture records root seed 9256392A2F5A74AC, MEDI_FLOATERS, 10 rooms, and 16 containers.",
-      "The earlier CARGO_FLOATERS, 8-room, 35-container layout is historical."
+      "Main combined report 20261008T195817Z-1b73e442 hash verified; it is an offline isolated run.",
+      "Later caller and upstream lane uploads both hash-verify and cite session 20261008T185119Z_0001550006607CAC and NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499.",
+      "Current seed-function artifact is stale: it cites session 20261002T213047Z and executable SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4."
     ],
     "inferences": [
-      "A fresh caller capture should be matched to the installed executable before analyzer output is trusted."
+      "The isolated parallel harness cannot chain newly produced caller/upstream outputs because workers receive independent snapshots.",
+      "A third distinct universe-address/root-seed pair is needed to test a general derivation."
     ],
     "hypotheses": []
   },
   "verification": {
-    "focused_tests": "python -m unittest discover -s tests -p 'test_seed_lineage_ui_extension.py' && python -m unittest discover -s tests -p 'test_agent_ui_extensions.py' && python -m unittest discover -s tests -p 'test_agent_extension_upload_namespace.py' && python -m unittest discover -s tests -p 'test_agent_console.py' \u2014 21/21 passed",
-    "manifest_api_compatibility": "passed; schema 1, Surveyor API 1.0, installed host 0.3.41",
-    "extension_hashes": "passed; lowercase SHA-256 verified against panel.json",
-    "invalid_content_rejection": "passed in test_agent_ui_extensions.py (unknown shell action/fields and incompatible dependencies rejected)",
-    "live_refresh_and_rollback": "passed in test_agent_ui_extensions.py (new version detected/activated; prior version retained and restorable)",
-    "action_preconditions": "passed; workflow.idle rejected when false and accepted when true",
-    "evidence_namespacing": "passed; seed-lineage upload path and local record tests",
-    "index_preservation": "passed; all 4 current main extension entries retained",
-    "version_1_0_0_overwritten": false,
-    "windows_visual_smoke": "not run in this Linux environment",
-    "extension_behavior_changed": false,
-    "live_update_detection": "passed; installed 1.0.1 offers 1.0.2; active 1.0.2 has no update candidate"
+    "focused_tests": "Inline structural validation of versioned JSON extension, stable action IDs, lane namespace, and computed SHA-256 values passed; repository Python unittest not run because local exec process setup failed.",
+    "manifest_api_compatibility": "checked against AGENT_UI_EXTENSION_GUIDE.md stable actions and API 1.0",
+    "extension_hashes": "panel 3dfc00fc70b40a0dcad117328876eb509d15c26c23197f6f86407017a2cc7334; manifest embeds panel hash; index points to 1.0.4",
+    "action_order": "caller → upstream → seed-function declared in order",
+    "live_update_detection": "not runtime-tested",
+    "windows_visual_smoke": "not run"
   },
   "rollback": [
-    "In Agent Console, roll seed-lineage back to 1.0.1.",
-    "If needed, remove only seed-lineage 1.0.2 from the extension index and revert the 1.0.2 files; retain prior versions and all other index entries."
+    "In Agent Console, roll seed-lineage back to 1.0.3.",
+    "Restore pre-publish main from backup/main-before-seed-lineage-reconcile-20261008-2343 if a full rollback is required."
   ],
   "file_sha256": {
-    "agent-ui/extensions/seed-lineage/1.0.2/panel.json": "967b94dd76a88e23c6c969a6839542d9caa1b34b0ab387682ec0fdf18bea40a5",
-    "agent-ui/extensions/seed-lineage/1.0.2/manifest.json": "8b486f3743adaa7e17e1ef204ace25f97b48f96061b04b3bd14af1db0ec9de8a",
-    "agent-ui/extensions/index.json": "3868ce1d47305c2e50c20922f1851da7e4286d8e427c1703e767c1902b97abd2",
-    "tests/test_seed_lineage_ui_extension.py": "6fc834a66025a3fcde847c8ba9411759714ff94477b875602d451e1c063a3de6",
-    "AI_HANDOFF.md": "d2a674784ef856e2eea46c36fb84082dbf5f05eb8fbf231028cb91a8ce2dff6b"
+    "agent-ui/extensions/seed-lineage/1.0.4/panel.json": "22708affb7433be558fa818b0cb86be0b3d7579fcf2af6d2046b038f79256f89",
+    "agent-ui/extensions/seed-lineage/1.0.4/manifest.json": "03c4e1518a75236f17b41511efe2d8659f3f4e4cd33f4f36d959e15290803f65",
+    "agent-ui/extensions/index.json": "97ed8f91d515d0ffb0289b86c24f9a3b29c4f67a7fe6eb3e1b02d2815137761a",
+    "tests/test_seed_lineage_ui_extension.py": "670cfc315fba9ce71a42b53f82aaa91b5f5bc0bc2d72ca5793b273071083355f",
+    "AI_HANDOFF.md": "e5e39575e98e997cdbf1cf6b664f2ac15926885c718933279c2826f14f2f234e",
+    "RESEARCH_INDEX.md": "6de3ca6d8aadca116603bf045de0a0863d08985394339a6a784fabb6e52d2bf5",
+    "WORKSPACE_STATE.json": "c0f097505bb29d5738fea4809c572f04cdd230bb1c20b6b038621cfb571ae336",
+    "agent-patches/seed-lineage/SEED_B_MANIFEST.json": "16e7b0238bb935c2eec7fe43efc8f0ef493ef0ca5cfd7047874acff64e1f3e7e",
+    "agent-patches/seed-lineage/STATUS.json": "0bfe35865e4fcd4f1079f5ea06acf60404e8da9bccd0431db762703984de21e7",
+    "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_195817_20261008.md": "374076bb7bc71eaeb854fdd1da485805e54fd7ce6f395d1666e154b011171d82"
   }
 }

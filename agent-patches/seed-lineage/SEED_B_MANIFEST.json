@@ -38,7 +38,12 @@
     "cache_files_in_complete_zip": 0,
     "game_memory_write_api_added": false,
     "known_anchor_35": "00001A0004E84EFD -> B006BAB6 -> 3E342BADCF79F176",
-    "known_anchor_51": "0001550006607CAC -> 9E1A7905 -> 37DEC848947D131C"
+    "known_anchor_51": "0001550006607CAC -> 9E1A7905 -> 37DEC848947D131C",
+    "latest_report_sha256_verified": true,
+    "lane_caller_upload_sha256_verified": true,
+    "lane_upstream_upload_sha256_verified": true,
+    "ui_json_contract": "passed by structural check; Python unittest suite not run because repository checkout/process helper unavailable in this session",
+    "live_validation": "required for a third-address root-seed sample"
   },
   "result": {
     "baseline_35_root_seed": "9256392A2F5A74AC",
@@ -59,32 +64,62 @@
     "derivation_status": "unknown-not-claimed"
   },
   "latest_research_review": {
-    "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_185304_20261008.md",
-    "source": "main pointer and sole authoritative combined report; report bytes fetched and SHA-256 verified",
-    "run_id": "20261008T185304Z-e95aae15",
-    "report_path": "research-uploads/20261008T185341Z-parallel-action-test/combined-results.json",
-    "report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe",
+    "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_195817_20261008.md",
+    "source": "Main pointer and combined report bytes fetched; pointer SHA-256 verified. Separate lane-exclusive uploads reviewed as their own evidence chain, not substituted for parallel action results.",
+    "run_id": "20261008T195817Z-1b73e442",
+    "report_path": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
+    "report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
     "verified": true,
     "actions_completed": 8,
     "upload_action_skipped": 1,
     "offline": true,
     "fresh_root_session": "20261008T185119Z_0001550006607CAC",
     "root_seed_candidate": "00C9E8DF0327789E",
-    "root_seed_derivation": "unknown-not-claimed",
-    "caller_session": "20261006T223811Z_0001BF0004E84EFD",
-    "upstream_session": "20261004T151219Z_0001BF0004E84EFD",
+    "caller_session": "20261008T185119Z_0001550006607CAC",
+    "parallel_upstream_session": "20261006T223811Z_0001BF0004E84EFD",
+    "parallel_seed_function_session": "20261006T223811Z_0001BF0004E84EFD",
     "constructor_identity": "unresolved"
   },
   "current_extension_candidate": {
-    "version": "1.0.3",
-    "panel": "agent-ui/extensions/seed-lineage/1.0.3/panel.json",
-    "manifest": "agent-ui/extensions/seed-lineage/1.0.3/manifest.json",
+    "version": "1.0.4",
+    "panel": "agent-ui/extensions/seed-lineage/1.0.4/panel.json",
+    "manifest": "agent-ui/extensions/seed-lineage/1.0.4/manifest.json",
     "actions": [
       "research.extract_caller_code",
-      "research.extract_upstream_callers"
+      "research.extract_upstream_callers",
+      "research.analyze_seed_function"
     ],
     "ui_api": "1.0",
     "custom_host_action": false,
     "probe_hook_added": false
+  },
+  "latest_lane_exclusive_evidence": {
+    "caller": {
+      "path": "research-uploads/20261008T213906Z-seed-lineage-extract-caller-b7822170/dungeon-caller-code-latest.json",
+      "run_manifest": "research-uploads/20261008T213906Z-seed-lineage-extract-caller-b7822170/run-manifest.json",
+      "sha256": "83ba43c47011c7c455b2cb079a210f9aaae2b9a6436a6ee408c233e63af5eee9",
+      "session": "20261008T185119Z_0001550006607CAC",
+      "verified": true
+    },
+    "upstream": {
+      "path": "research-uploads/20261008T213956Z-seed-lineage-extract-upstream-40576b80/dungeon-upstream-callers-latest.json",
+      "run_manifest": "research-uploads/20261008T213956Z-seed-lineage-extract-upstream-40576b80/run-manifest.json",
+      "sha256": "8e66960e4483fa6656f25ba91148322f774eba220dd41246c529d18f227db941",
+      "session": "20261008T185119Z_0001550006607CAC",
+      "caller_hash": "83ba43c47011c7c455b2cb079a210f9aaae2b9a6436a6ee408c233e63af5eee9",
+      "verified": true
+    },
+    "seed_function": {
+      "path": "research-uploads/20261008T214003Z-seed-lineage-all-saved-evidence-e6b0e29a-1aecdb93/dungeon-seed-function-analysis-latest.json",
+      "sha256": "228ca6872ec0f182efa419b284439d7110b63228738484f689405007ca6435e0",
+      "session": "20261002T213047Z_00001A0004E84EFD",
+      "executable_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "current_for_20261008_exe": false
+    }
+  },
+  "rollback": {
+    "base_commit": "9dd7aeba437b2d24ad5a5aa3d57cef21396550c2",
+    "backup_branch": "backup/main-before-seed-lineage-reconcile-20261008-2343",
+    "path": "Revert publication merge commit with git revert -m 1 <merge-commit>; backup branch preserves pre-publish main."
   }
 }
