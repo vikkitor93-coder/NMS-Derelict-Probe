@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "version": "0.3.64",
+  "version": "0.3.66",
   "status": "published-main-source-candidate",
-  "base_version": "0.3.61",
+  "base_version": "0.3.65",
   "artifact": {
-    "file_name": "NMS-Derelict-Probe-v0.3.64-source.zip",
+    "file_name": "NMS-Derelict-Probe-v0.3.66-source.zip",
     "includes": [
       "complete source project",
       "AI_HANDOFF.md",
@@ -14,6 +14,10 @@
     ]
   },
   "changes": [
+    "Saved-session queue runs one isolated report per saved session, FIFO, and persists across restarts",
+    "Workers analyze the exact triggering session after SHA-256 verification; mismatched reports do not complete queue entries",
+    "Full updater includes every currently indexed extension asset; repaired missing seed-lineage/1.0.3 payload entries",
+    "Fixed invalid truncated test source and updated stale extension/runtime version assertions",
     "Surveyor parallel research test panel with per-action progress",
     "optional combined-report-only upload controlled by the existing automatic upload toggle",
     "shared latest-report pointer and agent instruction to use only the combined report for the latest run",
@@ -27,12 +31,15 @@
     "build_request_tests": "7 passed",
     "saved_session_auto_run_tests": "covered in full project suite; 201 tests passed",
     "overlay_settings_tests": "covered in full project suite; 201 tests passed",
-    "trigger_provenance_tests": "3 passed",
+    "trigger_provenance_tests": "5 passed",
     "parallel_research_harness_self_test": "passed",
-    "unit_tests": "201 passed",
+    "unit_tests": "209 passed",
     "python_compile": "passed for tools, overlay, tests, and mod",
     "windows_ui_and_focus_validation": "pending local Windows installation",
-    "updater_package": "SHA-256 and size are recorded in update-manifest.json"
+    "updater_package": "SHA-256 and size are recorded in update-manifest.json",
+    "auto_research_queue_tests": "3 passed",
+    "package_integrity": "ZIP CRC, exact managed members, base64 round-trip, size and SHA-256 verified",
+    "windows_end_to_end": "pending local Windows validation"
   },
-  "publication": "Source and documentation published to GitHub main. The Surveyor updater remains on the prior stable manifest pending Windows UI/focus validation and release packaging."
+  "publication": "Source and v0.3.66 full updater package published to GitHub main; Windows end-to-end validation remains pending."
 }
