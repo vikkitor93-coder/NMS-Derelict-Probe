@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "title": "SEED-B · Cross-address root seed lineage",
+  "summary": "Latest main parallel report (20261008T195817Z-1b73e442; SHA-256 verified) and separate Seed-Lineage uploads confirm a fresh caller and upstream scan for session 20261008T185119Z_0001550006607CAC. The seed-function analysis still uses an older executable/session. To test root-seed derivation, capture a root event in a third, distinct universe address, then run these actions in order. The 14 containers are asset-predicted for MEDI_FLOATERS; the separate 43-target figure is also asset-derived. Neither is a physical count. The zero +0x10 read and unrelated resolver sample do not resolve dispatch. FF 52 10 target remains unresolved.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.extract_caller_code",
+      "label": "1. Extract caller code + upload",
+      "description": "After a root event is saved at the new universe address, extract its callsite window and verify it matches the installed NMS.exe.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.extract_upstream_callers",
+      "label": "2. Extract upstream callers + upload",
+      "description": "Run after step 1 succeeds. Confirm the output cites the same session, caller, universe address, and executable hash.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.analyze_seed_function",
+      "label": "3. Analyze seed function + upload",
+      "description": "Run after step 2 succeeds. This resolves the function boundary from the fresh upstream evidence; byte-level reads do not by themselves prove the root-seed construction formula.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    }
+  ]
+}

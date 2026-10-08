@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T23:36:12Z",
+  "updated_utc": "2026-10-08T23:37:48Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.67",
@@ -34,16 +34,20 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage-update-20261008",
-      "status": "latest-combined-report-reviewed-fresh-root-saved-caller-upstream-stale",
+      "status": "fresh-caller-upstream-confirmed-seed-function-stale-waiting-third-address",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-      "result_summary": "Latest main combined report hash verified. Fresh session 20261008T185119Z_0001550006607CAC captured root candidate 00C9E8DF0327789E at 18:51:04Z; derivation unproven. MEDI_FLOATERS analysis predicts 14 targets from assets (not observed). Caller and upstream outputs still use Oct 6 and Oct 4 sessions; no correlation to fresh event.",
+      "result_summary": "Main combined report 20261008T195817Z-1b73e442 verified (b74d...). It is sole authority for the offline parallel run: fresh caller/session 20261008T185119Z_0001550006607CAC; upstream and seed-function results were stale common-snapshot inputs. Later lane-exclusive caller/upstream uploads hash-verify and cite the fresh session/exe. Upstream observes descriptor +0x128, seed +0x138, use-seed +0x140; seed read precedes AddResource. The seed-function analysis remains stale from Oct 2 and older EXE. 14 MEDI targets and separate 43 CARGO targets are asset predictions, not observed counts.",
       "human_validation_required": true,
-      "review": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_185304_20261008.md",
-      "next_action": "On shared main Surveyor, close NMS if open; RUNTIME-A 1.0.6 > Upload captured root event > wait for upload success. Then Seed-Lineage 1.0.3 > Extract caller code + upload > Extract upstream callers + upload. Return the upload, caller, and upstream evidence records.",
+      "review": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_195817_20261008.md",
+      "next_action": "User provides one root event at a third universe address, then Seed-Lineage caller → upstream → seed-function actions are run sequentially. Full traversal is unnecessary.",
       "parallel_report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe",
-      "extension_version": "1.0.3",
-      "latest_report": "research-uploads/20261008T185341Z-parallel-action-test/combined-results.json",
-      "latest_report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe"
+      "extension_version": "1.0.4",
+      "latest_report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
+      "latest_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
+      "latest_lane_caller": "research-uploads/20261008T213906Z-seed-lineage-extract-caller-b7822170/dungeon-caller-code-latest.json",
+      "latest_lane_caller_sha256": "83ba43c47011c7c455b2cb079a210f9aaae2b9a6436a6ee408c233e63af5eee9",
+      "latest_lane_upstream": "research-uploads/20261008T213956Z-seed-lineage-extract-upstream-40576b80/dungeon-upstream-callers-latest.json",
+      "latest_lane_upstream_sha256": "8e66960e4483fa6656f25ba91148322f774eba220dd41246c529d18f227db941"
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-current-target-20261008-reconciled",
