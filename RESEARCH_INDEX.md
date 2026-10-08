@@ -1,6 +1,14 @@
 # NMS Derelict Probe — Research Index
 
-Last updated: 2026-10-01. This file is the short shared truth table for humans and parallel AI agents.
+Last updated: 2026-10-08. This file is the short shared truth table for humans and parallel AI agents.
+
+## Agent D review of attached parallel-action report (2026-10-08)
+
+- **Measured offline action result from the combined report:** `research.prepare_assets` completed with code 0 against saved session `20261006T223811Z_0001BF0004E84EFD`; 1,441 scene exports were indexed, 1,433 were dungeon scenes, 75 contained target references, and 164/164 saved scene instances resolved. The run did not attach to NMS or upload to GitHub. The shared pointer/report live in a user-attached 0.3.62 local candidate and are not published to `main` by Agent D; see `agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json` for source hashes.
+- **Asset-derived prediction:** 43 target containers comprise 30 salvage crates and 13 footlockers for those saved instances. This is separate from the historical 35-container measurement and later 16-container user observation. `crate-target-discovery` is diagnostic correlation data, not a physical count.
+- **Inference:** `CARGO_FLOATERS` is high-confidence from saved scene family and hazard evidence, and exists among the ten measured static choices. The combined report does not measure which `DungeonOptions` choice the game selected or the meaning of its static 0.33 weight.
+- **Analyzer-derived grouping:** the saved report groups the 43 predicted targets into eight CARG logical groups (33 targets), two BARRACKS groups (10), and one END group (0). These 11 groups are not a physical room count and cannot be equated one-for-one with the static `CARGO_FLOATERS` `Rooms=7` parameter or exact room IDs.
+- **Unresolved outside Agent D:** zero owner+0x10 reads in one saved caller sample and a separate resolver sample do not identify the current dispatch target. Do not combine those callsites.
 
 ## Agent D static abandoned-freighter map (2026-10-07)
 

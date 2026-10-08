@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "lane": "metadata",
+  "evidence_class": "offline-rerun-of-saved-evidence",
+  "source_distribution": "user-attached local Surveyor 0.3.62 source ZIP candidate; shared pointer and report not published to GitHub main by this review",
+  "source_zip_sha256": "43a65ad2499717d1f1f35d707f0fb5e00496f9cab591b067108ea2e0ed2ac56b",
+  "authoritative_report": "NMS-Derelict-Probe/research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json",
+  "authoritative_report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
+  "pointer": "NMS-Derelict-Probe/research/LATEST_PARALLEL_ACTION_TEST.json",
+  "run_id": "20261008T130233Z-755d4c43",
+  "run_mode": "isolated_parallel_test_no_github_upload",
+  "run_finished_utc": "2026-10-08T13:03:02.691Z",
+  "input_snapshot_available": true,
+  "worker_data_retained": false,
+  "upload_status_from_attached_run": "not_uploaded_from_attached_run",
+  "run_summary": {
+    "total": 9,
+    "completed": 8,
+    "failed": 0,
+    "unsupported": 0,
+    "upload_actions_skipped": 1
+  },
+  "source_sessions": {
+    "generation_and_asset_outputs": "20261006T223811Z_0001BF0004E84EFD",
+    "seed_function_analysis": "20261002T213047Z_00001A0004E84EFD",
+    "upstream_caller_analysis": "20261004T151219Z_0001BF0004E84EFD"
+  },
+  "metadata_action": {
+    "action_id": "research.prepare_assets",
+    "status": "complete",
+    "return_code": 0,
+    "duration_seconds": 29.288,
+    "workflow": "Prepare-Crate-Assets.cmd",
+    "artifact_sha256": {
+      "asset-work-v1/asset-calculation-latest.json": "411439791bbe5827035a99475e4266b88bc6c67b9365a8842d4dd40af4b043df",
+      "asset-work-v1/crate-target-discovery.json": "66accea84ddde6d436698e282c594abd77d25e88cbd2f9dfbe76b3b3d2b73174",
+      "asset-work-v1/room-crate-index.json": "01f9a3410513b6ade0e474ac93ec2bde22f643d598b216056fa3cb03bc208461"
+    }
+  },
+  "asset_results": {
+    "source_session_id": "20261006T223811Z_0001BF0004E84EFD",
+    "scene_exports_indexed": 1441,
+    "dungeon_scenes_indexed": 1433,
+    "dungeon_scenes_with_target_references": 75,
+    "used_dungeon_scene_types": 74,
+    "dungeon_scene_instances": 164,
+    "resolved_scene_instances": 164,
+    "unresolved_scene_instances": 0,
+    "predicted_salvage_crates": 30,
+    "predicted_crew_footlockers": 13,
+    "predicted_target_containers": 43,
+    "observed_container_count": null,
+    "count_classification": "asset-derived prediction for saved scene instances; not a physical count from this run",
+    "target_discovery_classification": "diagnostic correlations/reference counts only"
+  },
+  "preset": {
+    "name": "CARGO_FLOATERS",
+    "classification": "high-confidence inference from saved scene families and hazard evidence; not a directly observed DungeonOptions choice",
+    "static_choice_present": true,
+    "static_choice_weighting": "0.330000",
+    "static_choice_weighting_limit": "Static weighting does not establish runtime selection probability or the chosen option in this run."
+  },
+  "saved_room_family_analysis": {
+    "classification": "analyzer-derived logical grouping of saved scene evidence; family labels and target counts are not physical room or container observations",
+    "logical_groups": 11,
+    "family_groups_and_asset_predictions": {
+      "BARRACKS": {
+        "logical_groups": 2,
+        "predicted_salvage_crates": 2,
+        "predicted_crew_footlockers": 8,
+        "predicted_target_containers": 10
+      },
+      "CARG": {
+        "logical_groups": 8,
+        "predicted_salvage_crates": 28,
+        "predicted_crew_footlockers": 5,
+        "predicted_target_containers": 33
+      },
+      "END": {
+        "logical_groups": 1,
+        "predicted_salvage_crates": 0,
+        "predicted_crew_footlockers": 0,
+        "predicted_target_containers": 0
+      }
+    },
+    "static_cargo_floaters_rooms_parameter": 7,
+    "mapping_limit": "The 11 analyzer groups cannot be equated one-for-one with the table's Rooms=7 parameter or with exact static room IDs."
+  },
+  "dispatch_boundary": "The report's zero owner+0x10 reads and separate vtable-resolver sample do not resolve the current dispatch target; this is owned by the runtime and decompile lanes.",
+  "limits": [
+    "No new NMS attachment or in-game event occurred in the parallel run.",
+    "The report's historical 35-container measurement and later 16-container user observation remain separate from the 43-target prediction.",
+    "Artifact SHA-256 values identify original generated files while embedded absolute paths are redacted.",
+    "The report was imported from the local 0.3.62 source package after its attached run; the run itself did not upload to GitHub."
+  ],
+  "extension_decision": "METADATA-D 1.0.1 is unchanged: its registered prepare and analyze actions already cover this evidence; the isolated parallel run did not exercise the extension upload flow."
+}
