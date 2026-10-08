@@ -649,10 +649,364 @@ class ToolTests(unittest.TestCase):
         self.assertEqual(35, row["target_containers"])
         self.assertEqual(8, len(row["room_sequence"]))
         self.assertIn("layout_signature_sha256", row)
-        root_candidates = fixture.get("dungeon_root_seed_candidates") or []
-        self.assertTrue(root_candidates)
-        self.assertEqual("9256392A2F5A74AC", root_candidates[0].get("seed_hex"))
-        self.assertNotEqual(fixture.get("universe_address_hex"), root_candidates[0].get("seed_hex"))
+
+    def test_probe_contains_read_only_space_poi_context_hook(self):
+        source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+        self.assertIn("@nms.cGcSpacePoiSiteComponent.GeneratePoiDescription.before", source)
+        self.assertIn("poi-context-u64", source)
+        self.assertIn("universe address", source)
+        self.assertIn("_raw_u64_bits", source)
+        self.assertIn("@nms.cGcSpacePoiSiteComponent.GeneratePoiDescription.after", source)
+        self.assertIn("return_value_hex", source)
+        self.assertIn("@nms.cGcSpacePoiSiteComponent.Prepare.before", source)
+        self.assertIn("@nms.cGcSpacePoiSiteComponent.Prepare.after", source)
+        self.assertIn("poi_prepare_scope_component_hexes", source)
+        self.assertIn("@nms.cGcSpacePoiSiteComponent.OnActivate.before", source)
+        self.assertIn("@nms.cGcSpacePoiSiteComponent.OnActivate.after", source)
+        self.assertIn("@nms.cGcSpacePoiSiteComponent.AdvanceLifecycle.before", source)
+        self.assertIn("@nms.cGcSpacePoiSiteComponent.AdvanceLifecycle.after", source)
+        self.assertIn("poi_activation_scope_component_hexes", source)
+        self.assertIn("poi_lifecycle_scope_component_hexes", source)
+        self.assertIn("@nms.cTkResourceManager.AddResource.before", source)
+        self.assertIn("descriptor_pointer_hex", source)
+        self.assertIn("from pymhf.core.hooking import get_caller, on_key_pressed", source)
+        self.assertGreaterEqual(source.count("@get_caller"), 2)
+        self.assertIn("caller_return_offset_hex", source)
+        self.assertIn("caller_code_window", source)
+        self.assertIn("ReadProcessMemory", source)
+
+    def test_overlay_shows_generation_room_measurement_line(self):
+        status={
+            "heartbeat_epoch":1000.0,"probe_version":"0.3.11","state":"recording","recording":True,
+            "detail":"recording","blue_crates":0,"rooms":0,"room_zero_rooms":0,"vertical_transitions":0,"shuttle_bays":0,
+            "engineering_marked":False,"engineering_module_class":"unknown","last_event":"",
+            "generation_rooms":{"total_rooms_seen":8,"main_rooms_seen":7,"dead_end_rooms_seen":1,"room_parent_names_seen":8,"poi_context_arguments":["00001A0004E84EFD"],"poi_context_matches_universe_address":True},
+        }
+        view=overlay_mod.summarize_status(status,now_epoch=1000.5)
+        self.assertIn("GEN ROOMS 8",view["generation"])
+        self.assertIn("MAIN 7",view["generation"])
+        self.assertIn("DEAD END 1",view["generation"])
+        self.assertIn("POI-UA",view["generation"])
+        self.assertIn("00001A0004E84EFD",view["generation"])
+
+    def test_v0337_runtime_probe_captures_all_call_registers_at_shared_entry(self):
+        probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+        self.assertIn('PROBE_VERSION = "0.3.40"', probe)
+        exact=probe.index('exact_external = self._logical_entry_external_match_for_descriptor(descriptor_ptr)')
+        entry_capture=probe.index('phase="logical-entry-after-external-call"')
+        root_add_capture=probe.index('phase="root-resource-add"', exact)
+        self.assertLess(probe.index('def _trace_resource_descriptor_walk_entry'), entry_capture)
+        self.assertLess(entry_capture, root_add_capture)
+        self.assertIn('"capture_phase": phase', probe)
+        self.assertIn('"capture_utc": _utc_now()', probe)
+        self.assertIn('"external_owner_plus_0x10_capture_at_entry": frame.get("external_owner_plus_0x10_capture")', probe)
+        self.assertIn('exact_external["owner_plus_0x10_capture_at_root_add"]', probe)
+        self.assertIn('exact_external["owner_plus_0x10_capture_at_entry"] = entry_capture', probe)
+        self.assertIn('"external_call_register_snapshot_at_entry": frame.get("external_call_register_snapshot")', probe)
+        self.assertIn('"rcx_hex":', probe)
+        self.assertIn('"rdx_hex": f"{owner_pointer:016X}"', probe)
+        self.assertIn('"rdx_plus_0x10_capture": frame["external_owner_plus_0x10_capture"]', probe)
+        self.assertIn('"external_call_register_snapshot_at_entry": exact.get("external_call_register_snapshot_at_entry")', probe)
+        self.assertIn('"static_direct_reference_count": len(CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS)', probe)
+        self.assertIn('not 52 breakpoints', probe)
+        self.assertIn('"root_dispatch_capture": self._root_dispatch_capture_payload()', probe)
+        self.assertIn('"last_dungeon_root_owner_plus_0x10_capture": root_dispatch_capture', probe)
+        self.assertIn('kernel32.ReadProcessMemory(', probe)
+        self.assertNotIn('WriteProcessMemory', probe)
+        persist = probe[probe.index('def _persist_root_event'):probe.index('def _persist_exact_root_caller')]
+        self.assertIn('"universe_address_hex_at_capture": root_event.get("universe_address_hex_at_capture")', persist)
+        self.assertIn('"runtime_metadata_at_capture": runtime_metadata', persist)
+        self.assertIn('"root_event": root_event', persist)
+        root_capture = probe.index('event["universe_address_hex_at_capture"] = runtime_metadata.get("universe_address_hex")')
+        exact_persist = probe.index('self._persist_exact_root_caller(event, exact_external)')
+        self.assertLess(root_capture, exact_persist)
+        schema=json.loads((ROOT / "schema" / "live-status-v1.schema.json").read_text(encoding="utf-8"))
+        self.assertIn("root_dispatch_capture",schema["properties"])
+        self.assertIn("last_dungeon_root_owner_plus_0x10_capture",schema["properties"]["generation_rooms"]["properties"])
+
+    def test_overlay_and_objective_show_real_owner_slot_capture(self):
+        live={"root_dispatch_capture":{"captured":True,"slot_value_hex":"00007FF612345678","target_offset_hex":"01234567","target_identity":{"module_rva_hex":"01234567"}}}
+        view=overlay_mod.summarize_status({"heartbeat_epoch":1000.0,"probe_version":"0.3.34","state":"ready","recording":False,**live},now_epoch=1000.5)
+        self.assertIn("CAPTURED 00007FF612345678 -> NMS+01234567",view["root_dispatch"])
+        snapshot={"lanes":[{"id":"runtime-dispatch","name":"Runtime-A","human_required":True,"surveyor_request":"Wait for Root dispatch +0x10 capture, then upload"}]}
+        objective=overlay_mod.build_agent_objectives(snapshot,live,True)["objectives"][0]
+        self.assertTrue(objective["complete"])
+        self.assertTrue(objective["keep_game_open"])
+
+    def test_overlay_exposes_root_resource_and_separates_pending_dispatch_capture(self):
+        status={
+            "heartbeat_epoch":1000.0,"probe_version":"0.3.33","state":"recording","recording":True,
+            "generation_rooms":{"dungeon_root_resource_events_seen":2},
+        }
+        view=overlay_mod.summarize_status(status,now_epoch=1000.5)
+        self.assertIn("MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",view["root_resource"])
+        self.assertIn("observed 2",view["root_resource"])
+        self.assertIn("not captured",view["root_dispatch"].lower())
+        self.assertIn("Runtime-A",view["root_dispatch"])
+        probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+        self.assertIn('"dungeon_root_resource_events_seen": dungeon_root_resource_events_seen',probe)
+        self.assertIn('event_resource == DUNGEON_ROOT_SCENE',probe)
+
+    def test_overlay_controls_and_capture_status_are_visible_in_controller(self):
+        source=(ROOT / "tools" / "surveyor_controller.py").read_text(encoding="utf-8")
+        self.assertIn('text="Start overlay"',source)
+        self.assertIn('text="Stop overlay"',source)
+        self.assertIn('"Root resource"',source)
+        self.assertIn('"Root dispatch +0x10"',source)
+        self.assertIn("OVERLAY_STOP_REQUEST.write_text",source)
+
+    def test_seed_room_correlation_detects_repeat_address_stability(self):
+        summary={"measurements":[
+            {"universe_address_hex":"00001A0004E84EFD","preset":"CARGO_FLOATERS","target_containers":35,"reward_seed_hexes":["CE0669F299792E85"],"poi_seed_candidate_hexes":[],"layout_signature_sha256":"LAYOUT35","room_sequence":[]},
+            {"universe_address_hex":"00001A0004E84EFD","preset":"CARGO_FLOATERS","target_containers":35,"reward_seed_hexes":["CE0669F299792E85"],"poi_seed_candidate_hexes":["00001A0004E84EFD"],"layout_signature_sha256":"LAYOUT35","room_sequence":[]},
+            {"universe_address_hex":"0001550006607CAC","preset":"CARGO_FLOATERS","target_containers":51,"reward_seed_hexes":["1EE5E3C00986D42A"],"poi_seed_candidate_hexes":[],"layout_signature_sha256":"LAYOUT51","room_sequence":[]},
+        ]}
+        out=seed_room_correlation.analyze(summary)
+        self.assertEqual(3,out["measurement_count"])
+        self.assertEqual(2,out["unique_addresses"])
+        g=next(x for x in out["address_groups"] if x["universe_address_hex"]=="00001A0004E84EFD")
+        self.assertTrue(g["layout_stable_across_repeats"])
+        self.assertTrue(g["reward_seed_stable_across_repeats"])
+        self.assertTrue(g["poi_context_equals_universe_address"])
+
+    def test_verified_51_fixture_exposes_dungeon_root_seed_candidate(self):
+        fixture=json.loads((ROOT / "corpus" / "research" / "baseline-001-generation-fingerprint-v0.3.13.json").read_text(encoding="utf-8"))
+        seeds=fixture.get("dungeon_root_seed_candidates") or []
+        self.assertEqual(["00C9E8DF0327789E"],[x.get("seed_hex") for x in seeds])
+        self.assertEqual("dungeon-root-resource-seed-candidate",fixture.get("layout_seed_status"))
+
+    def test_51_repeat_confirms_same_room_multiset_with_full_room_indices(self):
+        older=json.loads((ROOT / "corpus" / "research" / "baseline-001-generation-fingerprint-v0.3.13.json").read_text(encoding="utf-8"))
+        repeat=json.loads((ROOT / "corpus" / "research" / "baseline-001-repeat-generation-v0.3.12.json").read_text(encoding="utf-8"))
+        self.assertEqual(older.get("layout_multiset_signature_sha256"), repeat.get("layout_multiset_signature_sha256"))
+        self.assertEqual(9,repeat.get("room_parent_index_coverage"))
+        self.assertEqual(list(range(9)),[x.get("room_index") for x in repeat.get("canonical_room_sequence") or []])
+        self.assertEqual(51,repeat.get("predicted_target_containers"))
+
+    def test_generation_measurement_keeps_dungeon_root_seed(self):
+        fixture=json.loads((ROOT / "corpus" / "research" / "baseline-001-generation-fingerprint-v0.3.13.json").read_text(encoding="utf-8"))
+        row=generation_measure.compact_row(fixture)
+        self.assertEqual(["00C9E8DF0327789E"],row.get("dungeon_root_seed_hexes"))
+
+    def test_overlay_shows_dungeon_root_seed_candidate(self):
+        status={
+            "heartbeat_epoch":1000.0,"probe_version":"0.3.13","state":"recording","recording":True,
+            "detail":"recording","blue_crates":0,"rooms":0,"room_zero_rooms":0,"vertical_transitions":0,"shuttle_bays":0,
+            "engineering_marked":False,"engineering_module_class":"unknown","last_event":"",
+            "generation_rooms":{"total_rooms_seen":9,"main_rooms_seen":7,"dead_end_rooms_seen":2,"room_parent_names_seen":9,"poi_context_arguments":["0001550006607CAC"],"poi_context_matches_universe_address":True,"last_dungeon_root_seed_hex":"00C9E8DF0327789E"},
+        }
+        view=overlay_mod.summarize_status(status,now_epoch=1000.5)
+        self.assertIn("DUNGEON-SEED 00C9E8DF0327789E",view["generation"])
+
+    def test_seed_room_correlation_tracks_dungeon_root_seed_stability(self):
+        summary={"measurements":[
+            {"universe_address_hex":"0001550006607CAC","target_containers":51,"reward_seed_hexes":["1EE5E3C00986D42A"],"dungeon_root_seed_hexes":["00C9E8DF0327789E"],"layout_multiset_signature_sha256":"LAYOUT51","room_sequence":[]},
+            {"universe_address_hex":"0001550006607CAC","target_containers":51,"reward_seed_hexes":["1EE5E3C00986D42A"],"dungeon_root_seed_hexes":["00C9E8DF0327789E"],"layout_multiset_signature_sha256":"LAYOUT51","room_sequence":[]},
+        ]}
+        out=seed_room_correlation.analyze(summary)
+        g=out["address_groups"][0]
+        self.assertTrue(g["dungeon_root_seed_stable_across_repeats"])
+        self.assertEqual(["00C9E8DF0327789E"],g["dungeon_root_seed_hexes"])
+        self.assertEqual([],out["dungeon_root_seed_collisions_across_addresses"])
+
+    def test_probe_filters_stale_poi_context_and_retains_dungeon_seed(self):
+        source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+        self.assertIn("discarded_pre_session_poi_context_mismatches",source)
+        self.assertIn("DUNGEON_SEED_RETENTION_SECONDS",source)
+        self.assertIn("universe_address_hex_at_capture",source)
+
+    def test_seed_room_correlation_requires_full_root_seed_coverage_for_stability(self):
+        summary={"measurements":[
+            {"universe_address_hex":"0001550006607CAC","dungeon_root_seed_hexes":["00C9E8DF0327789E"],"layout_multiset_signature_sha256":"L","room_sequence":[]},
+            {"universe_address_hex":"0001550006607CAC","dungeon_root_seed_hexes":[],"layout_multiset_signature_sha256":"L","room_sequence":[]},
+        ]}
+        out=seed_room_correlation.analyze(summary)
+        g=out["address_groups"][0]
+        self.assertEqual(1,g["dungeon_root_seed_measurement_coverage"])
+        self.assertIsNone(g["dungeon_root_seed_stable_across_repeats"])
+
+
+    def test_resource_seed_lineage_keeps_order_and_ignores_zero_seeds(self):
+        session={"trace":{"events":[
+            {"kind":"resource_add","trace_sequence":8,"resource_name":"MODELS/SPACE/POI/DUNGEON/CARG/ROOM.SCENE.MBIN","primary_seed":{"seed_hex":"1111111111111111","use_seed_value":True}},
+            {"kind":"resource_add","trace_sequence":7,"resource_name":"MODELS/SPACE/POI/DUNGEON.SCENE.MBIN","primary_seed":{"seed_hex":"2222222222222222","use_seed_value":True}},
+            {"kind":"resource_find","trace_sequence":9,"resource_name":"MODELS/SPACE/POI/DUNGEON/EMPTY/X.SCENE.MBIN","primary_seed":{"seed_hex":"0000000000000000","use_seed_value":True}},
+            {"kind":"resource_add","trace_sequence":10,"resource_name":"MODELS/PLANETS/IGNORED.SCENE.MBIN","primary_seed":{"seed_hex":"3333333333333333","use_seed_value":True}},
+        ]}}
+        out=generation_baseline.resource_seed_lineage(session)
+        self.assertEqual("captured",out["status"])
+        self.assertEqual(2,out["event_count"])
+        self.assertEqual([7,8],[x["trace_sequence"] for x in out["events"]])
+        self.assertEqual(["2222222222222222","1111111111111111"],out["unique_primary_seed_hexes"])
+        self.assertEqual(64,len(out["ordered_signature_sha256"]))
+
+    def test_generation_measurement_keeps_resource_seed_lineage_signature(self):
+        row=generation_measure.compact_row({
+            "session_id":"s","resource_seed_lineage":{
+                "ordered_signature_sha256":"abc123",
+                "unique_primary_seed_hexes":["A","B"],
+            }
+        })
+        self.assertEqual("abc123",row["resource_seed_lineage_signature_sha256"])
+        self.assertEqual(["A","B"],row["resource_seed_primary_hexes"])
+
+    def test_seed_room_correlation_tracks_lineage_stability_when_fully_covered(self):
+        summary={"measurements":[
+            {"universe_address_hex":"A","resource_seed_lineage_signature_sha256":"SIG","room_sequence":[]},
+            {"universe_address_hex":"A","resource_seed_lineage_signature_sha256":"SIG","room_sequence":[]},
+        ]}
+        out=seed_room_correlation.analyze(summary)
+        group=out["address_groups"][0]
+        self.assertTrue(group["resource_seed_lineage_stable_across_repeats"])
+        self.assertEqual(2,group["resource_seed_lineage_measurement_coverage"])
+
+    def test_probe_trace_events_have_monotonic_sequence_instrumentation(self):
+        source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+        self.assertIn("self._trace_sequence += 1",source)
+        self.assertIn('"trace_sequence": self._trace_sequence',source)
+
+
+    def test_v0314_cross_address_dungeon_seed_discriminator_fixtures(self):
+        baseline51=json.loads((ROOT / "corpus" / "research" / "baseline-001-repeat-generation-v0.3.13-reanalysis.json").read_text(encoding="utf-8"))
+        baseline35=json.loads((ROOT / "corpus" / "research" / "baseline-002-generation-fingerprint-v0.3.13.json").read_text(encoding="utf-8"))
+        older35=json.loads((ROOT / "corpus" / "research" / "baseline-002-generation-fingerprint-v0.3.12.json").read_text(encoding="utf-8"))
+        seed51=(baseline51.get("dungeon_root_seed_candidates") or [])[0]["seed_hex"]
+        seed35=(baseline35.get("dungeon_root_seed_candidates") or [])[0]["seed_hex"]
+        self.assertEqual("00C9E8DF0327789E",seed51)
+        self.assertEqual("9256392A2F5A74AC",seed35)
+        self.assertNotEqual(seed51,seed35)
+        self.assertEqual(51,baseline51.get("predicted_target_containers"))
+        self.assertEqual(35,baseline35.get("predicted_target_containers"))
+        self.assertEqual(older35.get("layout_multiset_signature_sha256"),baseline35.get("layout_multiset_signature_sha256"))
+
+    def test_overlay_room_loot_view_prioritizes_human_readable_counts(self):
+        status={
+            "heartbeat_epoch":1000.0,"probe_version":"0.3.15","state":"recording","recording":True,
+            "detail":"Entered derelict — recording started automatically","last_event":"",
+            "generation_rooms":{
+                "crate_index_status":"ready","salvage_crates_seen":31,"crew_footlockers_seen":4,"target_containers_seen":35,
+                "total_rooms_seen":8,"main_rooms_seen":7,"dead_end_rooms_seen":1,"room_parent_names_seen":8,
+                "rooms":[
+                    {"room_index":0,"room_kind":"main_room","dominant_family":"BARRACKS","salvage_crates":0,"crew_footlockers":1,"target_containers":1},
+                    {"room_index":1,"room_kind":"main_room","dominant_family":"CARG","salvage_crates":15,"crew_footlockers":0,"target_containers":15},
+                    {"room_index":5,"room_kind":"dead_end","dominant_family":"BARRACKS","salvage_crates":0,"crew_footlockers":0,"target_containers":0},
+                ],
+            },
+        }
+        view=overlay_mod.summarize_status(status,now_epoch=1000.5)
+        self.assertIn("LOOT SEEN 35",view["loot_summary"])
+        self.assertIn("SALVAGE 31",view["loot_summary"])
+        self.assertIn("FOOTLOCKERS 4",view["loot_summary"])
+        self.assertIn("R1  CARGO",view["room_loot"])
+        self.assertIn("15",view["room_loot"])
+        self.assertIn("R5  DEAD END",view["room_loot"])
+
+    def test_overlay_defaults_hide_research_noise_but_keep_rooms(self):
+        self.assertTrue(overlay_mod.DEFAULT_VIEW_SETTINGS["show_rooms"])
+        self.assertFalse(overlay_mod.DEFAULT_VIEW_SETTINGS["show_research"])
+        self.assertFalse(overlay_mod.DEFAULT_VIEW_SETTINGS["show_position"])
+        self.assertFalse(overlay_mod.DEFAULT_VIEW_SETTINGS["show_manual"])
+        self.assertFalse(overlay_mod.DEFAULT_VIEW_SETTINGS["show_hotkeys"])
+        self.assertTrue(overlay_mod.DEFAULT_VIEW_SETTINGS["show_objectives"])
+
+    def test_overlay_objectives_can_be_hidden_and_old_settings_default_visible(self):
+        with tempfile.TemporaryDirectory() as td:
+            settings = Path(td) / "overlay-settings.json"
+            settings.write_text('{"show_rooms": false}', encoding="utf-8")
+            loaded = overlay_mod.load_overlay_settings(settings)
+            self.assertTrue(loaded["show_objectives"])
+            settings.write_text('{"show_objectives": false}', encoding="utf-8")
+            loaded = overlay_mod.load_overlay_settings(settings)
+            self.assertFalse(loaded["show_objectives"])
+
+    def test_overlay_is_foreground_only_for_the_detected_game_process(self):
+        self.assertTrue(overlay_mod._same_process_is_foreground(123, 123))
+        self.assertFalse(overlay_mod._same_process_is_foreground(123, 456))
+        self.assertFalse(overlay_mod._same_process_is_foreground(0, 0))
+
+    def test_live_status_contract_has_per_room_loot(self):
+        schema=json.loads((ROOT / "schema" / "live-status-v1.schema.json").read_text(encoding="utf-8"))
+        generation=schema["properties"]["generation_rooms"]["properties"]
+        self.assertIn("rooms",generation)
+        self.assertIn("target_containers_seen",generation)
+        room_props=generation["rooms"]["items"]["properties"]
+        self.assertIn("salvage_crates",room_props)
+        self.assertIn("crew_footlockers",room_props)
+        self.assertIn("target_containers",room_props)
+
+    def test_probe_uses_local_asset_index_for_live_room_loot(self):
+        source=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
+        self.assertIn('"room-crate-index.json"',source)
+        self.assertIn("def _load_live_crate_index",source)
+        self.assertIn('"target_containers_seen"',source)
+        self.assertIn('"rooms": room_rows',source)
+
+    def test_repeat_35_v0314_confirms_root_seed_and_layout_again(self):
+        previous=json.loads((ROOT / "corpus" / "research" / "baseline-002-generation-fingerprint-v0.3.13.json").read_text(encoding="utf-8"))
+        repeat=json.loads((ROOT / "corpus" / "research" / "baseline-002-repeat-generation-v0.3.14.json").read_text(encoding="utf-8"))
+        self.assertEqual(35,repeat["predicted_target_containers"])
+        self.assertEqual(previous["layout_multiset_signature_sha256"],repeat["layout_multiset_signature_sha256"])
+        self.assertEqual(previous["dungeon_root_seed_candidates"][0]["seed_hex"],repeat["dungeon_root_seed_candidates"][0]["seed_hex"])
+        self.assertEqual("9256392A2F5A74AC",repeat["dungeon_root_seed_candidates"][0]["seed_hex"])
+
+    def test_generation_analyzer_stamps_its_own_version(self):
+        source=(ROOT / "tools" / "analyze_generation_baseline.py").read_text(encoding="utf-8")
+        self.assertIn('ANALYSIS_TOOL_VERSION = "0.3.24"',source)
+        self.assertIn('"analysis_tool_version":ANALYSIS_TOOL_VERSION',source)
+
+    def test_resource_seed_context_lineage_widens_without_changing_dungeon_lineage(self):
+        session={"trace":{"events":[
+            {"kind":"resource_add","trace_sequence":5,"resource_name":"MODELS/SPACE/POI/ABANDONED/GENERATOR.SCENE.MBIN","primary_seed":{"seed_hex":"AAAAAAAAAAAAAAAA","use_seed_value":True}},
+            {"kind":"resource_add","trace_sequence":6,"resource_name":"MODELS/SPACE/POI/DUNGEON.SCENE.MBIN","primary_seed":{"seed_hex":"BBBBBBBBBBBBBBBB","use_seed_value":True}},
+            {"kind":"reward","trace_sequence":7,"resource_name":"MODELS/SPACE/POI/IGNORED.SCENE.MBIN","seed":{"seed_hex":"CCCCCCCCCCCCCCCC"}},
+        ]}}
+        dungeon=generation_baseline.resource_seed_lineage(session)
+        context=generation_baseline.resource_seed_context_lineage(session)
+        self.assertEqual(["BBBBBBBBBBBBBBBB"],dungeon["unique_primary_seed_hexes"])
+        self.assertEqual(["AAAAAAAAAAAAAAAA","BBBBBBBBBBBBBBBB"],context["unique_primary_seed_hexes"])
+        self.assertEqual("dungeon-only",dungeon["scope"])
+        self.assertEqual("recorded-derelict-poi-context",context["scope"])
+
+    def test_generation_measurement_keeps_seed_context_lineage_without_breaking_old_fields(self):
+        row=generation_measure.compact_row({
+            "session_id":"s",
+            "resource_seed_lineage":{"ordered_signature_sha256":"old","unique_primary_seed_hexes":["ROOT"]},
+            "resource_seed_context_lineage":{"ordered_signature_sha256":"wide","unique_primary_seed_hexes":["UPSTREAM","ROOT"]},
+            "poi_generation_trace":{
+                "description_return_hexes":["DERIVED"],
+                "description_results":[{"return_matches_dungeon_root_seed":True}],
+                "dungeon_root_inside_prepare":True,
+                "dungeon_root_engine_caller_offsets":["00123456"],
+                "dungeon_root_manager_caller_offsets":["00654321"],
+            },
+        })
+        self.assertEqual("old",row["resource_seed_lineage_signature_sha256"])
+        self.assertEqual(["ROOT"],row["resource_seed_primary_hexes"])
+        self.assertEqual("wide",row["resource_seed_context_signature_sha256"])
+        self.assertEqual(["UPSTREAM","ROOT"],row["resource_seed_context_primary_hexes"])
+        self.assertEqual(["DERIVED"],row["poi_description_return_hexes"])
+        self.assertTrue(row["poi_description_return_matches_root_seed"])
+        self.assertTrue(row["dungeon_root_inside_poi_prepare"])
+        self.assertFalse(row["dungeon_root_inside_poi_activation"])
+        self.assertFalse(row["dungeon_root_inside_poi_lifecycle"])
+        self.assertEqual(0,row["resource_manager_root_event_count"])
+        self.assertEqual(["00123456"],row["dungeon_root_engine_caller_offsets"])
+        self.assertEqual(["00654321"],row["dungeon_root_manager_caller_offsets"])
+
+
+    def test_v0316_context_fixture_proves_address_echo_before_distinct_root(self):
+        fixture=json.loads((ROOT / "corpus" / "research" / "baseline-002-repeat-generation-v0.3.16-context.json").read_text(encoding="utf-8"))
+        self.assertEqual("0.3.16",fixture.get("analysis_tool_version"))
+        self.assertEqual("00001A0004E84EFD",fixture.get("universe_address_hex"))
+        context=fixture.get("resource_seed_context_lineage") or {}
+        self.assertEqual(58,context.get("event_count"))
+        events=context.get("events") or []
+        address_events=[e for e in events if e.get("primary_seed_hex")=="00001A0004E84EFD"]
+        self.assertEqual(11,len(address_events))
+        self.assertTrue(all("HULK" in str(e.get("resource_name") or "") or "ABAND" in str(e.get("resource_name") or "") for e in address_events))
+        root=(fixture.get("dungeon_root_seed_candidates") or [])[0].get("seed_hex")
+        self.assertEqual("9256392A2F5A74AC",root)
+        self.assertNotEqual(fixture.get("universe_address_hex"),root)
 
     def test_poi_generation_summary_correlates_return_and_prepare_scope(self):
         session={"trace":{"events":[
@@ -798,7 +1152,7 @@ class ToolTests(unittest.TestCase):
 
 
     def test_v0322_version_marker(self):
-        self.assertEqual("0.3.64", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.66", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
 
     def test_parallel_research_panel_runs_and_optionally_shares_only_combined_report(self):
         controller=(ROOT / "tools" / "surveyor_controller.py").read_text(encoding="utf-8")
@@ -1042,7 +1396,7 @@ class ToolTests(unittest.TestCase):
         self.assertNotIn("Test-Runtime", start_nms)
         self.assertNotIn("Python.Python.3.12", start_nms)
         self.assertNotIn("import pymhf; import nmspy", start_nms)
-        self.assertIn('CONTROLLER_VERSION = "0.3.64"', controller)
+        self.assertIn('CONTROLLER_VERSION = "0.3.66"', controller)
         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
 
     def test_github_update_buttons_use_a_separate_geometry_parent(self):
@@ -1103,7 +1457,7 @@ class ToolTests(unittest.TestCase):
             self.assertIn(token, probe)
 
     def test_v0330_version(self):
-        self.assertEqual("0.3.64", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.66", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
 
     def test_v0328_seed_function_relrefs_classify_recursion(self):
@@ -1195,7 +1549,7 @@ class ToolTests(unittest.TestCase):
     def test_v0333_all_52_callers_are_observed_in_one_hook(self):
         probe=(ROOT / "mod" / "derelict_baseline_probe.py").read_text(encoding="utf-8")
         self.assertIn("CURRENT_BUILD_LOGICAL_ENTRY_CALLER_RETURNS", probe)
-        self.assertIn("CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA = 0x00634C63", probe)
+        self.assertIn("CURRENT_BUILD_RECURSIVE_CALL_RETURN_RVA = 0x0063A773", probe)
         self.assertIn("_logical_entry_caller_hits", probe)
         self.assertIn("_logical_entry_external_match_for_descriptor", probe)
         self.assertIn('"all-callers-single-hook-exact-descriptor-correlation" if exact else', probe)
