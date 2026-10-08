@@ -234,6 +234,25 @@ def _copy_input_snapshot(source: Path, destination: Path, *, link_extracted: boo
                         shutil.copy2(source_file, destination_file)
 
 
+def _pin_session_as_latest(local_data: Path, session_path: Path, expected_sha256: str) -> str:
+    """Make a worker analyze the exact saved session that triggered its run."""
+    raw = session_path.read_bytes()
+    actual = hashlib.sha256(raw).hexdigest()
+    if actual.lower() != expected_sha256.lower():
+        raise ValueError(f"Saved session hash changed before research started: {session_path.name}")
+    try:
+        session = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError(f"Saved session is not valid UTF-8 JSON: {session_path.name}") from exc
+    if not isinstance(session, dict) or not session.get("ended_utc"):
+        raise ValueError(f"Saved session is incomplete: {session_path.name}")
+    target = local_data / "latest.json"
+    temp = target.with_suffix(".json.tmp")
+    temp.write_bytes(raw)
+    os.replace(temp, target)
+    return actual
+
+
 def _command(action_id: str, workflow: str, outdir: Path) -> list[str] | None:
     py = sys.executable
     tools = ROOT / "tools"
@@ -293,7 +312,8 @@ def _artifact_records(action_id: str, local_data: Path, outdir: Path, initial_st
 
 
 def _run_action(spec: tuple[str, str, str], run_dir: Path, input_root: Path,
-                source_env: dict[str, str], progress_events: queue.Queue[dict[str, Any]]) -> dict[str, Any]:
+                source_env: dict[str, str], progress_events: queue.Queue[dict[str, Any]],
+                session_override: tuple[Path, str] | None = None) -> dict[str, Any]:
     action_id, lane, workflow = spec
     worker = run_dir / "workers" / action_id.replace(".", "_")
     local = worker / "local-appdata"
@@ -305,6 +325,8 @@ def _run_action(spec: tuple[str, str, str], run_dir: Path, input_root: Path,
         local_data,
         link_extracted=action_id in {"research.measure_generation", "research.analyze_generation"},
     )
+    if session_override:
+        _pin_session_as_latest(local_data, *session_override)
     initial_state: dict[str, tuple[str, int]] = {}
     for path in local_data.rglob("*"):
         if path.is_file():
@@ -342,7 +364,8 @@ def _run_action(spec: tuple[str, str, str], run_dir: Path, input_root: Path,
 
 
 def _trigger_record(kind: str, session_file: str | None = None,
-                   session_sha256: str | None = None) -> dict[str, str | None]:
+                   session_sha256: str | None = None,
+                   session_input_verified: bool = False) -> dict[str, str | bool | None]:
     allowed = {"manual_button", "automatic_saved_session", "command_line"}
     if kind not in allowed:
         raise ValueError(f"Unknown parallel research trigger: {kind}")
@@ -350,6 +373,7 @@ def _trigger_record(kind: str, session_file: str | None = None,
         "kind": kind,
         "session_file": Path(session_file).name if session_file else None,
         "session_sha256": session_sha256,
+        "session_input_verified": session_input_verified,
     }
 
 
@@ -358,13 +382,26 @@ def run_test(output_dir: Path | None = None, max_workers: int = 8, *,
              trigger_session_sha256: str | None = None) -> tuple[Path, Path, int]:
     localappdata = os.environ.get("LOCALAPPDATA")
     input_root = Path(localappdata) / "NMSDerelictSurveyor" if localappdata else Path("__no_localappdata__")
+    session_override: tuple[Path, str] | None = None
+    if trigger_kind == "automatic_saved_session":
+        if not trigger_session_file or not trigger_session_sha256:
+            raise ValueError("Automatic saved-session research requires the session filename and SHA-256.")
+        safe_name = Path(trigger_session_file).name
+        if safe_name != trigger_session_file or not safe_name.lower().endswith(".json"):
+            raise ValueError("Automatic saved-session filename must be a JSON basename.")
+        session_path = input_root / "sessions" / safe_name
+        raw_session = session_path.read_bytes()
+        if hashlib.sha256(raw_session).hexdigest().lower() != trigger_session_sha256.lower():
+            raise ValueError(f"Saved session hash changed before research started: {safe_name}")
+        session_override = (session_path, trigger_session_sha256)
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
     run_dir = (output_dir or ROOT / "parallel-action-tests" / run_id).resolve()
     run_dir.mkdir(parents=True, exist_ok=False)
     queue_path = run_dir / "queue.jsonl"
     final_path = run_dir / "combined-results.json"
     started_utc = utc_now()
-    trigger = _trigger_record(trigger_kind, trigger_session_file, trigger_session_sha256)
+    trigger = _trigger_record(trigger_kind, trigger_session_file, trigger_session_sha256,
+                              session_input_verified=session_override is not None)
     append_queue(queue_path, {"event": "run_started", "run_id": run_id, "utc": started_utc, "workers": max_workers,
                               "actions": [s[0] for s in ACTION_SPECS], "trigger": trigger})
     results: list[dict[str, Any]] = []
@@ -377,7 +414,8 @@ def run_test(output_dir: Path | None = None, max_workers: int = 8, *,
         for spec in ACTION_SPECS:
             append_queue(queue_path, {"event": "action_started", "action_id": spec[0], "lane": spec[1], "utc": utc_now()})
             dashboard.update(spec[0], state="RUNNING", stage="Launching isolated action")
-            future_specs[pool.submit(_run_action, spec, run_dir, input_root, source_env, progress_events)] = spec
+            future_specs[pool.submit(_run_action, spec, run_dir, input_root, source_env,
+                                     progress_events, session_override)] = spec
         pending = set(future_specs)
         try:
             while pending:
@@ -569,6 +607,9 @@ def main() -> int:
         )
     except FileExistsError as exc:
         print(f"Refusing to overwrite an existing test run: {exc}", file=sys.stderr)
+        return 2
+    except (OSError, ValueError) as exc:
+        print(f"Could not start parallel research: {exc}", file=sys.stderr)
         return 2
     print(f"Queue: {queue_path}")
     print(f"Combined results: {final_path}")
