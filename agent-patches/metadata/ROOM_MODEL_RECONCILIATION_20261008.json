@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "metadata",
-  "reviewed_utc": "2026-10-08T23:28:08Z",
+  "reviewed_utc": "2026-10-08T23:31:26Z",
   "evidence_class": "cross-run static-rule and scene-parent-model reconciliation",
   "conclusion": "The reported Room N values are analyzer-derived parent-key groups, not verified static RoomId counts. The data supports grouping/classification mismatch as a plausible contributor to the 7-versus-11/10 discrepancy, but does not determine whether generator semantics also contribute.",
   "current_pointer": {
@@ -260,5 +260,331 @@
     "backup_branch": "backup/main-before-metadata-reconcile-20261008-2328",
     "base_commit": "69efada4badc48701bcd27ee9b631c1b10be7280",
     "revert": "Revert the reconciliation publication commit; retain timestamped research reports."
+  },
+  "captured_group_inventory": {
+    "source_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+    "source_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+    "run_id": "20261008T140207Z-d8e24197",
+    "source_session": "20261008T140041Z_0001BF0004E84EFD",
+    "analyzer_scope": "11 logical groups from generation-baseline-latest.json, grouped by parent_key; Room N is parsed from captured parent labels.",
+    "aggregate_counts": {
+      "CARG": 8,
+      "BARRACKS": 2,
+      "END": 1,
+      "total": 11,
+      "asset_predicted_salvage": 30,
+      "asset_predicted_footlockers": 13,
+      "asset_predicted_total": 43,
+      "observed_container_count": null
+    },
+    "groups": [
+      {
+        "room_index": 0,
+        "parent_key": "0038752E",
+        "analyzer_label": "Room 0",
+        "analyzer_classification": "main_room",
+        "dominant_scene_family": "CARG",
+        "family_scene_counts": {
+          "CARG": 4,
+          "EMPTY": 5
+        },
+        "scene_instances": 9,
+        "asset_predicted_salvage": 0,
+        "asset_predicted_footlockers": 0,
+        "asset_predicted_targets": 0,
+        "dead_end_classifier_evidence": [],
+        "dead_end_named_scene_paths": [],
+        "family_only_static_id_candidates": [
+          "R_FLO_CARG",
+          "R_S_FLO_CARG",
+          "B_FLO_CARG"
+        ]
+      },
+      {
+        "room_index": 1,
+        "parent_key": "0038752F",
+        "analyzer_label": "Room 1",
+        "analyzer_classification": "main_room",
+        "dominant_scene_family": "BARRACKS",
+        "family_scene_counts": {
+          "BARRACKS": 4,
+          "EMPTY": 3,
+          "SPAWNERS": 1
+        },
+        "scene_instances": 8,
+        "asset_predicted_salvage": 0,
+        "asset_predicted_footlockers": 2,
+        "asset_predicted_targets": 2,
+        "dead_end_classifier_evidence": [],
+        "dead_end_named_scene_paths": [],
+        "family_only_static_id_candidates": [
+          "R_FLO_BARR",
+          "R_S_FLO_BARR",
+          "B_FLO_BARR"
+        ]
+      },
+      {
+        "room_index": 2,
+        "parent_key": "00387530",
+        "analyzer_label": "Room 2",
+        "analyzer_classification": "main_room",
+        "dominant_scene_family": "CARG",
+        "family_scene_counts": {
+          "CARG": 10,
+          "COMM": 2,
+          "EMPTY": 15,
+          "SPAWNERS": 1
+        },
+        "scene_instances": 28,
+        "asset_predicted_salvage": 7,
+        "asset_predicted_footlockers": 3,
+        "asset_predicted_targets": 10,
+        "dead_end_classifier_evidence": [],
+        "dead_end_named_scene_paths": [],
+        "family_only_static_id_candidates": [
+          "R_FLO_CARG",
+          "R_S_FLO_CARG",
+          "B_FLO_CARG"
+        ]
+      },
+      {
+        "room_index": 3,
+        "parent_key": "00387531",
+        "analyzer_label": "Room 3",
+        "analyzer_classification": "main_room",
+        "dominant_scene_family": "CARG",
+        "family_scene_counts": {
+          "CARG": 1,
+          "EMPTY": 1,
+          "SPAWNERS": 1
+        },
+        "scene_instances": 3,
+        "asset_predicted_salvage": 1,
+        "asset_predicted_footlockers": 0,
+        "asset_predicted_targets": 1,
+        "dead_end_classifier_evidence": [],
+        "dead_end_named_scene_paths": [
+          "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_DEADEND3.SCENE.MBIN",
+          "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_C_3.SCENE.MBIN"
+        ],
+        "family_only_static_id_candidates": [
+          "R_FLO_CARG",
+          "R_S_FLO_CARG",
+          "B_FLO_CARG"
+        ]
+      },
+      {
+        "room_index": 4,
+        "parent_key": "00387532",
+        "analyzer_label": "Room 4",
+        "analyzer_classification": "main_room",
+        "dominant_scene_family": "CARG",
+        "family_scene_counts": {
+          "CARG": 7,
+          "EMPTY": 17,
+          "SPAWNERS": 2
+        },
+        "scene_instances": 26,
+        "asset_predicted_salvage": 7,
+        "asset_predicted_footlockers": 1,
+        "asset_predicted_targets": 8,
+        "dead_end_classifier_evidence": [],
+        "dead_end_named_scene_paths": [
+          "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_R_3.SCENE.MBIN"
+        ],
+        "family_only_static_id_candidates": [
+          "R_FLO_CARG",
+          "R_S_FLO_CARG",
+          "B_FLO_CARG"
+        ]
+      },
+      {
+        "room_index": 5,
+        "parent_key": "00387533",
+        "analyzer_label": "Room 5",
+        "analyzer_classification": "main_room",
+        "dominant_scene_family": "CARG",
+        "family_scene_counts": {
+          "CARG": 1,
+          "COMM": 1,
+          "EMPTY": 2,
+          "SPAWNERS": 1
+        },
+        "scene_instances": 5,
+        "asset_predicted_salvage": 0,
+        "asset_predicted_footlockers": 0,
+        "asset_predicted_targets": 0,
+        "dead_end_classifier_evidence": [],
+        "dead_end_named_scene_paths": [
+          "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_DEADEND2.SCENE.MBIN",
+          "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_C_3.SCENE.MBIN"
+        ],
+        "family_only_static_id_candidates": [
+          "R_FLO_CARG",
+          "R_S_FLO_CARG",
+          "B_FLO_CARG"
+        ]
+      },
+      {
+        "room_index": 6,
+        "parent_key": "0038753E",
+        "analyzer_label": "Room 6",
+        "analyzer_classification": "main_room",
+        "dominant_scene_family": "CARG",
+        "family_scene_counts": {
+          "CARG": 8,
+          "COMM": 2,
+          "EMPTY": 16
+        },
+        "scene_instances": 26,
+        "asset_predicted_salvage": 9,
+        "asset_predicted_footlockers": 1,
+        "asset_predicted_targets": 10,
+        "dead_end_classifier_evidence": [],
+        "dead_end_named_scene_paths": [
+          "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_R_3.SCENE.MBIN"
+        ],
+        "family_only_static_id_candidates": [
+          "R_FLO_CARG",
+          "R_S_FLO_CARG",
+          "B_FLO_CARG"
+        ]
+      },
+      {
+        "room_index": 7,
+        "parent_key": "0038753F",
+        "analyzer_label": "Room 7",
+        "analyzer_classification": "main_room",
+        "dominant_scene_family": "CARG",
+        "family_scene_counts": {
+          "CARG": 4,
+          "EMPTY": 4,
+          "SPAWNERS": 2
+        },
+        "scene_instances": 10,
+        "asset_predicted_salvage": 3,
+        "asset_predicted_footlockers": 0,
+        "asset_predicted_targets": 3,
+        "dead_end_classifier_evidence": [],
+        "dead_end_named_scene_paths": [],
+        "family_only_static_id_candidates": [
+          "R_FLO_CARG",
+          "R_S_FLO_CARG",
+          "B_FLO_CARG"
+        ]
+      },
+      {
+        "room_index": 8,
+        "parent_key": "00287540",
+        "analyzer_label": "Room 8",
+        "analyzer_classification": "main_room",
+        "dominant_scene_family": "BARRACKS",
+        "family_scene_counts": {
+          "BARRACKS": 10,
+          "CARG": 1,
+          "COMM": 1,
+          "EMPTY": 13,
+          "SPAWNERS": 3
+        },
+        "scene_instances": 28,
+        "asset_predicted_salvage": 2,
+        "asset_predicted_footlockers": 6,
+        "asset_predicted_targets": 8,
+        "dead_end_classifier_evidence": [],
+        "dead_end_named_scene_paths": [],
+        "family_only_static_id_candidates": [
+          "R_FLO_BARR",
+          "R_S_FLO_BARR",
+          "B_FLO_BARR"
+        ]
+      },
+      {
+        "room_index": 9,
+        "parent_key": "00287541",
+        "analyzer_label": "Room 9",
+        "analyzer_classification": "main_room",
+        "dominant_scene_family": "CARG",
+        "family_scene_counts": {
+          "CARG": 1,
+          "COMM": 1,
+          "EMPTY": 2,
+          "SPAWNERS": 1
+        },
+        "scene_instances": 5,
+        "asset_predicted_salvage": 1,
+        "asset_predicted_footlockers": 0,
+        "asset_predicted_targets": 1,
+        "dead_end_classifier_evidence": [],
+        "dead_end_named_scene_paths": [
+          "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_DEADEND0.SCENE.MBIN",
+          "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_C_3.SCENE.MBIN"
+        ],
+        "family_only_static_id_candidates": [
+          "R_FLO_CARG",
+          "R_S_FLO_CARG",
+          "B_FLO_CARG"
+        ]
+      },
+      {
+        "room_index": 10,
+        "parent_key": "00287542",
+        "analyzer_label": "Room 10",
+        "analyzer_classification": "main_room",
+        "dominant_scene_family": "END",
+        "family_scene_counts": {
+          "COMM": 1,
+          "EMPTY": 8,
+          "END": 6,
+          "SPAWNERS": 1
+        },
+        "scene_instances": 16,
+        "asset_predicted_salvage": 0,
+        "asset_predicted_footlockers": 0,
+        "asset_predicted_targets": 0,
+        "dead_end_classifier_evidence": [],
+        "dead_end_named_scene_paths": [],
+        "family_only_static_id_candidates": [
+          "R_END"
+        ]
+      }
+    ],
+    "interpretation": "The two BARRACKS-dominant groups can be numerically compatible with the two exact-one BARRACKS rules, and Room 10 is index-compatible with the R_END minimum. Neither is an ID assignment. The eight CARG-dominant groups could represent repeated instances among R_FLO_CARG, R_S_FLO_CARG, and B_FLO_CARG; without per-group RoomId data, the report cannot distinguish main room IDs, branch room IDs, or grouping expansion."
+  },
+  "static_rule_reconciliation": {
+    "preset": "CARGO_FLOATERS",
+    "configured_rooms": 7,
+    "main_room_ids": [
+      "R_END",
+      "R_FLO_BARR",
+      "R_S_FLO_BARR",
+      "R_FLO_CARG",
+      "R_S_FLO_CARG"
+    ],
+    "branch_room_ids": [
+      "B_FLO_BARR",
+      "B_FLO_CARG"
+    ],
+    "exact_count_rules": [
+      {
+        "room_id": "R_FLO_BARR",
+        "min": 1,
+        "max": 1
+      },
+      {
+        "room_id": "R_S_FLO_BARR",
+        "min": 1,
+        "max": 1
+      },
+      {
+        "room_id": "R_END",
+        "min": 1,
+        "max": 1
+      }
+    ],
+    "sequence_rule": {
+      "room_id": "R_END",
+      "min_room_index": 6
+    },
+    "comparison_result": "Rules constrain static room IDs and order; the analyzer inventory counts parent_key groups and scene-family dominance. Aggregates are partly numerically compatible, but no exact reconciliation or contradiction follows without a source-backed parent_key/scene-to-RoomId crosswalk."
   }
 }
