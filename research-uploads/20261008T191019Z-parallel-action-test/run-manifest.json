@@ -1,0 +1,26 @@
+{
+  "action": "parallel-action-test",
+  "files": [
+    {
+      "name": "combined-results.json",
+      "sha256": "1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471",
+      "size": 1555213,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    }
+  ],
+  "run_id": "20261008T190939Z-98545bb8",
+  "selection": "Only the latest combined parallel research report; per-action files and queue are intentionally excluded.",
+  "uploaded_for_lanes": [
+    "runtime-dispatch",
+    "seed-lineage",
+    "dungeon-decompile",
+    "metadata"
+  ],
+  "utc": "20261008T191019Z",
+  "version": 1
+}
