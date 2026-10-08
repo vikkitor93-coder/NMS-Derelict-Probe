@@ -17,6 +17,8 @@
     "sanitized_offline_run": "research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/run-manifest.json",
     "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
     "static_root_trace": "agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json",
+    "parallel_action_review": "agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json",
+    "parallel_source_snapshot": "agent-patches/metadata/METADATA_PARALLEL_SOURCE_SNAPSHOT_20261008.json",
     "complete_source_snapshot": "agent-patches/metadata/METADATA_SOURCE_SNAPSHOT_20261007.json",
     "source_hashes": {
       "entrance_entity_mbin_sha256": "7ae4acec4521f5e8347b9d61514cf59dae7a24e722a7058a1126beb999b243e8",
@@ -31,11 +33,12 @@
     "windows_visual_refresh_and_rollback": "user confirmed on 2026-10-07; no separate screenshot or machine log supplied",
     "mapper": "ten unique choices and presets matched; inactive similarly named entity rejected",
     "root_trace": "hashed root scene and attachment entity decompiled; one locator attachment, two component types, no direct room-scene reference; all ten preset room-ID lists parsed",
+    "parallel_action_review": "attached 0.3.62 candidate ZIP and combined report SHA-256 verified; metadata action completed code 0 against saved input; 43 remains an asset-derived prediction grouped across 11 analyzer-derived logical rooms; shared pointer/report were not uploaded by Agent D",
     "package": "exact v0.3.60 base hash verified; complete 161-file v0.3.61 ZIP and manifest hashes verified before publication; 184/184 Windows Python 3.13 tests passed"
   },
   "confirmed": "The installed active entrance component contains ten static weighted choices and a DungeonRootScene field.",
   "unproven": "Runtime choice probabilities, seed input, actual frequencies, and the relationship between static DungeonRootScene and observed runtime DUNGEON.SCENE.MBIN.",
   "human_intervention_required": false,
   "rollback": "Restore backup/main-before-metadata-d-20261007-final or revert the publication commit; keep the dated research evidence for audit.",
-  "next_action": "Seek an explicit static mapping from table room IDs to room scene assets; coordinate with seed-lineage and dungeon-decompile before runtime claims."
+  "next_action": "Coordinate with dungeon-decompile on room-ID-to-scene resolution; do not promote the analyzer room grouping or inferred preset to a runtime observation."
 }

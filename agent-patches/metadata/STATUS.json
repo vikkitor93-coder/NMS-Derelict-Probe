@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "status": "complete",
-  "state": "published-to-main",
+  "state": "parallel-offline-evidence-reviewed",
   "human_intervention_required": false,
-  "summary": "METADATA-D 1.0.1 Prepare assets + upload completed on Windows. The user confirmed visual refresh and rollback. The active entrance entity maps directly to all ten weighted dungeon-table presets. The static DungeonRootScene's direct attachment contains gravity and physics components, with no direct room-scene reference. The one-line MBINCompiler repair and full Surveyor 0.3.61 source package are published on main; runtime selection behavior remains unverified.",
+  "summary": "The attached October 8 combined report verifies an offline METADATA-D prepare-assets action against saved evidence: 164/164 scene instances resolved and 43 target containers predicted from assets. No new game capture, physical count, or GitHub upload occurred in that run. The static ten-choice map and Surveyor 0.3.61 repair remain published; runtime selection remains unverified.",
   "completed_action": "Surveyor's 2026-10-07 00:35 UTC Prepare assets + upload run completed all three steps with exit status 0. Its extension action record is complete and main contains research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/.",
   "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
-  "next_action": "Seek an explicit static mapping from table room IDs to room scene assets. Coordinate with seed-lineage and dungeon-decompile lanes before claiming runtime selection semantics.",
+  "next_action": "Coordinate with dungeon-decompile on room-ID-to-scene resolution. The available combined-report room-family audit is complete; do not claim runtime selection semantics.",
   "user_steps": [],
   "success_condition": "The published package contains the repaired script and the metadata map remains reproducible from the hashed game assets.",
   "remaining_validation": [
-    "Runtime weighted-choice selection semantics, seed input, and actual selection frequencies remain unverified."
+    "Runtime weighted-choice selection semantics, seed input, actual selection frequencies, and an observed count for the saved October 6 session remain unverified."
   ],
   "evidence_to_return": [
     "research-uploads/20261007T003535Z-metadata-prepare-assets-a4da0463/run-manifest.json on main"
@@ -18,7 +18,11 @@
   "full_derelict_required": false,
   "evidence_review": "agent-patches/metadata/STATIC_DUNGEON_OPTIONS_MAP_20261007.md",
   "static_root_trace": "agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json",
+  "parallel_action_review": "agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json",
+  "parallel_source_snapshot": "agent-patches/metadata/METADATA_PARALLEL_SOURCE_SNAPSHOT_20261008.json",
+  "extension_version": "1.0.1",
+  "progress": "Reviewed the attached combined offline report and cross-checked its 11 analyzer-derived room groups against the 43-target asset prediction. The shared pointer/report remain outside GitHub main pending separate publication.",
   "complete_source_snapshot": "agent-patches/metadata/METADATA_SOURCE_SNAPSHOT_20261007.json",
   "pull_request": "https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/49",
-  "updated_utc": "2026-10-07T01:21:28Z"
+  "updated_utc": "2026-10-08T13:44:18Z"
 }

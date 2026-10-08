@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-07T01:21:28Z",
+  "updated_utc": "2026-10-08T13:44:18Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -47,13 +47,14 @@
     },
     "metadata": {
       "branch": "agent/metadata-evidence-status-20261006",
-      "status": "static-map-and-repair-published",
+      "status": "parallel-offline-evidence-reviewed",
       "objective": "Continue static abandoned-freighter asset relationship analysis without duplicating runtime, seed, or decompile lanes.",
       "manifest": "agent-patches/metadata/METADATA_D_20261007_MANIFEST.json",
       "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
       "human_validation_required": false,
       "static_root_trace": "agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json",
-      "next_action": "Seek an explicit static mapping from table room IDs to room scene assets; coordinate before claiming runtime weighted-choice semantics."
+      "parallel_action_review": "agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json",
+      "next_action": "Coordinate with dungeon-decompile on room-ID-to-scene resolution; Agent D's combined-report room-family audit is complete and does not establish runtime preset selection."
     }
   },
   "human_intervention": {
