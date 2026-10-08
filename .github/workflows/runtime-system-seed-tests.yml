@@ -3,7 +3,7 @@ name: Runtime-A system seed regression
 on:
   push:
     branches:
-      - agent/runtime-dispatch-system-reset-final-20261008
+      - agent/runtime-dispatch-seed-status-fix-20261008
   pull_request:
     paths:
       - mod/derelict_baseline_probe.py
