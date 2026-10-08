@@ -85,7 +85,7 @@
     "required": true,
     "full_derelict_traversal_required": false,
     "steps": [
-      "On the PC running NMS, open Windows PowerShell and run: Get-FileHash 'G:\\SteamLibrary\\steamapps\\common\\No Man\u0027s Sky\\Binaries\\NMS.exe' -Algorithm SHA256. Continue only if the SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. If NMS.exe is installed elsewhere, replace only the quoted path with that NMS.exe path; if the hash differs, stop and report the hash.",
+      "On the PC running NMS, open Windows PowerShell and run: Get-FileHash \"G:\\SteamLibrary\\steamapps\\common\\No Man's Sky\\Binaries\\NMS.exe\" -Algorithm SHA256. Continue only if the SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. If NMS.exe is installed elsewhere, replace only the quoted path with that NMS.exe path; if the hash differs, stop and report the hash.",
       "Open WinDbg x64. Choose File > Attach to process, select the running NMS.exe from the matching install, and attach. In the bottom Command pane, enter: lm m NMS. Confirm the module list contains NMS.exe.",
       "In the WinDbg Command pane enter: bp NMS+0x02C08607 then enter: g. This sets a breakpoint on the instruction before the indirect call FF 52 10. If WinDbg says it cannot resolve NMS, run lm, find the NMS.exe row, and use its start address in bp <start-address>+0x02C08607, then enter g.",
       "Trigger one accessible derelict root event. When WinDbg breaks, do not enter g yet.",
