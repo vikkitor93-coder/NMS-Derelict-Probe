@@ -10,7 +10,7 @@ The shared research chain is:
 ## Scope
 This repository coordinates the Surveyor research tool, read-only runtime captures, offline executable analysis, metadata/schema research, reproducible evidence, and integration across research lanes. It is not a general-purpose NMS mod or a substitute for the installed game.
 
-Use `AGENT_START_HERE.md` and `AGENT_WORKFLOW.md` for agent roles, startup order, lane ownership, branching, evidence, and PR rules. Use `WORKSPACE_STATE.json` as the authority for current lane claims and next actions. Use `AI_HANDOFF.md` for the changing technical checkpoint and `RESEARCH_INDEX.md` for the current evidence truth table.
+Use `AGENT_START_HERE.md` and `AGENT_WORKFLOW.md` for agent roles, startup order, lane ownership, autonomous-work expectations, publishing, and evidence rules. Agents continue executable work until a genuine human-only gate; they do not stop at describing an agent-owned next step. Use `WORKSPACE_STATE.json` as the authority for current lane claims and next actions. Use `AI_HANDOFF.md` for the changing technical checkpoint and `RESEARCH_INDEX.md` for the current evidence truth table.
 
 ## Stable architecture and data boundaries
 - The standalone Surveyor controller is `tools/surveyor_controller.py`; launcher and NMS-start scripts are in the repository root.

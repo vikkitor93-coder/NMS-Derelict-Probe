@@ -8,6 +8,14 @@ You are one autonomous research/coding agent in a parallel reverse-engineering p
 
 Do not start by rereading the whole repository. Do not duplicate another claimed lane. Keep unfinished experiments on your lane branch. When lane research or a build request is complete, tested, and documented, publish that lane output directly to `main` under the policy below; shared Surveyor source/updater releases are published only by the primary integration assistant.
 
+## Work until a real human gate
+
+Treat the assigned objective as work to complete, not a request to describe a plan. At every apparent stopping point, check whether the next useful step can be done with repository files, existing evidence, code, tests, or available tools. If it can, do it. If an attempt fails, inspect the first useful error, fix or work around the cause, and retry. Do not stop after an intermediate finding or leave an agent-owned next step for the user or another agent.
+
+When the assigned objective is complete, continue with the next highest-value task in the same lane that advances the shared goal and does not duplicate another lane. If another lane is blocking one path, record the concrete dependency and continue independent lane work. Stop and ask the user only when the remaining action truly requires their PC/live NMS, inaccessible local evidence, credentials/authorization unavailable to the agent, or information only they can provide. Before asking, finish independent work and provide one precise numbered recipe with the exact control/action and success condition. Do not label ordinary analysis, coding, testing, documentation, publishing, or handoff as a human blocker.
+
+Do not report “next step” as a handoff while that step is still agent-owned and executable. Keep `next_action` in lane status focused on the next action the agent will perform. Set `waiting_on_user` only for a genuine human gate; include the requested action, numbered steps, success condition, evidence to return, and traversal requirement.
+
 
 ## Direct publishing policy
 
@@ -65,9 +73,9 @@ Continue autonomously until one of these occurs:
 - the next step genuinely requires the user's PC, NMS runtime, local NMS.exe, or another human-only action;
 - progress is blocked by a dependency owned by another lane.
 
-Do not stop just because you found one intermediate result. If a useful next step is safely available inside your lane, continue.
+Do not stop just because you found one intermediate result. If a useful next step is safely available inside your lane, continue. When the assigned objective is complete, continue with the next useful non-duplicative lane task. A dependency on another lane blocks only that dependent path; keep working on independent tasks.
 
-Keep the Surveyor Agent Console informed by committing `agent-patches/<lane>/STATUS.json` to your lane branch at start, after meaningful progress/prerequisite/evidence/extension changes, before any user request, and when the request completes. Update its timestamp and include progress, blockers, next action, and the published extension version when relevant. The console polls every 20 seconds; uncommitted chat text is not visible to it.
+Keep the Surveyor Agent Console informed by committing `agent-patches/<lane>/STATUS.json` to your lane branch at start, after meaningful progress/prerequisite/evidence/extension changes, before any user request, and when the request completes. Keep the main-branch copy of completed status/manifest updates synchronized so every agent can find the same project state in one place. Update its timestamp and include progress, blockers, next action, and the published extension version when relevant. The console polls every 20 seconds; uncommitted chat text is not visible to it.
 
 Keep measured facts, public reverse-engineered facts, inference, and hypotheses explicitly separate. Never promote a plausible interpretation to a confirmed fact.
 
