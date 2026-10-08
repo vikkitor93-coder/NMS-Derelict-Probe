@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane_id": "runtime-dispatch",
   "lane": "agent/runtime-dispatch-20261008-latest-root-correlation",
-  "purpose": "Review the latest authoritative Oct 8 combined report, correlate the saved root entry/caller evidence, correct Runtime-A status and extension guidance, and continue offline validation without WinDbg.",
+  "purpose": "Correct stale Runtime-A hook and recursive-return labels from the unique signature match in the hash-matched NMS.exe; preserve report provenance and continue offline without WinDbg.",
   "published_base": {
     "branch": "main",
     "commit": "02c32ebe2020b6134f0dbd72efa049ebf8de5e7b",
@@ -48,27 +48,28 @@
     "instruction_bytes": "FF 52 10",
     "saved_event_return_rva": "02C0860A",
     "logical_entry_rva": "00634BC0",
-    "logical_entry_correlation": "same root descriptor and exact external caller return; strong runtime candidate",
+    "logical_entry_correlation": "The raw report value 00634BC0 is a stale probe constant. The source installs a static signature hook; the exact signature uniquely matches 0063A6D0 in the matching executable.",
     "owner_plus_0x10_capture_phase": "logical-entry-after-external-call",
     "owner_plus_0x10_value": "0000000000000000",
     "dispatch_target_fully_resolved": true,
-    "resolved_dispatch_target_rva": "00634BC0",
-    "resolution_basis": "BEFORE-hook entry at 00634BC0 correlated to caller return 02C0860A from FF 52 10 at 02C08607; pyMHF get_caller saves [RSP]."
+    "resolved_dispatch_target_rva": "0063A6D0",
+    "resolution_basis": "The exact root event records caller return 02C0860A after FF 52 10 at 02C08607; a unique signature scan on the hash-matched NMS.exe resolves the BEFORE-hook address to 0063A6D0."
   },
   "findings": {
     "runtime_entry_candidate": {
-      "rva": "00634BC0",
-      "basis": "The exact root descriptor event matched the hook at 00634BC0; pyMHF 0.2.4 BEFORE callback and get_caller source confirm caller return 02C0860A is the original function return after call 02C08607 FF 52 10.",
-      "confidence": "resolved dispatch address for the matched event by verified BEFORE-hook + saved caller-return correlation",
-      "conflicting_capture": "owner/RDX+0x10 is zero at the BEFORE-hook and root-add. This remains a data/instrumentation inconsistency and is not used as target evidence."
+      "rva": "0063A6D0",
+      "basis": "The probe registers by static signature, not fixed offset. The user-run scan found one match at 0063A6D0; the saved root event records exact return 02C0860A after the indirect call at 02C08607.",
+      "confidence": "resolved destination address for the matched event by unique hook signature and exact caller-return correlation",
+      "conflicting_capture": "owner/RDX+0x10 is zero at the after-call hook and root-add; this remains unresolved and is not target evidence."
     },
-    "unsupported_candidate_correction": "0063A6D0 is not identified as the target by the latest combined report; the static 0063A706 call path is separate.",
+    "unsupported_candidate_correction": "00634BC0/00634C63 are stale build labels. 0063A6D0 is confirmed as the signature-matched hook address. The 0063A706 direct E8 path is not the runtime FF 52 10 destination.",
     "separate_offline_resolver_sample": {
       "call_instruction_rva": "02C04977",
       "return_rva": "02C0497A",
       "candidate_function_rva": "00634BC0",
       "vtable_matches": 0,
-      "resolves_current_call_at_02C08607": false
+      "resolves_current_call_at_02C08607": false,
+      "interpretation": "A separate callsite tested a stale candidate address; its zero-match output does not resolve or refute the current 02C08607 event."
     },
     "latest_generation_analysis": {
       "session_id": "20261008T163203Z_0001BF0004E84EFD",
@@ -88,7 +89,7 @@
       "replaced_by_latest_zero_output": false
     },
     "dispatch_target_address_resolved": true,
-    "dispatch_target_rva": "00634BC0",
+    "dispatch_target_rva": "0063A6D0",
     "dispatch_target_semantic_identity_resolved": false,
     "pyMHF_hook_validation": {
       "package_version": "0.2.4",
@@ -98,30 +99,51 @@
       "observed_source_behavior": [
         "Runtime-A registers the logical-entry callback as a BEFORE detour and decorates it with get_caller.",
         "pyMHF _compound_detour invokes BEFORE detours before calling the original function.",
-        "The get_caller trampoline loads the qword at [RSP] and caller_address returns that saved return address relative to module base."
+        "The get_caller trampoline loads the qword at [RSP] and caller_address returns that saved return address relative to module base.",
+        "The probe's static_function_hook uses a signature with no fixed offset; CURRENT_BUILD_LOGICAL_ENTRY_RVA only labels emitted evidence."
       ],
-      "interpretation": "The call destination for the matched root event is resolved to 00634BC0 by runtime entry/caller correlation; the +0x10 zero is excluded as evidence."
+      "interpretation": "Unique signature match at 0063A6D0 plus exact event caller return 02C0860A resolves the destination for the matched event."
+    },
+    "signature_scan_validation": {
+      "executable_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+      "match_count": 1,
+      "rva": "0063A6D0",
+      "file_offset_hex": "639AD0",
+      "corroborating_review": "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json",
+      "function_range": "0063A6D0..0063A729",
+      "body_sha256": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7"
+    },
+    "probe_source_update": {
+      "old_version": "0.3.38",
+      "new_version": "0.3.39",
+      "old_entry_rva": "00634BC0",
+      "new_entry_rva": "0063A6D0",
+      "old_recursive_return_rva": "00634C63",
+      "new_recursive_return_rva": "0063A773",
+      "test": "tests/test_runtime_hook_address_labels.py",
+      "test_status": "pending local execution",
+      "test_command": "python -m unittest discover -s tests -p \"test_runtime_hook_address_labels.py\""
     }
   },
   "review": "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008_163756.md",
   "extension": {
-    "version": "1.0.5",
-    "manifest": "agent-ui/extensions/runtime-dispatch/1.0.5/manifest.json",
-    "panel": "agent-ui/extensions/runtime-dispatch/1.0.5/panel.json",
-    "previous_version_retained": "1.0.4",
-    "code_or_probe_changed": false,
-    "panel_sha256": "ee422051513bf78b3b0154cab3ce68feb4bb54056e70751edc992ddc32a82baf"
+    "version": "1.0.6",
+    "manifest": "agent-ui/extensions/runtime-dispatch/1.0.6/manifest.json",
+    "panel": "agent-ui/extensions/runtime-dispatch/1.0.6/panel.json",
+    "previous_version_retained": "1.0.5",
+    "code_or_probe_changed": true,
+    "panel_sha256": "4c72079f1dffd0cae03970df8055b9b35ab2e4a2e161c5b1112f22d701e4b2ec"
   },
   "human_validation": {
-    "required": false,
+    "required": true,
     "full_derelict_traversal_required": false,
-    "reason": "Installed pyMHF hook source resolves the event's dispatch address offline; continue with the slot inconsistency and function semantics from saved evidence."
+    "reason": "Only the focused regression test remains; the local command runner is unavailable. No live NMS or debugger action is required."
   },
   "rollback": {
-    "backup_ref": "backup/main-before-runtime-a-semantic-review-20261008-1700",
-    "base_commit": "1126549f9b65035058b9907b218ec7cc628be98b",
-    "repository_rollback": "Revert the semantic-review publish commit on main; the backup ref preserves this exact pre-follow-up state. The earlier backup/main-before-runtime-a-20261008-1655 preserves pre-Runtime-A main.",
-    "extension_rollback": "Restore runtime-dispatch extension 1.0.4 in agent-ui/extensions/index.json; its manifest and panel remain in the repository.",
-    "followup_base_commit": "1126549f9b65035058b9907b218ec7cc628be98b"
+    "backup_ref": "backup/main-before-runtime-a-signature-correction-20261008-1820",
+    "base_commit": "7b62524a018c52801084548d21b47b771683cc38",
+    "repository_rollback": "Revert the correction commit after it is published; the backup ref preserves pre-change main.",
+    "extension_rollback": "Select Runtime-A extension 1.0.5 in the index; its files remain available.",
+    "followup_base_commit": "7b62524a018c52801084548d21b47b771683cc38"
   }
 }

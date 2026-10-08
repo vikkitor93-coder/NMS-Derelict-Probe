@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "title": "RUNTIME-A — Resolved dispatch address",
+  "summary": "Unique hook-signature match on the hash-verified NMS.exe resolves the matched call at 02C08607: FF 52 10 (return 02C0860A) to 0063A6D0. Old labels 00634BC0 and 00634C63 were stale; source labels corrected to 0063A6D0 and 0063A773. The after-call +0x10 read remains zero and unresolved, not a target. Separate resolver 02C04977 is unrelated. No WinDbg. The 43 figure remains an asset prediction, separate from observed counts.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.analyze_generation",
+      "label": "Analyze generation + upload",
+      "description": "Run the reviewed saved-evidence analysis and upload through Surveyor if desired. This does not capture the dispatch slot before the call and does not require a debugger.",
+      "preconditions": [
+        "workflow.idle",
+        "nms.running",
+        "probe.connected"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.upload_runtime_capture",
+      "label": "Upload captured root event",
+      "description": "Upload the probe-saved root event using Surveyor after closing NMS. No debugger is needed. Keep the zero slot read separate from the resolved entry/caller target correlation.",
+      "preconditions": [
+        "workflow.idle",
+        "runtime.capture_saved"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    }
+  ]
+}
