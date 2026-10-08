@@ -12,7 +12,7 @@
   "source_candidate": {
     "version": "0.3.62",
     "zip_sha256": "43a65ad2499717d1f1f35d707f0fb5e00496f9cab591b067108ea2e0ed2ac56b",
-    "published_to_main": false,
+    "published_to_main": true,
     "pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
     "report": "research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json",
     "report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
@@ -145,5 +145,13 @@
     "repository_rollback": "Revert the correction commit after it is published; the backup ref preserves pre-change main.",
     "extension_rollback": "Select Runtime-A extension 1.0.5 in the index; its files remain available.",
     "followup_base_commit": "7b62524a018c52801084548d21b47b771683cc38"
+  },
+  "publication": {
+    "main_commit": "373a5e8247823ab5c1a5955d31c70bc25bb610e9",
+    "pull_request": 51,
+    "backup_ref": "backup/main-before-runtime-a-signature-correction-20261008-1820",
+    "backup_commit": "7b62524a018c52801084548d21b47b771683cc38",
+    "python_unittest": "not_run_local_runner_unavailable",
+    "equivalent_assertions": "5/5_passed_against_branch_files"
   }
 }
