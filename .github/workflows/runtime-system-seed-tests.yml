@@ -7,7 +7,7 @@ on:
   pull_request:
     paths:
       - mod/derelict_baseline_probe.py
-      - tests/test_system_scoped_root_capture.py
+      - tests/test_system_scoped_root_capture.py tools/build_full_source_package.py
       - tools/build_full_source_package.py
       - .github/workflows/runtime-system-seed-tests.yml
 
