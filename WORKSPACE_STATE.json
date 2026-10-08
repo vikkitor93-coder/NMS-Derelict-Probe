@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T14:35:53Z",
+  "updated_utc": "2026-10-08T14:38:21Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -42,19 +42,21 @@
       "extension_version": "1.0.3"
     },
     "dungeon-decompile": {
-      "branch": "agent/dungeon-report-review-20261008",
-      "status": "oct8-parallel-review-complete-waiting-matching-executable",
+      "branch": "agent/dungeon-current-target-20261008-reconciled",
+      "status": "static-hook-call-chain-verified-live-dispatch-unresolved",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "Validate the byte-derived 033E1B60 call destination against matching NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, or equivalent hash-matched .pdata/code export. No game run or traversal is required.",
+      "next_action": "Static call path 0063A706 -> 033E1B60 -> 033E1A50 is verified against matching NMS.exe. Runtime target capture remains with agent/runtime-dispatch; keep these paths distinct.",
       "latest_evidence": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
       "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
       "current_build_static_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
       "helper_dataflow_review": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
       "new_root_capture_review": "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json",
       "root_callback_code_export": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
-      "parallel_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json",
-      "parallel_report_sha256": "3af46d71fbeabc5810f3c83dbdd93b59cc2cfd71358dbaa6bb9c35c398e38592",
-      "attached_parallel_report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda"
+      "latest_combined_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+      "latest_combined_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+      "latest_review": "agent-patches/dungeon-decompile/CURRENT_HOOK_CALL_TARGET_20261008.json",
+      "latest_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+      "latest_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6"
     },
     "metadata": {
       "branch": "agent/metadata-evidence-status-20261006",
