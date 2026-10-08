@@ -152,6 +152,9 @@ def build() -> dict:
     digest = hashlib.sha256(package_bytes).hexdigest()
     encoded = base64.b64encode(package_bytes).decode("ascii")
     parts = [encoded[i:i + PART_SIZE] for i in range(0, len(encoded), PART_SIZE)]
+    reconstructed = base64.b64decode("".join(parts))
+    if reconstructed != package_bytes or hashlib.sha256(reconstructed).hexdigest() != digest:
+        raise RuntimeError("Updater chunk round-trip did not reproduce the verified ZIP")
     for index, part in enumerate(parts):
         _write_text(archive_dir / f"part-{index:03d}.b64", part)
 
