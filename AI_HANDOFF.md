@@ -1,3 +1,11 @@
+## Runtime-A system-scoped root-seed reset — 2026-10-08
+
+The user reports the prior root seed stays visible after entering a new system and that another system displayed a raw F-pattern seed value. The exact local run artifacts and seed bytes were not attached, so the F-pattern is not yet classified.
+
+Probe 0.3.40 is prepared on branch `agent/runtime-dispatch-system-reset-20261008`. It polls normalized universe address once per second and on dungeon-root capture; on a known address change it closes the prior recording, clears in-memory pre-session root/POI/trace buffers and the current exact-root cache, and filters buffered root seeds to the current address. Root-seed reports now keep raw field, `UseSeedValue`, effective value and classification separate. A disabled raw field is not labeled as the seed used by NMS. The change is not yet published as the app package.
+
+Focused test: `tests/test_system_scoped_root_capture.py`; not run because the local command runner is unavailable. No live NMS test performed. Next: verify the change, rebuild the source package/updater chunks, publish with a backup, then request one normal no-debugger switch-system check. Preserve captured evidence in the append-only journal.
+
 ## Runtime-A latest dispatch correction — 2026-10-08
 
 The Oct 8 16:37 combined report remains the sole authority for that run (8 complete, 1 upload skipped, offline saved-evidence analysis, no NMS attach): `research-uploads/20261008T163844Z-parallel-action-test/combined-results.json`, SHA-256 `7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c`. Its raw `logical_entry_rva=00634BC0` field reflects a stale source constant.
