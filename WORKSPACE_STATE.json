@@ -1,15 +1,15 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T19:25:08Z",
+  "updated_utc": "2026-10-08T19:56:00Z",
   "integration": {
     "branch": "main",
-    "canonical_version": "0.3.65",
+    "canonical_version": "0.3.66",
     "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.65",
+    "candidate_version": "0.3.66",
     "candidate_branch": "main",
-    "candidate_base": "main@3ec6153b6c7631a80f333c7c7f62d7e0e372192c",
-    "candidate_status": "Probe 0.3.40 system-scope reset and effective-seed reporting passed focused CI and package validation; one normal system-switch check remains."
+    "candidate_base": "main@9709cc19ddcdbe896cd48b876a51d23db7fdb42",
+    "candidate_status": "Saved-session queue fix and complete updater package validated locally and published to main; Windows end-to-end queue verification remains pending."
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
