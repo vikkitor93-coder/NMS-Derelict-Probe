@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T23:32:22Z",
+  "updated_utc": "2026-10-08T23:34:03Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.67",
@@ -26,7 +26,7 @@
       "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
       "extension_version": "1.0.6",
       "human_validation_required": true,
-      "next_action": "In Surveyor 0.3.67 with Runtime-A 1.0.6, verify the previous root capture clears after switching systems, then record the next root event's raw seed, UseSeedValue, and effective state. No WinDbg or full traversal.",
+      "next_action": "In Surveyor v0.3.67, use Check app update > Install update, then Check lane extensions to confirm Runtime-A 1.0.6. Start NMS normally, switch systems, confirm the old Root resource capture clears, capture the next root event, close NMS, then use Upload captured root event. Return its upload run manifest. No full traversal.",
       "latest_report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
       "latest_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
       "surveyor_version": "0.3.67",
@@ -93,7 +93,7 @@
       {
         "lane": "runtime-dispatch",
         "kind": "verify-system-change-seed-reset",
-        "next_action": "In Surveyor 0.3.67 with Runtime-A 1.0.6, verify the previous root capture clears after switching systems, then record the next root event's raw seed, UseSeedValue, and effective state. No WinDbg or full traversal.",
+        "next_action": "In Surveyor v0.3.67, use Check app update > Install update, then Check lane extensions to confirm Runtime-A 1.0.6. Start NMS normally, switch systems, confirm the old Root resource capture clears, capture the next root event, close NMS, then use Upload captured root event. Return its upload run manifest. No full traversal.",
         "full_derelict_required": false,
         "report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
         "report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41"
