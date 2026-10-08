@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "version": "0.3.67",
-  "status": "release-candidate-verified",
+  "status": "published-source-package",
   "artifact": {
     "storage": "github-base64-chunks-and-local-download",
     "file_name": "NMS-Derelict-Probe-v0.3.67-source.zip"
@@ -16,11 +16,12 @@
     "zip_integrity": "ZipFile.testzip passed; managed member set verified",
     "windows_ui": "pending local Windows validation",
     "nms_7_05_mod_runtime": "separate integration objective; not claimed by Agent D",
-    "package_refresh": "v0.3.66 package; updater SHA-256 and size recorded in update-manifest.json",
+    "package_refresh": "v0.3.67 full source package is distributed through update-manifest.json.",
     "parallel_action_self_test": "passed",
     "saved_session_queue_e2e": "pending local Windows validation",
     "startup_queue_backfill": "verified by regression tests",
-    "windows_backlog_validation": "pending local Windows validation"
+    "windows_backlog_validation": "pending local Windows validation",
+    "package_files": 178
   },
   "resume": {
     "metadata_agent": "Continue static asset relationship analysis; do not claim runtime weighted-choice semantics from static weights."
