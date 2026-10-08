@@ -1,0 +1,18 @@
+{
+  "action": "analyze-generation",
+  "evidence_namespace": "metadata",
+  "files": [
+    {
+      "name": "generation-baseline-latest.json",
+      "sha256": "00a3d86d59ab28f7dac997d09b92efc5d62306aba6a5e3c01207b75c7b9d2f30",
+      "size": 83511
+    },
+    {
+      "name": "exact-root-caller-latest.json",
+      "sha256": "4b59ce057bdbede08c4d9b175409dc674d12baa90397075adc466cac322bc10c",
+      "size": 15520
+    }
+  ],
+  "utc": "20261008T191756Z",
+  "version": 1
+}
