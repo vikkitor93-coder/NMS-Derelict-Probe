@@ -1,4 +1,12 @@
-## DUNGEON-C Oct 8 combined report and current hook recheck — 2026-10-08
+## DUNGEON-C latest combined report and executable call-path review — 2026-10-08
+
+The current main pointer names run `20261008T140207Z-d8e24197` at `research-uploads/20261008T140254Z-parallel-action-test/combined-results.json`; SHA-256 `11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6` matches the pointer. This combined report is the sole authority for that run: 8 complete, 0 failed, 1 upload skipped; saved-evidence offline processing only, with no new NMS event. Do not use queue or per-action latest files as substitutes.
+
+The provided NMS.exe is a byte-for-byte match for the recorded build (88,560,712 bytes; SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`). Its `.pdata` table and code confirm that the saved `0063A706: E8 55 74 DA 02` call reaches a five-byte jump stub at `033E1B60`; that stub (`E9 EB FE FF FF`) jumps to `033E1A50`. Neither address is covered by a listed `.pdata` runtime-function entry; the next entry starts at `033E1B70`. These are static bytes and range-table facts only. The path is not proven to be related to the runtime `02C08607: FF 52 10` dispatch. The zero direct-call-candidate list remains inconsistent with the byte-verified E8 instruction. Detailed hashes and calculations: `agent-patches/dungeon-decompile/CURRENT_HOOK_CALL_TARGET_20261008.json`.
+
+The report’s 43 targets (30 salvage crates + 13 footlockers from 164 resolved scene instances) remain an asset-derived prediction. Keep separate from the historical 35-container measurement and the distinct post-update 16-container user observation. The after-call owner+0x10 zero and separate resolver sample still do not identify the runtime dispatch destination. D-lane offline executable review is complete; runtime target correlation and any live slot capture remain with `agent/runtime-dispatch`. No game launch or traversal was performed.
+
+## Prior DUNGEON-C Oct 8 report reviews — 2026-10-08
 
 The Oct 8 combined report was read from the user-provided local 0.3.62 candidate, and its bytes match the pointer SHA-256 12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda. The attached candidate and its 13:02 run report are not published on main; DUNGEON-C did not publish or replace either shared file. GitHub main has since received a separate 13:43 combined report, now referenced by research/LATEST_PARALLEL_ACTION_TEST.json; its SHA-256 3af46d71fbeabc5810f3c83dbdd93b59cc2cfd71358dbaa6bb9c35c398e38592 was verified against the main-branch report bytes. Each combined report is authority only for its own run: both report 8 saved-evidence offline actions, upload skipped, and no NMS attachment or new capture.
 
@@ -8,6 +16,14 @@ DUNGEON-C rechecked its saved 89-byte 0063A6D0 hook body: its verified hash stil
 
 Next D action: provide NMS.exe with SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, or a hash-matched export containing .pdata and code at 033E1B60. No live NMS session or traversal is needed for that offline validation.
 # NMS Derelict Probe — AI handoff
+
+## Seed-B review of main's 14:02 combined report
+
+Main pointer run `20261008T140207Z-d8e24197` and report `research-uploads/20261008T140254Z-parallel-action-test/combined-results.json` were hash-verified (`11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6`). The eight completed actions analyzed saved evidence offline; upload was skipped and the parallel run did not attach to NMS. Its generation artifact contains a saved root event from `20261008T140041Z_0001BF0004E84EFD`, timestamped 14:00:37Z, with descriptor `0000021C2457DD28`, owner `0000021C2457DC00`, and root seed candidate `5B4AE67D9C2A8F61`. The direct Engine caller is `0063AC20` -> `0183E770`. A separate logical-entry event from that saved trace is `02C08607: FF 52 10` / return `02C0860A`; owner+0x10 was read after the external call and at root add, both zero. Dispatch target and seed derivation remain unproven.
+
+The asset analyzer infers CARGO_FLOATERS at high confidence and predicts 43 target containers (30 salvage, 13 footlockers) across 164 scene instances / 11 logical chunks. The 43 is asset-derived, not a measured physical count. POI generation receives the universe address as a raw argument, while its return is the component address; no root seed transformation is demonstrated. Caller-code and upstream results in the report use older source sessions and must not be joined to the fresh saved event as one trace.
+
+Seed-Lineage extension 1.0.3 requests existing shared Surveyor actions in sequence: Extract caller code, then Extract upstream callers. The next human request is to refresh the extension, record a fresh root event in universe `0001BF0004E84EFD`, run those actions, and return both run manifests. No traversal is required. Full lane analysis: `agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_140207_20261008.md`.
 
 ## Runtime-A Oct 8 combined report review
 

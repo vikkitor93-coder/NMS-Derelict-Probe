@@ -39,7 +39,7 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "Analyze current 0063A6D0 hook function offline. Do not link earlier 006369F0 helper dataflow to root callback. Runtime lane must refresh labels and capture pre-call dispatch slot.",
+    "next_method": "D-lane offline static-call boundary review completed against matching NMS.exe. Runtime dispatch remains unresolved and is owned by agent/runtime-dispatch.",
     "candidate_identity_rule": "Candidate RVAs remain unnamed until full helper bodies and call semantics are validated; the runtime owner+0x10 field is not the caller's vtable slot.",
     "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/"
   },
@@ -279,16 +279,21 @@
     "derived_from_raw_capture": true,
     "precall_slot_captured": false
   },
-  "latest_parallel_action_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json",
-  "parallel_action_review": {
-    "run_id": "20261008T134309Z-f2fd5cd2",
-    "count_limit": "43 is an asset-derived prediction, not a fresh observed count; historical 35 and separate post-update 16 observation remain distinct.",
-    "report_path": "research-uploads/20261008T134355Z-parallel-action-test/combined-results.json",
-    "results_authority": "combined report only",
-    "report_sha256": "3af46d71fbeabc5810f3c83dbdd93b59cc2cfd71358dbaa6bb9c35c398e38592",
-    "human_input_required": "matching current NMS.exe SHA-256 or equivalent hash-matched .pdata/code export",
-    "review": "The 02C08607 caller extraction and 02C04977 resolver sample are distinct. Dispatch remains unresolved. Current bounded 0063A6D0 bytes contain a hash-verified E8 rel32 destination 033E1B60; its .pdata range/body remain unverified.",
-    "attached_candidate_run": "20261008T130233Z-755d4c43"
+  "parallel_review_validation": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_VALIDATION_20261008.json",
+  "current_hook_call_target_review": {
+    "path": "agent-patches/dungeon-decompile/CURRENT_HOOK_CALL_TARGET_20261008.json",
+    "exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "finding": "0063A706 calls stub 033E1B60, which tail-jumps to 033E1A50; neither RVA is covered by a .pdata range",
+    "dispatch_resolved": false,
+    "runtime_dispatch_lane": "agent/runtime-dispatch"
   },
-  "parallel_review_validation": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_VALIDATION_20261008.json"
+  "latest_parallel_action_review": {
+    "run_id": "20261008T140207Z-d8e24197",
+    "report_path": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+    "report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+    "pointer_report_sha256_verified": true,
+    "results_authority": "combined report only",
+    "summary": "8 complete, 0 failed, 1 upload skipped; saved-evidence offline run; no NMS event"
+  },
+  "latest_parallel_action_run": "20261008T140207Z-d8e24197"
 }
