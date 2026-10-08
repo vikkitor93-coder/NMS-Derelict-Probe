@@ -295,5 +295,6 @@
     "results_authority": "combined report only",
     "summary": "8 complete, 0 failed, 1 upload skipped; saved-evidence offline run; no NMS event"
   },
-  "latest_parallel_action_run": "20261008T140207Z-d8e24197"
+  "latest_parallel_action_run": "20261008T140207Z-d8e24197",
+  "branch": "agent/dungeon-current-target-20261008-reconciled"
 }
