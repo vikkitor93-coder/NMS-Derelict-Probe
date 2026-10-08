@@ -145,3 +145,14 @@ Reverse engineer No Man’s Sky abandoned-freighter generation using static and 
 
 - Roll back the app by reinstalling the previous complete v0.3.49 package. Roll back the installed farming mod with `python tools/github_integration.py rollback-derelict-farming`. No probe, session, extension API, or saved evidence migration is needed. Extension versions retain their individual rollback controls.
 - **Next action:** update Surveyor, select your downloaded mod ZIP with **Install Derelict Farming archive**, fully restart NMS, then test repeat derelicts in the same system. Confirm `+0x10` remains pending until a real capture is reported.
+
+
+## Seed-B review of latest combined report (2026-10-08 18:53 UTC)
+
+The current main pointer names run `20261008T185304Z-e95aae15`, report `research-uploads/20261008T185341Z-parallel-action-test/combined-results.json`, SHA-256 `9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe`. The hash was verified against the fetched report bytes. This is the sole source used here for this parallel run's results. The parallel run itself was isolated/offline, with an input snapshot and no retained worker data; the runtime upload action was disabled.
+
+The report's generation artifact derives from session `20261008T185119Z_0001550006607CAC`, universe `0001550006607CAC`. It records one root `DUNGEON.SCENE.MBIN` resource event at `2026-10-08T18:51:04.549Z` with root-seed candidate `00C9E8DF0327789E`; derivation remains unproven. The analyzer infers `MEDI_FLOATERS`, 10 logical rooms and 146 scene instances, predicting 14 target containers (7 salvage + 7 footlockers) from assets. This is not a physical count. It is separate from the prior `CARGO_FLOATERS` asset-derived prediction of 43 targets (30 salvage + 13 footlockers).
+
+Seed-Lineage extraction did not consume the fresh event: caller output cites source session `20261006T223811Z_0001BF0004E84EFD`; upstream cites `20261004T151219Z_0001BF0004E84EFD`; seed-function analysis cites `20261002T213047Z_00001A0004E84EFD`. Do not join those static/offline results to the 18:51 event. Exact-root caller bytes decode `02C08607: FF 52 10` returning at `02C0860A`, but no dispatch target is established. The zero-candidate resolver sample is `02C04977` / `02C0497A`, a separate callsite.
+
+Next: use shared-main RUNTIME-A 1.0.6 to upload the saved root event, then Seed-Lineage 1.0.3 Extract caller code and Extract upstream callers in order. Require the new caller to cite session `20261008T185119Z_0001550006607CAC` and the matching executable SHA-256 before correlating it. No new NMS launch or derelict traversal is required if the saved capture remains available. Full lane status: `agent-patches/seed-lineage/STATUS.json`.
