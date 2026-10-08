@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "metadata",
-  "reviewed_utc": "2026-10-08T20:05:30Z",
+  "reviewed_utc": "2026-10-08T23:28:08Z",
   "evidence_class": "cross-run static-rule and scene-parent-model reconciliation",
   "conclusion": "The reported Room N values are analyzer-derived parent-key groups, not verified static RoomId counts. The data supports grouping/classification mismatch as a plausible contributor to the 7-versus-11/10 discrepancy, but does not determine whether generator semantics also contribute.",
   "current_pointer": {
@@ -209,6 +209,11 @@
       "rule": "CARGO main IDs and Rooms=7",
       "captured": "8 CARG-dominant groups and 11 total parent groups",
       "result": "not directly comparable without a parent-key-to-RoomId mapping; branch/subgraph/grouping effects remain possible"
+    },
+    {
+      "rule": "CARGO_FLOATERS has Rooms=7, five main ID types and two branch ID types; 8 CARG-dominant / 11 total parent-key groups were reported",
+      "captured": "CARG families cannot distinguish R_FLO_CARG, R_S_FLO_CARG, or B_FLO_CARG; Room N parent-key groups are not static room IDs",
+      "result": "No exact numeric reconciliation is supported. Grouping, branch/subgraph expansion, or generator semantics remain possible; mapping needs per-scene RoomId evidence."
     }
   ],
   "model_observations": {
@@ -221,12 +226,16 @@
     "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
     "root_callback": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
     "finding": "DUNGEON-C identifies DUNGEON.SCENE.MBIN and analyzes executable hook/call paths, but provides no mapping from captured parent keys/Room N groups or scene paths to static R_*/B_* IDs.",
-    "dispatch_boundary": "Static code-call findings do not resolve runtime FF 52 10. The zero owner+0x10 read and separate resolver sample remain unresolved."
+    "dispatch_boundary": "Static code-call findings do not resolve runtime FF 52 10. The zero owner+0x10 read and separate resolver sample remain unresolved.",
+    "current_assigned_branch": "agent/dungeon-current-target-20261008-reconciled",
+    "current_assigned_branch_commit": "1904a3c381889ed1c0418ee91ebd38b571c914d1",
+    "branch_tree_room_mapping_paths": [],
+    "branch_check": "Inspected current DUNGEON-C manifest, status, and tracked tree; no room-ID/scene crosswalk artifact is present. Manifest contains a separately attributed user report of an 11-room CARGO_FLOATERS traverse that matched modeled room and target totals, but no per-room IDs."
   },
   "separate_user_validation": {
-    "source": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-    "statement": "The DUNGEON-C manifest records the user's report that an 11-room CARGO_FLOATERS traverse matched the modeled rooms and 43 target predictions.",
-    "limit": "This is separately attributed user validation, not a combined-report result, and includes no per-room ID mapping; it does not make the 43 asset prediction an observed count."
+    "source": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json on agent/dungeon-current-target-20261008-reconciled at 1904a3c381889ed1c0418ee91ebd38b571c914d1",
+    "statement": "Manifest separately records the user's 11-room CARGO_FLOATERS physical traverse matching modeled rooms and 43 target predictions.",
+    "limit": "No per-room RoomId crosswalk; this is not the combined report's result and does not convert the 43 asset-derived prediction into an observed container count."
   },
   "limits": [
     "The latest 19:58 report is a manual-button offline analysis of saved session 20261008T185119Z_0001550006607CAC; it is not a new live NMS capture and does not replace the earlier CARGO report.",
@@ -234,7 +243,7 @@
     "DUNGEON-C's current branch artifacts do not provide a room-ID crosswalk or generator semantics.",
     "Direct DungeonOptions selection remains unverified."
   ],
-  "next_action": "Audit the exact tools/analyze_generation_baseline.py from the current Surveyor 0.3.62 source ZIP against both saved reports and determine whether parent_key/dead-end classification explains the grouping shape; then check whether a reproducible RoomId crosswalk can be built.",
+  "next_action": "Request the DUNGEON-C room-ID-to-scene crosswalk or the local extracted dungeon-room metadata that contains it; then map saved parent_key groups to static IDs. No Surveyor control or full traversal is required for this artifact-only step.",
   "analyzer_source_inspection": {
     "source": "User-supplied NMS-Derelict-Probe-v0.3.62 source ZIP, inspected in the preceding task; its archive SHA-256 was not recorded in the current main pointer.",
     "analysis_tool_version_in_reports": "0.3.24",
@@ -248,8 +257,8 @@
     "unresolved": "Parent-key grouping and dead-end classification explain the analyzer's measurement boundary but do not establish whether each parent group corresponds to a generated room, branch chunk, or static room ID; the 11-versus-7 count's generator semantics remain unresolved."
   },
   "rollback": {
-    "backup_branch": "backup/main-before-metadata-room-reconcile-20261008-2004",
-    "base_commit": "bffa810123d2f10652c79d2ffe97efa08b88adb7",
-    "revert": "Revert the publication commit; preserve timestamped research reports."
+    "backup_branch": "backup/main-before-metadata-reconcile-20261008-2328",
+    "base_commit": "69efada4badc48701bcd27ee9b631c1b10be7280",
+    "revert": "Revert the reconciliation publication commit; retain timestamped research reports."
   }
 }
