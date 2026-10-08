@@ -12,7 +12,7 @@ on:
       - .github/workflows/runtime-system-seed-tests.yml
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   system-seed-regression:
@@ -26,11 +26,21 @@ jobs:
         run: python -m unittest discover -s tests -p "test_system_scoped_root_capture.py"
       - name: Compile changed Python files
         run: python -m py_compile mod/derelict_baseline_probe.py tests/test_system_scoped_root_capture.py tools/build_full_source_package.py
-      - name: Build app update package
-        if: github.event_name == 'push'
+
+  build-app-update:
+    if: github.event_name == 'push' && github.actor == 'vikkitor93-coder'
+    needs: system-seed-regression
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Build and verify full app source package
         run: python tools/build_full_source_package.py
       - name: Commit app update package
-        if: github.event_name == 'push'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
