@@ -1,10 +1,14 @@
-## Runtime-A latest main combined report review — 2026-10-08
+## Runtime-A latest dispatch correction — 2026-10-08
 
-- Pointer names run 20261008T163756Z-cd3dbef7 at research-uploads/20261008T163844Z-parallel-action-test/combined-results.json; SHA-256 7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c matches the report bytes. This report alone is authoritative for that run: 8 actions completed, 1 upload skipped, and no NMS attach or new live event.
-- The report's 16:31:47.935Z root event matches descriptor 000002752ED7F928 / seed candidate 5B4AE67D9C2A8F61 with logical entry 00634BC0 and exact caller return 02C0860A; the caller instruction is 02C08607: FF 52 10. pyMHF 0.2.4 source confirms the probe callback is a BEFORE detour and get_caller loads the original return address from [RSP]. Thus this exact root event resolves the dispatch destination to 00634BC0 by entry/caller correlation.
-- Owner/RDX+0x10 reads zero at logical-entry-after-external-call and at root-add. The zero is not the dispatch target and remains an inconsistency with the BEFORE-hook observation. Resolver sample 02C04977 / return 02C0497A is separate and does not resolve 02C08607. Static code at 0063A6D0 is not evidence for this target; the previous 0063A6D0 claim is withdrawn.
-- Latest generation analysis reports 0 resolved scenes and 0 predicted targets with unresolved preset; this is not an observed physical count. The prior asset-derived prediction of 43 (30 salvage + 13 footlockers across 164 resolved instances) comes from the distinct 14:02 report research-uploads/20261008T140254Z-parallel-action-test/combined-results.json (SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6); it is not an output of the latest 16:37 run and remains distinct from historical 35 and separate post-update 16 user observation.
-- Next: offline review of hook timing/capture order; do not use WinDbg because it crashes this user's NMS setup. pyMHF source hashes: core/hooking.py 5008B2D3106C598DFCA7AB7A0641F7A879DDCE93E0EF8836950A16983EA2A9AA; utils/iced.py 8EDDAF92E8B718490D0CB48AF6AC9FFF2B45EACA7051011D442663FC5711E254. Full review: agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008_163756.md.
+The Oct 8 16:37 combined report remains the sole authority for that run (8 complete, 1 upload skipped, offline saved-evidence analysis, no NMS attach): `research-uploads/20261008T163844Z-parallel-action-test/combined-results.json`, SHA-256 `7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c`. Its raw `logical_entry_rva=00634BC0` field reflects a stale source constant.
+
+The probe registers its hook by `@static_function_hook(signature=...)`; `CURRENT_BUILD_LOGICAL_ENTRY_RVA` is only written into evidence metadata. The user's read-only scan verified the NMS.exe SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499` and found one signature match at `0063A6D0`. DUNGEON-C's saved static artifact independently records that hook location and the .pdata range `0063A6D0..0063A729`.
+
+The matched 16:31:47.935Z root event records caller return `02C0860A` after `02C08607: FF 52 10`. The unique signature-matched BEFORE hook resolves this event's dispatch destination to `0063A6D0`. Source labels `00634BC0` and `00634C63` were stale and are corrected to `0063A6D0` and `0063A773` in probe 0.3.39. Function semantic identity remains unresolved.
+
+The owner+0x10 zero remains an unresolved after-call capture/data inconsistency, not a target. The separate resolver call `02C04977` is unrelated. The unresolved-preset zero output is not a physical count. The 43-target figure (30 crates + 13 footlockers over 164 scenes) remains a distinct asset-derived prediction, separate from historical 35 and post-update 16 counts. No WinDbg or live NMS action was used.
+
+Review: `agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md`. Focused regression test `tests.test_runtime_hook_address_labels` is pending local run.
 
 ## DUNGEON-C latest combined report and executable call-path review (2026-10-08)
 
