@@ -1,3 +1,9 @@
+## Metadata parent groups versus static room IDs — 2026-10-08
+
+Current pointer/report SHA-256 `b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41` verifies for run `20261008T195817Z-1b73e442`, an offline manual-button analysis of saved session `20261008T185119Z_0001550006607CAC`, not a fresh live capture. The inferred MEDI_FLOATERS data has 10 parent groups vs `Rooms=7` and 14 asset-predicted targets, not observed. The older CARGO report remains authoritative for its own run: 11 parent-key groups (8 CARG, 2 BARRACKS, 1 END) and 43 asset-predicted targets (30 + 13), not a physical container count.
+
+CARGO_FLOATERS rules require one each of `R_FLO_BARR`, `R_S_FLO_BARR`, and `R_END`; END has minimum index 6. Family/index counts are compatible but do not prove exact IDs. Five CARGO parent groups contain `ROOM_DEADEND`-named prefabs while classified main; MEDI has three. The supplied analyzer groups by parent_key and applies family-level dead-end classification, so scene basenames alone do not define a static room ID. DUNGEON-C provides no `Room N`/parent-key to `R_*`/`B_*` crosswalk. Details: `agent-patches/metadata/ROOM_MODEL_RECONCILIATION_20261008.json`.
+
 ## Surveyor saved-session queue — 2026-10-08
 
 The latest verified 19:10 combined report names one input session only; it does not prove all three queued sessions ran. Surveyor 0.3.66 now queues each saved file separately, persists the FIFO across restarts, pins each worker to its triggering session SHA-256, and requires a matching trigger hash before recording completion. Local regression suite and package integrity checks passed; Windows end-to-end validation is pending.

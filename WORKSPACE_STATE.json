@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T19:56:00Z",
+  "updated_utc": "2026-10-08T20:05:30Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.66",
@@ -61,17 +61,19 @@
       "latest_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6"
     },
     "metadata": {
-      "branch": "agent/metadata-evidence-status-20261006",
-      "status": "fresh-capture-room-model-reviewed",
+      "branch": "agent/metadata-room-model-reconcile-20261008",
+      "status": "analyzer-grouping-rule-reconciled-static-room-id-crosswalk-missing",
       "objective": "Continue static abandoned-freighter asset relationship analysis without duplicating runtime, seed, or decompile lanes.",
       "manifest": "agent-patches/metadata/METADATA_D_20261007_MANIFEST.json",
       "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
-      "human_validation_required": false,
+      "human_validation_required": true,
       "static_root_trace": "agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json",
-      "parallel_action_review": "agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json",
-      "next_action": "Compare the eight CARG groups and 11 total parent groups with CARGO_FLOATERS Rooms=7 and dungeon-decompile room-ID evidence; determine whether the mismatch reflects model grouping or generator semantics.",
-      "latest_parallel_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
-      "latest_parallel_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6"
+      "parallel_action_review": "agent-patches/metadata/ROOM_MODEL_RECONCILIATION_20261008.json",
+      "next_action": "Obtain the referenced DUNGEON-C room-ID-to-scene evidence (or the local extracted room assets that contain that mapping); current published DUNGEON-C artifacts only cover executable call paths. Then map captured parent_key groups without treating Room N as a static ID.",
+      "latest_parallel_report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
+      "latest_parallel_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
+      "latest_room_model_review": "agent-patches/metadata/ROOM_MODEL_RECONCILIATION_20261008.json",
+      "updated_utc": "2026-10-08T20:05:30Z"
     }
   },
   "human_intervention": {
@@ -90,6 +92,15 @@
         "lane": "runtime-dispatch",
         "kind": "verify-system-change-seed-reset",
         "next_action": "Update Surveyor through its in-app updater. Enter a different system and confirm the previous root capture clears; on the next root capture, inspect raw seed, UseSeedValue, and effective state.",
+        "full_derelict_required": false
+      },
+      {
+        "lane": "metadata",
+        "kind": "provide-static-room-id-crosswalk",
+        "manifest": "agent-patches/metadata/METADATA_D_20261007_MANIFEST.json",
+        "next_action": "Obtain the referenced DUNGEON-C room-ID-to-scene evidence (or the local extracted room assets that contain that mapping); current published DUNGEON-C artifacts only cover executable call paths. Then map captured parent_key groups without treating Room N as a static ID.",
+        "report": "agent-patches/metadata/ROOM_MODEL_RECONCILIATION_20261008.json",
+        "report_sha256": "",
         "full_derelict_required": false
       }
     ]
