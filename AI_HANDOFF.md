@@ -1,3 +1,11 @@
+## Saved-session queue correction — 2026-10-08
+
+The latest verified combined report covers one source session, `20261008T185119Z_Uzawan_XI.json`; it does not establish that the other two sessions in the user's queue ran. The expected behavior is one separate research run and combined report per saved session, processed sequentially.
+
+The source fix is now on main in `tools/surveyor_controller.py` and `tools/test_parallel_research_actions.py`. It persists the FIFO queue across restarts, pins each worker to its triggering session file, verifies the session SHA-256, and rejects completion if the report trigger hash does not match. Regression tests cover queue order, persistence/recovery, session pinning, and stale-report rejection. Local verification: 206 unit tests passed, Python compileall passed, and the harness self-test passed.
+
+The published updater manifest is still v0.3.65; it does not yet include this fix. Do not tell the user it is installed or available in-app until a complete v0.3.66 package is rebuilt and its updater chunks pass checksum and ZIP validation. The attempted package rebuild from the published v0.3.65 archive was blocked by missing package files and a syntax error in an archive test file. Windows end-to-end queue validation also remains pending.
+
 ## Runtime-A system-scoped root seed capture — 2026-10-08
 
 Probe 0.3.40 closes an active capture and clears live root-seed/caller buffers when the observed nonzero universe address changes. It accepts a root capture into a session only when its capture address matches that session. Seed evidence reports the raw value, UseSeedValue, and effective state separately. The user's system-switch observation and F-pattern remain separate from the parallel-action data; without that run's UseSeedValue field, the F-pattern cannot be classified.
