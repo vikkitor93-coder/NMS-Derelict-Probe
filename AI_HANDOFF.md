@@ -40,7 +40,7 @@ The v0.3.66 updater package now includes the queue fix and current indexed exten
 
 Probe 0.3.40 closes an active capture and clears live root-seed/caller buffers when the observed nonzero universe address changes. It accepts a root capture into a session only when its capture address matches that session. Seed evidence reports the raw value, UseSeedValue, and effective state separately. The user's system-switch observation and F-pattern remain separate from the parallel-action data; without that run's UseSeedValue field, the F-pattern cannot be classified.
 
-The latest pointer was verified against the sole authoritative combined report for its run: research-uploads/20261008T191019Z-parallel-action-test/combined-results.json, SHA-256 1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471. It is an isolated parallel test on saved session 20261008T185119Z_Uzawan_XI.json (session SHA-256 ba1ebc2aa42772d03e9b4e66ed771839a7a74f5b6a4e4797f855eb7815ad5414), not a fresh live NMS capture. Eight of nine actions completed; the upload action was skipped. The saved-session analysis reports root seed candidate 00C9E8DF0327789E with UseSeedValue=true, still candidate-captured-unverified. It does not explain the user's F-pattern. Its 14 target containers (7 salvage + 7 footlockers) are predicted from 146 scene instances, not an observed in-game count; keep this separate from the asset-derived 43-target prediction. The zero +0x10 read and separate resolver sample remain unresolved and are not treated as dispatch targets.
+The current main pointer names run `20261008T195817Z-1b73e442` at `research-uploads/20261008T195856Z-parallel-action-test/combined-results.json`; the report SHA-256 `b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41` matches the pointer. This was an isolated manual parallel test with an input snapshot and no retained worker data; 8/9 actions completed and the upload action was skipped. The report analyzes saved session `20261008T185119Z_0001550006607CAC`, not a fresh live capture. It reports one root-seed candidate `00C9E8DF0327789E` with `UseSeedValue=true`; derivation remains unproven. `MEDI_FLOATERS`, 146 scene instances, and 14 targets (7 salvage + 7 footlockers) are analysis/prediction results, not an observed physical container count. Keep the separate 43-target `CARGO_FLOATERS` asset prediction (30 + 13 across 164 scenes) distinct from both 14 and all observed counts. The caller extraction decodes `02C08607: FF 52 10` returning at `02C0860A`, but `target_rva_hex` is null. The report's resolver action tests a different callsite (`02C04977` / return `02C0497A`) against stale candidate `00634BC0` and finds zero matches; it does not resolve the `02C08607` target. The report's upstream-callers action cites older session `20261006T223811Z_0001BF0004E84EFD` / seed `5B4AE67D9C2A8F61`; do not join it to the fresh `00C9` event. The separate signature/caller correlation to `0063A6D0` remains distinct evidence and is not inferred from either zero result.
 
 Focused system/seed tests and package integrity checks passed in GitHub Actions. Normal NMS system-switch verification remains pending.
 
@@ -91,66 +91,11 @@ The saved current caller is `02C08607: FF 52 10`, return `02C0860A`. In the late
 
 The latest saved event already repeats the post-call zero read. The remaining Runtime-A step is a pre-instruction observation at `NMS.exe+02C08607` (`FF 52 10`), recording `RDX` and `[RDX+0x10]` before execution; verify NMS.exe SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`. A debugger capture at one root event is sufficient; no full traversal is needed. The data-only panel is version 1.0.3 and preserves 1.0.2 for rollback. Probe/app code did not change.
 
-### Runtime-A live capture recipe
+### Runtime-A debugger recipe (superseded)
 
-1. Open the published **Surveyor 0.3.61** with its compatible **Probe 0.3.38**. Use Surveyor's normal launch/connect path for NMS and leave the player outside a derelict freighter that can be entered. Keep Surveyor connected so it can save the matching root event. The attached 0.3.62 ZIP is a local source candidate, not a published live build.
-2. Open **Windows PowerShell** and paste:
+The previous WinDbg breakpoint recipe is withdrawn. The user's WinDbg attachment stalled or crashed NMS, and the saved output showed no breakpoint hit or slot capture. Do not repeat it. Runtime-A's only pending user check is the normal Surveyor system-switch validation described above; no debugger is needed.
 
-   ```powershell
-   Get-FileHash "G:\SteamLibrary\steamapps\common\No Man's Sky\Binaries\NMS.exe" -Algorithm SHA256
-   ```
-
-   Continue only when `Hash` is `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`. If NMS.exe is installed elsewhere, replace the quoted path with its actual path. If the hash differs, stop and send the displayed hash.
-3. Open **WinDbg x64**. Select **File > Attach to process**, choose the running `NMS.exe` from that install, and attach.
-4. In the bottom **Command** pane, type `lm m NMS` and press Enter. Confirm that `NMS.exe` appears in the module list.
-5. In that pane, type `bp NMS+0x02C08607` and press Enter. Then type `g` and press Enter. If WinDbg cannot resolve `NMS`, type `lm`, find the `NMS.exe` row, and set the breakpoint using `bp <start-address>+0x02C08607` with that row's start address; then type `g`.
-6. Enter the derelict freighter once. When WinDbg stops, do not type `g` yet. In the Command pane, enter each line below separately, pressing Enter after each:
-
-   ```text
-   r rip
-   r rcx
-   r rdx
-   dq @rdx+0x10 L1
-   ```
-
-   `dq` prints the eight-byte slot value before `FF 52 10` executes. Optionally enter `u @rip L1` to verify the current instruction. Copy this output before proceeding.
-7. Enter `g` to resume NMS and let the single root event finish saving. Close NMS. In Surveyor's **Agent Console > RUNTIME-A** panel, click **Upload captured root event**.
-8. Return the WinDbg output and the Surveyor upload result/event JSON. If the breakpoint does not trigger or the memory read fails, return the exact WinDbg message instead. No full traversal is required.
-
-## METADATA-D combined offline action review — 2026-10-08
-
-The latest GitHub main pointer names run `20261008T140207Z-d8e24197` at `research-uploads/20261008T140254Z-parallel-action-test/combined-results.json`; the report SHA-256 matches the pointer: `11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6`. The report's parallel actions ran offline, but their saved input includes fresh NMS capture session `20261008T140041Z_0001BF0004E84EFD` at system address `0001BF0004E84EFD`. The exact root event is timestamped `2026-10-08T14:00:37.544Z` and records seed candidate `5B4AE67D9C2A8F61`; its derivation remains unverified. The earlier user-attached 13:02 candidate report is retained as historical provenance in `agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json`.
-
-Asset preparation resolves 164/164 scene instances. Its 43 targets (30 salvage crates and 13 footlockers) are an **asset-derived prediction**, not an observed physical count. The generation analyzer infers `CARGO_FLOATERS` at high confidence from scene-family and hazard evidence, but did not directly observe the selected `DungeonOptions` value. It groups captured scenes under indexed parents `Room 0` through `Room 10`: 11 main-room groups against static `Rooms=7`, with `room_model_status=needs-review` and zero manual F6/F5 markers. The final END group is at index 10; static `R_END` has minimum index 6, so that placement is consistent, but this does not explain the 11-versus-7 count. Two BARRACKS groups are compatible with the two one-count static BARRACKS rules, but family labels cannot distinguish their IDs; eight CARG groups and 11 total groups remain unexplained. Exact static room IDs remain unmapped. Earlier 0.3.62 regression tests assert seven main rooms for the historical 51-target and 35-target fixtures, so this capture is outside those validated room-count cases. This remains an analyzer/static discrepancy; it does not prove the static parameter is wrong, and the grouped target counts do not identify exact static room IDs.
-
-The exact captured caller has a zero owner `+0x10` value; the separate resolver report is a different callsite and has zero candidate matches. Neither resolves dispatch. The parallel harness skipped upload, though the combined report itself has subsequently been published to main. See the review JSON for action/artifact hashes and all provenance limits. METADATA-D 1.0.1 remains unchanged.
-## Seed-B constructor capture candidate — 2026-10-08
-
-Seed-B has a tested read-only constructor-capture patch on `agent/seed-lineage` (`c429ff3`) and a local 0.3.62 candidate ZIP. It is not on main because live hook and object identity are unverified. The lane status gives a short root-capture recipe without traversal. The candidate keeps probe protocol `0.3.38` and marks root events with `seed_b_variant_version`; empty matches are diagnostic, not a negative proof. This is separate from the October 8 offline combined-report result.
-
-## Seed-B combined-report review — 2026-10-08
-
-Seed-B verified the user-attached 0.3.62 local candidate's `research/LATEST_PARALLEL_ACTION_TEST.json` against its combined report (SHA-256 `12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda`). The report is not published here. It is the sole source for the October 8 parallel run: eight offline saved-evidence actions completed, one upload disabled, no new NMS event. Source sessions differ across generation/asset, seed-function, and upstream analysis. The 43 target containers are an asset-derived prediction (30 salvage crates + 13 footlockers), separate from historical observed 35 and post-update user-observed 16. The saved exact caller is `02C08607: FF 52 10`, return `02C0860A`; the zero owner `+0x10` read is not a pre-call slot target. The resolver's zero-match result comes from another caller sample (`02C04977`) and does not resolve current dispatch. See `agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md` for provenance, static constructor trace, and limitations. Root seed derivation remains unproven. No new extension or runtime behavior is published.
-
-## METADATA-D publication — 2026-10-07
-
-Agent D followed the active component's `DungeonRootScene` asset through its direct scene attachment. The root scene contains one `GeneratedBaseRoot` locator, which attaches `GENERATEDBASEROOT.ENTITY.MBIN`; that entity contains gravity-volume and static-physics components. The root scene has no direct room-scene reference. `agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json` records exact MBIN hashes and the ten presets' main/branch room IDs. A complete source snapshot containing this handoff is encoded in `packages/v0.3.61-metadata-static-source/` with its own `agent-patches/metadata/METADATA_SOURCE_SNAPSHOT_20261007.json` manifest; it is not a new updater version. This narrows the static boundary but does not establish how the runtime `DUNGEON.SCENE.MBIN` resource or room assets are chosen.
-
-Surveyor 0.3.61 repairs `Prepare-Crate-Assets.ps1` by passing `--input-format=MBIN -y` to MBINCompiler. The persistent extraction directory may contain both MBIN and previously generated MXML files; the old command could stop at a prompt in the noninteractive METADATA-D action. The Windows action completed preparation and both uploads with exit status 0 after the local repair. The user subsequently confirmed the METADATA-D visual refresh and rollback check. This last check is user-reported; the action logs and main-branch run manifest are recorded separately in `agent-patches/metadata/PREPARE_ASSETS_REPAIR_20261007.md`.
-
-The active abandoned-freighter entrance component has ten static `DungeonOptions` choices, all matched by name to current dungeon-table presets. The choices and exact source hashes are in `agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json`; method and limits are in `STATIC_DUNGEON_OPTIONS_MAP_20261007.md`. These weights do not prove runtime selection probabilities, seed input, or frequencies. The component's static `DungeonRootScene` field is not yet linked to the separately observed runtime `DUNGEON.SCENE.MBIN` resource. Seed-lineage and dungeon-decompile lanes own those other links.
-
-The source package is a complete 0.3.61 ZIP, encoded in `packages/v0.3.61-full/` and described by the root `update-manifest.json`. The previous main commit is preserved at `backup/main-before-metadata-d-20261007-final`. The smallest functional change from 0.3.60 is one line in `Prepare-Crate-Assets.ps1`; no extension panel, host action ID, probe protocol, or NMS write behavior changed. Next Agent D task: continue independent static metadata and asset relationship analysis; require a live capture only if a specific remaining claim cannot be resolved offline.
-
-## DUNGEON-C current hook export — 2026-10-07
-
-Ran the v0.3.39 offline helper exporter on a derived copy of the October 6 event with its stale hook label corrected by the unique current executable signature. The original uploaded event is untouched. The resulting `agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json` contains the current `0063A6D0..0063A729` bounded hook bytes and explicit raw-source provenance. Its adjacent branch range `0063A729..0063AB6C` has a direct self call at `0063A76E`, returning at `0063A773`; this independently confirms the current recursive return. The actual pre-call dispatch slot remains uncaptured.
-
-## DUNGEON-C October 6 root review — 2026-10-07
-
-A fresh root event, descriptor `00000112B726B528`, records caller return `02C0860A` on the current executable; the bytes at `02C08607` are `FF 52 10`. The probe source hook signature matches uniquely at current `.pdata` function start `0063A6D0`. The report is `agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json`. The probe still publishes old-build labels `00634BC0` (logical entry) and `00634C63` (recursive return), and the uploaded code/vtable exports are from the older executable and descriptor. The prior map to `006369F0` remains a map of that old label only; its five-helper dataflow is not established as the root callback.
-
-The captured zero is owner+0x10 after the call, not a pre-call `[RDX+0x10]` dispatch target. Analyze `0063A6D0` offline; a future current-build event with a pre-call slot read is needed to prove the indirect target.
+The captured zero is owner+0x10 after the call, not a pre-call `[RDX+0x10]` target. The signature/caller correlation to `0063A6D0` is separate evidence; the latest combined report's caller decode still has no target RVA, and the `02C04977` resolver sample is unrelated. No further WinDbg capture is requested.
 
 ## DUNGEON-C helper dataflow — 2026-10-05
 
@@ -256,3 +201,8 @@ Next: on shared main Surveyor, close NMS if open, use RUNTIME-A 1.0.6 **Upload c
 
 
 Windows UI/focus and live end-to-end queue validation remain pending. Source and the v0.3.66 updater package are published on `main`.
+
+
+## Runtime-A reconciliation and next action — 2026-10-08
+
+The verified current report and callsite/counter caveats are recorded above and in `agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json`. The indexed Runtime-A extension remains 1.0.6; its existing panel already separates the `0063A6D0` signature/caller correlation from the zero post-call slot and unrelated resolver sample, so no extension or index hash change was needed. Probe 0.3.40's system-boundary reset is covered by focused tests and package integrity checks in GitHub Actions; the only remaining check is a normal system switch in Surveyor 0.3.67 with Runtime-A 1.0.6. No full derelict traversal or debugger is required. See the lane `STATUS.json` for the exact steps and evidence to return.
