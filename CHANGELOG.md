@@ -1,3 +1,12 @@
+## v0.3.66 — process every saved-session research job
+
+- Drain the saved-session research queue FIFO, running one isolated report per session.
+- Persist queued/running work across Surveyor restarts.
+- Pin analysis to the triggering session file and verify its SHA-256; reject a report for a different session.
+- Restore the v0.3.65 package omissions: include current Seed Lineage 1.0.3 and all indexed extension assets in the managed update payload.
+- Repair the truncated regression-test source and synchronize test expectations with the current probe and extension versions.
+- Verification: 212 unit tests, compileall, parallel-action harness self-test, package CRC, manifest membership, chunk round-trip, and SHA-256 checks passed. Windows UI and live end-to-end queue validation remain pending.
+
 ## v0.3.65 — system-scoped root seed state
 
 - Reset live Runtime-A root seed state on a known universe-address change.
