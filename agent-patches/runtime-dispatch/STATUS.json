@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-08T23:35:32Z",
+  "updated_utc": "2026-10-08T23:35:59Z",
   "state": "waiting_on_user",
   "status": "Probe 0.3.40 clears root-seed state at system boundaries; the latest combined report provides saved-session analysis, while the live system-switch check remains pending.",
   "summary": "The main report pointer and combined report SHA-256 match. The isolated saved-session run reports root candidate 00C9E8DF0327789E with UseSeedValue=true and predicts 14 targets from assets; neither is a live system-switch result or an observed container count. The exact caller decodes FF 52 10 at 02C08607 returning at 02C0860A with no target RVA; the 02C04977 resolver sample is separate and does not resolve it. No further WinDbg attempt is requested.",
   "progress": "Probe 0.3.40 system-scoped reset and seed-state reporting are included in Surveyor 0.3.67; Runtime-A extension 1.0.6 is indexed. Focused tests and package integrity passed in GitHub Actions. The latest combined report was hash-verified and its caveats reconciled.",
   "blockers": [],
-  "next_action": "In Surveyor v0.3.67, use Check app update > Install update, then Check lane extensions to confirm Runtime-A 1.0.6. Start NMS normally, switch systems, confirm the old Root resource capture clears, capture the next root event, close NMS, then use Upload captured root event. Return its upload run manifest. No full traversal.",
+  "next_action": "In Surveyor v0.3.67, update the app/extensions, warp systems, confirm the old Root resource capture clears, then enter a derelict only until one new root event is captured. Close NMS, upload the event, and return the receipt. No room traversal.",
   "human_intervention_required": true,
   "evidence_to_return": [
     "research/LATEST_PARALLEL_ACTION_TEST.json",
@@ -24,7 +24,7 @@
       "In Surveyor's GitHub / updates section, click Check app update, then Install update when v0.3.67 is offered. In the same section, click Check lane extensions and confirm Runtime-A is 1.0.6.",
       "Keep WinDbg closed. In Surveyor's Game section, click Start NMS and wait for the probe to show Connected.",
       "Use the in-game star map to warp into a different system. In Surveyor's Overlay details, watch the Root resource row and confirm the old system's capture clears.",
-      "Wait only until the first root event from the new system is captured, then stop; no full traversal is required. Close NMS normally.",
+      "After confirming the clear, enter a derelict in the new system only far enough for the probe to capture the root resource event; stop before exploring rooms. Close NMS normally.",
       "In Surveyor's Runtime-A 1.0.6 panel, click Upload captured root event and wait for the upload success receipt."
     ],
     "success_condition": "After the system address changes, the prior Root resource capture clears; the next root event is associated with the new system and its JSON contains raw seed, UseSeedValue, and effective seed/state. Surveyor shows upload success.",
