@@ -167,6 +167,10 @@
     "tests": [
       "tests/test_system_scoped_root_capture.py"
     ],
-    "test_state": "not_run_local_runner_unavailable"
+    "test_state": "6_focused_tests_passed_in_github_actions; py_compile_passed; zip_integrity_passed",
+    "app_version": "0.3.63",
+    "package_built": true,
+    "package_path": "packages/v0.3.63-full/",
+    "package_parts": 34
   }
 }
