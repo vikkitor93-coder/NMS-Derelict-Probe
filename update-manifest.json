@@ -42,8 +42,8 @@
     "packages/v0.3.65-full/part-033.b64",
     "packages/v0.3.65-full/part-034.b64"
   ],
-  "package_sha256": "d7e1f4d15b79b4f56b9ea79fb160e7c571440e96f903c030d57269827d1557a5",
-  "package_size": 461845,
+  "package_sha256": "3a9afe332454a02ebfb8fbb781860d5a32f6cff55279316216b8802093fa5b81",
+  "package_size": 463219,
   "managed_files": [
     ".github/workflows/runtime-system-seed-tests.yml",
     ".gitignore",
