@@ -1,3 +1,7 @@
+## Runtime-A system-scoped root seed capture — 2026-10-08
+
+User-reported observation: root seed capture remained visible after entering a new system; a later raw seed appeared as an F-pattern. The report is not part of the Oct 8 parallel-action dataset. Probe 0.3.40 clears cached root/caller state on a changed nonzero universe address and reports the descriptor's raw seed separately from UseSeedValue and effective state. The reported pattern cannot be classified as enabled or disabled without that flag. Normal NMS validation remains pending.
+
 ## Runtime-A latest dispatch correction — 2026-10-08
 
 The Oct 8 16:37 combined report remains the sole authority for that run (8 complete, 1 upload skipped, offline saved-evidence analysis, no NMS attach): `research-uploads/20261008T163844Z-parallel-action-test/combined-results.json`, SHA-256 `7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c`. Its raw `logical_entry_rva=00634BC0` field reflects a stale source constant.

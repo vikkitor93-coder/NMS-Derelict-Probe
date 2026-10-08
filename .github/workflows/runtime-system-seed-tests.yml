@@ -3,12 +3,20 @@ name: Runtime-A system seed regression
 on:
   push:
     branches:
-      - agent/runtime-dispatch-system-reset-20261008
+      - agent/runtime-dispatch-system-reset-final-20261008
   pull_request:
     paths:
       - mod/derelict_baseline_probe.py
-      - tests/test_system_scoped_root_capture.py
+      - tests/test_system_scoped_root_capture.py tools/build_full_source_package.py
+      - tools/build_full_source_package.py
       - .github/workflows/runtime-system-seed-tests.yml
+
+concurrency:
+  group: runtime-a-system-seed-package
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   system-seed-regression:
@@ -22,3 +30,24 @@ jobs:
         run: python -m unittest discover -s tests -p "test_system_scoped_root_capture.py"
       - name: Compile changed Python files
         run: python -m py_compile mod/derelict_baseline_probe.py tests/test_system_scoped_root_capture.py
+
+  build-app-update:
+    if: github.event_name == 'push' && github.actor == 'vikkitor93-coder'
+    needs: system-seed-regression
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Build and verify full app source package
+        run: python tools/build_full_source_package.py
+      - name: Commit app update package
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add VERSION.txt README.md CHANGELOG.md CANONICAL_SOURCE.json update-manifest.json AI_HANDOFF.md WORKSPACE_STATE.json RESEARCH_INDEX.md agent-patches/runtime-dispatch/STATUS.json agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json packages/v0.3.65-full
+          git commit -m "Build Surveyor source package v0.3.65 with Probe 0.3.40"
+          git push
