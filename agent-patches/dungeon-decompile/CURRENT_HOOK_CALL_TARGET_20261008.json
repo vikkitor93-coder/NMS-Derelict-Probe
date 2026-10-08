@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
   "lane": "dungeon-decompile",
-  "reviewed_utc": "2026-10-08T14:22:00Z",
+  "reviewed_utc": "2026-10-08T23:50:00Z",
   "source": {
     "executable": "NMS.exe",
     "file_size_bytes": 88560712,
     "sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
     "image_base": "0x0000000140000000",
-    "source_path_recorded": false
+    "source_path_recorded": "G:\\SteamLibrary\\steamapps\\common\\No Man's Sky\\Binaries\\NMS.exe (user-supplied path; local read-only verification)"
   },
   "latest_combined_report": {
     "pointer_path": "research/LATEST_PARALLEL_ACTION_TEST.json",
     "report_path": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
     "report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
     "run_id": "20261008T140207Z-d8e24197",
-    "authority": "combined report is sole authority for this run; no queue or per-action latest substituted",
+    "authority": "Static call-path review originally accompanied the 14:02 report. Executable bytes are independently verified offline; that report contains no fresh NMS event. Current lane report pointer is in DUNGEON_C_MANIFEST.json; the separate 16:31 Runtime-A dispatch correlation is documented in RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md.",
     "summary": "8 complete, 0 failed, 1 upload skipped; offline saved-evidence run; no NMS event captured"
   },
   "static_call_path": {
@@ -81,12 +81,12 @@
     "relates_to_runtime_dispatch": false,
     "limits": [
       "This static call path does not identify the target of runtime caller 02C08607: FF 52 10 / return 02C0860A.",
-      "The 14:02 combined report did not capture a new NMS event.",
       "The separate resolver callsite 02C04977 is not the same sample and its zero-match result is not dispatch proof.",
       "43 targets from 164 scene instances is an asset-derived prediction (30 salvage + 13 footlockers), not a new observed count.",
       "Historical 35-container measurement and separate post-update 16-container observation are unchanged.",
       "Owner+0x10 was a post-call zero read and does not resolve the pre-call dispatch slot.",
-      "No NMS launch or derelict traversal was performed."
+      "No NMS launch or derelict traversal was performed.",
+      "The E8 helper call is inside callback 0063A6D0 and is not the indirect dispatch itself. Runtime-A separately correlates 0063A6D0 to one event; raw slot and semantic identity remain unresolved."
     ]
   },
   "verification": {
@@ -97,5 +97,5 @@
     "pdata_lookup": true,
     "bounded_window_hashes": true
   },
-  "next_action": "No more D-lane offline evidence is currently available from this call path. Runtime target correlation and live slot capture remain with runtime-dispatch; do not attribute the static thunk chain to the 02C08607 dispatch without new evidence."
+  "next_action": "Continue offline semantic analysis of callback 0063A6D0 and helper 033E1A50 using matching-build bytes. Do not repeat WinDbg (user reports it crashes NMS)."
 }
