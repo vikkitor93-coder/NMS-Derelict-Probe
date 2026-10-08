@@ -1,19 +1,17 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-08T19:00:00Z",
-  "state": "in_progress",
-  "status": "Implemented a system-scope reset for live root-seed state and explicit raw/effective seed fields. Awaiting regression checks and package publication.",
-  "summary": "The user observed root-seed state persisting after entering a new system and raw seed values that can be inactive. Probe 0.3.40 tracks the normalized universe address, ends the old session and clears in-memory root/POI/trace buffers at known system changes, rejects prior-system seed candidates, and labels raw seed state separately from whether UseSeedValue is enabled.",
-  "progress": "Branch agent/runtime-dispatch-system-reset-20261008 contains the probe changes and focused tests. It is not yet published; current in-app package remains v0.3.61.",
-  "blockers": [
-    "Local Python runner is unavailable; the new unittest has not run."
-  ],
-  "next_action": "Validate the five focused tests and update/package the current source so Surveyor can deliver Probe 0.3.40; then publish the completed change and request a normal no-debugger system-switch check.",
+  "updated_utc": "2026-10-08T19:12:00Z",
+  "state": "ready_for_integration",
+  "status": "Probe 0.3.40 resets live root-seed state at known universe-address changes and separates raw seed values from effective UseSeedValue state. Focused CI and package integrity checks pass; v0.3.63 updater package is built on the lane branch.",
+  "summary": "The user observed that root seed state stayed visible after entering another system and saw a raw F-pattern seed field. The capture now polls normalized universe addresses, closes the old system's session, clears live pre-session root/POI/trace state, filters buffered seeds by exact system address, and reports raw/effective seed fields separately. The exact uploaded F-pattern value and its UseSeedValue flag remain unverified.",
+  "progress": "GitHub Actions run 37829748216 passed six focused tests and Python compilation, built full source package v0.3.63 / Probe 0.3.40, verified the ZIP CRC and packaged probe bytes, and committed its 34 updater chunks on this lane branch. Not published to main yet.",
+  "blockers": [],
+  "next_action": "Publish the tested lane branch and updater manifest to main with a new backup ref. Then ask the user to refresh the app and verify one normal system switch without WinDbg.",
   "human_intervention_required": false,
   "evidence_to_return": [
-    "User observation from 2026-10-08: prior root seed remained visible after entering a new system; second system showed raw seed-like value with F nibble pattern.",
-    "No new run manifest or captured session was attached in this turn; exact seed bytes and UseSeedValue flag remain unverified."
+    "The user's 2026-10-08 observation; no local session or run manifest supplied, so the exact raw F-pattern and UseSeedValue status are still unknown.",
+    "GitHub Actions run 37829748216: six focused tests passed; py_compile passed; package builder and zip integrity checks passed."
   ],
   "extension_version": "1.0.6",
   "full_derelict_required": false
