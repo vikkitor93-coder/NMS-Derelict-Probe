@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "lane": "dungeon-decompile",
+  "reviewed_utc": "2026-10-08T14:22:00Z",
+  "source": {
+    "executable": "NMS.exe",
+    "file_size_bytes": 88560712,
+    "sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "image_base": "0x0000000140000000",
+    "source_path_recorded": false
+  },
+  "latest_combined_report": {
+    "pointer_path": "research/LATEST_PARALLEL_ACTION_TEST.json",
+    "report_path": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+    "report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+    "run_id": "20261008T140207Z-d8e24197",
+    "authority": "combined report is sole authority for this run; no queue or per-action latest substituted",
+    "summary": "8 complete, 0 failed, 1 upload skipped; offline saved-evidence run; no NMS event captured"
+  },
+  "static_call_path": {
+    "source_evidence": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
+    "source_function_rva": "0063A6D0",
+    "source_body_bytes": 89,
+    "source_body_sha256": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7",
+    "call_instruction_rva": "0063A706",
+    "call_instruction_bytes": "E8 55 74 DA 02",
+    "rel32_destination_rva": "033E1B60",
+    "target_bytes": "E9 EB FE FF FF",
+    "target_instruction": "jmp rel32",
+    "jump_destination_rva": "033E1A50",
+    "pe_exception_directory": {
+      "rva": "0748E000",
+      "size": "001CD43C",
+      "runtime_function_entries": 157445
+    },
+    "pdata_lookup": {
+      "033E1B60": {
+        "containing_range": null,
+        "previous_range": "033E15B0..033E16E6",
+        "next_range": "033E1B70..033E1C71"
+      },
+      "033E1A50": {
+        "containing_range": null,
+        "previous_range": "033E15B0..033E16E6",
+        "next_range": "033E1B70..033E1C71"
+      },
+      "033E1B70": {
+        "containing_range": "033E1B70..033E1C71",
+        "previous_range": "033E1B70..033E1C71",
+        "next_range": "033E1C80..033E1D85"
+      }
+    },
+    "windows": [
+      {
+        "rva": "033E1B60",
+        "length": 16,
+        "file_offset": "033E0F60",
+        "sha256": "ed59be825fa2893a938ef973ac272e894fdaf94182736861bb186884980ed7d0",
+        "bytes": "E9 EB FE FF FF CC CC CC CC CC CC CC CC CC CC CC"
+      },
+      {
+        "rva": "033E1A50",
+        "length": 272,
+        "file_offset": "033E0E50",
+        "sha256": "95665d60d8f8b4a8713b9f93fff41eb1e84a16b112541a320de2fc0c1c1b3172",
+        "bytes": "8B 05 46 86 C9 01 4C 8B CA 4C 2B C9 4D 8B D1 49 83 E2 E0 74 79 A8 20 74 75 C4 C1 F9 6E D8 C5 E1 6C DB C4 E3 65 18 DB 01 49 8D 14 0A 0F 1F 40 00 C4 E2 65 29 09 C5 FD D7 C1 85 C0 75 44 48 83 C1 20 48 3B CA 75 EA 41 83 E1 1C 74 2E 41 8B D1 48 8D 05 6A 27 63 01 48 83 E2 FC 48 2B C2 C5 FE 6F 10 C4 E2 6D 8C 01 C4 E2 7D 29 CB C5 F5 DB D2 C5 FD D7 C2 85 C0 75 0A 49 03 C9 48 8B C1 C5 F8 77 C3 C5 F8 77 F3 0F BC C0 8B C0 48 03 C1 C3 49 83 E1 F0 74 36 A8 04 74 32 66 49 0F 6E C8 4D 8D 14 09 66 0F 6C C9 66 66 66 0F 1F 84 00 00 00 00 00 F3 0F 6F 01 66 0F 38 29 C1 66 0F D7 C0 85 C0 75 21 48 83 C1 10 49 3B CA 75 E6 48 3B CA 74 0F 90 4C 39 01 74 09 48 83 C1 08 48 3B CA 75 F2 48 8B C1 C3 0F BC C0 48 03 C1 C3 CC CC CC CC CC CC CC E9 1B FD FF FF CC CC CC CC CC CC CC CC CC CC CC E9 0B FE FF FF CC CC CC CC CC CC CC CC CC CC CC"
+      },
+      {
+        "rva": "033E1B70",
+        "length": 257,
+        "file_offset": "033E0F70",
+        "sha256": "b8651843ca57c9d4040fde8f41bd86df656dc919447662b8ed4a0b718c16cdd2",
+        "bytes": "48 89 5C 24 08 8B 05 21 85 C9 01 4C 8B D2 4C 2B D1 41 8B D8 4C 8B DA 4C 8B C9 A8 20 74 59 49 83 FA 20 72 53 C5 F9 6E DB C5 F9 70 DB 00 49 83 E2 E0 4C 8D 05 58 E4 C1 FC C4 E3 65 18 DB 01 4C 03 D1 C5 E5 76 01 C5 FC 50 D0 C4 C2 7D 31 8C D0 10 38 A1 04 C4 E2 75 36 11 C4 C1 7E 7F 11 42 0F B6 84 02 10 40 A1 04 48 83 C1 20 4C 03 C8 49 3B CA 75 CF C5 F8 77 EB 66 A8 04 74 62 49 83 FA 10 72 5C 66 0F 6E D3 4C 8D 05 04 E4 C1 FC 49 83 E2 F0 66 0F 70 D2 00 4C 03 D1 0F 1F 84 00 00 00 00 00 F3 0F 6F 09 48 83 C1 10 66 0F 6F C1 66 0F 76 C2 0F 50 D0 8B C2 48 03 C0 F3 41 0F 6F 84 C0 00 37 A1 04 66 0F 38 00 C8 F3 41 0F 7F 09 42 0F B6 84 02 00 38 A1 04 4C 03 C8 49 3B CA 75 C3 49 3B CB 74 16 8B 01 3B C3 74 07 41 89 01 49 83 C1 04 48 83 C1 04 49 3B CB 75 EA 48 8B 5C 24 08 49 8B C1 C3"
+      }
+    ],
+    "candidate_export_discrepancy": "The 89-byte saved body contains a byte-verified E8 call while direct_call_candidates is empty; unresolved exporter/list discrepancy."
+  },
+  "report_interpretation": {
+    "finding": "Static call at 0063A706 reaches a jump stub at 033E1B60, which tail-jumps to 033E1A50. Neither RVA is covered by a .pdata entry in this executable; adjacent .pdata function begins at 033E1B70.",
+    "semantic_identity": "unresolved",
+    "relates_to_runtime_dispatch": false,
+    "limits": [
+      "This static call path does not identify the target of runtime caller 02C08607: FF 52 10 / return 02C0860A.",
+      "The 14:02 combined report did not capture a new NMS event.",
+      "The separate resolver callsite 02C04977 is not the same sample and its zero-match result is not dispatch proof.",
+      "43 targets from 164 scene instances is an asset-derived prediction (30 salvage + 13 footlockers), not a new observed count.",
+      "Historical 35-container measurement and separate post-update 16-container observation are unchanged.",
+      "Owner+0x10 was a post-call zero read and does not resolve the pre-call dispatch slot.",
+      "No NMS launch or derelict traversal was performed."
+    ]
+  },
+  "verification": {
+    "executable_sha256_match": true,
+    "pointer_report_sha256_match": true,
+    "call_rel32_checked": true,
+    "jump_rel32_checked": true,
+    "pdata_lookup": true,
+    "bounded_window_hashes": true
+  },
+  "next_action": "No more D-lane offline evidence is currently available from this call path. Runtime target correlation and live slot capture remain with runtime-dispatch; do not attribute the static thunk chain to the 02C08607 dispatch without new evidence."
+}
