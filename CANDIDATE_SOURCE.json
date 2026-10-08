@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "version": "0.3.67",
-  "status": "release-candidate-verified",
+  "status": "published-main-source-candidate",
   "base_version": "0.3.66",
   "artifact": {
     "file_name": "NMS-Derelict-Probe-v0.3.67-source.zip",
@@ -43,5 +43,5 @@
     "windows_end_to_end": "pending local Windows validation",
     "startup_backfill_tests": "passed"
   },
-  "publication": "Release candidate being built from current main v0.3.66; direct publication follows package verification."
+  "publication": "Surveyor v0.3.67 source and full updater package are published to GitHub main; Windows startup/backlog validation remains pending."
 }
