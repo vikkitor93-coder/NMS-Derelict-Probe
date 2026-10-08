@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-08T23:34:03Z",
+  "updated_utc": "2026-10-08T23:35:32Z",
   "state": "waiting_on_user",
   "status": "Probe 0.3.40 clears root-seed state at system boundaries; the latest combined report provides saved-session analysis, while the live system-switch check remains pending.",
   "summary": "The main report pointer and combined report SHA-256 match. The isolated saved-session run reports root candidate 00C9E8DF0327789E with UseSeedValue=true and predicts 14 targets from assets; neither is a live system-switch result or an observed container count. The exact caller decodes FF 52 10 at 02C08607 returning at 02C0860A with no target RVA; the 02C04977 resolver sample is separate and does not resolve it. No further WinDbg attempt is requested.",
