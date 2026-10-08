@@ -3,7 +3,11 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Published Surveyor package: **v0.3.66**. Current source candidate: **v0.3.66**; Runtime-A probe: **0.3.40**. The candidate adds a dedicated Surveyor panel to run all eight parallel research actions, optional automatic runs after a session is saved, explicit run-trigger provenance, NMS-only overlay visibility, agent-objective visibility control, and a validated queue for agent build requests.
+Published Surveyor package: **v0.3.67**. Current source candidate: **v0.3.67**; Runtime-A probe: **0.3.40**. The candidate adds a dedicated Surveyor panel to run all eight parallel research actions, optional automatic runs after a session is saved, explicit run-trigger provenance, NMS-only overlay visibility, agent-objective visibility control, and a validated queue for agent build requests.
+
+## v0.3.67 — recover unprocessed saved sessions
+
+On startup, Surveyor discovers saved session files without an existing matching automatic research report and queues them individually in chronological order. Existing reports are indexed by source hash to prevent duplicate work.
 
 ## v0.3.66 — saved-session queue integrity
 
