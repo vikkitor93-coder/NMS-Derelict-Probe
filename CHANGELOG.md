@@ -1,3 +1,8 @@
+## v0.3.63 — system-scoped root seed state
+
+- Reset live Runtime-A root seed state on a known universe-address change.
+- Report raw seed value, UseSeedValue, and effective seed separately.
+
 # 0.3.61 — METADATA-D asset preparation repair
 
 - Give MBINCompiler an explicit MBIN input format and overwrite consent when the persistent asset directory also contains generated MXML files.

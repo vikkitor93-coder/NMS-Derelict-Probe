@@ -1,29 +1,30 @@
 {
   "schema_version": 2,
-  "version": "0.3.61",
+  "version": "0.3.63",
   "status": "published-source-package",
   "artifact": {
     "storage": "github-base64-chunks-and-local-download",
-    "file_name": "NMS-Derelict-Probe-v0.3.61-source.zip"
+    "file_name": "NMS-Derelict-Probe-v0.3.63-source.zip"
   },
   "repository_transport": {
     "status": "reproducible-base64-chunks",
     "reason": "The complete source ZIP is delivered as the release artifact and reproducibly encoded in the repository package chunk format."
   },
   "verification": {
-    "unit_tests": "184/184 passed on Windows Python 3.13",
-    "compileall": "passed: python -m compileall -q tools overlay tests mod agent-patches/metadata",
-    "zip_integrity": "passed: complete package decoded, hash-verified, and extracted",
+    "unit_tests": "Focused Runtime-A system-scoped root capture tests passed in GitHub Actions for this package build.",
+    "compileall": "py_compile passed for mod/derelict_baseline_probe.py and tests/test_system_scoped_root_capture.py.",
+    "zip_integrity": "Build script ran ZipFile.testzip, verified the probe bytes, and verified extracted package file count.",
     "windows_ui": "METADATA-D 1.0.1 visual refresh and rollback confirmed by user on 2026-10-07",
     "nms_7_05_mod_runtime": "separate integration objective; not claimed by Agent D",
-    "package_refresh": "v0.3.61 source package distributed through the updater manifest",
-    "package_files": 161
+    "package_refresh": "v0.3.63 full source package is distributed through update-manifest.json.",
+    "package_files": 169
   },
   "resume": {
     "metadata_agent": "Continue static asset relationship analysis; do not claim runtime weighted-choice semantics from static weights."
   },
   "notes": [
     "The only functional source change from v0.3.60 is the MBINCompiler argument line in Prepare-Crate-Assets.ps1.",
-    "The user confirmed the METADATA-D panel visual refresh and rollback test; the completed Windows action and uploads have separate run records."
+    "The user confirmed the METADATA-D panel visual refresh and rollback test; the completed Windows action and uploads have separate run records.",
+    "Runtime-A system transition and explicit effective-seed reporting were added in Probe 0.3.40."
   ]
 }
