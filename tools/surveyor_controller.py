@@ -33,7 +33,7 @@ except ImportError:  # Running surveyor_controller.py directly from the tools fo
     import agent_console
     import agent_ui_extensions
 
-CONTROLLER_VERSION = "0.3.66"
+CONTROLLER_VERSION = "0.3.67"
 AGENT_REFRESH_INTERVALS_MS = {
     "20 seconds": 20_000,
     "1 minute": 60_000,
@@ -121,6 +121,76 @@ def _restore_pending_auto_research(records: dict[str, Any], sessions_dir: Path =
         record["state"] = "queued"
         pending.append((signature, sessions_dir / filename))
     return pending
+
+
+def _completed_auto_research_reports(project_root: Path, latest_report: Path) -> dict[str, dict[str, str]]:
+    """Index prior reports by exact automatic-session hash to prevent duplicate work."""
+    report_root = project_root / "parallel-action-tests"
+    candidates = set(report_root.glob("*/combined-results.json")) if report_root.is_dir() else set()
+    if latest_report.is_file():
+        candidates.add(latest_report)
+    completed: dict[str, dict[str, str]] = {}
+    for path in sorted(candidates, key=lambda item: str(item).casefold()):
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            continue
+        trigger = report.get("trigger") if isinstance(report, dict) else None
+        signature = str((trigger or {}).get("session_sha256") or "").lower()
+        if len(signature) != 64 or any(ch not in "0123456789abcdef" for ch in signature):
+            continue
+        completed[signature] = {
+            "run_id": str(report.get("run_id") or ""),
+            "report_path": str(report.get("report_path") or path),
+        }
+    return completed
+
+
+def _reconcile_saved_session_queue(
+    records: dict[str, Any], pending: list[tuple[str, Path]], sessions_dir: Path,
+    project_root: Path, latest_report: Path, already_done: set[str] | None = None,
+) -> int:
+    """Backfill unprocessed saved sessions and skip hashes with an existing report."""
+    reported = _completed_auto_research_reports(project_root, latest_report)
+    known_done = {str(item).lower() for item in (already_done or set())}
+    pending_signatures = {signature for signature, _path in pending}
+    added = 0
+    candidates: list[tuple[str, str, Path]] = []
+    if sessions_dir.is_dir():
+        for path in sessions_dir.glob("*.json"):
+            try:
+                raw = path.read_bytes()
+                session = json.loads(raw.decode("utf-8"))
+            except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+                continue
+            if not isinstance(session, dict) or not session.get("ended_utc"):
+                continue
+            signature = hashlib.sha256(raw).hexdigest()
+            candidates.append((str(session.get("ended_utc") or ""), signature, path))
+    candidates.sort(key=lambda item: (item[0], item[2].name.casefold()))
+    for _ended_utc, signature, path in candidates:
+        record = records.get(signature)
+        if signature in pending_signatures:
+            continue
+        if signature in known_done or (isinstance(record, dict) and record.get("state") in {"complete", "completed-with-errors", "already-reported", "cancelled-by-user"}):
+            continue
+        if signature in reported:
+            records[signature] = {
+                **(record if isinstance(record, dict) else {}),
+                "session_file": path.name, "state": "already-reported",
+                **reported[signature], "updated_utc": _utc(),
+            }
+            continue
+        records[signature] = {
+            **(record if isinstance(record, dict) else {}),
+            "session_file": path.name, "state": "queued",
+            "queued_utc": (record or {}).get("queued_utc") if isinstance(record, dict) else _utc(),
+            "recovered_from_saved_sessions": True,
+        }
+        pending.append((signature, path))
+        pending_signatures.add(signature)
+        added += 1
+    return added
 
 
 def _runtime_capture_saved(path: Path = RUNTIME_CAPTURE_FILE) -> bool:
@@ -299,6 +369,11 @@ class SurveyorController:
         self.auto_research_last_signature = str(_read_json(AUTO_RESEARCH_RECEIPT).get("session_sha256") or "")
         if any(signature == self.auto_research_last_signature for signature, _path in self.auto_research_pending):
             self.auto_research_last_signature = ""
+        self.auto_research_backfilled = _reconcile_saved_session_queue(
+            self.auto_research_records, self.auto_research_pending, ROOT / "sessions",
+            self.project_root, ROOT / "parallel-action-test-latest.json",
+            {self.auto_research_last_signature} if self.auto_research_last_signature else set(),
+        )
         if not self.auto_research_last_signature and not self.auto_research_pending:
             current_saved = _saved_session_snapshot(_read_json(LIVE_STATUS))
             if current_saved:
@@ -1797,7 +1872,11 @@ class SurveyorController:
                     self._write_auto_research_receipt(signature, path, "cancelled-by-user")
                 self.auto_research_pending.clear()
                 self._persist_auto_research_queue()
-            self.auto_research_state.set("Automatic research is enabled." if self.auto_research_enabled.get() else "Automatic research is off; use Run all research actions in parallel when ready.")
+            if self.auto_research_enabled.get():
+                self.auto_research_state.set("Automatic research is enabled; saved-session backlog will run in order.")
+                self._start_next_auto_research()
+            else:
+                self.auto_research_state.set("Automatic research is off; queued saved sessions will wait until enabled.")
         except OSError as exc:
             self._set_status("Could not save automatic research setting", str(exc))
 
