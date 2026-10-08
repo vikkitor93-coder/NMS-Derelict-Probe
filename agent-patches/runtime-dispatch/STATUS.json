@@ -9,7 +9,7 @@
   "blockers": [
     "Focused regression test not run because the local command runner is unavailable; keep this correction on the lane branch until it passes."
   ],
-  "next_action": "Run python -m unittest tests.test_runtime_hook_address_labels from the Runtime-A branch archive. On pass, publish to main using the recorded backup ref. Then continue offline semantic analysis of 0063A6D0 and the zero-slot discrepancy; no WinDbg.",
+  "next_action": "Run python -m unittest discover -s tests -p "test_runtime_hook_address_labels.py" from the Runtime-A branch archive. On pass, publish to main using the recorded backup ref. Then continue offline semantic analysis of 0063A6D0 and the zero-slot discrepancy; no WinDbg.",
   "human_intervention_required": true,
   "evidence_to_return": [
     "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",

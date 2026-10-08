@@ -121,7 +121,8 @@
       "old_recursive_return_rva": "00634C63",
       "new_recursive_return_rva": "0063A773",
       "test": "tests/test_runtime_hook_address_labels.py",
-      "test_status": "pending local execution"
+      "test_status": "pending local execution",
+      "test_command": "python -m unittest discover -s tests -p \"test_runtime_hook_address_labels.py\""
     }
   },
   "review": "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008_163756.md",
