@@ -8,7 +8,7 @@ The matched 16:31:47.935Z root event records caller return `02C0860A` after `02C
 
 The owner+0x10 zero remains an unresolved after-call capture/data inconsistency, not a target. The separate resolver call `02C04977` is unrelated. The unresolved-preset zero output is not a physical count. The 43-target figure (30 crates + 13 footlockers over 164 scenes) remains a distinct asset-derived prediction, separate from historical 35 and post-update 16 counts. No WinDbg or live NMS action was used.
 
-Review: `agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md`. Focused regression test `tests.test_runtime_hook_address_labels` is pending local run.
+Review: `agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md`. Published to `main` in merge commit `373a5e8247823ab5c1a5955d31c70bc25bb610e9` (PR #51); registry now points to extension 1.0.6. The five focused address/evidence assertions were checked against the branch files and all passed; the Python unittest itself was not run because the local command runner is unavailable. Backup: `backup/main-before-runtime-a-signature-correction-20261008-1820` at `7b62524a018c52801084548d21b47b771683cc38`. Workspace state was synced in `ed1c3108661d5ea90636174c122feb89ee2911eb`.
 
 ## DUNGEON-C latest combined report and executable call-path review — 2026-10-08
 
