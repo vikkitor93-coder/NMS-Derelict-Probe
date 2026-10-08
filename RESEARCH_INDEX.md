@@ -1,14 +1,18 @@
 # NMS Derelict Probe — Research Index
 
-Last updated: 2026-10-08. This file is the short shared truth table for humans and parallel AI agents.
-
 ## Agent D review of attached parallel-action report (2026-10-08)
 
-- **Measured offline action result from the combined report:** `research.prepare_assets` completed with code 0 against saved session `20261006T223811Z_0001BF0004E84EFD`; 1,441 scene exports were indexed, 1,433 were dungeon scenes, 75 contained target references, and 164/164 saved scene instances resolved. The run did not attach to NMS or upload to GitHub. The shared pointer/report live in a user-attached 0.3.62 local candidate and are not published to `main` by Agent D; see `agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json` for source hashes.
+- **Measured offline action result from the combined report:** `research.prepare_assets` completed with code 0 against saved session `20261006T223811Z_0001BF0004E84EFD`; 1,441 scene exports were indexed, 1,433 were dungeon scenes, 75 contained target references, and 164/164 saved scene instances resolved. The run did not attach to NMS or upload to GitHub. The attached 13:02 pointer/report live in a user-attached 0.3.62 local candidate and were not published to `main` by Agent D; the current main pointer names a distinct 13:43 run; see `agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json` for source hashes.
 - **Asset-derived prediction:** 43 target containers comprise 30 salvage crates and 13 footlockers for those saved instances. This is separate from the historical 35-container measurement and later 16-container user observation. `crate-target-discovery` is diagnostic correlation data, not a physical count.
 - **Inference:** `CARGO_FLOATERS` is high-confidence from saved scene family and hazard evidence, and exists among the ten measured static choices. The combined report does not measure which `DungeonOptions` choice the game selected or the meaning of its static 0.33 weight.
 - **Analyzer-derived grouping:** the saved report groups the 43 predicted targets into eight CARG logical groups (33 targets), two BARRACKS groups (10), and one END group (0). These 11 groups are not a physical room count and cannot be equated one-for-one with the static `CARGO_FLOATERS` `Rooms=7` parameter or exact room IDs.
 - **Unresolved outside Agent D:** zero owner+0x10 reads in one saved caller sample and a separate resolver sample do not identify the current dispatch target. Do not combine those callsites.
+
+## Seed-B combined-report review — 2026-10-08
+
+Seed-B verified the user-attached 0.3.62 local candidate's `research/LATEST_PARALLEL_ACTION_TEST.json` against its combined report (SHA-256 `12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda`). The report is not published here. It is the sole source for the October 8 parallel run: eight offline saved-evidence actions completed, one upload disabled, no new NMS event. Source sessions differ across generation/asset, seed-function, and upstream analysis. The 43 target containers are an asset-derived prediction (30 salvage crates + 13 footlockers), separate from historical observed 35 and post-update user-observed 16. The saved exact caller is `02C08607: FF 52 10`, return `02C0860A`; the zero owner `+0x10` read is not a pre-call slot target. The resolver's zero-match result comes from another caller sample (`02C04977`) and does not resolve current dispatch. See `agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md` for provenance, static constructor trace, and limitations. Root seed derivation remains unproven. No new extension or runtime behavior is published.
+
+Last updated: 2026-10-08. This file is the short shared truth table for humans and parallel AI agents.
 
 ## Agent D static abandoned-freighter map (2026-10-07)
 
@@ -68,3 +72,5 @@ Last updated: 2026-10-08. This file is the short shared truth table for humans a
 ## Evidence rule
 
 Every conclusion must be tagged mentally as **measured**, **public-structure confirmed**, **inferred**, or **hypothesis**. Never promote an inference to measured fact merely because it fits the current model.
+
+\n

@@ -4,8 +4,8 @@
   "base_release": "0.3.61",
   "purpose": "Agent D review of the user-attached October 8 combined report; not an updater release",
   "file_name": "NMS-Derelict-Probe-v0.3.61-AgentD-parallel-review-source.zip",
-  "sha256": "5cf693a160a7b5ebb3805b4d0cffbd49a5f72b1473014e74514ca591140a911b",
-  "size": 433571,
+  "sha256": "8ac82e8e283b386b4e2e750e37d5e97e867b615bae9ff208ab33e67a9b237ad8",
+  "size": 434418,
   "file_count": 163,
   "encoding": "base64-concatenated-parts",
   "parts": [

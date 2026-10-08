@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T13:44:18Z",
+  "updated_utc": "2026-10-08T13:48:14Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -28,10 +28,11 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage",
-      "status": "agent-output-published-do-not-duplicate",
+      "status": "combined-report-reviewed-seed-derivation-open",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-      "result_summary": "Offline system-seed anchors implemented and verified; direct equality with known derelict root seeds was not found and no derivation is claimed.",
-      "human_validation_required": false
+      "result_summary": "Verified attached local candidate combined-report SHA-256; 43 asset targets are predicted, 35 and 16 are observed counts; current dispatch and root seed derivation remain unresolved.",
+      "human_validation_required": false,
+      "review": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md"
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-decompile",
