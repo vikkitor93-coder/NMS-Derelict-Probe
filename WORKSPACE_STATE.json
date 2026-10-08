@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T14:40:18Z",
+  "updated_utc": "2026-10-08T16:55:19Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -20,15 +20,15 @@
   "lanes": {
     "runtime-dispatch": {
       "branch": "agent/runtime-dispatch",
-      "status": "Latest main report reviewed; saved event still lacks pre-instruction dispatch slot",
+      "status": "Latest combined report correlates logical entry 00634BC0 with exact root call return 02C0860A; post-call zero-slot discrepancy is under offline review.",
       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
       "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
-      "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008.md",
-      "extension_version": "1.0.3",
-      "human_validation_required": true,
-      "next_action": "Follow the numbered WinDbg recipe in AI_HANDOFF.md: verify NMS.exe SHA-256, attach WinDbg x64, break before NMS+0x02C08607, and return RDX/[RDX+0x10] output with the matching Surveyor root event; no full traversal required.",
-      "latest_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
-      "latest_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6"
+      "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008_163756.md",
+      "extension_version": "1.0.4",
+      "human_validation_required": false,
+      "next_action": "Inspect pyMHF static_function_hook/get_caller timing and Runtime-A capture order; do not use WinDbg. Prototype read-only callsite capture only if offline semantics do not reconcile the zero slot.",
+      "latest_report": "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json",
+      "latest_report_sha256": "7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c"
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage-update-20261008",
@@ -75,12 +75,6 @@
   "human_intervention": {
     "required_now": true,
     "pending": [
-      {
-        "lane": "runtime-dispatch",
-        "kind": "pre-instruction-dispatch-slot-capture",
-        "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
-        "next_action": "Follow the numbered WinDbg recipe in AI_HANDOFF.md and RUNTIME_A_MANIFEST.json; return the pre-call RDX/[RDX+0x10] output with its matching Surveyor root event. No full traversal required."
-      },
       {
         "kind": "fresh-root-caller-and-upstream-evidence",
         "lane": "seed-lineage",

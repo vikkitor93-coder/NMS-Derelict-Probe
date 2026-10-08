@@ -1,38 +1,21 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-08T14:35:47Z",
-  "state": "blocked",
-  "status": "The latest main report is verified and reviewed. Its offline run contains a saved 14:00:37Z root event, but owner+0x10 was read after the call and remains zero; a pre-instruction capture is still required.",
-  "summary": "Latest main report 20261008T140207Z-d8e24197 SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6 matches the pointer. Its offline run did not attach to NMS; the saved event timestamp is 2026-10-08T14:00:37.544Z. Call 02C08607 (FF 52 10) returns at 02C0860A; the after-call owner+0x10 read is zero. Separate resolver 02C04977 / 02C0497A found zero matches for 00634BC0. Asset analysis predicts 43 targets (30 crates + 13 lockers) across 164 instances, not an observed count; historical 35 and post-update 16 remain distinct.",
-  "progress": "Added a provenance-preserving review and Runtime-A extension 1.0.3. No probe/app code changed. The attached 13:02 candidate report and latest published main report are documented separately; neither shared report nor pointer was modified by Runtime-A.",
+  "updated_utc": "2026-10-08T16:55:19Z",
+  "state": "in_progress",
+  "status": "Latest combined report verifies a fresh saved root event. Logical entry 00634BC0 is correlated with exact caller return 02C0860A after 02C08607: FF 52 10, making it a strong runtime target candidate. The +0x10 zero was read after the call and is not a target; hook timing/capture semantics remain to be checked.",
+  "summary": "Main pointer/report SHA-256 7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c verified for run 20261008T163756Z-cd3dbef7. The 16:37 run was offline saved-evidence analysis: 8 complete, 1 upload skipped, no NMS attach. The 16:31:47.935Z root descriptor event ties logical entry 00634BC0 to caller return 02C0860A and call 02C08607 FF 52 10. The post-call +0x10 value is zero. The separate 02C04977 resolver sample is not dispatch proof. The separate 43 target prediction is from the distinct 14:02 report (SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6), not the latest 16:37 run and not an observed count; latest generation output has zero resolved instances under an unresolved preset.",
+  "progress": "Added a provenance-preserving review of the latest main combined report and versioned Runtime-A extension 1.0.4. No app/probe code changed. Corrected the unsupported 0063A6D0 inference; 00634BC0 is a strong runtime-correlated candidate, with hook timing and zero-slot discrepancy still open. WinDbg is unsuitable for this setup and is not requested.",
   "blockers": [
-    "The latest saved event captures the hook after dispatch. A pre-instruction observation at NMS.exe+02C08607 is required to identify the current slot value."
+    "The saved event correlates logical entry 00634BC0 with return 02C0860A, but the slot read at the logical-entry-after-external-call phase is zero. Validate hook/caller timing and register semantics before marking the dispatch target fully resolved."
   ],
-  "next_action": "Follow the numbered Runtime-A live capture recipe in AI_HANDOFF.md and RUNTIME_A_MANIFEST.json: verify the NMS.exe hash, attach WinDbg x64, break at NMS+0x02C08607, and capture RDX/[RDX+0x10] on one root event. Return the debugger output with the matching Surveyor root event; no full traversal required.",
-  "human_intervention_required": true,
-  "human_action": {
-    "required": true,
-    "reason": "The latest saved event has only a post-call slot read; a debugger or equivalent pre-instruction capture is needed for the dispatch slot value.",
-    "after_build_steps": [
-      "Open the published Surveyor 0.3.61 with compatible Probe 0.3.38. Use Surveyor's normal launch/connect path for NMS and leave the player outside a derelict freighter that can be entered. Keep Surveyor connected so it can save the matching root event. The attached 0.3.62 ZIP is a local source candidate, not a published live build.",
-      "On the PC running NMS, open Windows PowerShell and run: Get-FileHash \"G:\\SteamLibrary\\steamapps\\common\\No Man's Sky\\Binaries\\NMS.exe\" -Algorithm SHA256. Continue only if the SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. If NMS.exe is installed elsewhere, replace only the quoted path with that NMS.exe path; if the hash differs, stop and report the hash.",
-      "Open WinDbg x64. Choose File > Attach to process, select the running NMS.exe from the matching install, and attach. In the bottom Command pane, enter: lm m NMS. Confirm the module list contains NMS.exe.",
-      "In the WinDbg Command pane enter: bp NMS+0x02C08607 then enter: g. This sets a breakpoint on the instruction before the indirect call FF 52 10. If WinDbg says it cannot resolve NMS, run lm, find the NMS.exe row, and use its start address in bp <start-address>+0x02C08607, then enter g.",
-      "Enter the derelict freighter once. When WinDbg breaks, do not enter g yet.",
-      "In the WinDbg Command pane, enter r rip and press Enter. Then enter r rcx and press Enter. Then enter r rdx and press Enter. Finally enter dq @rdx+0x10 L1 and press Enter. The displayed QWORD is the raw eight-byte slot value before the call executes. Optionally enter u @rip L1 to confirm FF 52 10. No full traversal is required.",
-      "Copy the WinDbg output showing RIP, RCX, RDX, and the dq result before continuing.",
-      "Enter g to resume NMS and let the root event finish saving. Close NMS. In Surveyor's Agent Console > RUNTIME-A panel, click Upload captured root event.",
-      "Return the WinDbg output and the Surveyor upload result/event JSON. If the breakpoint never hits or memory cannot be read, report the exact WinDbg message instead. No full traversal is required."
-    ],
-    "success_condition": "A descriptor-correlated pre-instruction record shows the raw slot before FF 52 10 executes, or records why that read is unavailable; keep post-call/root-add reads separate."
-  },
+  "next_action": "Continue offline: inspect the installed pyMHF static_function_hook/get_caller wrapper timing and Runtime-A capture order. If semantics do not explain the zero slot, prototype a read-only callsite capture and test it before requesting a live NMS action. Do not use WinDbg; no full traversal is required.",
+  "human_intervention_required": false,
   "evidence_to_return": [
-    "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008.md",
-    "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json (latest main pointer; SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6)",
-    "research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json (local v0.3.62 candidate; SHA-256 verified, not claimed published)",
+    "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008_163756.md",
+    "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json (pointer SHA-256 verified: 7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c)",
     "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json"
   ],
-  "extension_version": "1.0.3",
+  "extension_version": "1.0.4",
   "full_derelict_required": false
 }

@@ -13,7 +13,7 @@ from tools import surveyor_controller as controller
 
 ROOT = Path(__file__).resolve().parents[1]
 LANE = "runtime-dispatch"
-VERSION = "1.0.3"
+VERSION = "1.0.4"
 HOST_VERSION = "0.3.53"
 EXTENSION_DIR = ROOT / "agent-ui" / "extensions" / LANE / VERSION
 
@@ -65,13 +65,13 @@ class RuntimeDispatchExtensionTests(unittest.TestCase):
         manifest, panel = read_extension()
         action = panel["actions"][0]
         self.assertTrue(panel["request_only"])
-        self.assertIn("Saved root event 2026-10-08 14:00:37Z", panel["summary"])
-        self.assertIn("hook is after dispatch and owner+0x10 is zero", panel["summary"])
-        self.assertIn("Separate resolver 02C04977/02C0497A found zero candidates", panel["summary"])
-        self.assertIn("Latest 14:02 run was offline", panel["summary"])
-        self.assertIn("43 targets (30 crates+13 lockers)", panel["summary"])
-        self.assertIn("not observed", panel["summary"])
-        self.assertIn("Historical 35 and post-update 16 remain separate", panel["summary"])
+        self.assertIn("Latest combined report 20261008T163756Z-cd3dbef7", panel["summary"])
+        self.assertIn("correlates entry 00634BC0 with return 02C0860A", panel["summary"])
+        self.assertIn("The +0x10 zero is post-call and not a target", panel["summary"])
+        self.assertIn("02C04977 resolver is separate", panel["summary"])
+        self.assertIn("Do not use WinDbg", panel["summary"])
+        self.assertIn("not a physical count", panel["summary"])
+        self.assertIn("prior asset-derived 43 remains separate", panel["summary"])
         self.assertEqual(["research.analyze_generation", "research.upload_runtime_capture"], [a["action_id"] for a in panel["actions"]])
         self.assertIn(action["action_id"], extensions.HOST_ACTION_IDS)
         self.assertEqual({}, action["parameters"])
