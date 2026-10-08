@@ -1,18 +1,18 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "lane": "metadata",
-  "evidence_class": "offline-rerun-of-saved-evidence",
-  "source_distribution": "user-attached local Surveyor 0.3.62 source ZIP candidate; shared pointer and report not published to GitHub main by this review",
-  "source_zip_sha256": "43a65ad2499717d1f1f35d707f0fb5e00496f9cab591b067108ea2e0ed2ac56b",
-  "authoritative_report": "NMS-Derelict-Probe/research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json",
-  "authoritative_report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
-  "pointer": "NMS-Derelict-Probe/research/LATEST_PARALLEL_ACTION_TEST.json",
-  "run_id": "20261008T130233Z-755d4c43",
+  "evidence_class": "combined-report-review-of-saved-live-capture",
+  "source_distribution": "GitHub main combined report; the parallel harness analyzed saved evidence offline, including the newly captured 2026-10-08 session",
+  "authoritative_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+  "authoritative_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+  "pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
+  "pointer_uploaded_utc": "20261008T140254Z",
+  "run_id": "20261008T140207Z-d8e24197",
+  "run_started_utc": "2026-10-08T14:02:07.744Z",
+  "run_finished_utc": "2026-10-08T14:02:48.061Z",
   "run_mode": "isolated_parallel_test_no_github_upload",
-  "run_finished_utc": "2026-10-08T13:03:02.691Z",
   "input_snapshot_available": true,
   "worker_data_retained": false,
-  "upload_status_from_attached_run": "not_uploaded_from_attached_run",
   "run_summary": {
     "total": 9,
     "completed": 8,
@@ -20,78 +20,156 @@
     "unsupported": 0,
     "upload_actions_skipped": 1
   },
-  "source_sessions": {
-    "generation_and_asset_outputs": "20261006T223811Z_0001BF0004E84EFD",
-    "seed_function_analysis": "20261002T213047Z_00001A0004E84EFD",
-    "upstream_caller_analysis": "20261004T151219Z_0001BF0004E84EFD"
+  "capture_provenance": {
+    "classification": "live NMS capture is present in saved input evidence; the combined parallel actions themselves ran offline",
+    "generation_session_id": "20261008T140041Z_0001BF0004E84EFD",
+    "generation_session_address_hex": "0001BF0004E84EFD",
+    "probe_version": "0.3.38",
+    "analysis_tool_version": "0.3.24",
+    "exact_root_event_utc": "2026-10-08T14:00:37.544Z",
+    "exact_external_caller_return_rva_hex": "02C0860A",
+    "dungeon_root_seed_candidate_hex": "5B4AE67D9C2A8F61",
+    "seed_status": "candidate-captured-unverified",
+    "seed_limit": "captured candidate; derivation and role remain unverified"
   },
-  "metadata_action": {
-    "action_id": "research.prepare_assets",
-    "status": "complete",
-    "return_code": 0,
-    "duration_seconds": 29.288,
-    "workflow": "Prepare-Crate-Assets.cmd",
-    "artifact_sha256": {
-      "asset-work-v1/asset-calculation-latest.json": "411439791bbe5827035a99475e4266b88bc6c67b9365a8842d4dd40af4b043df",
-      "asset-work-v1/crate-target-discovery.json": "66accea84ddde6d436698e282c594abd77d25e88cbd2f9dfbe76b3b3d2b73174",
-      "asset-work-v1/room-crate-index.json": "01f9a3410513b6ade0e474ac93ec2bde22f643d598b216056fa3cb03bc208461"
+  "metadata_actions": {
+    "prepare_assets": {
+      "status": "complete",
+      "return_code": 0,
+      "session_id": "20261008T140041Z_0001BF0004E84EFD",
+      "dungeon_scene_instances": 164,
+      "resolved_scene_instances": 164,
+      "unresolved_scene_instances": 0,
+      "scene_exports_indexed": 1441,
+      "dungeon_scenes_indexed": 1433,
+      "dungeon_scenes_with_target_references": 75,
+      "predicted_salvage_crates": 30,
+      "predicted_crew_footlockers": 13,
+      "predicted_target_containers": 43,
+      "observed_container_count": null,
+      "manual_f7_target_containers": 0,
+      "artifact_sha256": {
+        "asset-work-v1/asset-calculation-latest.json": "9a8ea5a0b0a765ba3f53c92282e0ca72e839719bdd3b6abc6209a4f7bb42e9b7",
+        "asset-work-v1/crate-target-discovery.json": "06f6f84bb0532d2cefa3f7af27feb439b7f8e06e930b4401b4ebf4c0f393046a",
+        "asset-work-v1/room-crate-index.json": "4aef30f4bb5183a5e34386eeb2040ef3f8798132cd94c63d65a75c509be37b24"
+      }
     }
   },
-  "asset_results": {
-    "source_session_id": "20261006T223811Z_0001BF0004E84EFD",
-    "scene_exports_indexed": 1441,
-    "dungeon_scenes_indexed": 1433,
-    "dungeon_scenes_with_target_references": 75,
-    "used_dungeon_scene_types": 74,
-    "dungeon_scene_instances": 164,
-    "resolved_scene_instances": 164,
-    "unresolved_scene_instances": 0,
+  "combined_report_artifact_sha256": {
+    "asset-work-v1/generation-baseline-latest.json": "5c725d5c8003adfe5c60d2f6e9ce973f6472dd1731a299031ec44f601caa8ffe",
+    "action-outputs/dungeon-seed-function-analysis-latest.json": "1d75a53117532fe20e89092fa21c45b78edce1d0241469071d82664a617e6c77",
+    "action-outputs/dungeon-caller-code-latest.json": "13606b5d6fa5920b9ee2563e87431fa1780a35c1fbc314b550928be9e44747f4",
+    "action-outputs/exact-root-caller-code-latest.json": "6361740d04b9eede4ec3ea3ca94368af9fdb01981f962f64525b37b97c50f9ab",
+    "action-outputs/dungeon-upstream-callers-latest.json": "308568b371d58d64efc22cfc2fb2a43b2b093466997ba5146b961117bd55d507",
+    "asset-work-v1/generation-measurements-summary.json": "23afebc2d48d4ead55f1a8e287c4325ca3cd70e30ce064dd70982fbc8d69cddf",
+    "asset-work-v1/generation-measurements.csv": "91c272005ed01573abe003e68b91209ae94313acb34bdac81f8233f99d00402d",
+    "asset-work-v1/seed-room-correlation.json": "22884974f75d38f9045fa380b4d0a93f3dacf1251a9743dc0e7908c793c8f7cc",
+    "asset-work-v1/asset-calculation-latest.json": "9a8ea5a0b0a765ba3f53c92282e0ca72e839719bdd3b6abc6209a4f7bb42e9b7",
+    "asset-work-v1/crate-target-discovery.json": "06f6f84bb0532d2cefa3f7af27feb439b7f8e06e930b4401b4ebf4c0f393046a",
+    "asset-work-v1/room-crate-index.json": "4aef30f4bb5183a5e34386eeb2040ef3f8798132cd94c63d65a75c509be37b24",
+    "action-outputs/exact-root-vtable-latest.json": "11279a87d723d2e6d4fa3cf0159ce0824f5092615dca1022346118488d4547d2"
+  },
+  "preset": {
+    "name": "CARGO_FLOATERS",
+    "classification": "high-confidence inference from saved scene-family and hazard evidence; selected DungeonOptions value was not directly observed",
+    "static_table_rooms": 7,
+    "static_choice_weighting": "0.330000",
+    "weighting_limit": "Static weight is not proof of runtime selection probability."
+  },
+  "room_model_discrepancy": {
+    "classification": "analyzer-derived parent groups from captured scene evidence; each group has a Room N parent label, but the report is not a manual physical-room count",
+    "analyzer_main_rooms": 11,
+    "analyzer_dead_ends": 0,
+    "analyzer_total_rooms": 11,
+    "room_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "terminal_group": {
+      "room_index": 10,
+      "dominant_family": "END"
+    },
+    "static_table_rooms": 7,
+    "main_room_count_matches_table": false,
+    "static_R_END_min_room_index": 6,
+    "static_exact_room_count_rules": [
+      {
+        "room_id": "R_FLO_BARR",
+        "min": 1,
+        "max": 1
+      },
+      {
+        "room_id": "R_S_FLO_BARR",
+        "min": 1,
+        "max": 1
+      },
+      {
+        "room_id": "R_END",
+        "min": 1,
+        "max": 1
+      }
+    ],
+    "static_rule_comparison": {
+      "captured_family_groups": {
+        "CARG": 8,
+        "BARRACKS": 2,
+        "END": 1
+      },
+      "captured_barracks_count_vs_two_static_barracks_rules": "family total is compatible with one R_FLO_BARR and one R_S_FLO_BARR, but family labels cannot identify those exact room IDs",
+      "captured_end_vs_static_R_END_rule": "one END group is present at index 10, meeting the static minimum index 6",
+      "remaining_mismatch": "eight CARG family groups and 11 total parent groups remain unexplained against Rooms=7"
+    },
+    "room_model_status": "needs-review",
+    "room_parent_index_coverage": 11,
+    "manual_room_markers": {
+      "main_rooms_f6": 0,
+      "dead_ends_f5": 0
+    },
+    "logical_groups_by_family": {
+      "CARG": 8,
+      "BARRACKS": 2,
+      "END": 1
+    },
+    "predicted_targets_by_family": {
+      "CARG": 33,
+      "BARRACKS": 10,
+      "END": 0
+    },
+    "limit": "The indexed parent groups and family labels do not identify exact static room IDs. END at index 10 satisfies static R_END minimum index 6, but this does not explain why the report has 11 groups while Rooms=7."
+  },
+  "target_prediction": {
+    "classification": "asset-derived prediction for saved scene instances; not a physical container count",
     "predicted_salvage_crates": 30,
     "predicted_crew_footlockers": 13,
     "predicted_target_containers": 43,
     "observed_container_count": null,
-    "count_classification": "asset-derived prediction for saved scene instances; not a physical count from this run",
-    "target_discovery_classification": "diagnostic correlations/reference counts only"
+    "historical_counts_limit": "Keep the historical 35 measurement and separate user-observed 16 count distinct from this 43-target prediction."
   },
-  "preset": {
-    "name": "CARGO_FLOATERS",
-    "classification": "high-confidence inference from saved scene families and hazard evidence; not a directly observed DungeonOptions choice",
-    "static_choice_present": true,
-    "static_choice_weighting": "0.330000",
-    "static_choice_weighting_limit": "Static weighting does not establish runtime selection probability or the chosen option in this run."
+  "dispatch_boundary": {
+    "exact_capture_owner_plus_0x10": "0000000000000000",
+    "exact_capture_target_identity": null,
+    "exact_call_return_rva_hex": "02C0860A",
+    "resolver_sample_call_return_rva_hex": "02C0497A",
+    "resolver_sample_instruction_hex": "FF5210",
+    "resolver_candidate_match_count": 0,
+    "interpretation": "The zero owner+0x10 value from the exact captured caller is not a resolved dispatch target. The separate resolver sample is a different callsite and has zero candidate matches; do not combine them. Runtime/decompile lanes own this question."
   },
-  "saved_room_family_analysis": {
-    "classification": "analyzer-derived logical grouping of saved scene evidence; family labels and target counts are not physical room or container observations",
-    "logical_groups": 11,
-    "family_groups_and_asset_predictions": {
-      "BARRACKS": {
-        "logical_groups": 2,
-        "predicted_salvage_crates": 2,
-        "predicted_crew_footlockers": 8,
-        "predicted_target_containers": 10
-      },
-      "CARG": {
-        "logical_groups": 8,
-        "predicted_salvage_crates": 28,
-        "predicted_crew_footlockers": 5,
-        "predicted_target_containers": 33
-      },
-      "END": {
-        "logical_groups": 1,
-        "predicted_salvage_crates": 0,
-        "predicted_crew_footlockers": 0,
-        "predicted_target_containers": 0
-      }
-    },
-    "static_cargo_floaters_rooms_parameter": 7,
-    "mapping_limit": "The 11 analyzer groups cannot be equated one-for-one with the table's Rooms=7 parameter or with exact static room IDs."
+  "upload_status": "combined parallel harness skipped upload; this report was later published as saved research evidence",
+  "prior_attached_candidate_review": {
+    "source_zip_sha256": "43a65ad2499717d1f1f35d707f0fb5e00496f9cab591b067108ea2e0ed2ac56b",
+    "report_path": "NMS-Derelict-Probe/research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json",
+    "report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
+    "run_id": "20261008T130233Z-755d4c43",
+    "note": "Preserved for provenance; superseded as the latest report by the current main pointer."
   },
-  "dispatch_boundary": "The report's zero owner+0x10 reads and separate vtable-resolver sample do not resolve the current dispatch target; this is owned by the runtime and decompile lanes.",
-  "limits": [
-    "No new NMS attachment or in-game event occurred in the parallel run.",
-    "The report's historical 35-container measurement and later 16-container user observation remain separate from the 43-target prediction.",
-    "Artifact SHA-256 values identify original generated files while embedded absolute paths are redacted.",
-    "The report was imported from the local 0.3.62 source package after its attached run; the run itself did not upload to GitHub."
-  ],
-  "extension_decision": "METADATA-D 1.0.1 is unchanged: its registered prepare and analyze actions already cover this evidence; the isolated parallel run did not exercise the extension upload flow."
+  "extension_decision": "METADATA-D 1.0.1 remains unchanged; the capture provides analysis evidence, not a new extension upload-flow requirement."
 }
