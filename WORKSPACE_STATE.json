@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T19:00:00Z",
+  "updated_utc": "2026-10-08T19:12:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -20,15 +20,17 @@
   "lanes": {
     "runtime-dispatch": {
       "branch": "agent/runtime-dispatch-system-reset-20261008",
-      "status": "Implemented a system-scope reset for live root-seed state and explicit raw/effective seed fields. Awaiting regression checks and package publication.",
+      "status": "Probe 0.3.40 resets live root-seed state at known universe-address changes and separates raw seed values from effective UseSeedValue state. Focused CI and package integrity checks pass; v0.3.63 updater package is built on the lane branch.",
       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
       "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
       "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
       "extension_version": "1.0.6",
       "human_validation_required": false,
-      "next_action": "Publish the Probe 0.3.40 system-scope reset through the app package after regression checks; then perform a normal no-debugger system switch to confirm the displayed root seed clears.",
+      "next_action": "Publish the tested app package v0.3.63 with Probe 0.3.40; after the user updates through the app, verify that entering a different system clears the prior live root seed.",
       "latest_report": "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json",
-      "latest_report_sha256": "7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c"
+      "latest_report_sha256": "7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c",
+      "probe_version": "0.3.40",
+      "app_version": "0.3.63"
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage-update-20261008",
