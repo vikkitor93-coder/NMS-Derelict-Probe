@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 33755)
+Total output lines: 2476
+
 from __future__ import annotations
 
 import argparse
@@ -17,7 +20,7 @@ import tkinter as tk
 from datetime import datetime, timezone
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
-from typing import Callable
+from typing import Any, Callable
 
 # The overlay owns the live-status formatter used by both windows.
 PROJECT_DIR = Path(__file__).resolve().parents[1]
@@ -33,7 +36,7 @@ except ImportError:  # Running surveyor_controller.py directly from the tools fo
     import agent_console
     import agent_ui_extensions
 
-CONTROLLER_VERSION = "0.3.60"
+CONTROLLER_VERSION = "0.3.64"
 AGENT_REFRESH_INTERVALS_MS = {
     "20 seconds": 20_000,
     "1 minute": 60_000,
@@ -60,6 +63,8 @@ ROOT_EVENT_UPLOAD_RECEIPT = ROOT / "root-event-upload-receipt.json"
 ROOT_EVENT_FILE = WORK / "root-event-latest.json"
 RUNTIME_CAPTURE_OUTBOX = ROOT / "runtime-capture-outbox"
 AUTO_UPLOAD_SETTINGS = ROOT / "auto-upload-settings.json"
+AUTO_RESEARCH_SETTINGS = ROOT / "auto-research-settings.json"
+AUTO_RESEARCH_RECEIPT = ROOT / "auto-research-last-session.json"
 AUTO_EVIDENCE_UPLOAD_INTERVAL_SECONDS = 30.0
 
 
@@ -69,6 +74,37 @@ def _load_auto_upload_setting() -> bool:
     except (OSError, UnicodeDecodeError, json.JSONDecodeError):
         return True
     return bool(value.get("enabled", True)) if isinstance(value, dict) else True
+
+
+def _load_auto_research_setting() -> bool:
+    try:
+        value = json.loads(AUTO_RESEARCH_SETTINGS.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return True
+    return bool(value.get("enabled", True)) if isinstance(value, dict) else True
+
+
+def _saved_session_snapshot(status: dict[str, Any], sessions_dir: Path = ROOT / "sessions") -> tuple[str, Path] | None:
+    """Return a stable signature/path only when the probe reports a saved session on disk."""
+    if status.get("state") != "saved":
+        return None
+    detail = str(status.get("detail") or "")
+    match = re.search(r"Saved baseline\s*[—-]\s*([^;]+);", detail)
+    if not match:
+        return None
+    name = match.group(1).strip()
+    if not name or Path(name).name != name or not name.lower().endswith(".json"):
+        return None
+    path = sessions_dir / name
+    try:
+        raw = path.read_bytes()
+        session = json.loads(raw.decode("utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return None
+    if not isinstance(session, dict) or not session.get("ended_utc"):
+        return None
+    signature = hashlib.sha256(raw).hexdigest()
+    return signature, path
 
 
 def _runtime_capture_saved(path: Path = RUNTIME_CAPTURE_FILE) -> bool:
@@ -236,6 +272,15 @@ class SurveyorController:
         self.recovery_signature_last_uploaded = str(root_receipt.get("signature") or "")
         self.recovery_evidence_last_upload = 0.0
         self.auto_upload_enabled = tk.BooleanVar(value=_load_auto_upload_setting())
+        self.auto_research_enabled = tk.BooleanVar(value=_load_auto_research_setting())
+        self.auto_research_pending: list[tuple[str, Path]] = []
+        self.auto_research_last_signature = str(_read_json(AUTO_RESEARCH_RECEIPT).get("session_sha256") or "")
+        self.auto_research_running_signature = ""
+        if not self.auto_research_last_signature:
+            current_saved = _saved_session_snapshot(_read_json(LIVE_STATUS))
+            if current_saved:
+                self.auto_research_last_signature = current_saved[0]
+                self._write_auto_research_receipt(current_saved[0], current_saved[1], "already-saved-at-startup")
         self.last_nms_running = False
         self.last_probe_connected = False
         self.available_version = "not checked"
@@ -296,13 +341,15 @@ class SurveyorController:
         self.workflow_command = tk.StringVar(value="")
         self.workflow_progress = tk.StringVar(value="")
         self.workflow_latest = tk.StringVar(value="")
+        self.parallel_test_state = tk.StringVar(value="No parallel research test has run from this Surveyor yet.")
+        self.auto_research_state = tk.StringVar(value="Automatic research runs after a new saved derelict session is detected.")
         self.output_events: queue.SimpleQueue[tuple[str, str]] = queue.SimpleQueue()
         self._latest_output = ""
         self._latest_progress = ""
         self.overlay_enabled = tk.BooleanVar(value=self._load_overlay_pref())
         self.overlay_state = tk.StringVar(value="Overlay status: checking")
         overlay_settings = load_overlay_settings(ROOT / "overlay-settings.json")
-        self.overlay_setting_vars = {key: tk.BooleanVar(value=overlay_settings[key]) for key in ("show_rooms", "show_research", "show_position", "show_manual", "show_hotkeys")}
+        self.overlay_setting_vars = {key: tk.BooleanVar(value=overlay_settings[key]) for key in ("show_rooms", "show_research", "show_position", "show_manual", "show_hotkeys", "show_objectives")}
         self.overlay_opacity = tk.IntVar(value=overlay_settings["opacity_percent"])
         self.overlay_x_offset = tk.IntVar(value=overlay_settings["x_offset"])
         self.overlay_y_offset = tk.IntVar(value=overlay_settings["y_offset"])
@@ -420,7 +467,7 @@ class SurveyorController:
         display_group.pack(fill="x", pady=(0, 10))
         toggles = ttk.Frame(display)
         toggles.pack(fill="x")
-        for title, key in (("Rooms", "show_rooms"), ("Research", "show_research"), ("Position", "show_position"), ("Manual counts", "show_manual"), ("Hotkeys", "show_hotkeys")):
+        for title, key in (("Rooms", "show_rooms"), ("Research", "show_research"), ("Position", "show_position"), ("Manual counts", "show_manual"), ("Hotkeys", "show_hotkeys"), ("Agent objectives", "show_objectives")):
             ttk.Checkbutton(toggles, text=title, variable=self.overlay_setting_vars[key], command=self._save_overlay_settings).pack(side="left", padx=(0, 10))
         self._overlay_slider(display, "Opacity", self.overlay_opacity, 20, 100, "%")
         self._overlay_slider(display, "Horizontal position", self.overlay_x_offset, -800, 800, " px")
@@ -470,6 +517,28 @@ class SurveyorController:
             ("Prepare crate assets + upload", lambda: self._project_action("Prepare assets + upload", "Prepare-Crate-Assets.cmd", "prepare-assets")),
             ("Analyze generation + upload", lambda: self._project_action("Analyze generation + upload", "Analyze-Generation-Baseline.cmd", "analyze-generation")),
         ])
+
+        parallel_group, parallel = self._make_collapsible_section(root, "Parallel research test", padding=8)
+        parallel_group.pack(fill="x", pady=(0, 10))
+        ttk.Label(
+            parallel,
+            text="Runs the eight offline research actions against one start-of-run evidence snapshot. It does not hook NMS. The queue stays local; when automatic uploads are enabled, only the combined report is shared with all four lanes.",
+            wraplength=690,
+            justify="left",
+        ).pack(anchor="w", pady=(0, 6))
+        ttk.Checkbutton(
+            parallel,
+            text="Automatically run all research actions after a derelict session is saved",
+            variable=self.auto_research_enabled,
+            command=self._save_auto_research_setting,
+        ).pack(anchor="w", pady=(0, 4))
+        ttk.Label(parallel, textvariable=self.auto_research_state, wraplength=690, justify="left").pack(anchor="w", pady=(0, 6))
+        self.parallel_test_button = ttk.Button(
+            parallel, text="Run all research actions in parallel",
+            command=lambda: self.run_parallel_research_test(trigger_kind="manual_button"),
+        )
+        self.parallel_test_button.pack(anchor="w", pady=(0, 4))
+        ttk.Label(parallel, textvariable=self.parallel_test_state, wraplength=690, justify="left").pack(anchor="w")
 
         capture_group, capture = self._make_collapsible_section(root, "Live capture", padding=8)
         capture_group.pack(fill="x", pady=(0, 10))
@@ -704,962 +773,11 @@ class SurveyorController:
             lane_group.grid(row=0, column=index, sticky="nsew", padx=4)
             lane_box.columnconfigure(0, weight=1)
             uploaded_var = tk.BooleanVar(value=False)
-            self.agent_upload_vars[lane_id] = uploaded_var
-            steps_button = ttk.Button(lane_box, text="Copy full steps", command=lambda i=lane_id: self._copy_agent_steps(i))
-            steps_button.pack(fill="x", pady=2)
-            steps_button.state(["disabled"])
-            update_button = ttk.Button(
-                lane_box,
-                text="Up to date",
-                command=lambda i=lane_id: self._install_lane_extension(i),
-            )
-            update_button.pack(fill="x", pady=2)
-            update_button.state(["disabled"])
-            rollback_button = ttk.Button(lane_box, text="Rollback unavailable", state="disabled")
-            rollback_button.pack(fill="x", pady=2)
-            action_host = ttk.Frame(lane_box)
-            action_host.pack(fill="x")
-            receipt_check = ttk.Checkbutton(
-                lane_box,
-                text="Evidence upload confirmed",
-                variable=uploaded_var,
-                state="disabled",
-            )
-            receipt_check.pack(anchor="w", pady=(4, 0))
-            self.agent_ui_extension_controls[lane_id] = {
-                "steps": steps_button,
-                "update": update_button,
-                "rollback": rollback_button,
-                "actions": action_host,
-                "action_buttons": [],
-                "action_specs": [],
-            }
-            self.agent_ui_extension_update_buttons[lane_id] = update_button
-
-        global_actions_group, global_actions = self._make_collapsible_section(actions, "Agent actions", padding=5)
-        global_actions_group.pack(fill="x", pady=(6, 0))
-        ttk.Button(global_actions, text="Refresh agents", command=self._refresh_agent_console).pack(side="left")
-        ttk.Button(global_actions, text="Copy status summary", command=self._copy_agent_summary).pack(side="left", padx=(8, 0))
-        self.agent_ui_extension_notice_label = ttk.Label(global_actions, textvariable=self.agent_ui_extension_notice)
-        self.agent_ui_extension_notice_label.pack(side="left", padx=(12, 0), fill="x", expand=True)
-        self.agent_ui_bulk_update_button = ttk.Button(
-            global_actions, text="Update all extensions", command=self._install_all_agent_ui_extensions
-        )
-        self.agent_ui_bulk_update_button.pack(side="right")
-        self.agent_ui_upload_all_button = ttk.Button(
-            global_actions, text="Upload all", command=self._upload_all_agent_evidence
-        )
-        self.agent_ui_upload_all_button.pack(side="right", padx=(0, 8))
-
-        cards = ttk.Frame(outer)
-        cards.pack(fill="both", expand=True)
-        for index in range(len(agent_console.LANES)):
-            cards.columnconfigure(index, weight=1, uniform="agent-card")
-        cards.rowconfigure(0, weight=1)
-        for index, lane_config in enumerate(agent_console.LANES):
-            lane_id = lane_config["id"]
-            card_group, card = self._make_collapsible_section(
-                cards, lane_config["name"], padding=5, body_fill="both", body_expand=True
-            )
-            card_group.grid(row=0, column=index, sticky="nsew", padx=4, pady=4)
-            card.columnconfigure(0, weight=1)
-            card.rowconfigure(0, weight=1)
-            info = ttk.Frame(card)
-            info.grid(row=0, column=0, sticky="nsew")
-            info.columnconfigure(0, weight=1)
-            info.rowconfigure(0, weight=1)
-            info_canvas = tk.Canvas(info, highlightthickness=0, width=360)
-            self._register_mousewheel_scroll_target(info_canvas)
-            info_scroll = ttk.Scrollbar(info, orient="vertical", command=info_canvas.yview)
-            info_canvas.configure(yscrollcommand=lambda first, last, c=info_canvas, s=info_scroll: self._set_lane_scrollbar(c, s, first, last))
-            info_canvas.grid(row=0, column=0, sticky="nsew")
-            info_scroll.grid(row=0, column=1, sticky="ns")
-            info_body = ttk.Frame(info_canvas, padding=(2, 2, 6, 2))
-            info_window = info_canvas.create_window((0, 0), window=info_body, anchor="nw")
-            info_body.bind("<Configure>", lambda _e, c=info_canvas: c.configure(scrollregion=c.bbox("all")))
-            info_canvas.bind("<Configure>", lambda e, c=info_canvas, w=info_window: c.itemconfigure(w, width=e.width))
-            status_var = tk.StringVar(value="Loading published status…")
-            summary_var = tk.StringVar(value="Waiting for agent status.")
-            request_var = tk.StringVar(value="")
-            upload_detail_var = tk.StringVar(value="No lane upload confirmed yet.")
-            notice_var = tk.StringVar(value="Checking published lane extension…")
-            action_needed_var = tk.StringVar(value="Checking published agent status…")
-            action_label_var = tk.StringVar(value="Action: Checking published extension…")
-            action_reason_var = tk.StringVar(value="Needs: checking published action…")
-            version_var = tk.StringVar(value="Installed extension version: checking…")
-            details_frame = ttk.Frame(info_body)
-            details_frame.pack(fill="x")
-            ttk.Label(details_frame, text="Receipt history only; it does not lock action buttons.", wraplength=310, justify="left").pack(anchor="w")
-            ttk.Label(details_frame, textvariable=status_var, font=("Segoe UI", 10, "bold"), wraplength=310, justify="left").pack(anchor="w", fill="x", pady=(4, 0))
-            ttk.Label(details_frame, textvariable=summary_var, wraplength=310, justify="left").pack(anchor="w", fill="x", pady=(4, 4))
-            ttk.Label(details_frame, textvariable=request_var, wraplength=310, justify="left").pack(anchor="w", fill="x", pady=(0, 4))
-            receipt_detail_label = ttk.Label(details_frame, textvariable=upload_detail_var, wraplength=310, justify="left")
-            receipt_detail_label.pack(anchor="w", fill="x", pady=(0, 4))
-            extension_body = ttk.Frame(info_body)
-            extension_body.pack(fill="x", pady=(2, 0))
-            extension_body.columnconfigure(0, weight=1)
-            needed_box = ttk.LabelFrame(card, text="NEEDED", padding=(6, 4))
-            needed_box.grid(row=1, column=0, sticky="ew", pady=(4, 2))
-            ttk.Label(needed_box, textvariable=action_needed_var, wraplength=320, justify="left", font=("Segoe UI", 9, "bold")).pack(anchor="w", fill="x")
-            ttk.Label(needed_box, textvariable=action_label_var, wraplength=320, justify="left").pack(anchor="w", fill="x", pady=(3, 0))
-            ttk.Label(needed_box, textvariable=action_reason_var, wraplength=320, justify="left").pack(anchor="w", fill="x", pady=(2, 0))
-            ttk.Label(card, textvariable=version_var, wraplength=340, justify="left").grid(row=2, column=0, sticky="ew", pady=(0, 2))
-            self.agent_cards[lane_id] = {
-                "status": status_var, "summary": summary_var, "request": request_var,
-                "uploaded": uploaded_var, "upload_detail": upload_detail_var,
-                "action_needed": action_needed_var, "action_label": action_label_var,
-                "action_reason": action_reason_var, "version": version_var,
-                "details_frame": details_frame, "extension_body": extension_body,
-                "receipt_detail_label": receipt_detail_label,
-            }
-            self.agent_ui_extension_bodies[lane_id] = extension_body
-            self.agent_ui_extension_notices[lane_id] = notice_var
-            self.agent_ui_extension_notices[lane_id].set("Published extension status loading…")
-        self.agent_ui_extension_frame = None
-
-        for lane_config in agent_console.LANES:
-            self._render_agent_ui_extension({
-                "id": lane_config["id"], "name": lane_config["name"], "human_required": False,
-            })
-
-        self._apply_agent_console_visibility()
-        self.window.after_idle(self._refresh_agent_console)
-        self.window.after_idle(self._check_agent_ui_extensions)
-
-    def _toggle_agent_console_options(self) -> None:
-        frame = self.agent_console_options_frame
-        if frame is None:
-            return
-        self.agent_console_options_visible = not self.agent_console_options_visible
-        if self.agent_console_options_visible:
-            frame.pack(fill="x", pady=(0, 6), before=self.agent_console_state_label)
-            self.agent_options_toggle_button.configure(text="Options −")
-        else:
-            frame.pack_forget()
-            self.agent_options_toggle_button.configure(text="Options +")
-
-    def _apply_agent_console_visibility(self) -> None:
-        for card in self.agent_cards.values():
-            details = card["details_frame"]
-            if self.agent_show_status_details_var.get():
-                details.pack(fill="x")
-            else:
-                details.pack_forget()
-            extension = card["extension_body"]
-            if self.agent_show_extension_details_var.get():
-                extension.pack(fill="x", pady=(2, 0))
-            else:
-                extension.pack_forget()
-            receipt = card["receipt_detail_label"]
-            if self.agent_show_receipt_details_var.get() and self.agent_show_status_details_var.get():
-                receipt.pack(anchor="w", fill="x", pady=(0, 4))
-            else:
-                receipt.pack_forget()
-        settings = (
-            ("status", "lane details", self.agent_show_status_details_var.get()),
-            ("extension", "extension details", self.agent_show_extension_details_var.get()),
-            ("receipt", "receipt details", self.agent_show_receipt_details_var.get()),
-        )
-        for key, label, visible in settings:
-            button = self.agent_console_option_buttons.get(key)
-            if button:
-                button.configure(text=f"− Hide {label}" if visible else f"+ Show {label}")
-
-    def _toggle_agent_status_details(self) -> None:
-        self.agent_show_status_details_var.set(not self.agent_show_status_details_var.get())
-        self._save_agent_console_preferences()
-        self._apply_agent_console_visibility()
-
-    def _toggle_agent_extension_details(self) -> None:
-        self.agent_show_extension_details_var.set(not self.agent_show_extension_details_var.get())
-        self._save_agent_console_preferences()
-        self._apply_agent_console_visibility()
-
-    def _toggle_agent_receipt_details(self) -> None:
-        self.agent_show_receipt_details_var.set(not self.agent_show_receipt_details_var.get())
-        self._save_agent_console_preferences()
-        self._apply_agent_console_visibility()
-
-    def _on_agent_refresh_interval_changed(self, _event: tk.Event | None = None) -> None:
-        self._save_agent_console_preferences()
-        self._reschedule_agent_refresh()
-
-    def _refresh_agent_console_all(self) -> None:
-        self._refresh_agent_console()
-        self._check_agent_ui_extensions()
-
-    def _reschedule_agent_refresh(self) -> None:
-        if self.agent_refresh_after_id:
-            try:
-                self.window.after_cancel(self.agent_refresh_after_id)
-            except tk.TclError:
-                pass
-            self.agent_refresh_after_id = None
-        interval = AGENT_REFRESH_INTERVALS_MS.get(self.agent_refresh_interval_var.get(), 60_000)
-        if interval and self.window.winfo_exists():
-            self.agent_refresh_after_id = self.window.after(interval, self._scheduled_agent_refresh)
-
-    def _refresh_agent_console(self) -> None:
-        if self.agent_fetch_running:
-            return
-        self.agent_fetch_running = True
-        self.agent_console_state.set("Refreshing published agent status…")
-
-        def worker() -> None:
-            snapshot = agent_console.load_agent_snapshot()
-            try:
-                self.window.after(0, lambda: self._apply_agent_snapshot(snapshot))
-            except (tk.TclError, RuntimeError):
-                pass
-
-        threading.Thread(target=worker, name="Surveyor-Agent-Console", daemon=True).start()
-
-    def _scheduled_agent_refresh(self) -> None:
-        self.agent_refresh_after_id = None
-        if AGENT_REFRESH_INTERVALS_MS.get(self.agent_refresh_interval_var.get(), 0):
-            self._refresh_agent_console_all()
-            self._reschedule_agent_refresh()
-
-    def _apply_agent_snapshot(self, snapshot: dict) -> None:
-        self.agent_fetch_running = False
-        if not snapshot.get("registry_available") and not snapshot.get("any_lane_data"):
-            if self.agent_snapshot:
-                self.agent_console_state.set("Refresh failed — showing the last successful snapshot.")
-                return
-            self.agent_console_state.set("Could not load published status. Check the connection and retry.")
-            self.agent_console_updated.set("No status snapshot is available yet.")
-            return
-
-        self.agent_snapshot = snapshot
-        self._publish_overlay_objectives()
-        stale = agent_console.registry_is_stale(snapshot.get("registry_updated_utc", ""))
-        if stale is True:
-            self.agent_console_state.set("Main status registry is over 30 minutes old; each lane status is fetched separately.")
-        elif not snapshot.get("registry_available"):
-            self.agent_console_state.set("Main status registry unavailable; showing status published on agent branches.")
-        else:
-            self.agent_console_state.set("Showing the latest status published to the project repository.")
-        registry_time = snapshot.get("registry_updated_utc") or "unknown"
-        fetched = snapshot.get("fetched_utc") or "unknown"
-        self.agent_console_updated.set(f"Registry updated: {registry_time}   ·   Refreshed: {fetched}")
-
-        for lane in snapshot.get("lanes", []):
-            self._render_agent_details(lane)
-            self._render_agent_ui_extension(lane)
-        self._refresh_agent_upload_indicators()
-        if self.agent_ui_extension_index:
-            self._update_agent_extension_summary()
-
-    def _check_agent_ui_extensions(self) -> None:
-        if self.agent_ui_extension_check_running:
-            return
-        self.agent_ui_extension_check_running = True
-        self.agent_ui_extension_notice.set("Checking published lane UI extensions…")
-        self.extension_updates_state.set("Checking the published extension index…")
-
-        def worker() -> None:
-            try:
-                entries = agent_ui_extensions.load_index()
-                error = ""
-            except Exception as exc:
-                entries = []
-                error = f"{type(exc).__name__}: {exc}"
-            try:
-                self.window.after(0, lambda: self._apply_agent_ui_extensions(entries, error))
-            except (tk.TclError, RuntimeError):
-                pass
-
-        threading.Thread(target=worker, name="Surveyor-UI-Extensions", daemon=True).start()
-
-    def _apply_agent_ui_extensions(self, entries: list[dict], error: str) -> None:
-        self.agent_ui_extension_check_running = False
-        if error:
-            self.agent_ui_extension_error = error
-            self.extension_updates_state.set("Could not reach the published extension index. Check again when online.")
-            self.agent_ui_extension_notice.set("Could not refresh published extensions.")
-            if not self.agent_ui_extension_index:
-                _log("agent_ui_extension_index_error", error=error)
-        else:
-            self.agent_ui_extension_error = ""
-            self.agent_ui_extension_index = entries
-            self._update_agent_extension_summary()
-            self.agent_ui_extension_notice.set("Published extension index refreshed.")
-        for lane in (self.agent_snapshot or {}).get("lanes", []):
-            self._render_agent_ui_extension(lane)
-
-    def _update_agent_extension_summary(self) -> None:
-        candidates = agent_ui_extensions.update_candidates(
-            self.agent_ui_extension_index, self.agent_ui_extensions_root
-        )
-        lane_names = {
-            lane.get("id"): lane.get("name")
-            for lane in (self.agent_snapshot or {}).get("lanes", [])
-        }
-        if candidates:
-            updates = ", ".join(
-                f"{lane_names.get(item['extension_id'], item['extension_id'])} v{item['version']}"
-                for item in candidates
-            )
-            self.extension_updates_state.set(
-                f"Updates available: {updates}. Use Update all extensions or the lane buttons in Agent Console."
-            )
-        else:
-            self.extension_updates_state.set(
-                "Published extensions are current. Check extensions in Agent Console to refresh all lanes."
-            )
-        if hasattr(self, "agent_ui_extension_update_buttons"):
-            self._refresh_agent_extension_update_controls()
-
-    def _refresh_agent_extension_update_controls(self) -> None:
-        candidates = {
-            item["extension_id"]: item
-            for item in agent_ui_extensions.update_candidates(
-                self.agent_ui_extension_index, self.agent_ui_extensions_root
-            )
-        }
-        for extension_id, button in self.agent_ui_extension_update_buttons.items():
-            entry = candidates.get(extension_id)
-            if entry:
-                button.configure(text=f"Update to v{entry['version']}")
-                can_update = (
-                    extension_id not in self.agent_ui_extension_installing
-                    and not self.agent_ui_upload_queue_running
-                )
-                button.state(["!disabled"] if can_update else ["disabled"])
-                self.agent_ui_extension_entries[extension_id] = entry
-            else:
-                button.configure(text="Up to date")
-                button.state(["disabled"])
-                self.agent_ui_extension_entries.pop(extension_id, None)
-        for extension_id, control in self.agent_ui_extension_controls.items():
-            version = self.agent_ui_extension_rollback_versions.get(extension_id)
-            rollback = control["rollback"]
-            if version:
-                rollback.configure(text=f"Roll back to v{version}", command=lambda i=extension_id, v=version: self._rollback_agent_ui_extension(i, v))
-                rollback.state(["!disabled"])
-            else:
-                rollback.configure(text="Rollback unavailable")
-                rollback.state(["disabled"])
-        if self.agent_ui_bulk_update_button:
-            busy = any(item in self.agent_ui_extension_installing for item in candidates)
-            self.agent_ui_bulk_update_button.configure(
-                text=f"Update all ({len(candidates)})" if candidates else "Update all extensions"
-            )
-            self.agent_ui_bulk_update_button.state(
-                ["!disabled"] if candidates and not busy and not self.agent_ui_upload_queue_running else ["disabled"]
-            )
-
-    def _install_lane_extension(self, extension_id: str) -> None:
-        entry = self.agent_ui_extension_entries.get(extension_id)
-        if entry:
-            self._confirm_agent_ui_extension_update(entry)
-
-    def _install_all_agent_ui_extensions(self) -> None:
-        candidates = agent_ui_extensions.update_candidates(
-            self.agent_ui_extension_index, self.agent_ui_extensions_root
-        )
-        candidates = [item for item in candidates if item["extension_id"] not in self.agent_ui_extension_installing]
-        if not candidates:
-            return
-        names = ", ".join(f"{item['extension_id']} v{item['version']}" for item in candidates)
-        if not messagebox.askyesno(
-            "Update agent extensions",
-            f"Install all available agent extension updates?\n\n{names}",
-            parent=self.agent_console_window,
-        ):
-            return
-        self.agent_ui_extension_installing.update(item["extension_id"] for item in candidates)
-        if hasattr(self, "agent_ui_extension_update_buttons"):
-            self._refresh_agent_extension_update_controls()
-        self.agent_ui_extension_notice.set("Installing all available lane extensions…")
-
-        def worker() -> None:
-            failures = []
-            for entry in candidates:
-                extension_id = entry["extension_id"]
-                try:
-                    agent_ui_extensions.install_extension(
-                        self.agent_ui_extensions_root,
-                        entry,
-                        CONTROLLER_VERSION,
-                        agent_ui_extensions.HOST_ACTION_IDS,
-                    )
-                    _log("agent_ui_extension_updated", extension_id=extension_id, version=entry["version"], batch=True)
-                except Exception as exc:
-                    failures.append(f"{extension_id}: {type(exc).__name__}: {exc}")
-                    _log("agent_ui_extension_update_failed", extension_id=extension_id, error=repr(exc), batch=True)
-            try:
-                self.window.after(0, lambda: self._finish_agent_ui_extension_batch(candidates, failures))
-            except (tk.TclError, RuntimeError):
-                pass
-
-        threading.Thread(target=worker, name="Surveyor-UI-Extensions-Batch", daemon=True).start()
-
-    def _finish_agent_ui_extension_batch(self, entries: list[dict], failures: list[str]) -> None:
-        for entry in entries:
-            extension_id = entry["extension_id"]
-            self.agent_ui_extension_installing.discard(extension_id)
-            lane = next((item for item in (self.agent_snapshot or {}).get("lanes", []) if item.get("id") == extension_id), None)
-            self._render_agent_ui_extension(lane or {"id": extension_id, "name": extension_id, "human_required": False})
-        if failures:
-            self.agent_ui_extension_notice.set("Some updates failed; those lanes kept their previous versions.")
-            messagebox.showerror("Agent extension updates", "Some updates failed; successful updates remain active.\n\n" + "\n".join(failures), parent=self.agent_console_window)
-        else:
-            self.agent_ui_extension_notice.set("All available agent extensions updated and active.")
-            self._update_agent_extension_summary()
-        self._refresh_agent_extension_update_controls()
-
-    def _extension_context(self) -> dict:
-        return {
-            "workflow_idle": not self.workflow_running,
-            "nms_running": self.last_nms_running,
-            "probe_connected": self.last_probe_connected,
-            "runtime_capture_saved": _runtime_capture_saved(),
-        }
-
-    def _render_agent_ui_extension(self, lane: dict) -> None:
-        extension_id = lane.get("id", "")
-        body = self.agent_ui_extension_bodies.get(extension_id)
-        if body is None or not body.winfo_exists():
-            return
-        control = self.agent_ui_extension_controls.get(extension_id)
-        entry = next((item for item in self.agent_ui_extension_index if item["extension_id"] == extension_id), None)
-        notice = self.agent_ui_extension_notices[extension_id]
-        active = None
-        panel = None
-        extension_version = ""
-        try:
-            loaded = agent_ui_extensions.load_installed_extension(
-                self.agent_ui_extensions_root,
-                extension_id,
-                CONTROLLER_VERSION,
-                agent_ui_extensions.HOST_ACTION_IDS,
-            )
-            if loaded:
-                manifest, panel = loaded
-                active = manifest
-                extension_version = manifest["version"]
-        except Exception as exc:
-            _log("agent_ui_extension_load_error", extension_id=extension_id, error=repr(exc))
-            ttk.Label(body, text="This lane extension failed validation. Surveyor core actions are unaffected.", wraplength=310, justify="left").pack(anchor="w")
-            notice.set("Installed panel failed validation.")
-
-        if entry and (active is None or agent_ui_extensions.update_candidates([entry], self.agent_ui_extensions_root)):
-            version = entry["version"]
-            notice.set(f"Update available: v{version}")
-        elif self.agent_ui_extension_error:
-            notice.set("Update check failed; installed panel remains available.")
-        elif active:
-            notice.set(f"Extension v{extension_version} active")
-        else:
-            notice.set("No published extension for this lane")
-        card = self.agent_cards.get(extension_id)
-        if card:
-            installed_text = f"Installed v{extension_version}" if extension_version else "Installed extension: none"
-            published_text = f"Published v{entry['version']}" if entry else "No published extension"
-            reported = str(lane.get("extension_version") or "").strip()
-            reported_text = f" · Agent reports v{reported}" if reported else ""
-            card["version"].set(f"{installed_text} · {published_text}{reported_text}")
-
-        render_key = json.dumps({"entry": entry, "active": active, "panel": panel, "error": self.agent_ui_extension_error}, sort_keys=True, ensure_ascii=False)
-        if self.agent_extension_render_keys.get(extension_id) == render_key:
-            if panel and panel.get("actions") and card:
-                card["action_label"].set("Action: " + str(panel["actions"][0]["label"]))
-            self._refresh_agent_ui_lane_action_states(extension_id, lane)
-            return
-
-        self.agent_extension_render_keys[extension_id] = render_key
-        for child in body.winfo_children():
-            child.destroy()
-        if control:
-            for button in control["action_buttons"]:
-                button.destroy()
-            control["action_buttons"] = []
-            control["action_specs"] = []
-        lane_buttons: list[tuple[ttk.Button, list[str]]] = []
-        self.agent_ui_action_buttons_by_lane[extension_id] = lane_buttons
-
-        if panel:
-            ttk.Label(body, text=panel["title"], font=("Segoe UI", 10, "bold")).pack(anchor="w", pady=(4, 0))
-            if panel.get("summary"):
-                ttk.Label(body, text=panel["summary"], wraplength=310, justify="left").pack(anchor="w", pady=(2, 2))
-            for action in panel["actions"]:
-                context = self._extension_context()
-                reason_var = tk.StringVar(value=self._agent_action_reason(action["preconditions"], context, lane, bool(panel.get("request_only"))))
-                if card and action is panel["actions"][0]:
-                    card["action_reason"].set(self._agent_needs_text(action["preconditions"], context))
-                if card and action is panel["actions"][0]:
-                    card["action_label"].set("Action: " + str(action["label"]))
-                enabled = agent_ui_extensions.action_button_enabled(
-                    action["preconditions"], context,
-                    request_only=bool(panel.get("request_only")),
-                    requested=bool(lane.get("human_required")),
-                )
-                button = ttk.Button(
-                    control["actions"] if control else body,
-                    text=action["label"],
-                    command=lambda a=action, i=extension_id, v=extension_version: self._run_agent_ui_extension_action(i, v, a),
-                )
-                button.pack(fill="x", pady=2)
-                if not enabled:
-                    button.state(["disabled"])
-                lane_buttons.append((button, action["preconditions"]))
-                if control:
-                    control["action_buttons"].append(button)
-                    control["action_specs"].append({
-                        "button": button,
-                        "extension_id": extension_id,
-                        "version": extension_version,
-                        "action": action,
-                        "preconditions": action["preconditions"],
-                        "request_only": bool(panel.get("request_only")),
-                        "requested": bool(lane.get("human_required")),
-                        "reason_var": reason_var,
-                    })
-
-        if active:
-            versions = agent_ui_extensions.installed_versions(self.agent_ui_extensions_root, extension_id)
-            older = [version for version in versions if agent_ui_extensions._version(version) < agent_ui_extensions._version(extension_version)]
-            self.agent_ui_extension_rollback_versions[extension_id] = older[0] if older else ""
-            if older:
-                ttk.Label(body, text=f"Rollback available: v{older[0]}", wraplength=310).pack(anchor="w", pady=(4, 0))
-        else:
-            self.agent_ui_extension_rollback_versions.pop(extension_id, None)
-        self.agent_ui_action_buttons = [
-            item for lane_items in self.agent_ui_action_buttons_by_lane.values() for item in lane_items
-        ]
-        if control:
-            control["steps"].state(["!disabled"] if lane.get("human_required") else ["disabled"])
-        self._refresh_agent_extension_update_controls()
-
-    def _refresh_agent_ui_lane_action_states(self, extension_id: str, lane: dict) -> None:
-        control = self.agent_ui_extension_controls.get(extension_id)
-        if not control:
-            return
-        requested = bool(lane.get("human_required"))
-        control["steps"].state(["!disabled"] if requested else ["disabled"])
-        context = self._extension_context()
-        for spec in control["action_specs"]:
-            enabled = agent_ui_extensions.action_button_enabled(
-                spec["preconditions"], context,
-                request_only=spec["request_only"], requested=requested,
-            )
-            spec["button"].state(["!disabled"] if enabled else ["disabled"])
-            spec["reason_var"].set(
-                self._agent_action_reason(spec["preconditions"], context, lane, spec["request_only"])
-            )
-        card = self.agent_cards.get(extension_id)
-        if card and control["action_specs"]:
-            first = control["action_specs"][0]
-            card["action_label"].set("Action: " + str(first["action"]["label"]))
-            card["action_reason"].set(self._agent_needs_text(first["preconditions"], context))
-
-    @staticmethod
-    def _agent_needs_text(preconditions: list[str], state: dict) -> str:
-        if not preconditions:
-            return "Needs: none"
-        allowed, _reason = agent_ui_extensions.preconditions_met(preconditions, state)
-        line = "Needs: " + ", ".join(preconditions)
-        if not allowed:
-            _ok, missing = agent_ui_extensions.preconditions_met(preconditions, state)
-            line += "\nMissing now: " + missing.removeprefix("Needs: ")
-        else:
-            line += "\nReady"
-        return line
-
-    @staticmethod
-    def _agent_action_reason(preconditions: list[str], state: dict, lane: dict, request_only: bool) -> str:
-        if request_only and not lane.get("human_required"):
-            return "Waiting for this lane to publish a Surveyor request."
-        allowed, reason = agent_ui_extensions.preconditions_met(preconditions, state)
-        if allowed:
-            return "Ready to run. The upload receipt does not affect this action."
-        labels = {
-            "workflow.idle": "finish the current Surveyor action",
-            "nms.running": "start NMS",
-            "probe.connected": "wait for the probe connection",
-            "runtime.capture_saved": "capture the root event and wait for Surveyor to save it",
-        }
-        failed = reason.removeprefix("Needs: ").split(", ")
-        missing = [labels.get(item, item) for item in failed]
-        prefix = "Request published; " if request_only and lane.get("human_required") else "Action unavailable; "
-        return prefix + " and ".join(missing) + ". The upload receipt does not lock this button."
-
-    def _confirm_agent_ui_extension_update(self, entry: dict) -> None:
-        extension_id = entry["extension_id"]
-        version = entry["version"]
-        if extension_id in self.agent_ui_extension_installing:
-            return
-        # The persistent update button is the notice. Avoid repeated popups on refresh.
-        if not messagebox.askyesno("Surveyor UI update", f"The {extension_id} agent has published a UI update (v{version}). Install it now?", parent=self.agent_console_window):
-            return
-        self.agent_ui_extension_installing.add(extension_id)
-        self._refresh_agent_extension_update_controls()
-        if extension_id in self.agent_ui_extension_notices:
-            self.agent_ui_extension_notices[extension_id].set(f"Installing v{version}…")
-
-        def worker() -> None:
-            try:
-                agent_ui_extensions.install_extension(
-                    self.agent_ui_extensions_root,
-                    entry,
-                    CONTROLLER_VERSION,
-                    agent_ui_extensions.HOST_ACTION_IDS,
-                )
-                error = ""
-            except Exception as exc:
-                error = f"{type(exc).__name__}: {exc}"
-            try:
-                self.window.after(0, lambda: self._finish_agent_ui_extension_update(extension_id, error))
-            except (tk.TclError, RuntimeError):
-                pass
-
-        threading.Thread(target=worker, name=f"Surveyor-UI-Extension-{extension_id}", daemon=True).start()
-
-    def _finish_agent_ui_extension_update(self, extension_id: str, error: str) -> None:
-        self.agent_ui_extension_installing.discard(extension_id)
-        notices = getattr(self, "agent_ui_extension_notices", {})
-        if error:
-            if extension_id in notices:
-                notices[extension_id].set("Update failed; previous version remains active.")
-            elif getattr(self, "agent_ui_extension_notice", None):
-                self.agent_ui_extension_notice.set("Extension update failed. The previous version remains active.")
-            _log("agent_ui_extension_update_failed", extension_id=extension_id, error=error)
-            messagebox.showerror("Surveyor UI extension", f"The update failed; the previous version is still active.\n\n{error}", parent=self.agent_console_window)
-        else:
-            if extension_id in notices:
-                notices[extension_id].set("Updated and active")
-            elif getattr(self, "agent_ui_extension_notice", None):
-                self.agent_ui_extension_notice.set(f"{extension_id} UI extension refreshed without restarting Surveyor.")
-            _log("agent_ui_extension_updated", extension_id=extension_id)
-            self._update_agent_extension_summary()
-        lane = next((item for item in (getattr(self, "agent_snapshot", None) or {}).get("lanes", []) if item.get("id") == extension_id), None)
-        lane = lane or getattr(self, "agent_selected_lane", None)
-        if lane:
-            self._render_agent_ui_extension(lane)
-        if hasattr(self, "agent_ui_extension_update_buttons"):
-            self._refresh_agent_extension_update_controls()
-
-    def _rollback_agent_ui_extension(self, extension_id: str, version: str) -> None:
-        try:
-            agent_ui_extensions.activate_installed_extension(
-                self.agent_ui_extensions_root,
-                extension_id,
-                version,
-                CONTROLLER_VERSION,
-                agent_ui_extensions.HOST_ACTION_IDS,
-            )
-            _log("agent_ui_extension_rollback", extension_id=extension_id, version=version)
-            if extension_id in self.agent_ui_extension_notices:
-                self.agent_ui_extension_notices[extension_id].set(f"Rolled back to v{version}")
-            lane = next((item for item in (self.agent_snapshot or {}).get("lanes", []) if item.get("id") == extension_id), None)
-            if lane:
-                self._render_agent_ui_extension(lane)
-        except Exception as exc:
-            _log("agent_ui_extension_rollback_failed", extension_id=extension_id, version=version, error=repr(exc))
-            messagebox.showerror("Surveyor UI extension", f"Rollback failed; the active extension was left unchanged.\n\n{exc}", parent=self.agent_console_window)
-
-    def _run_agent_ui_extension_action(self, extension_id: str, version: str, action: dict) -> None:
-        if action.get("action_id") not in agent_ui_extensions.HOST_ACTION_IDS:
-            self._set_status("Extension action rejected", "The action ID is not registered by Surveyor.")
-            return
-        current = agent_ui_extensions.load_installed_extension(
-            self.agent_ui_extensions_root, extension_id, CONTROLLER_VERSION, agent_ui_extensions.HOST_ACTION_IDS
-        )
-        if not current or current[0].get("version") != version:
-            self._set_status("Extension action rejected", "The selected UI extension version is no longer active.")
-            return
-        state = self._extension_context()
-        allowed, reason = agent_ui_extensions.preconditions_met(action["preconditions"], state)
-        if not allowed:
-            if not state.get("workflow_idle"):
-                self._set_status("Agent action waiting", "Finish the current Surveyor action, then press this lane action again. The upload receipt does not lock it.")
-                return
-            if "nms.running" in action["preconditions"] and not state.get("nms_running"):
-                if messagebox.askyesno(
-                    "This lane needs NMS",
-                    "This published action needs NMS and a live probe connection. The checked upload receipt is only history and does not block it. Start NMS now?",
-                    parent=self.agent_console_window,
-                ):
-                    self.start_nms()
-                else:
-                    self._set_status("Agent action waiting", "Start NMS, wait until the probe shows Connected, then press the lane action again.")
-                return
-            if "probe.connected" in action["preconditions"] and not state.get("probe_connected"):
-                self._set_status("Waiting for probe connection", "NMS is running, but the live probe has not connected yet. Wait for Surveyor to show Connected, then press the lane action again.")
-                return
-            self._set_status("Agent action unavailable", reason + ". Upload receipt state is not used as an action lock.")
-            return
-        calls = {
-            "research.analyze_seed_function": ("Analyze seed function + upload", "Analyze-Dungeon-Seed-Function.cmd", "analyze-seed-function"),
-            "research.extract_upstream_callers": ("Extract upstream callers + upload", "Extract-Dungeon-Upstream-Callers.cmd", "extract-upstream"),
-            "research.extract_exact_root_caller": ("Extract exact root caller + upload", "Extract-Exact-Root-Caller-Code.cmd", "extract-exact-root-caller"),
-            "research.resolve_root_vtable": ("Resolve root vtable + upload", "Resolve-Exact-Root-VTable.cmd", "resolve-root-vtable"),
-            "research.extract_caller_code": ("Extract caller code + upload", "Extract-Dungeon-Caller-Code.cmd", "extract-caller"),
-            "research.measure_generation": ("Measure generation + upload", "Measure-Derelict-Generation.cmd", "measure"),
-            "research.prepare_assets": ("Prepare crate assets + upload", "Prepare-Crate-Assets.cmd", "prepare-assets"),
-            "research.analyze_generation": ("Analyze generation + upload", "Analyze-Generation-Baseline.cmd", "analyze-generation"),
-        }
-        if action["action_id"] == "research.upload_runtime_capture":
-            snapshot = _runtime_capture_snapshot()
-            if not state.get("runtime_capture_saved") or snapshot is None:
-                self._set_status(
-                    "Saved root capture not found",
-                    "Run NMS until Root dispatch +0x10 is captured. The probe saves the evidence before you close the game.",
-                )
-                return
-            helper = self.project_root / "tools" / "github_integration.py"
-            fingerprint, _raw = snapshot
-            self.runtime_capture_upload_inflight = fingerprint
-            steps = [("Upload Runtime-A root event", [self.python_exe, str(helper), "upload", "--action", "upload-runtime-capture"])]
-            if self.auto_upload_enabled.get():
-                steps.append(("Share changed evidence with all lanes", [
-                    self.python_exe, str(helper), "upload", "--action", "all-saved-evidence", "--only-if-changed",
-                ]))
-            self._run_steps(
-                "Upload saved root capture",
-                steps,
-                evidence_namespace=extension_id,
-                extension_version=version,
-                extension_action_id=action["action_id"],
-                upload_action="upload-runtime-capture",
-                on_complete=lambda code, key=fingerprint: self._finish_runtime_capture_auto_upload(key, code, automatic=False),
-            )
-            return
-        call = calls.get(action["action_id"])
-        if call is None:
-            self._set_status("Agent action unavailable", "This Surveyor build has no handler for that action.")
-            return
-        _log("agent_ui_extension_action", extension_id=extension_id, version=version, action_id=action["action_id"])
-        self._project_action(*call, evidence_namespace=extension_id, extension_version=version, extension_action_id=action["action_id"])
-
-    def _eligible_agent_upload_actions(self, state: dict | None = None) -> list[dict]:
-        context = state or self._extension_context()
-        eligible = []
-        for controls in self.agent_ui_extension_controls.values():
-            for item in controls["action_specs"]:
-                if item["request_only"] and not item["requested"]:
-                    continue
-                allowed, _reason = agent_ui_extensions.preconditions_met(item["preconditions"], context)
-                if allowed:
-                    eligible.append(item)
-        return eligible
-
-    def _upload_all_agent_evidence(self) -> None:
-        if self.agent_ui_upload_queue_running:
-            return
-        actions = self._eligible_agent_upload_actions()
-        if not actions:
-            self.agent_ui_extension_notice.set("No lane upload actions are currently ready.")
-            return
-        steps = "\n".join(
-            f"• {item['extension_id']}: {item['action']['label']}"
-            for item in actions
-        )
-        if not messagebox.askyesno(
-            "Upload all lane evidence",
-            "Run each currently available lane action and upload its result? Actions run one at a time. Some may analyze or prepare evidence before uploading.\n\n"
-            + steps,
-            parent=self.agent_console_window,
-        ):
-            return
-        self.agent_ui_upload_queue = list(actions)
-        self.agent_ui_upload_queue_total = len(actions)
-        self.agent_ui_upload_queue_running = True
-        self._refresh_agent_upload_all_state()
-        self._refresh_agent_extension_update_controls()
-        for button, _preconditions in self.agent_ui_action_buttons:
-            button.state(["disabled"])
-        self._advance_agent_ui_upload_queue()
-
-    def _advance_agent_ui_upload_queue(self) -> None:
-        if not self.agent_ui_upload_queue_running:
-            return
-        if self.workflow_running:
-            self.window.after(250, self._advance_agent_ui_upload_queue)
-            return
-        if not self.agent_ui_upload_queue:
-            self.agent_ui_upload_queue_running = False
-            total = self.agent_ui_upload_queue_total
-            self.agent_ui_upload_queue_total = 0
-            self._refresh_agent_upload_indicators()
-            self.agent_ui_extension_notice.set(
-                f"Upload-all finished ({total} lane action{'s' if total != 1 else ''}). Check each lane’s receipt above."
-            )
-            self._refresh_agent_upload_all_state()
-            self._refresh_agent_extension_update_controls()
-            return
-
-        item = self.agent_ui_upload_queue.pop(0)
-        action = item["action"]
-        lane = next(
-            (row for row in (self.agent_snapshot or {}).get("lanes", []) if row.get("id") == item["extension_id"]),
-            {},
-        )
-        context = self._extension_context()
-        allowed, reason = agent_ui_extensions.preconditions_met(item["preconditions"], context)
-        if item["request_only"] and not lane.get("human_required"):
-            allowed = False
-            reason = "This lane no longer requests Surveyor input."
-        if allowed:
-            remaining = len(self.agent_ui_upload_queue)
-            self.agent_ui_extension_notice.set(
-                f"Uploading {item['extension_id']}: {action['label']} ({remaining} after this)."
-            )
-            self._run_agent_ui_extension_action(item["extension_id"], item["version"], action)
-        else:
-            _log("agent_ui_upload_all_skipped", extension_id=item["extension_id"], action_id=action["action_id"], reason=reason)
-        self._refresh_agent_upload_all_state()
-        self.window.after(250 if self.workflow_running else 25, self._advance_agent_ui_upload_queue)
-
-    def _refresh_agent_upload_all_state(self) -> None:
-        button = self.agent_ui_upload_all_button
-        if not button:
-            return
-        if self.agent_ui_upload_queue_running:
-            button.configure(text="Uploading…")
-            button.state(["disabled"])
-            return
-        eligible = self._eligible_agent_upload_actions({
-            "workflow_idle": not self.workflow_running,
-            "nms_running": _nms_running(),
-            "probe_connected": bool(self.probe_state.get().startswith("Connected")),
-            "runtime_capture_saved": _runtime_capture_saved(),
-        })
-        button.configure(text=f"Upload all ({len(eligible)})" if eligible else "Upload all")
-        button.state(["!disabled"] if eligible else ["disabled"])
-
-    def _render_agent_details(self, lane: dict) -> None:
-        card = self.agent_cards.get(lane.get("id", ""))
-        if not card:
-            return
-        needs_you = bool(lane.get("human_required"))
-        controls = self.agent_ui_extension_controls.get(lane.get("id", ""))
-        if controls:
-            controls["steps"].state(["!disabled"] if needs_you else ["disabled"])
-        card["status"].set(("NEEDS SURVEYOR · " if needs_you else "NO SURVEYOR ACTION · ") + str(lane.get("status") or "status unknown"))
-        card["summary"].set(str(lane.get("summary") or "No result summary has been published yet."))
-        lines = []
-        if lane.get("progress"):
-            lines.append("Progress: " + str(lane["progress"]))
-        if lane.get("blockers"):
-            lines.append("Blockers: " + "; ".join(str(item) for item in lane["blockers"]))
-        if lane.get("has_agent_status"):
-            published_at = str(lane.get("updated_utc") or "timestamp missing")
-            if agent_console.lane_status_is_stale(str(lane.get("updated_utc") or "")) is True:
-                published_at += " · stale for over 15 minutes"
-            lines.append("Lane status published: " + published_at)
-        else:
-            lines.append("No lane STATUS.json is published yet; showing registry/manifest fallback.")
-        if lane.get("human_required"):
-            lines.append("Surveyor request: " + str(lane.get("surveyor_request") or "Complete the steps below."))
-            if lane.get("steps"):
-                lines.extend(f"{index}. {step}" for index, step in enumerate(lane["steps"][:3], start=1))
-                if len(lane["steps"]) > 3:
-                    lines.append(f"…and {len(lane['steps']) - 3} more steps (Copy full steps)")
-            if lane.get("success_condition"):
-                lines.append("Success when: " + str(lane["success_condition"]))
-            if lane.get("evidence_to_return"):
-                lines.append("Return: " + ", ".join(str(item) for item in lane["evidence_to_return"][:3]))
-            if lane.get("full_derelict_required") is not None:
-                lines.append("Full traversal: " + ("Yes" if lane["full_derelict_required"] else "No"))
-            lines.append('When done, return to Main and write "check".')
-        elif lane.get("next_action"):
-            lines.append("Next: " + str(lane["next_action"]))
-        card["request"].set("\n".join(lines) if lines else "No Surveyor request is currently published.")
-        if needs_you:
-            needed = lane.get("surveyor_request") or "Complete the published Surveyor steps."
-            card["action_needed"].set(str(needed))
-            action = lane.get("next_action") or (lane.get("steps") or [""])[0]
-            card["action_label"].set("Action: " + str(action) if action else "Action: see the published steps")
-        else:
-            card["action_needed"].set("No Surveyor action is currently published.")
-            action = lane.get("next_action") or "No action requested"
-            card["action_label"].set("Action: " + str(action))
-        card["action_reason"].set("Needs: checking published action…" if needs_you else "Needs: none")
-
-    def _refresh_agent_upload_indicators(self) -> None:
-        for extension_id, card in self.agent_cards.items():
-            record = agent_ui_extensions.latest_action_record(self.agent_ui_extensions_root, extension_id)
-            upload_record = agent_ui_extensions.latest_upload_record(self.agent_ui_extensions_root, extension_id)
-            uploaded = agent_ui_extensions.action_record_confirms_upload(upload_record)
-            card["uploaded"].set(uploaded)
-            if uploaded:
-                stamp = str(upload_record.get("utc") or "upload confirmed")
-                path = str(upload_record.get("upload_path") or "")
-                card["upload_detail"].set(f"{path} · {stamp}")
-            elif record and record.get("status") == "failed":
-                card["upload_detail"].set("Latest lane action failed; no successful upload is confirmed.")
-            elif record:
-                card["upload_detail"].set("Latest lane action has no GitHub upload confirmation.")
-            else:
-                card["upload_detail"].set("No lane upload confirmed yet.")
-
-    def _copy_agent_steps(self, lane_id: str | None = None) -> None:
-        lane = next(
-            (item for item in (self.agent_snapshot or {}).get("lanes", []) if item.get("id") == lane_id),
-            None,
-        ) if lane_id else self.agent_selected_lane
-        if not lane or not lane.get("human_required"):
-            return
-        text = agent_console.build_instruction(lane)
-        self.agent_console_window.clipboard_clear()
-        self.agent_console_window.clipboard_append(text)
-        self.agent_console_state.set("Surveyor steps copied. Complete them, then return here and write ‘check’.")
-
-    def _copy_agent_summary(self) -> None:
-        if not self.agent_snapshot:
-            return
-        rows = ["NMS Derelict Probe agent status"]
-        for lane in self.agent_snapshot.get("lanes", []):
-            rows.append(f"{lane.get('name')}: {lane.get('status')}")
-            if lane.get("human_required"):
-                rows.append("  Surveyor request: " + (lane.get("surveyor_request") or "see copied steps"))
-                rows.extend(f"  {i}. {step}" for i, step in enumerate(lane.get("steps", []), start=1))
-                if lane.get("full_derelict_required") is not None:
-                    rows.append("  Full derelict traversal required: " + ("Yes" if lane["full_derelict_required"] else "No"))
-        self.window.clipboard_clear()
-        self.window.clipboard_append("\n".join(rows))
-        self.agent_console_state.set("Agent status summary copied to clipboard.")
-
-    def _close(self) -> None:
-        try:
-            if self.agent_console_window is not None and self.agent_console_window.winfo_exists():
-                self.agent_console_window.destroy()
-        finally:
-            self.window.destroy()
-
-    def _load_overlay_pref(self) -> bool:
-        pref = ROOT / "overlay-enabled.txt"
-        try:
-            return pref.read_text(encoding="utf-8-sig").strip().lower() == "true"
-        except Exception:
-            return False
-
-    def _save_overlay_pref(self) -> None:
-        try:
-            (ROOT / "overlay-enabled.txt").write_text("true" if self.overlay_enabled.get() else "false", encoding="utf-8")
-        except Exception as exc:
-            _log("overlay_pref_error", error=repr(exc))
-
-    def _save_overlay_settings(self) -> None:
-        settings = {key: bool(var.get()) for key, var in self.overlay_setting_vars.items()}
-        settings.update({
-            "opacity_percent": int(self.overlay_opacity.get()),
-            "x_offset": int(self.overlay_x_offset.get()),
-            "y_offset": int(self.overlay_y_offset.get()),
-        })
-        save_overlay_settings(ROOT / "overlay-settings.json", settings)
-
-    def _save_auto_upload_setting(self) -> None:
-        try:
-            AUTO_UPLOAD_SETTINGS.parent.mkdir(parents=True, exist_ok=True)
-            temp_path = AUTO_UPLOAD_SETTINGS.with_suffix(".json.tmp")
-            temp_path.write_text(json.dumps({"schema_version": 1, "enabled": bool(self.auto_upload_enabled.get())}, indent=2) + "\n", encoding="utf-8")
-            os.replace(temp_path, AUTO_UPLOAD_SETTINGS)
-            _log("auto_upload_setting_changed", enabled=bool(self.auto_upload_enabled.get()))
+            self.agent_upl…13755 tokens truncated…
+                self.auto_research_pending.clear()
+            self.auto_research_state.set("Automatic research is enabled." if self.auto_research_enabled.get() else "Automatic research is off; use Run all research actions in parallel when ready.")
         except OSError as exc:
-            self._set_status("Could not save auto-upload setting", str(exc))
+            self._set_status("Could not save automatic research setting", str(exc))
 
     def _publish_overlay_objectives(self) -> None:
         path = ROOT / "overlay-objectives.json"
@@ -1681,6 +799,7 @@ class SurveyorController:
         self.source_version.set(self._source_version())
 
         live = _read_json(LIVE_STATUS)
+        self._maybe_auto_run_research_after_saved_session(live)
         self._publish_overlay_objectives()
         view = summarize_status(live, nms_running=running)
         self.nms_state.set(view["nms"])
@@ -2010,6 +1129,107 @@ class SurveyorController:
             upload_action="all-saved-evidence",
         )
 
+    def _maybe_auto_run_research_after_saved_session(self, live: dict[str, Any]) -> None:
+        if not self.auto_research_enabled.get():
+            return
+        snapshot = _saved_session_snapshot(live)
+        if snapshot is None:
+            return
+        signature, path = snapshot
+        queued_signatures = {item[0] for item in self.auto_research_pending}
+        if signature in {self.auto_research_last_signature, self.auto_research_running_signature} or signature in queued_signatures:
+            return
+        self.auto_research_pending.append((signature, path))
+        self.auto_research_state.set(f"Saved session detected: {path.name}; queued {len(self.auto_research_pending)} saved run(s) for research.")
+        if self.workflow_running or not self.auto_research_pending:
+            return
+        signature, path = self.auto_research_pending.pop(0)
+        self.auto_research_last_signature = signature
+        self.auto_research_running_signature = signature
+        self._write_auto_research_receipt(signature, path, "started")
+        self.auto_research_state.set(f"Running all research actions for saved session {path.name}.")
+        self.run_parallel_research_test(
+            auto_session=(signature, path), trigger_kind="automatic_saved_session",
+        )
+
+    def run_parallel_research_test(self, *, auto_session: tuple[str, Path] | None = None,
+                                   trigger_kind: str = "manual_button") -> None:
+        if os.name != "nt":
+            self._set_status("Parallel research test requires Windows", "The test runs the installed PowerShell research workflows.")
+            self._fail_auto_research_start(auto_session, "Parallel research requires Windows.")
+            return
+        script = self.project_root / "tools" / "test_parallel_research_actions.py"
+        helper = self.project_root / "tools" / "github_integration.py"
+        if not script.is_file():
+            self._set_status("Parallel research test unavailable", f"Missing runner: {script}")
+            self._fail_auto_research_start(auto_session, f"Missing runner: {script.name}")
+            return
+        command = [self.python_exe, str(script), "--trigger", trigger_kind]
+        if auto_session:
+            signature, session_path = auto_session
+            command.extend(["--session-file", session_path.name, "--session-sha256", signature])
+        steps = [("Run eight isolated research actions", command)]
+        auto_upload = bool(self.auto_upload_enabled.get())
+        if auto_upload:
+            if not helper.is_file():
+                self._set_status("Parallel research test unavailable", f"Missing upload helper: {helper}")
+                self._fail_auto_research_start(auto_session, f"Missing upload helper: {helper.name}")
+                return
+            steps.append(("Share combined research report with all lanes", [
+                self.python_exe, str(helper), "upload", "--action", "parallel-action-test",
+            ]))
+        self.parallel_test_state.set("Running eight actions… progress is shown in Current action below.")
+        self._run_steps(
+            "Parallel research test",
+            steps,
+            upload_action="parallel-action-test" if auto_upload else "",
+            on_complete=lambda code, shared=auto_upload, session=auto_session: self._finish_parallel_research_test(code, shared, session),
+        )
+
+    def _fail_auto_research_start(self, auto_session: tuple[str, Path] | None, reason: str) -> None:
+        if not auto_session:
+            return
+        signature, path = auto_session
+        self.auto_research_running_signature = ""
+        self._write_auto_research_receipt(signature, path, "not-started")
+        self.auto_research_state.set(f"Could not start automatic research for {path.name}: {reason}")
+
+    def _finish_parallel_research_test(self, returncode: int, auto_upload: bool, auto_session: tuple[str, Path] | None = None) -> None:
+        latest = ROOT / "parallel-action-test-latest.json"
+        try:
+            payload = json.loads(latest.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            self.parallel_test_state.set("No combined report was produced. Open the workflow diagnostic for details.")
+            self._fail_auto_research_start(auto_session, "No combined report was produced; open the workflow diagnostic.")
+            return
+        run_id = str(payload.get("run_id") or "unknown run")
+        summary = payload.get("summary") or {}
+        done = int(summary.get("completed", 0))
+        total = int(summary.get("total", 0)) - int(summary.get("upload_actions_skipped", 0))
+        failed = int(summary.get("failed", 0))
+        if auto_session:
+            signature, path = auto_session
+            self.auto_research_running_signature = ""
+            report_path = str(payload.get("report_path") or f"parallel-action-tests/{run_id}/combined-results.json")
+            self._write_auto_research_receipt(
+                signature, path,
+                "complete" if returncode == 0 and failed == 0 else "completed-with-errors",
+                run_id=run_id, report_path=report_path,
+            )
+            self.auto_research_state.set(
+                f"Automatic research finished for {path.name}: {done}/{total} actions completed, {failed} failed. "
+                f"Run: {run_id}." if returncode == 0 else
+                f"Automatic research failed for {path.name}; open the workflow diagnostic. Run: {run_id}."
+            )
+        if failed:
+            self.parallel_test_state.set(f"{done}/{total} actions completed; {failed} failed. Report: parallel-action-tests/{run_id}/combined-results.json")
+        elif returncode == 0 and auto_upload:
+            self.parallel_test_state.set(f"{done}/{total} actions completed; combined report shared with all lanes. Run: {run_id}")
+        elif returncode == 0:
+            self.parallel_test_state.set(f"{done}/{total} actions completed; local only (automatic uploads are off). Report: parallel-action-tests/{run_id}/combined-results.json")
+        else:
+            self.parallel_test_state.set(f"{done}/{total} actions completed; report upload failed. Run: {run_id}. Open workflow diagnostic for details.")
+
     def _project_action_command(self, cmd_name: str) -> list[str] | None:
         lower = cmd_name.lower()
         if lower.endswith(".cmd"):
@@ -2168,7 +1388,7 @@ class SurveyorController:
                         self.window.after(0, self._refresh_agent_upload_indicators)
                     except (tk.TclError, RuntimeError):
                         pass
-                elif upload_action == "all-saved-evidence":
+                elif upload_action in {"all-saved-evidence", "parallel-action-test"}:
                     upload_match = re.search(
                         rf"https://github\.com/{re.escape(agent_ui_extensions.REPOSITORY)}/tree/[^/\s]+/(research-uploads/[^\s]+)",
                         combined,
@@ -2182,9 +1402,9 @@ class SurveyorController:
                                 self.agent_ui_extensions_root,
                                 lane_id,
                                 versions.get(lane_id) or "shared-evidence-batch",
-                                "research.upload_all_saved_evidence",
+                                "research.upload_all_saved_evidence" if upload_action == "all-saved-evidence" else "research.parallel_action_test",
                                 "complete" if returncode == 0 and upload_path else "failed",
-                                "Deduplicated all available saved evidence in one shared main-branch upload.",
+                                "Deduplicated all available saved evidence in one shared main-branch upload." if upload_action == "all-saved-evidence" else "Published the combined parallel research report only; individual outputs and queue were excluded.",
                                 upload_path,
                             )
                         except Exception as record_error:
