@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T23:35:59Z",
+  "updated_utc": "2026-10-08T23:36:12Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.67",
@@ -22,7 +22,7 @@
       "branch": "agent/runtime-dispatch-seed-status-fix-20261008",
       "status": "Probe 0.3.40 clears root-seed state at system boundaries; the latest combined report was reconciled and the normal system-switch runtime check remains pending.",
       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
-      "artifact": "update-manifest.json (full Surveyor package v0.3.67; includes Probe 0.3.40)",
+      "artifact": "update-manifest.json",
       "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
       "extension_version": "1.0.6",
       "human_validation_required": true,
