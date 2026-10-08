@@ -1,3 +1,10 @@
+## v0.3.67 — recover unprocessed saved sessions
+
+- On startup, scan saved session JSON files and queue sessions without a persisted queue entry or matching automatic research report.
+- Skip sessions already represented by a report with the exact SHA-256; record that report instead of rerunning it.
+- Preserve FIFO order, per-session reports, restart persistence, and explicit upload toggle behavior.
+- Verification: 210 unit tests, compileall, harness self-test, and complete updater package checks. Windows startup/backlog validation remains pending.
+
 ## v0.3.66 — process every saved-session research job
 
 - Drain the saved-session research queue FIFO, running one isolated report per session.
