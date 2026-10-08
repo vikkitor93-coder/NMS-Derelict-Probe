@@ -193,14 +193,20 @@
     "direct_main_publication": true,
     "lane_branch_sync": "Update STATUS.json and RUNTIME_A_MANIFEST.json in place on agent/runtime-dispatch-seed-status-fix-20261008 after main publication; preserve the branch-only package/history and its backup reference.",
     "tests": "Prepublish JSON parse and cross-reference assertions passed; latest report SHA-256 verified against the pointer. Runtime/unit test results come from the published v0.3.67 CI record: 210 tests, compileall, harness self-test, and 37-part updater integrity.",
-    "rollback": "Restore the four reconciliation files from backup/main-before-runtime-reconcile-20261008-2330 or revert the reconciliation commits in reverse order; backup/runtime-dispatch-seed-status-fix-pre-reconcile-20261008 preserves pre-sync lane history.",
-    "complete_lane_records_commit": "cdebd47b6a0aa32770bd3d8d958aa0929abc9eb0",
+    "rollback": "Restore the five reconciliation files (AI_HANDOFF.md, WORKSPACE_STATE.json, RESEARCH_INDEX.md, and the Runtime-A STATUS.json and RUNTIME_A_MANIFEST.json) from backup/main-before-runtime-reconcile-20261008-2330, or revert the Runtime-A reconciliation commits newest-first; backup/runtime-dispatch-seed-status-fix-pre-reconcile-20261008 preserves the lane's pre-sync history.",
+    "complete_lane_records_commit": "3c60563c63a0ed3f7568ab254fe7f66d2a0204ee",
     "main_file_commits": {
       "RESEARCH_INDEX.md": "bff0effe7e535932b544e2c734109ff458c20f17",
       "AI_HANDOFF.md": "4bccc753ab92f1cb25493c0c6906c19e7eb21843",
       "WORKSPACE_STATE.json": "c4d32238ffce1077bd7097042383348d411ea438",
       "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json": "fd799a4e5593245ee202fc6ee724251b2e453d7e",
       "agent-patches/runtime-dispatch/STATUS.json": "cdebd47b6a0aa32770bd3d8d958aa0929abc9eb0"
+    },
+    "main_followup_commits": {
+      "RESEARCH_INDEX.md": "42689f38067c83c6fb792d0aac1ffefa4c223241",
+      "WORKSPACE_STATE.json": "15302ef2d7da75b7c4a3ff5678381268add30031",
+      "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json": "02932387c0300d10e49dabc8aa1d0bb7f8da32ad",
+      "agent-patches/runtime-dispatch/STATUS.json": "3c60563c63a0ed3f7568ab254fe7f66d2a0204ee"
     }
   },
   "system_scope_seed_reset": {
@@ -212,9 +218,9 @@
       "effective_seed_hex",
       "effective_state"
     ],
-    "validation": "focused unit tests and package integrity in GitHub Actions; live NMS system-switch check pending",
+    "validation": "Focused system/seed tests and package integrity passed in GitHub Actions; one normal NMS system-switch validation remains pending.",
     "human_validation_required": true,
-    "combined_report_scope": "The 2026-10-08 combined parallel-action report remains the sole authority for that run; this user-run observation is separate."
+    "combined_report_scope": "The 19:58 combined report (pointer SHA verified) is authoritative for its offline run only; it does not test system reset."
   },
   "latest_combined_report_review": {
     "pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
@@ -234,7 +240,6 @@
       "upload_actions_skipped": 1
     },
     "source_session": "20261008T185119Z_0001550006607CAC",
-    "source_session_sha256": "ba1ebc2aa42772d03e9b4e66ed771839a7a74f5b6a4e4797f855eb7815ad5414",
     "seed_result": "00C9E8DF0327789E with UseSeedValue=true from one saved root event; candidate only, derivation unproven.",
     "container_result": "14 predicted (7 salvage + 7 footlockers) from 146 asset-resolved scene instances; not observed physically. Keep separate from the 43 CARGO_FLOATERS asset prediction.",
     "caller_result": "02C08607 FF 52 10 returns at 02C0860A; static caller extraction has no target_rva_hex.",
@@ -261,7 +266,7 @@
     "lane_status_before_sha": "795c66b24da0d094f0b14aa68399693123cfec6a",
     "main_manifest_before_sha": "484c0d2d7234d0fea02d29d02cbc008f52427363",
     "lane_manifest_before_sha": "74af42a92f36b2bd0037fa80d538f7b702ef8e74",
-    "resolution": "Main and lane status copies matched on the live reset gate, but the lane manifest/report reference was stale. Replaced Runtime-A report references with main's pointer-verified 19:58 combined report. A metadata lane commit advanced main during preparation; its changes are preserved. Lane branch will sync to reconciled main after publication.",
+    "resolution": "Main and lane status copies agreed that the only remaining gate is the normal system-switch run, but the lane manifest and latest report reference were stale. Replaced the stale reference with main's pointer-verified 19:58 combined report, preserved the separate saved-session/upstream provenance, and clarified the no-debugger system-switch recipe. Main and lane branch-only history from other lanes are preserved.",
     "branch_relation": "The lane branch was 167 commits behind and 9 ahead of main. Preserve its branch-only package and history; synchronize the lane STATUS.json and RUNTIME_A_MANIFEST.json in place rather than force-moving the branch."
   }
 }
