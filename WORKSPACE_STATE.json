@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T19:18:10Z",
+  "updated_utc": "2026-10-08T19:20:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.65",
@@ -26,9 +26,9 @@
       "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
       "extension_version": "1.0.6",
       "human_validation_required": true,
-      "next_action": "Update Surveyor in-app, enter a different system, confirm the old root seed clears, then observe the next root capture's raw value, UseSeedValue, and effective state.",
-      "latest_report": "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json",
-      "latest_report_sha256": "7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c"
+      "next_action": "Use Surveyor's in-app updater, enter a different system, confirm the prior root capture clears, then inspect the next root event's raw seed, UseSeedValue, and effective state.",
+      "latest_report": "research-uploads/20261008T191019Z-parallel-action-test/combined-results.json",
+      "latest_report_sha256": "1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471"
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage-update-20261008",
@@ -77,6 +77,15 @@
   "human_intervention": {
     "required_now": true,
     "pending": [
+      {
+        "lane": "seed-lineage",
+        "kind": "upload-saved-root-and-recapture-caller-upstream",
+        "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
+        "next_action": "On shared main Surveyor, close NMS if open; RUNTIME-A 1.0.6 > Upload captured root event > wait for upload success. Then Seed-Lineage 1.0.3 > Extract caller code + upload > Extract upstream callers + upload. Return the upload, caller, and upstream evidence records.",
+        "report": "research-uploads/20261008T185341Z-parallel-action-test/combined-results.json",
+        "report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe",
+        "full_derelict_required": false
+      },
       {
         "lane": "runtime-dispatch",
         "kind": "verify-system-change-seed-reset",
