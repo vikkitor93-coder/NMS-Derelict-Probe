@@ -3,7 +3,13 @@
 > **v0.3.36 launch fix:** Standalone Surveyor remains independent, but **Start NMS** now hands off to the same console-backed `pymhf.exe run nmspy` launch style used by the older working UI. The hidden `import pymhf` preflight and Python downgrade/reinstall loop were removed.
 
 
-Current Surveyor package: **v0.3.60**. Runtime-A probe: **0.3.38**. Versions 0.3.59–0.3.60 add crash-safe event journaling, always save root-event evidence when exact caller or `+0x10` capture is pending, and batch changed evidence uploads every 30 seconds while automatic uploads are enabled.
+Current Surveyor package: **v0.3.63**. Runtime-A probe: **0.3.40**. Versions 0.3.59–0.3.60 add crash-safe event journaling, always save root-event evidence when exact caller or `+0x10` capture is pending, and batch changed evidence uploads every 30 seconds while automatic uploads are enabled.
+
+## v0.3.63 — system-scoped root seed state
+
+- End a capture session and clear live root-seed state when the observed universe address changes.
+- Keep raw descriptor seed bytes separate from the UseSeedValue flag and effective seed state.
+- No debugger or game-state writes are used. A normal live system switch is still needed to verify the runtime behavior.
 
 ## v0.3.60 — paced recovery uploads
 
