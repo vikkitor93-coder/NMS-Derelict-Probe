@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T18:40:00Z",
+  "updated_utc": "2026-10-08T19:08:07Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -32,14 +32,16 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage-update-20261008",
-      "status": "latest-root-event-reviewed-extension-1.0.3-ready",
+      "status": "latest-combined-report-reviewed-fresh-root-saved-caller-upstream-stale",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-      "result_summary": "Latest main combined report hash verified. Saved 14:00:37Z root event ties descriptor 0000021C2457DD28 and seed candidate 5B4AE67D9C2A8F61 to direct Engine caller 0063AC20 -> 0183E770; FF 52 10 dispatch remains unresolved. Extension 1.0.3 requests fresh caller then upstream evidence through existing shared host actions.",
+      "result_summary": "Latest main combined report hash verified. Fresh session 20261008T185119Z_0001550006607CAC captured root candidate 00C9E8DF0327789E at 18:51:04Z; derivation unproven. MEDI_FLOATERS analysis predicts 14 targets from assets (not observed). Caller and upstream outputs still use Oct 6 and Oct 4 sessions; no correlation to fresh event.",
       "human_validation_required": true,
-      "review": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_140207_20261008.md",
-      "next_action": "Refresh Seed-Lineage extension 1.0.3, record a fresh root event, run Extract caller code then Extract upstream callers, and return both run manifests; no traversal.",
-      "parallel_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
-      "extension_version": "1.0.3"
+      "review": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_185304_20261008.md",
+      "next_action": "On shared main Surveyor, close NMS if open; RUNTIME-A 1.0.6 > Upload captured root event > wait for upload success. Then Seed-Lineage 1.0.3 > Extract caller code + upload > Extract upstream callers + upload. Return the upload, caller, and upstream evidence records.",
+      "parallel_report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe",
+      "extension_version": "1.0.3",
+      "latest_report": "research-uploads/20261008T185341Z-parallel-action-test/combined-results.json",
+      "latest_report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe"
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-current-target-20261008-reconciled",
@@ -76,9 +78,13 @@
     "required_now": true,
     "pending": [
       {
-        "kind": "fresh-root-caller-and-upstream-evidence",
         "lane": "seed-lineage",
-        "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json"
+        "kind": "upload-saved-root-and-recapture-caller-upstream",
+        "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
+        "next_action": "On shared main Surveyor, close NMS if open; RUNTIME-A 1.0.6 > Upload captured root event > wait for upload success. Then Seed-Lineage 1.0.3 > Extract caller code + upload > Extract upstream callers + upload. Return the upload, caller, and upstream evidence records.",
+        "report": "research-uploads/20261008T185341Z-parallel-action-test/combined-results.json",
+        "report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe",
+        "full_derelict_required": false
       }
     ]
   },
