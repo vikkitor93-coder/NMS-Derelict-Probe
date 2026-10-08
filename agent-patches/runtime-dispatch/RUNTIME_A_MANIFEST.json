@@ -5,9 +5,9 @@
   "purpose": "Correct stale Runtime-A hook and recursive-return labels from the unique signature match in the hash-matched NMS.exe; preserve report provenance and continue offline without WinDbg.",
   "published_base": {
     "branch": "main",
-    "commit": "02c32ebe2020b6134f0dbd72efa049ebf8de5e7b",
-    "app_version": "0.3.61",
-    "compatible_probe": "0.3.38"
+    "commit": "3ec6153b6c7631a80f333c7c7f62d7e0e372192c",
+    "app_version": "0.3.65",
+    "compatible_probe": "0.3.40"
   },
   "source_candidate": {
     "version": "0.3.62",
@@ -153,5 +153,18 @@
     "backup_commit": "7b62524a018c52801084548d21b47b771683cc38",
     "python_unittest": "not_run_local_runner_unavailable",
     "equivalent_assertions": "5/5_passed_against_branch_files"
+  },
+  "system_scope_seed_reset": {
+    "probe_version": "0.3.40",
+    "implementation": "universe-address transition closes the active session and clears live root seed, caller, and pre-session capture buffers",
+    "seed_reporting": [
+      "raw_seed_hex",
+      "UseSeedValue",
+      "effective_seed_hex",
+      "effective_state"
+    ],
+    "validation": "focused unit tests and package integrity in GitHub Actions; live NMS system-switch check pending",
+    "human_validation_required": true,
+    "combined_report_scope": "The 2026-10-08 combined parallel-action report remains the sole authority for that run; this user-run observation is separate."
   }
 }
