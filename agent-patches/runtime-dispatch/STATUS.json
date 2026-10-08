@@ -1,16 +1,14 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-08T18:20:00Z",
+  "updated_utc": "2026-10-08T18:40:00Z",
   "state": "in_progress",
-  "status": "The matched root event resolves its FF 52 10 dispatch destination to 0063A6D0, the unique signature-scanned BEFORE-hook address in the hash-matched executable. The report's 00634BC0 label was stale. The owner+0x10 zero remains unexplained and is not target evidence.",
-  "summary": "The 16:37 combined report remains unchanged and hash-verified; it is offline saved-evidence analysis, not a new capture. Its 16:31 event records return 02C0860A after 02C08607: FF 52 10. A user-run signature scan on matching NMS.exe SHA-256 13d5060d… found the source-declared static hook exactly once at 0063A6D0; DUNGEON-C evidence independently records the same .pdata function. Source labels 00634BC0/00634C63 are stale and corrected to 0063A6D0/0063A773 in probe 0.3.39. The +0x10 zero remains an inconsistency, not the target; semantic identity is unresolved.",
-  "progress": "Corrected build-specific hook and recursive-return constants using the unique signature scan and matching-build review. Added a focused regression test and extension 1.0.6. Shared report and pointer are unchanged.",
-  "blockers": [
-    "Focused regression test not run because the local command runner is unavailable; keep this correction on the lane branch until it passes."
-  ],
-  "next_action": "Run python -m unittest discover -s tests -p \"test_runtime_hook_address_labels.py\" from the Runtime-A branch archive. On pass, publish to main with the recorded backup ref. Then continue offline semantic analysis of 0063A6D0 and the zero-slot discrepancy; no WinDbg.",
-  "human_intervention_required": true,
+  "status": "Published to main. Matching NMS.exe signature resolves the matched FF 52 10 event destination to 0063A6D0; owner+0x10 zero remains unexplained and is not target evidence.",
+  "summary": "Probe source labels corrected to 0063A6D0/0063A773 and Runtime-A extension 1.0.6 published. The latest combined report remains offline saved-evidence analysis; no live NMS capture or semantic function identity is claimed.",
+  "progress": "Published in main merge commit 373a5e8247823ab5c1a5955d31c70bc25bb610e9. Five focused evidence/address assertions passed equivalent checks; Python unittest not run because the local command runner is unavailable.",
+  "blockers": [],
+  "next_action": "Continue offline semantic analysis of 0063A6D0 and the owner+0x10 zero discrepancy. Do not use WinDbg.",
+  "human_intervention_required": false,
   "evidence_to_return": [
     "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
     "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json",
