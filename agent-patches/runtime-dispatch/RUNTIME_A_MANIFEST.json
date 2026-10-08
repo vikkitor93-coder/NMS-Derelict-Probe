@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane_id": "runtime-dispatch",
   "lane": "agent/runtime-dispatch-20261008-latest-root-correlation",
-  "purpose": "Correct stale Runtime-A hook and recursive-return labels from the unique signature match in the hash-matched NMS.exe; preserve report provenance and continue offline without WinDbg.",
+  "purpose": "Reset stale Runtime-A root-seed state at universe-address changes and report raw seed value separately from UseSeedValue activation; retain the verified hook-address correction.",
   "published_base": {
     "branch": "main",
     "commit": "02c32ebe2020b6134f0dbd72efa049ebf8de5e7b",
@@ -153,5 +153,20 @@
     "backup_commit": "7b62524a018c52801084548d21b47b771683cc38",
     "python_unittest": "not_run_local_runner_unavailable",
     "equivalent_assertions": "5/5_passed_against_branch_files"
+  },
+  "system_scope_reset_candidate": {
+    "probe_version": "0.3.40",
+    "published_to_main": false,
+    "source": "mod/derelict_baseline_probe.py",
+    "changes": [
+      "Poll normalized universe address once per second and when the dungeon root resource is captured.",
+      "End an active session and clear live pre-session trace, root-seed, POI and caller state on a known system transition.",
+      "Exclude root-seed candidates without an exact matching known system address.",
+      "Expose raw seed, UseSeedValue, effective seed, and state as separate fields."
+    ],
+    "tests": [
+      "tests/test_system_scoped_root_capture.py"
+    ],
+    "test_state": "not_run_local_runner_unavailable"
   }
 }
