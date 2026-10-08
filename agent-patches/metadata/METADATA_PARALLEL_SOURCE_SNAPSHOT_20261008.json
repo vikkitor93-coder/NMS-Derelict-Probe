@@ -4,9 +4,9 @@
   "base_release": "0.3.61",
   "purpose": "Agent D review of the latest October 8 published combined report and saved capture; not an updater release",
   "file_name": "NMS-Derelict-Probe-v0.3.61-AgentD-parallel-review-source.zip",
-  "sha256": "c2e835157fc3e87b0a5eadd5ceee933d4421ba8adb514443f97234f11db8e9ff",
-  "size": 444699,
-  "file_count": 167,
+  "sha256": "de0f3a9bb55f7c2ca2dcb7793443a9d3371355c2e5d64a39009d61585da74ff0",
+  "size": 452261,
+  "file_count": 172,
   "encoding": "base64-concatenated-parts",
   "parts": [
     "packages/v0.3.61-metadata-parallel-review-source/part-000.b64",
@@ -41,7 +41,8 @@
     "packages/v0.3.61-metadata-parallel-review-source/part-029.b64",
     "packages/v0.3.61-metadata-parallel-review-source/part-030.b64",
     "packages/v0.3.61-metadata-parallel-review-source/part-031.b64",
-    "packages/v0.3.61-metadata-parallel-review-source/part-032.b64"
+    "packages/v0.3.61-metadata-parallel-review-source/part-032.b64",
+    "packages/v0.3.61-metadata-parallel-review-source/part-033.b64"
   ],
   "attached_shared_pointer_and_report_included": false,
   "derived_review": "agent-patches/metadata/PARALLEL_ACTION_REVIEW_20261008.json"
