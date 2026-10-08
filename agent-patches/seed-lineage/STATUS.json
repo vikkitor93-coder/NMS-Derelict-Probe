@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "lane": "seed-lineage",
+  "updated_utc": "2026-10-08T13:43:08Z",
+  "state": "in_progress",
+  "status": "Combined-report review complete; root constructor identity remains unproven",
+  "summary": "Verified attached 0.3.62 local-candidate combined report SHA-256. Offline saved-record run only. 43 target containers are asset-predicted; historical 35 and post-update 16 are observations. Static descriptor paths do not identify the live root constructor or dispatch target.",
+  "next_action": "Find saved object-identity evidence; if absent, validate the read-only constructor capture against current source before a short live NMS run.",
+  "surveyor_request": "No action yet; current-source compatibility review remains.",
+  "human_intervention_required": false,
+  "user_steps": [],
+  "success_condition": "Identify the descriptor source and root object identity without claiming an unverified seed transform.",
+  "evidence_to_return": [
+    "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md"
+  ],
+  "full_derelict_required": false,
+  "evidence_path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md"
+}
