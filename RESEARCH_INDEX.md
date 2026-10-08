@@ -1,11 +1,22 @@
 ## DUNGEON-C latest combined report and executable call-path review (2026-10-08)
 
 - **Pointer provenance:** `research/LATEST_PARALLEL_ACTION_TEST.json` names run `20261008T140207Z-d8e24197` and report `research-uploads/20261008T140254Z-parallel-action-test/combined-results.json`. Report SHA-256 `11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6` matches the pointer. That combined report alone is authoritative for the run: 8 complete, 0 failed, 1 upload skipped; offline saved-evidence processing and no new NMS event.
+
 - **Measured static bytes:** matching NMS.exe SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499` confirms the saved call at `0063A706` reaches stub `033E1B60`, whose `E9 EB FE FF FF` tail jump reaches `033E1A50`. Neither address is covered by a `.pdata` runtime-function range; the next listed range begins at `033E1B70`. This is a static call path only and is not proof of the runtime `02C08607: FF 52 10` target. See `agent-patches/dungeon-decompile/CURRENT_HOOK_CALL_TARGET_20261008.json`.
+
 - **Unresolved exporter detail:** the 89-byte hook body contains the E8 rel32 call, although its saved `direct_call_candidates` list is empty. Cause remains unknown.
+
 - **Limits:** the 43 targets (30 salvage + 13 footlockers) remain an asset-derived prediction for 164 resolved scene instances, separate from the historical 35-container count and distinct post-update 16-container observation. The after-call owner+0x10 zero and separate resolver sample do not resolve dispatch. No game launch or traversal occurred. Runtime target capture remains with `agent/runtime-dispatch`.
 
-## Prior DUNGEON-C parallel report review (2026-10-08)
+## Seed-B review of main's 14:02 combined report (2026-10-08)
+
+- **Saved root event:** session `20261008T140041Z_0001BF0004E84EFD` records the 14:00:37Z root resource event, descriptor `0000021C2457DD28`, seed candidate `5B4AE67D9C2A8F61`, and direct Engine caller `0063AC20` -> `0183E770`. The same saved trace records logical entry `02C08607: FF 52 10`, returning at `02C0860A`; both owner+0x10 reads are after-call zeros. The indirect dispatch target is unresolved.
+- **Asset prediction:** CARGO_FLOATERS is inferred at high confidence; 11 logical chunks and 164 scene instances yield an asset-derived prediction of 43 target containers (30 salvage, 13 footlockers), not a physical count.
+- **Seed boundary:** the POI description raw argument matches universe address `0001BF0004E84EFD`; the description return matches the POI component address, not the universe address or dungeon-root seed. The root seed remains a candidate; its derivation and constructor identity are unproven.
+- **Provenance:** main pointer `research/LATEST_PARALLEL_ACTION_TEST.json` names run `20261008T140207Z-d8e24197`, report SHA-256 `11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6`. Eight actions reanalyzed saved evidence offline; upload was skipped. Caller and upstream results in that report use older saved sessions, so do not join them to the 14:00:37Z event as one runtime trace.
+- **Next:** on the shared main Surveyor, capture a fresh root event, run Seed-Lineage extension 1.0.3 actions Extract caller code then Extract upstream callers, and return both evidence manifests. No traversal is required. Full review: `agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_140207_20261008.md`.
+
+## DUNGEON-C parallel report review (2026-10-08)
 
 - **Source and provenance:** The user-provided local 0.3.62 candidate contained pointer research/LATEST_PARALLEL_ACTION_TEST.json and combined report research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json. Pointer SHA-256 matched the report bytes: 12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda. The candidate and shared report were not published or modified by DUNGEON-C. The combined report is the sole authority for the Oct 8 action results: 8 offline actions completed, upload skipped, no NMS session or new event.
 - **Published update:** After the attached 13:02 candidate report, main published a separate 13:43 combined report at research-uploads/20261008T134355Z-parallel-action-test/combined-results.json (SHA-256 3af46d71fbeabc5810f3c83dbdd93b59cc2cfd71358dbaa6bb9c35c398e38592). Its hash matches the later main pointer. The two combined reports are kept as separate runs and each is authoritative only for its own action results.

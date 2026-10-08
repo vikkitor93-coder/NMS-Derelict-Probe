@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T14:29:00Z",
+  "updated_utc": "2026-10-08T14:31:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -42,7 +42,7 @@
       "extension_version": "1.0.3"
     },
     "dungeon-decompile": {
-      "branch": "agent/dungeon-current-target-20261008",
+      "branch": "agent/dungeon-current-target-20261008-reconciled",
       "status": "static-hook-call-chain-verified-live-dispatch-unresolved",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
       "next_action": "Static call path 0063A706 -> 033E1B60 -> 033E1A50 is verified against matching NMS.exe. Runtime target capture remains with agent/runtime-dispatch; keep these paths distinct.",
