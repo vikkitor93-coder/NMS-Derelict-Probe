@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T20:08:35Z",
+  "updated_utc": "2026-10-08T20:12:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.67",
@@ -9,7 +9,7 @@
     "candidate_version": "0.3.67",
     "candidate_branch": "main",
     "candidate_base": "main@fb1edd38c94774b3f4be08a198702840d1bdf559",
-    "candidate_status": "v0.3.67 adds startup recovery of previously saved, unprocessed sessions; package build and tests in progress."
+    "candidate_status": "Surveyor v0.3.67 startup recovery is published on main. Local checks passed: 210 tests, compileall, harness self-test, and verified 37-part updater package. Windows backlog execution remains pending."
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
