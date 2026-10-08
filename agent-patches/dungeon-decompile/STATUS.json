@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "branch": "agent/dungeon-current-target-20261008",
+  "branch": "agent/dungeon-current-target-20261008-reconciled",
   "reviewed_utc": "2026-10-08T14:25:00Z",
   "state": "static-hook-call-chain-verified-live-dispatch-unresolved",
   "verified": {
@@ -523,5 +523,7 @@
   "latest_parallel_action_run": "20261008T140207Z-d8e24197",
   "latest_parallel_action_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json",
   "current_hook_call_target": "agent-patches/dungeon-decompile/CURRENT_HOOK_CALL_TARGET_20261008.json",
-  "latest_combined_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6"
+  "latest_combined_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+  "latest_parallel_action_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+  "latest_hook_call_target_review": "agent-patches/dungeon-decompile/CURRENT_HOOK_CALL_TARGET_20261008.json"
 }
