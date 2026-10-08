@@ -1,24 +1,26 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-08T14:16:27Z",
+  "updated_utc": "2026-10-08T19:05:06Z",
   "state": "awaiting_fresh_root_caller_evidence",
-  "status": "Latest saved root event reviewed; shared-build caller and upstream recapture prepared in extension 1.0.3",
-  "summary": "Verified main combined report 20261008T140207Z-d8e24197 SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6. Saved root event at 14:00:37Z ties descriptor 0000021C2457DD28 and seed candidate 5B4AE67D9C2A8F61 to direct Engine caller 0063AC20 -> 0183E770. Current upstream action result is from an older session; constructor identity and root-seed derivation remain unresolved.",
-  "next_action": "Refresh Seed-Lineage extension 1.0.3 on shared main Surveyor; capture a fresh root event, run Extract caller code + upload, then Extract upstream callers + upload; return both evidence records.",
-  "surveyor_request": "Use shared main Surveyor with Seed-Lineage 1.0.3. At system 0001BF0004E84EFD record a fresh derelict root event, run the two Seed-Lineage actions in order, and return their evidence paths. No traversal.",
+  "status": "Latest combined report reviewed and hash-verified. A new root event is saved, but caller and upstream results still reference older sessions.",
+  "summary": "Main pointer report 20261008T185304Z-e95aae15 SHA-256 9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe verified. Saved event at 2026-10-08T18:51:04.549Z records universe 0001550006607CAC and root-seed candidate 00C9E8DF0327789E (one event, unverified derivation). Generation analyzer infers MEDI_FLOATERS, 10 logical rooms / 146 scene instances, and 14 asset-predicted containers; this is not a physical count and is separate from the earlier CARGO_FLOATERS 43-target asset prediction. Caller extraction uses 20261006T223811Z; upstream uses 20261004T151219Z; they do not join to the fresh capture. Parallel run was offline and upload_runtime_capture was disabled. Constructor identity and seed derivation remain unresolved.",
+  "next_action": "On shared main Surveyor, close NMS if open; RUNTIME-A 1.0.6 > Upload captured root event > wait for upload success. Then Seed-Lineage 1.0.3 > Extract caller code + upload > Extract upstream callers + upload. Return the upload, caller, and upstream evidence records.",
+  "surveyor_request": "Upload the saved root event for session 20261008T185119Z_0001550006607CAC with RUNTIME-A 1.0.6, then rerun both Seed-Lineage 1.0.3 actions in order. No NMS launch or traversal is required if that saved capture remains available.",
   "human_intervention_required": true,
   "user_steps": [
-    "1. In the shared main Surveyor Agent Console, refresh extensions and confirm Seed-Lineage 1.0.3 is active.",
-    "2. Start or restart NMS from the installed executable, enter system 0001BF0004E84EFD, and load the derelict until its root resource event is saved. Do not traverse the derelict.",
-    "3. In the Seed-Lineage panel, run “1. Extract caller code + upload”, then “2. Extract upstream callers + upload”. Return both uploaded evidence paths or manifests."
+    "1. In the shared main Surveyor Agent Console, close NMS if open; open RUNTIME-A 1.0.6 and choose “Upload captured root event”. Wait for upload success.",
+    "2. Open Seed-Lineage 1.0.3 and run “1. Extract caller code + upload”, then “2. Extract upstream callers + upload”. Return the three uploaded evidence records."
   ],
-  "success_condition": "Caller and upstream artifacts both cite the fresh root event/session; caller baseline bytes match installed NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499; upstream descriptor reads can then be compared to current caller context.",
+  "success_condition": "Caller artifact cites source session 20261008T185119Z_0001550006607CAC and universe 0001550006607CAC, matches NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, and the upstream artifact cites that new caller artifact/session. No constructor or seed-derivation claim is made from the saved candidate alone.",
   "evidence_to_return": [
-    "Both action output paths and their run manifests",
-    "Caller output baseline_window_matches_exe and nms_exe SHA-256",
-    "Fresh root event timestamp and descriptor pointer"
+    "Runtime-A root-event upload evidence/manifest",
+    "Seed-Lineage caller and upstream evidence/manifests",
+    "Caller source_session_id, universe address, baseline_window_matches_exe, and NMS.exe SHA-256"
   ],
   "full_derelict_required": false,
-  "evidence_path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_140207_20261008.md"
+  "evidence_path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_185304_20261008.md",
+  "parallel_report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe",
+  "extension_version": "1.0.3",
+  "runtime_extension_version": "1.0.6"
 }

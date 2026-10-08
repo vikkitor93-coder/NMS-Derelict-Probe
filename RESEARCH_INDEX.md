@@ -112,3 +112,14 @@ Last updated: 2026-10-08. This file is the short shared truth table for humans a
 Every conclusion must be tagged mentally as **measured**, **public-structure confirmed**, **inferred**, or **hypothesis**. Never promote an inference to measured fact merely because it fits the current model.
 
 \n
+
+
+## Seed-B review of latest combined report (2026-10-08 18:53 UTC)
+
+Main pointer run `20261008T185304Z-e95aae15` references `research-uploads/20261008T185341Z-parallel-action-test/combined-results.json`, SHA-256 `9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe`; fetched report bytes match the pointer. This combined report is the sole source used for this parallel run's results. The parallel run was isolated/offline, used an input snapshot, retained no worker data, and marked `research.upload_runtime_capture` `not_run_upload_disabled`.
+
+The generation artifact derives from session `20261008T185119Z_0001550006607CAC`, universe `0001550006607CAC`. It records one root `DUNGEON.SCENE.MBIN` event at `2026-10-08T18:51:04.549Z` with root-seed candidate `00C9E8DF0327789E`; derivation remains unproven. The analyzer infers `MEDI_FLOATERS`, 10 logical rooms and 146 scene instances, and predicts 14 target containers (7 salvage + 7 footlockers) from assets. This is not a physical count and is separate from the earlier `CARGO_FLOATERS` asset-derived 43-target prediction (30 salvage + 13 footlockers).
+
+Seed-Lineage caller output cites older session `20261006T223811Z_0001BF0004E84EFD`; upstream output cites `20261004T151219Z_0001BF0004E84EFD`; seed-function analysis cites `20261002T213047Z_00001A0004E84EFD`. Do not join these offline results to the fresh root event. Static extraction decodes `02C08607: FF 52 10` returning at `02C0860A`, but does not resolve its target. The zero-match resolver sample at `02C04977` / `02C0497A` is a separate callsite.
+
+Next: on shared main Surveyor, close NMS if open, use RUNTIME-A 1.0.6 **Upload captured root event**, then Seed-Lineage 1.0.3 **Extract caller code + upload** and **Extract upstream callers + upload** in order. Verify the caller cites fresh session `20261008T185119Z_0001550006607CAC` and the hash-matched executable, and verify upstream cites that caller. No new NMS launch or traversal is needed if the saved capture remains available. Full lane review: `agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_185304_20261008.md`.
