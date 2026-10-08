@@ -74,9 +74,9 @@ def _prepare_metadata(managed_files: list[str], canonical: dict) -> None:
     )
     canonical["verification"]["package_refresh"] = f"v{APP_VERSION} full source package is distributed through update-manifest.json."
     canonical["verification"]["package_files"] = len(managed_files)
-    canonical.setdefault("notes", []).append(
-        f"Runtime-A system transition and explicit effective-seed reporting were added in Probe {PROBE_VERSION}."
-    )
+    note = f"Runtime-A system transition and explicit effective-seed reporting were added in Probe {PROBE_VERSION}."
+    if note not in canonical.setdefault("notes", []):
+        canonical["notes"].append(note)
     _write_text(ROOT / "CANONICAL_SOURCE.json", json.dumps(canonical, indent=2) + "\n")
 
 
@@ -100,6 +100,9 @@ def build() -> dict:
     _prepare_metadata(managed_files, canonical)
     paths = sorted(managed_files)
     archive_dir = ROOT / "packages" / f"v{APP_VERSION}-full"
+    packages_root = (ROOT / "packages").resolve()
+    if archive_dir.resolve().parent != packages_root:
+        raise RuntimeError("Refusing to clear a package path outside packages/")
     if archive_dir.exists():
         shutil.rmtree(archive_dir)
     archive_dir.mkdir(parents=True)
