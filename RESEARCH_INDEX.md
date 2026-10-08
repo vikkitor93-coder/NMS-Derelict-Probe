@@ -1,7 +1,8 @@
 ## Runtime-A system-scoped root seed capture — 2026-10-08
 
-User-reported observation: root seed capture remained visible after entering a new system; a later raw seed appeared as an F-pattern. The report is not part of the Oct 8 parallel-action dataset. Probe 0.3.40 clears cached root/caller state on a changed nonzero universe address and reports the descriptor's raw seed separately from UseSeedValue and effective state. The reported pattern cannot be classified as enabled or disabled without that flag. Normal NMS validation remains pending.
+The user's system-switch observation and F-pattern seed are separate from the latest parallel-action report. Pointer verification succeeded for research-uploads/20261008T191019Z-parallel-action-test/combined-results.json (SHA-256 1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471), an isolated saved-session analysis with upload skipped. It records candidate 00C9E8DF0327789E with UseSeedValue=true, still unverified. Its 14 target containers (7+7) are predicted from 146 scene instances, not observed; keep separate from the asset-derived 43-target prediction. The zero +0x10 read and separate resolver sample remain unresolved and are not dispatch targets.
 
+Probe 0.3.40 clears live root/caller buffers at a changed nonzero universe address and reports raw seed separately from UseSeedValue/effective state. Normal NMS system-switch validation remains pending.
 ## Runtime-A latest dispatch correction — 2026-10-08
 
 The Oct 8 16:37 combined report remains the sole authority for that run (8 complete, 1 upload skipped, offline saved-evidence analysis, no NMS attach): `research-uploads/20261008T163844Z-parallel-action-test/combined-results.json`, SHA-256 `7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c`. Its raw `logical_entry_rva=00634BC0` field reflects a stale source constant.
