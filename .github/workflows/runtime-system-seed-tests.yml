@@ -1,0 +1,24 @@
+name: Runtime-A system seed regression
+
+on:
+  push:
+    branches:
+      - agent/runtime-dispatch-system-reset-20261008
+  pull_request:
+    paths:
+      - mod/derelict_baseline_probe.py
+      - tests/test_system_scoped_root_capture.py
+      - .github/workflows/runtime-system-seed-tests.yml
+
+jobs:
+  system-seed-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Run focused system and seed tests
+        run: python -m unittest discover -s tests -p "test_system_scoped_root_capture.py"
+      - name: Compile changed Python files
+        run: python -m py_compile mod/derelict_baseline_probe.py tests/test_system_scoped_root_capture.py
