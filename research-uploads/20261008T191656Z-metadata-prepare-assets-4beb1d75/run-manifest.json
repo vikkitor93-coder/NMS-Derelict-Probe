@@ -1,0 +1,23 @@
+{
+  "action": "prepare-assets",
+  "evidence_namespace": "metadata",
+  "files": [
+    {
+      "name": "room-crate-index.json",
+      "sha256": "b2e1e5c7f4f5273d373fd5db44049efb3c84a7c5f6d0f22dc9f2690b93bef721",
+      "size": 806285
+    },
+    {
+      "name": "asset-calculation-latest.json",
+      "sha256": "4167500600bc616f5f6b084154cca22975ff9df5752500f84cd0c98018c34bc1",
+      "size": 36691
+    },
+    {
+      "name": "crate-target-discovery.json",
+      "sha256": "b5b97d68dda929b2ae5e7fb5c6d0e80456f754c1bf52041082aac66dea654804",
+      "size": 36555
+    }
+  ],
+  "utc": "20261008T191656Z",
+  "version": 1
+}
