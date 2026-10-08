@@ -59,17 +59,21 @@
     "derivation_status": "unknown-not-claimed"
   },
   "latest_research_review": {
-    "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_140207_20261008.md",
-    "source": "main pointer and combined report; sole action-results source",
-    "run_id": "20261008T140207Z-d8e24197",
-    "report_path": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
-    "report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+    "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_185304_20261008.md",
+    "source": "main pointer and sole authoritative combined report; report bytes fetched and SHA-256 verified",
+    "run_id": "20261008T185304Z-e95aae15",
+    "report_path": "research-uploads/20261008T185341Z-parallel-action-test/combined-results.json",
+    "report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe",
     "verified": true,
     "actions_completed": 8,
     "upload_action_skipped": 1,
     "offline": true,
-    "constructor_identity": "unresolved",
-    "seed_derivation": "unknown-not-claimed"
+    "fresh_root_session": "20261008T185119Z_0001550006607CAC",
+    "root_seed_candidate": "00C9E8DF0327789E",
+    "root_seed_derivation": "unknown-not-claimed",
+    "caller_session": "20261006T223811Z_0001BF0004E84EFD",
+    "upstream_session": "20261004T151219Z_0001BF0004E84EFD",
+    "constructor_identity": "unresolved"
   },
   "current_extension_candidate": {
     "version": "1.0.3",
