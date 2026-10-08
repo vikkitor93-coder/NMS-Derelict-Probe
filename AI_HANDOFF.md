@@ -35,17 +35,18 @@ The latest saved event already repeats the post-call zero read. The remaining Ru
 
 ### Runtime-A live capture recipe
 
-1. On the PC running NMS, open **Windows PowerShell** and paste:
+1. Open the published **Surveyor 0.3.61** with its compatible **Probe 0.3.38**. Use Surveyor's normal launch/connect path for NMS and leave the player outside a derelict freighter that can be entered. Keep Surveyor connected so it can save the matching root event. The attached 0.3.62 ZIP is a local source candidate, not a published live build.
+2. Open **Windows PowerShell** and paste:
 
    ```powershell
    Get-FileHash "G:\SteamLibrary\steamapps\common\No Man's Sky\Binaries\NMS.exe" -Algorithm SHA256
    ```
 
    Continue only when `Hash` is `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`. If NMS.exe is installed elsewhere, replace the quoted path with its actual path. If the hash differs, stop and send the displayed hash.
-2. Open **WinDbg x64**. Select **File > Attach to process**, choose the running `NMS.exe` from that install, and attach.
-3. In the bottom **Command** pane, type `lm m NMS` and press Enter. Confirm that `NMS.exe` appears in the module list.
-4. In that pane, type `bp NMS+0x02C08607` and press Enter. Then type `g` and press Enter. If WinDbg cannot resolve `NMS`, type `lm`, find the `NMS.exe` row, and set the breakpoint using `bp <start-address>+0x02C08607` with that row's start address; then type `g`.
-5. Trigger one accessible derelict root event. When WinDbg stops, do not type `g` yet. In the Command pane, enter each line below separately, pressing Enter after each:
+3. Open **WinDbg x64**. Select **File > Attach to process**, choose the running `NMS.exe` from that install, and attach.
+4. In the bottom **Command** pane, type `lm m NMS` and press Enter. Confirm that `NMS.exe` appears in the module list.
+5. In that pane, type `bp NMS+0x02C08607` and press Enter. Then type `g` and press Enter. If WinDbg cannot resolve `NMS`, type `lm`, find the `NMS.exe` row, and set the breakpoint using `bp <start-address>+0x02C08607` with that row's start address; then type `g`.
+6. Enter the derelict freighter once. When WinDbg stops, do not type `g` yet. In the Command pane, enter each line below separately, pressing Enter after each:
 
    ```text
    r rip
@@ -54,8 +55,9 @@ The latest saved event already repeats the post-call zero read. The remaining Ru
    dq @rdx+0x10 L1
    ```
 
-   `dq` prints the eight-byte slot value before `FF 52 10` executes. Optionally enter `u @rip L1` to verify the current instruction.
-6. Copy the command output and provide it with the matching Surveyor saved root-event JSON (or its event timestamp and root descriptor). Then enter `g` to resume NMS. If the breakpoint does not trigger or the read fails, provide the exact WinDbg message. No full traversal is required.
+   `dq` prints the eight-byte slot value before `FF 52 10` executes. Optionally enter `u @rip L1` to verify the current instruction. Copy this output before proceeding.
+7. Enter `g` to resume NMS and let the single root event finish saving. Close NMS. In Surveyor's **Agent Console > RUNTIME-A** panel, click **Upload captured root event**.
+8. Return the WinDbg output and the Surveyor upload result/event JSON. If the breakpoint does not trigger or the memory read fails, return the exact WinDbg message instead. No full traversal is required.
 
 ## METADATA-D combined offline action review — 2026-10-08
 
