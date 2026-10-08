@@ -166,5 +166,30 @@
     "validation": "focused unit tests and package integrity in GitHub Actions; live NMS system-switch check pending",
     "human_validation_required": true,
     "combined_report_scope": "The 2026-10-08 combined parallel-action report remains the sole authority for that run; this user-run observation is separate."
+  },
+  "latest_combined_report_review": {
+    "pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
+    "run_id": "20261008T190939Z-98545bb8",
+    "report": "research-uploads/20261008T191019Z-parallel-action-test/combined-results.json",
+    "report_sha256": "1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471",
+    "pointer_hash_verified": true,
+    "mode": "isolated_parallel_test_no_github_upload",
+    "source_session": "20261008T185119Z_Uzawan_XI.json",
+    "source_session_sha256": "ba1ebc2aa42772d03e9b4e66ed771839a7a74f5b6a4e4797f855eb7815ad5414",
+    "actions": {
+      "total": 9,
+      "completed": 8,
+      "failed": 0,
+      "unsupported": 0,
+      "upload_actions_skipped": 1
+    },
+    "seed_result": "Saved-session analysis reports root seed candidate 00C9E8DF0327789E with UseSeedValue=true; status remains candidate-captured-unverified and it is separate from the user's reported F-pattern.",
+    "container_result": "14 (7 salvage plus 7 footlockers) is predicted from 146 scene instances, not observed. It remains separate from the asset-derived 43-target prediction.",
+    "interpretation_limits": [
+      "No fresh live NMS capture.",
+      "The zero +0x10 read is not a resolved dispatch target.",
+      "The separate resolver sample is not the resolved dispatch target.",
+      "Do not infer the user's enabled seed from the F-pattern without its UseSeedValue flag."
+    ]
   }
 }
