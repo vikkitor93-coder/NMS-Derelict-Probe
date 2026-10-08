@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "version": "0.3.64",
+  "status": "published-main-source-candidate",
+  "base_version": "0.3.61",
+  "artifact": {
+    "file_name": "NMS-Derelict-Probe-v0.3.64-source.zip",
+    "includes": [
+      "complete source project",
+      "AI_HANDOFF.md",
+      "parallel research combined report",
+      "updater package chunks",
+      "tests and documentation"
+    ]
+  },
+  "changes": [
+    "Surveyor parallel research test panel with per-action progress",
+    "optional combined-report-only upload controlled by the existing automatic upload toggle",
+    "shared latest-report pointer and agent instruction to use only the combined report for the latest run",
+    "Windows extracted-assets worker fallback without symlink privilege",
+    "automatic run of all eight research actions after a newly saved session is confirmed on disk",
+    "parallel-run trigger source and saved-session identity in report, queue, and automatic-run receipt",
+    "overlay appears only while the NMS process is foreground; Agent Objectives has a persistent display toggle",
+    "validated build-request queue and main compiler staging helper with conflict and stale-base checks"
+  ],
+  "verification": {
+    "build_request_tests": "7 passed",
+    "saved_session_auto_run_tests": "covered in full project suite; 201 tests passed",
+    "overlay_settings_tests": "covered in full project suite; 201 tests passed",
+    "trigger_provenance_tests": "3 passed",
+    "parallel_research_harness_self_test": "passed",
+    "unit_tests": "201 passed",
+    "python_compile": "passed for tools, overlay, tests, and mod",
+    "windows_ui_and_focus_validation": "pending local Windows installation",
+    "updater_package": "SHA-256 and size are recorded in update-manifest.json"
+  },
+  "publication": "Source and documentation published to GitHub main. The Surveyor updater remains on the prior stable manifest pending Windows UI/focus validation and release packaging."
+}
