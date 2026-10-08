@@ -5,9 +5,9 @@
   "purpose": "Correct stale Runtime-A hook and recursive-return labels from the unique signature match in the hash-matched NMS.exe; preserve report provenance and continue offline without WinDbg.",
   "published_base": {
     "branch": "main",
-    "commit": "02c32ebe2020b6134f0dbd72efa049ebf8de5e7b",
-    "app_version": "0.3.61",
-    "compatible_probe": "0.3.38"
+    "commit": "3ec6153b6c7631a80f333c7c7f62d7e0e372192c",
+    "app_version": "0.3.65",
+    "compatible_probe": "0.3.40"
   },
   "source_candidate": {
     "version": "0.3.62",
