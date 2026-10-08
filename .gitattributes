@@ -1,0 +1,2 @@
+# Extension panel hashes cover exact bytes; keep them stable on Windows checkouts.
+agent-ui/extensions/** text eol=lf

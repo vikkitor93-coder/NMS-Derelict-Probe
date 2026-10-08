@@ -165,10 +165,10 @@
   },
   "upload_status": "combined parallel harness skipped upload; this report was later published as saved research evidence",
   "prior_attached_candidate_review": {
-    "source_zip_sha256": "43a65ad2499717d1f1f35d707f0fb5e00496f9cab591b067108ea2e0ed2ac56b",
-    "report_path": "NMS-Derelict-Probe/research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json",
-    "report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
-    "run_id": "20261008T130233Z-755d4c43",
+    "source_zip_sha256": null,
+    "report_path": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+    "report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+    "run_id": "20261008T140207Z-d8e24197",
     "note": "Preserved for provenance; superseded as the latest report by the current main pointer."
   },
   "extension_decision": "METADATA-D 1.0.1 remains unchanged; the capture provides analysis evidence, not a new extension upload-flow requirement."
