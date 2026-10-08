@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "lane_id": "runtime-dispatch",
-  "lane": "agent/runtime-dispatch-oct08-report-review",
-  "purpose": "Record the Oct 8 combined parallel-action report review, update the Runtime-A status and data-only panel, and identify the remaining live evidence needed to resolve the current dispatch target.",
+  "lane": "agent/runtime-dispatch-20261008-latest-root-correlation",
+  "purpose": "Review the latest authoritative Oct 8 combined report, correlate the saved root entry/caller evidence, correct Runtime-A status and extension guidance, and continue offline validation without WinDbg.",
   "published_base": {
     "branch": "main",
-    "commit": "dadb67b17eeefbeadc51b9a6ac21d3aaa8862a4e",
+    "commit": "02c32ebe2020b6134f0dbd72efa049ebf8de5e7b",
     "app_version": "0.3.61",
     "compatible_probe": "0.3.38"
   },
@@ -29,76 +29,81 @@
   },
   "latest_main_report": {
     "pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
-    "run_id": "20261008T140207Z-d8e24197",
-    "report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
-    "report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+    "run_id": "20261008T163756Z-cd3dbef7",
+    "report": "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json",
+    "report_sha256": "7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c",
     "pointer_hash_verified": true,
     "mode": "isolated_parallel_test_no_github_upload",
     "actions": {
+      "total": 9,
       "completed": 8,
-      "upload_skipped": 1,
-      "nms_attached_during_run": false
+      "failed": 0,
+      "unsupported": 0,
+      "upload_actions_skipped": 1
     },
-    "saved_event_timestamp_utc": "2026-10-08T14:00:37.544Z",
+    "nms_attached_during_run": false,
+    "saved_event_timestamp_utc": "2026-10-08T16:31:47.935Z",
+    "saved_event_session_id": "20261008T163203Z_0001BF0004E84EFD",
     "saved_event_call_instruction_rva": "02C08607",
+    "instruction_bytes": "FF 52 10",
     "saved_event_return_rva": "02C0860A",
-    "entry_hook_phase": "after external dispatch call",
-    "owner_plus_0x10_after_call": "0000000000000000",
-    "dispatch_target_resolved": false
+    "logical_entry_rva": "00634BC0",
+    "logical_entry_correlation": "same root descriptor and exact external caller return; strong runtime candidate",
+    "owner_plus_0x10_capture_phase": "logical-entry-after-external-call",
+    "owner_plus_0x10_value": "0000000000000000",
+    "dispatch_target_fully_resolved": false
   },
   "findings": {
-    "saved_root_event": {
-      "event_utc": "2026-10-06T22:38:07.570Z",
-      "current_call_instruction_rva": "02C08607",
-      "instruction_bytes": "FF 52 10",
-      "return_rva": "02C0860A",
-      "owner_plus_0x10_entry_value": "0000000000000000",
-      "owner_plus_0x10_root_add_value": "0000000000000000",
-      "dispatch_target_resolved": false
+    "runtime_entry_candidate": {
+      "rva": "00634BC0",
+      "basis": "Latest combined report exact root descriptor event matched the logical-entry hook; caller return 02C0860A follows call 02C08607 FF 52 10.",
+      "confidence": "strong runtime correlation; provisional pending hook timing/capture validation",
+      "conflicting_capture": "owner/RDX+0x10 is zero at logical-entry-after-external-call and root-add; zero is not treated as the target"
     },
+    "unsupported_candidate_correction": "0063A6D0 is not identified as the target by the latest combined report; the static 0063A706 call path is separate.",
     "separate_offline_resolver_sample": {
       "call_instruction_rva": "02C04977",
       "return_rva": "02C0497A",
       "candidate_function_rva": "00634BC0",
-      "slot": "+0x10",
       "vtable_matches": 0,
       "resolves_current_call_at_02C08607": false
     },
-    "asset_prediction": {
+    "latest_generation_analysis": {
+      "session_id": "20261008T163203Z_0001BF0004E84EFD",
+      "resolved_scene_instances": 0,
+      "predicted_target_containers": 0,
+      "preset": "unresolved",
+      "observed_physical_count": false
+    },
+    "prior_asset_prediction": {
+      "source_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+      "source_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
       "resolved_scene_instances": 164,
       "predicted_salvage_crates": 30,
       "predicted_footlockers": 13,
       "predicted_targets": 43,
       "observed_physical_count": false,
-      "historical_35_and_post_update_16_observations_replaced": false
+      "replaced_by_latest_zero_output": false
     }
   },
-  "review": "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008.md",
+  "review": "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008_163756.md",
   "extension": {
-    "version": "1.0.3",
-    "manifest": "agent-ui/extensions/runtime-dispatch/1.0.3/manifest.json",
-    "panel": "agent-ui/extensions/runtime-dispatch/1.0.3/panel.json",
-    "previous_version_retained": "1.0.2",
-    "code_or_probe_changed": false
+    "version": "1.0.4",
+    "manifest": "agent-ui/extensions/runtime-dispatch/1.0.4/manifest.json",
+    "panel": "agent-ui/extensions/runtime-dispatch/1.0.4/panel.json",
+    "previous_version_retained": "1.0.3",
+    "code_or_probe_changed": false,
+    "panel_sha256": "2345b91ee87c62d80b1e2f1b859240c9368c7a46f060e9bcfab708a789a309e9"
   },
   "human_validation": {
-    "required": true,
+    "required": false,
     "full_derelict_traversal_required": false,
-    "steps": [
-      "Open the published Surveyor 0.3.61 with compatible Probe 0.3.38. Use Surveyor's normal launch/connect path for NMS and leave the player outside a derelict freighter that can be entered. Keep Surveyor connected so it can save the matching root event. The attached 0.3.62 ZIP is a local source candidate, not a published live build.",
-      "On the PC running NMS, open Windows PowerShell and run: Get-FileHash \"G:\\SteamLibrary\\steamapps\\common\\No Man's Sky\\Binaries\\NMS.exe\" -Algorithm SHA256. Continue only if the SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. If NMS.exe is installed elsewhere, replace only the quoted path with that NMS.exe path; if the hash differs, stop and report the hash.",
-      "Open WinDbg x64. Choose File > Attach to process, select the running NMS.exe from the matching install, and attach. In the bottom Command pane, enter: lm m NMS. Confirm the module list contains NMS.exe.",
-      "In the WinDbg Command pane enter: bp NMS+0x02C08607 then enter: g. This sets a breakpoint on the instruction before the indirect call FF 52 10. If WinDbg says it cannot resolve NMS, run lm, find the NMS.exe row, and use its start address in bp <start-address>+0x02C08607, then enter g.",
-      "Enter the derelict freighter once. When WinDbg breaks, do not enter g yet.",
-      "In the WinDbg Command pane, enter r rip and press Enter. Then enter r rcx and press Enter. Then enter r rdx and press Enter. Finally enter dq @rdx+0x10 L1 and press Enter. The displayed QWORD is the raw eight-byte slot value before the call executes. Optionally enter u @rip L1 to confirm FF 52 10. No full traversal is required.",
-      "Copy the WinDbg output showing RIP, RCX, RDX, and the dq result before continuing.",
-      "Enter g to resume NMS and let the root event finish saving. Close NMS. In Surveyor's Agent Console > RUNTIME-A panel, click Upload captured root event.",
-      "Return the WinDbg output and the Surveyor upload result/event JSON. If the breakpoint never hits or memory cannot be read, report the exact WinDbg message instead. No full traversal is required."
-    ],
-    "success_condition": "A descriptor-correlated pre-instruction record identifies the raw slot value before FF 52 10 executes, or explicitly records why the read is unavailable; keep the existing post-call/root-add zero reads separate."
+    "reason": "The latest saved event enables offline review of the entry/caller correlation. Do not ask for or use WinDbg; first validate hook timing and capture semantics from available code."
   },
   "rollback": {
-    "extension": "Activate retained runtime-dispatch extension 1.0.2; to withdraw new installs, restore its entry in agent-ui/extensions/index.json.",
-    "repository": "Revert the publish commit on main; preserve the pre-publish backup ref recorded in WORKSPACE_STATE.json and the publish report."
+    "backup_ref": "backup/main-before-runtime-a-20261008-1655",
+    "base_commit": "02c32ebe2020b6134f0dbd72efa049ebf8de5e7b",
+    "repository_rollback": "git revert <Runtime-A publish commit> on main; the backup ref preserves the exact pre-publish main state.",
+    "extension_rollback": "Restore runtime-dispatch extension 1.0.3 in agent-ui/extensions/index.json; its manifest and panel remain in the repository."
   }
 }

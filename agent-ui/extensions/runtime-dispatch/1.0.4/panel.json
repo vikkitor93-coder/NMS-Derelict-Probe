@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "title": "RUNTIME-A — Root dispatch correlation",
+  "summary": "Run 20261008T163756Z-cd3dbef7 is hash-verified offline analysis. The 16:31 root event correlates entry 00634BC0 with return 02C0860A after 02C08607: FF 52 10; candidate pending hook-timing validation. The +0x10 zero is post-call, and 02C04977 resolver is separate. Do not use WinDbg; it crashes this setup. Latest unresolved-preset output (0 scenes/targets) is not a physical count; prior asset-derived 43 remains separate.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.analyze_generation",
+      "label": "Analyze generation + upload",
+      "description": "Run the reviewed saved-evidence analysis and upload through Surveyor if desired. This does not capture the dispatch slot before the call and does not require a debugger.",
+      "preconditions": [
+        "workflow.idle",
+        "nms.running",
+        "probe.connected"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.upload_runtime_capture",
+      "label": "Upload captured root event",
+      "description": "Upload the probe-saved root event using Surveyor after closing NMS. No debugger is needed. Keep post-call zero reads separate from the runtime-correlated entry/caller evidence.",
+      "preconditions": [
+        "workflow.idle",
+        "runtime.capture_saved"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    }
+  ]
+}

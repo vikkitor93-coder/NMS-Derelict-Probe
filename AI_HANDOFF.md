@@ -1,3 +1,11 @@
+## Runtime-A latest main report and debugger constraint — 2026-10-08
+
+The current main pointer is run 20261008T163756Z-cd3dbef7, report research-uploads/20261008T163844Z-parallel-action-test/combined-results.json, SHA-256 7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c verified. The combined report is the sole authority for this run: 8 complete, 1 upload skipped; saved-evidence offline analysis, no NMS attach or fresh event during the run.
+
+Its saved 16:31:47.935Z root event matches the logical-entry hook RVA 00634BC0 with exact caller return 02C0860A, following 02C08607: FF 52 10. This is strong runtime-correlated evidence for entry 00634BC0, pending verification of static_function_hook/get_caller timing. The same report reads owner/RDX+0x10 as zero only at logical-entry-after-external-call and root-add; that zero is not a target. The resolver sample at 02C04977 is separate. The prior 0063A6D0 dispatch claim is unsupported and withdrawn.
+
+Do not ask the user to use WinDbg: they reported it crashes NMS, while NMS runs without it. Continue offline with probe-hook timing and capture-order validation. The latest generation baseline has zero resolved scene instances/targets because the preset is unresolved; this is not a physical container count. The prior asset-derived 43-target prediction (30 crates + 13 footlockers across 164 instances) is from distinct report research-uploads/20261008T140254Z-parallel-action-test/combined-results.json, SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6; it is not an output of the latest 16:37 run and remains separate from historical 35 and post-update 16. Full review: agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008_163756.md.
+
 ## DUNGEON-C latest combined report and executable call-path review — 2026-10-08
 
 The current main pointer names run `20261008T140207Z-d8e24197` at `research-uploads/20261008T140254Z-parallel-action-test/combined-results.json`; SHA-256 `11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6` matches the pointer. This combined report is the sole authority for that run: 8 complete, 0 failed, 1 upload skipped; saved-evidence offline processing only, with no new NMS event. Do not use queue or per-action latest files as substitutes.
