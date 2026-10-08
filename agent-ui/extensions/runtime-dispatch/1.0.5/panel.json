@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "title": "RUNTIME-A — Root dispatch target",
+  "summary": "pyMHF 0.2.4 source confirms BEFORE hooks run before original and get_caller reads [RSP]. The exact root event enters 00634BC0 from 02C08607: FF 52 10 (return 02C0860A), resolving this event's dispatch address. The +0x10 read is still zero at the before-hook, an unresolved data/instrumentation inconsistency, not the target. 02C04977 resolver is separate. Do not use WinDbg. Latest zero scenes/targets is unresolved analysis, not a physical count; prior asset-derived 43 remains separate.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.analyze_generation",
+      "label": "Analyze generation + upload",
+      "description": "Run the reviewed saved-evidence analysis and upload through Surveyor if desired. This does not capture the dispatch slot before the call and does not require a debugger.",
+      "preconditions": [
+        "workflow.idle",
+        "nms.running",
+        "probe.connected"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.upload_runtime_capture",
+      "label": "Upload captured root event",
+      "description": "Upload the probe-saved root event using Surveyor after closing NMS. No debugger is needed. Keep the zero slot read separate from the resolved entry/caller target correlation.",
+      "preconditions": [
+        "workflow.idle",
+        "runtime.capture_saved"
+      ],
+      "evidence_namespace": "runtime-dispatch",
+      "parameters": {}
+    }
+  ]
+}

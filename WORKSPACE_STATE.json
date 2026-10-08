@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T16:55:19Z",
+  "updated_utc": "2026-10-08T17:00:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.61",
@@ -20,13 +20,13 @@
   "lanes": {
     "runtime-dispatch": {
       "branch": "agent/runtime-dispatch",
-      "status": "Latest combined report correlates logical entry 00634BC0 with exact root call return 02C0860A; post-call zero-slot discrepancy is under offline review.",
+      "status": "Exact 16:31 root event resolves dispatch address 00634BC0 through verified BEFORE-hook/caller-return correlation; zero slot discrepancy remains.",
       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
       "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
       "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008_163756.md",
-      "extension_version": "1.0.4",
+      "extension_version": "1.0.5",
       "human_validation_required": false,
-      "next_action": "Inspect pyMHF static_function_hook/get_caller timing and Runtime-A capture order; do not use WinDbg. Prototype read-only callsite capture only if offline semantics do not reconcile the zero slot.",
+      "next_action": "Offline: explain the BEFORE-hook +0x10 zero by checking caller argument flow, pyMHF trampoline, and function semantics. No WinDbg.",
       "latest_report": "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json",
       "latest_report_sha256": "7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c"
     },

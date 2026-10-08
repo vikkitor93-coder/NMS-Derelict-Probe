@@ -7,10 +7,16 @@ GitHub main pointer research/LATEST_PARALLEL_ACTION_TEST.json names run 20261008
 ## Runtime-dispatch evidence
 
 - research.extract_exact_root_caller ties the saved dungeon-root descriptor 000002752ED7F928, seed candidate 5B4AE67D9C2A8F61, and event time 2026-10-08T16:31:47.935Z to logical entry RVA 00634BC0. The exact external caller return RVA is 02C0860A; the caller bytes decode 02C08607: FF 52 10, returning immediately after the indirect call.
-- The probe source identifies 00634BC0 as the current-build logical-entry hook location. Matching the same descriptor at that hook with caller return 02C0860A is strong runtime-correlated evidence that 00634BC0 is the entry reached by this call. Keep it as a high-confidence candidate pending validation of hook timing and register/slot capture semantics.
-- The reported owner/RDX+0x10 sample is explicitly logical-entry-after-external-call; its raw value is 0000000000000000, and root-add also reads zero. This zero is not a dispatch target. Its apparent conflict with the observed logical-entry/caller correlation remains open.
+- The probe source identifies 00634BC0 as the current-build logical-entry hook location. Matching the same descriptor at that hook with caller return 02C0860A resolves the destination entry for this event to 00634BC0 by runtime control-flow correlation. This conclusion uses the observed callee entry and caller return, not the slot value or the separate resolver sample.
+- The reported owner/RDX+0x10 sample is explicitly logical-entry-after-external-call; its raw value is 0000000000000000, and root-add also reads zero. This zero is not a dispatch target. The probe registers the entry callback as a BEFORE detour, so the zero remains an instrumentation/data inconsistency even though the separate control-flow correlation resolves the destination address.
 - The separate resolver sample is 02C04977: FF 52 10 / return 02C0497A; its zero-match search against 00634BC0 is a different callsite and does not confirm or refute the 02C08607 runtime correlation.
 - The caller 0063AC20 -> 0183E770 is a separate Engine caller/seed-lineage result, not the indirect dispatch destination. The unrelated static helper path at 0063A706 is also not evidence for this runtime target. The earlier 0063A6D0 target claim is unsupported.
+
+## Hook timing and target resolution
+
+The checked-in probe source, mod/derelict_baseline_probe.py (SHA-256 ACC8942B792A3EB0C9FFC4A688676E42B24587703655CE6675F11082CFD47750), pins CURRENT_BUILD_LOGICAL_ENTRY_RVA to 00634BC0 and registers _trace_resource_descriptor_walk_entry with @_resource_descriptor_walk_entry.before and @get_caller. In installed pyMHF 0.2.4, _compound_detour executes BEFORE callbacks before self.original. Its caller-address trampoline loads the qword at [RSP] (the function's return address) and caller_address returns that saved address relative to the module base. Source hashes: pymhf.core.hooking.py 5008B2D3106C598DFCA7AB7A0641F7A879DDCE93E0EF8836950A16983EA2A9AA; pymhf.utils.iced.py 8EDDAF92E8B718490D0CB48AF6AC9FFF2B45EACA7051011D442663FC5711E254.
+
+Therefore the exact root descriptor match at the 00634BC0 BEFORE hook, paired with return 02C0860A immediately after 02C08607: FF 52 10, resolves the dispatch destination for this event to 00634BC0. The +0x10 value remains contradictory and unresolved; it is not used as the target evidence. The function's semantic identity is not established by this address correlation.
 
 ## Counts and limits
 
@@ -18,6 +24,6 @@ The latest report's generation-baseline artifact is session 20261008T163203Z_000
 
 ## Next work
 
-Do not use WinDbg for this capture: the user reported that attaching the debugger crashes NMS, while NMS runs normally without it. Continue offline by verifying the pyMHF static_function_hook/get_caller timing and the Runtime-A capture wrapper against the installed source. If that cannot reconcile the entry/caller correlation with the post-call zero, design and test a read-only callsite capture before requesting any live NMS action. No full traversal is required.
+Do not use WinDbg for this capture: the user reported that attaching the debugger crashes NMS, while NMS runs normally without it. Continue offline by checking why the BEFORE-hook owner+0x10 read is zero despite the confirmed entry/caller dispatch correlation, and investigate the argument mapping or concurrent mutation. If needed, design and test a read-only callsite capture. Do not request a live NMS action unless repository and saved evidence are exhausted. No full traversal is required.
 
 Evidence for the report's returned artifacts and provenance is preserved in the combined JSON above; no queue or separate per-action latest file was used.
