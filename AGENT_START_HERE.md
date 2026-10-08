@@ -6,7 +6,19 @@ Read this file first when joining the project from normal ChatGPT, Work, Codex, 
 
 You are one autonomous research/coding agent in a parallel reverse-engineering project. You are **not** the only AI working on the repository. Your job is to advance one non-overlapping research lane toward the shared goal, publish reproducible evidence, and leave enough state in GitHub that another AI can continue without this chat history.
 
-Do not start by rereading the whole repository or duplicate another claimed lane. Keep unfinished experiments on your lane branch. Once a change is complete, tested, documented, and recoverable, you are authorized to publish it directly to `main`; do not wait for a separate integration-agent merge or user approval. Follow `AGENT_WORKFLOW.md` for the backup, validation, and rollback steps.
+Do not start by rereading the whole repository. Do not duplicate another claimed lane. Keep unfinished experiments on your lane branch. When lane research or a build request is complete, tested, and documented, publish that lane output directly to `main` under the policy below; shared Surveyor source/updater releases are published only by the primary integration assistant.
+
+
+## Direct publishing policy
+
+- `main` is the stable shared branch. Completed lane research/status/evidence and complete build-request bundles may be published there directly by their author.
+- Before publishing, create a backup branch from current `main` or record the exact base commit and a revert path.
+- Keep incomplete or experimental work on the assigned lane branch. Publish lane research with tests, evidence, and lane manifest/status. Submit shared Surveyor source/updater changes as a build request; only the primary integration assistant publishes the integrated app build. Include extension/index hashes when a separately published JSON lane extension changes.
+- Do not wait for an integration-agent merge. A PR is a fallback only when direct push is unavailable or rejected.
+
+## Requesting a shared Surveyor build change
+
+Do not publish a competing full Surveyor build. Put complete requested files and a `request.json` under `build-requests/<lane-id>/<request-id>/`, then publish that request bundle to `main`. Follow `build-requests/README.md` for required hashes, base commit, tests, status, and rollback fields. Leave it as `draft` until complete; use `ready` when it is ready for the next main compile. The primary integration assistant is the main compiler: it stages valid ready requests, resolves conflicts, runs integration tests, and publishes a single combined build. A queued request is not shipped until it appears in a compiled release/handoff.
 
 ## Shared goal
 
@@ -22,15 +34,16 @@ All lanes contribute evidence toward connecting that chain.
 
 ## Startup order
 
-1. Read `WORKSPACE_STATE.json` for the **current** lane claims and next actions.
-2. Read `RESEARCH_INDEX.md` for the short truth table: confirmed facts, public-structure facts, hypotheses, and disproven ideas.
-3. Read `AI_HANDOFF.md` for architecture, current technical context, user workflow, and important constraints.
-4. Read `AGENT_WORKFLOW.md` for branch/Surveyor/evidence/PR rules.
-5. Read only your assigned lane manifest and relevant changed files/evidence.
+1. Read `WORKSPACE_STATE.json` for the **current** lane claims, next actions, publishing policy, and latest combined research pointer.
+2. Open `research/LATEST_PARALLEL_ACTION_TEST.json` and read the report it names. For the latest parallel-action run, this combined report is the sole source for action results. Do not use its queue or separate per-action latest files as competing results. Preserve the report's provenance and interpretation notes.
+3. Read `RESEARCH_INDEX.md` for the truth table and `AI_HANDOFF.md` for architecture/current technical context.
+4. Read `AGENT_WORKFLOW.md` for publishing and Surveyor/evidence rules.
+5. Read `build-requests/README.md` before asking for a shared Surveyor build change.
+6. Read only your assigned lane manifest and files/evidence needed for your objective. Do not replace a combined-report finding with an unreviewed historical file.
 
 For any Surveyor panel/action request, also follow `AGENT_UI_EXTENSION_GUIDE.md`. All four lanes share its single versioned, data-only extension contract; do not add lane-specific Python UI modules or shell-command strings.
 
-Historical sections and old next-actions are never more authoritative than `WORKSPACE_STATE.json`.
+The latest combined report is authoritative only for the parallel run it records; its source sessions and limitations remain explicit. Historical evidence stays historical and must not be relabeled as current. For lane ownership and next actions, `WORKSPACE_STATE.json` remains authoritative.
 
 ## Lane rules
 
@@ -40,17 +53,21 @@ Current standard lanes are:
 - `agent/seed-lineage` — system/POI/root seed derivation and RNG research.
 - `agent/dungeon-decompile` — current/historical executable mapping and dungeon-generator discovery.
 - `agent/metadata` — abandoned-freighter DungeonOptions, weights, presets, schemas, and static assets.
-- `main` — stable shared branch. Agents may publish completed, validated lane changes directly to `main` under `AGENT_WORKFLOW.md`; unfinished experiments remain on lane branches.
+- `main` — integration only; combines proven results.
 
 If your lane is marked `claimed`, do not take it unless the user explicitly assigned you to that exact lane. For a new independent task, branch from current `main` as `agent/<short-lane-id>`.
 
 ## How to work
 
-**Keep working until human intervention is genuinely required.** When you identify a next step, first decide whether you can do it yourself with repository files, code, available tools, or existing evidence. If you can, do it now; do not stop at reporting it as the next step. If an attempt fails, inspect the first useful error, diagnose the cause, and try a reasonable alternative. When the current objective is complete, choose the next highest-value task within your lane and continue.
+Continue autonomously until one of these occurs:
 
-Pause for the user only when the remaining step truly requires their PC, a live NMS session, local files or evidence unavailable to you, or information only they can provide. Before asking, complete all independent work and reduce the human step to one precise, numbered recipe with the exact controls and success condition. A dependency on another lane is not a reason to idle: continue independent analysis, improve reproducibility, or prepare a concrete handoff while waiting.
+- the objective is completed with reproducible evidence;
+- the next step genuinely requires the user's PC, NMS runtime, local NMS.exe, or another human-only action;
+- progress is blocked by a dependency owned by another lane.
 
-Do not stop merely because you found an intermediate result, reported progress, or named a possible next step. If a useful step is safely available within your lane, execute it.
+Do not stop just because you found one intermediate result. If a useful next step is safely available inside your lane, continue.
+
+Keep the Surveyor Agent Console informed by committing `agent-patches/<lane>/STATUS.json` to your lane branch at start, after meaningful progress/prerequisite/evidence/extension changes, before any user request, and when the request completes. Update its timestamp and include progress, blockers, next action, and the published extension version when relevant. The console polls every 20 seconds; uncommitted chat text is not visible to it.
 
 Keep measured facts, public reverse-engineered facts, inference, and hypotheses explicitly separate. Never promote a plausible interpretation to a confirmed fact.
 
@@ -67,17 +84,17 @@ Preserve stable launcher/controller/probe behavior and backwards-compatible prot
 Publish enough information for integration to reproduce your work:
 
 - objective and result;
-- exact branch/commit (publish completed changes directly to `main`; a PR is optional, not a required approval hop);
+- exact branch/commit;
 - changed files;
 - tests run and exact result;
 - evidence files/schema;
 - confirmed facts vs hypotheses;
 - human intervention required or not;
-- smallest published change set and how it was made recoverable;
+- smallest proposed integration subset;
 - rollback/migration notes when relevant;
 - lane manifest under `agent-patches/<lane>/` when code/tooling was produced.
 
-A complete Surveyor build belongs in ChatGPT Library; GitHub stores source, manifests, reproducible patches, evidence, branches, optional PRs, and state summaries.
+A complete experimental Surveyor build belongs in ChatGPT Library; GitHub stores manifests, reproducible patches, evidence, branches, PRs, and state summaries.
 
 ## Human intervention format
 
