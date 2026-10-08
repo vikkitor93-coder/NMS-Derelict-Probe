@@ -82,6 +82,7 @@ def _refresh_shared_status() -> None:
     state["updated_utc"] = now
     integration = state.setdefault("integration", {})
     integration.update({
+        "canonical_version": APP_VERSION,
         "candidate_version": APP_VERSION,
         "candidate_branch": "main",
         "candidate_base": "main@3ec6153b6c7631a80f333c7c7f62d7e0e372192c",
@@ -131,6 +132,12 @@ def _refresh_shared_status() -> None:
     manifest_path = ROOT / "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json"
     if manifest_path.exists():
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest.setdefault("published_base", {}).update({
+            "branch": "main",
+            "commit": "3ec6153b6c7631a80f333c7c7f62d7e0e372192c",
+            "app_version": APP_VERSION,
+            "compatible_probe": PROBE_VERSION,
+        })
         manifest["system_scope_seed_reset"] = {
             "probe_version": PROBE_VERSION,
             "implementation": "universe-address transition closes the active session and clears live root seed, caller, and pre-session capture buffers",
