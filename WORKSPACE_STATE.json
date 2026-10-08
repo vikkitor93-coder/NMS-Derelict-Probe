@@ -1,9 +1,9 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T19:17:00Z",
+  "updated_utc": "2026-10-08T19:18:10Z",
   "integration": {
     "branch": "main",
-    "canonical_version": "0.3.61",
+    "canonical_version": "0.3.65",
     "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
     "candidate_version": "0.3.65",

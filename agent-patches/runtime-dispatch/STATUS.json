@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-08T19:17:00Z",
+  "updated_utc": "2026-10-08T19:18:10Z",
   "state": "waiting_on_user",
   "status": "Probe 0.3.40 clears root-seed state at a system boundary and separates raw seed from UseSeedValue/effective state; one normal runtime check remains.",
   "summary": "Implementation and focused regression tests are complete. No WinDbg was used. The reported F-pattern remains unclassified without its captured UseSeedValue field.",
