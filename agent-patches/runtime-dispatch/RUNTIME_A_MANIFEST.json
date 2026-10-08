@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "lane_id": "runtime-dispatch",
+  "lane": "agent/runtime-dispatch-oct08-report-review",
+  "purpose": "Record the Oct 8 combined parallel-action report review, update the Runtime-A status and data-only panel, and identify the remaining live evidence needed to resolve the current dispatch target.",
+  "published_base": {
+    "branch": "main",
+    "commit": "dadb67b17eeefbeadc51b9a6ac21d3aaa8862a4e",
+    "app_version": "0.3.61",
+    "compatible_probe": "0.3.38"
+  },
+  "source_candidate": {
+    "version": "0.3.62",
+    "zip_sha256": "43a65ad2499717d1f1f35d707f0fb5e00496f9cab591b067108ea2e0ed2ac56b",
+    "published_to_main": false,
+    "pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
+    "report": "research/parallel-action-tests/20261008T130233Z-755d4c43/combined-results.json",
+    "report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
+    "pointer_hash_verified": true,
+    "authoritative_scope": "sole source for results of the 2026-10-08 parallel-action run",
+    "run_mode": "offline reanalysis of the start-of-run saved-evidence snapshot; no NMS attachment or new live capture",
+    "actions": {
+      "total": 9,
+      "completed": 8,
+      "failed": 0,
+      "unsupported": 0,
+      "upload_skipped": 1
+    }
+  },
+  "latest_main_report": {
+    "pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
+    "run_id": "20261008T140207Z-d8e24197",
+    "report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+    "report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+    "pointer_hash_verified": true,
+    "mode": "isolated_parallel_test_no_github_upload",
+    "actions": {
+      "completed": 8,
+      "upload_skipped": 1,
+      "nms_attached_during_run": false
+    },
+    "saved_event_timestamp_utc": "2026-10-08T14:00:37.544Z",
+    "saved_event_call_instruction_rva": "02C08607",
+    "saved_event_return_rva": "02C0860A",
+    "entry_hook_phase": "after external dispatch call",
+    "owner_plus_0x10_after_call": "0000000000000000",
+    "dispatch_target_resolved": false
+  },
+  "findings": {
+    "saved_root_event": {
+      "event_utc": "2026-10-06T22:38:07.570Z",
+      "current_call_instruction_rva": "02C08607",
+      "instruction_bytes": "FF 52 10",
+      "return_rva": "02C0860A",
+      "owner_plus_0x10_entry_value": "0000000000000000",
+      "owner_plus_0x10_root_add_value": "0000000000000000",
+      "dispatch_target_resolved": false
+    },
+    "separate_offline_resolver_sample": {
+      "call_instruction_rva": "02C04977",
+      "return_rva": "02C0497A",
+      "candidate_function_rva": "00634BC0",
+      "slot": "+0x10",
+      "vtable_matches": 0,
+      "resolves_current_call_at_02C08607": false
+    },
+    "asset_prediction": {
+      "resolved_scene_instances": 164,
+      "predicted_salvage_crates": 30,
+      "predicted_footlockers": 13,
+      "predicted_targets": 43,
+      "observed_physical_count": false,
+      "historical_35_and_post_update_16_observations_replaced": false
+    }
+  },
+  "review": "agent-patches/runtime-dispatch/RUNTIME_A_PARALLEL_REVIEW_20261008.md",
+  "extension": {
+    "version": "1.0.3",
+    "manifest": "agent-ui/extensions/runtime-dispatch/1.0.3/manifest.json",
+    "panel": "agent-ui/extensions/runtime-dispatch/1.0.3/panel.json",
+    "previous_version_retained": "1.0.2",
+    "code_or_probe_changed": false
+  },
+  "human_validation": {
+    "required": true,
+    "full_derelict_traversal_required": false,
+    "steps": [
+      "Verify the live NMS.exe SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499.",
+      "In a debugger attached to NMS, break immediately before NMS.exe+02C08607 (FF 52 10) on an accessible derelict root event.",
+      "Record RDX and the eight-byte value at [RDX+0x10] before the instruction executes, plus the callsite/return and root descriptor correlation; no full traversal is needed."
+    ],
+    "success_condition": "A descriptor-correlated pre-instruction record identifies the raw slot value before FF 52 10 executes, or explicitly records why the read is unavailable; keep the existing post-call/root-add zero reads separate."
+  },
+  "rollback": {
+    "extension": "Activate retained runtime-dispatch extension 1.0.2; to withdraw new installs, restore its entry in agent-ui/extensions/index.json.",
+    "repository": "Revert the publish commit on main; preserve the pre-publish backup ref recorded in WORKSPACE_STATE.json and the publish report."
+  }
+}
