@@ -1,3 +1,7 @@
+## Surveyor saved-session queue — 2026-10-08
+
+The latest verified 19:10 combined report names one input session only; it does not prove all three queued sessions ran. Surveyor 0.3.66 now queues each saved file separately, persists the FIFO across restarts, pins each worker to its triggering session SHA-256, and requires a matching trigger hash before recording completion. Local regression suite and package integrity checks passed; Windows end-to-end validation is pending.
+
 ## Runtime-A system-scoped root seed capture — 2026-10-08
 
 The user's system-switch observation and F-pattern seed are separate from the latest parallel-action report. Pointer verification succeeded for research-uploads/20261008T191019Z-parallel-action-test/combined-results.json (SHA-256 1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471), an isolated saved-session analysis with upload skipped. It records candidate 00C9E8DF0327789E with UseSeedValue=true, still unverified. Its 14 target containers (7+7) are predicted from 146 scene instances, not observed; keep separate from the asset-derived 43-target prediction. The zero +0x10 read and separate resolver sample remain unresolved and are not dispatch targets.
