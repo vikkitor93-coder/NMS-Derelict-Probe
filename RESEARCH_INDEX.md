@@ -1,3 +1,9 @@
+## METADATA-D room-group reconciliation — 2026-10-08
+
+Current pointer/report SHA-256 `b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41` verifies for run `20261008T195817Z-1b73e442`: offline manual-button analysis of saved session `20261008T185119Z_0001550006607CAC`, not fresh live capture. MEDI_FLOATERS has 10 parent-key groups vs static `Rooms=7`; 14 targets are predicted, not observed. Historical CARGO run `20261008T140207Z-d8e24197` has 8 CARG + 2 BARRACKS + 1 END parent groups (11 total) and 43 asset-predicted targets (30 + 13), not an observed count.
+
+CARGO_FLOATERS static rules: `Rooms=7`; five main IDs and two branch IDs; exactly one each `R_FLO_BARR`, `R_S_FLO_BARR`, and `R_END`, with END minimum index 6. Counts/family labels do not map parent-key groups to IDs. DUNGEON-C's separately recorded 11-room traverse supplies no per-room crosswalk. The current 7-versus-11/10 semantics remain unresolved. Details: `agent-patches/metadata/ROOM_MODEL_RECONCILIATION_20261008.json`.
+
 ## Startup recovery of unprocessed saved sessions — 2026-10-08
 
 Surveyor 0.3.67 scans saved session JSON files at startup, queues those without a matching persisted queue record or exact-hash automatic report, and skips files already represented by a prior report. This backfills sessions queued by pre-0.3.66 builds. Each recovered file still gets a separate FIFO run/report.
