@@ -85,9 +85,12 @@
     "required": true,
     "full_derelict_traversal_required": false,
     "steps": [
-      "Verify the live NMS.exe SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499.",
-      "In a debugger attached to NMS, break immediately before NMS.exe+02C08607 (FF 52 10) on an accessible derelict root event.",
-      "Record RDX and the eight-byte value at [RDX+0x10] before the instruction executes, plus the callsite/return and root descriptor correlation; no full traversal is needed."
+      "On the PC running NMS, open Windows PowerShell and run: Get-FileHash 'G:\\SteamLibrary\\steamapps\\common\\No Man\u0027s Sky\\Binaries\\NMS.exe' -Algorithm SHA256. Continue only if the SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. If NMS.exe is installed elsewhere, replace only the quoted path with that NMS.exe path; if the hash differs, stop and report the hash.",
+      "Open WinDbg x64. Choose File > Attach to process, select the running NMS.exe from the matching install, and attach. In the bottom Command pane, enter: lm m NMS. Confirm the module list contains NMS.exe.",
+      "In the WinDbg Command pane enter: bp NMS+0x02C08607 then enter: g. This sets a breakpoint on the instruction before the indirect call FF 52 10. If WinDbg says it cannot resolve NMS, run lm, find the NMS.exe row, and use its start address in bp <start-address>+0x02C08607, then enter g.",
+      "Trigger one accessible derelict root event. When WinDbg breaks, do not enter g yet.",
+      "In the WinDbg Command pane, enter r rip and press Enter. Then enter r rcx and press Enter. Then enter r rdx and press Enter. Finally enter dq @rdx+0x10 L1 and press Enter. The displayed QWORD is the raw eight-byte slot value before the call executes. Optionally enter u @rip L1 to confirm FF 52 10. No full traversal is required.",
+      "Copy the WinDbg output showing RIP, RCX, RDX, and the dq result. Include the matching Surveyor saved root-event JSON (or its event timestamp/root descriptor) so the live stop is correlated to a root event. Then enter g to resume NMS. Return the output and event evidence; if the breakpoint never hits or memory cannot be read, report the exact WinDbg message instead."
     ],
     "success_condition": "A descriptor-correlated pre-instruction record identifies the raw slot value before FF 52 10 executes, or explicitly records why the read is unavailable; keep the existing post-call/root-add zero reads separate."
   },

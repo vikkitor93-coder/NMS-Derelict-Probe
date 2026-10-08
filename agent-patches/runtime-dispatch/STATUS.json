@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-08T14:05:00Z",
+  "updated_utc": "2026-10-08T14:28:18Z",
   "state": "blocked",
   "status": "The latest main report is verified and reviewed. Its offline run contains a saved 14:00:37Z root event, but owner+0x10 was read after the call and remains zero; a pre-instruction capture is still required.",
   "summary": "Latest main report 20261008T140207Z-d8e24197 SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6 matches the pointer. Its offline run did not attach to NMS; the saved event timestamp is 2026-10-08T14:00:37.544Z. Call 02C08607 (FF 52 10) returns at 02C0860A; the after-call owner+0x10 read is zero. Separate resolver 02C04977 / 02C0497A found zero matches for 00634BC0. Asset analysis predicts 43 targets (30 crates + 13 lockers) across 164 instances, not an observed count; historical 35 and post-update 16 remain distinct.",
@@ -9,16 +9,18 @@
   "blockers": [
     "The latest saved event captures the hook after dispatch. A pre-instruction observation at NMS.exe+02C08607 is required to identify the current slot value."
   ],
-  "next_action": "With NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, break before NMS.exe+02C08607 (FF 52 10) on one accessible root event and record RDX plus [RDX+0x10] before execution; no full traversal required.",
+  "next_action": "Follow the numbered Runtime-A live capture recipe in AI_HANDOFF.md and RUNTIME_A_MANIFEST.json: verify the NMS.exe hash, attach WinDbg x64, break at NMS+0x02C08607, and capture RDX/[RDX+0x10] on one root event. Return the debugger output with the matching Surveyor root event; no full traversal required.",
   "human_intervention_required": true,
   "human_action": {
     "required": true,
     "reason": "The latest saved event has only a post-call slot read; a debugger or equivalent pre-instruction capture is needed for the dispatch slot value.",
     "after_build_steps": [
-      "Verify NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499.",
-      "Attach a debugger and break immediately before NMS.exe+02C08607 (FF 52 10) when an accessible derelict root is dispatched.",
-      "Record RDX, the eight-byte value at [RDX+0x10] before execution, the caller/return, and the matching root descriptor; no full traversal is required.",
-      "Return the debugger capture or state explicitly that the breakpoint/capture is unavailable."
+      "On the PC running NMS, open Windows PowerShell and run: Get-FileHash 'G:\\SteamLibrary\\steamapps\\common\\No Man\u0027s Sky\\Binaries\\NMS.exe' -Algorithm SHA256. Continue only if the SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. If NMS.exe is installed elsewhere, replace only the quoted path with that NMS.exe path; if the hash differs, stop and report the hash.",
+      "Open WinDbg x64. Choose File > Attach to process, select the running NMS.exe from the matching install, and attach. In the bottom Command pane, enter: lm m NMS. Confirm the module list contains NMS.exe.",
+      "In the WinDbg Command pane enter: bp NMS+0x02C08607 then enter: g. This sets a breakpoint on the instruction before the indirect call FF 52 10. If WinDbg says it cannot resolve NMS, run lm, find the NMS.exe row, and use its start address in bp <start-address>+0x02C08607, then enter g.",
+      "Trigger one accessible derelict root event. When WinDbg breaks, do not enter g yet.",
+      "In the WinDbg Command pane, enter r rip and press Enter. Then enter r rcx and press Enter. Then enter r rdx and press Enter. Finally enter dq @rdx+0x10 L1 and press Enter. The displayed QWORD is the raw eight-byte slot value before the call executes. Optionally enter u @rip L1 to confirm FF 52 10. No full traversal is required.",
+      "Copy the WinDbg output showing RIP, RCX, RDX, and the dq result. Include the matching Surveyor saved root-event JSON (or its event timestamp/root descriptor) so the live stop is correlated to a root event. Then enter g to resume NMS. Return the output and event evidence; if the breakpoint never hits or memory cannot be read, report the exact WinDbg message instead."
     ],
     "success_condition": "A descriptor-correlated pre-instruction record shows the raw slot before FF 52 10 executes, or records why that read is unavailable; keep post-call/root-add reads separate."
   },
