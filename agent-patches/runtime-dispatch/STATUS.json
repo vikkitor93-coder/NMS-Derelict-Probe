@@ -1,20 +1,19 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-08T18:40:00Z",
+  "updated_utc": "2026-10-08T19:00:00Z",
   "state": "in_progress",
-  "status": "Published to main. Matching NMS.exe signature resolves the matched FF 52 10 event destination to 0063A6D0; owner+0x10 zero remains unexplained and is not target evidence.",
-  "summary": "Probe source labels corrected to 0063A6D0/0063A773 and Runtime-A extension 1.0.6 published. The latest combined report remains offline saved-evidence analysis; no live NMS capture or semantic function identity is claimed.",
-  "progress": "Published in main merge commit 373a5e8247823ab5c1a5955d31c70bc25bb610e9. Five focused evidence/address assertions passed equivalent checks; Python unittest not run because the local command runner is unavailable.",
-  "blockers": [],
-  "next_action": "Continue offline semantic analysis of 0063A6D0 and the owner+0x10 zero discrepancy. Do not use WinDbg.",
+  "status": "Implemented a system-scope reset for live root-seed state and explicit raw/effective seed fields. Awaiting regression checks and package publication.",
+  "summary": "The user observed root-seed state persisting after entering a new system and raw seed values that can be inactive. Probe 0.3.40 tracks the normalized universe address, ends the old session and clears in-memory root/POI/trace buffers at known system changes, rejects prior-system seed candidates, and labels raw seed state separately from whether UseSeedValue is enabled.",
+  "progress": "Branch agent/runtime-dispatch-system-reset-20261008 contains the probe changes and focused tests. It is not yet published; current in-app package remains v0.3.61.",
+  "blockers": [
+    "Local Python runner is unavailable; the new unittest has not run."
+  ],
+  "next_action": "Validate the five focused tests and update/package the current source so Surveyor can deliver Probe 0.3.40; then publish the completed change and request a normal no-debugger system-switch check.",
   "human_intervention_required": false,
   "evidence_to_return": [
-    "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
-    "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json",
-    "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
-    "research-uploads/20261008T163844Z-parallel-action-test/combined-results.json (SHA-256 7eb7c6a62ee5a909d0e0f12df0890ac3653a73fa66ae11f51e0c651dc571994c)",
-    "User-run signature scan: verified matching NMS.exe, one hook-signature match at RVA 0063A6D0 / file offset 0x639AD0"
+    "User observation from 2026-10-08: prior root seed remained visible after entering a new system; second system showed raw seed-like value with F nibble pattern.",
+    "No new run manifest or captured session was attached in this turn; exact seed bytes and UseSeedValue flag remain unverified."
   ],
   "extension_version": "1.0.6",
   "full_derelict_required": false
