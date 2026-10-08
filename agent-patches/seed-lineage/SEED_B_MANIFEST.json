@@ -57,5 +57,13 @@
     "boundary_failure_reproduced": false,
     "human_intervention_required": false,
     "derivation_status": "unknown-not-claimed"
+  },
+  "latest_research_review": {
+    "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md",
+    "source": "user-attached 0.3.62 local candidate ZIP combined report",
+    "report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
+    "published_report": false,
+    "live_validation": false,
+    "derivation_status": "unknown-not-claimed"
   }
 }
