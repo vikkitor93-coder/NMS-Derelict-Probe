@@ -1,0 +1,2585 @@
+{
+  "version": 1,
+  "analysis_tool_version": "0.3.24",
+  "session_id": "20261009T230838Z_0000790006606CAB",
+  "probe_version": "0.3.40",
+  "universe_address_hex": "0000790006606CAB",
+  "reality_index": 0,
+  "galactic_address": {
+    "planet_index": 0,
+    "solar_system_index": 121,
+    "voxel_x": -853,
+    "voxel_y": 6,
+    "voxel_z": 1542
+  },
+  "dungeon_scene_instances": 134,
+  "logical_generated_chunks": 10,
+  "predicted_salvage_crates": 25,
+  "predicted_crew_footlockers": 7,
+  "predicted_target_containers": 32,
+  "preset_inference": {
+    "preset": "CARGO_FLOATERS",
+    "confidence": "high",
+    "candidates": [
+      "CARGO_FLOATERS"
+    ],
+    "family": "CARGO",
+    "hazard": "FLOATERS",
+    "family_scene_counts": {
+      "CARG": 26,
+      "MEDI": 0
+    },
+    "all_scene_family_counts": {
+      "BARRACKS": 13,
+      "CARG": 26,
+      "COMM": 6,
+      "EMPTY": 75,
+      "END": 5,
+      "SPAWNERS": 9
+    },
+    "hazard_evidence": [
+      "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+      "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FLOATER.SCENE.MBIN"
+    ]
+  },
+  "selected_preset_config": {
+    "name": "CARGO_FLOATERS",
+    "size": {
+      "x": 13,
+      "y": 4,
+      "z": 13
+    },
+    "entrance": {
+      "x": 6,
+      "y": 3,
+      "z": 0
+    },
+    "rooms": 7,
+    "probability": {
+      "x": 1.0,
+      "y": 0.5,
+      "z": 1.0,
+      "straight": null,
+      "straight_multiplier": 1.25
+    },
+    "main_room_types": [
+      {
+        "room_id": "R_END",
+        "branch_probability": 0.0,
+        "raw_type": "GcDungeonRoomParams",
+        "raw": {
+          "name": "MainRoomTypes",
+          "value": "GcDungeonRoomParams",
+          "children": [
+            {
+              "name": "RoomId",
+              "value": "R_END",
+              "children": []
+            },
+            {
+              "name": "BranchProbability",
+              "value": 0.0,
+              "children": []
+            }
+          ]
+        }
+      },
+      {
+        "room_id": "R_FLO_BARR",
+        "branch_probability": 0.75,
+        "raw_type": "GcDungeonRoomParams",
+        "raw": {
+          "name": "MainRoomTypes",
+          "value": "GcDungeonRoomParams",
+          "children": [
+            {
+              "name": "RoomId",
+              "value": "R_FLO_BARR",
+              "children": []
+            },
+            {
+              "name": "BranchProbability",
+              "value": 0.75,
+              "children": []
+            }
+          ]
+        }
+      },
+      {
+        "room_id": "R_S_FLO_BARR",
+        "branch_probability": 0.33,
+        "raw_type": "GcDungeonRoomParams",
+        "raw": {
+          "name": "MainRoomTypes",
+          "value": "GcDungeonRoomParams",
+          "children": [
+            {
+              "name": "RoomId",
+              "value": "R_S_FLO_BARR",
+              "children": []
+            },
+            {
+              "name": "BranchProbability",
+              "value": 0.33,
+              "children": []
+            }
+          ]
+        }
+      },
+      {
+        "room_id": "R_FLO_CARG",
+        "branch_probability": 0.8,
+        "raw_type": "GcDungeonRoomParams",
+        "raw": {
+          "name": "MainRoomTypes",
+          "value": "GcDungeonRoomParams",
+          "children": [
+            {
+              "name": "RoomId",
+              "value": "R_FLO_CARG",
+              "children": []
+            },
+            {
+              "name": "BranchProbability",
+              "value": 0.8,
+              "children": []
+            }
+          ]
+        }
+      },
+      {
+        "room_id": "R_S_FLO_CARG",
+        "branch_probability": 0.33,
+        "raw_type": "GcDungeonRoomParams",
+        "raw": {
+          "name": "MainRoomTypes",
+          "value": "GcDungeonRoomParams",
+          "children": [
+            {
+              "name": "RoomId",
+              "value": "R_S_FLO_CARG",
+              "children": []
+            },
+            {
+              "name": "BranchProbability",
+              "value": 0.33,
+              "children": []
+            }
+          ]
+        }
+      }
+    ],
+    "branch_room_types": [
+      "B_FLO_BARR",
+      "B_FLO_CARG"
+    ],
+    "quests": [
+      {
+        "Probability": 1.0,
+        "QuestItems": {
+          "QuestItems": "R_W_CAPT"
+        },
+        "__type__": "GcDungeonQuestParams"
+      },
+      {
+        "Probability": 1.0,
+        "QuestItems": {
+          "QuestItems": "R_W_CREW"
+        },
+        "__type__": "GcDungeonQuestParams"
+      },
+      {
+        "Probability": 1.0,
+        "QuestItems": {
+          "QuestItems": "R_W_END"
+        },
+        "__type__": "GcDungeonQuestParams"
+      }
+    ],
+    "generation_rules": [
+      {
+        "type": "GcRoomCountRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcRoomCountRule",
+          "children": [
+            {
+              "name": "GcRoomCountRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "RoomID",
+                  "value": "R_FLO_BARR",
+                  "children": []
+                },
+                {
+                  "name": "Min",
+                  "value": 1,
+                  "children": []
+                },
+                {
+                  "name": "Max",
+                  "value": 1,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "room_id": "R_FLO_BARR",
+        "min": 1,
+        "max": 1
+      },
+      {
+        "type": "GcRoomCountRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcRoomCountRule",
+          "children": [
+            {
+              "name": "GcRoomCountRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "RoomID",
+                  "value": "R_S_FLO_BARR",
+                  "children": []
+                },
+                {
+                  "name": "Min",
+                  "value": 1,
+                  "children": []
+                },
+                {
+                  "name": "Max",
+                  "value": 1,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "room_id": "R_S_FLO_BARR",
+        "min": 1,
+        "max": 1
+      },
+      {
+        "type": "GcRoomSequenceRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcRoomSequenceRule",
+          "children": [
+            {
+              "name": "GcRoomSequenceRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "RoomID",
+                  "value": "R_END",
+                  "children": []
+                },
+                {
+                  "name": "MinRoomIndex",
+                  "value": 6,
+                  "children": []
+                },
+                {
+                  "name": "MustBeBeforeRoom",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "MustBeAfterRoom",
+                  "value": "",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "room_id": "R_END",
+        "min_room_index": 6,
+        "must_be_before_room": "",
+        "must_be_after_room": ""
+      },
+      {
+        "type": "GcRoomCountRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcRoomCountRule",
+          "children": [
+            {
+              "name": "GcRoomCountRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "RoomID",
+                  "value": "R_END",
+                  "children": []
+                },
+                {
+                  "name": "Min",
+                  "value": 1,
+                  "children": []
+                },
+                {
+                  "name": "Max",
+                  "value": 1,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "room_id": "R_END",
+        "min": 1,
+        "max": 1
+      },
+      {
+        "type": "GcQuestItemPlacementRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcQuestItemPlacementRule",
+          "children": [
+            {
+              "name": "GcQuestItemPlacementRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "QuestItemID",
+                  "value": "R_W_END",
+                  "children": []
+                },
+                {
+                  "name": "MinRoomIndex",
+                  "value": 6,
+                  "children": []
+                },
+                {
+                  "name": "MaxRoomIndex",
+                  "value": 100,
+                  "children": []
+                },
+                {
+                  "name": "MustBeBeforeQuestItem",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "MustBeAfterQuestItem",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "ValidRoomIDs",
+                  "value": null,
+                  "children": [
+                    {
+                      "name": "ValidRoomIDs",
+                      "value": "R_END",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "quest_item_id": "R_W_END",
+        "min_room_index": 6,
+        "max_room_index": 100,
+        "must_be_before_quest_item": "",
+        "must_be_after_quest_item": "",
+        "valid_room_ids": [
+          "R_END"
+        ]
+      },
+      {
+        "type": "GcQuestItemPlacementRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcQuestItemPlacementRule",
+          "children": [
+            {
+              "name": "GcQuestItemPlacementRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "QuestItemID",
+                  "value": "R_W_CAPT",
+                  "children": []
+                },
+                {
+                  "name": "MinRoomIndex",
+                  "value": 0,
+                  "children": []
+                },
+                {
+                  "name": "MaxRoomIndex",
+                  "value": 100,
+                  "children": []
+                },
+                {
+                  "name": "MustBeBeforeQuestItem",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "MustBeAfterQuestItem",
+                  "value": "R_W_CREW",
+                  "children": []
+                },
+                {
+                  "name": "ValidRoomIDs",
+                  "value": null,
+                  "children": [
+                    {
+                      "name": "ValidRoomIDs",
+                      "value": "R_FLO_BARR",
+                      "children": []
+                    },
+                    {
+                      "name": "ValidRoomIDs",
+                      "value": "R_FLO_CARG",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "quest_item_id": "R_W_CAPT",
+        "min_room_index": 0,
+        "max_room_index": 100,
+        "must_be_before_quest_item": "",
+        "must_be_after_quest_item": "R_W_CREW",
+        "valid_room_ids": [
+          "R_FLO_BARR",
+          "R_FLO_CARG"
+        ]
+      },
+      {
+        "type": "GcQuestItemPlacementRule",
+        "raw": {
+          "name": "GenerationRules",
+          "value": "GcQuestItemPlacementRule",
+          "children": [
+            {
+              "name": "GcQuestItemPlacementRule",
+              "value": null,
+              "children": [
+                {
+                  "name": "QuestItemID",
+                  "value": "R_W_CREW",
+                  "children": []
+                },
+                {
+                  "name": "MinRoomIndex",
+                  "value": 1,
+                  "children": []
+                },
+                {
+                  "name": "MaxRoomIndex",
+                  "value": 100,
+                  "children": []
+                },
+                {
+                  "name": "MustBeBeforeQuestItem",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "MustBeAfterQuestItem",
+                  "value": "",
+                  "children": []
+                },
+                {
+                  "name": "ValidRoomIDs",
+                  "value": null,
+                  "children": [
+                    {
+                      "name": "ValidRoomIDs",
+                      "value": "R_FLO_BARR",
+                      "children": []
+                    },
+                    {
+                      "name": "ValidRoomIDs",
+                      "value": "R_FLO_CARG",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "quest_item_id": "R_W_CREW",
+        "min_room_index": 1,
+        "max_room_index": 100,
+        "must_be_before_quest_item": "",
+        "must_be_after_quest_item": "",
+        "valid_room_ids": [
+          "R_FLO_BARR",
+          "R_FLO_CARG"
+        ]
+      }
+    ],
+    "pruning_rules": [
+      "STANDINGLIGHT1",
+      "STANDINGLIGHT2",
+      "STANDINGLIGHT3",
+      "DATAPAD",
+      "LARGEDEBRIS",
+      "SALVAGESHIP"
+    ]
+  },
+  "reward_seed_candidates": [
+    {
+      "reward_id": "R_ABAND_AMMO",
+      "mission_id": "",
+      "seed_hex": "61FF9092AE3928E9",
+      "seed_u64": 7061521700402833641,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CAPS",
+      "mission_id": "",
+      "seed_hex": "105846D9FADE5830",
+      "seed_u64": 1177769204588107824,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CAPS",
+      "mission_id": "",
+      "seed_hex": "19279B6B73AA77FE",
+      "seed_u64": 1812588260844271614,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CAPS",
+      "mission_id": "",
+      "seed_hex": "266262AC3C5F7955",
+      "seed_u64": 2765881613045692757,
+      "use_seed_value": true,
+      "observations": 1
+    },
+    {
+      "reward_id": "R_ABAND_CAPS",
+      "mission_id": "",
+      "seed_hex": "5A309F18D5AA62AE",
+      "seed_u64": 6498869191308370606,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CAPS",
+      "mission_id": "",
+      "seed_hex": "97931D97F8ADD161",
+      "seed_u64": 10922106059852992865,
+      "use_seed_value": true,
+      "observations": 1
+    },
+    {
+      "reward_id": "R_ABAND_CAPS",
+      "mission_id": "",
+      "seed_hex": "D55145B806D70C91",
+      "seed_u64": 15371143659883269265,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "012B7ED03D996410",
+      "seed_u64": 84300450888246288,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "03371F2067A72FEF",
+      "seed_u64": 231688129871294447,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "096DA2695BE9CF73",
+      "seed_u64": 679377692200128371,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "1305CCC8A946A604",
+      "seed_u64": 1370726823809689092,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "262277489ED79B01",
+      "seed_u64": 2747889876435704577,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "2DCC818F77F4FFF1",
+      "seed_u64": 3300155080148582385,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "371CEBF378A93E41",
+      "seed_u64": 3971308402367872577,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "44D9370FC5B9D80F",
+      "seed_u64": 4961057005406640143,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "4B9F397BB0F6BE19",
+      "seed_u64": 5449137277554310681,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "508C405DF308AF75",
+      "seed_u64": 5804084792027295605,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "58E38BB0C33A3A61",
+      "seed_u64": 6405116686356855393,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "7980145E261D29BF",
+      "seed_u64": 8755020070207171007,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "7C5DEDDDE7975217",
+      "seed_u64": 8961580370866164247,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "944458C373F8B4F6",
+      "seed_u64": 10683761812517205238,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "CFB90A65D4173B80",
+      "seed_u64": 14968006269008821120,
+      "use_seed_value": true,
+      "observations": 3
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "D9E5EDC13CEA61E1",
+      "seed_u64": 15701217090103566817,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "E24E9AF5F410D069",
+      "seed_u64": 16307141681907552361,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "E8D4D3192FF07857",
+      "seed_u64": 16777266616993871959,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "EC4A98F625EEC3D9",
+      "seed_u64": 17026589524193362905,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "EF7533F36EE38423",
+      "seed_u64": 17254754667970397219,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CASE",
+      "mission_id": "",
+      "seed_hex": "FB9D5EC855D4F688",
+      "seed_u64": 18130751889389975176,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "096020C66A3EA5E5",
+      "seed_u64": 675575980663678437,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "0FE927F073E3601E",
+      "seed_u64": 1146491493832417310,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "109C11ED1093989B",
+      "seed_u64": 1196851310856738971,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "1B562E4A1DF70492",
+      "seed_u64": 1969812782886356114,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "1C19BE2638142E54",
+      "seed_u64": 2024858578838629972,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "2667BFF493469E22",
+      "seed_u64": 2767391553206263330,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "45A046493935BDA0",
+      "seed_u64": 5017087265197112736,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "4D9EB6257E6E7797",
+      "seed_u64": 5593108059391948695,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "4E31FEC95AFC4EB0",
+      "seed_u64": 5634564749585567408,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "51A12FBE1C67B6DF",
+      "seed_u64": 5882035081889429215,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "576B57FE24E42AA2",
+      "seed_u64": 6299225252860013218,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "5A309F18D5AA62AE",
+      "seed_u64": 6498869191308370606,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "5E7911439357CB42",
+      "seed_u64": 6807491293679700802,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "7D4E92F2706BDC5A",
+      "seed_u64": 9029315872890281050,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "8CECA6976F98EA4F",
+      "seed_u64": 10154674429156190799,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "8E1B661A05812553",
+      "seed_u64": 10239890439704487251,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "920D38FB52B71084",
+      "seed_u64": 10524130556310392964,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "95F003EC2863A671",
+      "seed_u64": 10804139818886604401,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "9BF8E11A12638700",
+      "seed_u64": 11238980372196984576,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "A92FC42E9190B840",
+      "seed_u64": 12191178420604942400,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "ACFE6262733AD001",
+      "seed_u64": 12465508993587662849,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "B109EEE1D31EFF58",
+      "seed_u64": 12756990073180716888,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "B71BC6F05EC2C71E",
+      "seed_u64": 13194358268996273950,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "D6037855C01D0232",
+      "seed_u64": 15421301858737390130,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "D79CC7D00685E094",
+      "seed_u64": 15536512510797930644,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "E2E9BF34047E6311",
+      "seed_u64": 16350810152279892753,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "E62CF8ED8DA9E333",
+      "seed_u64": 16585905226866352947,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "F06663BE6526DC0C",
+      "seed_u64": 17322642686119173132,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "F37D32AFF3A42290",
+      "seed_u64": 17545235454593606288,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "F4FC39DB82B22F4B",
+      "seed_u64": 17653048254338838347,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_CRATE",
+      "mission_id": "",
+      "seed_hex": "FA564CAC025E0EF6",
+      "seed_u64": 18038689659136904950,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_END",
+      "mission_id": "",
+      "seed_hex": "14C3C994A9891312",
+      "seed_u64": 1496261141553812242,
+      "use_seed_value": true,
+      "observations": 4
+    },
+    {
+      "reward_id": "R_ABAND_GIFT",
+      "mission_id": "",
+      "seed_hex": "9D7C27CC6F9B8DA4",
+      "seed_u64": 11347988920066084260,
+      "use_seed_value": true,
+      "observations": 4
+    },
+    {
+      "reward_id": "R_ABAND_HAZ_S",
+      "mission_id": "",
+      "seed_hex": "9D7C27CC6F9B8DA4",
+      "seed_u64": 11347988920066084260,
+      "use_seed_value": true,
+      "observations": 4
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "01B1E9DD18F1B542",
+      "seed_u64": 122135800731252034,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "029649F4828F1FE8",
+      "seed_u64": 186417749093720040,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "031465DD7B3EED55",
+      "seed_u64": 221914283577896277,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "1721B72CE7F37A37",
+      "seed_u64": 1666814740601731639,
+      "use_seed_value": true,
+      "observations": 3
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "27E4DB403FA3CF58",
+      "seed_u64": 2874663531161309016,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "3112795E0EE2E5C6",
+      "seed_u64": 3536022102322898374,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "36B37D1770A533BD",
+      "seed_u64": 3941631638506910653,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "398D6C9EF83BC1DA",
+      "seed_u64": 4147090261903393242,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "3D94C6D1E0C2083E",
+      "seed_u64": 4437390137588058174,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "536008D49E625D27",
+      "seed_u64": 6007811612195577127,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "55735D9218B57B77",
+      "seed_u64": 6157367997606755191,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "5C3E63DFC25A0148",
+      "seed_u64": 6646859912734966088,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "5D2FA4B1F730272D",
+      "seed_u64": 6714766653695993645,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "5F33FDA95A272782",
+      "seed_u64": 6860105561219213186,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "6A3E307762EE9597",
+      "seed_u64": 7655609705895466391,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "760BFAA8B48A031D",
+      "seed_u64": 8506167923709707037,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "76A4D122603F23F7",
+      "seed_u64": 8549187938229887991,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "8D669E48B4848804",
+      "seed_u64": 10189005242075744260,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "8DCBC25E7D1B5BBB",
+      "seed_u64": 10217473890701761467,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "8FF06302B04E832A",
+      "seed_u64": 10371898805033272106,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "99935C17C84191F5",
+      "seed_u64": 11066289966593184245,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "A54FC4DA00154AF5",
+      "seed_u64": 11911955980001561333,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "C142745A988AFDCC",
+      "seed_u64": 13925820930238119372,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "DF8A2CADE8802118",
+      "seed_u64": 16107736142685675800,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "DF8E2C7E7E54F8F2",
+      "seed_u64": 16108861838947842290,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "E1EB7A0CC921BC8A",
+      "seed_u64": 16279239473393417354,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "E37C158FDE13A4D8",
+      "seed_u64": 16392000451372098776,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "EF0D1DFFD67910E3",
+      "seed_u64": 17225457134414139619,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "EF0E2993D4BA2B09",
+      "seed_u64": 17225751339644627721,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_LOCK",
+      "mission_id": "",
+      "seed_hex": "EF143EDCF79E670E",
+      "seed_u64": 17227463593367070478,
+      "use_seed_value": true,
+      "observations": 2
+    },
+    {
+      "reward_id": "R_ABAND_NAN",
+      "mission_id": "",
+      "seed_hex": "730BB294C1950C93",
+      "seed_u64": 8289915891078204563,
+      "use_seed_value": true,
+      "observations": 4
+    },
+    {
+      "reward_id": "R_ABAND_OPEN",
+      "mission_id": "",
+      "seed_hex": "9D7C27CC6F9B8DA4",
+      "seed_u64": 11347988920066084260,
+      "use_seed_value": true,
+      "observations": 4
+    },
+    {
+      "reward_id": "R_ABAND_WALK_S",
+      "mission_id": "",
+      "seed_hex": "9D7C27CC6F9B8DA4",
+      "seed_u64": 11347988920066084260,
+      "use_seed_value": true,
+      "observations": 4
+    },
+    {
+      "reward_id": "R_FREI_TECH",
+      "mission_id": "",
+      "seed_hex": "14C3C994A9891312",
+      "seed_u64": 1496261141553812242,
+      "use_seed_value": true,
+      "observations": 4
+    }
+  ],
+  "dungeon_root_seed_candidates": [
+    {
+      "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+      "seed_hex": "C36137A0B4914AD9",
+      "seed_u64": 14078595073500596953,
+      "use_seed_value": true,
+      "observations": 1,
+      "captured_universe_addresses": [
+        "0000790006606CAB"
+      ],
+      "interpretation": "dungeon-root-resource-descriptor-seed-candidate"
+    }
+  ],
+  "dungeon_root_seed_status": "candidate-captured-unverified",
+  "resource_seed_lineage": {
+    "status": "captured",
+    "event_count": 1,
+    "ordered_signature_sha256": "3ff90b10f1420f50b7aaf1a26fb28807442e969a52ed37113d00a129e01cc067",
+    "unique_primary_seed_hexes": [
+      "C36137A0B4914AD9"
+    ],
+    "unique_secondary_seed_hexes": [],
+    "events": [
+      {
+        "event_order": 2,
+        "trace_sequence": 1601,
+        "utc": "2026-10-09T23:08:33.348Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "C36137A0B4914AD9",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      }
+    ],
+    "scope": "dungeon-only",
+    "interpretation": "ordered non-zero descriptor seeds on dungeon resource events; correlation evidence only"
+  },
+  "resource_seed_lineage_status": "captured",
+  "resource_seed_context_lineage": {
+    "status": "captured",
+    "event_count": 1,
+    "ordered_signature_sha256": "3ff90b10f1420f50b7aaf1a26fb28807442e969a52ed37113d00a129e01cc067",
+    "unique_primary_seed_hexes": [
+      "C36137A0B4914AD9"
+    ],
+    "unique_secondary_seed_hexes": [],
+    "events": [
+      {
+        "event_order": 2,
+        "trace_sequence": 1601,
+        "utc": "2026-10-09T23:08:33.348Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "C36137A0B4914AD9",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      }
+    ],
+    "scope": "recorded-derelict-poi-context",
+    "interpretation": "ordered non-zero descriptor seeds across all derelict/POI resource events already captured by the probe; correlation evidence only"
+  },
+  "resource_seed_context_lineage_status": "captured",
+  "poi_generation_trace": {
+    "status": "captured",
+    "description_input_count": 1,
+    "description_result_count": 1,
+    "description_return_hexes": [
+      "000000DBA7BBD750"
+    ],
+    "description_results": [
+      {
+        "event_order": 1,
+        "trace_sequence": null,
+        "utc": null,
+        "poi_type_value": 6,
+        "poi_type_name": "AbandonedFreighter",
+        "component_address_hex": "000000DBA7BBD750",
+        "raw_argument_hex": "0000790006606CAB",
+        "return_value_hex": "000000DBA7BBD750",
+        "return_matches_universe_address": false,
+        "return_matches_dungeon_root_seed": false
+      }
+    ],
+    "prepare_event_count": 0,
+    "prepare_events": [],
+    "activation_event_count": 0,
+    "activation_events": [],
+    "lifecycle_event_count": 0,
+    "lifecycle_events": [],
+    "dungeon_root_inside_prepare": false,
+    "dungeon_root_prepare_scope_events": [],
+    "dungeon_root_inside_activation": false,
+    "dungeon_root_activation_scope_events": [],
+    "dungeon_root_inside_lifecycle": false,
+    "dungeon_root_lifecycle_scope_events": [],
+    "dungeon_root_resource_events": [
+      {
+        "event_order": 2,
+        "trace_sequence": 1601,
+        "utc": "2026-10-09T23:08:33.348Z",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "C36137A0B4914AD9",
+        "descriptor_pointer_hex": "0000026622D9A128",
+        "caller_return_offset_hex": "0063AC25",
+        "caller_code_window": {
+          "start_offset_hex": "0063ABF5",
+          "return_offset_hex": "0063AC25",
+          "return_index": 48,
+          "byte_count": 80,
+          "bytes_hex": "0400004C89751841B900040004488D8DE0000000440F44C8BA01000000488D45E0488944242848897C2420E84B3B2001488BD0488D8ECC010000E8DC69B9FF488D8DE0000000E840AE7202B201488D8D"
+        },
+        "caller_decoded": {
+          "encoding": "E8 rel32",
+          "call_instruction_offset_hex": "0063AC20",
+          "call_target_offset_hex": "0183E770",
+          "descriptor_argument_source_register": "RDI",
+          "descriptor_passed_unchanged_to_engine": true
+        },
+        "logical_entry_match_count": 1,
+        "logical_entry_matches": [
+          {
+            "utc": "2026-10-09T23:08:33.347Z",
+            "context_pointer_hex": "000002676DB79960",
+            "owner_pointer_hex": "0000026622D9A000",
+            "descriptor_pointer_hex": "0000026622D9A128",
+            "primary_seed_hex": "C36137A0B4914AD9",
+            "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+            "caller_return_offset_hex": "02C0860A",
+            "external_origin_caller_return_offset_hex": "02C0860A",
+            "recursion_depth": 0,
+            "external_owner_pointer_hex": "0000026622D9A000",
+            "external_owner_plus_0x10_capture_at_entry": {
+              "owner_pointer_hex": "0000026622D9A000",
+              "slot_offset_hex": "00000010",
+              "slot_address_hex": "0000026622D9A010",
+              "capture_phase": "logical-entry-after-external-call",
+              "capture_utc": "2026-10-09T23:08:33.347Z",
+              "read_status": "captured",
+              "raw_bytes_hex": "0000000000000000",
+              "slot_value_hex": "0000000000000000",
+              "target_identity": null
+            },
+            "external_call_register_snapshot_at_entry": {
+              "capture_phase": "shared-entry-hook-after-call",
+              "capture_utc": "2026-10-09T23:08:33.347Z",
+              "caller_return_rva_hex": "02C0860A",
+              "rcx_hex": "000002676DB79960",
+              "rdx_hex": "0000026622D9A000",
+              "rdx_plus_0x10_capture": {
+                "owner_pointer_hex": "0000026622D9A000",
+                "slot_offset_hex": "00000010",
+                "slot_address_hex": "0000026622D9A010",
+                "capture_phase": "logical-entry-after-external-call",
+                "capture_utc": "2026-10-09T23:08:33.347Z",
+                "read_status": "captured",
+                "raw_bytes_hex": "0000000000000000",
+                "slot_value_hex": "0000000000000000",
+                "target_identity": null
+              }
+            },
+            "caller_class": "external",
+            "known_static_candidate": false,
+            "age_ms_at_root_add": 1.802
+          }
+        ],
+        "logical_entry_nearest_caller_return_offset_hex": "02C0860A",
+        "logical_entry_nearest_caller_code_window": {
+          "start_offset_hex": "02C085AA",
+          "return_offset_hex": "02C0860A",
+          "return_index": 96,
+          "byte_count": 160,
+          "bytes_hex": "BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95"
+        },
+        "logical_entry_exact_external_caller_return_offset_hex": "02C0860A",
+        "logical_entry_exact_external_caller_code_window": {
+          "start_offset_hex": "02C0858A",
+          "return_offset_hex": "02C0860A",
+          "return_index": 128,
+          "byte_count": 224,
+          "bytes_hex": "33FF4C897B38EB034533FFBA58000000488BCFE86E480100488B8E1801000048BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95C2FF50204C897F38BA58000000488BCBE8B1470100488BDDEB0748014350488B"
+        },
+        "logical_entry_exact_external_match": {
+          "utc": "2026-10-09T23:08:33.347Z",
+          "context_pointer_hex": "000002676DB79960",
+          "owner_pointer_hex": "0000026622D9A000",
+          "descriptor_pointer_hex": "0000026622D9A128",
+          "primary_seed_hex": "C36137A0B4914AD9",
+          "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+          "caller_return_offset_hex": "02C0860A",
+          "external_origin_caller_return_offset_hex": "02C0860A",
+          "recursion_depth": 0,
+          "external_owner_pointer_hex": "0000026622D9A000",
+          "external_owner_plus_0x10_capture_at_entry": {
+            "owner_pointer_hex": "0000026622D9A000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "0000026622D9A010",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:08:33.347Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": null
+          },
+          "external_call_register_snapshot_at_entry": {
+            "capture_phase": "shared-entry-hook-after-call",
+            "capture_utc": "2026-10-09T23:08:33.347Z",
+            "caller_return_rva_hex": "02C0860A",
+            "rcx_hex": "000002676DB79960",
+            "rdx_hex": "0000026622D9A000",
+            "rdx_plus_0x10_capture": {
+              "owner_pointer_hex": "0000026622D9A000",
+              "slot_offset_hex": "00000010",
+              "slot_address_hex": "0000026622D9A010",
+              "capture_phase": "logical-entry-after-external-call",
+              "capture_utc": "2026-10-09T23:08:33.347Z",
+              "read_status": "captured",
+              "raw_bytes_hex": "0000000000000000",
+              "slot_value_hex": "0000000000000000",
+              "target_identity": {
+                "status": "null-or-low-address",
+                "address_hex": "0000000000000000"
+              }
+            }
+          },
+          "caller_class": "external",
+          "known_static_candidate": false,
+          "age_ms_at_root_add": 1.848,
+          "resolved_external_caller_return_offset_hex": "02C0860A",
+          "owner_plus_0x10_capture_at_root_add": {
+            "owner_pointer_hex": "0000026622D9A000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "0000026622D9A010",
+            "capture_phase": "root-resource-add",
+            "capture_utc": "2026-10-09T23:08:33.349Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          },
+          "owner_plus_0x10_capture": {
+            "owner_pointer_hex": "0000026622D9A000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "0000026622D9A010",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:08:33.347Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          },
+          "owner_plus_0x10_capture_at_entry": {
+            "owner_pointer_hex": "0000026622D9A000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "0000026622D9A010",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:08:33.347Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          }
+        },
+        "logical_entry_unique_callers_observed": 11,
+        "logical_entry_static_candidate_count": 52,
+        "poi_prepare_scope_component_hexes": [],
+        "poi_activation_scope_component_hexes": [],
+        "poi_lifecycle_scope_component_hexes": []
+      }
+    ],
+    "resource_manager_root_event_count": 0,
+    "resource_manager_root_events": [],
+    "dungeon_root_engine_caller_offsets": [
+      "0063AC25"
+    ],
+    "dungeon_root_manager_caller_offsets": [],
+    "dungeon_root_engine_call_sites": [
+      {
+        "encoding": "E8 rel32",
+        "call_instruction_offset_hex": "0063AC20",
+        "call_target_offset_hex": "0183E770",
+        "descriptor_argument_source_register": "RDI",
+        "descriptor_passed_unchanged_to_engine": true
+      }
+    ],
+    "dungeon_logical_entry_caller_offsets": [
+      "02C0860A"
+    ],
+    "dungeon_logical_entry_nearest_callers": [
+      {
+        "caller_return_offset_hex": "02C0860A",
+        "caller_code_window": {
+          "start_offset_hex": "02C085AA",
+          "return_offset_hex": "02C0860A",
+          "return_index": 96,
+          "byte_count": 160,
+          "bytes_hex": "BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95"
+        }
+      }
+    ],
+    "dungeon_logical_entry_exact_external_callers": [
+      {
+        "caller_return_offset_hex": "02C0860A",
+        "caller_code_window": {
+          "start_offset_hex": "02C0858A",
+          "return_offset_hex": "02C0860A",
+          "return_index": 128,
+          "byte_count": 224,
+          "bytes_hex": "33FF4C897B38EB034533FFBA58000000488BCFE86E480100488B8E1801000048BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95C2FF50204C897F38BA58000000488BCBE8B1470100488BDDEB0748014350488B"
+        },
+        "match": {
+          "utc": "2026-10-09T23:08:33.347Z",
+          "context_pointer_hex": "000002676DB79960",
+          "owner_pointer_hex": "0000026622D9A000",
+          "descriptor_pointer_hex": "0000026622D9A128",
+          "primary_seed_hex": "C36137A0B4914AD9",
+          "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+          "caller_return_offset_hex": "02C0860A",
+          "external_origin_caller_return_offset_hex": "02C0860A",
+          "recursion_depth": 0,
+          "external_owner_pointer_hex": "0000026622D9A000",
+          "external_owner_plus_0x10_capture_at_entry": {
+            "owner_pointer_hex": "0000026622D9A000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "0000026622D9A010",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:08:33.347Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": null
+          },
+          "external_call_register_snapshot_at_entry": {
+            "capture_phase": "shared-entry-hook-after-call",
+            "capture_utc": "2026-10-09T23:08:33.347Z",
+            "caller_return_rva_hex": "02C0860A",
+            "rcx_hex": "000002676DB79960",
+            "rdx_hex": "0000026622D9A000",
+            "rdx_plus_0x10_capture": {
+              "owner_pointer_hex": "0000026622D9A000",
+              "slot_offset_hex": "00000010",
+              "slot_address_hex": "0000026622D9A010",
+              "capture_phase": "logical-entry-after-external-call",
+              "capture_utc": "2026-10-09T23:08:33.347Z",
+              "read_status": "captured",
+              "raw_bytes_hex": "0000000000000000",
+              "slot_value_hex": "0000000000000000",
+              "target_identity": {
+                "status": "null-or-low-address",
+                "address_hex": "0000000000000000"
+              }
+            }
+          },
+          "caller_class": "external",
+          "known_static_candidate": false,
+          "age_ms_at_root_add": 1.848,
+          "resolved_external_caller_return_offset_hex": "02C0860A",
+          "owner_plus_0x10_capture_at_root_add": {
+            "owner_pointer_hex": "0000026622D9A000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "0000026622D9A010",
+            "capture_phase": "root-resource-add",
+            "capture_utc": "2026-10-09T23:08:33.349Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          },
+          "owner_plus_0x10_capture": {
+            "owner_pointer_hex": "0000026622D9A000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "0000026622D9A010",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:08:33.347Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          },
+          "owner_plus_0x10_capture_at_entry": {
+            "owner_pointer_hex": "0000026622D9A000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "0000026622D9A010",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:08:33.347Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          }
+        },
+        "unique_callers_observed": 11,
+        "static_candidate_count": 52
+      }
+    ],
+    "interpretation": "target-POI description/lifecycle plus dungeon-root resource boundaries, direct Engine caller, and exact descriptor-correlated all-callers logical-entry evidence; the verified self-recursive edge is excluded from the exact external caller"
+  },
+  "poi_generation_trace_status": "captured",
+  "poi_seed_candidates": [
+    {
+      "poi_type_value": 6,
+      "poi_type_name": "AbandonedFreighter",
+      "raw_argument_hex": "0000790006606CAB",
+      "raw_argument_u64": 133041013943467,
+      "interpretation": "universe-address-confirmed",
+      "observations": 1,
+      "matches_universe_address": true
+    }
+  ],
+  "poi_context_arguments": [
+    {
+      "poi_type_value": 6,
+      "poi_type_name": "AbandonedFreighter",
+      "raw_argument_hex": "0000790006606CAB",
+      "raw_argument_u64": 133041013943467,
+      "interpretation": "universe-address-confirmed",
+      "observations": 1,
+      "matches_universe_address": true
+    }
+  ],
+  "discarded_poi_context_arguments": [],
+  "poi_context_status": "universe-address-confirmed",
+  "layout_seed_status": "dungeon-root-resource-seed-candidate",
+  "generation_signature_sha256": "62adaf170ae692bb2e37dc4fd0b32db84f6211c424d80f87a2fd40adc3d2dfab",
+  "layout_signature_sha256": "62adaf170ae692bb2e37dc4fd0b32db84f6211c424d80f87a2fd40adc3d2dfab",
+  "layout_multiset_signature_sha256": "8764de53f474d7c8b8bdda4bfc6bee7c727c7bf587b136c1bd53bf4563526548",
+  "legacy_stream_signature_sha256": "5006f1823326973dcc77ce01b59dfdcedf2cb29faf4f2ec69a8557bba4603277",
+  "historical_16_system_block_hypothesis": {
+    "solar_system_index_decimal": 121,
+    "solar_system_index_hex": "0x079",
+    "block_start_hex": "0x070",
+    "block_end_hex": "0x07F",
+    "status": "historical-community-hypothesis-not-yet-validated-on-cosmos"
+  },
+  "base_room_count_from_table": 7,
+  "observed_main_rooms": 10,
+  "observed_dead_end_rooms": 0,
+  "observed_total_rooms": 10,
+  "main_room_count_matches_table": false,
+  "manual_room_markers": {
+    "main_rooms_f6": 7,
+    "dead_ends_f5": 3
+  },
+  "room_model_status": "needs-review",
+  "room_parent_index_coverage": 10,
+  "canonical_room_sequence": [
+    {
+      "room_index": 0,
+      "room_label": "Room 0",
+      "room_kind": "main_room",
+      "dominant_family": "CARG",
+      "salvage_crates": 4,
+      "crew_footlockers": 0,
+      "target_containers": 4,
+      "stream_order": 1
+    },
+    {
+      "room_index": 1,
+      "room_label": "Room 1",
+      "room_kind": "main_room",
+      "dominant_family": "CARG",
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "stream_order": 5
+    },
+    {
+      "room_index": 2,
+      "room_label": "Room 2",
+      "room_kind": "main_room",
+      "dominant_family": "CARG",
+      "salvage_crates": 2,
+      "crew_footlockers": 2,
+      "target_containers": 4,
+      "stream_order": 2
+    },
+    {
+      "room_index": 3,
+      "room_label": "Room 3",
+      "room_kind": "main_room",
+      "dominant_family": "CARG",
+      "salvage_crates": 8,
+      "crew_footlockers": 0,
+      "target_containers": 8,
+      "stream_order": 3
+    },
+    {
+      "room_index": 4,
+      "room_label": "Room 4",
+      "room_kind": "main_room",
+      "dominant_family": "CARG",
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "stream_order": 8
+    },
+    {
+      "room_index": 5,
+      "room_label": "Room 5",
+      "room_kind": "main_room",
+      "dominant_family": "CARG",
+      "salvage_crates": 8,
+      "crew_footlockers": 1,
+      "target_containers": 9,
+      "stream_order": 6
+    },
+    {
+      "room_index": 6,
+      "room_label": "Room 6",
+      "room_kind": "main_room",
+      "dominant_family": "BARRACKS",
+      "salvage_crates": 0,
+      "crew_footlockers": 1,
+      "target_containers": 1,
+      "stream_order": 9
+    },
+    {
+      "room_index": 7,
+      "room_label": "Room 7",
+      "room_kind": "main_room",
+      "dominant_family": "BARRACKS",
+      "salvage_crates": 1,
+      "crew_footlockers": 2,
+      "target_containers": 3,
+      "stream_order": 7
+    },
+    {
+      "room_index": 8,
+      "room_label": "Room 8",
+      "room_kind": "main_room",
+      "dominant_family": "BARRACKS",
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "stream_order": 10
+    },
+    {
+      "room_index": 9,
+      "room_label": "Room 9",
+      "room_kind": "main_room",
+      "dominant_family": "END",
+      "salvage_crates": 2,
+      "crew_footlockers": 1,
+      "target_containers": 3,
+      "stream_order": 4
+    }
+  ],
+  "logical_groups": [
+    {
+      "parent_key": "003A9796",
+      "parent_node_names": [
+        "Room 0"
+      ],
+      "room_index": 0,
+      "room_label": "Room 0",
+      "first_event_index": 0,
+      "first_seen_utc": "2026-10-09T23:09:00.544Z",
+      "last_seen_utc": "2026-10-09T23:09:01.135Z",
+      "scene_instances": 15,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "CARG",
+      "scene_family_counts": {
+        "CARG": 3,
+        "COMM": 1,
+        "EMPTY": 11
+      },
+      "salvage_crates": 4,
+      "crew_footlockers": 0,
+      "target_containers": 4,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER_CRATES00.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER_SHELVE0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT02.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_LSHAPE_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_TSHAPE_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_BRANCH_UNLOCKED.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_R_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_3.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNERTRI_RC_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/STAIRS_DOWN.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 1,
+      "stream_order": 1
+    },
+    {
+      "parent_key": "003A9798",
+      "parent_node_names": [
+        "Room 2"
+      ],
+      "room_index": 2,
+      "room_label": "Room 2",
+      "first_event_index": 1,
+      "first_seen_utc": "2026-10-09T23:09:00.546Z",
+      "last_seen_utc": "2026-10-09T23:09:01.111Z",
+      "scene_instances": 12,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "CARG",
+      "scene_family_counts": {
+        "CARG": 4,
+        "EMPTY": 6,
+        "SPAWNERS": 2
+      },
+      "salvage_crates": 2,
+      "crew_footlockers": 2,
+      "target_containers": 4,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER00.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER04.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERRIGHT_C_0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_3.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/STAIRS_DOWN.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FLOATER.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 2,
+      "stream_order": 2
+    },
+    {
+      "parent_key": "003A9799",
+      "parent_node_names": [
+        "Room 3"
+      ],
+      "room_index": 3,
+      "room_label": "Room 3",
+      "first_event_index": 2,
+      "first_seen_utc": "2026-10-09T23:09:00.548Z",
+      "last_seen_utc": "2026-10-09T23:09:01.112Z",
+      "scene_instances": 28,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "CARG",
+      "scene_family_counts": {
+        "CARG": 8,
+        "COMM": 1,
+        "EMPTY": 17,
+        "SPAWNERS": 2
+      },
+      "salvage_crates": 8,
+      "crew_footlockers": 0,
+      "target_containers": 8,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER01.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER03.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_FLOOR0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERRIGHT_C_0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALL_1_4.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALL_1_5.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_CREWTERMINAL.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_BRANCH_UNLOCKED.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOORPILLAR_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_3.SCENE.MBIN",
+          "instances": 3
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNERADJACENT_C_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNER_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLPILLAR_3.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_3.SCENE.MBIN",
+          "instances": 3
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/STAIRS_DOWN.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FLOATER.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 3,
+      "stream_order": 3
+    },
+    {
+      "parent_key": "003A979F",
+      "parent_node_names": [
+        "Room 9"
+      ],
+      "room_index": 9,
+      "room_label": "Room 9",
+      "first_event_index": 3,
+      "first_seen_utc": "2026-10-09T23:09:00.572Z",
+      "last_seen_utc": "2026-10-09T23:09:01.098Z",
+      "scene_instances": 13,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "END",
+      "scene_family_counts": {
+        "COMM": 1,
+        "EMPTY": 7,
+        "END": 5
+      },
+      "salvage_crates": 2,
+      "crew_footlockers": 1,
+      "target_containers": 3,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_FINALTERMINAL.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_4.SCENE.MBIN",
+          "instances": 3
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_4.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_4.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/STAIRS_UP.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_6.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_WALLOUTCORNERLEFT_C_4_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_WALL_4_4.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 4,
+      "stream_order": 4
+    },
+    {
+      "parent_key": "003A9797",
+      "parent_node_names": [
+        "Room 1"
+      ],
+      "room_index": 1,
+      "room_label": "Room 1",
+      "first_event_index": 7,
+      "first_seen_utc": "2026-10-09T23:09:00.596Z",
+      "last_seen_utc": "2026-10-09T23:09:00.926Z",
+      "scene_instances": 3,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "CARG",
+      "scene_family_counts": {
+        "CARG": 1,
+        "EMPTY": 2
+      },
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_DEADEND0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_LSHAPE_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_C_3.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 5,
+      "stream_order": 5
+    },
+    {
+      "parent_key": "003A979B",
+      "parent_node_names": [
+        "Room 5"
+      ],
+      "room_index": 5,
+      "room_label": "Room 5",
+      "first_event_index": 8,
+      "first_seen_utc": "2026-10-09T23:09:00.596Z",
+      "last_seen_utc": "2026-10-09T23:09:01.136Z",
+      "scene_instances": 24,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "CARG",
+      "scene_family_counts": {
+        "CARG": 9,
+        "COMM": 1,
+        "EMPTY": 12,
+        "SPAWNERS": 2
+      },
+      "salvage_crates": 8,
+      "crew_footlockers": 1,
+      "target_containers": 9,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/CORNER02.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_FLOOR1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALLOUTCORNERRIGHT_C_0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALL_1_1.SCENE.MBIN",
+          "instances": 3
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALL_1_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT05.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_LSHAPE_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_3.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_3.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_3.SCENE.MBIN",
+          "instances": 4
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+          "instances": 2
+        }
+      ],
+      "generation_order": 6,
+      "stream_order": 6
+    },
+    {
+      "parent_key": "003A979D",
+      "parent_node_names": [
+        "Room 7"
+      ],
+      "room_index": 7,
+      "room_label": "Room 7",
+      "first_event_index": 10,
+      "first_seen_utc": "2026-10-09T23:09:00.597Z",
+      "last_seen_utc": "2026-10-09T23:09:01.136Z",
+      "scene_instances": 21,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "BARRACKS",
+      "scene_family_counts": {
+        "BARRACKS": 6,
+        "COMM": 2,
+        "EMPTY": 11,
+        "SPAWNERS": 2
+      },
+      "salvage_crates": 1,
+      "crew_footlockers": 2,
+      "target_containers": 3,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/CORNER05.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/CORNER_BUNK00.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_FLOOR0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_INCORNER_1_9.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALL7.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALLOUTCORNERRIGHT_C_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_CAPTTERMINAL.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT04.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_BRANCH_UNLOCKED.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_2.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNERADJACENT_C_2.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_2.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FLOATER.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 7,
+      "stream_order": 7
+    },
+    {
+      "parent_key": "003A979A",
+      "parent_node_names": [
+        "Room 4"
+      ],
+      "room_index": 4,
+      "room_label": "Room 4",
+      "first_event_index": 35,
+      "first_seen_utc": "2026-10-09T23:09:00.736Z",
+      "last_seen_utc": "2026-10-09T23:09:01.006Z",
+      "scene_instances": 2,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "CARG",
+      "scene_family_counts": {
+        "CARG": 1,
+        "EMPTY": 1
+      },
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_DEADEND2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_C_3.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 8,
+      "stream_order": 8
+    },
+    {
+      "parent_key": "003A979C",
+      "parent_node_names": [
+        "Room 6"
+      ],
+      "room_index": 6,
+      "room_label": "Room 6",
+      "first_event_index": 45,
+      "first_seen_utc": "2026-10-09T23:09:00.772Z",
+      "last_seen_utc": "2026-10-09T23:09:01.123Z",
+      "scene_instances": 14,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "BARRACKS",
+      "scene_family_counts": {
+        "BARRACKS": 6,
+        "EMPTY": 7,
+        "SPAWNERS": 1
+      },
+      "salvage_crates": 0,
+      "crew_footlockers": 1,
+      "target_containers": 1,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/CORNER02.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/CORNER_BUNK00.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALL5.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/WALL_BUNK01.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_2.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLPILLAR_2.SCENE.MBIN",
+          "instances": 2
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_2.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 9,
+      "stream_order": 9
+    },
+    {
+      "parent_key": "003A979E",
+      "parent_node_names": [
+        "Room 8"
+      ],
+      "room_index": 8,
+      "room_label": "Room 8",
+      "first_event_index": 62,
+      "first_seen_utc": "2026-10-09T23:09:00.852Z",
+      "last_seen_utc": "2026-10-09T23:09:01.079Z",
+      "scene_instances": 2,
+      "room_kind": "main_room",
+      "dead_end_evidence": [],
+      "dominant_family": "BARRACKS",
+      "scene_family_counts": {
+        "BARRACKS": 1,
+        "EMPTY": 1
+      },
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0,
+      "scene_paths": [
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_DEADEND4.SCENE.MBIN",
+          "instances": 1
+        },
+        {
+          "path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_C_2.SCENE.MBIN",
+          "instances": 1
+        }
+      ],
+      "generation_order": 10,
+      "stream_order": 10
+    }
+  ]
+}
