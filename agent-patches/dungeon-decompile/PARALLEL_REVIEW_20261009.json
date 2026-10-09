@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "reviewed_utc": "2026-10-09T23:12:00Z",
+  "reviewed_utc": "2026-10-09T23:43:00Z",
   "source": {
     "manual_pointer_path": "research/LATEST_PARALLEL_ACTION_TEST.json",
     "manual_report_path": "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
@@ -99,9 +99,11 @@
     "WinDbg is ruled out by the user's report that it crashes NMS; no debugger or live NMS action was used.",
     "Capture producer reports exact descriptor/caller-return correlation; the code extractor copies metadata and does not independently derive it. 0063A6D0 is event-scoped effective-entry correlation, not proof of the raw FF 52 10 slot target.",
     "The latest all-saved snapshot contains the already-reported 23:08 capture, not a new event. Its +0x10 field is explicitly captured after the external call and remains unusable as dispatch target.",
-    "The newest automatic combined report is a distinct cohort. Its exact-caller action matches the 23:08 event; caller-code, upstream, and resolver artifacts use other saved inputs and must not be joined to that event."
+    "The newest automatic combined report is a distinct cohort. Its exact-caller action matches the 23:08 event; caller-code, upstream, and resolver artifacts use other saved inputs and must not be joined to that event.",
+    "The 1180-byte callback digest covers .pdata ranges 0063A6D0..0063A729 and 0063A729..0063AB6C only; range 0063AB6C..0063B04E is a third primary chained range.",
+    "The combined 2430-byte primary-chain digest is not asserted; the third-range raw hex hash is verified, and the first two ranges are represented in shared evidence only by an aggregate digest."
   ],
-  "next_action": "Continue offline classification of the 52 static references and trace their caller-side dataflow; keep semantic naming unresolved.",
+  "next_action": "Continue offline analysis of the 12-entry state table at 0063BEBC and classify its targets; recompute the full 2430-byte primary-chain digest from the matching executable when local command access is available.",
   "extractor_source_audit": {
     "source_path": "tools/extract_exact_root_caller_code.py",
     "source_sha": "0943c480830413c61fec228c2c97fac350a9c867",
@@ -111,12 +113,15 @@
   },
   "current_build_context": {
     "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
-    "sha256": "a069eac1cbbb7c6449ef542c2e413367a30674863c8d11c09247a5fe8a7aff0f",
+    "sha256": "8e4b45c236d3d237bb8f2250cd9fc981ebe4f77396d341805034f4dea4c94596",
     "sha256_verified": true,
-    "summary": "Two standalone captures report a unique descriptor/caller-return correlation to effective entry 0063A6D0. Static caller/callback bytes were checked against local NMS.exe SHA-256 13d5060d...cc3499. Event-scoped correlation only; raw dispatch slot and callback semantics remain unresolved.",
-    "latest_snapshot": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/",
-    "latest_snapshot_manifest": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/run-manifest.json",
-    "snapshot_capture_hash_matches": true
+    "summary": "The 1180-byte digest covers only the first two chained .pdata ranges. The primary chain extends through 0063B04E (2430 bytes); the fresh same-session seed-function artifact supplies the third range [0063AB6C,0063B04E), SHA-256 51e39e..., with root AddResource at 0063AC20. The combined primary-span digest is not asserted. Raw dispatch target and semantic identity remain unresolved.",
+    "latest_snapshot": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/",
+    "latest_snapshot_manifest": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
+    "snapshot_capture_hash_matches": true,
+    "seed_function_artifact_path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json",
+    "seed_function_artifact_sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+    "seed_function_artifact_sha256_verified": true
   },
   "runtime_capture_provenance": [
     {
@@ -291,5 +296,25 @@
       "pdata_entries_in_exe": 157445
     },
     "interpretation": "Same-session offline static cross-reference and field-offset evidence. The observed descriptor pointer and seed values match the static field locations for this event. This corroborates event-scoped dataflow at 0063A6D0 but does not provide a semantic function name or the pre-call FF 52 10 slot target."
+  },
+  "callback_pdata_correction": {
+    "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json",
+    "sha256": "f69954b69cfce4e54b2a31765bf48a4b5506990557772504120a846d1d4f3692",
+    "primary_chain_length_bytes": 2430,
+    "combined_sha256": null
+  },
+  "subsequent_lane_exclusive_evidence": {
+    "path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json",
+    "run_manifest_path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/run-manifest.json",
+    "artifact_sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+    "artifact_sha256_verified": true,
+    "action": "analyze-seed-function",
+    "uploaded_utc": "2026-10-09T23:33:49Z",
+    "source_session_id": "20261009T230838Z_0000790006606CAB",
+    "universe_address": "0000790006606CAB",
+    "root_seed_candidate": "C36137A0B4914AD9",
+    "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "upstream_artifact_sha256": "65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52",
+    "scope_note": "Separate lane-exclusive action upload; not substituted for the manual or automatic combined reports. The later 23:35Z all-saved snapshot repeats this artifact."
   }
 }
