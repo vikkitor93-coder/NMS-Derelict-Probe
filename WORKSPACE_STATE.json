@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-09T00:36:57Z",
+  "updated_utc": "2026-10-09T00:40:58Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -8,8 +8,8 @@
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
     "candidate_version": "0.3.70",
     "candidate_branch": "main",
-    "candidate_base": "main@b74dca838f3a90c23b14d2d656c90c5774fd2556",
-    "candidate_status": "Surveyor 0.3.70 code, directives, and updater package are ready for main publication. Full 225-test suite and compileall pass; package includes 186 managed source files and its 39 parts reconstruct to the verified SHA-256. Windows installation validation remains pending.",
+    "candidate_base": "main@5cd18ea942680bfb95479cb7a2a967ba65d1d506",
+    "candidate_status": "Surveyor 0.3.70 is published to main. Queued saved sessions now run concurrently in bounded groups of three, each with four isolated research actions; per-session reports are saved to research-output/automatic-session-batches and published as one hash-verified batch for all lanes. Full 225-test suite, compileall, and 186-file/39-part updater package checks pass. Windows installation validation remains pending.",
     "current_research_action": "Queued saved sessions are analyzed in parallel batches; each saved session remains an independent evidence cohort. Agents follow research/LATEST_AUTOMATIC_RESEARCH_BATCH.json to per-session reports."
   },
   "lane_claims": {
