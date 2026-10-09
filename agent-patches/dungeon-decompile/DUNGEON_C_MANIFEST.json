@@ -39,8 +39,8 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "Continue offline semantic analysis of the hash-matched callback and caller/dataflow. The exact-caller extractor decodes FF 52 10 but copies logical_entry_rva_hex and exact_runtime_match from input JSON without independently validating them; 0063A6D0 is source metadata for this report, not a proven target. Raw pre-call slot and callback semantics remain unresolved. Do not use WinDbg.",
-    "candidate_identity_rule": "Do not infer semantic identity from RVA. For the 2026-10-08 16:31:47.935Z event only, effective destination is signature-correlated to 0063A6D0; raw virtual slot value and callback semantic identity remain unresolved. owner+0x10 is a separate data read.",
+    "next_method": "Continue offline caller/callback cross-reference analysis; keep current event-specific entry correlation separate from stale caller/upstream/resolver inputs. Latest automatic report 20261009T231728Z-208c8af6 is hash-verified. Its exact-caller action matches the 23:08 event; caller-code, upstream, and resolver outputs are separate source cohorts.",
+    "candidate_identity_rule": "For events with producer-reported exact descriptor/caller-return single-hook correlation, record 0063A6D0 as event-scoped effective-entry correlation only. Do not infer raw [RDX+0x10] or callback semantic identity; owner+0x10 is separate post-call data.",
     "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/",
     "latest_parallel_report_sha256": "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439"
   },
@@ -261,7 +261,8 @@
       "00636C33"
     ],
     "direct_call_sites_matched": 33,
-    "runtime_target_proven": false
+    "runtime_target_proven": false,
+    "interpretation": "Static RVA mapping only; raw target slot remains unmeasured. See current caller context for event-scoped single-hook correlations."
   },
   "helper_dataflow_review": {
     "report": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
@@ -382,13 +383,17 @@
   "latest_parallel_action_run": "20261009T163626Z-9056847b",
   "branch": "agent/dungeon-current-target-20261008-reconciled",
   "latest_automatic_research_batch_review": {
-    "batch_id": "20261009T163434Z-bf1ed756",
-    "run_id": "20261009T163435Z-b91c6dbb",
-    "uploaded_utc": "2026-10-09T16:35:25Z",
-    "session_file": "20261009T161852Z_Stlepiosc_XIX.json",
-    "session_sha256": "15c10763f0a5df6c3b7caec8b9ed771361d806912a1fb74c43b249f5c676e23a",
-    "session_input_verified": true,
-    "mode": "isolated_parallel_test_no_github_upload",
+    "pointer_path": "research/LATEST_AUTOMATIC_RESEARCH_BATCH.json",
+    "pointer_index_path": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/batch-results.json",
+    "pointer_index_sha256": "e8f703afa93485172c9108153696e518a2cf381446cb0aaccc63468fd75bb909",
+    "pointer_index_sha256_verified": true,
+    "report_path": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json",
+    "report_sha256": "48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3",
+    "report_sha256_verified": true,
+    "run_id": "20261009T231728Z-208c8af6",
+    "batch_id": "20261009T231727Z-4cc0e6a5",
+    "session_file": "20261009T230838Z_Gersid_XVI.json",
+    "session_sha256": "ac8cef02578a2b667723b5e6ceda4f52a23c058b09b606d7d72bc6bdcd8449c5",
     "summary": {
       "total": 9,
       "completed": 7,
@@ -397,6 +402,91 @@
       "upload_actions_skipped": 1
     },
     "failed_action": "research.prepare_assets",
-    "note": "Separate saved-session cohort. D action artifact hashes are identical in both reports; they are not independent runtime captures."
+    "d_actions": {
+      "exact_caller": {
+        "status": "complete",
+        "artifact_sha256": "69a84f7eedcf8810e9bb97ea6a434973c99f4e38ed08b544e3f63eeb9e65cb75",
+        "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+        "event_utc": "2026-10-09T23:08:33.347Z",
+        "descriptor": "0000026622D9A128",
+        "seed": "C36137A0B4914AD9",
+        "caller_return": "02C0860A",
+        "instruction_rva": "02C08607",
+        "instruction_bytes": "FF5210",
+        "target_rva": null,
+        "recorded_entry": "0063A6D0",
+        "interpretation": "The combined report's exact-caller action uses the same input saved session and identifies the caller bytes, but the extractor copies entry metadata and does not independently prove the direct target."
+      },
+      "caller_code": {
+        "status": "complete",
+        "artifact_sha256": "4f9bec74cdc341aa3b39132f0cf0fa5287738a710ba043e0c05fb25270ae9016",
+        "source_session_id": "20261009T161852Z_00006D0006606CAB",
+        "address": "00006D0006606CAB",
+        "seed": "A5047E4E4B68F362",
+        "call_target": "0183E770",
+        "same_as_exact_caller_session": false
+      },
+      "upstream": {
+        "status": "complete",
+        "artifact_sha256": "8e66960e4483fa6656f25ba91148322f774eba220dd41246c529d18f227db941",
+        "source_session_id": "20261008T185119Z_0001550006607CAC",
+        "address": "0001550006607CAC",
+        "seed": "00C9E8DF0327789E",
+        "same_as_exact_caller_session": false
+      },
+      "resolver": {
+        "status": "complete",
+        "artifact_sha256": "11279a87d723d2e6d4fa3cf0159ce0824f5092615dca1022346118488d4547d2",
+        "candidate": "00634BC0",
+        "callsite": "02C04977",
+        "return_rva": "02C0497A",
+        "matches": 0,
+        "same_as_exact_caller_event": false
+      }
+    },
+    "scope_note": "This combined report alone is authoritative for this automatic batch. Its D exact-caller action matches the 23:08 session; other D action artifacts retain separate source inputs. The 23:14 all-saved snapshot repeats the same 23:08 runtime capture."
+  },
+  "updated_utc": "2026-10-09T23:23:00Z",
+  "latest_current_build_context": {
+    "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
+    "sha256": "a069eac1cbbb7c6449ef542c2e413367a30674863c8d11c09247a5fe8a7aff0f",
+    "sha256_verified": true,
+    "exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "callback_contiguous_sha256": "a00336416913eead94306aec9d137106e868ae504072147eaba8225e0032b81b",
+    "runtime_events": [
+      "2026-10-09T23:05:09.625Z",
+      "2026-10-09T23:08:33.349Z"
+    ],
+    "latest_snapshot": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/",
+    "latest_snapshot_manifest": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/run-manifest.json",
+    "snapshot_capture_sha256": "eecced17a13f026a7f42eadd9969892504310eba4a66ea81a24f0b99de07b12d",
+    "static_direct_reference_count": 52,
+    "recursive_return_rva": "0063A773",
+    "latest_automatic_batch_report": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json",
+    "latest_automatic_batch_report_sha256": "48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3",
+    "latest_automatic_batch_index": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/batch-results.json",
+    "latest_automatic_batch_index_sha256": "e8f703afa93485172c9108153696e518a2cf381446cb0aaccc63468fd75bb909",
+    "duplicate_snapshots": [
+      {
+        "path": "research-uploads/20261009T232049Z-seed-lineage-analyze-generation-a4d98eab/",
+        "manifest_path": "research-uploads/20261009T232049Z-seed-lineage-analyze-generation-a4d98eab/run-manifest.json",
+        "capture_artifact_sha256": "eecced17a13f026a7f42eadd9969892504310eba4a66ea81a24f0b99de07b12d",
+        "event_utc": "2026-10-09T23:08:33.349Z",
+        "descriptor": "0000026622D9A128",
+        "universe_address": "0000790006606CAB",
+        "root_seed": "C36137A0B4914AD9",
+        "same_capture_as_23_08_standalone_and_23_14_snapshot": true,
+        "new_runtime_event": false
+      },
+      {
+        "path": "research-uploads/20261009T232150Z-seed-lineage-all-saved-evidence-ca6ac9ea-1bc33dd4/",
+        "manifest_path": "research-uploads/20261009T232150Z-seed-lineage-all-saved-evidence-ca6ac9ea-1bc33dd4/run-manifest.json",
+        "manifest_blob_sha": "717fa93764e3b74456104012efe79b1f6f68f761",
+        "capture_artifact_sha256": "eecced17a13f026a7f42eadd9969892504310eba4a66ea81a24f0b99de07b12d",
+        "event_utc": "2026-10-09T23:08:33.349Z",
+        "same_event": true,
+        "new_runtime_event": false
+      }
+    ]
   }
 }
