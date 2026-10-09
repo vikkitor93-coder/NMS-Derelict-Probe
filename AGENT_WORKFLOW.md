@@ -117,3 +117,5 @@ Example waiting status (keep fields irrelevant to your lane concise):
 ## Latest combined parallel research
 
 For action results from the latest parallel test, agents must read `research/LATEST_PARALLEL_ACTION_TEST.json` and then only the combined report it names. The report is the shared source for that run; do not treat individual action latest files or `queue.jsonl` as competing research inputs. Its provenance, unresolved callsite mismatch, and predicted-versus-observed count distinctions are part of the result and must be retained. Older evidence remains historical and may be consulted only when the task explicitly compares builds or sessions.
+
+When `research/LATEST_ROOT_SEED_BATCH.json` exists, verify the referenced report SHA-256 and inspect its listed source capture journals. The Surveyor batch action reads append-only root-resource events, groups them by process journal and universe address, and publishes the report with those exact journals for all lanes. Treat repeated samples at one address as repeats. Keep process journals separate unless executable identity is verified, and do not claim an address-to-root-seed formula from correlation alone.

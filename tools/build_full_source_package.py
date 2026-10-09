@@ -8,7 +8,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-APP_VERSION = "0.3.67"
+APP_VERSION = "0.3.68"
 PART_SIZE = 18_000
 EXTRA_MANAGED_FILES = {
     "tools/build_full_source_package.py",
@@ -22,14 +22,19 @@ EXTRA_MANAGED_FILES = {
     "agent-ui/extensions/runtime-dispatch/1.0.6/panel.json",
     "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json",
     "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
+    "Analyze-Root-Seed-Batch.cmd",
+    "Analyze-Root-Seed-Batch.ps1",
+    "tools/analyze_root_seed_batch.py",
+    "tests/test_root_seed_batch.py",
+    "tests/test_root_seed_batch_upload.py",
 }
 
 
 def build() -> dict[str, object]:
     manifest_path = ROOT / "update-manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    if manifest.get("version") not in {"0.3.66", APP_VERSION}:
-        raise RuntimeError(f"Expected v0.3.66 or current v{APP_VERSION} base manifest, got {manifest.get('version')!r}")
+    if manifest.get("version") not in {"0.3.67", APP_VERSION}:
+        raise RuntimeError(f"Expected v0.3.67 or current v{APP_VERSION} base manifest, got {manifest.get('version')!r}")
 
     files = set(manifest.get("managed_files", [])) | EXTRA_MANAGED_FILES
     # The updater manifest is fetched before installation. Packaging stale copies

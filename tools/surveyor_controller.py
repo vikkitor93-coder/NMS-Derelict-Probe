@@ -617,6 +617,27 @@ class SurveyorController:
             ("Analyze generation + upload", lambda: self._project_action("Analyze generation + upload", "Analyze-Generation-Baseline.cmd", "analyze-generation")),
         ])
 
+        root_seed_group, root_seed_batch = self._make_collapsible_section(root, "Multi-system root seed correlation", padding=8)
+        root_seed_group.pack(fill="x", pady=(0, 10))
+        ttk.Label(
+            root_seed_batch,
+            text=("Capture root events in several different systems during one NMS launch, then run this once. "
+                  "It reads the append-only capture journals, keeps each game-process cohort and universe address separate, "
+                  "and uploads the report plus its source journals to all four lanes."),
+            wraplength=690,
+            justify="left",
+        ).pack(anchor="w", pady=(0, 6))
+        self.root_seed_batch_button = ttk.Button(
+            root_seed_batch,
+            text="Analyze saved root events across systems + upload",
+            command=lambda: self._project_action(
+                "Analyze saved root events across systems + upload",
+                "Analyze-Root-Seed-Batch.cmd",
+                "root-seed-batch",
+            ),
+        )
+        self.root_seed_batch_button.pack(anchor="w")
+
         parallel_group, parallel = self._make_collapsible_section(root, "Parallel research test", padding=8)
         parallel_group.pack(fill="x", pady=(0, 10))
         ttk.Label(

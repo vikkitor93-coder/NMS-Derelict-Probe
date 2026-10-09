@@ -1,15 +1,16 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-08T23:45:00Z",
+  "updated_utc": "2026-10-08T23:53:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.67",
     "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.67",
+    "candidate_version": "0.3.68",
     "candidate_branch": "main",
-    "candidate_base": "main@fb1edd38c94774b3f4be08a198702840d1bdf559",
-    "candidate_status": "Surveyor v0.3.67 startup recovery is published on main. Local checks passed: 210 tests, compileall, harness self-test, and verified 37-part updater package. Windows backlog execution remains pending."
+    "candidate_base": "main@afc1c5e785d2101f82bfe14170d333d6dce99d46",
+    "candidate_status": "Surveyor v0.3.68 adds append-only multi-system root-event correlation. Full suite 219/219, compileall, source ZIP CRC/managed-file verification, and 38-part reconstruction hash passed. Windows installation validation remains pending; release is prepared for publication.",
+    "current_research_action": "After one NMS process visits multiple systems, the batch analyzer groups root events from that process journal, compares address/seed repetitions and collisions without inferring a seed formula, and uploads source journals with a single hash-verified report pointer for all four lanes."
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",

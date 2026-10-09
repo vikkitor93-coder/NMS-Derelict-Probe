@@ -1,5 +1,17 @@
 # NMS Derelict Probe — AI handoff
 
+## Current release and multi-system root-seed workflow — 2026-10-08
+
+- **Version:** Surveyor source/updater 0.3.68, based on 0.3.67. The batch analyzer is read-only and uses evidence already written by the probe.
+- **Capture:** run NMS once and visit different universe addresses. Each `MODELS/SPACE/POI/DUNGEON.SCENE.MBIN` resource-add event is appended and flushed to the current process's `capture-journal-*.jsonl`, including the captured address, system metadata, and primary/secondary seed fields. `root-event-latest.json` remains a compatibility snapshot containing only the newest event.
+- **Analyze and publish:** Surveyor > **Multi-system root seed correlation** > **Analyze saved root events across systems + upload**. The action groups events by journal/process and address, reports repeats and collisions, then publishes the report and exact source journals to all four lanes. Pointer: `research/LATEST_ROOT_SEED_BATCH.json`.
+- **Report contract:** schema 1, type `root-seed-multi-system-correlation`. Each observation has source journal and line, event ID/time, address, seed candidate, `UseSeedValue`, and descriptor. Three distinct addresses allow an initial comparison, not proof of a general formula. Different process journals remain separate because legacy events lack a verified executable hash.
+- **Key files:** `tools/analyze_root_seed_batch.py`, `tools/surveyor_controller.py`, `tools/github_integration.py`, `Analyze-Root-Seed-Batch.cmd` / `.ps1`; tests `tests/test_root_seed_batch.py` and `tests/test_root_seed_batch_upload.py`.
+- **Run/tests:** `python tools/analyze_root_seed_batch.py --root <SurveyorDataRoot> --out <report.json>`; `python -m unittest tests.test_root_seed_batch tests.test_root_seed_batch_upload -v`; full regression `python -m unittest discover -s tests -v`.
+- **Next action:** capture one root event in each of five different systems during one NMS launch, exit after the last capture, then run the Surveyor batch button once. Agents verify the pointer/report/journal hashes and compare only compatible cohorts. Stop after each root resource is captured; a full derelict traversal is unnecessary.
+
+## Historical handoff notes
+
 ## Agent operating contract — 2026-10-08
 
 Agents must keep executing their assigned work until a genuine human-only gate remains. At every apparent stopping point, check whether the next useful action can be completed from available code, repository history, uploaded evidence, tests, or tools; if it can, do it. Diagnose failed attempts and try a reasonable fix or fallback. Do not leave an executable agent-owned “next step” for the user or another agent, and do not stop after an intermediate finding. When the assigned task is complete, continue with the next useful non-duplicative task in the same lane. A dependency blocks only the work that depends on it; continue independent work.
