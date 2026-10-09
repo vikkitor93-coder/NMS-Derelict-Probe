@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-09T16:20:52Z",
+  "updated_utc": "2026-10-09T16:27:30Z",
   "state": "waiting_on_user",
   "status": "Seed-Lineage 1.0.5 is ready for Agent Console discovery with the latest combined report reconciled. The newest saved runtime sample is 00006D0006606CAB -> A5047E4E4B68F362, but no same-sample static caller/upstream/seed-function chain exists.",
   "summary": "Verified automatic report 20261009T161520Z-7233c462 (SHA-256 35e403f79d6e3c665a36f74eee13928dc5a9d77036278604efb1039143076e55) has one fresh root candidate 0001680006607CAC -> 2139770A2614E3DC, without executable identity. Its caller, upstream, and seed-function action outputs cite the prior 000155 session. The separate 16:18 runtime capture records 00006D0006606CAB -> A5047E4E4B68F362 and dynamic caller return 02C0860A; its owner +0x10 read is zero and executable identity is absent. No address-to-root derivation is claimed.",
-  "progress": "Reconciled the latest automatic combined report and the newer all-saved/runtime-only upload separately. The automatic report's exact-root static extraction matches the 16:13 runtime caller at 02C0860A in NMS.exe SHA 13d506..., while caller/upstream/seed-function action outputs still cite the earlier 000155 session. Sequential lane actions remain pending.",
+  "progress": "Reconciled the latest automatic combined report and newer runtime-only upload separately. The report's exact-root static extraction matches its 16:13 runtime caller at 02C0860A in NMS.exe SHA 13d506..., while three action outputs cite the earlier 000155 session. Published Agent Console extension 1.0.5 in main commit 5a906d3e8d7d4be92dd4a339614c59ff5608d7e4; reconciled lane status/manifest are on lane commit d556c5e6bc2c9127b87c8bef2fafd4b51480940e. Same-sample sequential actions remain pending.",
   "blockers": [
     "User must refresh Agent Console and run the three sequential saved-evidence actions on the latest 00006D0006606CAB capture so same-sample artifacts can be reviewed.",
     "Primary compiler must include the ready extension files in the next complete Surveyor source package."
