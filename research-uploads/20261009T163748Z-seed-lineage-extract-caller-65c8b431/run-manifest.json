@@ -1,0 +1,13 @@
+{
+  "action": "extract-caller",
+  "evidence_namespace": "seed-lineage",
+  "files": [
+    {
+      "name": "dungeon-caller-code-latest.json",
+      "sha256": "83ba43c47011c7c455b2cb079a210f9aaae2b9a6436a6ee408c233e63af5eee9",
+      "size": 42082
+    }
+  ],
+  "utc": "20261009T163748Z",
+  "version": 1
+}
