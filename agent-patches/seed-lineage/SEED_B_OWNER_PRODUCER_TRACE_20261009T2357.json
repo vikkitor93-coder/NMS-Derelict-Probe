@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "lane": "seed-lineage",
+  "reviewed_utc": "2026-10-09T23:57:15Z",
+  "purpose": "Offline follow-up from the fresh same-executable 000079 caller/upstream evidence to identify the object passed into the seed-consuming logical function.",
+  "provenance": {
+    "source_session": "20261009T230838Z_0000790006606CAB",
+    "universe_address": "0000790006606CAB",
+    "root_seed_candidate": "C36137A0B4914AD9",
+    "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "caller_artifact": "research-uploads/20261009T232144Z-seed-lineage-extract-caller-9ac5f53b/dungeon-caller-code-latest.json",
+    "caller_artifact_sha256": "e63c2a420c9d30e1d21509ff815cdb2250ce9ede1583f59379fbf7a3e332ffbe",
+    "upstream_artifact": "research-uploads/20261009T232432Z-seed-lineage-extract-upstream-08cc282f/dungeon-upstream-callers-latest.json",
+    "upstream_artifact_sha256": "65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52",
+    "logical_entry_rva": "0063A6D0",
+    "descriptor_flow_review": "agent-patches/seed-lineage/SEED_FUNCTION_REVIEW_20261009T233349Z.json"
+  },
+  "observations": [
+    {
+      "caller_rva": "006395E6",
+      "helper_call_rva": "006395D3",
+      "helper_call_bytes": "E8 08 06 00 00",
+      "helper_target_rva": "00639BE0",
+      "helper_return_use": "RAX copied to RBX; RBX then copied to RDX; RSI copied to RCX; direct call enters 0063A6D0"
+    },
+    {
+      "caller_rva": "00639BB6",
+      "helper_call_rva": "00639B99",
+      "helper_call_bytes": "E8 42 00 00 00",
+      "helper_target_rva": "00639BE0",
+      "helper_return_use": "RAX copied to RBX; RBX then copied to RDX; RSI copied to RCX; direct call enters 0063A6D0"
+    },
+    {
+      "helper_entry_bytes": "48 89 5C 24 10 48 89 6C 24 18 56 57 41 54 41 56 41 57 48 81 EC 70 03 00 00",
+      "helper_entry_interpretation": "Both call displacements resolve to the same apparent function entry/prologue at 00639BE0."
+    },
+    {
+      "callee_argument_evidence": "The callee copies incoming RDX to RSI at 0063A6F1, then reads a primary seed at owner+0x138 (descriptor+0x10) and checks UseSeedValue at owner+0x140 (descriptor+0x18)."
+    }
+  ],
+  "interpretation": {
+    "supported": "Two same-executable direct callers use a common helper at 00639BE0, pass its returned pointer as the second argument to logical entry candidate 0063A6D0, and that callee consumes an embedded descriptor seed from the argument owner.",
+    "candidate": "00639BE0 is a shared owner/descriptor producer or setup helper candidate in the seed-consumption path.",
+    "not_established": [
+      "The helper's complete body or all callers are not present in the available code windows.",
+      "No write to owner+0x138 or descriptor+0x10 is established by these excerpts.",
+      "The helper's return type, object semantics, seed assignment, and root-seed formula remain unproven.",
+      "This static path does not resolve the runtime dispatch target.",
+      "No physical container count is inferred."
+    ]
+  },
+  "limits": [
+    "Evidence is confined to same-executable static byte windows and the matching 000079 dynamic sample.",
+    "The automatic saved-session combined report remains a separate provenance cohort; its mismatched static-action samples are not used to form this chain.",
+    "The current 32-target prediction and historical 43-target prediction remain separate asset-derived predictions, not observed container counts.",
+    "A zero owner+0x10 read and a resolver sample from a separate callsite do not resolve dispatch."
+  ],
+  "next_action": "Obtain a wider code extract or focused upstream/caller analysis for 00639BE0 and determine whether it writes owner+0x138 or forwards a seed from its arguments; retain the 000079 executable identity constraint."
+}
