@@ -14,6 +14,7 @@ import sys
 import threading
 import time
 import tkinter as tk
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
@@ -33,7 +34,7 @@ except ImportError:  # Running surveyor_controller.py directly from the tools fo
     import agent_console
     import agent_ui_extensions
 
-CONTROLLER_VERSION = "0.3.69"
+CONTROLLER_VERSION = "0.3.70"
 AGENT_REFRESH_INTERVALS_MS = {
     "20 seconds": 20_000,
     "1 minute": 60_000,
@@ -126,7 +127,10 @@ def _restore_pending_auto_research(records: dict[str, Any], sessions_dir: Path =
 def _completed_auto_research_reports(project_root: Path, latest_report: Path) -> dict[str, dict[str, str]]:
     """Index prior reports by exact automatic-session hash to prevent duplicate work."""
     report_root = project_root / "parallel-action-tests"
-    candidates = set(report_root.glob("*/combined-results.json")) if report_root.is_dir() else set()
+    candidates = set(report_root.rglob("combined-results.json")) if report_root.is_dir() else set()
+    batch_root = project_root / "research-output" / "automatic-session-batches"
+    if batch_root.is_dir():
+        candidates.update(batch_root.rglob("combined-results.json"))
     if latest_report.is_file():
         candidates.add(latest_report)
     completed: dict[str, dict[str, str]] = {}
@@ -366,6 +370,8 @@ class SurveyorController:
             self.auto_research_records, ROOT / "sessions",
         )
         self.auto_research_running_signature = ""
+        self.auto_research_running_signatures: set[str] = set()
+        self.auto_research_running_batch_id = ""
         self.auto_research_last_signature = str(_read_json(AUTO_RESEARCH_RECEIPT).get("session_sha256") or "")
         if any(signature == self.auto_research_last_signature for signature, _path in self.auto_research_pending):
             self.auto_research_last_signature = ""
@@ -1894,7 +1900,7 @@ class SurveyorController:
                 self.auto_research_pending.clear()
                 self._persist_auto_research_queue()
             if self.auto_research_enabled.get():
-                self.auto_research_state.set("Automatic research is enabled; saved-session backlog will run in order.")
+                self.auto_research_state.set("Automatic research is enabled; saved-session backlog will run in parallel batches (up to 3 sessions at once).")
                 self._start_next_auto_research()
             else:
                 self.auto_research_state.set("Automatic research is off; queued saved sessions will wait until enabled.")
@@ -2262,34 +2268,112 @@ class SurveyorController:
             return
         signature, path = snapshot
         queued_signatures = {item[0] for item in self.auto_research_pending}
-        if signature in {self.auto_research_last_signature, self.auto_research_running_signature} or signature in queued_signatures:
+        if signature in {self.auto_research_last_signature, self.auto_research_running_signature} or signature in self.auto_research_running_signatures or signature in queued_signatures:
             return
         self.auto_research_pending.append((signature, path))
         self.auto_research_records[signature] = {
             "session_file": path.name, "state": "queued", "queued_utc": _utc(),
         }
         self._persist_auto_research_queue()
-        self.auto_research_state.set(f"Saved session detected: {path.name}; queued {len(self.auto_research_pending)} saved run(s) for research.")
+        self.auto_research_state.set(f"Saved session detected: {path.name}; {len(self.auto_research_pending)} run(s) queued for parallel research.")
         self._start_next_auto_research()
 
     def _start_next_auto_research(self) -> None:
-        """Start exactly one queued session when Surveyor has no action running."""
+        """Start one bounded-parallel batch containing every currently queued session."""
         if (not self.auto_research_enabled.get() or self.workflow_running
-                or self.auto_research_running_signature or not self.auto_research_pending):
+                or self.auto_research_running_signatures or not self.auto_research_pending):
             return
-        signature, path = self.auto_research_pending.pop(0)
-        self.auto_research_last_signature = signature
-        self.auto_research_running_signature = signature
-        self.auto_research_records[signature] = {
-            **self.auto_research_records.get(signature, {}),
-            "session_file": path.name, "state": "running", "started_utc": _utc(),
+        sessions = list(self.auto_research_pending)
+        self.auto_research_pending.clear()
+        batch_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
+        output_dir = self.project_root / "research-output" / "automatic-session-batches" / batch_id
+        spec_path = self.project_root / "research-output" / "automatic-session-batches" / ".requests" / f"{batch_id}.json"
+        spec_path.parent.mkdir(parents=True, exist_ok=True)
+        batch_spec = {
+            "schema_version": 1, "batch_id": batch_id,
+            "sessions": [{"session_file": path.name, "session_sha256": signature}
+                         for signature, path in sessions],
         }
+        temp = spec_path.with_suffix(".json.tmp")
+        temp.write_text(json.dumps(batch_spec, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        os.replace(temp, spec_path)
+        self.auto_research_running_signatures = {signature for signature, _path in sessions}
+        self.auto_research_running_signature = next(iter(self.auto_research_running_signatures), "")
+        self.auto_research_running_batch_id = batch_id
+        self.auto_research_last_signature = sessions[-1][0]
+        for signature, path in sessions:
+            self.auto_research_records[signature] = {
+                **self.auto_research_records.get(signature, {}),
+                "session_file": path.name, "state": "running", "batch_id": batch_id, "started_utc": _utc(),
+            }
+            self._write_auto_research_receipt(signature, path, "started")
         self._persist_auto_research_queue()
-        self._write_auto_research_receipt(signature, path, "started")
-        self.auto_research_state.set(f"Running all research actions for saved session {path.name}.")
-        self.run_parallel_research_test(
-            auto_session=(signature, path), trigger_kind="automatic_saved_session",
+        self.auto_research_state.set(
+            f"Running {len(sessions)} saved session(s) in parallel (up to 3 sessions × 4 actions). "
+            f"Reports: research-output/automatic-session-batches/{batch_id}/"
         )
+        runner = self.project_root / "tools" / "run_saved_session_batch.py"
+        if not runner.is_file():
+            self._finish_auto_research_batch(2, sessions, batch_id, output_dir / "batch-results.json", False)
+            return
+        command = [self.python_exe, str(runner), "--batch-spec", str(spec_path),
+                   "--output-dir", str(output_dir), "--max-concurrent-sessions", "3",
+                   "--action-workers", "4"]
+        auto_upload = bool(self.auto_upload_enabled.get())
+        if auto_upload:
+            command.append("--upload")
+        self._run_steps(
+            "Parallel saved-session research batch", [("Run queued sessions and save isolated reports", command)],
+            upload_action="automatic-research-batch" if auto_upload else "",
+            on_complete=lambda code, batch_sessions=sessions, batch=batch_id, report=output_dir / "batch-results.json", shared=auto_upload:
+                self._finish_auto_research_batch(code, batch_sessions, batch, report, shared),
+        )
+
+    def _finish_auto_research_batch(self, returncode: int, sessions: list[tuple[str, Path]],
+                                    batch_id: str, index_path: Path, auto_upload: bool) -> None:
+        try:
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            index = {}
+        results = {str(item.get("session_sha256") or "").lower(): item
+                   for item in index.get("sessions", []) if isinstance(item, dict)}
+        upload_complete = (index.get("github_upload") or {}).get("status") == "complete"
+        completed = 0
+        failures = 0
+        for signature, path in sessions:
+            item = results.get(signature.lower(), {})
+            state = str(item.get("status") or "not-started")
+            report_path = str(item.get("report_path") or "")
+            run_id = str(item.get("run_id") or batch_id)
+            success = state == "complete" and bool(report_path)
+            final_state = "complete" if success else "completed-with-errors"
+            completed += int(success)
+            failures += int(not success)
+            self.auto_research_records[signature] = {
+                **self.auto_research_records.get(signature, {}), "session_file": path.name,
+                "state": final_state, "batch_id": batch_id, "run_id": run_id,
+                **({"report_path": report_path} if report_path else {}),
+                **({"detail": str(item.get("detail") or state)} if not success else {}),
+                "updated_utc": _utc(),
+            }
+            self._write_auto_research_receipt(signature, path, final_state, run_id=run_id,
+                                              report_path=report_path or None)
+        self.auto_research_running_signatures.difference_update(signature for signature, _path in sessions)
+        self.auto_research_running_signature = next(iter(self.auto_research_running_signatures), "")
+        self.auto_research_running_batch_id = ""
+        self._persist_auto_research_queue()
+        self.auto_research_state.set(
+            f"Saved-session batch {batch_id} finished: {completed}/{len(sessions)} reports complete, "
+            f"{failures} need review. Local files: {index_path.parent}"
+            + (" Published to GitHub for all four lanes." if upload_complete else
+               (" GitHub upload needs review in the workflow log." if auto_upload else " Automatic upload is off."))
+        )
+        if not index:
+            self.auto_research_state.set(
+                f"Saved-session batch {batch_id} did not produce its index. Open the workflow diagnostic; "
+                f"sessions remain recorded at {AUTO_RESEARCH_QUEUE}."
+            )
+        self._start_next_auto_research()
 
     def run_parallel_research_test(self, *, auto_session: tuple[str, Path] | None = None,
                                    trigger_kind: str = "manual_button") -> None:
@@ -2545,7 +2629,7 @@ class SurveyorController:
                         self.window.after(0, self._refresh_agent_upload_indicators)
                     except (tk.TclError, RuntimeError):
                         pass
-                elif upload_action in {"all-saved-evidence", "parallel-action-test"}:
+                elif upload_action in {"all-saved-evidence", "parallel-action-test", "automatic-research-batch"}:
                     upload_match = re.search(
                         rf"https://github\.com/{re.escape(agent_ui_extensions.REPOSITORY)}/tree/[^/\s]+/(research-uploads/[^\s]+)",
                         combined,
@@ -2561,7 +2645,7 @@ class SurveyorController:
                                 versions.get(lane_id) or "shared-evidence-batch",
                                 "research.upload_all_saved_evidence" if upload_action == "all-saved-evidence" else "research.parallel_action_test",
                                 "complete" if returncode == 0 and upload_path else "failed",
-                                "Deduplicated all available saved evidence in one shared main-branch upload." if upload_action == "all-saved-evidence" else "Published the combined parallel research report only; individual outputs and queue were excluded.",
+                                "Deduplicated all available saved evidence in one shared main-branch upload." if upload_action == "all-saved-evidence" else ("Published each saved-session report with a batch index; session reports remain separate." if upload_action == "automatic-research-batch" else "Published the combined parallel research report only; individual outputs and queue were excluded."),
                                 upload_path,
                             )
                         except Exception as record_error:

@@ -1,16 +1,16 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-09T00:34:30Z",
+  "updated_utc": "2026-10-09T00:36:57Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
     "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.69",
+    "candidate_version": "0.3.70",
     "candidate_branch": "main",
-    "candidate_base": "main@ea903615ac1c5ef400dd108212cf0e9b65ceb928",
-    "candidate_status": "Surveyor 0.3.69 is published to main at b076f83ede95ad0e53a836f9fefb876996d2bb39. It suppresses Explorer windows during background caller-extraction research while preserving interactive output selection. Verification: 220/220 tests, compileall, and source ZIP plus 38-part package integrity passed. Windows installation validation remains pending.",
-    "current_research_action": "After one NMS process visits multiple systems, the batch analyzer groups root events from that process journal, compares address/seed repetitions and collisions without inferring a seed formula, and uploads source journals with a single hash-verified report pointer for all four lanes."
+    "candidate_base": "main@b74dca838f3a90c23b14d2d656c90c5774fd2556",
+    "candidate_status": "Surveyor 0.3.70 code, directives, and updater package are ready for main publication. Full 225-test suite and compileall pass; package includes 186 managed source files and its 39 parts reconstruct to the verified SHA-256. Windows installation validation remains pending.",
+    "current_research_action": "Queued saved sessions are analyzed in parallel batches; each saved session remains an independent evidence cohort. Agents follow research/LATEST_AUTOMATIC_RESEARCH_BATCH.json to per-session reports."
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
@@ -20,17 +20,16 @@
   },
   "lanes": {
     "runtime-dispatch": {
-      "branch": "agent/runtime-dispatch-seed-status-fix-20261008",
-      "status": "Probe 0.3.40 resets live root-seed captures on system change and reports raw/effective state separately; latest report 20261009T003300Z-4b050fa5 is offline saved-session analysis, and normal runtime validation remains pending.",
+      "branch": "main",
+      "status": "Probe 0.3.40 resets live root-seed captures on system change and reports raw/effective seed state separately; normal runtime check pending.",
       "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
       "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
       "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
       "extension_version": "1.0.6",
       "human_validation_required": true,
-      "next_action": "Update Surveyor 0.3.69, switch systems, confirm the old Root resource clears, enter one derelict only until the next root event is captured, then upload it. No room traversal.",
-      "latest_report": "research-uploads/20261009T003338Z-parallel-action-test/combined-results.json",
-      "latest_report_sha256": "4aa443cff1733adb94e1aea67faa92a3b1902bdbcdc376b96cd5d4a3f94d3e7d",
-      "latest_report_run_id": "20261009T003300Z-4b050fa5"
+      "next_action": "Update Surveyor in-app, enter a different system, confirm the old root seed clears, then observe the next root capture's raw value, UseSeedValue, and effective state.",
+      "latest_report": "research-uploads/20261008T191019Z-parallel-action-test/combined-results.json",
+      "latest_report_sha256": "1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471"
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage-update-20261008",
@@ -93,11 +92,8 @@
       {
         "lane": "runtime-dispatch",
         "kind": "verify-system-change-seed-reset",
-        "next_action": "Update Surveyor 0.3.69, switch systems, confirm the old Root resource clears, enter one derelict only until the next root event is captured, then upload it. No room traversal.",
-        "full_derelict_required": false,
-        "report": "research-uploads/20261009T003338Z-parallel-action-test/combined-results.json",
-        "report_sha256": "4aa443cff1733adb94e1aea67faa92a3b1902bdbcdc376b96cd5d4a3f94d3e7d",
-        "run_id": "20261009T003300Z-4b050fa5"
+        "next_action": "Update Surveyor through its in-app updater. Enter a different system and confirm the previous root capture clears; on the next root capture, inspect raw seed, UseSeedValue, and effective state.",
+        "full_derelict_required": false
       },
       {
         "lane": "metadata",

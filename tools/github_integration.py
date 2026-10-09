@@ -17,6 +17,7 @@ import urllib.request
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 REPO = "vikkitor93-coder/NMS-Derelict-Probe"
 BRANCH = "main"
@@ -32,6 +33,7 @@ ALL_EVIDENCE_UPLOAD_RECEIPT = ROOT / "all-saved-evidence-upload-receipt.json"
 ACTION_OUTPUTS = {
     "all-saved-evidence": [],
     "parallel-action-test": [ROOT / "parallel-action-test-latest.json"],
+    "automatic-research-batch": [],
     "measure": [WORK / "generation-baseline-latest.json", WORK / "generation-measurements-summary.json", WORK / "generation-measurements.csv", WORK / "seed-room-correlation.json"],
     "extract-caller": [WORK / "dungeon-caller-code-latest.json"],
     "extract-upstream": [WORK / "dungeon-upstream-callers-latest.json"],
@@ -55,7 +57,7 @@ def all_saved_evidence_outputs() -> tuple[list[Path], dict[str, list[str]]]:
     unique: dict[str, Path] = {}
     producers: dict[str, list[str]] = {}
     for action, paths in ACTION_OUTPUTS.items():
-        if action in {"all-saved-evidence", "parallel-action-test"}:
+        if action in {"all-saved-evidence", "parallel-action-test", "automatic-research-batch"}:
             continue
         for path in paths:
             key = os.path.normcase(str(path.resolve()))
@@ -274,8 +276,129 @@ def _api_json(gh: str, method: str, endpoint: str, payload: object | None = None
         raise
 
 
-def upload_action(action: str, capture_file: str | None = None, only_if_changed: bool = False) -> None:
+def upload_automatic_research_batch(batch_file: str) -> None:
+    """Publish a batch index and every per-session report as one Git commit."""
+    root = project_root()
+    index_path = Path(batch_file).resolve()
+    try:
+        index_path.relative_to(root.resolve())
+    except ValueError as exc:
+        raise RuntimeError("Batch index must be inside the Surveyor project folder.") from exc
+    index = _read_json_file(index_path)
+    if index.get("schema_version") != 1 or not isinstance(index.get("reports"), list):
+        raise RuntimeError("The selected batch index is not a valid saved-session research batch.")
+    report_snapshots: list[tuple[dict[str, Any], bytes, dict[str, Any]]] = []
+    for item in index["reports"]:
+        if not isinstance(item, dict):
+            raise RuntimeError("Batch index contains an invalid report entry.")
+        relative = str(item.get("report_path") or "")
+        rel_path = Path(relative)
+        if rel_path.is_absolute() or ".." in rel_path.parts:
+            raise RuntimeError("Batch report path is unsafe.")
+        report_path = (root / rel_path).resolve()
+        try:
+            report_path.relative_to(root.resolve())
+            raw = report_path.read_bytes()
+            report = json.loads(raw.decode("utf-8"))
+        except (ValueError, OSError, UnicodeError, json.JSONDecodeError) as exc:
+            raise RuntimeError(f"A referenced batch report is missing or invalid: {relative}") from exc
+        digest = hashlib.sha256(raw).hexdigest()
+        if digest != str(item.get("report_sha256") or "").lower():
+            raise RuntimeError(f"A referenced batch report changed after the index was written: {relative}")
+        expected_session_sha = str(item.get("session_sha256") or "").lower()
+        actual_session_sha = str((report.get("trigger") or {}).get("session_sha256") or "").lower()
+        if not expected_session_sha or expected_session_sha != actual_session_sha:
+            raise RuntimeError(f"A batch report does not match its saved-session hash: {relative}")
+        report_snapshots.append((item, raw, report))
+    if not report_snapshots:
+        raise RuntimeError("The saved-session batch contains no completed reports to publish.")
+
+    gh = _gh()
+    if not gh:
+        raise RuntimeError("GitHub CLI is missing. Use Set up GitHub uploads first.")
+    auth = _auth_status(gh)
+    if auth.returncode != 0:
+        raise RuntimeError("GitHub CLI is not authenticated. Use Set up GitHub uploads first.")
+    now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    batch_id = str(index.get("batch_id") or "batch")
+    safe_id = re.sub(r"[^A-Za-z0-9_.-]+", "-", batch_id)[:64] or "batch"
+    folder = evidence_folder(now, "automatic-research-batch") + f"-{safe_id}-{uuid.uuid4().hex[:6]}"
+    lanes = ["runtime-dispatch", "seed-lineage", "dungeon-decompile", "metadata"]
+    entries: list[dict[str, str]] = []
+    published_reports: list[dict[str, Any]] = []
+    for item, raw, report in report_snapshots:
+        run_id = str(report.get("run_id") or item.get("run_id") or "run")
+        safe_run = re.sub(r"[^A-Za-z0-9_.-]+", "-", run_id)[:80] or "run"
+        remote_path = f"{folder}/reports/{safe_run}/combined-results.json"
+        blob = _api_json(gh, "POST", f"repos/{REPO}/git/blobs", {
+            "content": base64.b64encode(raw).decode("ascii"), "encoding": "base64"})
+        entries.append({"path": remote_path, "mode": "100644", "type": "blob", "sha": blob["sha"]})
+        published_reports.append({
+            "session_file": str(item.get("session_file") or ""),
+            "session_sha256": str(item.get("session_sha256") or ""),
+            "run_id": run_id,
+            "status": str(item.get("status") or "complete"),
+            "summary": item.get("summary") or report.get("summary") or {},
+            "report_path": remote_path,
+            "report_sha256": hashlib.sha256(raw).hexdigest(),
+        })
+    batch_payload = {
+        "schema_version": 1, "batch_id": batch_id, "uploaded_utc": now,
+        "started_utc": index.get("started_utc"), "state": index.get("state"),
+        "session_count": index.get("session_count", len(index.get("sessions", []))),
+        "published_report_count": len(published_reports),
+        "max_concurrent_sessions": index.get("max_concurrent_sessions"),
+        "action_workers_per_session": index.get("action_workers_per_session"),
+        "visible_to_lanes": lanes, "reports": published_reports,
+    }
+    batch_bytes = (json.dumps(batch_payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    batch_blob = _api_json(gh, "POST", f"repos/{REPO}/git/blobs", {
+        "content": base64.b64encode(batch_bytes).decode("ascii"), "encoding": "base64"})
+    batch_remote_path = f"{folder}/batch-results.json"
+    entries.append({"path": batch_remote_path, "mode": "100644", "type": "blob", "sha": batch_blob["sha"]})
+    manifest = {
+        "version": 1, "utc": now, "action": "automatic-research-batch",
+        "batch_id": batch_id, "visible_to_lanes": lanes,
+        "selection": "One immutable combined-results report per saved session; report paths and session hashes are indexed in batch-results.json.",
+        "batch_results_path": batch_remote_path,
+        "files": [{"name": report["report_path"], "sha256": report["report_sha256"],
+                   "session_sha256": report["session_sha256"]} for report in published_reports],
+    }
+    manifest_bytes = (json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    manifest_blob = _api_json(gh, "POST", f"repos/{REPO}/git/blobs", {
+        "content": base64.b64encode(manifest_bytes).decode("ascii"), "encoding": "base64"})
+    entries.append({"path": f"{folder}/run-manifest.json", "mode": "100644", "type": "blob", "sha": manifest_blob["sha"]})
+    pointer = {
+        "schema_version": 1, "batch_id": batch_id, "uploaded_utc": now,
+        "report_path": batch_remote_path, "report_sha256": hashlib.sha256(batch_bytes).hexdigest(),
+        "published_report_count": len(published_reports), "visible_to_lanes": lanes,
+    }
+    pointer_bytes = (json.dumps(pointer, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    pointer_blob = _api_json(gh, "POST", f"repos/{REPO}/git/blobs", {
+        "content": base64.b64encode(pointer_bytes).decode("ascii"), "encoding": "base64"})
+    entries.append({"path": "research/LATEST_AUTOMATIC_RESEARCH_BATCH.json", "mode": "100644", "type": "blob", "sha": pointer_blob["sha"]})
+    ref = _api_json(gh, "GET", f"repos/{REPO}/git/ref/heads/{BRANCH}")
+    parent = ref["object"]["sha"]
+    base_commit = _api_json(gh, "GET", f"repos/{REPO}/git/commits/{parent}")
+    tree = _api_json(gh, "POST", f"repos/{REPO}/git/trees", {"base_tree": base_commit["tree"]["sha"], "tree": entries})
+    commit = _api_json(gh, "POST", f"repos/{REPO}/git/commits", {
+        "message": f"Add saved-session research batch {batch_id}", "tree": tree["sha"], "parents": [parent]})
+    _api_json(gh, "PATCH", f"repos/{REPO}/git/refs/heads/{BRANCH}", {"sha": commit["sha"], "force": False})
+    print(f"Complete + uploaded: https://github.com/{REPO}/tree/{BRANCH}/{folder}")
+    print(f"Latest saved-session batch pointer: https://github.com/{REPO}/blob/{BRANCH}/research/LATEST_AUTOMATIC_RESEARCH_BATCH.json")
+    print(f"NMSDS_BATCH_UPLOAD_PATH={folder}")
+    _log("upload_complete", action="automatic-research-batch", folder=folder,
+         batch_id=batch_id, report_count=len(published_reports), commit=commit["sha"])
+
+
+def upload_action(action: str, capture_file: str | None = None, only_if_changed: bool = False,
+                  batch_file: str | None = None) -> None:
     _log("upload_start", action=action)
+    if action == "automatic-research-batch":
+        if not batch_file:
+            raise RuntimeError("Automatic research batch upload requires --batch-file.")
+        upload_automatic_research_batch(batch_file)
+        return
     gh = _gh()
     if not gh:
         raise RuntimeError("GitHub CLI is missing. Use Set up GitHub uploads first.")
@@ -746,6 +869,7 @@ def main() -> int:
     up.add_argument("--action", required=True, choices=sorted(ACTION_OUTPUTS))
     up.add_argument("--capture-file", help="Upload this immutable saved root-event JSON snapshot.")
     up.add_argument("--only-if-changed", action="store_true", help="Skip all-saved-evidence upload when its content matches the last successful batch.")
+    up.add_argument("--batch-file", help="Publish a saved-session batch index and its isolated per-session reports.")
     sub.add_parser("check-update")
     sub.add_parser("install-update")
     farming = sub.add_parser("install-derelict-farming")
@@ -758,7 +882,7 @@ def main() -> int:
         if args.cmd == "setup":
             setup_github()
         elif args.cmd == "upload":
-            upload_action(args.action, args.capture_file, args.only_if_changed)
+            upload_action(args.action, args.capture_file, args.only_if_changed, args.batch_file)
         elif args.cmd == "check-update":
             check_update()
         elif args.cmd == "install-update":

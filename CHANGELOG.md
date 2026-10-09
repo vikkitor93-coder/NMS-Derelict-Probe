@@ -1,3 +1,11 @@
+## v0.3.70 — parallel queued research batches and shared report index
+
+- Run queued saved sessions concurrently in bounded groups of three, with up to four isolated research actions per session.
+- Save each session's combined report, queue, and log under `research-output/automatic-session-batches/<batch-id>/` without racing or replacing the single-run latest report.
+- Publish all completed per-session reports and a hash-verified batch index to GitHub together; expose `research/LATEST_AUTOMATIC_RESEARCH_BATCH.json` for the four lanes.
+- Update agent startup and workflow directives to read the batch index and its individual session reports. Cloud agents use GitHub because the local PC output folder is not directly accessible to them.
+- Tests cover queued batch launch, concurrency limits, session hash pinning, per-session report isolation, and upload path/hash validation.
+
 ## v0.3.69 — suppress Explorer during background research
 
 - Prevent the two Python caller extractors from opening Explorer when Surveyor runs them noninteractively.

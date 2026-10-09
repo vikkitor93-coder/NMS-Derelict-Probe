@@ -379,7 +379,8 @@ def _trigger_record(kind: str, session_file: str | None = None,
 
 def run_test(output_dir: Path | None = None, max_workers: int = 8, *,
              trigger_kind: str = "command_line", trigger_session_file: str | None = None,
-             trigger_session_sha256: str | None = None) -> tuple[Path, Path, int]:
+             trigger_session_sha256: str | None = None,
+             publish_latest: bool = True) -> tuple[Path, Path, int]:
     localappdata = os.environ.get("LOCALAPPDATA")
     input_root = Path(localappdata) / "NMSDerelictSurveyor" if localappdata else Path("__no_localappdata__")
     session_override: tuple[Path, str] | None = None
@@ -488,7 +489,7 @@ def run_test(output_dir: Path | None = None, max_workers: int = 8, *,
     # Keep immutable per-run outputs, plus one local handoff artifact for the
     # Surveyor's explicit shared-report upload action. The queue remains a
     # local diagnostic and is never part of that upload.
-    if localappdata:
+    if localappdata and publish_latest:
         app_root = Path(localappdata) / "NMSDerelictSurveyor"
         app_root.mkdir(parents=True, exist_ok=True)
         latest_report = app_root / "parallel-action-test-latest.json"
@@ -499,7 +500,7 @@ def run_test(output_dir: Path | None = None, max_workers: int = 8, *,
         report_relative = final_path.resolve().relative_to(ROOT.resolve()).as_posix()
     except ValueError:
         report_relative = ""
-    if report_relative:
+    if report_relative and publish_latest:
         pointer = {
             "schema_version": 1,
             "run_id": run_id,
@@ -597,6 +598,7 @@ def main() -> int:
                         default="command_line", help="what initiated this run")
     parser.add_argument("--session-file", help="saved session filename when auto-triggered")
     parser.add_argument("--session-sha256", help="saved session SHA-256 when auto-triggered")
+    parser.add_argument("--no-latest", action="store_true", help="do not write the shared latest report or pointer; use for concurrent isolated runs")
     args = parser.parse_args()
     if args.self_test:
         return self_test()
@@ -604,6 +606,7 @@ def main() -> int:
         queue_path, final_path, failures = run_test(
             args.output_dir, args.workers, trigger_kind=args.trigger,
             trigger_session_file=args.session_file, trigger_session_sha256=args.session_sha256,
+            publish_latest=not args.no_latest,
         )
     except FileExistsError as exc:
         print(f"Refusing to overwrite an existing test run: {exc}", file=sys.stderr)

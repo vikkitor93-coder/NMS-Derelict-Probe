@@ -95,7 +95,7 @@ class AutoResearchQueueTests(unittest.TestCase):
             saved = json.loads(path.read_text(encoding="utf-8"))
             self.assertEqual("queued", saved["sessions"]["sha-1"]["state"])
 
-    def test_queued_saved_sessions_each_get_a_sequential_run_and_report(self):
+    def test_queued_saved_sessions_launch_one_parallel_batch_with_distinct_hashes(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             controller = controller_module.SurveyorController.__new__(controller_module.SurveyorController)
@@ -104,9 +104,16 @@ class AutoResearchQueueTests(unittest.TestCase):
             controller.auto_research_records = {}
             controller.auto_research_last_signature = ""
             controller.auto_research_running_signature = ""
+            controller.auto_research_running_signatures = set()
+            controller.auto_research_running_batch_id = ""
             controller.auto_research_state = Value("")
             controller.parallel_test_state = Value("")
             controller.workflow_running = True
+            controller.project_root = root
+            controller.python_exe = "python"
+            controller.auto_upload_enabled = Value(False)
+            (root / "tools").mkdir()
+            (root / "tools" / "run_saved_session_batch.py").write_text("# test stub\n", encoding="utf-8")
             receipts = []
             starts = []
             controller._write_auto_research_receipt = lambda signature, path, state, **kwargs: receipts.append(
@@ -114,11 +121,11 @@ class AutoResearchQueueTests(unittest.TestCase):
             )
             controller._persist_auto_research_queue = lambda: None
 
-            def start_run(**kwargs):
-                starts.append(kwargs["auto_session"])
+            def start_run(label, steps, **kwargs):
+                starts.append((label, steps, kwargs))
                 controller.workflow_running = True
 
-            controller.run_parallel_research_test = start_run
+            controller._run_steps = start_run
             sessions = [(f"sha-{i}", root / f"session-{i}.json") for i in range(1, 4)]
             snapshots = iter(sessions)
             with patch.object(controller_module, "_saved_session_snapshot", side_effect=lambda _live: next(snapshots)):
@@ -128,24 +135,41 @@ class AutoResearchQueueTests(unittest.TestCase):
             self.assertEqual(3, len(controller.auto_research_pending))
             controller.workflow_running = False
             controller._start_next_auto_research()
-            self.assertEqual([sessions[0]], starts)
-
-            with patch.object(controller_module, "ROOT", root):
-                for index, session in enumerate(sessions, start=1):
-                    (root / "parallel-action-test-latest.json").write_text(json.dumps({
-                        "run_id": f"run-{index}",
-                        "report_path": f"parallel-action-tests/run-{index}/combined-results.json",
-                        "trigger": {"session_sha256": session[0]},
-                        "summary": {"completed": 8, "total": 9, "failed": 0, "upload_actions_skipped": 1},
-                    }), encoding="utf-8")
-                    controller.workflow_running = False
-                    controller._finish_parallel_research_test(0, False, session)
-                    self.assertEqual(sessions[:min(index + 1, len(sessions))], starts)
-
-            completed = [receipt for receipt in receipts if receipt[2] == "complete"]
-            self.assertEqual(3, len(completed))
-            self.assertEqual(["run-1", "run-2", "run-3"], [receipt[3] for receipt in completed])
+            self.assertEqual(1, len(starts))
+            label, steps, _kwargs = starts[0]
+            self.assertEqual("Parallel saved-session research batch", label)
+            self.assertIn("run_saved_session_batch.py", steps[0][1][1])
+            self.assertIn("--max-concurrent-sessions", steps[0][1])
+            spec_arg = steps[0][1][steps[0][1].index("--batch-spec") + 1]
+            spec = json.loads(Path(spec_arg).read_text(encoding="utf-8"))
+            self.assertEqual([session[0] for session in sessions], [item["session_sha256"] for item in spec["sessions"]])
+            self.assertEqual(3, len(controller.auto_research_running_signatures))
             self.assertEqual(0, len(controller.auto_research_pending))
+
+    def test_batch_completion_updates_each_session_from_its_own_report(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            controller = controller_module.SurveyorController.__new__(controller_module.SurveyorController)
+            controller.auto_research_records = {}
+            controller.auto_research_running_signatures = {"sha-1", "sha-2"}
+            controller.auto_research_running_signature = "sha-1"
+            controller.auto_research_state = Value("")
+            controller.auto_research_pending = []
+            controller.auto_research_enabled = Value(True)
+            controller.workflow_running = True
+            controller._persist_auto_research_queue = lambda: None
+            receipts = []
+            controller._write_auto_research_receipt = lambda signature, path, state, **kwargs: receipts.append((signature, state, kwargs.get("report_path")))
+            sessions = [("sha-1", root / "one.json"), ("sha-2", root / "two.json")]
+            output = root / "batch-results.json"
+            output.write_text(json.dumps({"sessions": [
+                {"session_sha256": "sha-1", "session_file": "one.json", "status": "complete", "run_id": "run-1", "report_path": "research-output/batch/runs/one/combined-results.json"},
+                {"session_sha256": "sha-2", "session_file": "two.json", "status": "complete", "run_id": "run-2", "report_path": "research-output/batch/runs/two/combined-results.json"},
+            ]}), encoding="utf-8")
+            controller._start_next_auto_research = lambda: None
+            controller._finish_auto_research_batch(0, sessions, "batch", output, False)
+            self.assertEqual({"sha-1", "sha-2"}, {row[0] for row in receipts if row[1] == "complete"})
+            self.assertNotEqual(controller.auto_research_records["sha-1"]["report_path"], controller.auto_research_records["sha-2"]["report_path"])
 
 
 if __name__ == "__main__":

@@ -1,3 +1,7 @@
+## Automatic multi-session batches
+
+For queued saved-session research, `research/LATEST_AUTOMATIC_RESEARCH_BATCH.json` points to a SHA-256-verified batch index. The index names each saved-session hash and its own immutable `combined-results.json` report. Compare sessions only as distinct cohorts and verify each report hash before citing it. The local PC mirror is `<project>/research-output/automatic-session-batches/<batch-id>/`; cloud lane agents use the GitHub pointer because they cannot access that device folder directly. The older `research/LATEST_PARALLEL_ACTION_TEST.json` continues to identify a single manual parallel run.
+
 ## Surveyor background research stays in the app — 2026-10-09
 
 Automatic research sets `NMSDS_NONINTERACTIVE=1`. Both Python caller extractors now honor it and skip Explorer selection, preventing folder windows from opening during the saved-session backlog or parallel research. Direct interactive command runs still open the output location. Regression: `tests.test_tools.ToolTests.test_background_caller_extractions_do_not_open_explorer`.
@@ -151,17 +155,3 @@ Next: on shared main Surveyor, close NMS if open, use RUNTIME-A 1.0.6 **Upload c
 ## Seed-B current evidence reconciliation (2026-10-08 23:36 UTC)
 
 Main combined report `research-uploads/20261008T195856Z-parallel-action-test/combined-results.json` for run `20261008T195817Z-1b73e442` hash-verifies (`b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41`). It remains the sole authority for that isolated parallel run: fresh root/caller session `20261008T185119Z_0001550006607CAC`; upstream and seed-function outputs were from the harness's independent old snapshots. Later lane-exclusive caller and upstream evidence uploads at 21:39 UTC each hash-verify and cite the same fresh session and executable `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`. Upstream static evidence places descriptor at argument +0x128, primary seed at +0x138 (descriptor +0x10), and reads it before root AddResource; derivation remains unknown. The 21:40 all-saved seed-function analysis is stale (Oct 2 session and executable hash 671de...). Fourteen MEDI_FLOATERS targets are asset-predicted, not observed; the 43-target CARGO_FLOATERS figure remains a separate asset-derived prediction. Zero +0x10 and unrelated resolver sample do not resolve dispatch. A third distinct address/root-seed sample is needed; full traversal is unnecessary.
-
-
-## Runtime-A latest combined report review — 20261009T003300Z-4b050fa5
-
-Main pointer `research/LATEST_PARALLEL_ACTION_TEST.json` names `research-uploads/20261009T003338Z-parallel-action-test/combined-results.json` (SHA-256 `4aa443cff1733adb94e1aea67faa92a3b1902bdbcdc376b96cd5d4a3f94d3e7d`, verified at base commit `ff6ec847981122ee69439d774ba07e540780e1e4`). This is the sole authority for this isolated run: 8 actions completed, 0 failed, and 1 upload skipped. It was triggered from verified saved session `20261004T093659Z_Nezawac-Eibei.json` (SHA-256 `a4b7deddc1cd8489da90498abc4591f6b5bcd4421baf0f449084beb90e7bde90`), not a live system-switch test.
-
-The generation action uses session `20261004T093659Z_00001A0004E84EFD` / universe `00001A0004E84EFD` and records root-seed candidate `9256392A2F5A74AC` with UseSeedValue=true (1 observation; derivation unproven). Its preset is `MEDI_FLOATERS`, room model `needs-review`, and target output is 16; this is not an observed physical count and does not produce a resolved asset prediction when preset/scene resolution is absent. The earlier 14-target MEDI_FLOATERS analysis and separate 43-target CARGO_FLOATERS asset prediction remain distinct historical results; 43 is still an asset prediction (30 salvage + 13 footlockers over 164 scenes), never an observed count.
-
-The report's exact caller remains `02C08607: FF 52 10` returning at `02C0860A` with `target_rva_hex=null`. The zero `+0x10` value is not target evidence. The resolver output at `02C04977` / `02C0497A` tested `00634BC0` and found 0 matches; it is a different callsite. The report's generation session differs from its Seed-Lineage caller/upstream action sessions, so those outputs must not be joined. The independent unique-signature correlation at `0063A6D0` remains separate and does not change these limits.
-
-
-## Runtime-A system-scope reset validation (2026-10-09)
-
-Surveyor 0.3.69 includes Probe 0.3.40 and Runtime-A extension 1.0.6. The remaining check is a normal system switch, clearing the prior Root resource row, and capturing/uploading one new root event; stop before exploring rooms. WinDbg is not requested. See `agent-patches/runtime-dispatch/STATUS.json` for exact controls and evidence to return.

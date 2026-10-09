@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "version": "0.3.69",
-  "status": "published",
-  "base_version": "0.3.68",
+  "version": "0.3.70",
+  "status": "ready-to-publish",
+  "base_version": "0.3.69",
   "artifact": {
-    "file_name": "NMS-Derelict-Probe-v0.3.69-source.zip",
+    "file_name": "NMS-Derelict-Probe-v0.3.70-source.zip",
     "includes": [
       "complete source project",
       "AI_HANDOFF.md",
@@ -14,29 +14,18 @@
     ]
   },
   "changes": [
-    "Suppress Explorer windows from caller-code extraction tools during noninteractive automatic and parallel research; preserve output-folder selection for direct interactive runs.",
-    "Analyze multiple saved dungeon-root events across systems from append-only capture journals; publish a hash-verified all-lanes report pointer and source evidence.",
-    "On startup, recover saved sessions without a matching queue record or exact-hash report; preserve FIFO and avoid duplicates",
-    "Saved-session queue runs one isolated report per saved session, FIFO, and persists across restarts",
-    "Workers analyze the exact triggering session after SHA-256 verification; mismatched reports do not complete queue entries",
-    "Full updater includes every currently indexed extension asset; repaired missing seed-lineage/1.0.3 payload entries",
-    "Fixed invalid truncated test source and updated stale extension/runtime version assertions",
-    "Surveyor parallel research test panel with per-action progress",
-    "optional combined-report-only upload controlled by the existing automatic upload toggle",
-    "shared latest-report pointer and agent instruction to use only the combined report for the latest run",
-    "Windows extracted-assets worker fallback without symlink privilege",
-    "automatic run of all eight research actions after a newly saved session is confirmed on disk",
-    "parallel-run trigger source and saved-session identity in report, queue, and automatic-run receipt",
-    "overlay appears only while the NMS process is foreground; Agent Objectives has a persistent display toggle",
-    "validated build-request queue and main compiler staging helper with conflict and stale-base checks"
+    "Run queued saved-session research in bounded parallel groups: up to three sessions at once, four isolated actions per session.",
+    "Write one immutable report, queue, and log per session under research-output/automatic-session-batches/<batch-id> without racing the shared single-run latest report.",
+    "Publish every completed session report, a batch index, and research/LATEST_AUTOMATIC_RESEARCH_BATCH.json to main in one upload commit when automatic uploads are enabled.",
+    "Update agent startup and workflow directives to verify the batch pointer and each session report hash; cloud agents use GitHub because they cannot access the local PC folder.",
+    "Preserve the existing manual single-run parallel research action and report pointer."
   ],
   "verification": {
-    "background_folder_launch_regression": "passed; interactive selection and noninteractive suppression both verified",
-    "full_unit_tests": "220/220 passed",
+    "automatic_batch_tests": "passed; concurrency cap, report isolation, hash validation, pointer/index upload tested",
+    "focused_tests": "225/225 full suite passed",
     "python_compile": "passed for tools, overlay, tests, and mod",
-    "source_zip": "CRC, exact 183-file managed set, and 38-part reconstruction SHA-256 verified",
-    "windows_surveyor_validation": "pending local Windows installation",
-    "publication": "published to main; Windows installation validation remains pending"
+    "source_zip": "CRC and exact managed-file list verified; 39-part base64 round trip passed",
+    "windows_surveyor_validation": "pending local Windows installation"
   },
-  "publication": "Surveyor v0.3.69 was published to main in commit b076f83ede95ad0e53a836f9fefb876996d2bb39. Rollback reference: backup/main-before-background-folder-fix-20261009-0027 at pre-release base ea903615ac1c5ef400dd108212cf0e9b65ceb928."
+  "publication": "Ready to publish to main; rollback reference: backup/main-before-parallel-saved-session-batches-20261009 at base b74dca838f3a90c23b14d2d656c90c5774fd2556."
 }

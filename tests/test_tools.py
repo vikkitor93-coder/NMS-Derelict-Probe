@@ -1166,15 +1166,18 @@ class ToolTests(unittest.TestCase):
 
 
     def test_v0322_version_marker(self):
-        self.assertEqual("0.3.69", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.70", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
 
     def test_parallel_research_panel_runs_and_optionally_shares_only_combined_report(self):
         controller=(ROOT / "tools" / "surveyor_controller.py").read_text(encoding="utf-8")
         uploader=(ROOT / "tools" / "github_integration.py").read_text(encoding="utf-8")
         self.assertIn('"Parallel research test"', controller)
         self.assertIn('"--trigger", trigger_kind', controller)
-        self.assertIn('trigger_kind="automatic_saved_session"', controller)
-        self.assertIn('trigger_kind="manual_button"', controller)
+        batch_runner=(ROOT / "tools" / "run_saved_session_batch.py").read_text(encoding="utf-8")
+        self.assertIn('"automatic_saved_session"', batch_runner)
+        self.assertIn('"--no-latest"', batch_runner)
+        self.assertIn('"automatic-research-batch"', controller)
+        self.assertIn('"--max-concurrent-sessions", "3"', controller)
         self.assertIn('auto_upload = bool(self.auto_upload_enabled.get())', controller)
         self.assertIn('"parallel-action-test"', controller)
         self.assertIn('"Only the latest combined parallel research report; per-action files and queue are intentionally excluded."', uploader)
@@ -1410,7 +1413,7 @@ class ToolTests(unittest.TestCase):
         self.assertNotIn("Test-Runtime", start_nms)
         self.assertNotIn("Python.Python.3.12", start_nms)
         self.assertNotIn("import pymhf; import nmspy", start_nms)
-        self.assertIn('CONTROLLER_VERSION = "0.3.69"', controller)
+        self.assertIn('CONTROLLER_VERSION = "0.3.70"', controller)
         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
 
     def test_github_update_buttons_use_a_separate_geometry_parent(self):
@@ -1471,7 +1474,7 @@ class ToolTests(unittest.TestCase):
             self.assertIn(token, probe)
 
     def test_v0330_version(self):
-        self.assertEqual("0.3.69", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.70", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
 
     def test_v0328_seed_function_relrefs_classify_recursion(self):
