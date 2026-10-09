@@ -38,7 +38,13 @@
     "cache_files_in_complete_zip": 0,
     "game_memory_write_api_added": false,
     "known_anchor_35": "00001A0004E84EFD -> B006BAB6 -> 3E342BADCF79F176",
-    "known_anchor_51": "0001550006607CAC -> 9E1A7905 -> 37DEC848947D131C"
+    "known_anchor_51": "0001550006607CAC -> 9E1A7905 -> 37DEC848947D131C",
+    "latest_report_sha256_verified": true,
+    "lane_caller_upload_sha256_verified": true,
+    "lane_upstream_upload_sha256_verified": true,
+    "ui_json_contract": "Passed static JSON/hash/action/index/request-bundle checks; summary length 483/500. Python unittest tests.test_seed_lineage_ui_extension was not run because the local execution helper could not start.",
+    "live_validation": "Pending user Agent Console refresh and action run; no NMS launch or derelict traversal required.",
+    "address_seed_comparison": "Pinned hadsh/nms_namegen indexPrimedPRNG BigInt reproduction: both existing address anchors match (B006BAB6, 9E1A7905); third address 0001680006607CAC yields 8A6EF089. This validates the address calculation, not a root-seed formula."
   },
   "result": {
     "baseline_35_root_seed": "9256392A2F5A74AC",
@@ -47,8 +53,20 @@
     "derelict_relation_status": "unknown-not-claimed"
   },
   "human_validation": {
-    "required": false,
-    "reason": "The new computation is offline and verified against two known addresses; future seed-derivation work needs more runtime boundary evidence, but this variant itself does not require an NMS run."
+    "required": true,
+    "reason": "Agent Console must run the three saved-evidence actions sequentially on the latest 00006D0006606CAB capture so their outputs share one input chain.",
+    "surveyor_request": "Use Seed-B 1.0.5 to extract caller code, upstream callers, and seed-function analysis sequentially from the latest saved root capture at 00006D0006606CAB.",
+    "steps": [
+      "Surveyor > Agent Console > Refresh now > Seed-B card > Update to v1.0.5; confirm Installed 1.0.5 / Published 1.0.5 and that no Invalid extension panel summary error appears.",
+      "With workflow idle, click 1. Extract caller code + upload; wait for success and check the output uses address 00006D0006606CAB and root A5047E4E4B68F362.",
+      "Only after action 1 succeeds, click 2. Extract upstream callers + upload; wait for success and confirm the same session, address, root, caller, and NMS.exe hash.",
+      "Only after action 2 succeeds, click 3. Analyze seed function + upload; wait for success and confirm it cites the upstream result from action 2."
+    ],
+    "success_condition": "All three uploaded action records form a same-session/address/root/caller/executable chain for 00006D0006606CAB; otherwise return the first failing action record. The current runtime capture itself contains no NMS.exe hash and its +0x10 slot is zero.",
+    "evidence_to_return": [
+      "The three upload/run-manifest paths and their evidence paths, or the first failing action record."
+    ],
+    "full_derelict_required": false
   },
   "follow_up_analysis": {
     "path": "agent-patches/seed-lineage/SEED_B_ANALYSIS_20261002.json",
@@ -59,21 +77,204 @@
     "derivation_status": "unknown-not-claimed"
   },
   "latest_research_review": {
-    "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md",
-    "source": "user-attached 0.3.62 local candidate ZIP combined report",
-    "report_sha256": "12035c7362e77363af084bc24254c7b013edecba6ca9015f1d3c6985ea527eda",
-    "published_report": false,
-    "live_validation": false,
-    "derivation_status": "unknown-not-claimed"
+    "path": "agent-patches/seed-lineage/SEED_B_AUTO_BATCH_REVIEW_20261009T161520Z.md",
+    "run_id": "20261009T161520Z-7233c462",
+    "report_path": "research-uploads/20261009T161615Z-automatic-research-batch-20261009T161519Z-fdc03736-828540/reports/20261009T161520Z-7233c462/combined-results.json",
+    "report_sha256": "35e403f79d6e3c665a36f74eee13928dc5a9d77036278604efb1039143076e55",
+    "verified": true,
+    "source": "Latest automatic per-session combined report; newer runtime-only capture documented separately.",
+    "third_address": "0001680006607CAC",
+    "root_seed_candidate": "2139770A2614E3DC",
+    "derivation_status": "unknown-not-claimed",
+    "latest_runtime_only_address": "00006D0006606CAB",
+    "latest_runtime_only_root": "A5047E4E4B68F362"
   },
-  "constructor_0362_candidate": {
-    "patch": "agent-patches/seed-lineage/SEED_B_CONSTRUCTOR_0362.patch",
-    "note": "agent-patches/seed-lineage/SEED_B_CONSTRUCTOR_0362.md",
-    "patch_sha256": "6f33b100c6c97d350980e83237d6c12962d231ed2a9a4fd02497f4c5f7639ab1",
-    "source": "user-attached 0.3.62 local source candidate",
-    "unit_tests": "test_tools.py 126/126 passed",
-    "compile": "passed",
-    "live_validation": "required",
-    "main_publish": false
+  "current_extension_candidate": {
+    "version": "1.0.5",
+    "publication": "published-to-main-extension-index; Agent Console refresh/action validation pending; ready build request retained for primary compiler source packaging",
+    "request_id": "seed-panel-summary-limit-20261009",
+    "panel_summary_characters": 491,
+    "panel_sha256": "45fe41d6bb10dc0a790bf6143c953fa17b1c89efb2ba30c7c475a772820b38bb",
+    "manifest_sha256": "0718eb037ddeefee6b39eabb897a2400da07c6b3fa0b50fbbce714f83f020f90",
+    "actions": [
+      "research.extract_caller_code",
+      "research.extract_upstream_callers",
+      "research.analyze_seed_function"
+    ],
+    "failure_cause": "1.0.4 panel summary exceeded the host limit of 500 characters; v1.0.5 uses a 491-character summary and keeps action buttons visible only while human input is required."
+  },
+  "latest_lane_exclusive_evidence": {
+    "caller": {
+      "path": "research-uploads/20261008T213906Z-seed-lineage-extract-caller-b7822170/dungeon-caller-code-latest.json",
+      "run_manifest": "research-uploads/20261008T213906Z-seed-lineage-extract-caller-b7822170/run-manifest.json",
+      "sha256": "83ba43c47011c7c455b2cb079a210f9aaae2b9a6436a6ee408c233e63af5eee9",
+      "session": "20261008T185119Z_0001550006607CAC",
+      "verified": true
+    },
+    "upstream": {
+      "path": "research-uploads/20261008T213956Z-seed-lineage-extract-upstream-40576b80/dungeon-upstream-callers-latest.json",
+      "run_manifest": "research-uploads/20261008T213956Z-seed-lineage-extract-upstream-40576b80/run-manifest.json",
+      "sha256": "8e66960e4483fa6656f25ba91148322f774eba220dd41246c529d18f227db941",
+      "session": "20261008T185119Z_0001550006607CAC",
+      "caller_hash": "83ba43c47011c7c455b2cb079a210f9aaae2b9a6436a6ee408c233e63af5eee9",
+      "verified": true
+    },
+    "seed_function": {
+      "path": "research-uploads/20261008T214003Z-seed-lineage-all-saved-evidence-e6b0e29a-1aecdb93/dungeon-seed-function-analysis-latest.json",
+      "sha256": "228ca6872ec0f182efa419b284439d7110b63228738484f689405007ca6435e0",
+      "session": "20261002T213047Z_00001A0004E84EFD",
+      "executable_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "current_for_20261008_exe": false
+    }
+  },
+  "rollback": {
+    "base_commit": "6542cc36f78390da1be1e82fc59bad46657d8f7a",
+    "backup_branch": "backup/main-before-seed-extension-20261009T162052",
+    "path": "Agent Console rollback to v1.0.4; repository rollback via git revert of the single-parent publication. Backup ref backup/main-before-seed-extension-20261009T162052 retains main at 6542cc36f78390da1be1e82fc59bad46657d8f7a.",
+    "latest_lane_publication": {
+      "base_commit": "6542cc36f78390da1be1e82fc59bad46657d8f7a",
+      "backup_branch": "backup/main-before-seed-extension-20261009T162052",
+      "path": "Single-parent commit. Revert with git revert <commit-sha>; backup branch preserves exact base."
+    }
+  },
+  "latest_saved_session_batch": {
+    "batch_id": "20261009T161519Z-fdc03736",
+    "batch_index_path": "research-uploads/20261009T161615Z-automatic-research-batch-20261009T161519Z-fdc03736-828540/batch-results.json",
+    "batch_index_sha256": "69a195338658155ed8165b7e69abf459b9c904a9fca22d75304e2356a45ed418",
+    "report_path": "research-uploads/20261009T161615Z-automatic-research-batch-20261009T161519Z-fdc03736-828540/reports/20261009T161520Z-7233c462/combined-results.json",
+    "report_sha256": "35e403f79d6e3c665a36f74eee13928dc5a9d77036278604efb1039143076e55",
+    "input_session_sha256": "bd414953ea7592fa20e56e286b3189d214535476242e19cee2fc617e0b77e166",
+    "status": "completed-with-errors",
+    "completed_actions": 7,
+    "failed_actions": 1,
+    "upload_actions_skipped": 1,
+    "fresh_generation_session": "20261009T161406Z_0001680006607CAC",
+    "root_seed_candidate": "2139770A2614E3DC",
+    "seed_lineage_caller_upstream_function_session": "20261008T185119Z_0001550006607CAC",
+    "details_path": "agent-patches/seed-lineage/SEED_B_AUTO_BATCH_REVIEW_20261009T161520Z.md"
+  },
+  "seed_lineage_reconciliation": {
+    "report_run_id": "20261009T015909Z-77532ce2",
+    "report_sha256": "721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b",
+    "distinct_address_seed_candidates": [
+      {
+        "universe_address_hex": "00001A0004E84EFD",
+        "root_seed_hex": "9256392A2F5A74AC",
+        "public_system_seed_hex": "B006BAB6"
+      },
+      {
+        "universe_address_hex": "0001550006607CAC",
+        "root_seed_hex": "00C9E8DF0327789E",
+        "public_system_seed_hex": "9E1A7905"
+      },
+      {
+        "universe_address_hex": "0001680006607CAC",
+        "root_seed_hex": "2139770A2614E3DC",
+        "public_system_seed_hex": "8A6EF089"
+      }
+    ],
+    "distinct_addresses": 3,
+    "derivation_status": "unknown-not-claimed",
+    "fresh_third_address_caller_upstream_seed_function_chain": false,
+    "physical_container_counts_observed": false,
+    "asset_prediction_notes": [
+      "MEDI_FLOATERS 14 target value is asset-derived, not a physical count.",
+      "CARGO_FLOATERS 43-target value is asset-derived and remains separate from generation-measurement target_container_values."
+    ],
+    "dispatch_notes": [
+      "Zero +0x10 read is not a resolved target.",
+      "Separate resolver sample is not a resolved dispatch target."
+    ],
+    "third_address_executable_identity": "unverified-not-present-in-measurement-artifact",
+    "public_system_seed_comparison": {
+      "report": "agent-patches/seed-lineage/SEED_B_SYSTEM_SEED_COMPARISON_20261009.json",
+      "upstream_commit": "52ad48affaa4089c8f487a470a888dc9b7a650aa",
+      "known_anchor_checks_passed": 2,
+      "third_address_system_seed_hex": "8A6EF089",
+      "root_derivation_status": "unknown-not-claimed"
+    },
+    "all_saved_snapshot_path": "research-uploads/20261009T155449Z-all-saved-evidence-1756d0ee/run-manifest.json",
+    "all_saved_snapshot_upload_utc": "20261009T155449Z",
+    "latest_combined_run": {
+      "run_id": "20261009T161520Z-7233c462",
+      "report_sha256": "35e403f79d6e3c665a36f74eee13928dc5a9d77036278604efb1039143076e55",
+      "session": "20261009T161406Z_0001680006607CAC",
+      "root_seed_candidate": "2139770A2614E3DC",
+      "observations": 1,
+      "executable_identity_verified": false,
+      "fresh_same_session_static_chain": false
+    },
+    "separate_latest_runtime_capture": {
+      "address": "00006D0006606CAB",
+      "root_seed_candidate": "A5047E4E4B68F362",
+      "observations": 1,
+      "caller_return": "02C0860A",
+      "owner_plus_0x10": "0000000000000000",
+      "executable_identity_verified": false,
+      "combined_report_includes_capture": false
+    }
+  },
+  "latest_offline_comparison": {
+    "name": "NMS system-address seed indexPrimedPRNG",
+    "upstream_repository": "hadsh/nms_namegen",
+    "upstream_commit": "52ad48affaa4089c8f487a470a888dc9b7a650aa",
+    "upstream_source_files": [
+      {
+        "path": "nms_namegen/iprng.py",
+        "git_blob_sha": "374d4e6fce569a2176141d4a613925c41e8f667a",
+        "url": "https://github.com/hadsh/nms_namegen/blob/52ad48affaa4089c8f487a470a888dc9b7a650aa/nms_namegen/iprng.py"
+      },
+      {
+        "path": "nms_namegen/system.py",
+        "git_blob_sha": "663c169f5e4435849b0991cbe34536da16d5b4a6",
+        "url": "https://github.com/hadsh/nms_namegen/blob/52ad48affaa4089c8f487a470a888dc9b7a650aa/nms_namegen/system.py"
+      }
+    ],
+    "computation": "Apply indexPrimedPRNG to the 64-bit universe address; take the low 32 bits as system_seed_hex, matching systemAttributes(). This is the public address-derived system seed, not the 64-bit dungeon-root candidate.",
+    "independent_reimplementation": "JavaScript BigInt fixed-width 64-bit port of the cited rotation/mixing/index logic; no external code copied into Surveyor."
+  },
+  "latest_all_saved_evidence_snapshot": {
+    "run_manifest_path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/run-manifest.json",
+    "run_manifest_sha256": "159c8d153e3b7020daf143ce8f574392a7c92791e8750d618437be500f3148af",
+    "upload_utc": "20261009T161936Z",
+    "root_event": {
+      "path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/root-event-latest.json",
+      "sha256": "e0f850e46dd8b36b24de323a212ec84043cfc872a111cb5e6060316aaa7af412",
+      "address": "00006D0006606CAB",
+      "seed": "A5047E4E4B68F362"
+    },
+    "caller": {
+      "path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/dungeon-caller-code-latest.json",
+      "sha256": "83ba43c47011c7c455b2cb079a210f9aaae2b9a6436a6ee408c233e63af5eee9",
+      "session": "20261008T185119Z_0001550006607CAC"
+    },
+    "upstream": {
+      "path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/dungeon-upstream-callers-latest.json",
+      "sha256": "8e66960e4483fa6656f25ba91148322f774eba220dd41246c529d18f227db941",
+      "session": "20261008T185119Z_0001550006607CAC"
+    },
+    "seed_function": {
+      "path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/dungeon-seed-function-analysis-latest.json",
+      "sha256": "228ca6872ec0f182efa419b284439d7110b63228738484f689405007ca6435e0",
+      "session": "20261002T213047Z_00001A0004E84EFD"
+    },
+    "capture_journal": {
+      "path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/capture-journal-20261009T161133Z-34728.jsonl",
+      "sha256": "78d35dfbcc5483cd46c9e4da758eed493b12dd1414519d66f35fc2c3b53291dd",
+      "note": "Contains UI texture resource-add events, not root capture."
+    },
+    "finding": "Root event is newer at 00006D..., but caller/upstream and seed-function files are stale inputs from unrelated sessions."
+  },
+  "latest_runtime_capture": {
+    "path": "research-uploads/20261009T161848Z-upload-runtime-capture/exact-root-caller-latest.json",
+    "sha256": "e0f850e46dd8b36b24de323a212ec84043cfc872a111cb5e6060316aaa7af412",
+    "captured_utc": "2026-10-09T16:18:44.422Z",
+    "universe_address_hex": "00006D0006606CAB",
+    "root_seed_candidate_hex": "A5047E4E4B68F362",
+    "observations": 1,
+    "caller_return_hex": "02C0860A",
+    "owner_plus_0x10_hex": "0000000000000000",
+    "nms_exe_sha256": null,
+    "report_provenance": "Separate runtime-only capture; not in the automatic combined report."
   }
 }
