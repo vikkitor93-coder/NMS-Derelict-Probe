@@ -205,3 +205,8 @@ Fresh generation baseline: session `20261009T161852Z_00006D0006606CAB`, address 
 The historical 43 CARGO targets remain a separate asset-derived prediction. Neither 21 nor 43 is an observed count. Root derivation remains unknown. Zero `+0x10` and the separate resolver sample do not identify a resolved dispatch target.
 
 Seed-B 1.0.6 adds an ordered refresh-first action list: analyze generation, extract caller, extract upstream callers, analyze seed function. Button ordering is a user sequence, not an enforced dependency; verify each output references the preceding artifact. Static panel/index/action/hash checks were completed. Python unittest was not run because the local execution helper could not start. One short local Agent Console action sequence is required; no NMS launch or full traversal is required.
+
+
+## DUNGEON-C current-build runtime/callback context (2026-10-09)
+
+Two standalone runtime captures at 23:05:09.625Z and 23:08:33.349Z report unique descriptor/caller-return correlation to effective entry 0063A6D0. This is event-scoped correlation; raw `[RDX+0x10]` dispatch slot and callback semantic identity remain unresolved. Local hash-matched static review confirms caller `02C08607: FF 52 10` and a contiguous 1180-byte callback path across `.pdata` ranges `0063A6D0..0063A729` and `0063A729..0063AB6C`. Review: `agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json` (SHA-256 `d5be5c47d5532927e7154e91d55bffc51c3c16bc7dd24f6b1d793d3e4dec68e6`). Keep the 43-target asset prediction separate from observed counts; historical 35 and post-update 16 remain distinct.
