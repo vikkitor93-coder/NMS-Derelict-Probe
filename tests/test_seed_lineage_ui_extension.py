@@ -76,7 +76,7 @@ class SeedLineageUIExtensionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             extension_state = Path(tmp)
             (extension_state / "active.json").write_text(
-                json.dumps({"seed-lineage": "1.0.6"}), encoding="utf-8"
+                json.dumps({"seed-lineage": "1.0.5"}), encoding="utf-8"
             )
             self.assertEqual([entry], extensions.update_candidates([entry], extension_state))
             (extension_state / "active.json").write_text(
