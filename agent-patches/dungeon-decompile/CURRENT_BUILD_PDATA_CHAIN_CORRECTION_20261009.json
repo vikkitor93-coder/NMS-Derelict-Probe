@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "reviewed_utc": "2026-10-09T23:43:00Z",
+  "objective": "Correct the scope of the callback byte-span description and record the newly published third chained .pdata range.",
+  "binary": {
+    "path_note": "user-provided installed executable, inspected read-only in prior local analysis",
+    "sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
+  },
+  "source_artifacts": {
+    "seed_function": {
+      "path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json",
+      "run_manifest_path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/run-manifest.json",
+      "sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+      "size_bytes": 15904,
+      "sha256_verified": true,
+      "verification": "Recomputed over the fetched UTF-8 artifact bytes; matches the dedicated run-manifest and the later all-saved snapshot manifest."
+    },
+    "all_saved_snapshot_manifest": {
+      "path": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
+      "seed_function_artifact_sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+      "match_verified": true,
+      "meaning": "The 23:35Z snapshot contains the same seed-function artifact; it is a reused saved artifact, not a new NMS event."
+    },
+    "source_session": "20261009T230838Z_0000790006606CAB",
+    "universe_address": "0000790006606CAB",
+    "root_seed_candidate": "C36137A0B4914AD9",
+    "upstream_artifact_sha256": "65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52",
+    "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
+  },
+  "prior_span_correction": {
+    "previously_recorded_start_rva": "0063A6D0",
+    "previously_recorded_end_rva_exclusive": "0063AB6C",
+    "previously_recorded_length_bytes": 1180,
+    "previously_recorded_sha256": "a00336416913eead94306aec9d137106e868ae504072147eaba8225e0032b81b",
+    "corrected_scope": "That verified hash covers only the first two adjacent .pdata ranges. It must not be described as the complete primary callback routine."
+  },
+  "primary_logical_chain": {
+    "start_rva": "0063A6D0",
+    "end_rva_exclusive": "0063B04E",
+    "total_length_bytes": 2430,
+    "combined_sha256": null,
+    "combined_sha256_status": "not computed; the shared seed-function artifact publishes raw bytes for range 3 but only prior aggregate digests for ranges 1 and 2",
+    "ranges": [
+      {
+        "start_rva": "0063A6D0",
+        "end_rva_exclusive": "0063A729",
+        "length_bytes": 89,
+        "unwind_info_rva": "04C2F500",
+        "unwind_flags": 0,
+        "role": "primary entry range"
+      },
+      {
+        "start_rva": "0063A729",
+        "end_rva_exclusive": "0063AB6C",
+        "length_bytes": 1091,
+        "unwind_info_rva": "04C2F510",
+        "unwind_flags": 4,
+        "chain_info_target": "0063A6D0",
+        "role": "primary chained range"
+      },
+      {
+        "start_rva": "0063AB6C",
+        "end_rva_exclusive": "0063B04E",
+        "length_bytes": 1250,
+        "unwind_info_rva": "04C2F538",
+        "unwind_flags": 4,
+        "chain_info_target": "0063A6D0",
+        "sha256": "51e39e47017337915fa1b72986ab9639a7a5b462858bc8be38bd6c9cba2cc9f6",
+        "sha256_verified_from_published_raw_hex": true,
+        "role": "primary chained range"
+      }
+    ],
+    "length_check": "89 + 1091 + 1250 = 2430"
+  },
+  "later_chained_funclets": [
+    {
+      "start_rva": "0063B04E",
+      "end_rva_exclusive": "0063B130",
+      "length_bytes": 226,
+      "unwind_info_rva": "04C2F560",
+      "unwind_flags": 4,
+      "chain_info_target": "0063AB6C"
+    },
+    {
+      "start_rva": "0063B130",
+      "end_rva_exclusive": "0063BEEC",
+      "length_bytes": 3516,
+      "unwind_info_rva": "04C2F574",
+      "unwind_flags": 4,
+      "chain_info_target": "0063AB6C"
+    }
+  ],
+  "root_add_call": {
+    "rva": "0063AC20",
+    "bytes": "E8 4B 3B 20 01",
+    "target_rva": "0183E770",
+    "verification": "Decoded from byte offset 0xB4 in the published raw third-range fragment; the call lies within 0063AB6C..0063B04E."
+  },
+  "separate_span_note": {
+    "start_rva": "0063A6D0",
+    "end_rva_exclusive": "0063BEEC",
+    "length_bytes": 6172,
+    "interpretation": "Contiguous address envelope covering all five adjacent .pdata entries; it includes primary-chain ranges and two later chained funclet ranges, so it is not one logical function body."
+  },
+  "unresolved": {
+    "state_dispatch_table_rva": "0063BEBC",
+    "entry_count": 12,
+    "next_action": "Read the 12 signed rel32 entries and map each target to its .pdata range; recompute the 2430-byte primary-span digest from the hash-matched local executable when the local command helper is available.",
+    "callback_semantic_identity": "unresolved",
+    "raw_FF_52_10_dispatch_target": "unresolved"
+  },
+  "retained_limits": [
+    "The 2026-10-09 23:33Z seed-function output is a lane-exclusive artifact for session 20261009T230838Z_0000790006606CAB; it is not a combined-report result.",
+    "The 23:35Z all-saved snapshot reuses the same seed-function artifact and the same 23:08Z runtime capture; it is not a new runtime event.",
+    "The 43-target value remains asset-derived, not an observed container count.",
+    "Keep the historical 35-container baseline and the separate post-update 16-target observation/model distinct.",
+    "The zero owner+0x10 read is after the external call and does not resolve the raw dispatch target; the separate resolver sample does not resolve this caller.",
+    "WinDbg remains excluded per the user's report that it crashes NMS; no debugger or live NMS action was used."
+  ],
+  "human_intervention_required": false
+}
