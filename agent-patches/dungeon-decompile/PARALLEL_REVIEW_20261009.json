@@ -66,7 +66,7 @@
       "target_rva_hex": null,
       "pointer_slot_rva_hex": null,
       "recorded_logical_entry_rva": "0063A6D0",
-      "interpretation": "The embedded source artifact associates logical-entry RVA 0063A6D0 with this descriptor/runtime match. The decoded indirect call itself has no static target RVA, and this report does not capture the pre-call [RDX+0x10] value. Keep the entry association distinct from direct call-target proof and from the separately established Oct 8 16:31 event correlation.",
+      "interpretation": "The extracted artifact copies logical_entry_rva_hex and exact_runtime_match from its input JSON; source audit confirms the extractor does not independently validate them. Thus 0063A6D0 is unvalidated source metadata in this report, while the decoded indirect call has target_rva_hex=null and no pre-call [RDX+0x10] value. This exact extraction alone does not prove the call destination.",
       "owner_plus_0x10": "0000000000000000 (captured after the external call; not the dispatch target)"
     },
     "upstream_callers": {
@@ -98,5 +98,12 @@
     "The callback semantic identity and raw pre-call virtual slot remain unresolved.",
     "WinDbg is ruled out by the user's report that it crashes NMS; no debugger or live NMS action was used."
   ],
-  "next_action": "Continue offline semantic analysis of the hash-matched current caller/callback and investigate generator-consumer references without assigning an unsupported semantic name."
+  "next_action": "Continue offline semantic analysis of the hash-matched current caller/callback and investigate generator-consumer references without assigning an unsupported semantic name.",
+  "extractor_source_audit": {
+    "source_path": "tools/extract_exact_root_caller_code.py",
+    "source_sha": "0943c480830413c61fec228c2c97fac350a9c867",
+    "relevant_lines": "229-268",
+    "finding": "extract() reads the external caller return RVA and decodes the NMS.exe call bytes, but copies logical_entry_rva_hex from input evidence at line 257 and exact_runtime_match at line 262 without independently deriving either value.",
+    "effect": "For this report, 0063A6D0 is input-source metadata. It is not a target established by the exact-caller extraction. The direct FF 52 10 target remains null; use the source capture producer's independently validated hook/descriptor correlation before making any effective-destination claim."
+  }
 }
