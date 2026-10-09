@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-09T15:23:52Z",
+  "updated_utc": "2026-10-09T16:20:52Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -33,19 +33,21 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage-update-20261008",
-      "status": "third-address-system-seed-computed; root relation remains unknown; 1.0.5-build-request-ready",
+      "status": "latest combined report reconciled; 1.0.5 extension published; waiting_on_user for sequential saved-sample actions",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-      "result_summary": "Hash-verified automatic batch 20261009T015908Z-d4d6ae3f report 20261009T015909Z-77532ce2 (SHA-256 721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b) contains third candidate 0001680006607CAC -> 2139770A2614E3DC, one observation; executable identity is unverified because the measurement artifact has no NMS.exe hash. Caller and seed-function outputs in that report cite the prior 0001550006607CAC session. Derivation remains unknown. Screenshot error is caused by 1.0.4 panel summary length 635 > host limit 500; 1.0.5 build request shortens it to 432. The 14 MEDI and separate 43 CARGO values remain asset predictions, not observed physical counts. Public address-system-seed calculation reproduces both existing anchors and yields 8A6EF089 for 0001680006607CAC; the associated 64-bit root candidate remains unexplained.",
-      "human_validation_required": false,
+      "result_summary": "Verified automatic report 20261009T161520Z-7233c462 (SHA-256 35e403f79d6e3c665a36f74eee13928dc5a9d77036278604efb1039143076e55) has one fresh root candidate 0001680006607CAC -> 2139770A2614E3DC, without executable identity. Its caller, upstream, and seed-function action outputs cite the prior 000155 session. The separate 16:18 runtime capture records 00006D0006606CAB -> A5047E4E4B68F362 and dynamic caller return 02C0860A; its owner +0x10 read is zero and executable identity is absent. No address-to-root derivation is claimed.",
+      "human_validation_required": true,
       "review": "agent-patches/seed-lineage/SEED_B_SYSTEM_SEED_COMPARISON_20261009.md",
-      "next_action": "Continue offline review for an independently supported address-to-root-seed link and preserve the third candidate's unverified executable provenance; after the 1.0.5 request is integrated, trace the already-saved third-address sample through caller, upstream callers, and seed-function analysis.",
+      "next_action": "After the three user-triggered uploads arrive, compare their session, address, root seed, caller return, and executable hash; then compute the public system-seed comparison for the newer 00006D0006606CAB sample and update the derivation review.",
       "parallel_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
-      "extension_version": "1.0.4",
-      "latest_report": "research-uploads/20261009T015948Z-automatic-research-batch-20261009T015908Z-d4d6ae3f-50cb03/reports/20261009T015909Z-77532ce2/combined-results.json",
-      "latest_report_sha256": "721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b",
+      "extension_version": "1.0.5",
+      "latest_report": "research-uploads/20261009T161615Z-automatic-research-batch-20261009T161519Z-fdc03736-828540/reports/20261009T161520Z-7233c462/combined-results.json",
+      "latest_report_sha256": "35e403f79d6e3c665a36f74eee13928dc5a9d77036278604efb1039143076e55",
       "candidate_extension_version": "1.0.5",
       "build_request_id": "seed-panel-summary-limit-20261009",
-      "latest_report_kind": "automatic_saved_session"
+      "latest_report_kind": "automatic_saved_session",
+      "latest_all_saved_evidence_snapshot": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/run-manifest.json",
+      "latest_runtime_capture": "research-uploads/20261009T161848Z-upload-runtime-capture/exact-root-caller-latest.json"
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-current-target-20261008-reconciled",
@@ -90,12 +92,25 @@
     "pending": [
       {
         "lane": "seed-lineage",
-        "kind": "upload-saved-root-and-recapture-caller-upstream",
+        "kind": "refresh-extension-and-run-sequential-saved-sample-actions",
         "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-        "next_action": "On shared main Surveyor, close NMS if open; RUNTIME-A 1.0.6 > Upload captured root event > wait for upload success. Then Seed-Lineage 1.0.3 > Extract caller code + upload > Extract upstream callers + upload. Return the upload, caller, and upstream evidence records.",
-        "report": "research-uploads/20261008T185341Z-parallel-action-test/combined-results.json",
-        "report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe",
-        "full_derelict_required": false
+        "status": "waiting_on_user",
+        "next_action": "Use Seed-B 1.0.5 to extract caller code, upstream callers, and seed-function analysis sequentially from the latest saved root capture at 00006D0006606CAB.",
+        "steps": [
+          "Surveyor > Agent Console > Refresh now > Seed-B card > Update to v1.0.5; confirm Installed 1.0.5 / Published 1.0.5 and that no Invalid extension panel summary error appears.",
+          "With workflow idle, click 1. Extract caller code + upload; wait for success and check the output uses address 00006D0006606CAB and root A5047E4E4B68F362.",
+          "Only after action 1 succeeds, click 2. Extract upstream callers + upload; wait for success and confirm the same session, address, root, caller, and NMS.exe hash.",
+          "Only after action 2 succeeds, click 3. Analyze seed function + upload; wait for success and confirm it cites the upstream result from action 2."
+        ],
+        "success_condition": "All three uploaded action records form a same-session/address/root/caller/executable chain for 00006D0006606CAB; otherwise return the first failing action record. The current runtime capture itself contains no NMS.exe hash and its +0x10 slot is zero.",
+        "evidence_to_return": [
+          "The three upload/run-manifest paths and their evidence paths, or the first failing action record."
+        ],
+        "full_derelict_required": false,
+        "latest_combined_report": "research-uploads/20261009T161615Z-automatic-research-batch-20261009T161519Z-fdc03736-828540/reports/20261009T161520Z-7233c462/combined-results.json",
+        "latest_combined_report_sha256": "35e403f79d6e3c665a36f74eee13928dc5a9d77036278604efb1039143076e55",
+        "latest_runtime_capture": "research-uploads/20261009T161848Z-upload-runtime-capture/exact-root-caller-latest.json",
+        "latest_runtime_capture_sha256": "e0f850e46dd8b36b24de323a212ec84043cfc872a111cb5e6060316aaa7af412"
       },
       {
         "lane": "runtime-dispatch",

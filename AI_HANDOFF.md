@@ -1,3 +1,11 @@
+## Seed-Lineage extension and current evidence — 2026-10-09 16:20Z
+
+- Seed-Lineage JSON extension 1.0.5 is published directly in the shared extension index, with a 491-character summary. The panel shows actions only while lane status is `waiting_on_user`. The ready build request remains for the primary compiler to include the same files and test in the compiled Surveyor release and complete source ZIP.
+- The current automatic pointer names batch `20261009T161519Z-fdc03736`; batch-index SHA-256 `69a195338658155ed8165b7e69abf459b9c904a9fca22d75304e2356a45ed418` and combined report SHA-256 `35e403f79d6e3c665a36f74eee13928dc5a9d77036278604efb1039143076e55` verify. Report `20261009T161520Z-7233c462` has one fresh 000168 root candidate `2139770A2614E3DC`; caller/upstream/seed-function action outputs still cite prior 000155.
+- A later runtime-only capture at 16:18:44Z records a different address `00006D0006606CAB`, candidate `A5047E4E4B68F362`, and external return `02C0860A`; it has no executable hash and is not part of that combined report. Its `+0x10` read is zero. The all-saved upload copies the earlier static artifacts, so no matched 00006D caller chain exists.
+- The separate exact-root static extraction in the combined report uses NMS.exe SHA-256 `13d506...` and correlates the 16:13 runtime return `02C0860A`; this does not identify a dispatch target. The separate resolver sample and zero `+0x10` remain unresolved.
+- MEDI 14 and CARGO 43 remain asset predictions, not physical counts. The next action is the extension's sequential caller → upstream → seed-function chain on the newest saved sample; no NMS launch or full traversal is needed. Python unittest was not run because the local execution helper failed to start; JSON, SHA, panel-limit, index and action-contract checks are being validated before publication.
+
 ## Current release — Surveyor 0.3.70 parallel saved-session batches — 2026-10-09
 
 - Queued saved sessions now run in bounded parallel groups: up to three sessions concurrently, with four isolated research actions for each. Additional queued sessions continue in later waves.

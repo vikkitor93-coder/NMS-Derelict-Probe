@@ -3,19 +3,19 @@
   "request_id": "seed-panel-summary-limit-20261009",
   "lane_id": "seed-lineage",
   "status": "ready",
-  "base_commit": "fc644e199a6c4bb327276b9a7c853a44509201e0",
-  "summary": "Publish Seed-Lineage extension 1.0.5 with a host-valid summary (maximum 500 characters), current batch provenance, and tests for the summary limit and lane action contract.",
+  "base_commit": "6542cc36f78390da1be1e82fc59bad46657d8f7a",
+  "summary": "Include Seed-Lineage extension 1.0.5 in the shared Surveyor source package. The JSON panel and index are also directly published for Agent Console discovery; the primary compiler still owns the compiled application and complete source ZIP.",
   "files": [
     {
       "source": "files/agent-ui/extensions/seed-lineage/1.0.5/panel.json",
       "target": "agent-ui/extensions/seed-lineage/1.0.5/panel.json",
-      "sha256": "8609eb77ee65cce1a8a82fbf1f0b5a3c75b24a663319fc05e75cf57e78fac767",
+      "sha256": "45fe41d6bb10dc0a790bf6143c953fa17b1c89efb2ba30c7c475a772820b38bb",
       "base_sha256": null
     },
     {
       "source": "files/agent-ui/extensions/seed-lineage/1.0.5/manifest.json",
       "target": "agent-ui/extensions/seed-lineage/1.0.5/manifest.json",
-      "sha256": "30bcbaec8487ae3ba4032521311e53499b64e09e9bd215fe9623b484ffcf517a",
+      "sha256": "0718eb037ddeefee6b39eabb897a2400da07c6b3fa0b50fbbce714f83f020f90",
       "base_sha256": null
     },
     {
@@ -27,12 +27,12 @@
     {
       "source": "files/tests/test_seed_lineage_ui_extension.py",
       "target": "tests/test_seed_lineage_ui_extension.py",
-      "sha256": "f761c37b52cd77b6aee4e08f5e1e863c5f40a2c516fabbfc023e8a99b83c03d3",
+      "sha256": "1cacf4330123ab6680cc5c4b7094313ce3001dc1a1d748e5c5b63886c4e6ffe4",
       "base_sha256": "0096d4a7fb67304218d3a5d55fa688aaec30da2daa068162cf7ba31cf2b12104"
     }
   ],
   "tests": [
     "python -m unittest tests.test_seed_lineage_ui_extension"
   ],
-  "rollback": "Before integration, mark this request cancelled and leave the index at 1.0.4. After integration, use Agent Console rollback to 1.0.3; retain the versioned files for history."
+  "rollback": "Agent Console rollback to v1.0.4 restores the prior panel. The ready request supplies the exact files for the primary compiler's source package; repository rollback is git revert of the single-parent publication commit, with backup branch backup/main-before-seed-extension-20261009T162052 as the base."
 }
