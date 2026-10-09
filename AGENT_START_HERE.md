@@ -44,10 +44,11 @@ All lanes contribute evidence toward connecting that chain.
 
 1. Read `WORKSPACE_STATE.json` for the **current** lane claims, next actions, publishing policy, and latest combined research pointer.
 2. Open `research/LATEST_PARALLEL_ACTION_TEST.json` and read the report it names. For the latest parallel-action run, this combined report is the sole source for action results. Do not use its queue or separate per-action latest files as competing results. Preserve the report's provenance and interpretation notes.
-3. Read `RESEARCH_INDEX.md` for the truth table and `AI_HANDOFF.md` for architecture/current technical context.
-4. Read `AGENT_WORKFLOW.md` for publishing and Surveyor/evidence rules.
-5. Read `build-requests/README.md` before asking for a shared Surveyor build change.
-6. Read only your assigned lane manifest and files/evidence needed for your objective. Do not replace a combined-report finding with an unreviewed historical file.
+3. If `research/LATEST_ROOT_SEED_BATCH.json` exists, verify its report SHA-256 and use the referenced batch report plus its listed source capture journals for multi-system seed correlation. The report keeps different process journals separate; do not substitute `root-event-latest.json`, which represents only the newest event.
+4. Read `RESEARCH_INDEX.md` for the truth table and `AI_HANDOFF.md` for architecture/current technical context.
+5. Read `AGENT_WORKFLOW.md` for publishing and Surveyor/evidence rules.
+6. Read `build-requests/README.md` before asking for a shared Surveyor build change.
+7. Read only your assigned lane manifest and files/evidence needed for your objective. Do not replace a combined-report finding with an unreviewed historical file.
 
 For any Surveyor panel/action request, also follow `AGENT_UI_EXTENSION_GUIDE.md`. All four lanes share its single versioned, data-only extension contract; do not add lane-specific Python UI modules or shell-command strings.
 

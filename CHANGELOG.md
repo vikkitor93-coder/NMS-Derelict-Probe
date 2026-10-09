@@ -1,3 +1,11 @@
+## v0.3.68 — multi-system root seed batch analysis
+
+- Analyze all captured dungeon-root events from append-only process journals; preserve each process as a separate cohort and group observations by universe address.
+- Compare repeated seeds and cross-address collisions without claiming a derived formula.
+- Add a Surveyor panel action that publishes the report and exact source journals to all four lanes through `research/LATEST_ROOT_SEED_BATCH.json`.
+- Preserve the existing latest-root capture and single-event upload workflows.
+- Verification: 219 unit tests passed; compile/package verification recorded in the release handoff.
+
 ## v0.3.67 — recover unprocessed saved sessions
 
 - On startup, scan saved session JSON files and queue sessions without a persisted queue entry or matching automatic research report.

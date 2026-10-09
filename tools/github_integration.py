@@ -46,6 +46,7 @@ ACTION_OUTPUTS = {
     "analyze-crates": [ROOT / "crate-research-latest.json"],
     "analyze-correlation": [WORK / "seed-room-correlation.json"],
     "compare-measurements": [WORK / "generation-measurements-summary.json", WORK / "generation-measurements.csv"],
+    "root-seed-batch": [WORK / "root-seed-batch-latest.json"],
 }
 
 
@@ -70,6 +71,31 @@ def all_saved_evidence_outputs() -> tuple[list[Path], dict[str, list[str]]]:
         unique.setdefault(key, root_event)
         producers.setdefault(key, []).append("runtime-probe")
     return list(unique.values()), producers
+
+
+def root_seed_batch_outputs() -> tuple[list[Path], dict[str, list[str]]]:
+    """Return one batch report and the exact append-only journals it analyzed."""
+    report_path = ACTION_OUTPUTS["root-seed-batch"][0]
+    try:
+        report = _read_json_file(report_path)
+    except Exception as exc:
+        raise RuntimeError("The root-seed batch report is missing or invalid JSON.") from exc
+    summary = report.get("summary") if isinstance(report, dict) else None
+    if not isinstance(summary, dict) or int(summary.get("root_event_observation_count") or 0) < 1:
+        raise RuntimeError("No saved root-resource events were found; capture at least one root event first.")
+    paths = [report_path]
+    producers = {os.path.normcase(str(report_path.resolve())): ["research.analyze_root_seed_batch"]}
+    for item in report.get("source_journals") or []:
+        if not isinstance(item, dict):
+            continue
+        name = Path(str(item.get("name") or "")).name
+        if not name.startswith("capture-journal-") or not name.endswith(".jsonl"):
+            continue
+        journal = ROOT / name
+        if journal.is_file():
+            paths.append(journal)
+            producers[os.path.normcase(str(journal.resolve()))] = ["runtime-probe"]
+    return paths, producers
 
 DERELICT_FARMING_FILES = {
     "METADATA/REALITY/TABLES/REWARDTABLE.EXML",
@@ -276,6 +302,9 @@ def upload_action(action: str, capture_file: str | None = None, only_if_changed:
     if action == "parallel-action-test":
         report_path = expected[0]
         report = _validated_parallel_action_report(report_path)
+    if action == "root-seed-batch":
+        expected, producers = root_seed_batch_outputs()
+        report = _read_json_file(expected[0])
     if not expected:
         raise RuntimeError(f"Unknown action: {action}")
     files = [p for p in expected if p.is_file()]
@@ -308,6 +337,10 @@ def upload_action(action: str, capture_file: str | None = None, only_if_changed:
         manifest["uploaded_for_lanes"] = ["runtime-dispatch", "seed-lineage", "dungeon-decompile", "metadata"]
         manifest["selection"] = "Only the latest combined parallel research report; per-action files and queue are intentionally excluded."
         manifest["run_id"] = report["run_id"]
+    if action == "root-seed-batch":
+        manifest["uploaded_for_lanes"] = ["runtime-dispatch", "seed-lineage", "dungeon-decompile", "metadata"]
+        manifest["selection"] = "The multi-system root-seed correlation report and the exact append-only capture journals it analyzed. Each journal/process remains a separate cohort."
+        manifest["run_id"] = f"root-seed-batch-{now}"
     if namespace:
         manifest["evidence_namespace"] = namespace
     ref = _api_json(gh, "GET", f"repos/{REPO}/git/ref/heads/{BRANCH}")
@@ -330,7 +363,7 @@ def upload_action(action: str, capture_file: str | None = None, only_if_changed:
         if action == "all-saved-evidence":
             record["produced_by"] = producers.get(os.path.normcase(str(p.resolve())), [])
             record["visible_to_lanes"] = manifest["uploaded_for_lanes"]
-        elif action == "parallel-action-test":
+        elif action in {"parallel-action-test", "root-seed-batch"}:
             record["visible_to_lanes"] = manifest["uploaded_for_lanes"]
         manifest["files"].append(record)
     mbytes = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
@@ -350,6 +383,27 @@ def upload_action(action: str, capture_file: str | None = None, only_if_changed:
             "encoding": "base64",
         })
         entries.append({"path": "research/LATEST_PARALLEL_ACTION_TEST.json", "mode": "100644", "type": "blob", "sha": pointer_blob["sha"]})
+    if action == "root-seed-batch":
+        report_digest = hashlib.sha256(snapshots[0][1]).hexdigest()
+        latest_pointer = {
+            "schema_version": 1,
+            "run_id": manifest["run_id"],
+            "uploaded_utc": now,
+            "report_path": f"{folder}/root-seed-batch-latest.json",
+            "report_sha256": report_digest,
+            "root_event_observation_count": report["summary"]["root_event_observation_count"],
+            "distinct_universe_address_count": report["summary"]["distinct_universe_address_count_overall"],
+            "visible_to_lanes": manifest["uploaded_for_lanes"],
+            "source_journals": [
+                {"name": item["name"], "sha256": item["sha256"], "root_event_count": item["root_event_count"]}
+                for item in report.get("source_journals", []) if isinstance(item, dict)
+            ],
+        }
+        pointer_blob = _api_json(gh, "POST", f"repos/{REPO}/git/blobs", {
+            "content": base64.b64encode((json.dumps(latest_pointer, indent=2, sort_keys=True) + "\n").encode()).decode("ascii"),
+            "encoding": "base64",
+        })
+        entries.append({"path": "research/LATEST_ROOT_SEED_BATCH.json", "mode": "100644", "type": "blob", "sha": pointer_blob["sha"]})
     tree = _api_json(gh, "POST", f"repos/{REPO}/git/trees", {"base_tree": base_tree, "tree": entries})
     new_commit = _api_json(gh, "POST", f"repos/{REPO}/git/commits", {"message": f"Add {action} research evidence {now}", "tree": tree["sha"], "parents": [parent]})
     _api_json(gh, "PATCH", f"repos/{REPO}/git/refs/heads/{BRANCH}", {"sha": new_commit["sha"], "force": False})
@@ -364,6 +418,8 @@ def upload_action(action: str, capture_file: str | None = None, only_if_changed:
     print(f"Complete + uploaded: https://github.com/{REPO}/tree/{BRANCH}/{folder}")
     if action == "parallel-action-test":
         print(f"Latest combined research pointer: https://github.com/{REPO}/blob/{BRANCH}/research/LATEST_PARALLEL_ACTION_TEST.json")
+    if action == "root-seed-batch":
+        print(f"Latest root-seed batch pointer: https://github.com/{REPO}/blob/{BRANCH}/research/LATEST_ROOT_SEED_BATCH.json")
     _log("upload_complete", action=action, folder=folder, commit=new_commit["sha"])
 
 
