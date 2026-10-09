@@ -2,9 +2,9 @@
   "schema_version": 1,
   "request_id": "seed-panel-summary-limit-20261009",
   "lane_id": "seed-lineage",
-  "status": "ready",
+  "status": "cancelled",
   "base_commit": "6542cc36f78390da1be1e82fc59bad46657d8f7a",
-  "summary": "Include Seed-Lineage extension 1.0.5 in the shared Surveyor source package. The JSON panel and index are also directly published for Agent Console discovery; the primary compiler still owns the compiled application and complete source ZIP.",
+  "summary": "Superseded by seed-lineage-fresh-baseline-action-20261009 (Seed-B 1.0.6 refresh first).",
   "files": [
     {
       "source": "files/agent-ui/extensions/seed-lineage/1.0.5/panel.json",

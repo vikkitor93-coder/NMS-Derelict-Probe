@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "extension_id": "seed-lineage",
+  "version": "1.0.6",
+  "compatible_surveyor_api_version": "1.0",
+  "min_surveyor_version": "0.3.41",
+  "dependencies": [
+    "agent-console.ui.v1",
+    "action.research.analyze_generation",
+    "action.research.extract_caller_code",
+    "action.research.extract_upstream_callers",
+    "action.research.analyze_seed_function"
+  ],
+  "entry_point": "panel.json",
+  "files": [
+    {
+      "sha256": "91af1cadde36ce926c51b93929cfbd75f157626c4a1eda971fc85f6730630646",
+      "path": "panel.json"
+    }
+  ]
+}

@@ -54,17 +54,18 @@
   },
   "human_validation": {
     "required": true,
-    "reason": "Agent Console must run the three saved-evidence actions sequentially on the latest 00006D0006606CAB capture so their outputs share one input chain.",
-    "surveyor_request": "Use Seed-B 1.0.5 to extract caller code, upstream callers, and seed-function analysis sequentially from the latest saved root capture at 00006D0006606CAB.",
+    "reason": "Agent Console must run four sequential actions on current baseline for same-sample chain.",
+    "surveyor_request": "Run Seed-B 1.0.6's refresh-first four-action sequence from the saved session and return its evidence.",
     "steps": [
-      "Surveyor > Agent Console > Refresh now > Seed-B card > Update to v1.0.5; confirm Installed 1.0.5 / Published 1.0.5 and that no Invalid extension panel summary error appears.",
-      "With workflow idle, click 1. Extract caller code + upload; wait for success and check the output uses address 00006D0006606CAB and root A5047E4E4B68F362.",
-      "Only after action 1 succeeds, click 2. Extract upstream callers + upload; wait for success and confirm the same session, address, root, caller, and NMS.exe hash.",
-      "Only after action 2 succeeds, click 3. Analyze seed function + upload; wait for success and confirm it cites the upstream result from action 2."
+      "Surveyor > Agent Console > Refresh now > Seed-B card > Update to v1.0.6; confirm Installed 1.0.6 / Published 1.0.6 and no Invalid extension panel summary error.",
+      "With workflow idle, click 1. Refresh generation baseline + upload. Confirm session 20261009T161852Z_00006D0006606CAB, address 00006D0006606CAB, root A5047E4E4B68F362, and artifact SHA-256 a950ddd7d2bf56c8a62ea5b26dee0ca0c40e51432ccb67a9d7a5f7b70dec32b7.",
+      "Only after step 1 succeeds, click 2. Extract caller code + upload; confirm the same session/address/root and executable identity.",
+      "Only after step 2 succeeds, click 3. Extract upstream callers + upload; confirm it cites the new caller artifact and uses the same sample.",
+      "Only after step 3 succeeds, click 4. Analyze seed function + upload; confirm it cites the new upstream artifact."
     ],
-    "success_condition": "All three uploaded action records form a same-session/address/root/caller/executable chain for 00006D0006606CAB; otherwise return the first failing action record. The current runtime capture itself contains no NMS.exe hash and its +0x10 slot is zero.",
+    "success_condition": "All four action uploads form one ordered chain for session 20261009T161852Z_00006D0006606CAB, address 00006D0006606CAB, root A5047E4E4B68F362, with each dependent output citing its predecessor. This establishes a same-sample analysis chain only, not a root formula or dispatch target.",
     "evidence_to_return": [
-      "The three upload/run-manifest paths and their evidence paths, or the first failing action record."
+      "Four run-manifest/evidence paths, or the first failing action record."
     ],
     "full_derelict_required": false
   },
@@ -90,18 +91,19 @@
     "latest_runtime_only_root": "A5047E4E4B68F362"
   },
   "current_extension_candidate": {
-    "version": "1.0.5",
-    "publication": "published-to-main-extension-index; Agent Console refresh/action validation pending; ready build request retained for primary compiler source packaging",
-    "request_id": "seed-panel-summary-limit-20261009",
-    "panel_summary_characters": 491,
-    "panel_sha256": "45fe41d6bb10dc0a790bf6143c953fa17b1c89efb2ba30c7c475a772820b38bb",
-    "manifest_sha256": "0718eb037ddeefee6b39eabb897a2400da07c6b3fa0b50fbbce714f83f020f90",
+    "version": "1.0.6",
+    "publication": "published-to-main-extension-index; runtime refresh/action validation pending; ready build request for primary compiler",
+    "request_id": "seed-lineage-fresh-baseline-action-20261009",
+    "panel_summary_characters": 395,
+    "panel_sha256": "91af1cadde36ce926c51b93929cfbd75f157626c4a1eda971fc85f6730630646",
+    "manifest_sha256": "98872ecec4a4919c62b43d65e1d0455313b9868226d204080668a18e1dea8d68",
     "actions": [
+      "research.analyze_generation",
       "research.extract_caller_code",
       "research.extract_upstream_callers",
       "research.analyze_seed_function"
     ],
-    "failure_cause": "1.0.4 panel summary exceeded the host limit of 500 characters; v1.0.5 uses a 491-character summary and keeps action buttons visible only while human input is required."
+    "reason": "Refresh generation baseline first before extracting caller, upstream callers, and seed function."
   },
   "latest_lane_exclusive_evidence": {
     "caller": {
@@ -128,30 +130,28 @@
     }
   },
   "rollback": {
-    "base_commit": "6542cc36f78390da1be1e82fc59bad46657d8f7a",
-    "backup_branch": "backup/main-before-seed-extension-20261009T162052",
-    "path": "Agent Console rollback to v1.0.4; repository rollback via git revert of the single-parent publication. Backup ref backup/main-before-seed-extension-20261009T162052 retains main at 6542cc36f78390da1be1e82fc59bad46657d8f7a.",
-    "latest_lane_publication": {
-      "base_commit": "6542cc36f78390da1be1e82fc59bad46657d8f7a",
-      "backup_branch": "backup/main-before-seed-extension-20261009T162052",
-      "path": "Single-parent commit. Revert with git revert <commit-sha>; backup branch preserves exact base."
-    }
+    "base_commit": "6688832abd762a1066283880451aadf5c400bdeb",
+    "backup_branch": "backup/main-before-seed-refresh-extension-20261009T2300",
+    "path": "Revert the one-parent publication commit; backup branch preserves exact base. Roll back panel in Agent Console to installed v1.0.5."
   },
   "latest_saved_session_batch": {
-    "batch_id": "20261009T161519Z-fdc03736",
-    "batch_index_path": "research-uploads/20261009T161615Z-automatic-research-batch-20261009T161519Z-fdc03736-828540/batch-results.json",
-    "batch_index_sha256": "69a195338658155ed8165b7e69abf459b9c904a9fca22d75304e2356a45ed418",
-    "report_path": "research-uploads/20261009T161615Z-automatic-research-batch-20261009T161519Z-fdc03736-828540/reports/20261009T161520Z-7233c462/combined-results.json",
-    "report_sha256": "35e403f79d6e3c665a36f74eee13928dc5a9d77036278604efb1039143076e55",
-    "input_session_sha256": "bd414953ea7592fa20e56e286b3189d214535476242e19cee2fc617e0b77e166",
+    "batch_id": "20261009T163434Z-bf1ed756",
+    "batch_index_path": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/batch-results.json",
+    "batch_index_sha256": "4ae5af8f6814e14d1e5e16ca1eeeaf455599b1e22d47286ba01e2b513f3f25cd",
+    "report_path": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
+    "report_sha256": "fb7126c475d65d0e764d802b74ed6a6ca99c56fb72d75c65da9e0e3f6335f1f4",
+    "input_session_sha256": "15c10763f0a5df6c3b7caec8b9ed771361d806912a1fb74c43b249f5c676e23a",
+    "run_id": "20261009T163435Z-b91c6dbb",
     "status": "completed-with-errors",
     "completed_actions": 7,
     "failed_actions": 1,
     "upload_actions_skipped": 1,
-    "fresh_generation_session": "20261009T161406Z_0001680006607CAC",
-    "root_seed_candidate": "2139770A2614E3DC",
-    "seed_lineage_caller_upstream_function_session": "20261008T185119Z_0001550006607CAC",
-    "details_path": "agent-patches/seed-lineage/SEED_B_AUTO_BATCH_REVIEW_20261009T161520Z.md"
+    "generation_session": "20261009T161852Z_00006D0006606CAB",
+    "universe_address": "00006D0006606CAB",
+    "root_seed_candidate": "A5047E4E4B68F362",
+    "generation_artifact_sha256": "a950ddd7d2bf56c8a62ea5b26dee0ca0c40e51432ccb67a9d7a5f7b70dec32b7",
+    "fresh_same_sample_static_chain": false,
+    "provenance": "automatic_saved_session; isolated_parallel_test_no_github_upload; input snapshot available; worker data not retained"
   },
   "seed_lineage_reconciliation": {
     "report_run_id": "20261009T015909Z-77532ce2",
