@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "version": "0.3.70",
-  "status": "ready-to-publish",
+  "status": "published",
   "base_version": "0.3.69",
   "artifact": {
     "file_name": "NMS-Derelict-Probe-v0.3.70-source.zip",
@@ -27,5 +27,5 @@
     "source_zip": "CRC and exact managed-file list verified; 39-part base64 round trip passed",
     "windows_surveyor_validation": "pending local Windows installation"
   },
-  "publication": "Ready to publish to main; rollback reference: backup/main-before-parallel-saved-session-batches-20261009 at base b74dca838f3a90c23b14d2d656c90c5774fd2556."
+  "publication": "Surveyor 0.3.70 is published to main. Rollback reference: backup/main-before-parallel-saved-session-20261009-0040 at pre-release base 5cd18ea942680bfb95479cb7a2a967ba65d1d506."
 }
