@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-current-target-20261008-reconciled",
-  "reviewed_utc": "2026-10-09T23:26:00Z",
+  "reviewed_utc": "2026-10-09T23:43:00Z",
   "state": "runtime-dispatch-correlated-static-callback-analysis-active",
   "verified": {
     "historical_baseline": {
@@ -346,6 +346,14 @@
       "return_rva": "02C0497A",
       "matches": 0,
       "separate_from_02C08607": true
+    },
+    "current_build_primary_pdata_chain": {
+      "start_rva": "0063A6D0",
+      "end_rva_exclusive": "0063B04E",
+      "length_bytes": 2430,
+      "range_count": 3,
+      "third_range_sha256": "51e39e47017337915fa1b72986ab9639a7a5b462858bc8be38bd6c9cba2cc9f6",
+      "combined_sha256": null
     }
   },
   "evidence": {
@@ -436,10 +444,10 @@
   },
   "blocked": {
     "human_action_required": false,
-    "reason": "Offline byte-level work remains available. WinDbg is excluded per user report; no live NMS action is required for current analysis.",
+    "reason": "No human action is required for the current evidence review. Offline state-table classification and primary-span hash verification remain agent-owned; WinDbg is excluded per the user's report that it crashes NMS.",
     "next_lane": "dungeon-decompile"
   },
-  "next_lane_owned_step": "Continue offline classification of the 52 static references and trace their caller-side dataflow; keep semantic naming unresolved.",
+  "next_lane_owned_step": "Continue offline classification of the 12 signed rel32 state-table entries at 0063BEBC, map targets to .pdata ranges, and compute the 2430-byte primary-chain SHA-256 from the matching executable when local command access is available.",
   "latest_shared_upload_review": {
     "path": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
     "root_event_utc": "2026-10-05T01:03:01.131Z",
@@ -481,7 +489,11 @@
     "research-uploads/20261009T232150Z-seed-lineage-all-saved-evidence-ca6ac9ea-1bc33dd4/run-manifest.json",
     "research-uploads/20261009T232432Z-seed-lineage-extract-upstream-08cc282f/dungeon-upstream-callers-latest.json",
     "research-uploads/20261009T232432Z-seed-lineage-extract-upstream-08cc282f/run-manifest.json",
-    "research-uploads/20261009T232439Z-seed-lineage-all-saved-evidence-c443da47-a318d1ad/run-manifest.json"
+    "research-uploads/20261009T232439Z-seed-lineage-all-saved-evidence-c443da47-a318d1ad/run-manifest.json",
+    "agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json",
+    "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json",
+    "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/run-manifest.json",
+    "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json"
   ],
   "main_package_update_check": {
     "version_file": "main VERSION.txt: 0.3.57",
@@ -550,10 +562,10 @@
     },
     "note": "Newest shared snapshot; root capture timestamp remains 2026-10-04T23:17:15.827Z. The exact-root-caller-code SHA-256 is still 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2. This is not a new runtime sample or a helper export."
   },
-  "updated_utc": "2026-10-09T23:26:00Z",
+  "updated_utc": "2026-10-09T23:43:00Z",
   "status": "runtime-correlated-callback-analysis-active",
-  "summary": "Two distinct standalone runtime captures (23:05 and 23:08Z) report a unique descriptor/caller-return correlation to effective entry 0063A6D0. Static analysis against local NMS.exe SHA-256 13d5060d...cc3499 confirms caller 02C08607 FF 52 10 and the contiguous callback path 0063A6D0..0063AB6C (1180 bytes). Raw pre-call slot and callback semantic identity remain unresolved. The current all-saved snapshot repeats the 23:08 event (same artifact SHA), adds the reported 52-reference count and recursive return 0063A773, and does not provide a new capture. A same-session upstream scan now confirms the descriptor seed at descriptor+0x10 and use flag at +0x18 are read before root add; observed values match runtime. 52 static references classify to 50 calls and 2 jumps across 47 .pdata ranges; the self-recursive edge is 0063A76E.",
-  "next_action": "Continue offline classification of the 52 static references and trace their caller-side dataflow; keep semantic naming unresolved.",
+  "summary": "Two distinct 2026-10-09 runtime captures report event-scoped effective-entry correlation to 0063A6D0; raw FF 52 10 target and callback semantics remain unresolved. Correction: the existing 1180-byte hash covers only the first two .pdata ranges (0063A6D0..0063AB6C). The primary chain has a third range through 0063B04E (2430 bytes total); the same-session seed-function upload supplies the 1250-byte third-range bytes and verifies their SHA-256, with root AddResource at 0063AC20 inside that range. The full primary-span digest is not asserted. Later 0063B04E..0063BEEC ranges are chained funclet ranges. The 23:35Z snapshot repeats the 23:08 event, not a new runtime capture.",
+  "next_action": "Continue offline classification of the 12 signed rel32 state-table entries at 0063BEBC, map targets to .pdata ranges, and compute the 2430-byte primary-chain SHA-256 from the matching executable when local command access is available.",
   "human_intervention_required": false,
   "user_steps": [],
   "current_build_static_map": {
@@ -658,7 +670,7 @@
   },
   "current_build_caller_context": {
     "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
-    "sha256": "4106dd4968c38c70fe504459aa172920712dc73c07141bc89d932dcda4d3400b",
+    "sha256": "8e4b45c236d3d237bb8f2250cd9fc981ebe4f77396d341805034f4dea4c94596",
     "verified": true
   },
   "runtime_capture_evidence": [
@@ -775,5 +787,23 @@
       "pdata_entries_in_exe": 157445
     },
     "interpretation": "Same-session offline static cross-reference and field-offset evidence. The observed descriptor pointer and seed values match the static field locations for this event. This corroborates event-scoped dataflow at 0063A6D0 but does not provide a semantic function name or the pre-call FF 52 10 slot target."
-  }
+  },
+  "latest_callback_pdata_chain_review": {
+    "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json",
+    "sha256": "f69954b69cfce4e54b2a31765bf48a4b5506990557772504120a846d1d4f3692",
+    "reviewed_utc": "2026-10-09T23:43:00Z"
+  },
+  "latest_seed_function_upload": {
+    "path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json",
+    "run_manifest_path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/run-manifest.json",
+    "sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+    "sha256_verified": true,
+    "session": "20261009T230838Z_0000790006606CAB",
+    "address": "0000790006606CAB",
+    "root": "C36137A0B4914AD9",
+    "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "upstream_sha256": "65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52",
+    "snapshot_manifest": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json"
+  },
+  "latest_seed_function_all_saved_snapshot": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json"
 }
