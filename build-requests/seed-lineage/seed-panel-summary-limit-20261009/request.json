@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "request_id": "seed-panel-summary-limit-20261009",
+  "lane_id": "seed-lineage",
+  "status": "ready",
+  "base_commit": "fc644e199a6c4bb327276b9a7c853a44509201e0",
+  "summary": "Publish Seed-Lineage extension 1.0.5 with a host-valid summary (maximum 500 characters), current batch provenance, and tests for the summary limit and lane action contract.",
+  "files": [
+    {
+      "source": "files/agent-ui/extensions/seed-lineage/1.0.5/panel.json",
+      "target": "agent-ui/extensions/seed-lineage/1.0.5/panel.json",
+      "sha256": "8609eb77ee65cce1a8a82fbf1f0b5a3c75b24a663319fc05e75cf57e78fac767",
+      "base_sha256": null
+    },
+    {
+      "source": "files/agent-ui/extensions/seed-lineage/1.0.5/manifest.json",
+      "target": "agent-ui/extensions/seed-lineage/1.0.5/manifest.json",
+      "sha256": "30bcbaec8487ae3ba4032521311e53499b64e09e9bd215fe9623b484ffcf517a",
+      "base_sha256": null
+    },
+    {
+      "source": "files/agent-ui/extensions/index.json",
+      "target": "agent-ui/extensions/index.json",
+      "sha256": "908ea180752837f571132771b4bca03f21a6c0266feb551272218791b8a32e44",
+      "base_sha256": "0934446d4d5b662ef6db95f701d1d3f68068d7396043faa441b9e485839dbb7c"
+    },
+    {
+      "source": "files/tests/test_seed_lineage_ui_extension.py",
+      "target": "tests/test_seed_lineage_ui_extension.py",
+      "sha256": "f761c37b52cd77b6aee4e08f5e1e863c5f40a2c516fabbfc023e8a99b83c03d3",
+      "base_sha256": "0096d4a7fb67304218d3a5d55fa688aaec30da2daa068162cf7ba31cf2b12104"
+    }
+  ],
+  "tests": [
+    "python -m unittest tests.test_seed_lineage_ui_extension"
+  ],
+  "rollback": "Before integration, mark this request cancelled and leave the index at 1.0.4. After integration, use Agent Console rollback to 1.0.3; retain the versioned files for history."
+}

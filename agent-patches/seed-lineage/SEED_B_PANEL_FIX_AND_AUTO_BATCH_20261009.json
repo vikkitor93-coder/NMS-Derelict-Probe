@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "lane": "seed-lineage",
+  "report_path": "research-uploads/20261009T015948Z-automatic-research-batch-20261009T015908Z-d4d6ae3f-50cb03/reports/20261009T015909Z-77532ce2/combined-results.json",
+  "report_sha256": "721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b",
+  "batch_id": "20261009T015908Z-d4d6ae3f",
+  "batch_sha256": "b1ea5afaee7aa2f6d2a49bd48c28b73a67d59a9aad3f6b53702d41fe2b0ea18a",
+  "input_session_sha256": "2b6c2767cdc1d01c4ef2c36a5536a787379bcd72bc3159ae5871a8fb786807a7",
+  "third_address": "0001680006607CAC",
+  "root_seed_candidate": "2139770A2614E3DC",
+  "caller_seedfunction_session": "20261008T185119Z_0001550006607CAC",
+  "panel_failure": "Invalid extension panel summary: 1.0.4 summary 635 chars; host maximum 500.",
+  "candidate_extension": "1.0.5",
+  "candidate_summary_chars": 432,
+  "build_request_id": "seed-panel-summary-limit-20261009",
+  "derivation_status": "unknown-not-claimed",
+  "full_traversal_required": false,
+  "third_address_executable_identity": "unverified-not-present-in-measurement-artifact"
+}

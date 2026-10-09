@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "title": "SEED-B · Cross-address root seed lineage",
+  "summary": "Verified report 20261009T004054Z-9fedea65: caller and seed-function outputs match session 20261008T185119Z_0001550006607CAC/current NMS.exe. New root candidate 2139770A2614E3DC at address 0001680006607CAC lacks a fresh caller/upstream chain; derivation remains unproven. The 14 MEDI and 43 CARGO figures are asset predictions, not observed counts. FF 52 10 remains unresolved; zero +0x10 and resolver sample do not resolve dispatch.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.extract_caller_code",
+      "label": "1. Extract caller code + upload",
+      "description": "After a root event is saved at the new universe address, extract its callsite window and verify it matches the installed NMS.exe.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.extract_upstream_callers",
+      "label": "2. Extract upstream callers + upload",
+      "description": "Run after step 1 succeeds. Confirm the output cites the same session, caller, universe address, and executable hash.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.analyze_seed_function",
+      "label": "3. Analyze seed function + upload",
+      "description": "Run after step 2 succeeds. This resolves the function boundary from the fresh upstream evidence; byte-level reads do not by themselves prove the root-seed construction formula.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    }
+  ]
+}
