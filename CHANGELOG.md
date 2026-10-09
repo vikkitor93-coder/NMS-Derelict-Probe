@@ -1,3 +1,10 @@
+## v0.3.69 — suppress Explorer during background research
+
+- Prevent the two Python caller extractors from opening Explorer when Surveyor runs them noninteractively.
+- Keep Explorer selection available when a user runs the extractors directly.
+- Add a regression test for background and interactive launch behavior.
+- Verification: recorded in `CANDIDATE_SOURCE.json` and the current AI handoff.
+
 ## v0.3.68 — multi-system root seed batch analysis
 
 - Analyze all captured dungeon-root events from append-only process journals; preserve each process as a separate cohort and group observations by universe address.

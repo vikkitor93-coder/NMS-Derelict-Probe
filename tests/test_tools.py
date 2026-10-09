@@ -4,6 +4,7 @@ import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -1150,9 +1151,22 @@ class ToolTests(unittest.TestCase):
             self.assertEqual(32,win["byte_count"])
             self.assertEqual(bytes((i & 0xFF) for i in range(0xF0,0x110)).hex().upper(),win["bytes_hex"])
 
+    def test_background_caller_extractions_do_not_open_explorer(self):
+        output = Path("caller-result.json")
+        with patch.object(caller_extract.os, "name", "nt"), patch.dict(
+            caller_extract.os.environ, {"NMSDS_NONINTERACTIVE": "1"}
+        ), patch.object(caller_extract.subprocess, "Popen") as popen:
+            self.assertFalse(caller_extract.open_output_in_explorer(output))
+            popen.assert_not_called()
+        with patch.object(caller_extract.os, "name", "nt"), patch.dict(
+            caller_extract.os.environ, {}, clear=True
+        ), patch.object(caller_extract.subprocess, "Popen") as popen:
+            self.assertTrue(caller_extract.open_output_in_explorer(output))
+            popen.assert_called_once_with(["explorer", f"/select,{output}"])
+
 
     def test_v0322_version_marker(self):
-        self.assertEqual("0.3.68", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.69", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
 
     def test_parallel_research_panel_runs_and_optionally_shares_only_combined_report(self):
         controller=(ROOT / "tools" / "surveyor_controller.py").read_text(encoding="utf-8")
@@ -1396,7 +1410,7 @@ class ToolTests(unittest.TestCase):
         self.assertNotIn("Test-Runtime", start_nms)
         self.assertNotIn("Python.Python.3.12", start_nms)
         self.assertNotIn("import pymhf; import nmspy", start_nms)
-        self.assertIn('CONTROLLER_VERSION = "0.3.67"', controller)
+        self.assertIn('CONTROLLER_VERSION = "0.3.69"', controller)
         self.assertTrue((ROOT / "Start-NMS-With-Overlay.cmd").is_file())
 
     def test_github_update_buttons_use_a_separate_geometry_parent(self):
@@ -1457,7 +1471,7 @@ class ToolTests(unittest.TestCase):
             self.assertIn(token, probe)
 
     def test_v0330_version(self):
-        self.assertEqual("0.3.68", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.3.69", (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip())
         self.assertEqual("0.3.33", seed_function.TOOL_VERSION)
 
     def test_v0328_seed_function_relrefs_classify_recursion(self):
