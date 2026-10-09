@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "reviewed_utc": "2026-10-09T23:11:30Z",
+  "reviewed_utc": "2026-10-09T23:43:00Z",
   "objective": "Reconcile current runtime-correlated caller events with local hash-matched static NMS.exe analysis.",
   "binary": {
     "path_note": "User-provided installed executable, inspected read-only",
@@ -54,7 +54,7 @@
       "recursive_return_hits": 17020
     }
   ],
-  "interpretation": "For the two standalone events, capture producers report an exact descriptor/caller-return-to-single-hook correlation at effective entry 0063A6D0. This is event-scoped hook correlation, not a captured raw [RDX+0x10] value, not proof of a conventional vtable destination, and not semantic identification. The 16:18 parallel report independently records 0063A6D0 as input metadata; its extractor copies that field and does not independently validate it. The 23:08 all-saved snapshots are duplicate copies of one event, not independent captures. The 23:14 all-saved snapshot verifies the 23:08 capture artifact hash and reports 52 static direct references plus a recursive return at 0063A773; these do not identify a semantic function name or pre-call slot. The 23:20 seed-lineage analysis upload also carries this same exact-root-caller artifact and a baseline for the same 23:08 session; these are further copies/derived analysis, not new runtime events. The newest 23:21 all-saved upload again preserves the same 23:08 exact-root-caller artifact hash; it is a repeated saved artifact, not a new runtime event. The latest same-session upstream scan confirms the static seed/descriptor fields and matches them to the 23:08 runtime descriptor, seed, and use flag. The 52-reference caller map includes 50 calls and 2 jumps across 47 .pdata ranges; 00251D22 is outside a listed range, and 0063A76E is the callback's self-recursive edge.",
+  "interpretation": "For the two standalone events, capture producers report an exact descriptor/caller-return-to-single-hook correlation at effective entry 0063A6D0. This is event-scoped hook correlation, not a captured raw [RDX+0x10] value, not proof of a conventional vtable destination, and not semantic identification. The 16:18 parallel report independently records 0063A6D0 as input metadata; its extractor copies that field and does not independently validate it. The 23:08 all-saved snapshots are duplicate copies of one event, not independent captures. The 23:14 all-saved snapshot verifies the 23:08 capture artifact hash and reports 52 static direct references plus a recursive return at 0063A773; these do not identify a semantic function name or pre-call slot. The 23:20 seed-lineage analysis upload also carries this same exact-root-caller artifact and a baseline for the same 23:08 session; these are further copies/derived analysis, not new runtime events. The newest 23:21 all-saved upload again preserves the same 23:08 exact-root-caller artifact hash; it is a repeated saved artifact, not a new runtime event. The latest same-session upstream scan confirms the static seed/descriptor fields and matches them to the 23:08 runtime descriptor, seed, and use flag. The 52-reference caller map includes 50 calls and 2 jumps across 47 .pdata ranges; 00251D22 is outside a listed range, and 0063A76E is the callback's self-recursive edge. The 2026-10-09 23:33Z seed-function artifact supplies the raw third primary .pdata range and places root AddResource call 0063AC20 inside it. The previously recorded 1180-byte span covers only the first two chained ranges; it is not the complete primary routine. The primary three-range span is 2430 bytes, but a combined digest is intentionally not asserted. Two later chained funclet ranges are separate.",
   "static": {
     "caller": {
       "rva": "02C08607",
@@ -79,7 +79,73 @@
       "contiguous_length_bytes": 1180,
       "contiguous_sha256": "a00336416913eead94306aec9d137106e868ae504072147eaba8225e0032b81b",
       "prefix_length_bytes": 89,
-      "prefix_sha256": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7"
+      "prefix_sha256": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7",
+      "contiguous_scope": "This 1180-byte SHA-256 covers only the first two adjacent chained .pdata ranges, 0063A6D0..0063AB6C. It is not the full primary logical routine.",
+      "primary_logical_pdata_chain": {
+        "start_rva": "0063A6D0",
+        "end_rva_exclusive": "0063B04E",
+        "byte_count": 2430,
+        "sha256": null,
+        "sha256_status": "not computed; shared raw bytes cover the third range only, while the earlier 1180-byte aggregate is available only as a verified digest",
+        "ranges": [
+          {
+            "start_rva": "0063A6D0",
+            "end_rva_exclusive": "0063A729",
+            "byte_count": 89,
+            "unwind_info_rva": "04C2F500",
+            "unwind_flags": 0,
+            "role": "primary entry range"
+          },
+          {
+            "start_rva": "0063A729",
+            "end_rva_exclusive": "0063AB6C",
+            "byte_count": 1091,
+            "unwind_info_rva": "04C2F510",
+            "unwind_flags": 4,
+            "chain_info_target": "0063A6D0",
+            "role": "primary chained range"
+          },
+          {
+            "start_rva": "0063AB6C",
+            "end_rva_exclusive": "0063B04E",
+            "byte_count": 1250,
+            "unwind_info_rva": "04C2F538",
+            "unwind_flags": 4,
+            "chain_info_target": "0063A6D0",
+            "sha256": "51e39e47017337915fa1b72986ab9639a7a5b462858bc8be38bd6c9cba2cc9f6",
+            "sha256_verified_from_published_raw_hex": true,
+            "role": "primary chained range containing root AddResource call 0063AC20"
+          }
+        ],
+        "byte_count_check": "89 + 1091 + 1250 = 2430",
+        "prior_1180_byte_hash_scope": "0063A6D0..0063AB6C only"
+      },
+      "adjacent_chained_funclet_ranges": [
+        {
+          "start_rva": "0063B04E",
+          "end_rva_exclusive": "0063B130",
+          "byte_count": 226,
+          "unwind_info_rva": "04C2F560",
+          "unwind_flags": 4,
+          "chain_info_target": "0063AB6C",
+          "role": "chained funclet range; excluded from primary span"
+        },
+        {
+          "start_rva": "0063B130",
+          "end_rva_exclusive": "0063BEEC",
+          "byte_count": 3516,
+          "unwind_info_rva": "04C2F574",
+          "unwind_flags": 4,
+          "chain_info_target": "0063AB6C",
+          "role": "chained funclet range; excluded from primary span"
+        }
+      ],
+      "contiguous_envelope_across_all_five_ranges": {
+        "start_rva": "0063A6D0",
+        "end_rva_exclusive": "0063BEEC",
+        "byte_count": 6172,
+        "interpretation": "adjacent address envelope across the primary chain plus two chained funclet ranges; do not treat as one logical callback body"
+      }
     },
     "helper_jump": {
       "callsite_rva": "0063A706",
@@ -118,6 +184,13 @@
           "0063AB6C"
         ]
       }
+    },
+    "root_add_call": {
+      "rva": "0063AC20",
+      "instruction_bytes": "E8 4B 3B 20 01",
+      "relative_call_target_rva": "0183E770",
+      "inside_primary_chain_range": "0063AB6C..0063B04E",
+      "verified_from_same_session_fragment": true
     }
   },
   "retained_limits": [
@@ -125,7 +198,9 @@
     "The helper/callback semantic name remains unknown; 033E1B60 and 033E1A50 are outside listed .pdata entries.",
     "The asset-derived 43-target prediction is separate from observed container counts; historical 35-container baseline and separate post-update 16-target model remain distinct.",
     "The separate resolver sample at 02C04977/02C0497A and candidate 00634BC0 has zero matches and does not resolve this caller.",
-    "WinDbg is excluded per user's report that it crashes NMS; no debugger or live game action was used."
+    "WinDbg is excluded per user's report that it crashes NMS; no debugger or live game action was used.",
+    "The fresh 23:33Z seed-function action is a separate lane-exclusive upload, not a replacement or result of either pointer-selected combined report.",
+    "The full 2430-byte primary chained-span SHA-256 has not been computed; only the earlier 1180-byte digest and the raw third-range digest are available in shared artifacts."
   ],
   "runtime_capture_snapshot_verification": {
     "manifest_path": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/run-manifest.json",
@@ -268,5 +343,30 @@
       "pdata_entries_in_exe": 157445
     },
     "interpretation": "Same-session offline static cross-reference and field-offset evidence. The observed descriptor pointer and seed values match the static field locations for this event. This corroborates event-scoped dataflow at 0063A6D0 but does not provide a semantic function name or the pre-call FF 52 10 slot target."
+  },
+  "latest_seed_function_analysis": {
+    "artifact_path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json",
+    "run_manifest_path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/run-manifest.json",
+    "artifact_sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+    "artifact_sha256_verified_by_independent_recomputation": true,
+    "artifact_size_bytes": 15904,
+    "source_session_id": "20261009T230838Z_0000790006606CAB",
+    "universe_address": "0000790006606CAB",
+    "root_seed_candidate": "C36137A0B4914AD9",
+    "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "upstream_artifact_sha256": "65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52",
+    "raw_fragment": {
+      "start_rva": "0063AB6C",
+      "end_rva_exclusive": "0063B04E",
+      "byte_count": 1250,
+      "sha256": "51e39e47017337915fa1b72986ab9639a7a5b462858bc8be38bd6c9cba2cc9f6",
+      "sha256_verified": true
+    },
+    "same_artifact_in_latest_all_saved_snapshot": {
+      "run_manifest_path": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
+      "artifact_sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+      "sha256_verified_from_manifest": true
+    },
+    "new_runtime_event": false
   }
 }
