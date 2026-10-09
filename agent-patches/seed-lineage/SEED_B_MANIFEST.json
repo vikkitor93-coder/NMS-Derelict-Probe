@@ -118,9 +118,9 @@
     "backup_branch": "backup/main-before-seed-panel-fix-20261009-1508",
     "path": "Revert the lane publication with git revert -m 1 <merge-commit>; rollback the extension in Agent Console to v1.0.3 after integration.",
     "latest_lane_publication": {
-      "base_commit": "8b58dcb9732a9bda2d4df5298b10a560d6274f02",
-      "backup_branch": "backup/main-before-seed-system-compare-20261009-1523",
-      "path": "Revert the lane publication commit with git revert -m 1 <commit>."
+      "base_commit": "0b9d657ccaaea1fe22e54fb2455a14a8289dc03a",
+      "backup_branch": "backup/main-before-seed-rollback-fix-20261009-1528",
+      "path": "Revert this single-parent publication with git revert <commit>."
     }
   },
   "latest_saved_session_batch": {
