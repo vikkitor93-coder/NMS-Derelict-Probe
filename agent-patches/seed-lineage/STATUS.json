@@ -1,15 +1,13 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-09T23:28:18Z",
-  "state": "waiting_on_user",
-  "status": "Fresh baseline, caller, and upstream evidence now agree on session 20261009T230838Z_0000790006606CAB. The all-saved snapshot still contains an older seed-function output; only that final analysis action remains.",
-  "summary": "Verified all-saved snapshot at research-uploads/20261009T232439Z-seed-lineage-all-saved-evidence-c443da47-a318d1ad/run-manifest.json; its listed SHA-256s match fetched bytes. Fresh baseline session 20261009T230838Z_0000790006606CAB, address 0000790006606CAB, root candidate C36137A0B4914AD9. Caller and upstream artifacts are fresh on that same sample and NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. Seed-function file in the snapshot remains stale (session 20261008T185119Z_0001550006607CAC, root 00C9E8DF0327789E); no fresh function chain/formula yet.",
-  "progress": "Checked new main uploads: generation baseline, caller, and upstream artifacts hash-verify and agree on the 23:08 session/address/root and executable. The all-saved snapshot reused the prior seed-function output. The separate direct caller and upstream action uploads are also present; no new analyze-seed-function upload commit appears in main.",
-  "blockers": [
-    "One final local Agent Console action is needed: rerun Analyze seed function + upload after the fresh upstream artifact."
-  ],
-  "next_action": "After the fresh seed-function upload arrives, verify its session/address/root/executable and upstream input, then resume offline root-seed derivation analysis.",
+  "updated_utc": "2026-10-09T23:39:09Z",
+  "state": "in_progress",
+  "status": "Fresh baseline, caller, upstream, and seed-function upload now align on sample 0000790006606CAB; offline dataflow analysis is active.",
+  "summary": "The 20261009T233349Z analyze-seed-function upload and 20261009T233356Z all-saved snapshot identify session 20261009T230838Z_0000790006606CAB, address 0000790006606CAB, root candidate C36137A0B4914AD9, executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, and upstream artifact SHA-256 65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52. Upload manifests declare seed-function SHA-256 38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212; independent recomputation remains unverified. Candidate logical entry 0063A6D0; descriptor primary-seed occurrence at owner +0x138; no possible writes reported. Root derivation remains unproven.",
+  "progress": "Reconciled the fresh seed-function action with the same-sample baseline/caller/upstream chain. Mapped candidate function entry, .pdata fragment distinction, direct references, descriptor-field occurrences, and no-write limitation; continuing offline dataflow analysis.",
+  "blockers": [],
+  "next_action": "Compare the fresh candidate function's descriptor and seed dataflow with the fresh caller/upstream evidence; test whether any static path computes or copies the captured root seed before the root AddResource call.",
   "extension_version": "1.0.6",
   "candidate_extension_version": "1.0.6",
   "build_request_id": "seed-lineage-fresh-baseline-action-20261009",
@@ -36,17 +34,13 @@
     "run_id": "20261009T004054Z-9fedea65",
     "report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972"
   },
-  "human_intervention_required": true,
-  "surveyor_request": "Rerun only Seed-B action 4, Analyze seed function + upload, now that the fresh baseline, caller, and upstream evidence are available.",
-  "user_steps": [
-    "Surveyor > Agent Console > Refresh now > Seed-B > with workflow idle, click 4. Analyze seed function + upload. Wait for the upload to finish; check that the output uses session 20261009T230838Z_0000790006606CAB, address 0000790006606CAB, root C36137A0B4914AD9, and cites the fresh upstream artifact SHA-256 65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52. Return its run-manifest/evidence path, or the action record if it fails."
-  ],
-  "success_condition": "A newly uploaded seed-function analysis uses session 20261009T230838Z_0000790006606CAB, address 0000790006606CAB, root C36137A0B4914AD9, executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, and cites the fresh upstream artifact e63? correction: upstream SHA-256 65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52. No claim of a solved root formula follows from byte-level evidence.",
-  "evidence_to_return": [
-    "The new analyze-seed-function run-manifest/evidence path, or the first failing action record."
-  ],
+  "human_intervention_required": false,
+  "surveyor_request": null,
+  "user_steps": [],
+  "success_condition": "No human action required for current offline analysis; only request new evidence if repository analysis reaches a verified live-only gap.",
+  "evidence_to_return": [],
   "full_derelict_required": false,
-  "evidence_path": "agent-patches/seed-lineage/SEED_B_SYSTEM_SEED_COMPARISON_20261009.md",
+  "evidence_path": "agent-patches/seed-lineage/SEED_FUNCTION_REVIEW_20261009T233349Z.json",
   "runtime_extension_version": "1.0.6",
   "latest_offline_comparison": {
     "path": "agent-patches/seed-lineage/SEED_B_SYSTEM_SEED_COMPARISON_20261009.json",
@@ -56,66 +50,8 @@
     "upstream_commit": "52ad48affaa4089c8f487a470a888dc9b7a650aa"
   },
   "latest_all_saved_evidence_snapshot": {
-    "path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/run-manifest.json",
-    "upload_utc": "20261009T161936Z",
-    "run_manifest_sha256": "159c8d153e3b7020daf143ce8f574392a7c92791e8750d618437be500f3148af",
-    "verified_files": [
-      {
-        "path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/exact-root-caller-latest.json",
-        "entrySha": "e0f850e46dd8b36b24de323a212ec84043cfc872a111cb5e6060316aaa7af412",
-        "session": null,
-        "address": "00006D0006606CAB",
-        "root": "A5047E4E4B68F362",
-        "utc": "2026-10-09T16:18:44.422Z",
-        "caller": "02C0860A",
-        "owner10": "0000000000000000",
-        "exehash": null
-      },
-      {
-        "path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/dungeon-caller-code-latest.json",
-        "entrySha": "83ba43c47011c7c455b2cb079a210f9aaae2b9a6436a6ee408c233e63af5eee9",
-        "session": "20261008T185119Z_0001550006607CAC",
-        "address": "0001550006607CAC",
-        "root": "00C9E8DF0327789E",
-        "utc": null,
-        "caller": null,
-        "owner10": null,
-        "exehash": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
-      },
-      {
-        "path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/dungeon-upstream-callers-latest.json",
-        "entrySha": "8e66960e4483fa6656f25ba91148322f774eba220dd41246c529d18f227db941",
-        "session": "20261008T185119Z_0001550006607CAC",
-        "address": "0001550006607CAC",
-        "root": "00C9E8DF0327789E",
-        "utc": null,
-        "caller": null,
-        "owner10": null,
-        "exehash": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
-      },
-      {
-        "path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/dungeon-seed-function-analysis-latest.json",
-        "entrySha": "228ca6872ec0f182efa419b284439d7110b63228738484f689405007ca6435e0",
-        "session": "20261002T213047Z_00001A0004E84EFD",
-        "address": "00001A0004E84EFD",
-        "root": "9256392A2F5A74AC",
-        "utc": null,
-        "caller": null,
-        "owner10": null,
-        "exehash": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4"
-      },
-      {
-        "path": "research-uploads/20261009T161936Z-all-saved-evidence-89885315/capture-journal-20261009T161133Z-34728.jsonl",
-        "entrySha": "78d35dfbcc5483cd46c9e4da758eed493b12dd1414519d66f35fc2c3b53291dd",
-        "session": null,
-        "address": null,
-        "root": null,
-        "utc": null,
-        "caller": null,
-        "owner10": null,
-        "exehash": null
-      }
-    ]
+    "path": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
+    "uploaded_utc": "20261009T233356Z"
   },
   "latest_report": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
   "latest_report_sha256": "fb7126c475d65d0e764d802b74ed6a6ca99c56fb72d75c65da9e0e3f6335f1f4",
@@ -132,8 +68,8 @@
     "provenance": "runtime-only capture and all-saved upload; not included in latest combined report 20261009T161520Z-7233c462"
   },
   "latest_lane_action_snapshot": {
-    "run_manifest_path": "research-uploads/20261009T232439Z-seed-lineage-all-saved-evidence-c443da47-a318d1ad/run-manifest.json",
-    "uploaded_utc": "20261009T232439Z",
+    "run_manifest_path": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
+    "uploaded_utc": "20261009T233356Z",
     "verified_files": {
       "generation_baseline": {
         "path": "research-uploads/20261009T232049Z-seed-lineage-analyze-generation-a4d98eab/generation-baseline-latest.json",
@@ -162,12 +98,15 @@
         "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
       },
       "seed_function": {
-        "path": "research-uploads/20261009T232439Z-seed-lineage-all-saved-evidence-c443da47-a318d1ad/dungeon-seed-function-analysis-latest.json",
-        "sha256": "e7590db2377d25ff88f46aa203691daf6008098650e991d28b4efde7aacb3013",
-        "session": "20261008T185119Z_0001550006607CAC",
-        "address": "0001550006607CAC",
-        "root": "00C9E8DF0327789E",
-        "fresh": false
+        "path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json",
+        "sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+        "sha256_status": "declared_by_both_upload_manifests; independent_recomputation_not_completed",
+        "session": "20261009T230838Z_0000790006606CAB",
+        "address": "0000790006606CAB",
+        "root": "C36137A0B4914AD9",
+        "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+        "upstream_sha256": "65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52",
+        "fresh": true
       }
     }
   }
