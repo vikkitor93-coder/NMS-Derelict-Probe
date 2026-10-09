@@ -127,9 +127,9 @@
     }
   },
   "rollback": {
-    "base_commit": "39700460d0eb955b61bad1d95a1e99737e22a8ee",
-    "backup_branch": "backup/main-before-seed-function-review-20261009T2338",
-    "path": "To revert this lane publish, revert its commits newest-first; the backup branch preserves the exact main tree before this review."
+    "base_commit": "6afe84752e8c0a1ff16439c70d448837acaf229b",
+    "backup_branch": "backup/main-before-seed-producer-trace-20261009T2357",
+    "path": "To roll back this publish, revert its Seed-B commits newest-first; this backup branch points to the exact main tree before the review was published."
   },
   "latest_saved_session_batch": {
     "batch_id": "20261009T231727Z-4cc0e6a5",
@@ -306,7 +306,7 @@
       }
     }
   },
-  "next_action": "Compare root candidates against the public address-derived system-seed anchors while tracing the fresh descriptor seed's construction; keep sample executable identities and parallel-report cohorts separate.",
+  "next_action": "Obtain a wider code extract or focused caller/upstream analysis for helper 00639BE0 and determine whether it writes owner+0x138 or forwards a seed from its arguments; keep the 000079 executable identity constraint.",
   "latest_seed_function_review": {
     "path": "agent-patches/seed-lineage/SEED_FUNCTION_REVIEW_20261009T233349Z.json",
     "session": "20261009T230838Z_0000790006606CAB",
@@ -347,5 +347,23 @@
     "system_seed": "D4759808",
     "root_seed_candidate": "9C2818C7FE094FC8",
     "root_seed_relation": "unknown-not-claimed"
+  },
+  "latest_owner_producer_trace": {
+    "path": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
+    "reviewed_utc": "2026-10-09T23:57:15Z",
+    "helper_entry_rva": "00639BE0",
+    "caller_rvas": [
+      "006395E6",
+      "00639BB6"
+    ],
+    "helper_call_rvas": [
+      "006395D3",
+      "00639B99"
+    ],
+    "direct_target_rva": "0063A6D0",
+    "pointer_flow": "helper return RAX -> RBX -> RDX argument",
+    "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "owner_plus_0x138_seed_write_established": false,
+    "root_formula_resolved": false
   }
 }
