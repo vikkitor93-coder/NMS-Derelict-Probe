@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "reviewed_utc": "2026-10-09T22:50:53Z",
+  "reviewed_utc": "2026-10-09T23:12:00Z",
   "source": {
     "manual_pointer_path": "research/LATEST_PARALLEL_ACTION_TEST.json",
     "manual_report_path": "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
@@ -96,14 +96,142 @@
     "Keep the historical 35-container baseline and separate post-update 16-target observation/model distinct.",
     "The zero owner+0x10 read is not a dispatch target; the separate resolver sample is not a target proof.",
     "The callback semantic identity and raw pre-call virtual slot remain unresolved.",
-    "WinDbg is ruled out by the user's report that it crashes NMS; no debugger or live NMS action was used."
+    "WinDbg is ruled out by the user's report that it crashes NMS; no debugger or live NMS action was used.",
+    "Capture producer reports exact descriptor/caller-return correlation; the code extractor copies metadata and does not independently derive it. 0063A6D0 is event-scoped effective-entry correlation, not proof of the raw FF 52 10 slot target.",
+    "The latest all-saved snapshot contains the already-reported 23:08 capture, not a new event. Its +0x10 field is explicitly captured after the external call and remains unusable as dispatch target.",
+    "The newest automatic combined report is a distinct cohort. Its exact-caller action matches the 23:08 event; caller-code, upstream, and resolver artifacts use other saved inputs and must not be joined to that event."
   ],
-  "next_action": "Continue offline semantic analysis of the hash-matched current caller/callback and investigate generator-consumer references without assigning an unsupported semantic name.",
+  "next_action": "Continue offline caller/callback cross-reference analysis; treat the latest batch's upstream and resolver artifacts as separate/stale inputs.",
   "extractor_source_audit": {
     "source_path": "tools/extract_exact_root_caller_code.py",
     "source_sha": "0943c480830413c61fec228c2c97fac350a9c867",
     "relevant_lines": "229-268",
     "finding": "extract() reads the external caller return RVA and decodes the NMS.exe call bytes, but copies logical_entry_rva_hex from input evidence at line 257 and exact_runtime_match at line 262 without independently deriving either value.",
     "effect": "For this report, 0063A6D0 is input-source metadata. It is not a target established by the exact-caller extraction. The direct FF 52 10 target remains null; use the source capture producer's independently validated hook/descriptor correlation before making any effective-destination claim."
-  }
+  },
+  "current_build_context": {
+    "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
+    "sha256": "31afe6be790a3e060a09d60607f0dac5f6b197f027a06b05b2d135cb9a930026",
+    "sha256_verified": true,
+    "summary": "Two standalone captures report a unique descriptor/caller-return correlation to effective entry 0063A6D0. Static caller/callback bytes were checked against local NMS.exe SHA-256 13d5060d...cc3499. Event-scoped correlation only; raw dispatch slot and callback semantics remain unresolved.",
+    "latest_snapshot": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/",
+    "latest_snapshot_manifest": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/run-manifest.json",
+    "snapshot_capture_hash_matches": true
+  },
+  "runtime_capture_provenance": [
+    {
+      "path": "research-uploads/20261009T230514Z-upload-runtime-capture/exact-root-caller-latest.json",
+      "sha256": "7873b89f314739bd260d32a9b5c46d9f5f1048c064069a441c218340a779ce8a",
+      "event_utc": "2026-10-09T23:05:09.625Z",
+      "descriptor": "0000026625DD0128",
+      "address": "00006D0006606CAB",
+      "seed": "A5047E4E4B68F362",
+      "caller_return": "02C0860A",
+      "entry": "0063A6D0",
+      "match_count": 1
+    },
+    {
+      "path": "research-uploads/20261009T230838Z-upload-runtime-capture/exact-root-caller-latest.json",
+      "sha256": "eecced17a13f026a7f42eadd9969892504310eba4a66ea81a24f0b99de07b12d",
+      "event_utc": "2026-10-09T23:08:33.349Z",
+      "descriptor": "0000026622D9A128",
+      "address": "0000790006606CAB",
+      "seed": "C36137A0B4914AD9",
+      "caller_return": "02C0860A",
+      "entry": "0063A6D0",
+      "match_count": 1
+    },
+    {
+      "path": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/run-manifest.json",
+      "artifact_path": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/exact-root-caller-latest.json",
+      "artifact_sha256": "eecced17a13f026a7f42eadd9969892504310eba4a66ea81a24f0b99de07b12d",
+      "event_utc": "2026-10-09T23:08:33.349Z",
+      "descriptor": "0000026622D9A128",
+      "address": "0000790006606CAB",
+      "seed": "C36137A0B4914AD9",
+      "caller_return": "02C0860A",
+      "entry": "0063A6D0",
+      "match_count": 1,
+      "static_direct_reference_count": 52,
+      "recursive_return_rva": "0063A773",
+      "same_event_as_23_08_upload": true
+    }
+  ],
+  "latest_automatic_batch": {
+    "pointer_path": "research/LATEST_AUTOMATIC_RESEARCH_BATCH.json",
+    "pointer_index_path": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/batch-results.json",
+    "pointer_index_sha256": "e8f703afa93485172c9108153696e518a2cf381446cb0aaccc63468fd75bb909",
+    "pointer_index_sha256_verified": true,
+    "report_path": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json",
+    "report_sha256": "48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3",
+    "report_sha256_verified": true,
+    "run_id": "20261009T231728Z-208c8af6",
+    "batch_id": "20261009T231727Z-4cc0e6a5",
+    "session_file": "20261009T230838Z_Gersid_XVI.json",
+    "session_sha256": "ac8cef02578a2b667723b5e6ceda4f52a23c058b09b606d7d72bc6bdcd8449c5",
+    "summary": {
+      "total": 9,
+      "completed": 7,
+      "failed": 1,
+      "unsupported": 0,
+      "upload_actions_skipped": 1
+    },
+    "failed_action": "research.prepare_assets",
+    "d_actions": {
+      "exact_caller": {
+        "status": "complete",
+        "artifact_sha256": "69a84f7eedcf8810e9bb97ea6a434973c99f4e38ed08b544e3f63eeb9e65cb75",
+        "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+        "event_utc": "2026-10-09T23:08:33.347Z",
+        "descriptor": "0000026622D9A128",
+        "seed": "C36137A0B4914AD9",
+        "caller_return": "02C0860A",
+        "instruction_rva": "02C08607",
+        "instruction_bytes": "FF5210",
+        "target_rva": null,
+        "recorded_entry": "0063A6D0",
+        "interpretation": "The combined report's exact-caller action uses the same input saved session and identifies the caller bytes, but the extractor copies entry metadata and does not independently prove the direct target."
+      },
+      "caller_code": {
+        "status": "complete",
+        "artifact_sha256": "4f9bec74cdc341aa3b39132f0cf0fa5287738a710ba043e0c05fb25270ae9016",
+        "source_session_id": "20261009T161852Z_00006D0006606CAB",
+        "address": "00006D0006606CAB",
+        "seed": "A5047E4E4B68F362",
+        "call_target": "0183E770",
+        "same_as_exact_caller_session": false
+      },
+      "upstream": {
+        "status": "complete",
+        "artifact_sha256": "8e66960e4483fa6656f25ba91148322f774eba220dd41246c529d18f227db941",
+        "source_session_id": "20261008T185119Z_0001550006607CAC",
+        "address": "0001550006607CAC",
+        "seed": "00C9E8DF0327789E",
+        "same_as_exact_caller_session": false
+      },
+      "resolver": {
+        "status": "complete",
+        "artifact_sha256": "11279a87d723d2e6d4fa3cf0159ce0824f5092615dca1022346118488d4547d2",
+        "candidate": "00634BC0",
+        "callsite": "02C04977",
+        "return_rva": "02C0497A",
+        "matches": 0,
+        "same_as_exact_caller_event": false
+      }
+    },
+    "scope_note": "This combined report alone is authoritative for this automatic batch. Its D exact-caller action matches the 23:08 session; other D action artifacts retain separate source inputs. The 23:14 all-saved snapshot repeats the same 23:08 runtime capture."
+  },
+  "duplicate_snapshot_paths": [
+    {
+      "path": "research-uploads/20261009T232049Z-seed-lineage-analyze-generation-a4d98eab/",
+      "manifest_path": "research-uploads/20261009T232049Z-seed-lineage-analyze-generation-a4d98eab/run-manifest.json",
+      "capture_artifact_sha256": "eecced17a13f026a7f42eadd9969892504310eba4a66ea81a24f0b99de07b12d",
+      "event_utc": "2026-10-09T23:08:33.349Z",
+      "descriptor": "0000026622D9A128",
+      "universe_address": "0000790006606CAB",
+      "root_seed": "C36137A0B4914AD9",
+      "same_capture_as_23_08_standalone_and_23_14_snapshot": true,
+      "new_runtime_event": false
+    }
+  ]
 }
