@@ -1,0 +1,18 @@
+{
+  "action": "analyze-generation",
+  "evidence_namespace": "seed-lineage",
+  "files": [
+    {
+      "name": "generation-baseline-latest.json",
+      "sha256": "6244a4e8f2d74ed7d5f54f94ad62f53edbd495ed99c5cbe41c42cc22b07dd714",
+      "size": 79618
+    },
+    {
+      "name": "exact-root-caller-latest.json",
+      "sha256": "eecced17a13f026a7f42eadd9969892504310eba4a66ea81a24f0b99de07b12d",
+      "size": 15662
+    }
+  ],
+  "utc": "20261009T232049Z",
+  "version": 1
+}
