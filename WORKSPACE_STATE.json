@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-09T23:00:00Z",
+  "updated_utc": "2026-10-09T23:23:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -73,7 +73,10 @@
       "latest_automatic_batch_report": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
       "latest_automatic_batch_report_sha256": "fb7126c475d65d0e764d802b74ed6a6ca99c56fb72d75c65da9e0e3f6335f1f4",
       "latest_automatic_batch_index": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/batch-results.json",
-      "latest_automatic_batch_index_sha256": "4ae5af8f6814e14d1e5e16ca1eeeaf455599b1e22d47286ba01e2b513f3f25cd"
+      "latest_automatic_batch_index_sha256": "4ae5af8f6814e14d1e5e16ca1eeeaf455599b1e22d47286ba01e2b513f3f25cd",
+      "latest_runtime_context_sha256": "a069eac1cbbb7c6449ef542c2e413367a30674863c8d11c09247a5fe8a7aff0f",
+      "latest_runtime_snapshot": "research-uploads/20261009T232150Z-seed-lineage-all-saved-evidence-ca6ac9ea-1bc33dd4/",
+      "latest_runtime_snapshot_manifest": "research-uploads/20261009T232150Z-seed-lineage-all-saved-evidence-ca6ac9ea-1bc33dd4/run-manifest.json"
     },
     "metadata": {
       "branch": "agent/metadata-room-model-reconcile-20261008",
