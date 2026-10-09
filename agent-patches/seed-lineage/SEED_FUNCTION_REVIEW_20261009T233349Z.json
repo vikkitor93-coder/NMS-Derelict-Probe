@@ -11,7 +11,7 @@
     "snapshot_evidence": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/dungeon-seed-function-analysis-latest.json",
     "declared_evidence_sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
     "declared_size_bytes": 15904,
-    "hash_verification": "Both upload manifests declare this digest and GitHub exposes the same content blob at the dedicated and snapshot paths; an independent SHA-256 recomputation was not completed in this review."
+    "hash_verification": "Verified independently from the exact GitHub base64 content bytes: SHA-256 38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212, size 15,904 bytes; matches the dedicated and all-saved upload manifests."
   },
   "sample": {
     "session": "20261009T230838Z_0000790006606CAB",
