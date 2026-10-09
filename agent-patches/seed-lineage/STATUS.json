@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-09T23:40:00Z",
+  "updated_utc": "2026-10-09T23:45:25Z",
   "state": "in_progress",
   "status": "Fresh baseline, caller, upstream, and seed-function upload now align on sample 0000790006606CAB; offline dataflow analysis is active.",
-  "summary": "The 20261009T233349Z analyze-seed-function upload and 20261009T233356Z all-saved snapshot identify session 20261009T230838Z_0000790006606CAB, address 0000790006606CAB, root candidate C36137A0B4914AD9, executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, and upstream artifact SHA-256 65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52. Upload manifests declare seed-function SHA-256 38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212; independent recomputation remains unverified. Candidate logical entry 0063A6D0; descriptor primary-seed occurrence at owner +0x138; no possible writes reported. Root derivation remains unproven.",
+  "summary": "The 20261009T233349Z analyze-seed-function upload and 20261009T233356Z all-saved snapshot identify session 20261009T230838Z_0000790006606CAB, address 0000790006606CAB, root candidate C36137A0B4914AD9, executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, and upstream artifact SHA-256 65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52. Upload manifests declare seed-function SHA-256 38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212; independent recomputation completed and matches the uploader-declared digest. Candidate logical entry 0063A6D0; descriptor primary-seed occurrence at owner +0x138; no possible writes reported. Root derivation remains unproven.",
   "progress": "Fresh same-sample static trace shows the candidate function copies its second argument into RSI, reads the embedded descriptor primary-seed field at owner +0x138 (descriptor +0x10), checks UseSeedValue at owner +0x140, and reaches root AddResource at 0063AC20. It reports no possible field writes; origin/derivation remains open.",
   "blockers": [],
   "next_action": "Trace the caller and static references to determine whether any upstream path constructs or copies the descriptor seed before entry at 0063A6D0; compare against compatible same-executable samples without promoting static predictions to runtime facts.",
@@ -100,7 +100,7 @@
       "seed_function": {
         "path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json",
         "sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
-        "sha256_status": "declared_by_both_upload_manifests; independent_recomputation_not_completed",
+        "sha256_status": "independently verified from GitHub base64 bytes; matches both upload manifests",
         "session": "20261009T230838Z_0000790006606CAB",
         "address": "0000790006606CAB",
         "root": "C36137A0B4914AD9",
