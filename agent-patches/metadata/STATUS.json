@@ -1,41 +1,44 @@
 {
   "schema_version": 1,
-  "status": "complete",
-  "state": "static-room-rule-cross-run-reconciled-room-id-crosswalk-required",
+  "status": "needs-human-input",
+  "state": "waiting_on_user",
   "human_intervention_required": true,
-  "summary": "Compared the historical CARGO_FLOATERS report (8 CARG-dominant, 2 BARRACKS-dominant, 1 END-dominant parent groups; 11 total) with static Rooms=7 and its exact-count/index rules, then checked the current MEDI_FLOATERS report (10 parent groups). Parent-key groups and family labels do not map to static R_*/B_* IDs. The active DUNGEON-C branch still has no room-ID-to-scene crosswalk. Grouping/classification may contribute; generator semantics remain unresolved.",
-  "completed_action": "Reconciled the eight CARG-dominant and 11 total analyzer groups against CARGO_FLOATERS static rules and current DUNGEON-C evidence; verified the latest pointer/report and checked the current MEDI run without replacing the earlier CARGO result.",
+  "summary": "Reviewed the uploaded dungeon.zip from main and the newest hash-verified saved-session report. The archive contains game scene/model assets but no explicit scene-to-RoomId mapping. The current MEDI result remains 10 analyzer groups vs static Rooms=7; the earlier CARGO result remains 11 analyzer groups vs Rooms=7. Counts and 43/14 target totals do not resolve room IDs or represent observed container counts.",
+  "completed_action": "Fetched and scanned all 2,866 files in main:dungeon.zip (SHA-256 5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60), including binary entries, for ASCII/UTF-16 R_*/B_* identifiers and RoomId/table fields; verified the latest combined-report pointer hash; reconciled the main and lane copies.",
   "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
-  "next_action": "Request the DUNGEON-C room-ID-to-scene crosswalk or the local extracted dungeon-room metadata that contains it; then map saved parent_key groups to static IDs. No Surveyor control or full traversal is required for this artifact-only step.",
+  "next_action": "Provide a separate evidence file or exact repository path that explicitly pairs generated dungeon scene paths with static R_*/B_* RoomIds. The uploaded dungeon.zip contains assets only and was not a crosswalk. No Surveyor control or full traversal is required for this artifact-only step.",
   "user_steps": [
-    "1. Attach the DUNGEON-C evidence file, or the relevant local extracted dungeon-room metadata, that maps generated room scenes/prefabs to static R_*/B_* RoomIds. Success condition: it contains a per-scene or per-room RoomId mapping usable against the saved CARGO_FLOATERS scene paths. Return the file(s) or exact accessible repo path. No Surveyor action or full traversal is required."
+    "1. Upload or point me to an existing evidence file that shows a generated scene path and its corresponding static RoomId (R_* or B_*) in the same mapping. The dungeon.zip you just uploaded was scanned and contains no such mapping, so do not upload it again. Success condition: at least one explicit scene-path-to-RoomId pairing that can be checked against the saved CARGO_FLOATERS scene paths. No Surveyor action or full derelict traversal is required."
   ],
   "success_condition": "A source-backed mapping links captured parent_key groups or their scene paths to static room IDs, allowing the 7-versus-11 comparison without equating labels/families to IDs.",
   "remaining_validation": [
-    "No DUNGEON-C artifact in the current assigned branch provides the requested RoomId-to-scene crosswalk; local extracted room metadata has not been provided.",
+    "No current repository artifact or the uploaded dungeon.zip provides the requested per-scene RoomId crosswalk.",
     "Whether static Rooms=7 counts only main rooms or includes branch/subgraph groups remains unresolved.",
     "Runtime weighted-choice semantics and direct selected DungeonOptions remain unverified.",
     "Target counts are asset-derived predictions, not physical observations."
   ],
   "evidence_to_return": [
-    "research/LATEST_PARALLEL_ACTION_TEST.json (current report pointer)",
-    "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json (current MEDI saved-session analysis; SHA-256 b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41)",
+    "research/LATEST_PARALLEL_ACTION_TEST.json",
+    "research-uploads/20261009T004133Z-parallel-action-test/combined-results.json (SHA-256 af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972)",
+    "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
+    "dungeon.zip on main (SHA-256 5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60)",
     "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json (historical CARGO report; SHA-256 11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6)",
     "agent-patches/metadata/ROOM_MODEL_RECONCILIATION_20261008.json",
-    "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json on agent/dungeon-current-target-20261008-reconciled (commit 1904a3c381889ed1c0418ee91ebd38b571c914d1)"
+    "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json on agent/dungeon-current-target-20261008-reconciled"
   ],
   "full_derelict_required": false,
-  "evidence_review": "agent-patches/metadata/ROOM_MODEL_RECONCILIATION_20261008.json",
+  "evidence_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
   "static_root_trace": "agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json",
   "parallel_action_review": "agent-patches/metadata/ROOM_MODEL_RECONCILIATION_20261008.json",
   "parallel_source_snapshot": "agent-patches/metadata/METADATA_PARALLEL_SOURCE_SNAPSHOT_20261008.json",
   "extension_version": "1.0.1",
-  "progress": "Pointer and current combined report SHA-256 verified. Current report is an isolated manual-button analysis of saved session 20261008T185119Z_0001550006607CAC, not a fresh live capture: MEDI_FLOATERS, 10 analyzer parent groups vs Rooms=7, and 14 asset-predicted targets. Historical CARGO report remains authoritative for its own run: 8 CARG + 2 BARRACKS + 1 END groups; 43 asset-derived target prediction across 164 resolved scenes, not an observed count. Static rules require one each R_FLO_BARR, R_S_FLO_BARR, and R_END (minimum index 6); two BARRACKS-dominant groups and END at index 10 are numerically compatible only. Eight CARG groups cannot be mapped to the two CARG main IDs plus B_FLO_CARG without a crosswalk. DUNGEON-C's separately recorded 11-room user traverse does not include per-room IDs. Supplied analyzer inspection explains parent-key grouping and dead-end label boundaries, not generator semantics.",
+  "progress": "The 2026-10-09 combined report hash-verifies and analyzes saved session 20261008T184737Z_Uzawan_XI offline: MEDI_FLOATERS, 10 analyzer logical groups, 146 scene instances, room_model_status=needs-review, zero manual F6/F5 markers, and 14 asset-predicted targets (7+7), not observed. The uploaded ZIP is in main at blob ce8ca51535db34165cd72477ab7b9ae9c94a86fa, size 9,733,369 bytes, SHA-256 5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60. It has 2,866 files; no ASCII/UTF-16 static room IDs or RoomId/DungeonOptions fields were found. Historical CARGO remains 8 CARG + 2 BARRACKS + 1 END groups (11 total), with 43 asset-derived predicted targets across 164 resolved scenes, not an observed count. Static CARGO_FLOATERS remains Rooms=7 with five main and two branch IDs and the exact-count/index constraints. The records remain unmappable without a scene-to-RoomId evidence artifact.",
   "complete_source_snapshot": "agent-patches/metadata/METADATA_SOURCE_SNAPSHOT_20261007.json",
   "pull_request": "https://github.com/vikkitor93-coder/NMS-Derelict-Probe/pull/49",
-  "updated_utc": "2026-10-08T23:28:08Z",
-  "latest_run_id": "20261008T195817Z-1b73e442",
-  "latest_report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
-  "latest_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
-  "rollback": "Backup branch backup/main-before-metadata-reconcile-20261008-2328 points to main base 69efada4badc48701bcd27ee9b631c1b10be7280. Revert the reconciliation publication commit to roll back the status, manifest, review, workspace, handoff, and index edits; retain timestamped research evidence."
+  "updated_utc": "2026-10-09T00:56:17Z",
+  "latest_run_id": "20261009T004054Z-9fedea65",
+  "latest_report": "research-uploads/20261009T004133Z-parallel-action-test/combined-results.json",
+  "latest_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
+  "rollback": "Backup branch backup/main-before-metadata-dungeon-zip-review-20261009 points to exact main base 641a764f02f26438bc584c820471dbe9da4df448. Revert the publication commit to roll back the review and status/shared-state edits; retain the uploaded archive and dated research evidence.",
+  "uploaded_archive_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json"
 }
