@@ -296,3 +296,10 @@ Fresh generation baseline: session `20261009T161852Z_00006D0006606CAB`, address 
 The historical 43 CARGO targets remain a separate asset-derived prediction. Neither 21 nor 43 is an observed count. Root derivation remains unknown. Zero `+0x10` and the separate resolver sample do not identify a resolved dispatch target.
 
 Seed-B 1.0.6 adds an ordered refresh-first action list: analyze generation, extract caller, extract upstream callers, analyze seed function. Button ordering is a user sequence, not an enforced dependency; verify each output references the preceding artifact. Static panel/index/action/hash checks were completed. Python unittest was not run because the local execution helper could not start. One short local Agent Console action sequence is required; no NMS launch or full traversal is required.
+
+
+## DUNGEON-C same-session upstream and caller-map review — 2026-10-09 23:26Z
+
+The standalone upstream artifact `research-uploads/20261009T232432Z-seed-lineage-extract-upstream-08cc282f/dungeon-upstream-callers-latest.json` has manifest artifact SHA-256 `65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52`. It uses the 23:08 session (`0000790006606CAB`, root candidate `C36137A0B4914AD9`) and the executable hash already verified for D. Static flow places the descriptor at second-argument+0x128; seed at descriptor+0x10 and UseSeedValue at +0x18 are read before root add at `0063AC20`. The runtime event reports descriptor `0000026622D9A128` from owner `0000026622D9A000`, seed `C36137A0B4914AD9`, and UseSeedValue enabled, matching those offsets.
+
+The scan finds 52 rel32 references to candidate entry `0063A6D0` (50 calls, 2 jumps). Read-only PE exception-table mapping against the hash-matched NMS.exe found 47 distinct containing `.pdata` ranges, one unmapped reference `00251D22`, and self-recursive call site `0063A76E` inside the adjacent range `0063A729..0063AB6C`. These address relationships and field offsets do not assign a semantic name. The raw pre-call slot also remains unknown. Continue by classifying the caller contexts and looking for dataflow anchors in the current binary.
