@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "lane": "seed-lineage",
+  "reviewed_utc": "2026-10-09T23:39:09Z",
+  "provenance": {
+    "action": "analyze-seed-function",
+    "upload_utc": "20261009T233349Z",
+    "run_manifest": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/run-manifest.json",
+    "evidence": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json",
+    "all_saved_snapshot": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
+    "snapshot_evidence": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/dungeon-seed-function-analysis-latest.json",
+    "declared_evidence_sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+    "declared_size_bytes": 15904,
+    "hash_verification": "Both upload manifests declare this digest and GitHub exposes the same content blob at the dedicated and snapshot paths; an independent SHA-256 recomputation was not completed in this review."
+  },
+  "sample": {
+    "session": "20261009T230838Z_0000790006606CAB",
+    "universe_address": "0000790006606CAB",
+    "root_seed_candidate": "C36137A0B4914AD9",
+    "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "upstream_artifact": "research-uploads/20261009T232432Z-seed-lineage-extract-upstream-08cc282f/dungeon-upstream-callers-latest.json",
+    "upstream_sha256": "65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52",
+    "caller_sha256": "e63c2a420c9d30e1d21509ff815cdb2250ce9ede1583f59379fbf7a3e332ffbe"
+  },
+  "findings": {
+    "root_add_call_rva": "0063AC20",
+    "runtime_pdata_fragment": {
+      "begin_rva": "0063AB6C",
+      "end_rva_exclusive": "0063B04E",
+      "note": "PE .pdata fragment containing root call; not established as the logical C++ entry."
+    },
+    "logical_function_entry": {
+      "rva": "0063A6D0",
+      "status": "candidate-from-int3-padding",
+      "padding_start_rva": "0063A6CC",
+      "padding_bytes": 4,
+      "prologue_matches": true,
+      "distance_to_root_add_call_bytes": 1360
+    },
+    "direct_references_to_candidate": {
+      "outside_known_prefix": 51,
+      "inside_known_prefix": 1
+    },
+    "descriptor_field_occurrences": [
+      {
+        "field": "primary_seed",
+        "owner_displacement": "0x138",
+        "rva": "0063A8D1",
+        "possible_write": false
+      },
+      {
+        "field": "descriptor",
+        "owner_displacement": "0x128",
+        "rva": "0063A932",
+        "possible_write": false
+      },
+      {
+        "field": "use_seed_flag",
+        "owner_displacement": "0x140",
+        "rva": "0063A939",
+        "possible_write": false
+      },
+      {
+        "field": "descriptor",
+        "owner_displacement": "0x128",
+        "rva": "0063ABC0",
+        "possible_write": false
+      },
+      {
+        "field": "descriptor",
+        "owner_displacement": "0x128",
+        "rva": "0063ABE4",
+        "possible_write": false
+      }
+    ],
+    "possible_descriptor_field_writes": [],
+    "known_prefix_sha256": "46d691a5a7387d13fee4df098262d271610ed1a19ce644240043f9f20580c3a",
+    "caveats": [
+      "The logical entry is a candidate based on padding and prologue; .pdata identifies only the runtime fragment around the root call.",
+      "Descriptor-field occurrences are byte-level references, not proof of assignment or seed derivation.",
+      "The zero owner +0x10 read and the separate resolver sample do not resolve the dispatch target.",
+      "The 32-target CARGO_FLOATERS value in the matching generation sample is asset-derived prediction, not observed count; historical 43-target prediction remains a separate asset-derived result."
+    ],
+    "derivation_status": "unknown-not-claimed"
+  },
+  "next": {
+    "owner": "seed-lineage agent",
+    "action": "Compare the fresh candidate function's descriptor/seed dataflow with the fresh caller and upstream evidence, then test whether any static path computes or copies the captured root seed before the root AddResource call.",
+    "human_or_live_nms_required": false,
+    "full_derelict_traversal_required": false
+  }
+}
