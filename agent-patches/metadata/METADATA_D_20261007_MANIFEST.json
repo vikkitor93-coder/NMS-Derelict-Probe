@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "lane": "metadata",
-  "date_utc": "2026-10-08",
+  "date_utc": "2026-10-09",
   "objective": "Repair noninteractive METADATA-D asset preparation and map current static abandoned-freighter dungeon options to table presets.",
-  "result": "Compared the CARGO_FLOATERS 8 CARG-dominant / 11 total analyzer parent groups with static Rooms=7, main/branch IDs, exact-count rules, and the separate DUNGEON-C traverse evidence. Family labels and Room N parent groups do not identify static IDs; 7-versus-11/10 semantics remain unresolved pending a scene-to-RoomId crosswalk. Current MEDI report is an offline saved-session analysis, not a fresh capture.",
+  "result": "Reviewed the user-uploaded dungeon.zip and newest hash-verified combined report. The ZIP contains scene/model assets but no explicit scene-to-static-RoomId crosswalk; the analyzer/static room-count reconciliation remains unresolved.",
   "canonical_version": "0.3.61",
   "source_change": "Prepare-Crate-Assets.ps1 calls MBINCompiler with --input-format=MBIN -y",
   "extension": {
@@ -24,15 +24,20 @@
       "entrance_entity_mbin_sha256": "7ae4acec4521f5e8347b9d61514cf59dae7a24e722a7058a1126beb999b243e8",
       "dungeon_table_mbin_sha256": "f5afb96f49560bf39a0ec6ffc295540ed4c38165e4458df2c7785fe391e1a82a"
     },
-    "latest_combined_report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
-    "latest_combined_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
-    "latest_run_id": "20261008T195817Z-1b73e442",
+    "latest_combined_report": "research-uploads/20261009T004133Z-parallel-action-test/combined-results.json",
+    "latest_combined_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
+    "latest_run_id": "20261009T004054Z-9fedea65",
     "room_model_reconciliation": "agent-patches/metadata/ROOM_MODEL_RECONCILIATION_20261008.json",
     "prior_cargo_combined_report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
     "prior_cargo_combined_report_sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
     "dungeon_c_manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
     "dungeon_c_branch": "agent/dungeon-current-target-20261008-reconciled",
-    "dungeon_c_commit": "1904a3c381889ed1c0418ee91ebd38b571c914d1"
+    "dungeon_c_commit": "1904a3c381889ed1c0418ee91ebd38b571c914d1",
+    "latest_pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
+    "latest_pointer_report_sha256_verified": true,
+    "uploaded_asset_archive": "dungeon.zip",
+    "uploaded_asset_archive_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
+    "uploaded_asset_archive_sha256": "5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60"
   },
   "verification": {
     "powershell_parse": "passed with zero errors",
@@ -44,14 +49,19 @@
     "root_trace": "hashed root scene and attachment entity decompiled; one locator attachment, two component types, no direct room-scene reference; all ten preset room-ID lists parsed",
     "parallel_action_review": "attached 0.3.62 candidate ZIP and combined report SHA-256 verified; metadata action completed code 0 against saved input; 43 remains an asset-derived prediction grouped across 11 analyzer-derived logical rooms; shared pointer/report were not uploaded by Agent D",
     "package": "exact v0.3.60 base hash verified; complete 161-file v0.3.61 ZIP and manifest hashes verified before publication; 184/184 Windows Python 3.13 tests passed",
-    "latest_capture_review": "Verified pointer/report SHA-256 b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41 for 20261008T195817Z-1b73e442. Isolated manual-button analysis of saved session 20261008T185119Z_0001550006607CAC, not fresh live capture; MEDI_FLOATERS 10 parent groups vs Rooms=7, 14 predicted targets (not observed).",
-    "room_model_reconciliation": "Historical CARGO run 20261008T140207Z: 8 CARG + 2 BARRACKS + 1 END parent-key groups (11 total), 43 predicted targets. Static CARGO_FLOATERS has Rooms=7, five main IDs, two branch IDs; exact-one rules for R_FLO_BARR, R_S_FLO_BARR, R_END, with R_END minimum index 6. Counts/family labels are numerically compatible in limited ways but do not establish IDs. Current DUNGEON-C branch records a separate 11-room physical traverse but no per-room mapping.",
-    "analyzer_source_inspection": "Supplied 0.3.62 candidate analyzer (analysis tool version 0.3.24) groups by parent_key, parses Room N from parent labels, and uses family-level DEADEND_* plus a small-group size condition. This explains mixed dead-end-prefab/main classifications but does not create a RoomId crosswalk."
+    "latest_capture_review": "Pointer and report hash-verified for run 20261009T004054Z-9fedea65. Trigger is automatic saved-session analysis of 20261008T184737Z_Uzawan_XI.json with verified session hash 25601e0269ae460d121c52b672ab769884a3e36e87e18fd90906606d020d866b; isolated/offline, no GitHub upload, worker data not retained. MEDI_FLOATERS has 10 analyzer groups, 146 scene instances, room_model_status needs-review, zero manual room markers, and 14 predicted targets (7 salvage + 7 footlockers); not fresh live capture or an observed physical count.",
+    "room_model_reconciliation": "Historical CARGO run 20261008T140207Z: 8 CARG + 2 BARRACKS + 1 END analyzer parent-key groups (11 total), with 43 asset-derived target predictions (30 salvage + 13 footlockers) across 164 resolved scenes, not observed. Static CARGO_FLOATERS has Rooms=7, five main IDs, two branch IDs; exact-one rules for R_FLO_BARR, R_S_FLO_BARR, R_END and R_END minimum index 6. Counts/family labels do not identify IDs. The separate 11-room DUNGEON-C traverse has no per-room mapping.",
+    "analyzer_source_inspection": "Supplied 0.3.62 candidate analyzer (analysis tool version 0.3.24) groups by parent_key, parses Room N from parent labels, and uses family-level DEADEND_* plus a small-group size condition. This explains mixed dead-end-prefab/main classifications but does not create a RoomId crosswalk.",
+    "uploaded_asset_archive_review": "Verified main dungeon.zip Git blob ce8ca51535db34165cd72477ab7b9ae9c94a86fa; 9,733,369 bytes, SHA-256 5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60. Read all 2,866 files without extraction; scanned text and binary entries for ASCII/UTF-16 room IDs and RoomId/DungeonOptions/DungeonRootScene fields; no matches. The archive does not supply a scene-to-RoomId mapping. Full record: agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json."
   },
   "confirmed": "The installed active entrance component contains ten static weighted choices and a DungeonRootScene field.",
   "unproven": "Runtime choice probabilities, seed input, actual frequencies, and the relationship between static DungeonRootScene and observed runtime DUNGEON.SCENE.MBIN.",
   "human_intervention_required": true,
-  "rollback": "Backup branch backup/main-before-metadata-reconcile-20261008-2328 points to main base 69efada4badc48701bcd27ee9b631c1b10be7280. Revert the reconciliation publication commit to roll back the status, manifest, review, workspace, handoff, and index edits; retain timestamped research evidence.",
-  "next_action": "Request the DUNGEON-C room-ID-to-scene crosswalk or the local extracted dungeon-room metadata that contains it; then map saved parent_key groups to static IDs. No Surveyor control or full traversal is required for this artifact-only step.",
-  "updated_utc": "2026-10-08T23:28:08Z"
+  "rollback": "Backup branch backup/main-before-metadata-dungeon-zip-review-20261009 points to exact main base 641a764f02f26438bc584c820471dbe9da4df448. Revert the publication commit to roll back this metadata status/manifest/review and shared-state text; retain dungeon.zip and historical evidence.",
+  "next_action": "Provide an existing evidence file or exact repository path explicitly pairing generated dungeon scene paths with static R_*/B_* RoomIds. The uploaded dungeon.zip was scanned and contains assets but no such mapping. No Surveyor action or full traversal is required for this artifact-only step.",
+  "updated_utc": "2026-10-09T00:56:17Z",
+  "uploaded_asset_archive_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
+  "latest_report": "research-uploads/20261009T004133Z-parallel-action-test/combined-results.json",
+  "latest_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
+  "latest_run_id": "20261009T004054Z-9fedea65"
 }

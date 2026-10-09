@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "lane": "metadata",
+  "reviewed_utc": "2026-10-09T00:56:17Z",
+  "objective": "Determine whether the user-uploaded dungeon.zip supplies the room-ID-to-scene crosswalk needed to reconcile analyzer parent groups with static CARGO_FLOATERS room rules.",
+  "archive": {
+    "path": "dungeon.zip",
+    "source_branch": "main",
+    "source_commit": "641a764f02f26438bc584c820471dbe9da4df448",
+    "git_blob_sha1": "ce8ca51535db34165cd72477ab7b9ae9c94a86fa",
+    "size_bytes": 9733369,
+    "sha256": "5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60",
+    "archive_entries_including_directories": 3005,
+    "file_entries_scanned": 2866,
+    "text_entries_scanned": 1433,
+    "archive_read_validation": "All 2866 file entries were read successfully; no extraction or execution performed.",
+    "path_validation": "Entries are under the dungeon asset tree; no absolute or parent-traversal paths were used.",
+    "scans": {
+      "utf8_xml_room_id_or_static_table_field_matches": 0,
+      "all_entry_ascii_room_id_matches": 0,
+      "all_entry_ascii_room_type_matches": 0,
+      "all_entry_ascii_roomid_or_dungeon_table_field_matches": 0,
+      "all_entry_utf16le_room_id_or_table_field_matches": 0,
+      "binary_entries_included": true,
+      "patterns": "R_*/B_* room IDs, RoomId, DungeonOptions, DungeonRootScene"
+    },
+    "conclusion": "The uploaded dungeon.zip is a model/scene asset archive and does not contain an explicit scene-path-to-static-RoomId crosswalk."
+  },
+  "latest_pointer_report": {
+    "pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
+    "report": "research-uploads/20261009T004133Z-parallel-action-test/combined-results.json",
+    "sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
+    "run_id": "20261009T004054Z-9fedea65",
+    "trigger_kind": "automatic_saved_session",
+    "session_file": "20261008T184737Z_Uzawan_XI.json",
+    "session_sha256": "25601e0269ae460d121c52b672ab769884a3e36e87e18fd90906606d020d866b",
+    "session_input_verified": true,
+    "mode": "isolated_parallel_test_no_github_upload",
+    "summary": {
+      "total_actions": 9,
+      "completed": 8,
+      "failed": 0,
+      "unsupported": 0,
+      "upload_actions_skipped": 1,
+      "worker_data_retained": false
+    },
+    "generation": {
+      "preset_inference": "MEDI_FLOATERS",
+      "preset_confidence": "high",
+      "logical_generated_chunks": 10,
+      "dungeon_scene_instances": 146,
+      "room_model_status": "needs-review",
+      "manual_room_markers": {
+        "main_rooms_f6": 0,
+        "dead_ends_f5": 0
+      },
+      "predicted_target_containers": 14,
+      "predicted_salvage": 7,
+      "predicted_footlockers": 7,
+      "physical_count_observed": false
+    },
+    "authority_note": "This combined report is the sole source used for results of its run; queue.jsonl and separate per-action latest files were not substituted."
+  },
+  "historical_cargo_report": {
+    "report": "research-uploads/20261008T140254Z-parallel-action-test/combined-results.json",
+    "sha256": "11ec9ee30687570efda334a255ea27836bfb347d8bf7631ec4ffae981e9175f6",
+    "run_id": "20261008T140207Z-d8e24197",
+    "finding": "Historical CARGO_FLOATERS report: 8 CARG-dominant + 2 BARRACKS-dominant + 1 END-dominant analyzer parent-key groups (11 total); 43 targets are asset-derived predictions (30 salvage + 13 footlockers across 164 resolved scenes), not observed container counts."
+  },
+  "static_rules": {
+    "path": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
+    "preset": "CARGO_FLOATERS",
+    "rooms": 7,
+    "main_room_ids": [
+      "R_END",
+      "R_FLO_BARR",
+      "R_S_FLO_BARR",
+      "R_FLO_CARG",
+      "R_S_FLO_CARG"
+    ],
+    "branch_room_ids": [
+      "B_FLO_BARR",
+      "B_FLO_CARG"
+    ],
+    "rules": [
+      "exactly one R_FLO_BARR",
+      "exactly one R_S_FLO_BARR",
+      "exactly one R_END",
+      "R_END minimum room index 6"
+    ]
+  },
+  "dungeon_c_evidence": {
+    "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
+    "branch": "agent/dungeon-current-target-20261008-reconciled",
+    "branch_head": "afc1c5e785d2101f82bfe14170d333d6dce99d46",
+    "finding": "The separately recorded 11-room traverse contains no per-room RoomId mapping."
+  },
+  "conclusion": "The new ZIP does not change the room-count reconciliation: asset families and filenames are present, but the archive contains no RoomId or R_*/B_* labels in readable or binary entries. Analyzer parent-key groups therefore still cannot be matched to static room IDs. Do not equate 11 CARGO groups with seven static Rooms; do not treat 43 or 14 predicted targets as observed counts.",
+  "human_intervention": {
+    "required": true,
+    "surveyor_action_required": false,
+    "full_derelict_required": false,
+    "request": "Provide an artifact that explicitly pairs at least one captured dungeon scene path with its static RoomId (R_* or B_*), or its exact accessible repository path. The uploaded dungeon.zip was checked and does not contain that mapping; do not upload it again."
+  },
+  "rollback": {
+    "backup_branch": "backup/main-before-metadata-dungeon-zip-review-20261009",
+    "base_commit": "641a764f02f26438bc584c820471dbe9da4df448",
+    "revert": "Revert the publication commit to remove this review and the associated lane/shared-state text; keep dungeon.zip and historical reports."
+  }
+}
