@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-09T01:22:23Z",
+  "updated_utc": "2026-10-09T15:12:21Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -33,16 +33,19 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage-update-20261008",
-      "status": "latest-combined-report-reviewed-fresh-root-saved-caller-upstream-stale",
+      "status": "automatic-batch-third-root-candidate-found; 1.0.4-summary-validation-failure-diagnosed; 1.0.5-request-ready",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-      "result_summary": "Latest main combined report hash verified. Fresh session 20261008T185119Z_0001550006607CAC captured root candidate 00C9E8DF0327789E at 18:51:04Z; derivation unproven. MEDI_FLOATERS analysis predicts 14 targets from assets (not observed). Caller and upstream outputs still use Oct 6 and Oct 4 sessions; no correlation to fresh event.",
-      "human_validation_required": true,
-      "review": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_185304_20261008.md",
-      "next_action": "On shared main Surveyor, close NMS if open; RUNTIME-A 1.0.6 > Upload captured root event > wait for upload success. Then Seed-Lineage 1.0.3 > Extract caller code + upload > Extract upstream callers + upload. Return the upload, caller, and upstream evidence records.",
-      "parallel_report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe",
-      "extension_version": "1.0.3",
-      "latest_report": "research-uploads/20261008T185341Z-parallel-action-test/combined-results.json",
-      "latest_report_sha256": "9576e887375b1d79ad629b07a26209337479ff6cf096222207de4c53a130dcbe"
+      "result_summary": "Hash-verified automatic batch 20261009T015908Z-d4d6ae3f report 20261009T015909Z-77532ce2 (SHA-256 721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b) contains third candidate 0001680006607CAC -> 2139770A2614E3DC, one observation; executable identity is unverified because the measurement artifact has no NMS.exe hash. Caller and seed-function outputs in that report cite the prior 0001550006607CAC session. Derivation remains unknown. Screenshot error is caused by 1.0.4 panel summary length 635 > host limit 500; 1.0.5 build request shortens it to 432. The 14 MEDI and separate 43 CARGO values remain asset predictions, not observed physical counts.",
+      "human_validation_required": false,
+      "review": "agent-patches/seed-lineage/SEED_B_PANEL_FIX_AND_AUTO_BATCH_20261009.md",
+      "next_action": "Continue offline address-seed anchor comparison for 0001680006607CAC -> 2139770A2614E3DC; retain primary-compiler dependency for Surveyor panel integration.",
+      "parallel_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
+      "extension_version": "1.0.4",
+      "latest_report": "research-uploads/20261009T015948Z-automatic-research-batch-20261009T015908Z-d4d6ae3f-50cb03/reports/20261009T015909Z-77532ce2/combined-results.json",
+      "latest_report_sha256": "721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b",
+      "candidate_extension_version": "1.0.5",
+      "build_request_id": "seed-panel-summary-limit-20261009",
+      "latest_report_kind": "automatic_saved_session"
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-current-target-20261008-reconciled",

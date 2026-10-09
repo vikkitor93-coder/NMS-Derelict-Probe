@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "extensions": [
+    {
+      "extension_id": "dungeon-decompile",
+      "version": "1.0.2",
+      "manifest_path": "dungeon-decompile/1.0.2/manifest.json"
+    },
+    {
+      "extension_id": "metadata",
+      "version": "1.0.1",
+      "manifest_path": "metadata/1.0.1/manifest.json"
+    },
+    {
+      "extension_id": "runtime-dispatch",
+      "version": "1.0.6",
+      "manifest_path": "runtime-dispatch/1.0.6/manifest.json"
+    },
+    {
+      "extension_id": "seed-lineage",
+      "version": "1.0.5",
+      "manifest_path": "seed-lineage/1.0.5/manifest.json"
+    }
+  ]
+}

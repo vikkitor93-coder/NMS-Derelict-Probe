@@ -53,7 +53,7 @@
   },
   "human_validation": {
     "required": false,
-    "reason": "The new computation is offline and verified against two known addresses; future seed-derivation work needs more runtime boundary evidence, but this variant itself does not require an NMS run."
+    "reason": "The existing third-address candidate is already in the verified saved-session report. No new traversal is needed; a same-capture evidence chain is deferred until the 1.0.5 build request is integrated."
   },
   "follow_up_analysis": {
     "path": "agent-patches/seed-lineage/SEED_B_ANALYSIS_20261002.json",
@@ -64,34 +64,29 @@
     "derivation_status": "unknown-not-claimed"
   },
   "latest_research_review": {
-    "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_195817_20261008.md",
-    "source": "Main pointer and combined report bytes fetched; pointer SHA-256 verified. Separate lane-exclusive uploads reviewed as their own evidence chain, not substituted for parallel action results.",
-    "run_id": "20261008T195817Z-1b73e442",
-    "report_path": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
-    "report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
+    "path": "agent-patches/seed-lineage/SEED_B_PANEL_FIX_AND_AUTO_BATCH_20261009.md",
+    "source": "Verified main automatic saved-session batch and session report SHA-256; the separate manual combined report is cited separately.",
+    "run_id": "20261009T015909Z-77532ce2",
+    "report_path": "research-uploads/20261009T015948Z-automatic-research-batch-20261009T015908Z-d4d6ae3f-50cb03/reports/20261009T015909Z-77532ce2/combined-results.json",
+    "report_sha256": "721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b",
     "verified": true,
-    "actions_completed": 8,
-    "upload_action_skipped": 1,
-    "offline": true,
-    "fresh_root_session": "20261008T185119Z_0001550006607CAC",
-    "root_seed_candidate": "00C9E8DF0327789E",
-    "caller_session": "20261008T185119Z_0001550006607CAC",
-    "parallel_upstream_session": "20261006T223811Z_0001BF0004E84EFD",
-    "parallel_seed_function_session": "20261006T223811Z_0001BF0004E84EFD",
-    "constructor_identity": "unresolved"
+    "third_address": "0001680006607CAC",
+    "root_seed_candidate": "2139770A2614E3DC",
+    "derivation_status": "unknown-not-claimed"
   },
   "current_extension_candidate": {
-    "version": "1.0.4",
-    "panel": "agent-ui/extensions/seed-lineage/1.0.4/panel.json",
-    "manifest": "agent-ui/extensions/seed-lineage/1.0.4/manifest.json",
+    "version": "1.0.5",
+    "publication": "ready-build-request-pending-primary-compiler",
+    "request_id": "seed-panel-summary-limit-20261009",
+    "panel_summary_characters": 432,
+    "panel_sha256": "8609eb77ee65cce1a8a82fbf1f0b5a3c75b24a663319fc05e75cf57e78fac767",
+    "manifest_sha256": "30bcbaec8487ae3ba4032521311e53499b64e09e9bd215fe9623b484ffcf517a",
     "actions": [
       "research.extract_caller_code",
       "research.extract_upstream_callers",
       "research.analyze_seed_function"
     ],
-    "ui_api": "1.0",
-    "custom_host_action": false,
-    "probe_hook_added": false
+    "failure_cause": "Published 1.0.4 panel summary length 635 exceeds host maximum 500."
   },
   "latest_lane_exclusive_evidence": {
     "caller": {
@@ -118,8 +113,60 @@
     }
   },
   "rollback": {
-    "base_commit": "9dd7aeba437b2d24ad5a5aa3d57cef21396550c2",
-    "backup_branch": "backup/main-before-seed-lineage-reconcile-20261008-2343",
-    "path": "Revert publication merge commit with git revert -m 1 <merge-commit>; backup branch preserves pre-publish main."
+    "base_commit": "fc644e199a6c4bb327276b9a7c853a44509201e0",
+    "backup_branch": "backup/main-before-seed-panel-fix-20261009-1508",
+    "path": "Revert the lane publication with git revert -m 1 <merge-commit>; rollback the extension in Agent Console to v1.0.3 after integration."
+  },
+  "latest_saved_session_batch": {
+    "batch_id": "20261009T015908Z-d4d6ae3f",
+    "batch_index_path": "research-uploads/20261009T015948Z-automatic-research-batch-20261009T015908Z-d4d6ae3f-50cb03/batch-results.json",
+    "batch_index_sha256": "b1ea5afaee7aa2f6d2a49bd48c28b73a67d59a9aad3f6b53702d41fe2b0ea18a",
+    "report_path": "research-uploads/20261009T015948Z-automatic-research-batch-20261009T015908Z-d4d6ae3f-50cb03/reports/20261009T015909Z-77532ce2/combined-results.json",
+    "report_sha256": "721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b",
+    "input_session_sha256": "2b6c2767cdc1d01c4ef2c36a5536a787379bcd72bc3159ae5871a8fb786807a7",
+    "status": "completed-with-errors",
+    "completed_actions": 7,
+    "failed_actions": 1,
+    "upload_actions_skipped": 1,
+    "seed_lineage_action_session": "20261008T185119Z_0001550006607CAC",
+    "third_address_candidate": {
+      "universe_address_hex": "0001680006607CAC",
+      "root_seed_hex": "2139770A2614E3DC",
+      "observations": 1,
+      "source_action": "research.measure_generation",
+      "executable_sha256": null,
+      "executable_identity_verified": false
+    }
+  },
+  "seed_lineage_reconciliation": {
+    "report_run_id": "20261009T015909Z-77532ce2",
+    "report_sha256": "721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b",
+    "distinct_address_seed_candidates": [
+      {
+        "universe_address_hex": "00001A0004E84EFD",
+        "root_seed_hex": "9256392A2F5A74AC"
+      },
+      {
+        "universe_address_hex": "0001550006607CAC",
+        "root_seed_hex": "00C9E8DF0327789E"
+      },
+      {
+        "universe_address_hex": "0001680006607CAC",
+        "root_seed_hex": "2139770A2614E3DC"
+      }
+    ],
+    "distinct_addresses": 3,
+    "derivation_status": "unknown-not-claimed",
+    "fresh_third_address_caller_upstream_seed_function_chain": false,
+    "physical_container_counts_observed": false,
+    "asset_prediction_notes": [
+      "MEDI_FLOATERS 14 target value is asset-derived, not a physical count.",
+      "CARGO_FLOATERS 43-target value is asset-derived and remains separate from observed generation measurement fields."
+    ],
+    "dispatch_notes": [
+      "Zero +0x10 read is not a resolved target.",
+      "Separate resolver sample is not a resolved dispatch target."
+    ],
+    "third_address_executable_identity": "unverified-not-present-in-measurement-artifact"
   }
 }

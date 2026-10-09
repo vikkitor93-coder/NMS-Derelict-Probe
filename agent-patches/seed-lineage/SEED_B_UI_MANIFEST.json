@@ -25,7 +25,7 @@
   },
   "base": {
     "branch": "main",
-    "commit": "9dd7aeba437b2d24ad5a5aa3d57cef21396550c2"
+    "commit": "fc644e199a6c4bb327276b9a7c853a44509201e0"
   },
   "changed_files": [
     "agent-ui/extensions/seed-lineage/1.0.4/panel.json",
@@ -36,7 +36,15 @@
     "RESEARCH_INDEX.md",
     "WORKSPACE_STATE.json",
     "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-    "agent-patches/seed-lineage/STATUS.json"
+    "agent-patches/seed-lineage/STATUS.json",
+    "agent-patches/seed-lineage/SEED_B_PANEL_FIX_AND_AUTO_BATCH_20261009.md",
+    "agent-patches/seed-lineage/SEED_B_PANEL_FIX_AND_AUTO_BATCH_20261009.json",
+    "agent-patches/seed-lineage/SEED_B_UI_MANIFEST.json",
+    "build-requests/seed-lineage/seed-panel-summary-limit-20261009/request.json",
+    "build-requests/seed-lineage/seed-panel-summary-limit-20261009/files/agent-ui/extensions/seed-lineage/1.0.5/panel.json",
+    "build-requests/seed-lineage/seed-panel-summary-limit-20261009/files/agent-ui/extensions/seed-lineage/1.0.5/manifest.json",
+    "build-requests/seed-lineage/seed-panel-summary-limit-20261009/files/agent-ui/extensions/index.json",
+    "build-requests/seed-lineage/seed-panel-summary-limit-20261009/files/tests/test_seed_lineage_ui_extension.py"
   ],
   "evidence": {
     "measured_facts": [
@@ -48,7 +56,14 @@
       "The isolated parallel harness cannot chain newly produced caller/upstream outputs because workers receive independent snapshots.",
       "A third distinct universe-address/root-seed pair is needed to test a general derivation."
     ],
-    "hypotheses": []
+    "hypotheses": [],
+    "latest_automatic_report": {
+      "run_id": "20261009T015909Z-77532ce2",
+      "sha256": "721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b",
+      "third_universe_address": "0001680006607CAC",
+      "root_seed_candidate": "2139770A2614E3DC",
+      "seed_lineage_call_and_function_session": "20261008T185119Z_0001550006607CAC"
+    }
   },
   "verification": {
     "focused_tests": "Inline structural validation of versioned JSON extension, stable action IDs, lane namespace, and computed SHA-256 values passed; repository Python unittest not run because local exec process setup failed.",
@@ -56,22 +71,41 @@
     "extension_hashes": "panel 3dfc00fc70b40a0dcad117328876eb509d15c26c23197f6f86407017a2cc7334; manifest embeds panel hash; index points to 1.0.4",
     "action_order": "caller → upstream → seed-function declared in order",
     "live_update_detection": "not runtime-tested",
-    "windows_visual_smoke": "not run"
+    "windows_visual_smoke": "not run after correction",
+    "reported_error": "Invalid extension panel summary",
+    "diagnosis": "The published 1.0.4 summary has 635 characters; host limit is 500.",
+    "candidate_summary": "1.0.5 summary is 432 characters; manifest embeds matching panel SHA-256; request payload hashes match.",
+    "focused_static_contract_check": "passed",
+    "python_unittest": "not run: local process setup failed; required during build request staging"
   },
   "rollback": [
-    "In Agent Console, roll seed-lineage back to 1.0.3.",
-    "Restore pre-publish main from backup/main-before-seed-lineage-reconcile-20261008-2343 if a full rollback is required."
+    "The failed update leaves installed v1.0.3 active, as shown in the screenshot.",
+    "After v1.0.5 integration, use Agent Console rollback to v1.0.3.",
+    "Main backup branch backup/main-before-seed-panel-fix-20261009-1508 points to base fc644e199a6c4bb327276b9a7c853a44509201e0."
   ],
   "file_sha256": {
-    "agent-ui/extensions/seed-lineage/1.0.4/panel.json": "22708affb7433be558fa818b0cb86be0b3d7579fcf2af6d2046b038f79256f89",
-    "agent-ui/extensions/seed-lineage/1.0.4/manifest.json": "03c4e1518a75236f17b41511efe2d8659f3f4e4cd33f4f36d959e15290803f65",
-    "agent-ui/extensions/index.json": "97ed8f91d515d0ffb0289b86c24f9a3b29c4f67a7fe6eb3e1b02d2815137761a",
-    "tests/test_seed_lineage_ui_extension.py": "670cfc315fba9ce71a42b53f82aaa91b5f5bc0bc2d72ca5793b273071083355f",
-    "AI_HANDOFF.md": "e5e39575e98e997cdbf1cf6b664f2ac15926885c718933279c2826f14f2f234e",
-    "RESEARCH_INDEX.md": "6de3ca6d8aadca116603bf045de0a0863d08985394339a6a784fabb6e52d2bf5",
-    "WORKSPACE_STATE.json": "c0f097505bb29d5738fea4809c572f04cdd230bb1c20b6b038621cfb571ae336",
-    "agent-patches/seed-lineage/SEED_B_MANIFEST.json": "16e7b0238bb935c2eec7fe43efc8f0ef493ef0ca5cfd7047874acff64e1f3e7e",
-    "agent-patches/seed-lineage/STATUS.json": "0bfe35865e4fcd4f1079f5ea06acf60404e8da9bccd0431db762703984de21e7",
-    "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_195817_20261008.md": "374076bb7bc71eaeb854fdd1da485805e54fd7ce6f395d1666e154b011171d82"
+    "agent-ui/extensions/seed-lineage/1.0.5/panel.json": "8609eb77ee65cce1a8a82fbf1f0b5a3c75b24a663319fc05e75cf57e78fac767",
+    "agent-ui/extensions/seed-lineage/1.0.5/manifest.json": "30bcbaec8487ae3ba4032521311e53499b64e09e9bd215fe9623b484ffcf517a",
+    "agent-ui/extensions/index.json": "908ea180752837f571132771b4bca03f21a6c0266feb551272218791b8a32e44",
+    "tests/test_seed_lineage_ui_extension.py": "f761c37b52cd77b6aee4e08f5e1e863c5f40a2c516fabbfc023e8a99b83c03d3",
+    "build-requests/seed-lineage/seed-panel-summary-limit-20261009/request.json": "f6680fb166a0fc702fd5b887eaafdb25dd1fb6a1002da09fe979f8cdad538acb"
+  },
+  "current_state": "Published 1.0.4 failed activation with Invalid extension panel summary; installed 1.0.3 remains active.",
+  "candidate_build_request": {
+    "request_id": "seed-panel-summary-limit-20261009",
+    "status": "ready",
+    "version": "1.0.5",
+    "base_commit": "fc644e199a6c4bb327276b9a7c853a44509201e0",
+    "request_path": "build-requests/seed-lineage/seed-panel-summary-limit-20261009/request.json",
+    "summary_character_count": 432,
+    "panel_sha256": "8609eb77ee65cce1a8a82fbf1f0b5a3c75b24a663319fc05e75cf57e78fac767",
+    "manifest_sha256": "30bcbaec8487ae3ba4032521311e53499b64e09e9bd215fe9623b484ffcf517a",
+    "file_sha256": {
+      "agent-ui/extensions/seed-lineage/1.0.5/panel.json": "8609eb77ee65cce1a8a82fbf1f0b5a3c75b24a663319fc05e75cf57e78fac767",
+      "agent-ui/extensions/seed-lineage/1.0.5/manifest.json": "30bcbaec8487ae3ba4032521311e53499b64e09e9bd215fe9623b484ffcf517a",
+      "agent-ui/extensions/index.json": "908ea180752837f571132771b4bca03f21a6c0266feb551272218791b8a32e44",
+      "tests/test_seed_lineage_ui_extension.py": "f761c37b52cd77b6aee4e08f5e1e863c5f40a2c516fabbfc023e8a99b83c03d3"
+    },
+    "request_sha256": "f6680fb166a0fc702fd5b887eaafdb25dd1fb6a1002da09fe979f8cdad538acb"
   }
 }

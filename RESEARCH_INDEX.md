@@ -173,3 +173,10 @@ The remaining request is a separate source artifact explicitly pairing a generat
 ## METADATA-D final repository record-pair check — 2026-10-09
 
 A recursive same-record check covered 97 main JSON files under `agent-patches/dungeon-decompile/`, `agent-patches/metadata/`, and `research-uploads/` that mention both room-ID and scene-path terms. Zero records paired a `RoomId` field with a scene path or `.SCENE.MBIN` value. Together with the prior archive, all-ref, room-crate-index, and generation-table checks, this confirms there is no existing repository artifact for the user to locate. New source evidence is needed to continue the scene-to-static-ID comparison; no Surveyor action sequence is established and no full traversal is required. Detailed method and scope: `agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json`.
+
+
+## Seed-Lineage automatic session 20261009T015909Z-77532ce2
+
+Verified batch `20261009T015908Z-d4d6ae3f` SHA-256 `b1ea5afaee7aa2f6d2a49bd48c28b73a67d59a9aad3f6b53702d41fe2b0ea18a`; its session report SHA-256 is `721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b`. The report has a third address/root candidate `0001680006607CAC -> 2139770A2614E3DC` from one saved-session observation; its executable hash is not present. Seed-Lineage caller and seed-function outputs in that report still cite `20261008T185119Z_0001550006607CAC`; a fresh chain for the third address is not present. Do not claim a derivation formula. The 14 MEDI_FLOATERS and 43 CARGO_FLOATERS figures are asset-derived predictions, not physical counts. The separate zero `+0x10` read and resolver sample do not identify the dispatch target.
+
+The screenshot's `Invalid extension panel summary` is explained by published panel 1.0.4's 635-character summary exceeding the host's 500-character limit. Corrected panel 1.0.5 (432 characters), manifest, index update, and regression change are in ready request `build-requests/seed-lineage/seed-panel-summary-limit-20261009/`; integration and the full current source ZIP remain the primary compiler's work. See `agent-patches/seed-lineage/SEED_B_PANEL_FIX_AND_AUTO_BATCH_20261009.md`.

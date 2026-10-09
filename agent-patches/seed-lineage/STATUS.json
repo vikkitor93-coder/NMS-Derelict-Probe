@@ -1,27 +1,35 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-08T23:37:48Z",
-  "state": "waiting_on_user",
-  "status": "Latest parallel report verified; later lane-exclusive caller and upstream artifacts hash-verified and cite the same fresh session. Seed-function analysis remains stale. Waiting for one root event at a third universe address to test seed derivation.",
-  "summary": "Main parallel report 20261008T195817Z-1b73e442 SHA-256 b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41 verified; its fresh caller uses session 20261008T185119Z_0001550006607CAC but upstream/seed-function actions used the parallel harness's old common snapshot. Later lane-exclusive caller and upstream uploads (21:39 UTC) both hash-verify and cite the fresh session and NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. Fresh upstream observes descriptor +0x128, primary seed +0x138, use-seed +0x140, with seed read before root AddResource; construction remains upstream and derivation unresolved. The all-saved seed-function artifact remains from 20261002 and a different executable hash, so it is not current evidence. Fourteen MEDI_FLOATERS targets are asset-predicted, not observed; separate CARGO_FLOATERS 43-target figure is also an asset prediction.",
-  "next_action": "After the user provides a root event at a third universe address, compare the seed candidate against the two existing address/seed pairs and rerun caller → upstream → seed-function in sequence.",
-  "surveyor_request": "Capture one root resource event at a universe address different from 00001A0004E84EFD and 0001550006607CAC. Upload the event, then run Seed-Lineage 1.0.4 caller, upstream, and seed-function actions in order. Full traversal is not required.",
-  "human_intervention_required": true,
-  "user_steps": [
-    "1. Update/open shared main Surveyor v0.3.67 and confirm Seed-Lineage 1.0.4 is active. Start NMS with the current probe, travel to a system whose universe address is not 00001A0004E84EFD or 0001550006607CAC, enter its derelict, and stop once Surveyor shows a saved MODELS/SPACE/POI/DUNGEON.SCENE.MBIN root event with that new universe address and a root-seed candidate.",
-    "2. Exit NMS. In Surveyor open RUNTIME-A 1.0.6 > Upload captured root event; wait until upload success is shown.",
-    "3. In Surveyor open Seed-Lineage 1.0.4 and run 1. Extract caller code + upload; wait for success. Then run 2. Extract upstream callers + upload; wait for success. Then run 3. Analyze seed function + upload; wait for success. Return the three run manifests and the runtime root-event upload record."
+  "updated_utc": "2026-10-09T15:12:21Z",
+  "state": "in_progress",
+  "status": "The latest hash-verified automatic session report contains a third root-seed candidate at 0001680006607CAC. The associated caller and seed-function outputs still cite the earlier 0001550006607CAC session. Surveyor 1.0.4 failed to load because its 635-character panel summary exceeds the host's 500-character limit; a corrected 1.0.5 request is prepared.",
+  "summary": "Automatic batch 20261009T015908Z-d4d6ae3f report 20261009T015909Z-77532ce2 has verified SHA-256 721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b. The third-address root candidate is 0001680006607CAC -> 2139770A2614E3DC, observed once; its executable hash is not present in that measurement artifact. Existing address pairs remain 00001A0004E84EFD -> 9256392A2F5A74AC and 0001550006607CAC -> 00C9E8DF0327789E. No derivation is claimed. The 14 MEDI_FLOATERS and separate 43 CARGO_FLOATERS quantities are asset-derived predictions, not physical counts. Request seed-panel-summary-limit-20261009 corrects the screenshot's invalid-summary error.",
+  "progress": "The 1.0.5 request and hash-verified evidence reconciliation are prepared; continuing offline comparison of the third-address seed candidate.",
+  "blockers": [
+    "Main compiler must stage the ready build request before the 1.0.5 panel is available in Surveyor."
   ],
-  "success_condition": "A new root-event record shows a third universe address, root DUNGEON.SCENE.MBIN, and root-seed candidate. Caller, upstream, and seed-function artifacts all cite that same session and NMS.exe SHA-256; upstream cites the new caller, and seed-function cites the new upstream output.",
-  "evidence_to_return": [
-    "Runtime-A root-event upload manifest and root-event-latest.json",
-    "Seed-Lineage caller, upstream, and seed-function upload run manifests plus JSON artifacts",
-    "Universe address, root-seed candidate, session ID, and NMS.exe SHA-256 from all three actions"
-  ],
-  "full_derelict_required": false,
-  "evidence_path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_195817_20261008.md",
-  "parallel_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
+  "next_action": "Locate or reproduce the repository's public system-seed calculation for 0001680006607CAC and compare it with 2139770A2614E3DC, keeping the relation unproven until calculated.",
   "extension_version": "1.0.4",
+  "candidate_extension_version": "1.0.5",
+  "build_request_id": "seed-panel-summary-limit-20261009",
+  "latest_automatic_batch": {
+    "batch_id": "20261009T015908Z-d4d6ae3f",
+    "batch_sha256": "b1ea5afaee7aa2f6d2a49bd48c28b73a67d59a9aad3f6b53702d41fe2b0ea18a",
+    "report_path": "research-uploads/20261009T015948Z-automatic-research-batch-20261009T015908Z-d4d6ae3f-50cb03/reports/20261009T015909Z-77532ce2/combined-results.json",
+    "report_sha256": "721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b",
+    "input_session_sha256": "2b6c2767cdc1d01c4ef2c36a5536a787379bcd72bc3159ae5871a8fb786807a7"
+  },
+  "latest_manual_parallel_report": {
+    "run_id": "20261009T004054Z-9fedea65",
+    "report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972"
+  },
+  "human_intervention_required": false,
+  "surveyor_request": "",
+  "user_steps": [],
+  "success_condition": "The 1.0.5 candidate passes host validation and the updated UI test during build-request staging; then the existing third-address root candidate can be followed with a same-capture caller/upstream/seed-function chain.",
+  "evidence_to_return": [],
+  "full_derelict_required": false,
+  "evidence_path": "agent-patches/seed-lineage/SEED_B_PANEL_FIX_AND_AUTO_BATCH_20261009.md",
   "runtime_extension_version": "1.0.6"
 }
