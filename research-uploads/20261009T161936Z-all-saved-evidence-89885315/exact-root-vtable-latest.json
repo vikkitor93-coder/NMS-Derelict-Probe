@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "tool_version": "0.3.38",
+  "method": "offline-vtable-slot-resolution",
+  "source_evidence": "exact-root-caller-code-latest.json",
+  "exact_external_caller_return_rva_hex": "02C0497A",
+  "indirect_call": {
+    "status": "decoded",
+    "kind": "call-indirect-ff2",
+    "prefix_hex": "",
+    "modrm_hex": "52",
+    "sib_hex": null,
+    "displacement": 16,
+    "rip_relative": false,
+    "instruction_rva_hex": "02C04977",
+    "return_rva_hex": "02C0497A",
+    "instruction_hex": "FF5210",
+    "target_rva_hex": null,
+    "pointer_slot_rva_hex": null
+  },
+  "target_function_rva_hex": "00634BC0",
+  "virtual_slot_offset_hex": "00000010",
+  "nms_exe": {
+    "file_name": "NMS.exe",
+    "file_size": 88545352,
+    "sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+    "pe_timestamp_hex": "6ABB9CC5",
+    "image_base_hex": "0000000140000000",
+    "size_of_image_hex": "07619000"
+  },
+  "absolute_function_pointer_match_count": 0,
+  "vtable_candidates": [],
+  "rva32_reference_count": 0,
+  "rva32_references": [],
+  "interpretation": "The runtime-correlated call is virtual (call [vtable+0x10]). Candidates here are offline data slots whose +0x10 entry resolves to the verified shared function. RTTI and code references are best-effort evidence; do not treat a class name as proven unless the CompleteObjectLocator checks are coherent."
+}
