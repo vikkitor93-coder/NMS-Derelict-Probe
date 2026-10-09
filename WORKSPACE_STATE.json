@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-09T16:20:52Z",
+  "updated_utc": "2026-10-09T22:50:53Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -53,18 +53,23 @@
       "branch": "agent/dungeon-current-target-20261008-reconciled",
       "status": "runtime-dispatch-correlated-static-callback-analysis-active",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "Continue offline semantic analysis of the hash-matched 0063A6D0 callback and surrounding caller/dataflow using existing code and evidence; do not use WinDbg or infer a semantic name from the RVA.",
+      "next_action": "Continue offline semantic analysis of the hash-matched current caller/callback and investigate generator-consumer references without assigning an unsupported semantic name.",
       "latest_evidence": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
       "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
       "current_build_static_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
       "helper_dataflow_review": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
       "new_root_capture_review": "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json",
       "root_callback_code_export": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
-      "latest_combined_report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
-      "latest_combined_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
-      "latest_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json",
-      "latest_report": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
-      "latest_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41"
+      "latest_combined_report": "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
+      "latest_combined_report_sha256": "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439",
+      "latest_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261009.json",
+      "latest_report": "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
+      "latest_report_sha256": "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439",
+      "latest_run_id": "20261009T163626Z-9056847b",
+      "latest_automatic_batch_report": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
+      "latest_automatic_batch_report_sha256": "fb7126c475d65d0e764d802b74ed6a6ca99c56fb72d75c65da9e0e3f6335f1f4",
+      "latest_automatic_batch_index": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/batch-results.json",
+      "latest_automatic_batch_index_sha256": "4ae5af8f6814e14d1e5e16ca1eeeaf455599b1e22d47286ba01e2b513f3f25cd"
     },
     "metadata": {
       "branch": "agent/metadata-room-model-reconcile-20261008",
