@@ -1,0 +1,411 @@
+{
+  "action": "all-saved-evidence",
+  "files": [
+    {
+      "name": "generation-baseline-latest.json",
+      "produced_by": [
+        "measure",
+        "analyze-generation"
+      ],
+      "sha256": "a950ddd7d2bf56c8a62ea5b26dee0ca0c40e51432ccb67a9d7a5f7b70dec32b7",
+      "size": 78232,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "generation-measurements-summary.json",
+      "produced_by": [
+        "measure",
+        "compare-measurements"
+      ],
+      "sha256": "1db051e4bd461497d4fd41a087266d07aa3b6b8665cdc10115b51715bc5eb753",
+      "size": 57894,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "generation-measurements.csv",
+      "produced_by": [
+        "measure",
+        "compare-measurements"
+      ],
+      "sha256": "44f390e1b45e12f21debd8ff5d274d92e4473ddc251fc9af78d6b62752e2dbbe",
+      "size": 9778,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "seed-room-correlation.json",
+      "produced_by": [
+        "measure",
+        "analyze-correlation"
+      ],
+      "sha256": "33694ade05c90ed79825f6122350a4d2a6ea4660dd1ccc7857625f337f09710c",
+      "size": 37560,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "dungeon-caller-code-latest.json",
+      "produced_by": [
+        "extract-caller"
+      ],
+      "sha256": "83ba43c47011c7c455b2cb079a210f9aaae2b9a6436a6ee408c233e63af5eee9",
+      "size": 42082,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "dungeon-upstream-callers-latest.json",
+      "produced_by": [
+        "extract-upstream"
+      ],
+      "sha256": "8e66960e4483fa6656f25ba91148322f774eba220dd41246c529d18f227db941",
+      "size": 161039,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "exact-root-caller-code-latest.json",
+      "produced_by": [
+        "extract-exact-root-caller"
+      ],
+      "sha256": "1f77e37699b97a802a768751bba4cc49cdbb1197dabc7dad73e479cdceaebf62",
+      "size": 67843,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "exact-root-vtable-latest.json",
+      "produced_by": [
+        "resolve-root-vtable"
+      ],
+      "sha256": "0fd0e89d6c8d08b31e9fffbd488fae9942248001ed85efd7ed58da1f1178d067",
+      "size": 1416,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "dungeon-seed-function-analysis-latest.json",
+      "produced_by": [
+        "analyze-seed-function"
+      ],
+      "sha256": "e7590db2377d25ff88f46aa203691daf6008098650e991d28b4efde7aacb3013",
+      "size": 15904,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "room-crate-index.json",
+      "produced_by": [
+        "prepare-assets"
+      ],
+      "sha256": "b2e1e5c7f4f5273d373fd5db44049efb3c84a7c5f6d0f22dc9f2690b93bef721",
+      "size": 806285,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "asset-calculation-latest.json",
+      "produced_by": [
+        "prepare-assets"
+      ],
+      "sha256": "c3efdec44d2d29656c67e243d4fc48398235f34d0e7848d491ece324e9a522cb",
+      "size": 32620,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "crate-target-discovery.json",
+      "produced_by": [
+        "prepare-assets"
+      ],
+      "sha256": "f3f0971c41b769a5bb285bff3fd98541aa4ea9b9b71d00226b8eb9e4cd28c49e",
+      "size": 42508,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "exact-root-caller-latest.json",
+      "produced_by": [
+        "analyze-generation",
+        "upload-runtime-capture"
+      ],
+      "sha256": "7873b89f314739bd260d32a9b5c46d9f5f1048c064069a441c218340a779ce8a",
+      "size": 15620,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "dungeon-generation-table.json",
+      "produced_by": [
+        "analyze-dungeon"
+      ],
+      "sha256": "5553792431f7074f58ba527ee307b7577acc53fde6a7b8889ceabe3865942234",
+      "size": 604899,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261006T221214Z-32948.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "c21d85adaf95ac8d80b4ab79d9c4872c6fed7412dab8441b364594c3fcd987a5",
+      "size": 303419,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261008T135915Z-28052.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "67a86bd8c3afc6875fc5501c4f9d91f0e0dddc878749c28f73097498c6d7ee7a",
+      "size": 302891,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261008T160125Z-11128.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "01e04df81701e3d0607734bb0b6591959179f194d9910ecdd5e635bad43f0241",
+      "size": 10505,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261008T160308Z-35096.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "34e0e548d7681b8d8330a759ec1d978363b7e29c2117868dbfca4537921957cc",
+      "size": 284809,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261008T162213Z-16436.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "bb5bfd2ed154c9f591159aa8113deaa085d0c7b2f4cf105f843f8f0bfe707e24",
+      "size": 26340,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261008T162621Z-3580.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "b7cb36178879f80c065547eec3b96caa63ff4d3362e929125f196bc1b2a8821d",
+      "size": 301327,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261008T163043Z-4808.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "15f6082ddc4aef6fe48c917f19c77b912a8288ae86b9a29d5c309605615f0c2e",
+      "size": 304064,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261008T184035Z-35644.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "94074164abafb279ab5525a95d8d444b46a09a36c6af1a88d44b5df7f787313a",
+      "size": 623198,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261008T184951Z-40764.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "2b5277f8b2c0b6ba585120fea7b99837355930c9bddacf1bbb5f6680de5f9224",
+      "size": 581889,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261009T013454Z-21464.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "5f45b8c1366e905eb9ad3a6f689e057d7db5176e6d59016fdfaa15a0b0b8a1a5",
+      "size": 924423,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261009T155438Z-3804.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "eba74154603f88f8b06ddf2ff68b97b174a17521bd9113e7d2682e469211a1eb",
+      "size": 1861,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261009T161133Z-34728.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "aa1e253a349d563942921a90fdcda64d2ec2c4ecea9cbc7ff46a7a16d5825759",
+      "size": 966580,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "capture-journal-20261009T230400Z-33728.jsonl",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "68e0ce9986e16d40c6302cee9a1b1f8a9c07973602815c03d3555dbe209f8d04",
+      "size": 574222,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    },
+    {
+      "name": "root-event-latest.json",
+      "produced_by": [
+        "runtime-probe"
+      ],
+      "sha256": "7873b89f314739bd260d32a9b5c46d9f5f1048c064069a441c218340a779ce8a",
+      "size": 15620,
+      "visible_to_lanes": [
+        "runtime-dispatch",
+        "seed-lineage",
+        "dungeon-decompile",
+        "metadata"
+      ]
+    }
+  ],
+  "selection": "All existing unique files declared by ACTION_OUTPUTS; overlapping outputs are included once.",
+  "uploaded_for_lanes": [
+    "runtime-dispatch",
+    "seed-lineage",
+    "dungeon-decompile",
+    "metadata"
+  ],
+  "utc": "20261009T230521Z",
+  "version": 1
+}
