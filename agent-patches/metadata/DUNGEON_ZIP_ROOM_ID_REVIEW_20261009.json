@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "metadata",
-  "reviewed_utc": "2026-10-09T01:14:05Z",
+  "reviewed_utc": "2026-10-09T01:22:23Z",
   "objective": "Search the uploaded dungeon.zip and all published Agent D/DUNGEON-C evidence for an existing mapping between captured scene paths and static room IDs.",
   "archive": {
     "path": "dungeon.zip",
@@ -100,12 +100,12 @@
     "required": true,
     "surveyor_action_required": false,
     "full_derelict_required": false,
-    "request": "The repository-wide search found no scene-to-RoomId mapping. Provide a separate artifact that explicitly pairs a generated scene path with its static R_*/B_* ID, if you have one. No Surveyor action or full traversal is needed; do not upload dungeon.zip again."
+    "request": "Repository search is complete: no existing crosswalk was found. The remaining comparison requires new source evidence that explicitly associates a generated scene with a static R_*/B_* RoomId. You do not need to search the repository or upload dungeon.zip again. No Surveyor control sequence is currently established for producing this association; no full traversal is required."
   },
   "rollback": {
-    "backup_branch": "backup/main-before-metadata-crosswalk-search-20261009",
-    "base_commit": "ec0a0445a6f593a399657bb02c96326002360ac1",
-    "revert": "Revert the repository-search publication commit to roll back this search note and associated status/shared-state changes; retain the prior archive review and research evidence."
+    "backup_branch": "backup/main-before-metadata-json-pair-scan-20261009",
+    "base_commit": "c3a2f9f49ae6b5a600bbae397f7342e91a59ad36",
+    "revert": "Revert the JSON-pair-scan publication commit to roll back only this final search update; retain the earlier archive review and repository-search publication."
   },
   "repository_search": {
     "all_remote_refs_scanned": 137,
@@ -139,6 +139,14 @@
       "latest_generation_table": "research-uploads/20261008T214003Z-seed-lineage-all-saved-evidence-e6b0e29a-1aecdb93/dungeon-generation-table.json",
       "CARGO_FLOATERS_table": "Rooms=7; five main IDs and two branch IDs; no scene path field or .SCENE.MBIN value."
     },
-    "conclusion": "No existing main, Agent D, or DUNGEON-C repository artifact provides the requested crosswalk. The saved scene index and static generation table are complementary but have no common room-ID join key. The three all-ref text matches are explanatory notes, not mapping records."
+    "conclusion": "No existing main, Agent D, or DUNGEON-C repository artifact provides the requested crosswalk. Across 97 main JSON files that mention both room-ID and scene-path terms, zero same-record RoomId-to-scene pairs were found. The saved scene index and static generation table are complementary but have no common room-ID join key. The three all-ref text matches are explanatory notes, not mapping records.",
+    "main_json_files_with_roomid_and_scene_terms": 97,
+    "same_record_roomid_scene_pairs": 0,
+    "same_record_pair_check": "Parsed each candidate JSON recursively and checked whether any single object record contains a RoomId/RoomID/room_id field together with a scene path/file/filename field or a .SCENE.MBIN value.",
+    "main_json_search_scope": [
+      "agent-patches/dungeon-decompile/",
+      "agent-patches/metadata/",
+      "research-uploads/"
+    ]
   }
 }
