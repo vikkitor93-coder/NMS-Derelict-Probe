@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-current-target-20261008-reconciled",
-  "reviewed_utc": "2026-10-09T22:50:53Z",
+  "reviewed_utc": "2026-10-09T22:55:06Z",
   "state": "runtime-dispatch-correlated-static-callback-analysis-active",
   "verified": {
     "historical_baseline": {
@@ -328,10 +328,10 @@
       "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
       "callsite": "02C08607: FF 52 10",
       "return_rva": "02C0860A",
-      "logical_entry_rva_metadata": "0063A6D0",
+      "logical_entry_rva_metadata": "0063A6D0 (copied from source evidence; not independently validated by extractor)",
       "target_rva": null,
       "owner_plus_0x10": "0000000000000000 after-call; not dispatch target",
-      "dispatch_resolution": "unresolved"
+      "dispatch_resolution": "unresolved by exact-caller extraction"
     },
     "latest_upstream_scan": {
       "artifact_sha256": "8e66960e4483fa6656f25ba91148322f774eba220dd41246c529d18f227db941",
@@ -541,9 +541,9 @@
     },
     "note": "Newest shared snapshot; root capture timestamp remains 2026-10-04T23:17:15.827Z. The exact-root-caller-code SHA-256 is still 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2. This is not a new runtime sample or a helper export."
   },
-  "updated_utc": "2026-10-09T22:50:53Z",
+  "updated_utc": "2026-10-09T22:55:06Z",
   "status": "runtime-dispatch-correlated-static-callback-analysis-active",
-  "summary": "Reviewed the pointer-selected Oct 9 manual combined report and the separately pointer-selected automatic batch report. The exact-caller artifact ties descriptor 0000022ADFB4A928 to event 2026-10-09T16:18:44.420Z at 02C08607: FF 52 10 / return 02C0860A; its target_rva is null. Artifact metadata records logical_entry_rva 0063A6D0, while the direct target and pre-call slot remain unproven. The separate resolver tests stale 00634BC0 at 02C04977/02C0497A and finds zero matches. WinDbg remains ruled out.",
+  "summary": "Reviewed the pointer-selected Oct 9 manual combined report and the separately pointer-selected automatic batch report. The exact-caller artifact ties descriptor 0000022ADFB4A928 to event 2026-10-09T16:18:44.420Z at 02C08607: FF 52 10 / return 02C0860A; its target_rva is null. Artifact metadata records logical_entry_rva 0063A6D0, while the direct target and pre-call slot remain unproven. The separate resolver tests stale 00634BC0 at 02C04977/02C0497A and finds zero matches. WinDbg remains ruled out. Source audit of tools/extract_exact_root_caller_code.py confirms it copies logical_entry_rva_hex and exact_runtime_match from input evidence; the Oct 9 extraction does not independently prove 0063A6D0 as target.",
   "next_action": "Continue offline semantic analysis of the hash-matched current caller/callback and investigate generator-consumer references without assigning an unsupported semantic name.",
   "human_intervention_required": false,
   "user_steps": [],
