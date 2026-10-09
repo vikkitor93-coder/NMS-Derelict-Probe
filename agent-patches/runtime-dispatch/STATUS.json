@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "lane": "runtime-dispatch",
-  "updated_utc": "2026-10-09T00:34:58Z",
+  "updated_utc": "2026-10-09T00:34:30Z",
   "state": "waiting_on_user",
-  "status": "Probe 0.3.40 clears root-seed state at a system boundary and separates raw seed from UseSeedValue/effective state; one normal runtime check remains.",
-  "summary": "Implementation and focused regression tests are complete. No WinDbg was used. The reported F-pattern remains unclassified without its captured UseSeedValue field.",
-  "progress": "System-scoped reset, stale-capture filtering, effective-seed fields, and full updater package were built and verified by CI.",
+  "status": "Probe 0.3.40 clears root-seed state at system boundaries; the latest hash-verified combined report is offline saved-session analysis, while the live system-switch check remains pending.",
+  "summary": "The current pointer and combined report SHA-256 match (20261009T003300Z-4b050fa5). Generation analysis uses saved session 20261004T093659Z_00001A0004E84EFD and reports root candidate 9256392A2F5A74AC with UseSeedValue=true; its preset/target output is MEDI_FLOATERS/16, not an observed physical count. The report's caller decodes FF 52 10 at 02C08607 returning at 02C0860A with no target RVA; the 02C04977 resolver is separate. Cross-action sessions differ.",
+  "progress": "Probe 0.3.40 system-scoped reset and raw/effective seed reporting are included in Surveyor 0.3.69; Runtime-A extension 1.0.6 is indexed. The published 0.3.69 CI record reports 220/220 tests, compileall, source ZIP, and 38-part package integrity passed. The latest combined report was hash-verified and its provenance/caveats reconciled.",
   "blockers": [],
-  "next_action": "Update Surveyor in-app, switch systems, and confirm the displayed root capture clears; inspect raw seed and UseSeedValue on the next capture.",
+  "next_action": "In Surveyor v0.3.69, update the app/extensions, warp systems, confirm the old Root resource capture clears, then enter a derelict only until one new root event is captured. Close NMS, upload the event, and return the receipt. No room traversal.",
   "human_intervention_required": true,
   "evidence_to_return": [
     "research/LATEST_PARALLEL_ACTION_TEST.json",
@@ -20,16 +20,17 @@
   "full_derelict_required": false,
   "human_action": {
     "required": true,
-    "surveyor_request": "Verify root-seed reset after a system change using the updated Surveyor.",
+    "surveyor_request": "Verify the system-scoped root-capture reset with Surveyor 0.3.69 and Runtime-A 1.0.6.",
     "steps": [
-      "Use Surveyor's in-app updater to install the latest package.",
-      "Enter a different star system.",
-      "Confirm the old root-seed capture clears.",
-      "Wait for the next root capture and record its raw seed, UseSeedValue, and effective state."
+      "In Surveyor's GitHub / updates section, click Check app update, then Install update when v0.3.69 is offered. In the same section, click Check lane extensions and confirm Runtime-A is 1.0.6.",
+      "Keep WinDbg closed. In Surveyor's Game section, click Start NMS and wait for the probe to show Connected.",
+      "Use the in-game star map to warp into a different system. In Surveyor's Overlay details, watch the Root resource row and confirm the old system's capture clears.",
+      "After confirming the clear, enter a derelict in the new system only far enough for the probe to capture the root resource event; stop before exploring rooms. Close NMS normally.",
+      "In Surveyor's Runtime-A 1.0.6 panel, click Upload captured root event and wait for the upload success receipt."
     ],
-    "success_condition": "The old system's capture is cleared, and a new root event shows raw seed plus UseSeedValue/effective state.",
+    "success_condition": "After the system address changes, the prior Root resource capture clears; the next root event is associated with the new system and its JSON contains raw seed, UseSeedValue, and effective seed/state. Surveyor shows upload success.",
     "evidence_to_return": [
-      "latest run manifest or root-event JSON"
+      "The Surveyor upload receipt/run-manifest path and the uploaded root-event JSON, or a screenshot of the Root resource row clearing plus the upload success receipt."
     ],
     "full_derelict_required": false
   }
