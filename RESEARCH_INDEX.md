@@ -224,3 +224,6 @@ Measured from the analyzer output: root AddResource RVA `0063AC20`; candidate lo
 
 
 Seed-B offline trace update (2026-10-09 23:40Z): same-sample upstream analysis shows the function copies its second argument to RSI at RVA `0063A6F1`, reads the descriptor primary-seed field at owner `+0x138` / descriptor `+0x10` at `0063A8CE`, checks UseSeedValue at owner `+0x140` / descriptor `+0x18` at `0063A936`, then reaches root AddResource at `0063AC20`. No possible writes to the descriptor or seed were reported. This indicates the function consumes an already-present seed; it does not locate its construction or prove its derivation. Next agent task is to trace callers and descriptor setup. See `agent-patches/seed-lineage/SEED_FUNCTION_REVIEW_20261009T233349Z.json`.
+
+
+Hash verification correction (2026-10-09 23:45Z): the exact GitHub base64 content bytes for `research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json` were independently SHA-256 checked; the digest is `38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212` at 15,904 bytes and matches both upload manifests.
