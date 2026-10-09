@@ -257,9 +257,9 @@
       "effective_seed_hex",
       "effective_state"
     ],
-    "validation": "focused unit tests and package integrity in GitHub Actions; live NMS system-switch check pending",
+    "validation": "Focused system/seed tests and package integrity passed in GitHub Actions; Surveyor 0.3.69 release checks passed, but one normal NMS system-switch validation remains pending.",
     "human_validation_required": true,
-    "combined_report_scope": "The 2026-10-08 combined parallel-action report remains the sole authority for that run; this user-run observation is separate."
+    "combined_report_scope": "The 20261009T003300Z-4b050fa5 combined report is authoritative for its isolated saved-session run only; it does not test system reset."
   },
   "latest_combined_report_review": {
     "pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
