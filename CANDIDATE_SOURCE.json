@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "version": "0.3.68",
-  "status": "ready-to-publish",
+  "status": "published",
   "base_version": "0.3.67",
   "artifact": {
     "file_name": "NMS-Derelict-Probe-v0.3.68-source.zip",
@@ -35,7 +35,7 @@
     "python_compile": "passed for tools, overlay, tests, and mod",
     "source_zip": "CRC and exact 183-file managed set passed; 38-part reconstruction SHA-256 verified",
     "windows_surveyor_validation": "pending local Windows installation",
-    "publication": "not yet published; awaiting atomic main update"
+    "publication": "published to main at commit 2c0b4206a790a805169254989b5c2561b43e1700; Windows installation validation remains pending"
   },
-  "publication": "Prepared from current main code version 0.3.67 (main base afc1c5e785d2101f82bfe14170d333d6dce99d46); publish only after atomic main update succeeds."
+  "publication": "Published to GitHub main at commit 2c0b4206a790a805169254989b5c2561b43e1700. Rollback reference: backup/main-before-root-seed-batch-20261008 at afc1c5e785d2101f82bfe14170d333d6dce99d46."
 }
