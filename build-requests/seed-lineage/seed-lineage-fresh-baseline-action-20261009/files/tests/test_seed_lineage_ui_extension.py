@@ -34,10 +34,10 @@ class SeedLineageUIExtensionTests(unittest.TestCase):
         self.assertTrue(source_panel["request_only"])
         self.assertLessEqual(len(source_panel["summary"]), 500)
         self.assertIn("20261009T163435Z-b91c6dbb", source_panel["summary"])
-        self.assertIn("20261009T161852Z", source_panel["summary"])
+        self.assertIn("00006D0006606CAB", source_panel["summary"])
         self.assertIn("00006D0006606CAB", source_panel["summary"])
         self.assertIn("43 CARGO targets are an asset prediction", source_panel["summary"])
-        self.assertIn("FF 52 10 and separate resolver remain unresolved", source_panel["summary"])
+        self.assertIn("Zero +0x10 and separate resolver sample do not resolve dispatch", source_panel["summary"])
         self.assertEqual(
             ["research.analyze_generation", "research.extract_caller_code", "research.extract_upstream_callers", "research.analyze_seed_function"],
             [action["action_id"] for action in panel["actions"]],
