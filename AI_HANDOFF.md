@@ -296,3 +296,16 @@ Fresh generation baseline: session `20261009T161852Z_00006D0006606CAB`, address 
 The historical 43 CARGO targets remain a separate asset-derived prediction. Neither 21 nor 43 is an observed count. Root derivation remains unknown. Zero `+0x10` and the separate resolver sample do not identify a resolved dispatch target.
 
 Seed-B 1.0.6 adds an ordered refresh-first action list: analyze generation, extract caller, extract upstream callers, analyze seed function. Button ordering is a user sequence, not an enforced dependency; verify each output references the preceding artifact. Static panel/index/action/hash checks were completed. Python unittest was not run because the local execution helper could not start. One short local Agent Console action sequence is required; no NMS launch or full traversal is required.
+
+
+## DUNGEON-C current-build caller context — 2026-10-09 23:12Z
+
+- Read-only static analysis of local NMS.exe matched SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`. Caller `02C08607` is `FF 52 10`, returning at `02C0860A`. Candidate `0063A6D0` spans `.pdata` ranges `0063A6D0..0063A729` and `0063A729..0063AB6C`; the contiguous path is 1180 bytes (SHA-256 `a00336416913eead94306aec9d137106e868ae504072147eaba8225e0032b81b`). The 89-byte prefix alone omits fall-through continuation.
+- Standalone captures at `2026-10-09T23:05:09.625Z` and `23:08:33.349Z` each report a unique descriptor/caller-return correlation to effective entry `0063A6D0` at return `02C0860A`. This is event-scoped correlation; direct `[RDX+0x10]` slot and callback semantic identity remain unknown. 23:08 all-saved snapshots repeat one capture; the 23:11 upload folder was not used because its path could not be verified.
+- Caller result `1` unlinks a lifecycle record and decrements `[RSI+0x118]`; other results accumulate elapsed `RAX` at `[RBX+0x50]` and continue. Preserve this caller behavior separately from generator semantics.
+- Keep the 43-target asset prediction, historical 35-container baseline, and post-update 16-target model distinct. WinDbg remains excluded per user report. Next: continue offline cross-reference/state-flow analysis without assigning a semantic callback name.
+
+
+## DUNGEON-C saved-evidence snapshot addendum — 2026-10-09 23:14Z
+
+The `20261009T231425Z` all-saved snapshot (`research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/`) carries the same 23:08 event artifact hash as the standalone upload (`eecced17a13f026a7f42eadd9969892504310eba4a66ea81a24f0b99de07b12d`). It is one repeated event, not a new capture. Current-schema metadata reports 52 static direct references to `0063A6D0`, recursive return `0063A773`, and 112852 external caller hits / 17020 recursive-return hits across the observed capture interval. Treat hit counts as interval-specific instrumentation counts. The owner+0x10 sample is explicitly post-call; it does not reveal the raw pre-call dispatch target. The snapshot's generation baseline is a separate session and its 21 target value is an analyzer prediction, not physical count evidence.
