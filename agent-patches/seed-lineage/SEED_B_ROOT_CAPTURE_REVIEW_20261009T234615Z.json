@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "lane": "seed-lineage",
+  "reviewed_utc": "2026-10-09T23:51:06Z",
+  "provenance": {
+    "action_commit": "f54b7e95deaf8e4f470b2db74f53aa57cb344da4",
+    "upload_utc": "20261009T234615Z",
+    "run_manifest": "research-uploads/20261009T234615Z-analyze-generation/run-manifest.json",
+    "generation_artifact": "research-uploads/20261009T234615Z-analyze-generation/generation-baseline-latest.json",
+    "generation_sha256": "67ee5348c0d3ea948fb93b81c9cf1122436a518fc2920bbc923df9e420526db8",
+    "exact_root_capture": "research-uploads/20261009T234615Z-analyze-generation/exact-root-caller-latest.json",
+    "exact_root_capture_sha256": "87813ff2737bca7f6e85a07235844bf773af4a956ee1572bcd3fb0fbf43e8246",
+    "exact_capture_sha256_verified": true,
+    "capture_size_bytes": 15677,
+    "generation_size_bytes": 22100
+  },
+  "sample": {
+    "session": "20261009T234421Z_0000760006606CAB",
+    "universe_address": "0000760006606CAB",
+    "root_seed_candidate": "9C2818C7FE094FC8",
+    "root_seed_effective": "9C2818C7FE094FC8",
+    "use_seed_value": true,
+    "root_state": "enabled",
+    "root_resource": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+    "capture_status": "exact-caller-correlated",
+    "root_event_utc": "2026-10-09T23:44:15.855Z",
+    "owner_pointer": "00000279DD497800",
+    "descriptor_pointer": "00000279DD497928",
+    "external_caller_return_rva": "02C0860A",
+    "logical_entry_rva": "0063A6D0",
+    "root_add_return_rva": "0063AC25",
+    "unique_callers_observed": 11,
+    "static_direct_reference_count": 52,
+    "known_static_candidate": false,
+    "executable_identity_present": false,
+    "exe_sha256": null
+  },
+  "dispatch": {
+    "owner_plus_0x10_value": "0000000000000000",
+    "capture_phases": [
+      "logical-entry-after-external-call",
+      "root-resource-add"
+    ],
+    "target_identity": null,
+    "conclusion": "does not resolve the dispatch target"
+  },
+  "generation": {
+    "root_seed_status": "candidate-captured-unverified",
+    "logical_chunks": 0,
+    "scene_instances": 0,
+    "predicted_target_containers": 0,
+    "interpretation": "This capture records the root resource event and does not report a traversed dungeon or physical container count."
+  },
+  "public_system_seed_comparison": {
+    "source_repository": "hadsh/nms_namegen",
+    "pinned_commit": "52ad48affaa4089c8f487a470a888dc9b7a650aa",
+    "source_files": [
+      "nms_namegen/iprng.py",
+      "nms_namegen/system.py"
+    ],
+    "algorithm": "fixed-width JavaScript BigInt reimplementation of indexPrimedPRNG; low 32 bits as system seed",
+    "known_anchor_checks": {
+      "00001A0004E84EFD": "B006BAB6",
+      "0001550006607CAC": "9E1A7905",
+      "0001680006607CAC": "8A6EF089"
+    },
+    "known_anchor_checks_passed": 3,
+    "new_address_system_seed": "D4759808",
+    "comparison_sample_000079_system_seed": "8271A2A8",
+    "relation_to_root_seed": "unproven"
+  },
+  "limits": [
+    "This is a separate live-capture cohort from the 000079 sample used by the fresh caller/upstream/seed-function chain.",
+    "The exact capture has no executable hash; do not claim executable compatibility with other samples.",
+    "The root seed is a capture candidate, not a proven derivation output.",
+    "The zero owner +0x10 value has a null target identity and does not identify a dispatch target.",
+    "The 43-target CARGO_FLOATERS prediction and 32-target 000079 prediction remain asset-derived and separate from observed counts."
+  ],
+  "next_action": "Compare the new address/root candidate pair with known address-system-seed anchors, then continue static tracing of the descriptor seed's construction while keeping executable cohorts separate."
+}
