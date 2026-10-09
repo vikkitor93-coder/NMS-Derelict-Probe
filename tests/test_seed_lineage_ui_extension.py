@@ -17,12 +17,12 @@ GITHUB_SPEC.loader.exec_module(github_integration)
 
 class SeedLineageUIExtensionTests(unittest.TestCase):
     def test_seed_lineage_extension_matches_host_api_and_lane_scope(self):
-        folder = ROOT / "agent-ui" / "extensions" / "seed-lineage" / "1.0.4"
+        folder = ROOT / "agent-ui" / "extensions" / "seed-lineage" / "1.0.5"
         manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
         validated, panel = extensions.validate_manifest(
             manifest,
             "seed-lineage",
-            "1.0.4",
+            "1.0.5",
             "0.3.43",
             lambda rel: (folder / rel).read_bytes(),
             extensions.HOST_ACTION_IDS,
@@ -32,9 +32,12 @@ class SeedLineageUIExtensionTests(unittest.TestCase):
         self.assertEqual("1.0", validated["compatible_surveyor_api_version"])
         self.assertEqual("seed-lineage", validated["extension_id"])
         self.assertTrue(source_panel["request_only"])
-        self.assertIn("20261008T195817Z-1b73e442", source_panel["summary"])
-        self.assertIn("43-target figure is also asset-derived", source_panel["summary"])
-        self.assertIn("FF 52 10 target remains unresolved.", source_panel["summary"])
+        self.assertLessEqual(len(source_panel["summary"]), 500)
+        self.assertIn("20261009T161520Z-7233c462", source_panel["summary"])
+        self.assertIn("20261009T161844Z", source_panel["summary"])
+        self.assertIn("00006D0006606CAB", source_panel["summary"])
+        self.assertIn("CARGO 43 are asset predictions", source_panel["summary"])
+        self.assertIn("FF 52 10 and separate resolver remain unresolved", source_panel["summary"])
         self.assertEqual(
             ["research.extract_caller_code", "research.extract_upstream_callers", "research.analyze_seed_function"],
             [action["action_id"] for action in panel["actions"]],
@@ -64,8 +67,8 @@ class SeedLineageUIExtensionTests(unittest.TestCase):
         self.assertIn(
             {
                 "extension_id": "seed-lineage",
-                "version": "1.0.4",
-                "manifest_path": "seed-lineage/1.0.4/manifest.json",
+                "version": "1.0.5",
+                "manifest_path": "seed-lineage/1.0.5/manifest.json",
             },
             index["extensions"],
         )
@@ -73,7 +76,7 @@ class SeedLineageUIExtensionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             extension_state = Path(tmp)
             (extension_state / "active.json").write_text(
-                json.dumps({"seed-lineage": "1.0.4"}), encoding="utf-8"
+                json.dumps({"seed-lineage": "1.0.5"}), encoding="utf-8"
             )
             self.assertEqual([entry], extensions.update_candidates([entry], extension_state))
             (extension_state / "active.json").write_text(

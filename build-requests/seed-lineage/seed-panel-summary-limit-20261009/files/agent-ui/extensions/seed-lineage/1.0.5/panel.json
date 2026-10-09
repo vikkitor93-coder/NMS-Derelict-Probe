@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "title": "SEED-B · Cross-address root seed lineage",
-  "summary": "Verified report 20261009T004054Z-9fedea65: caller and seed-function outputs match session 20261008T185119Z_0001550006607CAC/current NMS.exe. New root candidate 2139770A2614E3DC at address 0001680006607CAC lacks a fresh caller/upstream chain; derivation remains unproven. The 14 MEDI and 43 CARGO figures are asset predictions, not observed counts. FF 52 10 remains unresolved; zero +0x10 and resolver sample do not resolve dispatch.",
+  "summary": "Auto report 20261009T161520Z-7233c462: one root candidate at 0001680006607CAC -> 2139770A2614E3DC. Its caller, upstream, and seed-function outputs cite prior 000155 session. Separate runtime capture 20261009T161844Z records 00006D0006606CAB -> A5047E4E4B68F362; exact caller is 02C0860A, but no executable hash. Caller chain and root derivation remain unproven. +0x10 is zero; FF 52 10 and separate resolver remain unresolved. MEDI 14 and CARGO 43 are asset predictions, not observed counts.",
   "request_only": true,
   "actions": [
     {
