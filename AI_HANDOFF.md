@@ -1,9 +1,12 @@
-## Current release — Surveyor 0.3.69 folder-launch fix — 2026-10-09
+## Current release — Surveyor 0.3.70 parallel saved-session batches — 2026-10-09
 
-- The caller-code extraction tools now honor `NMSDS_NONINTERACTIVE=1`. Automatic and parallel background research writes its JSON output without opening Explorer; direct interactive runs still select the output file.
-- This corrects the two Python tools `tools/extract_nms_caller_code.py` and `tools/extract_exact_root_caller_code.py`. The PowerShell analysis launchers already suppress Explorer in noninteractive workflows.
+- Queued saved sessions now run in bounded parallel groups: up to three sessions concurrently, with four isolated research actions for each. Additional queued sessions continue in later waves.
+- Each saved session has an independent hash-pinned report and queue/log files in `<project>/research-output/automatic-session-batches/<batch-id>/`. This local device folder is easy to inspect and survives closing NMS.
+- If automatic upload is enabled, one batch upload publishes each session report, a batch index, and `research/LATEST_AUTOMATIC_RESEARCH_BATCH.json` to GitHub `main`. Agents verify the pointer and report hashes and keep sessions as separate cohorts. Cloud agents cannot access the PC's local folder directly, so GitHub is the shared path.
+- Manual **Parallel research actions** remains a single-run action with its existing `research/LATEST_PARALLEL_ACTION_TEST.json` pointer.
+- The caller-code extraction tools continue to honor `NMSDS_NONINTERACTIVE=1`, suppressing Explorer during background research while preserving output selection for direct interactive runs.
 - Multi-system root-seed analysis from 0.3.68 remains available: capture root events across different systems in one NMS launch, then use Surveyor > **Multi-system root seed correlation** > **Analyze saved root events across systems + upload**.
-- Verification: focused background-launch regression, full test suite, compileall, and full updater ZIP/chunk hash checks are recorded in `CANDIDATE_SOURCE.json`.
+- Verification: full suite (225 tests), compileall, and full updater-package integrity checks are recorded in `CANDIDATE_SOURCE.json`; Windows installation validation remains pending.
 
 # NMS Derelict Probe — AI handoff
 
@@ -229,18 +232,3 @@ The verified current report and callsite/counter caveats are recorded above and 
 ## Seed-B reconciliation — current combined run and later lane evidence (2026-10-08 23:36 UTC)
 
 The current parallel pointer references run `20261008T195817Z-1b73e442` at `research-uploads/20261008T195856Z-parallel-action-test/combined-results.json`, SHA-256 `b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41` (verified). That isolated report is authoritative for its run: 8 actions completed, 0 failed, upload skipped; fresh caller/session `20261008T185119Z_0001550006607CAC`; the parallel upstream and seed-function actions used an older common snapshot. Later separate caller and upstream uploads at 21:39 UTC hash-verify and cite the fresh session/executable. Upstream reports descriptor +0x128, seed +0x138, use-seed +0x140, seed read before root AddResource; the derivation is still unknown. The all-saved 21:40 seed-function artifact is stale (Oct 2 and old executable hash). The 14 MEDI targets and separate 43 CARGO targets are asset predictions, not physical counts. Zero +0x10 and the separate resolver sample remain unresolved. Current panel 1.0.4 runs caller → upstream → seed-function sequentially. Next human gate is one root event at a third universe address; no full traversal is required. See `agent-patches/seed-lineage/STATUS.json` for steps.
-
-
-## Runtime-A latest combined report review — 20261009T003300Z-4b050fa5
-
-Main pointer `research/LATEST_PARALLEL_ACTION_TEST.json` names `research-uploads/20261009T003338Z-parallel-action-test/combined-results.json` (SHA-256 `4aa443cff1733adb94e1aea67faa92a3b1902bdbcdc376b96cd5d4a3f94d3e7d`, verified at base commit `ff6ec847981122ee69439d774ba07e540780e1e4`). This is the sole authority for this isolated run: 8 actions completed, 0 failed, and 1 upload skipped. It was triggered from verified saved session `20261004T093659Z_Nezawac-Eibei.json` (SHA-256 `a4b7deddc1cd8489da90498abc4591f6b5bcd4421baf0f449084beb90e7bde90`), not a live system-switch test.
-
-The generation action uses session `20261004T093659Z_00001A0004E84EFD` / universe `00001A0004E84EFD` and records root-seed candidate `9256392A2F5A74AC` with UseSeedValue=true (1 observation; derivation unproven). Its preset is `MEDI_FLOATERS`, room model `needs-review`, and target output is 16; this is not an observed physical count and does not produce a resolved asset prediction when preset/scene resolution is absent. The earlier 14-target MEDI_FLOATERS analysis and separate 43-target CARGO_FLOATERS asset prediction remain distinct historical results; 43 is still an asset prediction (30 salvage + 13 footlockers over 164 scenes), never an observed count.
-
-The report's exact caller remains `02C08607: FF 52 10` returning at `02C0860A` with `target_rva_hex=null`. The zero `+0x10` value is not target evidence. The resolver output at `02C04977` / `02C0497A` tested `00634BC0` and found 0 matches; it is a different callsite. The report's generation session differs from its Seed-Lineage caller/upstream action sessions, so those outputs must not be joined. The independent unique-signature correlation at `0063A6D0` remains separate and does not change these limits.
-
-
-
-## Runtime-A lane state and next action — 2026-10-09
-
-The system-boundary reset code is in Probe 0.3.40, bundled with Surveyor 0.3.69, and Runtime-A extension 1.0.6. The current report is offline saved-session analysis and does not test reset behavior. Runtime-A's only remaining human gate is the normal system-switch test in `agent-patches/runtime-dispatch/STATUS.json`; it requires entering a different system and entering one derelict only until a root event is captured, with no room traversal. Keep WinDbg closed. The earlier 19:58 report, the 14-target asset prediction, and the distinct 43-target CARGO prediction remain historical separate evidence.

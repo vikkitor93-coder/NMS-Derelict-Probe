@@ -43,12 +43,13 @@ All lanes contribute evidence toward connecting that chain.
 ## Startup order
 
 1. Read `WORKSPACE_STATE.json` for the **current** lane claims, next actions, publishing policy, and latest combined research pointer.
-2. Open `research/LATEST_PARALLEL_ACTION_TEST.json` and read the report it names. For the latest parallel-action run, this combined report is the sole source for action results. Do not use its queue or separate per-action latest files as competing results. Preserve the report's provenance and interpretation notes.
-3. If `research/LATEST_ROOT_SEED_BATCH.json` exists, verify its report SHA-256 and use the referenced batch report plus its listed source capture journals for multi-system seed correlation. The report keeps different process journals separate; do not substitute `root-event-latest.json`, which represents only the newest event.
-4. Read `RESEARCH_INDEX.md` for the truth table and `AI_HANDOFF.md` for architecture/current technical context.
-5. Read `AGENT_WORKFLOW.md` for publishing and Surveyor/evidence rules.
-6. Read `build-requests/README.md` before asking for a shared Surveyor build change.
-7. Read only your assigned lane manifest and files/evidence needed for your objective. Do not replace a combined-report finding with an unreviewed historical file.
+2. For the latest automatic saved-session batch, open `research/LATEST_AUTOMATIC_RESEARCH_BATCH.json`, verify its `report_sha256`, then read the `batch-results.json` it names. That index links a separate `combined-results.json` and SHA-256 to each saved session. Read the report(s) relevant to your lane and verify their hashes; never combine sessions just because they share a batch. For a manually launched single parallel test, use `research/LATEST_PARALLEL_ACTION_TEST.json` as before. Queue files and `latest` action outputs are diagnostics, not authoritative shared results.
+3. On the user's PC, the durable local copies are under `research-output/automatic-session-batches/<batch-id>/`: one `runs/<session>-<hash>/combined-results.json` per saved session, plus `batch-results.json`, `queue.jsonl`, and logs. Cloud lane agents cannot read that PC folder directly; use the published GitHub batch pointer above to fetch the shared copies.
+4. If `research/LATEST_ROOT_SEED_BATCH.json` exists, verify its report SHA-256 and use the referenced batch report plus its listed source capture journals for multi-system seed correlation. The report keeps different process journals separate; do not substitute `root-event-latest.json`, which represents only the newest event.
+5. Read `RESEARCH_INDEX.md` for the truth table and `AI_HANDOFF.md` for architecture/current technical context.
+6. Read `AGENT_WORKFLOW.md` for publishing and Surveyor/evidence rules.
+7. Read `build-requests/README.md` before asking for a shared Surveyor build change.
+8. Read only your assigned lane manifest and files/evidence needed for your objective. Do not replace a combined-report finding with an unreviewed historical file.
 
 For any Surveyor panel/action request, also follow `AGENT_UI_EXTENSION_GUIDE.md`. All four lanes share its single versioned, data-only extension contract; do not add lane-specific Python UI modules or shell-command strings.
 
