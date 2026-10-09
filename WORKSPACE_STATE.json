@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-09T23:51:06Z",
+  "updated_utc": "2026-10-09T23:57:15Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -33,12 +33,12 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage",
-      "status": "Fresh 000079 same-sample static chain documented; separate exact root capture now adds address 0000760006606CAB; offline seed-lineage work active.",
+      "status": "Two same-executable callsites identify shared helper 00639BE0 as a candidate owner/descriptor producer for seed-consuming entry 0063A6D0; seed writes/formula unresolved.",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-      "result_summary": "Latest automatic combined report research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json verifies to 48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3; it pairs a fresh 000079 generation baseline with stale/different-sample seed-function (000155), caller (00006D), and upstream (000155) outputs. The later lane-exclusive 000079 seed-function artifact is hash-verified and aligns with caller/upstream on executable 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. A separate 000076 exact root capture records candidate 9C2818C7FE094FC8, public system seed D4759808, UseSeedValue=true, and caller 02C0860A; its executable identity is absent. Formula and dispatch target remain unresolved.",
+      "result_summary": "Latest automatic combined report research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json verifies to 48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3; it pairs a fresh 000079 generation baseline with stale/different-sample seed-function (000155), caller (00006D), and upstream (000155) outputs. The later lane-exclusive 000079 seed-function artifact is hash-verified and aligns with caller/upstream on executable 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. A separate 000076 exact root capture records candidate 9C2818C7FE094FC8, public system seed D4759808, UseSeedValue=true, and caller 02C0860A; its executable identity is absent. Formula and dispatch target remain unresolved. Offline follow-up matched two same-executable caller sites (006395D3 and 00639B99) to common helper 00639BE0. Both return pointers are passed as RDX into 0063A6D0, which reads an embedded descriptor seed at owner+0x138. This is a producer/setup candidate, not proof the helper writes the seed.",
       "human_validation_required": false,
       "review": "agent-patches/seed-lineage/SEED_B_ROOT_CAPTURE_REVIEW_20261009T234615Z.json",
-      "next_action": "Compare root candidates against the public address-derived system-seed anchors while tracing the fresh descriptor seed's construction; keep sample executable identities and parallel-report cohorts separate.",
+      "next_action": "Obtain a wider code extract or focused caller/upstream analysis for helper 00639BE0 and determine whether it writes owner+0x138 or forwards a seed from its arguments; keep the 000079 executable identity constraint.",
       "parallel_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
       "extension_version": "1.0.6",
       "latest_report": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json",
@@ -106,7 +106,10 @@
         "caller_return": "02C0860A",
         "owner_plus_0x10": "0000000000000000",
         "dispatch_target_resolved": false
-      }
+      },
+      "latest_owner_producer_trace": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
+      "owner_producer_helper_rva": "00639BE0",
+      "owner_producer_seed_write_established": false
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-current-target-20261008-reconciled",
