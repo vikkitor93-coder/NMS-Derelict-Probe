@@ -296,3 +296,6 @@ Fresh generation baseline: session `20261009T161852Z_00006D0006606CAB`, address 
 The historical 43 CARGO targets remain a separate asset-derived prediction. Neither 21 nor 43 is an observed count. Root derivation remains unknown. Zero `+0x10` and the separate resolver sample do not identify a resolved dispatch target.
 
 Seed-B 1.0.6 adds an ordered refresh-first action list: analyze generation, extract caller, extract upstream callers, analyze seed function. Button ordering is a user sequence, not an enforced dependency; verify each output references the preceding artifact. Static panel/index/action/hash checks were completed. Python unittest was not run because the local execution helper could not start. One short local Agent Console action sequence is required; no NMS launch or full traversal is required.
+
+
+DUNGEON-C checked the 23:21 all-saved snapshot. It repeats the 23:08 root capture with the same artifact SHA-256; no new live event is present. See `agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json` for the deduplicated provenance and latest pointer-selected batch review.
