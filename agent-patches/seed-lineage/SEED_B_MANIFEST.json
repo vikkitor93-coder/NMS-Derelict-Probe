@@ -130,9 +130,9 @@
     }
   },
   "rollback": {
-    "base_commit": "6688832abd762a1066283880451aadf5c400bdeb",
-    "backup_branch": "backup/main-before-seed-refresh-extension-20261009T2300",
-    "path": "Revert the one-parent publication commit; backup branch preserves exact base. Roll back panel in Agent Console to installed v1.0.5."
+    "base_commit": "0b520a035af44502a43e10f877f6d45975d5c963",
+    "backup_branch": "backup/main-before-seed-refresh-extension-20261009T2310",
+    "path": "If reverting the whole lane publish, revert its single-parent commits newest first (including the test/hash correction and initial publication), or restore from the backup reference. The backup preserves the exact pre-publish main tree."
   },
   "latest_saved_session_batch": {
     "batch_id": "20261009T163434Z-bf1ed756",
