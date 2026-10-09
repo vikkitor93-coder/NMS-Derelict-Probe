@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "version": "0.3.68",
-  "status": "published",
-  "base_version": "0.3.67",
+  "version": "0.3.69",
+  "status": "release-ready",
+  "base_version": "0.3.68",
   "artifact": {
-    "file_name": "NMS-Derelict-Probe-v0.3.68-source.zip",
+    "file_name": "NMS-Derelict-Probe-v0.3.69-source.zip",
     "includes": [
       "complete source project",
       "AI_HANDOFF.md",
@@ -14,6 +14,7 @@
     ]
   },
   "changes": [
+    "Suppress Explorer windows from caller-code extraction tools during noninteractive automatic and parallel research; preserve output-folder selection for direct interactive runs.",
     "Analyze multiple saved dungeon-root events across systems from append-only capture journals; publish a hash-verified all-lanes report pointer and source evidence.",
     "On startup, recover saved sessions without a matching queue record or exact-hash report; preserve FIFO and avoid duplicates",
     "Saved-session queue runs one isolated report per saved session, FIFO, and persists across restarts",
@@ -30,12 +31,11 @@
     "validated build-request queue and main compiler staging helper with conflict and stale-base checks"
   ],
   "verification": {
-    "root_seed_batch_tests": "9/9 passed",
-    "full_unit_tests": "219/219 passed",
+    "background_folder_launch_regression": "passed; interactive selection and noninteractive suppression both verified",
+    "full_unit_tests": "220/220 passed",
     "python_compile": "passed for tools, overlay, tests, and mod",
-    "source_zip": "CRC and exact 183-file managed set passed; 38-part reconstruction SHA-256 verified",
-    "windows_surveyor_validation": "pending local Windows installation",
-    "publication": "published to main at commit 2c0b4206a790a805169254989b5c2561b43e1700; Windows installation validation remains pending"
+    "source_zip": "CRC, exact 183-file managed set, and 38-part reconstruction SHA-256 verified",
+    "windows_surveyor_validation": "pending local Windows installation"
   },
-  "publication": "Published to GitHub main at commit 2c0b4206a790a805169254989b5c2561b43e1700. Rollback reference: backup/main-before-root-seed-batch-20261008 at afc1c5e785d2101f82bfe14170d333d6dce99d46."
+  "publication": "Release package based on main commit b57d3d07f9253c41aa8cd04ae8c67ad721c4d770; protected by backup branch backup/main-before-background-folder-fix-20261009."
 }

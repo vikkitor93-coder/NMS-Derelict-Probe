@@ -1,3 +1,7 @@
+## Surveyor background research stays in the app — 2026-10-09
+
+Automatic research sets `NMSDS_NONINTERACTIVE=1`. Both Python caller extractors now honor it and skip Explorer selection, preventing folder windows from opening during the saved-session backlog or parallel research. Direct interactive command runs still open the output location. Regression: `tests.test_tools.ToolTests.test_background_caller_extractions_do_not_open_explorer`.
+
 ## METADATA-D room-group reconciliation — 2026-10-08
 
 Current pointer/report SHA-256 `b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41` verifies for run `20261008T195817Z-1b73e442`: offline manual-button analysis of saved session `20261008T185119Z_0001550006607CAC`, not fresh live capture. MEDI_FLOATERS has 10 parent-key groups vs static `Rooms=7`; 14 targets are predicted, not observed. Historical CARGO run `20261008T140207Z-d8e24197` has 8 CARG + 2 BARRACKS + 1 END parent groups (11 total) and 43 asset-predicted targets (30 + 13), not an observed count.

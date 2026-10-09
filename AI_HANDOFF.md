@@ -1,6 +1,13 @@
+## Current release — Surveyor 0.3.69 folder-launch fix — 2026-10-09
+
+- The caller-code extraction tools now honor `NMSDS_NONINTERACTIVE=1`. Automatic and parallel background research writes its JSON output without opening Explorer; direct interactive runs still select the output file.
+- This corrects the two Python tools `tools/extract_nms_caller_code.py` and `tools/extract_exact_root_caller_code.py`. The PowerShell analysis launchers already suppress Explorer in noninteractive workflows.
+- Multi-system root-seed analysis from 0.3.68 remains available: capture root events across different systems in one NMS launch, then use Surveyor > **Multi-system root seed correlation** > **Analyze saved root events across systems + upload**.
+- Verification: focused background-launch regression, full test suite, compileall, and full updater ZIP/chunk hash checks are recorded in `CANDIDATE_SOURCE.json`.
+
 # NMS Derelict Probe — AI handoff
 
-## Current release and multi-system root-seed workflow — 2026-10-08
+## v0.3.68 multi-system root-seed workflow — 2026-10-08
 
 - **Version:** Surveyor source/updater 0.3.68, based on 0.3.67. The batch analyzer is read-only and uses evidence already written by the probe.
 - **Capture:** run NMS once and visit different universe addresses. Each `MODELS/SPACE/POI/DUNGEON.SCENE.MBIN` resource-add event is appended and flushed to the current process's `capture-journal-*.jsonl`, including the captured address, system metadata, and primary/secondary seed fields. `root-event-latest.json` remains a compatibility snapshot containing only the newest event.
