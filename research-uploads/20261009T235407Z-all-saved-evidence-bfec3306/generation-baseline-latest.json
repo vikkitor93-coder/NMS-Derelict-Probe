@@ -1,0 +1,512 @@
+{
+  "version": 1,
+  "analysis_tool_version": "0.3.24",
+  "session_id": "20261009T234421Z_0000760006606CAB",
+  "probe_version": "0.3.40",
+  "universe_address_hex": "0000760006606CAB",
+  "reality_index": 0,
+  "galactic_address": {
+    "planet_index": 0,
+    "solar_system_index": 118,
+    "voxel_x": -853,
+    "voxel_y": 6,
+    "voxel_z": 1542
+  },
+  "dungeon_scene_instances": 0,
+  "logical_generated_chunks": 0,
+  "predicted_salvage_crates": 0,
+  "predicted_crew_footlockers": 0,
+  "predicted_target_containers": 0,
+  "preset_inference": {
+    "preset": null,
+    "confidence": "unresolved",
+    "candidates": [
+      "MEDI_TURRETS",
+      "MEDI_FLOATERS",
+      "MEDI_BUGS",
+      "MEDI_SLIME",
+      "MEDI_MAZE",
+      "CARGO_TURRETS",
+      "CARGO_FLOATERS",
+      "CARGO_BUGS",
+      "CARGO_SLIME",
+      "CARGO_MAZE"
+    ],
+    "family": null,
+    "hazard": null,
+    "family_scene_counts": {
+      "CARG": 0,
+      "MEDI": 0
+    },
+    "all_scene_family_counts": {},
+    "hazard_evidence": []
+  },
+  "selected_preset_config": null,
+  "reward_seed_candidates": [],
+  "dungeon_root_seed_candidates": [
+    {
+      "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+      "seed_hex": "9C2818C7FE094FC8",
+      "seed_u64": 11252270916224765896,
+      "use_seed_value": true,
+      "observations": 1,
+      "captured_universe_addresses": [
+        "0000760006606CAB"
+      ],
+      "interpretation": "dungeon-root-resource-descriptor-seed-candidate"
+    }
+  ],
+  "dungeon_root_seed_status": "candidate-captured-unverified",
+  "resource_seed_lineage": {
+    "status": "captured",
+    "event_count": 1,
+    "ordered_signature_sha256": "a8c933963a5d248b5c8ed0f65c1e74860a71757c5ee7b3c96aa8ff5c057c7c4d",
+    "unique_primary_seed_hexes": [
+      "9C2818C7FE094FC8"
+    ],
+    "unique_secondary_seed_hexes": [],
+    "events": [
+      {
+        "event_order": 2,
+        "trace_sequence": 1553,
+        "utc": "2026-10-09T23:44:15.855Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "9C2818C7FE094FC8",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      }
+    ],
+    "scope": "dungeon-only",
+    "interpretation": "ordered non-zero descriptor seeds on dungeon resource events; correlation evidence only"
+  },
+  "resource_seed_lineage_status": "captured",
+  "resource_seed_context_lineage": {
+    "status": "captured",
+    "event_count": 1,
+    "ordered_signature_sha256": "a8c933963a5d248b5c8ed0f65c1e74860a71757c5ee7b3c96aa8ff5c057c7c4d",
+    "unique_primary_seed_hexes": [
+      "9C2818C7FE094FC8"
+    ],
+    "unique_secondary_seed_hexes": [],
+    "events": [
+      {
+        "event_order": 2,
+        "trace_sequence": 1553,
+        "utc": "2026-10-09T23:44:15.855Z",
+        "kind": "resource_add",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "9C2818C7FE094FC8",
+        "secondary_seed_hex": null,
+        "primary_use_seed_value": true,
+        "secondary_use_seed_value": null
+      }
+    ],
+    "scope": "recorded-derelict-poi-context",
+    "interpretation": "ordered non-zero descriptor seeds across all derelict/POI resource events already captured by the probe; correlation evidence only"
+  },
+  "resource_seed_context_lineage_status": "captured",
+  "poi_generation_trace": {
+    "status": "captured",
+    "description_input_count": 1,
+    "description_result_count": 1,
+    "description_return_hexes": [
+      "000000FE88BBD8C0"
+    ],
+    "description_results": [
+      {
+        "event_order": 1,
+        "trace_sequence": null,
+        "utc": null,
+        "poi_type_value": 6,
+        "poi_type_name": "AbandonedFreighter",
+        "component_address_hex": "000000FE88BBD8C0",
+        "raw_argument_hex": "0000760006606CAB",
+        "return_value_hex": "000000FE88BBD8C0",
+        "return_matches_universe_address": false,
+        "return_matches_dungeon_root_seed": false
+      }
+    ],
+    "prepare_event_count": 0,
+    "prepare_events": [],
+    "activation_event_count": 0,
+    "activation_events": [],
+    "lifecycle_event_count": 0,
+    "lifecycle_events": [],
+    "dungeon_root_inside_prepare": false,
+    "dungeon_root_prepare_scope_events": [],
+    "dungeon_root_inside_activation": false,
+    "dungeon_root_activation_scope_events": [],
+    "dungeon_root_inside_lifecycle": false,
+    "dungeon_root_lifecycle_scope_events": [],
+    "dungeon_root_resource_events": [
+      {
+        "event_order": 2,
+        "trace_sequence": 1553,
+        "utc": "2026-10-09T23:44:15.855Z",
+        "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+        "primary_seed_hex": "9C2818C7FE094FC8",
+        "descriptor_pointer_hex": "00000279DD497928",
+        "caller_return_offset_hex": "0063AC25",
+        "caller_code_window": {
+          "start_offset_hex": "0063ABF5",
+          "return_offset_hex": "0063AC25",
+          "return_index": 48,
+          "byte_count": 80,
+          "bytes_hex": "0400004C89751841B900040004488D8DE0000000440F44C8BA01000000488D45E0488944242848897C2420E84B3B2001488BD0488D8ECC010000E8DC69B9FF488D8DE0000000E840AE7202B201488D8D"
+        },
+        "caller_decoded": {
+          "encoding": "E8 rel32",
+          "call_instruction_offset_hex": "0063AC20",
+          "call_target_offset_hex": "0183E770",
+          "descriptor_argument_source_register": "RDI",
+          "descriptor_passed_unchanged_to_engine": true
+        },
+        "logical_entry_match_count": 1,
+        "logical_entry_matches": [
+          {
+            "utc": "2026-10-09T23:44:15.853Z",
+            "context_pointer_hex": "0000027AEE6F9960",
+            "owner_pointer_hex": "00000279DD497800",
+            "descriptor_pointer_hex": "00000279DD497928",
+            "primary_seed_hex": "9C2818C7FE094FC8",
+            "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+            "caller_return_offset_hex": "02C0860A",
+            "external_origin_caller_return_offset_hex": "02C0860A",
+            "recursion_depth": 0,
+            "external_owner_pointer_hex": "00000279DD497800",
+            "external_owner_plus_0x10_capture_at_entry": {
+              "owner_pointer_hex": "00000279DD497800",
+              "slot_offset_hex": "00000010",
+              "slot_address_hex": "00000279DD497810",
+              "capture_phase": "logical-entry-after-external-call",
+              "capture_utc": "2026-10-09T23:44:15.853Z",
+              "read_status": "captured",
+              "raw_bytes_hex": "0000000000000000",
+              "slot_value_hex": "0000000000000000",
+              "target_identity": null
+            },
+            "external_call_register_snapshot_at_entry": {
+              "capture_phase": "shared-entry-hook-after-call",
+              "capture_utc": "2026-10-09T23:44:15.853Z",
+              "caller_return_rva_hex": "02C0860A",
+              "rcx_hex": "0000027AEE6F9960",
+              "rdx_hex": "00000279DD497800",
+              "rdx_plus_0x10_capture": {
+                "owner_pointer_hex": "00000279DD497800",
+                "slot_offset_hex": "00000010",
+                "slot_address_hex": "00000279DD497810",
+                "capture_phase": "logical-entry-after-external-call",
+                "capture_utc": "2026-10-09T23:44:15.853Z",
+                "read_status": "captured",
+                "raw_bytes_hex": "0000000000000000",
+                "slot_value_hex": "0000000000000000",
+                "target_identity": null
+              }
+            },
+            "caller_class": "external",
+            "known_static_candidate": false,
+            "age_ms_at_root_add": 1.357
+          }
+        ],
+        "logical_entry_nearest_caller_return_offset_hex": "02C0860A",
+        "logical_entry_nearest_caller_code_window": {
+          "start_offset_hex": "02C085AA",
+          "return_offset_hex": "02C0860A",
+          "return_index": 96,
+          "byte_count": 160,
+          "bytes_hex": "BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95"
+        },
+        "logical_entry_exact_external_caller_return_offset_hex": "02C0860A",
+        "logical_entry_exact_external_caller_code_window": {
+          "start_offset_hex": "02C0858A",
+          "return_offset_hex": "02C0860A",
+          "return_index": 128,
+          "byte_count": 224,
+          "bytes_hex": "33FF4C897B38EB034533FFBA58000000488BCFE86E480100488B8E1801000048BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95C2FF50204C897F38BA58000000488BCBE8B1470100488BDDEB0748014350488B"
+        },
+        "logical_entry_exact_external_match": {
+          "utc": "2026-10-09T23:44:15.853Z",
+          "context_pointer_hex": "0000027AEE6F9960",
+          "owner_pointer_hex": "00000279DD497800",
+          "descriptor_pointer_hex": "00000279DD497928",
+          "primary_seed_hex": "9C2818C7FE094FC8",
+          "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+          "caller_return_offset_hex": "02C0860A",
+          "external_origin_caller_return_offset_hex": "02C0860A",
+          "recursion_depth": 0,
+          "external_owner_pointer_hex": "00000279DD497800",
+          "external_owner_plus_0x10_capture_at_entry": {
+            "owner_pointer_hex": "00000279DD497800",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "00000279DD497810",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:44:15.853Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": null
+          },
+          "external_call_register_snapshot_at_entry": {
+            "capture_phase": "shared-entry-hook-after-call",
+            "capture_utc": "2026-10-09T23:44:15.853Z",
+            "caller_return_rva_hex": "02C0860A",
+            "rcx_hex": "0000027AEE6F9960",
+            "rdx_hex": "00000279DD497800",
+            "rdx_plus_0x10_capture": {
+              "owner_pointer_hex": "00000279DD497800",
+              "slot_offset_hex": "00000010",
+              "slot_address_hex": "00000279DD497810",
+              "capture_phase": "logical-entry-after-external-call",
+              "capture_utc": "2026-10-09T23:44:15.853Z",
+              "read_status": "captured",
+              "raw_bytes_hex": "0000000000000000",
+              "slot_value_hex": "0000000000000000",
+              "target_identity": {
+                "status": "null-or-low-address",
+                "address_hex": "0000000000000000"
+              }
+            }
+          },
+          "caller_class": "external",
+          "known_static_candidate": false,
+          "age_ms_at_root_add": 1.403,
+          "resolved_external_caller_return_offset_hex": "02C0860A",
+          "owner_plus_0x10_capture_at_root_add": {
+            "owner_pointer_hex": "00000279DD497800",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "00000279DD497810",
+            "capture_phase": "root-resource-add",
+            "capture_utc": "2026-10-09T23:44:15.855Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          },
+          "owner_plus_0x10_capture": {
+            "owner_pointer_hex": "00000279DD497800",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "00000279DD497810",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:44:15.853Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          },
+          "owner_plus_0x10_capture_at_entry": {
+            "owner_pointer_hex": "00000279DD497800",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "00000279DD497810",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:44:15.853Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          }
+        },
+        "logical_entry_unique_callers_observed": 11,
+        "logical_entry_static_candidate_count": 52,
+        "poi_prepare_scope_component_hexes": [],
+        "poi_activation_scope_component_hexes": [],
+        "poi_lifecycle_scope_component_hexes": []
+      }
+    ],
+    "resource_manager_root_event_count": 0,
+    "resource_manager_root_events": [],
+    "dungeon_root_engine_caller_offsets": [
+      "0063AC25"
+    ],
+    "dungeon_root_manager_caller_offsets": [],
+    "dungeon_root_engine_call_sites": [
+      {
+        "encoding": "E8 rel32",
+        "call_instruction_offset_hex": "0063AC20",
+        "call_target_offset_hex": "0183E770",
+        "descriptor_argument_source_register": "RDI",
+        "descriptor_passed_unchanged_to_engine": true
+      }
+    ],
+    "dungeon_logical_entry_caller_offsets": [
+      "02C0860A"
+    ],
+    "dungeon_logical_entry_nearest_callers": [
+      {
+        "caller_return_offset_hex": "02C0860A",
+        "caller_code_window": {
+          "start_offset_hex": "02C085AA",
+          "return_offset_hex": "02C0860A",
+          "return_index": 96,
+          "byte_count": 160,
+          "bytes_hex": "BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95"
+        }
+      }
+    ],
+    "dungeon_logical_entry_exact_external_callers": [
+      {
+        "caller_return_offset_hex": "02C0860A",
+        "caller_code_window": {
+          "start_offset_hex": "02C0858A",
+          "return_offset_hex": "02C0860A",
+          "return_index": 128,
+          "byte_count": 224,
+          "bytes_hex": "33FF4C897B38EB034533FFBA58000000488BCFE86E480100488B8E1801000048BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95C2FF50204C897F38BA58000000488BCBE8B1470100488BDDEB0748014350488B"
+        },
+        "match": {
+          "utc": "2026-10-09T23:44:15.853Z",
+          "context_pointer_hex": "0000027AEE6F9960",
+          "owner_pointer_hex": "00000279DD497800",
+          "descriptor_pointer_hex": "00000279DD497928",
+          "primary_seed_hex": "9C2818C7FE094FC8",
+          "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+          "caller_return_offset_hex": "02C0860A",
+          "external_origin_caller_return_offset_hex": "02C0860A",
+          "recursion_depth": 0,
+          "external_owner_pointer_hex": "00000279DD497800",
+          "external_owner_plus_0x10_capture_at_entry": {
+            "owner_pointer_hex": "00000279DD497800",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "00000279DD497810",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:44:15.853Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": null
+          },
+          "external_call_register_snapshot_at_entry": {
+            "capture_phase": "shared-entry-hook-after-call",
+            "capture_utc": "2026-10-09T23:44:15.853Z",
+            "caller_return_rva_hex": "02C0860A",
+            "rcx_hex": "0000027AEE6F9960",
+            "rdx_hex": "00000279DD497800",
+            "rdx_plus_0x10_capture": {
+              "owner_pointer_hex": "00000279DD497800",
+              "slot_offset_hex": "00000010",
+              "slot_address_hex": "00000279DD497810",
+              "capture_phase": "logical-entry-after-external-call",
+              "capture_utc": "2026-10-09T23:44:15.853Z",
+              "read_status": "captured",
+              "raw_bytes_hex": "0000000000000000",
+              "slot_value_hex": "0000000000000000",
+              "target_identity": {
+                "status": "null-or-low-address",
+                "address_hex": "0000000000000000"
+              }
+            }
+          },
+          "caller_class": "external",
+          "known_static_candidate": false,
+          "age_ms_at_root_add": 1.403,
+          "resolved_external_caller_return_offset_hex": "02C0860A",
+          "owner_plus_0x10_capture_at_root_add": {
+            "owner_pointer_hex": "00000279DD497800",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "00000279DD497810",
+            "capture_phase": "root-resource-add",
+            "capture_utc": "2026-10-09T23:44:15.855Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          },
+          "owner_plus_0x10_capture": {
+            "owner_pointer_hex": "00000279DD497800",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "00000279DD497810",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:44:15.853Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          },
+          "owner_plus_0x10_capture_at_entry": {
+            "owner_pointer_hex": "00000279DD497800",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "00000279DD497810",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-09T23:44:15.853Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "0000000000000000",
+            "slot_value_hex": "0000000000000000",
+            "target_identity": {
+              "status": "null-or-low-address",
+              "address_hex": "0000000000000000"
+            }
+          }
+        },
+        "unique_callers_observed": 11,
+        "static_candidate_count": 52
+      }
+    ],
+    "interpretation": "target-POI description/lifecycle plus dungeon-root resource boundaries, direct Engine caller, and exact descriptor-correlated all-callers logical-entry evidence; the verified self-recursive edge is excluded from the exact external caller"
+  },
+  "poi_generation_trace_status": "captured",
+  "poi_seed_candidates": [
+    {
+      "poi_type_value": 6,
+      "poi_type_name": "AbandonedFreighter",
+      "raw_argument_hex": "0000760006606CAB",
+      "raw_argument_u64": 129742479060139,
+      "interpretation": "universe-address-confirmed",
+      "observations": 1,
+      "matches_universe_address": true
+    }
+  ],
+  "poi_context_arguments": [
+    {
+      "poi_type_value": 6,
+      "poi_type_name": "AbandonedFreighter",
+      "raw_argument_hex": "0000760006606CAB",
+      "raw_argument_u64": 129742479060139,
+      "interpretation": "universe-address-confirmed",
+      "observations": 1,
+      "matches_universe_address": true
+    }
+  ],
+  "discarded_poi_context_arguments": [],
+  "poi_context_status": "universe-address-confirmed",
+  "layout_seed_status": "dungeon-root-resource-seed-candidate",
+  "generation_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "layout_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "layout_multiset_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "legacy_stream_signature_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_16_system_block_hypothesis": {
+    "solar_system_index_decimal": 118,
+    "solar_system_index_hex": "0x076",
+    "block_start_hex": "0x070",
+    "block_end_hex": "0x07F",
+    "status": "historical-community-hypothesis-not-yet-validated-on-cosmos"
+  },
+  "base_room_count_from_table": null,
+  "observed_main_rooms": 0,
+  "observed_dead_end_rooms": 0,
+  "observed_total_rooms": 0,
+  "main_room_count_matches_table": null,
+  "manual_room_markers": {
+    "main_rooms_f6": 0,
+    "dead_ends_f5": 0
+  },
+  "room_model_status": "needs-review",
+  "room_parent_index_coverage": 0,
+  "canonical_room_sequence": [],
+  "logical_groups": []
+}
