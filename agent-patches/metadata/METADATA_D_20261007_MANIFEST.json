@@ -37,7 +37,8 @@
     "latest_pointer_report_sha256_verified": true,
     "uploaded_asset_archive": "dungeon.zip",
     "uploaded_asset_archive_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
-    "uploaded_asset_archive_sha256": "5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60"
+    "uploaded_asset_archive_sha256": "5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60",
+    "repository_search_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json"
   },
   "verification": {
     "powershell_parse": "passed with zero errors",
@@ -52,16 +53,18 @@
     "latest_capture_review": "Pointer and report hash-verified for run 20261009T004054Z-9fedea65. Trigger is automatic saved-session analysis of 20261008T184737Z_Uzawan_XI.json with verified session hash 25601e0269ae460d121c52b672ab769884a3e36e87e18fd90906606d020d866b; isolated/offline, no GitHub upload, worker data not retained. MEDI_FLOATERS has 10 analyzer groups, 146 scene instances, room_model_status needs-review, zero manual room markers, and 14 predicted targets (7 salvage + 7 footlockers); not fresh live capture or an observed physical count.",
     "room_model_reconciliation": "Historical CARGO run 20261008T140207Z: 8 CARG + 2 BARRACKS + 1 END analyzer parent-key groups (11 total), with 43 asset-derived target predictions (30 salvage + 13 footlockers) across 164 resolved scenes, not observed. Static CARGO_FLOATERS has Rooms=7, five main IDs, two branch IDs; exact-one rules for R_FLO_BARR, R_S_FLO_BARR, R_END and R_END minimum index 6. Counts/family labels do not identify IDs. The separate 11-room DUNGEON-C traverse has no per-room mapping.",
     "analyzer_source_inspection": "Supplied 0.3.62 candidate analyzer (analysis tool version 0.3.24) groups by parent_key, parses Room N from parent labels, and uses family-level DEADEND_* plus a small-group size condition. This explains mixed dead-end-prefab/main classifications but does not create a RoomId crosswalk.",
-    "uploaded_asset_archive_review": "Verified main dungeon.zip Git blob ce8ca51535db34165cd72477ab7b9ae9c94a86fa; 9,733,369 bytes, SHA-256 5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60. Read all 2,866 files without extraction; scanned text and binary entries for ASCII/UTF-16 room IDs and RoomId/DungeonOptions/DungeonRootScene fields; no matches. The archive does not supply a scene-to-RoomId mapping. Full record: agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json."
+    "uploaded_asset_archive_review": "Verified main dungeon.zip Git blob ce8ca51535db34165cd72477ab7b9ae9c94a86fa; 9,733,369 bytes, SHA-256 5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60. Read all 2,866 files without extraction; scanned text and binary entries for ASCII/UTF-16 room IDs and RoomId/DungeonOptions/DungeonRootScene fields; no matches. The archive does not supply a scene-to-RoomId mapping. Full record: agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json.",
+    "repository_search": "All 137 fetched remote refs searched under agent-patches/dungeon-decompile and agent-patches/metadata; three unique files contained both room-ID and scene-path terms and all were explanatory notes. Across main, 55 room-crate-index files had no RoomId field and 51 dungeon-generation-table exports had no scene-path field. The static table and scene index have no join key; full details in agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json."
   },
   "confirmed": "The installed active entrance component contains ten static weighted choices and a DungeonRootScene field.",
   "unproven": "Runtime choice probabilities, seed input, actual frequencies, and the relationship between static DungeonRootScene and observed runtime DUNGEON.SCENE.MBIN.",
   "human_intervention_required": true,
-  "rollback": "Backup branch backup/main-before-metadata-dungeon-zip-review-20261009 points to exact main base 641a764f02f26438bc584c820471dbe9da4df448. Revert the publication commit to roll back this metadata status/manifest/review and shared-state text; retain dungeon.zip and historical evidence.",
-  "next_action": "Provide an existing evidence file or exact repository path explicitly pairing generated dungeon scene paths with static R_*/B_* RoomIds. The uploaded dungeon.zip was scanned and contains assets but no such mapping. No Surveyor action or full traversal is required for this artifact-only step.",
-  "updated_utc": "2026-10-09T00:56:17Z",
+  "rollback": "Backup branch backup/main-before-metadata-crosswalk-search-20261009 points to exact main base ec0a0445a6f593a399657bb02c96326002360ac1. Revert the repository-search publication commit to roll back this search documentation and shared-state updates; preserve the previously published archive review.",
+  "next_action": "The repository-wide search found no scene-to-RoomId crosswalk. If the user has a separate evidence artifact pairing a generated scene path with a static R_*/B_* ID, obtain that file or path; otherwise new source evidence is required. No Surveyor action or full traversal is needed.",
+  "updated_utc": "2026-10-09T01:14:05Z",
   "uploaded_asset_archive_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
   "latest_report": "research-uploads/20261009T004133Z-parallel-action-test/combined-results.json",
   "latest_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
-  "latest_run_id": "20261009T004054Z-9fedea65"
+  "latest_run_id": "20261009T004054Z-9fedea65",
+  "repository_search_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json"
 }
