@@ -39,8 +39,8 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "Continue offline semantic analysis of the hash-matched callback and caller/dataflow. The exact-caller extractor decodes FF 52 10 but copies logical_entry_rva_hex and exact_runtime_match from input JSON without independently validating them; 0063A6D0 is source metadata for this report, not a proven target. Raw pre-call slot and callback semantics remain unresolved. Do not use WinDbg.",
-    "candidate_identity_rule": "Do not infer semantic identity from RVA. For the 2026-10-08 16:31:47.935Z event only, effective destination is signature-correlated to 0063A6D0; raw virtual slot value and callback semantic identity remain unresolved. owner+0x10 is a separate data read.",
+    "next_method": "Continue offline cross-reference and state-flow analysis from the verified 1180-byte callback path; keep helper semantics unresolved until a semantic anchor is found. Two captures at 23:05:09.625Z and 23:08:33.349Z report unique event-scoped correlation to effective entry 0063A6D0; raw dispatch slot and semantic identity remain unresolved. The 23:14 all-saved snapshot repeats the 23:08 capture; its zero +0x10 read is explicitly post-call.",
+    "candidate_identity_rule": "For events with producer-reported exact descriptor/caller-return single-hook correlation, record 0063A6D0 as event-scoped effective-entry correlation only. Do not infer raw [RDX+0x10] or callback semantic identity; owner+0x10 is separate post-call data.",
     "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/",
     "latest_parallel_report_sha256": "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439"
   },
@@ -261,7 +261,8 @@
       "00636C33"
     ],
     "direct_call_sites_matched": 33,
-    "runtime_target_proven": false
+    "runtime_target_proven": false,
+    "interpretation": "Static RVA mapping only; raw target slot remains unmeasured. See current caller context for event-scoped single-hook correlations."
   },
   "helper_dataflow_review": {
     "report": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
@@ -398,5 +399,22 @@
     },
     "failed_action": "research.prepare_assets",
     "note": "Separate saved-session cohort. D action artifact hashes are identical in both reports; they are not independent runtime captures."
+  },
+  "updated_utc": "2026-10-09T23:12:00Z",
+  "latest_current_build_context": {
+    "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
+    "sha256": "47cedad26c8d869a64424b8b4af9e7550a8041de04ca9c81d9ac4bb3092535ce",
+    "sha256_verified": true,
+    "exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "callback_contiguous_sha256": "a00336416913eead94306aec9d137106e868ae504072147eaba8225e0032b81b",
+    "runtime_events": [
+      "2026-10-09T23:05:09.625Z",
+      "2026-10-09T23:08:33.349Z"
+    ],
+    "latest_snapshot": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/",
+    "latest_snapshot_manifest": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/run-manifest.json",
+    "snapshot_capture_sha256": "eecced17a13f026a7f42eadd9969892504310eba4a66ea81a24f0b99de07b12d",
+    "static_direct_reference_count": 52,
+    "recursive_return_rva": "0063A773"
   }
 }
