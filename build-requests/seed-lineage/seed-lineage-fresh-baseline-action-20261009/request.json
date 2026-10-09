@@ -27,7 +27,7 @@
     {
       "source": "files/tests/test_seed_lineage_ui_extension.py",
       "target": "tests/test_seed_lineage_ui_extension.py",
-      "sha256": "8eadf0430a3b46e543cfd6b27df70b0767d0e2290df9e0b06d0e93594d6038e8",
+      "sha256": "4515ccc485e24e488d188065cd16b85c97cb18ab292450b7f258e8ab695e250c",
       "base_sha256": "0689beb24a2204e33405fc1977df9001788af8f3"
     }
   ],
