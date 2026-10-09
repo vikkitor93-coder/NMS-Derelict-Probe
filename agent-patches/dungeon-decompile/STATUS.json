@@ -2,7 +2,7 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-current-target-20261008-reconciled",
-  "reviewed_utc": "2026-10-08T23:45:00Z",
+  "reviewed_utc": "2026-10-09T22:50:53Z",
   "state": "runtime-dispatch-correlated-static-callback-analysis-active",
   "verified": {
     "historical_baseline": {
@@ -320,6 +320,32 @@
       "distinct_direct_call_targets": 7,
       "boundary_check": "GNU objdump linear decode from the complete .pdata-bounded body start; independently recomputed all 33 E8 rel32 targets and matched decoded targets",
       "conclusion": "Callsite boundaries/targets are enumerated. No target names or semantics assigned. The attachment has no helper .pdata ranges or helper-body bytes; user-attached bounded-body export is tool_version 0.3.37 and lacks direct_call_candidates/helper bodies from the v0.3.39 helper exporter."
+    },
+    "latest_exact_root_caller_event": {
+      "event_utc": "2026-10-09T16:18:44.420Z",
+      "descriptor": "0000022ADFB4A928",
+      "root_seed": "A5047E4E4B68F362 (candidate/unverified)",
+      "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+      "callsite": "02C08607: FF 52 10",
+      "return_rva": "02C0860A",
+      "logical_entry_rva_metadata": "0063A6D0",
+      "target_rva": null,
+      "owner_plus_0x10": "0000000000000000 after-call; not dispatch target",
+      "dispatch_resolution": "unresolved"
+    },
+    "latest_upstream_scan": {
+      "artifact_sha256": "8e66960e4483fa6656f25ba91148322f774eba220dd41246c529d18f227db941",
+      "source_session": "20261008T185119Z_0001550006607CAC",
+      "root_seed": "00C9E8DF0327789E",
+      "matches_latest_caller_event": false
+    },
+    "latest_resolver_sample": {
+      "artifact_sha256": "11279a87d723d2e6d4fa3cf0159ce0824f5092615dca1022346118488d4547d2",
+      "candidate_target_rva": "00634BC0",
+      "callsite": "02C04977",
+      "return_rva": "02C0497A",
+      "matches": 0,
+      "separate_from_02C08607": true
     }
   },
   "evidence": {
@@ -373,37 +399,47 @@
     "current_executable_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
     "executable_file_size_bytes": 88560712,
     "latest_combined_report": {
-      "run_id": "20261008T195817Z-1b73e442",
-      "report_path": "research-uploads/20261008T195856Z-parallel-action-test/combined-results.json",
-      "report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
+      "run_id": "20261009T163626Z-9056847b",
+      "report_path": "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
+      "report_sha256": "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439",
       "sha256_verified": true,
       "pointer_path": "research/LATEST_PARALLEL_ACTION_TEST.json",
-      "authority": "sole authority for Oct 8 19:58 run",
+      "authority": "sole authority for Oct 9 16:36 manual run",
       "mode": "isolated_parallel_test_no_github_upload",
       "summary": "8 complete; 0 failed; 1 upload skipped; no fresh NMS event",
       "d_action_artifacts": [
-        "61dd89c0f690fd8b9e76977b276c09ae851bc935680c2665132bbbc97f507494",
-        "52cc2d87f86ecc26c88f56993ef36d4d8dc5b2e9c313054abb35c161c38264de",
+        "2af8fbe1d26aa6949e183f8c1ff5371e9dc317e0050c751c295604f076d21dd0",
+        "8e66960e4483fa6656f25ba91148322f774eba220dd41246c529d18f227db941",
         "11279a87d723d2e6d4fa3cf0159ce0824f5092615dca1022346118488d4547d2"
       ],
-      "stale_resolver_input": "00634BC0",
-      "resolver_matches": 0,
-      "interpretation": "Zero-match resolution queried stale 00634BC0 and does not contradict separate Runtime-A event correlation at 0063A6D0.",
       "limits": [
-        "Do not use queue or per-action latest files as results.",
-        "43-target asset prediction is not observed count.",
-        "Historical 35-container baseline and post-update 16-target model remain separate.",
-        "owner+0x10 zero and separate 02C04977 resolver are not targets.",
-        "Callback semantic identity and raw slot value remain unresolved."
+        "Both combined reports are offline action runs; neither captures a new NMS event.",
+        "The automatic report has one failed metadata asset-preparation action; D's exact-caller, upstream-callers, and resolver actions completed.",
+        "The 43-target value remains an asset-derived prediction, not an observed container count.",
+        "Keep the historical 35-container baseline and separate post-update 16-target observation/model distinct.",
+        "The zero owner+0x10 read is not a dispatch target; the separate resolver sample is not a target proof.",
+        "The callback semantic identity and raw pre-call virtual slot remain unresolved.",
+        "WinDbg is ruled out by the user's report that it crashes NMS; no debugger or live NMS action was used."
       ]
+    },
+    "latest_automatic_research_batch": {
+      "batch_path": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/batch-results.json",
+      "batch_sha256": "4ae5af8f6814e14d1e5e16ca1eeeaf455599b1e22d47286ba01e2b513f3f25cd",
+      "batch_sha256_verified": true,
+      "report_path": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
+      "report_sha256": "fb7126c475d65d0e764d802b74ed6a6ca99c56fb72d75c65da9e0e3f6335f1f4",
+      "report_sha256_verified": true,
+      "run_id": "20261009T163435Z-b91c6dbb",
+      "source_session_file": "20261009T161852Z_Stlepiosc_XIX.json",
+      "summary": "7 complete; 1 failed; 1 upload skipped; D actions complete; offline only"
     }
   },
   "blocked": {
     "human_action_required": false,
-    "reason": "Matching executable supplied; offline static hook call-path and pdata boundary review completed. Live dispatch is owned by runtime-dispatch and remains unresolved.",
+    "reason": "Current D evidence can be reviewed offline. WinDbg is ruled out by the user's crash report; live target capture remains owned by runtime-dispatch.",
     "next_lane": "agent/runtime-dispatch"
   },
-  "next_lane_owned_step": "Runtime-dispatch owns live target correlation and pre-call slot capture; no D-lane user action is currently needed.",
+  "next_lane_owned_step": "Continue offline semantic analysis of the hash-matched current caller/callback and investigate generator-consumer references without assigning an unsupported semantic name.",
   "latest_shared_upload_review": {
     "path": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
     "root_event_utc": "2026-10-05T01:03:01.131Z",
@@ -432,7 +468,11 @@
     "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/exact-root-caller-latest.json",
     "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/exact-root-caller-code-latest.json",
     "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
-    "agent-patches/dungeon-decompile/PARALLEL_REVIEW_VALIDATION_20261008.json"
+    "agent-patches/dungeon-decompile/PARALLEL_REVIEW_VALIDATION_20261008.json",
+    "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
+    "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/batch-results.json",
+    "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
+    "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261009.json"
   ],
   "main_package_update_check": {
     "version_file": "main VERSION.txt: 0.3.57",
@@ -501,10 +541,10 @@
     },
     "note": "Newest shared snapshot; root capture timestamp remains 2026-10-04T23:17:15.827Z. The exact-root-caller-code SHA-256 is still 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2. This is not a new runtime sample or a helper export."
   },
-  "updated_utc": "2026-10-08T23:45:00Z",
+  "updated_utc": "2026-10-09T22:50:53Z",
   "status": "runtime-dispatch-correlated-static-callback-analysis-active",
-  "summary": "Reconciled current-build callback at 0063A6D0 with Runtime-A signature-correlated effective destination for the specific Oct 8 event. The static 0063A706 -> 033E1B60 -> 033E1A50 path is an internal direct helper call, not the dispatch destination. Semantic identity and raw slot capture remain unresolved; user reports WinDbg crashes NMS, so that method is ruled out.",
-  "next_action": "Continue offline semantic analysis of the hash-matched 0063A6D0 callback and surrounding caller/dataflow using existing code and evidence; do not use WinDbg or infer a semantic name from the RVA.",
+  "summary": "Reviewed the pointer-selected Oct 9 manual combined report and the separately pointer-selected automatic batch report. The exact-caller artifact ties descriptor 0000022ADFB4A928 to event 2026-10-09T16:18:44.420Z at 02C08607: FF 52 10 / return 02C0860A; its target_rva is null. Artifact metadata records logical_entry_rva 0063A6D0, while the direct target and pre-call slot remain unproven. The separate resolver tests stale 00634BC0 at 02C04977/02C0497A and finds zero matches. WinDbg remains ruled out.",
+  "next_action": "Continue offline semantic analysis of the hash-matched current caller/callback and investigate generator-consumer references without assigning an unsupported semantic name.",
   "human_intervention_required": false,
   "user_steps": [],
   "current_build_static_map": {
@@ -537,10 +577,18 @@
     "precall_slot_captured": false
   },
   "parallel_action_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json",
-  "latest_parallel_action_run": "20261008T195817Z-1b73e442",
-  "latest_parallel_action_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261008.json",
+  "latest_parallel_action_run": "20261009T163626Z-9056847b",
+  "latest_parallel_action_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261009.json",
   "current_hook_call_target": "agent-patches/dungeon-decompile/CURRENT_HOOK_CALL_TARGET_20261008.json",
-  "latest_combined_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
-  "latest_parallel_action_report_sha256": "b74d988e78f4001f870980e47776e77ddf3f14f97e5d8cfd4a9fde3c501dcd41",
-  "latest_hook_call_target_review": "agent-patches/dungeon-decompile/CURRENT_HOOK_CALL_TARGET_20261008.json"
+  "latest_combined_report_sha256": "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439",
+  "latest_parallel_action_report_sha256": "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439",
+  "latest_hook_call_target_review": "agent-patches/dungeon-decompile/CURRENT_HOOK_CALL_TARGET_20261008.json",
+  "latest_automatic_research_batch_review": {
+    "batch_path": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/batch-results.json",
+    "batch_sha256": "4ae5af8f6814e14d1e5e16ca1eeeaf455599b1e22d47286ba01e2b513f3f25cd",
+    "report_path": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
+    "report_sha256": "fb7126c475d65d0e764d802b74ed6a6ca99c56fb72d75c65da9e0e3f6335f1f4",
+    "run_id": "20261009T163435Z-b91c6dbb",
+    "d_action_artifacts_same_as_manual_report": true
+  }
 }
