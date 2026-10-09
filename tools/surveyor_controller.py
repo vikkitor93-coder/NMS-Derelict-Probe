@@ -2635,6 +2635,10 @@ class SurveyorController:
                         combined,
                     )
                     upload_path = upload_match.group(1).rstrip(".,)") if upload_match else ""
+                    upload_confirmed = bool(upload_path) and (
+                        returncode == 0 or
+                        (upload_action == "automatic-research-batch" and "NMSDS_BATCH_UPLOAD_COMPLETE=1" in combined)
+                    )
                     versions = {item.get("extension_id"): item.get("version", "") for item in self.agent_ui_extension_index}
                     for lane in agent_console.LANES:
                         lane_id = lane["id"]
@@ -2644,7 +2648,7 @@ class SurveyorController:
                                 lane_id,
                                 versions.get(lane_id) or "shared-evidence-batch",
                                 "research.upload_all_saved_evidence" if upload_action == "all-saved-evidence" else "research.parallel_action_test",
-                                "complete" if returncode == 0 and upload_path else "failed",
+                                "complete" if upload_confirmed else "failed",
                                 "Deduplicated all available saved evidence in one shared main-branch upload." if upload_action == "all-saved-evidence" else ("Published each saved-session report with a batch index; session reports remain separate." if upload_action == "automatic-research-batch" else "Published the combined parallel research report only; individual outputs and queue were excluded."),
                                 upload_path,
                             )
