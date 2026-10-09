@@ -81,11 +81,30 @@
       "The zero owner +0x10 read and the separate resolver sample do not resolve the dispatch target.",
       "The 32-target CARGO_FLOATERS value in the matching generation sample is asset-derived prediction, not observed count; historical 43-target prediction remains a separate asset-derived result."
     ],
-    "derivation_status": "unknown-not-claimed"
+    "derivation_status": "unknown-not-claimed",
+    "descriptor_seed_flow": {
+      "second_argument_copied_to_rsi": true,
+      "second_argument_copy_rva": "0063A6F1",
+      "descriptor_offset_from_second_argument": "0x128",
+      "descriptor_lea_rvas": [
+        "0063ABBD",
+        "0063ABE1"
+      ],
+      "primary_seed_offset_from_second_argument": "0x138",
+      "primary_seed_offset_from_descriptor": "0x10",
+      "primary_seed_read_rva": "0063A8CE",
+      "use_seed_flag_offset_from_second_argument": "0x140",
+      "use_seed_flag_offset_from_descriptor": "0x18",
+      "use_seed_flag_check_rva": "0063A936",
+      "read_precedes_root_add_call": true,
+      "source": "Same-sample upstream-caller analysis; descriptor-flow static trace.",
+      "interpretation": "The candidate function consumes a seed already present in the embedded descriptor before the root AddResource call. Construction/copy origin is earlier or external to the observed read; this function's scan reports no possible writes to the seed or descriptor fields."
+    },
+    "conclusion": "The fresh function analysis narrows the question: it consumes the captured descriptor seed and gates behavior on the descriptor use-seed flag; the reviewed bytes do not establish where that seed was created or how the root value is derived."
   },
   "next": {
     "owner": "seed-lineage agent",
-    "action": "Compare the fresh candidate function's descriptor/seed dataflow with the fresh caller and upstream evidence, then test whether any static path computes or copies the captured root seed before the root AddResource call.",
+    "action": "Trace the caller and static references to determine whether any upstream path constructs or copies the descriptor seed before entry at 0063A6D0; compare against compatible same-executable samples without promoting static predictions to runtime facts.",
     "human_or_live_nms_required": false,
     "full_derelict_traversal_required": false
   }
