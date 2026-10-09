@@ -1,10 +1,10 @@
 {
-  "batch_id": "20261009T015908Z-d4d6ae3f",
+  "batch_id": "20261009T161519Z-fdc03736",
   "published_report_count": 1,
-  "report_path": "research-uploads/20261009T015948Z-automatic-research-batch-20261009T015908Z-d4d6ae3f-50cb03/batch-results.json",
-  "report_sha256": "b1ea5afaee7aa2f6d2a49bd48c28b73a67d59a9aad3f6b53702d41fe2b0ea18a",
+  "report_path": "research-uploads/20261009T161615Z-automatic-research-batch-20261009T161519Z-fdc03736-828540/batch-results.json",
+  "report_sha256": "69a195338658155ed8165b7e69abf459b9c904a9fca22d75304e2356a45ed418",
   "schema_version": 1,
-  "uploaded_utc": "20261009T015948Z",
+  "uploaded_utc": "20261009T161615Z",
   "visible_to_lanes": [
     "runtime-dispatch",
     "seed-lineage",
