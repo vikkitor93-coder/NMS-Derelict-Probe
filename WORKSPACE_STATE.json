@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-09T23:40:00Z",
+  "updated_utc": "2026-10-09T23:51:06Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -33,25 +33,25 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage",
-      "status": "Fresh same-sample seed-function analysis complete; offline descriptor dataflow trace active.",
+      "status": "Fresh 000079 same-sample static chain documented; separate exact root capture now adds address 0000760006606CAB; offline seed-lineage work active.",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-      "result_summary": "Fresh function evidence matches session 20261009T230838Z_0000790006606CAB, address 0000790006606CAB, root C36137A0B4914AD9, executable 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, caller SHA e63c2a420c9d30e1d21509ff815cdb2250ce9ede1583f59379fbf7a3e332ffbe, and upstream SHA 65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52. The function reads the descriptor primary seed at owner +0x138 before root AddResource RVA 0063AC20 and reports no possible writes. Upload manifests declare function SHA 38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212; independent recomputation remains pending. Root derivation is unknown.",
+      "result_summary": "Latest automatic combined report research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json verifies to 48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3; it pairs a fresh 000079 generation baseline with stale/different-sample seed-function (000155), caller (00006D), and upstream (000155) outputs. The later lane-exclusive 000079 seed-function artifact is hash-verified and aligns with caller/upstream on executable 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. A separate 000076 exact root capture records candidate 9C2818C7FE094FC8, public system seed D4759808, UseSeedValue=true, and caller 02C0860A; its executable identity is absent. Formula and dispatch target remain unresolved.",
       "human_validation_required": false,
-      "review": "agent-patches/seed-lineage/SEED_FUNCTION_REVIEW_20261009T233349Z.json",
-      "next_action": "Trace the caller and static references to determine whether any upstream path constructs or copies the descriptor seed before entry at 0063A6D0; compare against compatible same-executable samples without promoting static predictions to runtime facts.",
+      "review": "agent-patches/seed-lineage/SEED_B_ROOT_CAPTURE_REVIEW_20261009T234615Z.json",
+      "next_action": "Compare root candidates against the public address-derived system-seed anchors while tracing the fresh descriptor seed's construction; keep sample executable identities and parallel-report cohorts separate.",
       "parallel_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
       "extension_version": "1.0.6",
-      "latest_report": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
-      "latest_report_sha256": "fb7126c475d65d0e764d802b74ed6a6ca99c56fb72d75c65da9e0e3f6335f1f4",
+      "latest_report": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json",
+      "latest_report_sha256": "48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3",
       "candidate_extension_version": "1.0.6",
       "build_request_id": "seed-lineage-fresh-baseline-action-20261009",
       "latest_report_kind": "automatic_saved_session",
       "latest_all_saved_evidence_snapshot": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
       "latest_runtime_capture": "research-uploads/20261009T161848Z-upload-runtime-capture/exact-root-caller-latest.json",
-      "latest_automatic_batch_index": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/batch-results.json",
-      "latest_automatic_batch_index_sha256": "4ae5af8f6814e14d1e5e16ca1eeeaf455599b1e22d47286ba01e2b513f3f25cd",
-      "latest_automatic_batch_report": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
-      "latest_automatic_batch_report_sha256": "fb7126c475d65d0e764d802b74ed6a6ca99c56fb72d75c65da9e0e3f6335f1f4",
+      "latest_automatic_batch_index": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/batch-results.json",
+      "latest_automatic_batch_index_sha256": "e8f703afa93485172c9108153696e518a2cf381446cb0aaccc63468fd75bb909",
+      "latest_automatic_batch_report": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json",
+      "latest_automatic_batch_report_sha256": "48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3",
       "latest_lane_action_snapshot": {
         "run_manifest_path": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
         "uploaded_utc": "20261009T233356Z",
@@ -94,6 +94,18 @@
             "fresh": true
           }
         }
+      },
+      "latest_exact_root_capture": {
+        "path": "research-uploads/20261009T234615Z-analyze-generation/exact-root-caller-latest.json",
+        "sha256": "87813ff2737bca7f6e85a07235844bf773af4a956ee1572bcd3fb0fbf43e8246",
+        "session": "20261009T234421Z_0000760006606CAB",
+        "address": "0000760006606CAB",
+        "root": "9C2818C7FE094FC8",
+        "public_system_seed": "D4759808",
+        "exe_identity_verified": false,
+        "caller_return": "02C0860A",
+        "owner_plus_0x10": "0000000000000000",
+        "dispatch_target_resolved": false
       }
     },
     "dungeon-decompile": {
