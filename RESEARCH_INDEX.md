@@ -205,3 +205,6 @@ Fresh generation baseline: session `20261009T161852Z_00006D0006606CAB`, address 
 The historical 43 CARGO targets remain a separate asset-derived prediction. Neither 21 nor 43 is an observed count. Root derivation remains unknown. Zero `+0x10` and the separate resolver sample do not identify a resolved dispatch target.
 
 Seed-B 1.0.6 adds an ordered refresh-first action list: analyze generation, extract caller, extract upstream callers, analyze seed function. Button ordering is a user sequence, not an enforced dependency; verify each output references the preceding artifact. Static panel/index/action/hash checks were completed. Python unittest was not run because the local execution helper could not start. One short local Agent Console action sequence is required; no NMS launch or full traversal is required.
+
+
+DUNGEON-C same-session upstream review (2026-10-09): artifact SHA-256 `65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52` ties the 23:08 capture to a 52-reference static scan. It reports 50 calls, 2 jumps, 47 `.pdata` caller ranges and one unmapped reference (`00251D22`). The candidate reads the embedded descriptor seed at descriptor+0x10 and UseSeedValue at +0x18 before the root add at `0063AC20`; runtime values match the observed descriptor and seed. Semantic function name and raw dispatch slot remain unresolved.
