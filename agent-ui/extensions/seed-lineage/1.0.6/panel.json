@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "title": "SEED-B · Cross-address root seed lineage",
+  "summary": "Verified automatic report 20261009T163435Z-b91c6dbb (SHA-256 fb7126c4...). Fresh generation sample 00006D0006606CAB -> A5047E4E4B68F362; 21 predicted targets are asset-derived, not observed. Caller/upstream/seed-function outputs remain stale. The separate 43 CARGO targets are an asset prediction. Zero +0x10 and separate resolver sample do not resolve dispatch; root derivation remains unknown.",
+  "request_only": true,
+  "actions": [
+    {
+      "action_id": "research.analyze_generation",
+      "label": "1. Refresh generation baseline + upload",
+      "description": "Refresh the saved generation baseline first; confirm its session, universe address, root candidate, and generated artifact hash before continuing.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.extract_caller_code",
+      "label": "2. Extract caller code + upload",
+      "description": "Run only after the refreshed baseline succeeds. Confirm this result uses the same session, address, root, and installed NMS.exe identity.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.extract_upstream_callers",
+      "label": "3. Extract upstream callers + upload",
+      "description": "Run only after step 2 succeeds. Confirm same sample and that the output cites the new caller artifact.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    },
+    {
+      "action_id": "research.analyze_seed_function",
+      "label": "4. Analyze seed function + upload",
+      "description": "Run only after step 3 succeeds. Confirm it cites the fresh upstream artifact; byte reads alone do not establish the root-seed formula.",
+      "preconditions": [
+        "workflow.idle"
+      ],
+      "evidence_namespace": "seed-lineage",
+      "parameters": {}
+    }
+  ]
+}

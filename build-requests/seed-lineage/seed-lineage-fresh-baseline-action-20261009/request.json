@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "request_id": "seed-lineage-fresh-baseline-action-20261009",
+  "lane_id": "seed-lineage",
+  "status": "ready",
+  "base_commit": "6688832abd762a1066283880451aadf5c400bdeb",
+  "summary": "Include Seed-B 1.0.6 refresh-first panel in the shared Surveyor source package. Panel/index are published for Agent Console discovery; primary compiler owns the compiled app and complete source ZIP.",
+  "files": [
+    {
+      "source": "files/agent-ui/extensions/seed-lineage/1.0.6/panel.json",
+      "target": "agent-ui/extensions/seed-lineage/1.0.6/panel.json",
+      "sha256": "91af1cadde36ce926c51b93929cfbd75f157626c4a1eda971fc85f6730630646",
+      "base_sha256": null
+    },
+    {
+      "source": "files/agent-ui/extensions/seed-lineage/1.0.6/manifest.json",
+      "target": "agent-ui/extensions/seed-lineage/1.0.6/manifest.json",
+      "sha256": "98872ecec4a4919c62b43d65e1d0455313b9868226d204080668a18e1dea8d68",
+      "base_sha256": null
+    },
+    {
+      "source": "files/agent-ui/extensions/index.json",
+      "target": "agent-ui/extensions/index.json",
+      "sha256": "208a242e6d84ea041b1d150115150d45b7e2a67e2a4639cde109e166a527d878",
+      "base_sha256": "e6e942faf39ea0e17a9414c6a6aa3acf0b8de57e"
+    },
+    {
+      "source": "files/tests/test_seed_lineage_ui_extension.py",
+      "target": "tests/test_seed_lineage_ui_extension.py",
+      "sha256": "8eadf0430a3b46e543cfd6b27df70b0767d0e2290df9e0b06d0e93594d6038e8",
+      "base_sha256": "0689beb24a2204e33405fc1977df9001788af8f3"
+    }
+  ],
+  "tests": [
+    "python -m unittest tests.test_seed_lineage_ui_extension (not run; local execution helper unavailable)"
+  ],
+  "rollback": "Agent Console rollback to installed v1.0.5; repository rollback via git revert of the publication commit. Backup branch backup/main-before-seed-refresh-extension-20261009T2300 preserves main base 6688832abd762a1066283880451aadf5c400bdeb."
+}
