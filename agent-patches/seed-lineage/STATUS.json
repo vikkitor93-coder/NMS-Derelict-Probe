@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-09T23:51:06Z",
+  "updated_utc": "2026-10-09T23:57:15Z",
   "state": "in_progress",
-  "status": "Fresh 000079 caller/upstream/seed-function chain is documented; a separate exact root capture now adds address 0000760006606CAB. Current automatic combined report confirms its saved-session seed-function/caller/upstream outputs were from mismatched samples.",
-  "summary": "Latest automatic saved-session report research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json is hash-verified and remains the sole authority for run 20261009T231728Z-208c8af6: its 000079 baseline predicts 32 CARGO_FLOATERS targets, while its seed-function and upstream outputs are from 000155 and its caller is from 00006D; they do not form a same-sample static chain. A later lane-exclusive seed-function upload is fresh for 000079 and independently hash-verified. A separate 20261009T234615Z capture adds a root candidate 9C2818C7FE094FC8 at address 0000760006606CAB, UseSeedValue true, exact external caller 02C0860A; that capture lacks executable identity. No root-seed formula or dispatch target is resolved.",
-  "progress": "Verified the latest automatic batch index/report hashes and kept its isolated saved-session outputs in their separate provenance cohort. Independently hash-verified the new 000076 exact root capture and derived its public system seed D4759808 with the pinned address-seed algorithm; executable compatibility remains unverified. Added both reviews and preserved the 000079 fresh static chain separately.",
+  "status": "Two same-executable callsites now identify common helper 00639BE0 as the producer/setup candidate whose return pointer is passed into seed-consuming entry 0063A6D0.",
+  "summary": "Latest automatic saved-session report research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json is hash-verified and remains the sole authority for run 20261009T231728Z-208c8af6: its 000079 baseline predicts 32 CARGO_FLOATERS targets, while its seed-function and upstream outputs are from 000155 and its caller is from 00006D; they do not form a same-sample static chain. A later lane-exclusive seed-function upload is fresh for 000079 and independently hash-verified. A separate 20261009T234615Z capture adds a root candidate 9C2818C7FE094FC8 at address 0000760006606CAB, UseSeedValue true, exact external caller 02C0860A; that capture lacks executable identity. No root-seed formula or dispatch target is resolved. Offline follow-up traced callsites 006395E6 and 00639BB6 through shared helper 00639BE0; its returned pointer is moved to RBX and passed as RDX into 0063A6D0. This supports an owner/descriptor producer candidate only; writes to owner+0x138, seed assignment, and formula remain unproven.",
+  "progress": "Verified the latest automatic batch index/report hashes and kept its isolated saved-session outputs in their separate provenance cohort. Independently hash-verified the new 000076 exact root capture and derived its public system seed D4759808 with the pinned address-seed algorithm; executable compatibility remains unverified. Added both reviews and preserved the 000079 fresh static chain separately. Matched both helper calls by rel32 arithmetic against the same executable hash; recorded bounded owner/descriptor producer lead and its unresolved write/derivation limits.",
   "blockers": [],
-  "next_action": "Compare root candidates against the public address-derived system-seed anchors while tracing the fresh descriptor seed's construction; keep sample executable identities and parallel-report cohorts separate.",
+  "next_action": "Obtain a wider code extract or focused caller/upstream analysis for helper 00639BE0 and determine whether it writes owner+0x138 or forwards a seed from its arguments; keep the 000079 executable identity constraint.",
   "extension_version": "1.0.6",
   "candidate_extension_version": "1.0.6",
   "build_request_id": "seed-lineage-fresh-baseline-action-20261009",
@@ -40,7 +40,7 @@
   "success_condition": "Continue offline until a specific inference requires a compatible-executable sample or a live-only measurement.",
   "evidence_to_return": [],
   "full_derelict_required": false,
-  "evidence_path": "agent-patches/seed-lineage/SEED_B_ROOT_CAPTURE_REVIEW_20261009T234615Z.json",
+  "evidence_path": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
   "runtime_extension_version": "1.0.6",
   "latest_offline_comparison": {
     "path": "agent-patches/seed-lineage/SEED_B_SYSTEM_SEED_COMPARISON_20261009.json",
@@ -124,5 +124,16 @@
     "external_caller_return_rva": "02C0860A",
     "owner_plus_0x10": "0000000000000000",
     "dispatch_target_resolved": false
+  },
+  "latest_owner_producer_trace": {
+    "path": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
+    "helper_entry_rva": "00639BE0",
+    "caller_rvas": [
+      "006395E6",
+      "00639BB6"
+    ],
+    "direct_target_rva": "0063A6D0",
+    "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "seed_write_established": false
   }
 }
