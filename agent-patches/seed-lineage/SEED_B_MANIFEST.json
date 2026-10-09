@@ -293,12 +293,17 @@
       }
     }
   },
-  "next_action": "Compare the fresh candidate function's descriptor and seed dataflow with the fresh caller/upstream evidence; test whether any static path computes or copies the captured root seed before the root AddResource call.",
+  "next_action": "Trace the caller and static references to determine whether any upstream path constructs or copies the descriptor seed before entry at 0063A6D0; compare against compatible same-executable samples without promoting static predictions to runtime facts.",
   "latest_seed_function_review": {
     "path": "agent-patches/seed-lineage/SEED_FUNCTION_REVIEW_20261009T233349Z.json",
     "session": "20261009T230838Z_0000790006606CAB",
     "logical_entry_candidate": "0063A6D0",
     "root_add_call_rva": "0063AC20",
+    "seed_consumed_from_second_argument": true,
+    "descriptor_offset": "0x128",
+    "primary_seed_offset_from_owner": "0x138",
+    "use_seed_flag_offset_from_owner": "0x140",
+    "possible_seed_or_descriptor_writes": 0,
     "derivation_status": "unknown-not-claimed"
   }
 }
