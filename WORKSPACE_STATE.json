@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-09T23:39:09Z",
+  "updated_utc": "2026-10-09T23:40:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -33,12 +33,12 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage",
-      "status": "Fresh baseline, caller, upstream, and seed-function upload align on sample 0000790006606CAB; offline dataflow analysis active.",
+      "status": "Fresh same-sample seed-function analysis complete; offline descriptor dataflow trace active.",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-      "result_summary": "The 20261009T233349Z seed-function upload uses the same session/address/root candidate and executable identity as fresh generation, caller, and upstream evidence. It cites upstream SHA-256 65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52. Its uploader manifests declare evidence SHA-256 38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212; independent SHA-256 recomputation remains pending. Candidate function entry 0063A6D0; seed-field occurrence at owner +0x138; no possible writes reported. Root-seed derivation remains unproven.",
+      "result_summary": "Fresh function evidence matches session 20261009T230838Z_0000790006606CAB, address 0000790006606CAB, root C36137A0B4914AD9, executable 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, caller SHA e63c2a420c9d30e1d21509ff815cdb2250ce9ede1583f59379fbf7a3e332ffbe, and upstream SHA 65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52. The function reads the descriptor primary seed at owner +0x138 before root AddResource RVA 0063AC20 and reports no possible writes. Upload manifests declare function SHA 38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212; independent recomputation remains pending. Root derivation is unknown.",
       "human_validation_required": false,
       "review": "agent-patches/seed-lineage/SEED_FUNCTION_REVIEW_20261009T233349Z.json",
-      "next_action": "Compare the fresh candidate function's descriptor and seed dataflow with the fresh caller/upstream evidence; test whether any static path computes or copies the captured root seed before the root AddResource call.",
+      "next_action": "Trace the caller and static references to determine whether any upstream path constructs or copies the descriptor seed before entry at 0063A6D0; compare against compatible same-executable samples without promoting static predictions to runtime facts.",
       "parallel_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
       "extension_version": "1.0.6",
       "latest_report": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
