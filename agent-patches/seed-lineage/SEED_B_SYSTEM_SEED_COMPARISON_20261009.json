@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "report_id": "seed-system-seed-comparison-20261009",
+  "lane": "seed-lineage",
+  "generated_utc": "2026-10-09T15:23:52Z",
+  "source": {
+    "saved_session_report": "research-uploads/20261009T015948Z-automatic-research-batch-20261009T015908Z-d4d6ae3f-50cb03/reports/20261009T015909Z-77532ce2/combined-results.json",
+    "saved_session_report_sha256": "721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b",
+    "batch_index": "research-uploads/20261009T015948Z-automatic-research-batch-20261009T015908Z-d4d6ae3f-50cb03/batch-results.json",
+    "batch_index_sha256": "b1ea5afaee7aa2f6d2a49bd48c28b73a67d59a9aad3f6b53702d41fe2b0ea18a",
+    "third_sample_session": "20261009T015149Z_0001680006607CAC",
+    "third_sample_root_action": "research.measure_generation",
+    "third_sample_root_resource": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+    "third_sample_observation_count": 1,
+    "third_sample_executable_sha256": null,
+    "third_sample_executable_identity_verified": false
+  },
+  "method": {
+    "name": "NMS system-address seed indexPrimedPRNG",
+    "upstream_repository": "hadsh/nms_namegen",
+    "upstream_commit": "52ad48affaa4089c8f487a470a888dc9b7a650aa",
+    "upstream_source_files": [
+      {
+        "path": "nms_namegen/iprng.py",
+        "git_blob_sha": "374d4e6fce569a2176141d4a613925c41e8f667a",
+        "url": "https://github.com/hadsh/nms_namegen/blob/52ad48affaa4089c8f487a470a888dc9b7a650aa/nms_namegen/iprng.py"
+      },
+      {
+        "path": "nms_namegen/system.py",
+        "git_blob_sha": "663c169f5e4435849b0991cbe34536da16d5b4a6",
+        "url": "https://github.com/hadsh/nms_namegen/blob/52ad48affaa4089c8f487a470a888dc9b7a650aa/nms_namegen/system.py"
+      }
+    ],
+    "computation": "Apply indexPrimedPRNG to the 64-bit universe address; take the low 32 bits as system_seed_hex, matching systemAttributes(). This is the public address-derived system seed, not the 64-bit dungeon-root candidate.",
+    "independent_reimplementation": "JavaScript BigInt fixed-width 64-bit port of the cited rotation/mixing/index logic; no external code copied into Surveyor."
+  },
+  "results": [
+    {
+      "universe_address_hex": "00001A0004E84EFD",
+      "public_system_seed_hex": "B006BAB6",
+      "root_seed_candidate_hex": "9256392A2F5A74AC",
+      "reference_anchor_match": true,
+      "notes": "Existing lane anchor; independent root-seed relationship remains unproven."
+    },
+    {
+      "universe_address_hex": "0001550006607CAC",
+      "public_system_seed_hex": "9E1A7905",
+      "root_seed_candidate_hex": "00C9E8DF0327789E",
+      "reference_anchor_match": true,
+      "notes": "Existing lane anchor; root-seed derivation remains unproven."
+    },
+    {
+      "universe_address_hex": "0001680006607CAC",
+      "public_system_seed_hex": "8A6EF089",
+      "root_seed_candidate_hex": "2139770A2614E3DC",
+      "reference_anchor_match": null,
+      "notes": "Third saved-session candidate; no same-session caller/upstream/seed-function chain and executable identity is unverified."
+    }
+  ],
+  "validation": {
+    "known_anchor_checks_passed": 2,
+    "computed_address_count": 3,
+    "test_vectors": [
+      {
+        "input": "00001A0004E84EFD",
+        "expected": "B006BAB6",
+        "actual": "B006BAB6",
+        "passed": true
+      },
+      {
+        "input": "0001550006607CAC",
+        "expected": "9E1A7905",
+        "actual": "9E1A7905",
+        "passed": true
+      }
+    ],
+    "third_address_output": "8A6EF089"
+  },
+  "interpretation": {
+    "system_seed_equals_root_seed_candidate": false,
+    "derivation_status": "unknown-not-claimed",
+    "limitations": [
+      "The third sample is a single observation and its generation-measurement artifact has no NMS.exe hash.",
+      "The calculation validates an address-to-public-system-seed output only; it does not explain the 64-bit dungeon-root seed.",
+      "The cited upstream implementation is an external reference, not a checked-in project utility or independent proof of the game's current executable behavior.",
+      "The combined report's asset-derived 43 CARGO_FLOATERS target prediction remains separate from generation-measurement target_container_values; neither is asserted here as a physical traversal count.",
+      "The zero +0x10 read and separate resolver sample remain unresolved and are not used."
+    ]
+  }
+}

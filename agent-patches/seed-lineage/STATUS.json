@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "lane": "seed-lineage",
-  "updated_utc": "2026-10-09T15:12:21Z",
+  "updated_utc": "2026-10-09T15:23:52Z",
   "state": "in_progress",
-  "status": "The latest hash-verified automatic session report contains a third root-seed candidate at 0001680006607CAC. The associated caller and seed-function outputs still cite the earlier 0001550006607CAC session. Surveyor 1.0.4 failed to load because its 635-character panel summary exceeds the host's 500-character limit; a corrected 1.0.5 request is prepared.",
-  "summary": "Automatic batch 20261009T015908Z-d4d6ae3f report 20261009T015909Z-77532ce2 has verified SHA-256 721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b. The third-address root candidate is 0001680006607CAC -> 2139770A2614E3DC, observed once; its executable hash is not present in that measurement artifact. Existing address pairs remain 00001A0004E84EFD -> 9256392A2F5A74AC and 0001550006607CAC -> 00C9E8DF0327789E. No derivation is claimed. The 14 MEDI_FLOATERS and separate 43 CARGO_FLOATERS quantities are asset-derived predictions, not physical counts. Request seed-panel-summary-limit-20261009 corrects the screenshot's invalid-summary error.",
-  "progress": "The 1.0.5 request and hash-verified evidence reconciliation are prepared; continuing offline comparison of the third-address seed candidate.",
+  "status": "The third saved address now has a reproducible public system-seed comparison: 0001680006607CAC -> 8A6EF089, alongside root candidate 2139770A2614E3DC. Two existing anchor vectors reproduced exactly; the root-seed derivation remains unknown. The 1.0.5 panel fix remains a ready build request pending compiler integration.",
+  "summary": "The SHA-256-verified automatic report 20261009T015909Z-77532ce2 records third candidate 0001680006607CAC -> root 2139770A2614E3DC (one observation; executable identity unverified). Applying the pinned public indexPrimedPRNG reference yields address system seed 8A6EF089; both existing lane anchor outputs (B006BAB6 and 9E1A7905) reproduce. This does not derive the 64-bit dungeon-root seed. Keep asset predictions and measurement fields distinct; no physical traversal count is claimed.",
+  "progress": "Completed a reproducible third-address public system-seed comparison with two known-anchor checks. Corrected Seed-Lineage 1.0.5 panel request remains ready for primary compiler staging.",
   "blockers": [
     "Main compiler must stage the ready build request before the 1.0.5 panel is available in Surveyor."
   ],
-  "next_action": "Locate or reproduce the repository's public system-seed calculation for 0001680006607CAC and compare it with 2139770A2614E3DC, keeping the relation unproven until calculated.",
+  "next_action": "Continue offline review for an independently supported address-to-root-seed link and preserve the third candidate's unverified executable provenance; after the 1.0.5 request is integrated, trace the already-saved third-address sample through caller, upstream callers, and seed-function analysis.",
   "extension_version": "1.0.4",
   "candidate_extension_version": "1.0.5",
   "build_request_id": "seed-panel-summary-limit-20261009",
@@ -27,9 +27,16 @@
   "human_intervention_required": false,
   "surveyor_request": "",
   "user_steps": [],
-  "success_condition": "The 1.0.5 candidate passes host validation and the updated UI test during build-request staging; then the existing third-address root candidate can be followed with a same-capture caller/upstream/seed-function chain.",
+  "success_condition": "A same-capture third-address caller → upstream → seed-function evidence chain is available; the root relation is claimed only if a reproducible method explains all validated pairs.",
   "evidence_to_return": [],
   "full_derelict_required": false,
-  "evidence_path": "agent-patches/seed-lineage/SEED_B_PANEL_FIX_AND_AUTO_BATCH_20261009.md",
-  "runtime_extension_version": "1.0.6"
+  "evidence_path": "agent-patches/seed-lineage/SEED_B_SYSTEM_SEED_COMPARISON_20261009.md",
+  "runtime_extension_version": "1.0.6",
+  "latest_offline_comparison": {
+    "path": "agent-patches/seed-lineage/SEED_B_SYSTEM_SEED_COMPARISON_20261009.json",
+    "system_seed_hex": "8A6EF089",
+    "root_seed_candidate_hex": "2139770A2614E3DC",
+    "known_anchor_checks_passed": 2,
+    "upstream_commit": "52ad48affaa4089c8f487a470a888dc9b7a650aa"
+  }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-09T15:12:21Z",
+  "updated_utc": "2026-10-09T15:23:52Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -33,12 +33,12 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage-update-20261008",
-      "status": "automatic-batch-third-root-candidate-found; 1.0.4-summary-validation-failure-diagnosed; 1.0.5-request-ready",
+      "status": "third-address-system-seed-computed; root relation remains unknown; 1.0.5-build-request-ready",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-      "result_summary": "Hash-verified automatic batch 20261009T015908Z-d4d6ae3f report 20261009T015909Z-77532ce2 (SHA-256 721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b) contains third candidate 0001680006607CAC -> 2139770A2614E3DC, one observation; executable identity is unverified because the measurement artifact has no NMS.exe hash. Caller and seed-function outputs in that report cite the prior 0001550006607CAC session. Derivation remains unknown. Screenshot error is caused by 1.0.4 panel summary length 635 > host limit 500; 1.0.5 build request shortens it to 432. The 14 MEDI and separate 43 CARGO values remain asset predictions, not observed physical counts.",
+      "result_summary": "Hash-verified automatic batch 20261009T015908Z-d4d6ae3f report 20261009T015909Z-77532ce2 (SHA-256 721427df0b4d95a3bb0cfee5ececa3fdb5517713c0abd998fca4802e3ced994b) contains third candidate 0001680006607CAC -> 2139770A2614E3DC, one observation; executable identity is unverified because the measurement artifact has no NMS.exe hash. Caller and seed-function outputs in that report cite the prior 0001550006607CAC session. Derivation remains unknown. Screenshot error is caused by 1.0.4 panel summary length 635 > host limit 500; 1.0.5 build request shortens it to 432. The 14 MEDI and separate 43 CARGO values remain asset predictions, not observed physical counts. Public address-system-seed calculation reproduces both existing anchors and yields 8A6EF089 for 0001680006607CAC; the associated 64-bit root candidate remains unexplained.",
       "human_validation_required": false,
-      "review": "agent-patches/seed-lineage/SEED_B_PANEL_FIX_AND_AUTO_BATCH_20261009.md",
-      "next_action": "Continue offline address-seed anchor comparison for 0001680006607CAC -> 2139770A2614E3DC; retain primary-compiler dependency for Surveyor panel integration.",
+      "review": "agent-patches/seed-lineage/SEED_B_SYSTEM_SEED_COMPARISON_20261009.md",
+      "next_action": "Continue offline review for an independently supported address-to-root-seed link and preserve the third candidate's unverified executable provenance; after the 1.0.5 request is integrated, trace the already-saved third-address sample through caller, upstream callers, and seed-function analysis.",
       "parallel_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
       "extension_version": "1.0.4",
       "latest_report": "research-uploads/20261009T015948Z-automatic-research-batch-20261009T015908Z-d4d6ae3f-50cb03/reports/20261009T015909Z-77532ce2/combined-results.json",
