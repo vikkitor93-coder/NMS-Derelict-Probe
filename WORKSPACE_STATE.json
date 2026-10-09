@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-09T00:25:00Z",
+  "updated_utc": "2026-10-09T00:27:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -8,8 +8,8 @@
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
     "candidate_version": "0.3.69",
     "candidate_branch": "main",
-    "candidate_base": "main@b57d3d07f9253c41aa8cd04ae8c67ad721c4d770",
-    "candidate_status": "Surveyor 0.3.69 suppresses Explorer windows during background caller-extraction research while preserving interactive output selection. Verification: 220/220 tests, compileall, and source ZIP plus 38-part hash integrity passed. Windows installation validation remains pending.",
+    "candidate_base": "main@ea903615ac1c5ef400dd108212cf0e9b65ceb928",
+    "candidate_status": "Surveyor 0.3.69 is published to main at b076f83ede95ad0e53a836f9fefb876996d2bb39. It suppresses Explorer windows during background caller-extraction research while preserving interactive output selection. Verification: 220/220 tests, compileall, and source ZIP plus 38-part package integrity passed. Windows installation validation remains pending.",
     "current_research_action": "After one NMS process visits multiple systems, the batch analyzer groups root events from that process journal, compares address/seed repetitions and collisions without inferring a seed formula, and uploads source journals with a single hash-verified report pointer for all four lanes."
   },
   "lane_claims": {
