@@ -1,0 +1,34 @@
+{
+  "action_workers_per_session": 4,
+  "batch_id": "20261010T011902Z-8bf8ea57",
+  "max_concurrent_sessions": 3,
+  "published_report_count": 1,
+  "reports": [
+    {
+      "report_path": "research-uploads/20261010T011941Z-automatic-research-batch-20261010T011902Z-8bf8ea57-e31e4c/reports/20261010T011903Z-a2bcd5d2/combined-results.json",
+      "report_sha256": "30b8f188bd6af88ac6f21109fc2cca8fea41735b065d1487d00a1bfc7fe566ad",
+      "run_id": "20261010T011903Z-a2bcd5d2",
+      "session_file": "20261010T010105Z_Irchol-Luhimo_XVII.json",
+      "session_sha256": "33794e2f46714b8ae873253e24bb50aab2f45d8ec41ba610852404399cf87df6",
+      "status": "completed-with-errors",
+      "summary": {
+        "completed": 7,
+        "failed": 1,
+        "total": 9,
+        "unsupported": 0,
+        "upload_actions_skipped": 1
+      }
+    }
+  ],
+  "schema_version": 1,
+  "session_count": 1,
+  "started_utc": "2026-10-10T01:19:03Z",
+  "state": "completed-with-errors",
+  "uploaded_utc": "20261010T011941Z",
+  "visible_to_lanes": [
+    "runtime-dispatch",
+    "seed-lineage",
+    "dungeon-decompile",
+    "metadata"
+  ]
+}

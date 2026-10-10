@@ -1,0 +1,21 @@
+{
+  "action": "automatic-research-batch",
+  "batch_id": "20261010T011902Z-8bf8ea57",
+  "batch_results_path": "research-uploads/20261010T011941Z-automatic-research-batch-20261010T011902Z-8bf8ea57-e31e4c/batch-results.json",
+  "files": [
+    {
+      "name": "research-uploads/20261010T011941Z-automatic-research-batch-20261010T011902Z-8bf8ea57-e31e4c/reports/20261010T011903Z-a2bcd5d2/combined-results.json",
+      "session_sha256": "33794e2f46714b8ae873253e24bb50aab2f45d8ec41ba610852404399cf87df6",
+      "sha256": "30b8f188bd6af88ac6f21109fc2cca8fea41735b065d1487d00a1bfc7fe566ad"
+    }
+  ],
+  "selection": "One immutable combined-results report per saved session; report paths and session hashes are indexed in batch-results.json.",
+  "utc": "20261010T011941Z",
+  "version": 1,
+  "visible_to_lanes": [
+    "runtime-dispatch",
+    "seed-lineage",
+    "dungeon-decompile",
+    "metadata"
+  ]
+}
