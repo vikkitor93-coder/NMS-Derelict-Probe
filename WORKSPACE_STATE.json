@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-10T00:00:43Z",
+  "updated_utc": "2026-10-10T00:03:28Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -126,10 +126,10 @@
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-current-target-20261008-reconciled",
-      "status": "runtime-dispatch-correlated-static-callback-analysis-active",
+      "status": "runtime-correlated-static-callback-analysis-active; .pdata chain extent corrected",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "Continue offline semantic analysis of the hash-matched current caller/callback and investigate generator-consumer references without assigning an unsupported semantic name.",
-      "latest_evidence": "research-uploads/20261005T014820Z-all-saved-evidence-a065a8b5/",
+      "next_action": "Continue repository-based offline analysis of callback generator-consumer references and the unmapped state table at 0063BEBC; do not duplicate Seed-B's candidate owner-producer trace or assign an unsupported callback identity.",
+      "latest_evidence": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/",
       "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
       "current_build_static_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
       "helper_dataflow_review": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
@@ -144,7 +144,17 @@
       "latest_automatic_batch_report": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
       "latest_automatic_batch_report_sha256": "fb7126c475d65d0e764d802b74ed6a6ca99c56fb72d75c65da9e0e3f6335f1f4",
       "latest_automatic_batch_index": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/batch-results.json",
-      "latest_automatic_batch_index_sha256": "4ae5af8f6814e14d1e5e16ca1eeeaf455599b1e22d47286ba01e2b513f3f25cd"
+      "latest_automatic_batch_index_sha256": "4ae5af8f6814e14d1e5e16ca1eeeaf455599b1e22d47286ba01e2b513f3f25cd",
+      "latest_runtime_snapshot_manifest": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/run-manifest.json",
+      "latest_runtime_snapshot_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261009.json",
+      "latest_pdata_chain_correction": "agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json",
+      "latest_current_build_context": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
+      "latest_root_event_sha256": "87813ff2737bca7f6e85a07235844bf773af4a956ee1572bcd3fb0fbf43e8246",
+      "latest_capture_journal_sha256": "44edb993033e7b59036c86c13ef9b62ec451f27f049bf2d7b7d41dcecb98bede",
+      "primary_callback_chain_bytes": 2430,
+      "raw_dispatch_target_resolved": false,
+      "callback_semantic_identity_resolved": false,
+      "cross_lane_seed_producer_trace": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json"
     },
     "metadata": {
       "branch": "agent/metadata-room-model-reconcile-20261008",
