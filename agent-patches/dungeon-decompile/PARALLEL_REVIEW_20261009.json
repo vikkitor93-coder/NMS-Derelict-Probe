@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "reviewed_utc": "2026-10-09T23:12:00Z",
+  "reviewed_utc": "2026-10-10T00:03:28Z",
   "source": {
     "manual_pointer_path": "research/LATEST_PARALLEL_ACTION_TEST.json",
     "manual_report_path": "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
@@ -101,7 +101,7 @@
     "The latest all-saved snapshot contains the already-reported 23:08 capture, not a new event. Its +0x10 field is explicitly captured after the external call and remains unusable as dispatch target.",
     "The newest automatic combined report is a distinct cohort. Its exact-caller action matches the 23:08 event; caller-code, upstream, and resolver artifacts use other saved inputs and must not be joined to that event."
   ],
-  "next_action": "Continue offline classification of the 52 static references and trace their caller-side dataflow; keep semantic naming unresolved.",
+  "next_action": "Continue offline analysis of the callback's generator-consumer references; preserve unresolved callback semantics and raw dispatch target.",
   "extractor_source_audit": {
     "source_path": "tools/extract_exact_root_caller_code.py",
     "source_sha": "0943c480830413c61fec228c2c97fac350a9c867",
@@ -111,12 +111,22 @@
   },
   "current_build_context": {
     "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
-    "sha256": "a069eac1cbbb7c6449ef542c2e413367a30674863c8d11c09247a5fe8a7aff0f",
+    "sha256": "a34fa4f04e53717c3e7c6af2f10191d8952b2d58100eb571480b7ae6ddad33e4",
     "sha256_verified": true,
     "summary": "Two standalone captures report a unique descriptor/caller-return correlation to effective entry 0063A6D0. Static caller/callback bytes were checked against local NMS.exe SHA-256 13d5060d...cc3499. Event-scoped correlation only; raw dispatch slot and callback semantics remain unresolved.",
     "latest_snapshot": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/",
     "latest_snapshot_manifest": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/run-manifest.json",
-    "snapshot_capture_hash_matches": true
+    "snapshot_capture_hash_matches": true,
+    "pdata_correction_path": "agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json",
+    "pdata_correction_sha256": "cb9e7fbb778aca2ee41a4d012f3f27ac2b280f6def468033578802c9e446398a",
+    "primary_chained_range_bytes": 2430,
+    "prior_1180_byte_hash_scope": "first two ranges only",
+    "latest_snapshot_path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/",
+    "latest_snapshot_manifest_verified": true,
+    "latest_runtime_events": [
+      "2026-10-09T23:41:33.649Z",
+      "2026-10-09T23:44:15.855Z"
+    ]
   },
   "runtime_capture_provenance": [
     {
@@ -291,5 +301,77 @@
       "pdata_entries_in_exe": 157445
     },
     "interpretation": "Same-session offline static cross-reference and field-offset evidence. The observed descriptor pointer and seed values match the static field locations for this event. This corroborates event-scoped dataflow at 0063A6D0 but does not provide a semantic function name or the pre-call FF 52 10 slot target."
-  }
+  },
+  "latest_saved_evidence_snapshot": {
+    "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/",
+    "manifest_path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/run-manifest.json",
+    "uploaded_utc": "20261009T235520Z",
+    "action": "all-saved-evidence",
+    "sole_authority_for_new_manual_parallel_results": false,
+    "manifest_verified_files": {
+      "root_event": {
+        "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/root-event-latest.json",
+        "sha256": "87813ff2737bca7f6e85a07235844bf773af4a956ee1572bcd3fb0fbf43e8246",
+        "sha256_verified": true
+      },
+      "capture_journal": {
+        "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/capture-journal-20261009T233934Z-6012.jsonl",
+        "sha256": "44edb993033e7b59036c86c13ef9b62ec451f27f049bf2d7b7d41dcecb98bede",
+        "sha256_verified": true
+      },
+      "baseline": {
+        "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/generation-baseline-latest.json",
+        "sha256": "67ee5348c0d3ea948fb93b81c9cf1122436a518fc2920bbc923df9e420526db8",
+        "sha256_verified": true
+      },
+      "seed_function": {
+        "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/dungeon-seed-function-analysis-latest.json",
+        "sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+        "sha256_verified": true
+      }
+    },
+    "root_events": [
+      {
+        "utc": "2026-10-09T23:41:33.649Z",
+        "universe_address": "0000790006606CAB",
+        "descriptor": "00000279E1F32928",
+        "root_seed_candidate": "C36137A0B4914AD9",
+        "external_caller_return": "02C0860A",
+        "entry_correlation": "single exact-descriptor match to 0063A6D0",
+        "owner_plus_0x10": "0D2F0CBB00000000 after call; not target"
+      },
+      {
+        "utc": "2026-10-09T23:44:15.855Z",
+        "universe_address": "0000760006606CAB",
+        "descriptor": "00000279DD497928",
+        "root_seed_candidate": "9C2818C7FE094FC8",
+        "external_caller_return": "02C0860A",
+        "entry_correlation": "single exact-descriptor match to 0063A6D0",
+        "owner_plus_0x10": "zero after call; not target"
+      }
+    ],
+    "new_root_event_vs_prior_snapshot": false,
+    "code_window_match": {
+      "bytes": 80,
+      "window_rva": "0063ABF5",
+      "seed_fragment_offset": 137,
+      "bytewise_match": true,
+      "full_runtime_executable_sha_present": false
+    },
+    "baseline_interpretation": "0 scenes, 0 chunks, 0 predicted targets, unresolved preset; not a full traversal or observed physical count.",
+    "provenance_note": "All-saved snapshot repeats two root events and includes stale Oct 5 code-export artifact; it is not a replacement combined report or a current 23:44 code export.",
+    "journal_record_count": 1590,
+    "stale_code_export": {
+      "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/exact-root-caller-code-latest.json",
+      "sha256": "1f77e37699b97a802a768751bba4cc49cdbb1197dabc7dad73e479cdceaebf62",
+      "tool_version": "0.3.37",
+      "event_utc": "2026-10-05T01:03:01.131Z",
+      "descriptor": "000001DCBF948128",
+      "logical_entry": "00634BC0",
+      "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "applies_to_latest_23_44_event": false,
+      "note": "This saved code-export file is stale and belongs to the Oct 5 event. For the 23:44 event use only the embedded 80-byte root-event code window and its byte match to the 1250-byte seed-function fragment; no full executable identity is present."
+    }
+  },
+  "cross_lane_note": "Seed-B tracks 00639BE0 as a candidate owner/descriptor producer and is waiting for a complete static listing; this does not block Lane C's independent .pdata/callback work."
 }
