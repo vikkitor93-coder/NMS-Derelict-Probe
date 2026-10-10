@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "reviewed_utc": "2026-10-10T00:03:28Z",
+  "reviewed_utc": "2026-10-10T00:09:23Z",
   "objective": "Correct the .pdata extent of the current callback candidate and reconcile the latest saved root-event evidence without overstating dispatch identity.",
   "backup": {
-    "branch": "backup/main-before-dungeonC-final-20261010-0003",
-    "base_commit": "c8f5e3f6e4a25eeaea9152748ff08d47167101c0",
-    "rollback": "Revert the final Lane C publication commit on main and agent/dungeon-current-target-20261008-reconciled, or reset those refs to the recorded base only if no later commits depend on this publication."
+    "branch": "backup/main-before-dungeonC-entry-20261010-0009",
+    "base_commit": "f6f3cdf09e687c7d33513aa3ba2057957a6f2a96",
+    "rollback": "Restore main and the assigned Lane C branch to this backup only if no later commits depend on this publication; otherwise revert the Lane C update commits in reverse order."
   },
   "current_binary": {
     "sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
@@ -183,5 +183,25 @@
     "Keep the asset-derived 43-target prediction separate from observed counts; historical 35-container baseline and separate post-update 16-target model remain distinct.",
     "WinDbg is excluded per the user's report that it crashes NMS; no debugger or live NMS action was used."
   ],
-  "human_intervention_required": false
+  "human_intervention_required": true,
+  "primary_entry_behavior_review": {
+    "path": "agent-patches/dungeon-decompile/CALLBACK_ENTRY_RANGE_REVIEW_20261010.json",
+    "sha256": "974f3f03798d6b58eeac7970456992c66112d94121e5d88b397fc8c12722255a",
+    "sha256_verified": true,
+    "source_artifact_sha256": "13938e7d4711d6ee49d46d865b48c2e72887f2d48cb111a4c42d330055e22834",
+    "executable_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
+  },
+  "human_request": {
+    "action": "In Ghidra CodeBrowser for NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, press G and navigate to 0063B130; copy/export the Listing through 0063BEEC with addresses, bytes, disassembly, and references to 0063BEBC into one text file.",
+    "success_condition": "Returned listing explicitly covers 0063B130 through 0063BEEC (including 0063BEBC) and identifies the matching executable SHA-256.",
+    "evidence_to_return": [
+      "One UTF-8 text file with matching executable SHA-256, the full 0063B130..0063BEEC Listing, and references to 0063BEBC."
+    ],
+    "full_derelict_required": false
+  },
+  "runner_access_attempt": {
+    "action": "Read-only check of the installed NMS.exe metadata to continue offline state-table analysis.",
+    "result": "The command runner did not start; it returned helper_unknown_error: setup refresh had errors before executing the command.",
+    "permission_denied": false
+  }
 }
