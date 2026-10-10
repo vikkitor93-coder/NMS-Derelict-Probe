@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "reviewed_utc": "2026-10-10T00:03:28Z",
+  "reviewed_utc": "2026-10-10T00:09:23Z",
   "source": {
     "manual_pointer_path": "research/LATEST_PARALLEL_ACTION_TEST.json",
     "manual_report_path": "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
@@ -111,14 +111,14 @@
   },
   "current_build_context": {
     "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
-    "sha256": "a34fa4f04e53717c3e7c6af2f10191d8952b2d58100eb571480b7ae6ddad33e4",
+    "sha256": "ab6b92f3a7f36204b7a2da151a55f323783913052cca0caf36a126550b488950",
     "sha256_verified": true,
     "summary": "Two standalone captures report a unique descriptor/caller-return correlation to effective entry 0063A6D0. Static caller/callback bytes were checked against local NMS.exe SHA-256 13d5060d...cc3499. Event-scoped correlation only; raw dispatch slot and callback semantics remain unresolved.",
     "latest_snapshot": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/",
     "latest_snapshot_manifest": "research-uploads/20261009T231425Z-all-saved-evidence-a8f14cf4/run-manifest.json",
     "snapshot_capture_hash_matches": true,
     "pdata_correction_path": "agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json",
-    "pdata_correction_sha256": "cb9e7fbb778aca2ee41a4d012f3f27ac2b280f6def468033578802c9e446398a",
+    "pdata_correction_sha256": "2aee950f3d1c524c50780793cc793ac9feaecb02fdf4adc5dbbf1245acdbb3d6",
     "primary_chained_range_bytes": 2430,
     "prior_1180_byte_hash_scope": "first two ranges only",
     "latest_snapshot_path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/",
@@ -373,5 +373,18 @@
       "note": "This saved code-export file is stale and belongs to the Oct 5 event. For the 23:44 event use only the embedded 80-byte root-event code window and its byte match to the 1250-byte seed-function fragment; no full executable identity is present."
     }
   },
-  "cross_lane_note": "Seed-B tracks 00639BE0 as a candidate owner/descriptor producer and is waiting for a complete static listing; this does not block Lane C's independent .pdata/callback work."
+  "cross_lane_note": "Seed-B tracks 00639BE0 as a candidate owner/descriptor producer and is waiting for a complete static listing; this does not block Lane C's independent .pdata/callback work.",
+  "primary_entry_behavior_review": {
+    "path": "agent-patches/dungeon-decompile/CALLBACK_ENTRY_RANGE_REVIEW_20261010.json",
+    "sha256": "974f3f03798d6b58eeac7970456992c66112d94121e5d88b397fc8c12722255a",
+    "sha256_verified": true,
+    "conclusion": "Helper return is compared with RBX; equality returns 1, inequality branches to 0063A722. No semantic name assigned."
+  },
+  "human_gate": {
+    "status": "waiting_on_user",
+    "required_range": "0063B130..0063BEEC",
+    "table_rva": "0063BEBC",
+    "full_derelict_traversal_required": false,
+    "surveyor_action_required": false
+  }
 }
