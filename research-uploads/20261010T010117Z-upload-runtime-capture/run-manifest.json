@@ -1,0 +1,12 @@
+{
+  "action": "upload-runtime-capture",
+  "files": [
+    {
+      "name": "exact-root-caller-latest.json",
+      "sha256": "e2d908be44e9eb1cc510c92a3d3e66c04ca0cc0af07369bc6f9c02178b0faa48",
+      "size": 15664
+    }
+  ],
+  "utc": "20261010T010117Z",
+  "version": 1
+}
