@@ -2,12 +2,18 @@
   "schema_version": 1,
   "lane": "seed-lineage",
   "updated_utc": "2026-10-09T23:57:15Z",
-  "state": "in_progress",
-  "status": "Two same-executable callsites now identify common helper 00639BE0 as the producer/setup candidate whose return pointer is passed into seed-consuming entry 0063A6D0.",
-  "summary": "Latest automatic saved-session report research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json is hash-verified and remains the sole authority for run 20261009T231728Z-208c8af6: its 000079 baseline predicts 32 CARGO_FLOATERS targets, while its seed-function and upstream outputs are from 000155 and its caller is from 00006D; they do not form a same-sample static chain. A later lane-exclusive seed-function upload is fresh for 000079 and independently hash-verified. A separate 20261009T234615Z capture adds a root candidate 9C2818C7FE094FC8 at address 0000760006606CAB, UseSeedValue true, exact external caller 02C0860A; that capture lacks executable identity. No root-seed formula or dispatch target is resolved. Offline follow-up traced callsites 006395E6 and 00639BB6 through shared helper 00639BE0; its returned pointer is moved to RBX and passed as RDX into 0063A6D0. This supports an owner/descriptor producer candidate only; writes to owner+0x138, seed assignment, and formula remain unproven.",
-  "progress": "Verified the latest automatic batch index/report hashes and kept its isolated saved-session outputs in their separate provenance cohort. Independently hash-verified the new 000076 exact root capture and derived its public system seed D4759808 with the pinned address-seed algorithm; executable compatibility remains unverified. Added both reviews and preserved the 000079 fresh static chain separately. Matched both helper calls by rel32 arithmetic against the same executable hash; recorded bounded owner/descriptor producer lead and its unresolved write/derivation limits.",
-  "blockers": [],
-  "next_action": "Obtain a wider code extract or focused caller/upstream analysis for helper 00639BE0 and determine whether it writes owner+0x138 or forwards a seed from its arguments; keep the 000079 executable identity constraint.",
+  "state": "waiting_on_user",
+  "status": "Offline callsite trace identifies shared helper 00639BE0 as a candidate owner/descriptor producer; the complete helper body is not in repository evidence and local executable access is unavailable.",
+  "summary": "Latest automatic saved-session report research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json is hash-verified and remains the sole authority for run 20261009T231728Z-208c8af6: its 000079 baseline predicts 32 CARGO_FLOATERS targets, while its seed-function and upstream outputs are from 000155 and its caller is from 00006D; they do not form a same-sample static chain. A later lane-exclusive seed-function upload is fresh for 000079 and independently hash-verified. A separate 20261009T234615Z capture adds a root candidate 9C2818C7FE094FC8 at address 0000760006606CAB, UseSeedValue true, exact external caller 02C0860A; that capture lacks executable identity. No root-seed formula or dispatch target is resolved. Offline follow-up traced callsites 006395E6 and 00639BB6 through shared helper 00639BE0; its returned pointer is moved to RBX and passed as RDX into 0063A6D0. This supports an owner/descriptor producer candidate only; writes to owner+0x138, seed assignment, and formula remain unproven. The next inference depends on the complete static helper listing at 00639BE0. Existing Surveyor Seed-Lineage actions do not export arbitrary RVAs, and local executable access failed; the request is for static evidence only, with no NMS launch or traversal.",
+  "progress": "Completed repository and saved-evidence analysis, identified common helper 00639BE0 from two same-executable callsites, and confirmed that available code windows stop before its body can be analyzed.",
+  "blockers": [
+    {
+      "kind": "inaccessible-local-static-code",
+      "reason": "Only partial code windows are committed; the current Surveyor extension cannot export arbitrary RVA functions, and local execution could not access the supplied executable.",
+      "required_evidence": "Complete Ghidra disassembly/decompiler listing and xrefs for 00639BE0 from NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499."
+    }
+  ],
+  "next_action": "Await the requested helper 00639BE0 static listing, then determine whether it writes owner+0x138 or forwards the seed from its arguments.",
   "extension_version": "1.0.6",
   "candidate_extension_version": "1.0.6",
   "build_request_id": "seed-lineage-fresh-baseline-action-20261009",
@@ -34,11 +40,17 @@
     "run_id": "20261009T004054Z-9fedea65",
     "report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972"
   },
-  "human_intervention_required": false,
-  "surveyor_request": null,
-  "user_steps": [],
-  "success_condition": "Continue offline until a specific inference requires a compatible-executable sample or a live-only measurement.",
-  "evidence_to_return": [],
+  "human_intervention_required": true,
+  "surveyor_request": "Surveyor's Seed-Lineage panel has no arbitrary-RVA code-export control: “Extract upstream callers + upload” only follows references to 0063A6D0, so repeating it cannot provide helper 00639BE0's full body. A static Ghidra listing of the exact NMS.exe build is required.",
+  "user_steps": [
+    "Use the NMS.exe build with SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 in Ghidra CodeBrowser. Use Search > Go To (G) and enter 140639BE0 (RVA 00639BE0 at preferred image base 140000000).",
+    "Copy/export the complete Listing disassembly and Decompiler output for the function beginning at 00639BE0 through its return. Also press X on the function entry and include its complete cross-reference list. Save these together as a text file.",
+    "Attach the text file here. Success is visible when the listing begins at 00639BE0 with bytes 48 89 5C 24 10 and the cross-reference list includes 006395D3 and 00639B99. Do not launch NMS or traverse a derelict; neither is required."
+  ],
+  "success_condition": "Listing starts at RVA 00639BE0 with bytes 48 89 5C 24 10, contains the full function through return, and its xrefs include callsites 006395D3 and 00639B99.",
+  "evidence_to_return": [
+    "One text file containing the full function disassembly, decompiler output, executable SHA-256, and complete xref list."
+  ],
   "full_derelict_required": false,
   "evidence_path": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
   "runtime_extension_version": "1.0.6",
