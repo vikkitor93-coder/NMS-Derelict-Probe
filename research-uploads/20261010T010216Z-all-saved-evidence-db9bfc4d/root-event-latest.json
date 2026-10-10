@@ -1,0 +1,390 @@
+{
+  "schema_version": 1,
+  "capture_version": 2,
+  "probe_version": "0.3.42",
+  "utc": "2026-10-10T01:00:51.173Z",
+  "method": "all-callers-single-hook-exact-descriptor-correlation",
+  "capture_status": "exact-caller-correlated",
+  "logical_entry_rva_hex": "0063A6D0",
+  "static_direct_reference_count": 52,
+  "recursive_return_rva_hex": "0063A773",
+  "root_resource": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+  "root_descriptor_pointer_hex": "000001BBA5E0F128",
+  "root_seed_hex": "9C2818C7FE094FC8",
+  "root_seed_effective_hex": "9C2818C7FE094FC8",
+  "root_seed_use_seed_value": true,
+  "root_seed_state": "enabled",
+  "root_event_utc": "2026-10-10T01:00:51.172Z",
+  "universe_address_hex_at_capture": "0000760006606CAB",
+  "runtime_metadata_at_capture": {
+    "environment_location": "Default",
+    "system_name": "Irchol-Luhimo XVII",
+    "reality_index": 0,
+    "galactic_address": {
+      "planet_index": 0,
+      "solar_system_index": 118,
+      "voxel_x": -853,
+      "voxel_y": 6,
+      "voxel_z": 1542
+    },
+    "universe_address_hex": "0000760006606CAB",
+    "environment_location_live": "Default",
+    "environment_location_stable": "Default"
+  },
+  "root_event": {
+    "utc": "2026-10-10T01:00:51.172Z",
+    "kind": "resource_add",
+    "resource_name": "MODELS/SPACE/POI/DUNGEON.SCENE.MBIN",
+    "resource_type": 1,
+    "resource_flags": 1024,
+    "descriptor_pointer_hex": "000001BBA5E0F128",
+    "caller_return_offset_hex": "0063AC25",
+    "caller_code_window": {
+      "start_offset_hex": "0063ABF5",
+      "return_offset_hex": "0063AC25",
+      "return_index": 48,
+      "byte_count": 80,
+      "bytes_hex": "0400004C89751841B900040004488D8DE0000000440F44C8BA01000000488D45E0488944242848897C2420E84B3B2001488BD0488D8ECC010000E8DC69B9FF488D8DE0000000E840AE7202B201488D8D"
+    },
+    "primary_seed": {
+      "seed_signed": -7194473157484785720,
+      "seed_u64": 11252270916224765896,
+      "seed_hex": "9C2818C7FE094FC8",
+      "use_seed_value": true
+    },
+    "secondary_seed": {
+      "seed_signed": -1,
+      "seed_u64": 18446744073709551615,
+      "seed_hex": "FFFFFFFFFFFFFFFF",
+      "use_seed_value": false
+    },
+    "poi_prepare_scope_component_hexes": [],
+    "poi_activation_scope_component_hexes": [],
+    "poi_lifecycle_scope_component_hexes": [],
+    "runtime_metadata_at_capture": {
+      "environment_location": "Default",
+      "system_name": "Irchol-Luhimo XVII",
+      "reality_index": 0,
+      "galactic_address": {
+        "planet_index": 0,
+        "solar_system_index": 118,
+        "voxel_x": -853,
+        "voxel_y": 6,
+        "voxel_z": 1542
+      },
+      "universe_address_hex": "0000760006606CAB",
+      "environment_location_live": "Default",
+      "environment_location_stable": "Default"
+    },
+    "universe_address_hex_at_capture": "0000760006606CAB",
+    "logical_entry_matches": [
+      {
+        "utc": "2026-10-10T01:00:51.172Z",
+        "context_pointer_hex": "000001BCE2F69960",
+        "owner_pointer_hex": "000001BBA5E0F000",
+        "descriptor_pointer_hex": "000001BBA5E0F128",
+        "primary_seed_hex": "9C2818C7FE094FC8",
+        "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+        "caller_return_offset_hex": "02C0860A",
+        "external_origin_caller_return_offset_hex": "02C0860A",
+        "recursion_depth": 0,
+        "external_owner_pointer_hex": "000001BBA5E0F000",
+        "external_owner_plus_0x10_capture_at_entry": {
+          "owner_pointer_hex": "000001BBA5E0F000",
+          "slot_offset_hex": "00000010",
+          "slot_address_hex": "000001BBA5E0F010",
+          "capture_phase": "logical-entry-after-external-call",
+          "capture_utc": "2026-10-10T01:00:51.172Z",
+          "read_status": "captured",
+          "raw_bytes_hex": "00000000991A3D14",
+          "slot_value_hex": "143D1A9900000000",
+          "target_identity": null
+        },
+        "external_call_register_snapshot_at_entry": {
+          "capture_phase": "shared-entry-hook-after-call",
+          "capture_utc": "2026-10-10T01:00:51.172Z",
+          "caller_return_rva_hex": "02C0860A",
+          "rcx_hex": "000001BCE2F69960",
+          "rdx_hex": "000001BBA5E0F000",
+          "rdx_plus_0x10_capture": {
+            "owner_pointer_hex": "000001BBA5E0F000",
+            "slot_offset_hex": "00000010",
+            "slot_address_hex": "000001BBA5E0F010",
+            "capture_phase": "logical-entry-after-external-call",
+            "capture_utc": "2026-10-10T01:00:51.172Z",
+            "read_status": "captured",
+            "raw_bytes_hex": "00000000991A3D14",
+            "slot_value_hex": "143D1A9900000000",
+            "target_identity": null
+          }
+        },
+        "caller_class": "external",
+        "known_static_candidate": false,
+        "age_ms_at_root_add": 0.947
+      }
+    ],
+    "logical_entry_match_count": 1,
+    "logical_entry_unique_callers_observed": 10,
+    "logical_entry_static_candidate_count": 52,
+    "logical_entry_nearest_caller_return_offset_hex": "02C0860A",
+    "logical_entry_nearest_caller_code_window": {
+      "start_offset_hex": "02C085AA",
+      "return_offset_hex": "02C0860A",
+      "return_index": 96,
+      "byte_count": 160,
+      "bytes_hex": "BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95"
+    },
+    "owner_plus_0x10_capture": {
+      "owner_pointer_hex": "000001BBA5E0F000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "000001BBA5E0F010",
+      "capture_phase": "logical-entry-after-external-call",
+      "capture_utc": "2026-10-10T01:00:51.172Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "00000000991A3D14",
+      "slot_value_hex": "143D1A9900000000",
+      "target_identity": {
+        "status": "not-in-loaded-module",
+        "address_hex": "143D1A9900000000"
+      }
+    },
+    "logical_entry_exact_external_match": {
+      "utc": "2026-10-10T01:00:51.172Z",
+      "context_pointer_hex": "000001BCE2F69960",
+      "owner_pointer_hex": "000001BBA5E0F000",
+      "descriptor_pointer_hex": "000001BBA5E0F128",
+      "primary_seed_hex": "9C2818C7FE094FC8",
+      "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+      "caller_return_offset_hex": "02C0860A",
+      "external_origin_caller_return_offset_hex": "02C0860A",
+      "recursion_depth": 0,
+      "external_owner_pointer_hex": "000001BBA5E0F000",
+      "external_owner_plus_0x10_capture_at_entry": {
+        "owner_pointer_hex": "000001BBA5E0F000",
+        "slot_offset_hex": "00000010",
+        "slot_address_hex": "000001BBA5E0F010",
+        "capture_phase": "logical-entry-after-external-call",
+        "capture_utc": "2026-10-10T01:00:51.172Z",
+        "read_status": "captured",
+        "raw_bytes_hex": "00000000991A3D14",
+        "slot_value_hex": "143D1A9900000000",
+        "target_identity": null
+      },
+      "external_call_register_snapshot_at_entry": {
+        "capture_phase": "shared-entry-hook-after-call",
+        "capture_utc": "2026-10-10T01:00:51.172Z",
+        "caller_return_rva_hex": "02C0860A",
+        "rcx_hex": "000001BCE2F69960",
+        "rdx_hex": "000001BBA5E0F000",
+        "rdx_plus_0x10_capture": {
+          "owner_pointer_hex": "000001BBA5E0F000",
+          "slot_offset_hex": "00000010",
+          "slot_address_hex": "000001BBA5E0F010",
+          "capture_phase": "logical-entry-after-external-call",
+          "capture_utc": "2026-10-10T01:00:51.172Z",
+          "read_status": "captured",
+          "raw_bytes_hex": "00000000991A3D14",
+          "slot_value_hex": "143D1A9900000000",
+          "target_identity": {
+            "status": "not-in-loaded-module",
+            "address_hex": "143D1A9900000000"
+          }
+        }
+      },
+      "caller_class": "external",
+      "known_static_candidate": false,
+      "age_ms_at_root_add": 1.081,
+      "resolved_external_caller_return_offset_hex": "02C0860A",
+      "owner_plus_0x10_capture_at_root_add": {
+        "owner_pointer_hex": "000001BBA5E0F000",
+        "slot_offset_hex": "00000010",
+        "slot_address_hex": "000001BBA5E0F010",
+        "capture_phase": "root-resource-add",
+        "capture_utc": "2026-10-10T01:00:51.173Z",
+        "read_status": "captured",
+        "raw_bytes_hex": "00000000991A3D14",
+        "slot_value_hex": "143D1A9900000000",
+        "target_identity": {
+          "status": "not-in-loaded-module",
+          "address_hex": "143D1A9900000000"
+        }
+      },
+      "owner_plus_0x10_capture": {
+        "owner_pointer_hex": "000001BBA5E0F000",
+        "slot_offset_hex": "00000010",
+        "slot_address_hex": "000001BBA5E0F010",
+        "capture_phase": "logical-entry-after-external-call",
+        "capture_utc": "2026-10-10T01:00:51.172Z",
+        "read_status": "captured",
+        "raw_bytes_hex": "00000000991A3D14",
+        "slot_value_hex": "143D1A9900000000",
+        "target_identity": {
+          "status": "not-in-loaded-module",
+          "address_hex": "143D1A9900000000"
+        }
+      },
+      "owner_plus_0x10_capture_at_entry": {
+        "owner_pointer_hex": "000001BBA5E0F000",
+        "slot_offset_hex": "00000010",
+        "slot_address_hex": "000001BBA5E0F010",
+        "capture_phase": "logical-entry-after-external-call",
+        "capture_utc": "2026-10-10T01:00:51.172Z",
+        "read_status": "captured",
+        "raw_bytes_hex": "00000000991A3D14",
+        "slot_value_hex": "143D1A9900000000",
+        "target_identity": {
+          "status": "not-in-loaded-module",
+          "address_hex": "143D1A9900000000"
+        }
+      }
+    },
+    "logical_entry_exact_external_caller_return_offset_hex": "02C0860A",
+    "logical_entry_exact_external_caller_code_window": {
+      "start_offset_hex": "02C0858A",
+      "return_offset_hex": "02C0860A",
+      "return_index": 128,
+      "byte_count": 224,
+      "bytes_hex": "33FF4C897B38EB034533FFBA58000000488BCFE86E480100488B8E1801000048BFBAE8A28B2EBAE8024883F90A0F82F3FEFFFF4C8BB424C8000000904489BEF8000000488B8610010000488B18483BD80F8462FEFFFF48837B48007508488B1BE99D000000E87C73FFFF488B4B48488BE84885C90F841C040000488B11FF52108BF8E85F73FFFF482BC583FF01754B488B4308488D7B10488B2B488928488B0B488B43084889410848FF8E18010000488B4F384885C97410488B01483BCF0F95C2FF50204C897F38BA58000000488BCBE8B1470100488BDDEB0748014350488B"
+    }
+  },
+  "exact_external_caller": {
+    "utc": "2026-10-10T01:00:51.172Z",
+    "context_pointer_hex": "000001BCE2F69960",
+    "owner_pointer_hex": "000001BBA5E0F000",
+    "descriptor_pointer_hex": "000001BBA5E0F128",
+    "primary_seed_hex": "9C2818C7FE094FC8",
+    "secondary_seed_hex": "FFFFFFFFFFFFFFFF",
+    "caller_return_offset_hex": "02C0860A",
+    "external_origin_caller_return_offset_hex": "02C0860A",
+    "recursion_depth": 0,
+    "external_owner_pointer_hex": "000001BBA5E0F000",
+    "external_owner_plus_0x10_capture_at_entry": {
+      "owner_pointer_hex": "000001BBA5E0F000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "000001BBA5E0F010",
+      "capture_phase": "logical-entry-after-external-call",
+      "capture_utc": "2026-10-10T01:00:51.172Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "00000000991A3D14",
+      "slot_value_hex": "143D1A9900000000",
+      "target_identity": null
+    },
+    "external_call_register_snapshot_at_entry": {
+      "capture_phase": "shared-entry-hook-after-call",
+      "capture_utc": "2026-10-10T01:00:51.172Z",
+      "caller_return_rva_hex": "02C0860A",
+      "rcx_hex": "000001BCE2F69960",
+      "rdx_hex": "000001BBA5E0F000",
+      "rdx_plus_0x10_capture": {
+        "owner_pointer_hex": "000001BBA5E0F000",
+        "slot_offset_hex": "00000010",
+        "slot_address_hex": "000001BBA5E0F010",
+        "capture_phase": "logical-entry-after-external-call",
+        "capture_utc": "2026-10-10T01:00:51.172Z",
+        "read_status": "captured",
+        "raw_bytes_hex": "00000000991A3D14",
+        "slot_value_hex": "143D1A9900000000",
+        "target_identity": {
+          "status": "not-in-loaded-module",
+          "address_hex": "143D1A9900000000"
+        }
+      }
+    },
+    "caller_class": "external",
+    "known_static_candidate": false,
+    "age_ms_at_root_add": 1.081,
+    "resolved_external_caller_return_offset_hex": "02C0860A",
+    "owner_plus_0x10_capture_at_root_add": {
+      "owner_pointer_hex": "000001BBA5E0F000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "000001BBA5E0F010",
+      "capture_phase": "root-resource-add",
+      "capture_utc": "2026-10-10T01:00:51.173Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "00000000991A3D14",
+      "slot_value_hex": "143D1A9900000000",
+      "target_identity": {
+        "status": "not-in-loaded-module",
+        "address_hex": "143D1A9900000000"
+      }
+    },
+    "owner_plus_0x10_capture": {
+      "owner_pointer_hex": "000001BBA5E0F000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "000001BBA5E0F010",
+      "capture_phase": "logical-entry-after-external-call",
+      "capture_utc": "2026-10-10T01:00:51.172Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "00000000991A3D14",
+      "slot_value_hex": "143D1A9900000000",
+      "target_identity": {
+        "status": "not-in-loaded-module",
+        "address_hex": "143D1A9900000000"
+      }
+    },
+    "owner_plus_0x10_capture_at_entry": {
+      "owner_pointer_hex": "000001BBA5E0F000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "000001BBA5E0F010",
+      "capture_phase": "logical-entry-after-external-call",
+      "capture_utc": "2026-10-10T01:00:51.172Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "00000000991A3D14",
+      "slot_value_hex": "143D1A9900000000",
+      "target_identity": {
+        "status": "not-in-loaded-module",
+        "address_hex": "143D1A9900000000"
+      }
+    }
+  },
+  "owner_plus_0x10_capture": {
+    "owner_pointer_hex": "000001BBA5E0F000",
+    "slot_offset_hex": "00000010",
+    "slot_address_hex": "000001BBA5E0F010",
+    "capture_phase": "logical-entry-after-external-call",
+    "capture_utc": "2026-10-10T01:00:51.172Z",
+    "read_status": "captured",
+    "raw_bytes_hex": "00000000991A3D14",
+    "slot_value_hex": "143D1A9900000000",
+    "target_identity": {
+      "status": "not-in-loaded-module",
+      "address_hex": "143D1A9900000000"
+    }
+  },
+  "exact_external_caller_return_offset_hex": "02C0860A",
+  "external_call_register_snapshot_at_entry": {
+    "capture_phase": "shared-entry-hook-after-call",
+    "capture_utc": "2026-10-10T01:00:51.172Z",
+    "caller_return_rva_hex": "02C0860A",
+    "rcx_hex": "000001BCE2F69960",
+    "rdx_hex": "000001BBA5E0F000",
+    "rdx_plus_0x10_capture": {
+      "owner_pointer_hex": "000001BBA5E0F000",
+      "slot_offset_hex": "00000010",
+      "slot_address_hex": "000001BBA5E0F010",
+      "capture_phase": "logical-entry-after-external-call",
+      "capture_utc": "2026-10-10T01:00:51.172Z",
+      "read_status": "captured",
+      "raw_bytes_hex": "00000000991A3D14",
+      "slot_value_hex": "143D1A9900000000",
+      "target_identity": {
+        "status": "not-in-loaded-module",
+        "address_hex": "143D1A9900000000"
+      }
+    }
+  },
+  "unique_callers_observed": 10,
+  "caller_hit_counts": {
+    "0055AB5B": 1226,
+    "0061F4EF": 324,
+    "0063A773": 8696,
+    "0123FE7B": 91,
+    "0153FCB0": 64,
+    "0153FD20": 66,
+    "016C58F0": 8415,
+    "017E2E30": 17,
+    "02C0860A": 112881,
+    "02C0875D": 24547
+  },
+  "interpretation": "All shared-entry callers are observed at once; exact descriptor identity selects the derelict path and the verified self-recursive edge is excluded."
+}
