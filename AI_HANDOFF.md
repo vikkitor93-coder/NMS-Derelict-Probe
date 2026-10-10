@@ -1,3 +1,13 @@
+## DUNGEON-C Lane C reconciliation — 2026-10-10 00:03Z
+
+Lane C reconciled against main at base `c8f5e3f6e4a25eeaea9152748ff08d47167101c0`; backup reference: `backup/main-before-dungeonC-final-20261010-0003`. The current callback candidate at `0063A6D0` has three primary chained `.pdata` ranges totaling 2,430 bytes. The prior 1,180-byte hash covers only the first two ranges; two trailing chained funclets remain separate, and the full primary-chain hash is unavailable. Details are in `agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json`.
+
+The latest reviewed saved-evidence snapshot is `research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/` (23:55:20Z). Its root artifact SHA-256 is `87813ff2737bca7f6e85a07235844bf773af4a956ee1572bcd3fb0fbf43e8246`; the journal SHA-256 is `44edb993033e7b59036c86c13ef9b62ec451f27f049bf2d7b7d41dcecb98bede`. It contains two dungeon-root events (23:41 and 23:44Z), each with one exact-descriptor match to `0063A6D0`, and adds no new root event. The 23:44 capture window matches an 80-byte slice of the verified seed-function fragment, without establishing full executable identity.
+
+The snapshot's `exact-root-caller-code-latest.json` is a stale Oct 5 export for descriptor `000001DCBF948128` and executable SHA `671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4`; it is not the code export for the 23:44 event. Owner+0x10 is post-call data in both root events, not the `FF 52 10` destination. Keep the 43-target asset prediction separate from the historical 35-container baseline and separate post-update 16-target model. The manual combined-report pointer/SHA remain unchanged; the all-saved snapshot does not replace combined-report authority.
+
+Seed-B separately tracks helper `00639BE0` as a candidate owner/descriptor producer and is waiting for a full static listing; its seed write/formula remains unproven. That gate does not block Lane C. Lane C itself has no human-only gate; continue offline generator-consumer analysis and investigate the unmapped state table at `0063BEBC`. No NMS launch or WinDbg session was used.
+
 ## Seed-Lineage extension and current evidence — 2026-10-09 16:20Z
 
 - Seed-Lineage JSON extension 1.0.5 is published directly in the shared extension index, with a 491-character summary. The panel shows actions only while lane status is `waiting_on_user`. The ready build request remains for the primary compiler to include the same files and test in the compiled Surveyor release and complete source ZIP.
