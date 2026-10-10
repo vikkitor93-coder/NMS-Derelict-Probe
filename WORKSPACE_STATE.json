@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-10T00:03:28Z",
+  "updated_utc": "2026-10-10T00:09:23Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -126,9 +126,9 @@
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-current-target-20261008-reconciled",
-      "status": "runtime-correlated-static-callback-analysis-active; .pdata chain extent corrected",
+      "status": "waiting_on_user",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "Continue repository-based offline analysis of callback generator-consumer references and the unmapped state table at 0063BEBC; do not duplicate Seed-B's candidate owner-producer trace or assign an unsupported callback identity.",
+      "next_action": "After the matching static listing is returned, decode the state table at 0063BEBC and update the callback analysis.",
       "latest_evidence": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/",
       "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
       "current_build_static_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
@@ -154,7 +154,9 @@
       "primary_callback_chain_bytes": 2430,
       "raw_dispatch_target_resolved": false,
       "callback_semantic_identity_resolved": false,
-      "cross_lane_seed_producer_trace": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json"
+      "cross_lane_seed_producer_trace": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
+      "latest_entry_behavior_review": "agent-patches/dungeon-decompile/CALLBACK_ENTRY_RANGE_REVIEW_20261010.json",
+      "primary_entry_call_target": "033E1B60"
     },
     "metadata": {
       "branch": "agent/metadata-room-model-reconcile-20261008",
@@ -214,6 +216,19 @@
         ],
         "full_derelict_required": false,
         "surveyor_action_required": false
+      },
+      {
+        "lane": "dungeon-decompile",
+        "kind": "offline-callback-funclet-listing",
+        "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
+        "next_action": "In Ghidra CodeBrowser for NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, press G and navigate to 0063B130; copy/export the Listing through 0063BEEC with addresses, bytes, disassembly, and references to 0063BEBC into one text file.",
+        "success_condition": "Returned listing explicitly covers 0063B130 through 0063BEEC (including 0063BEBC) and identifies the matching executable SHA-256.",
+        "evidence_to_return": [
+          "One UTF-8 text file with matching executable SHA-256, the full 0063B130..0063BEEC Listing, and references to 0063BEBC."
+        ],
+        "full_derelict_required": false,
+        "surveyor_action_required": false,
+        "nms_launch_required": false
       }
     ]
   },
