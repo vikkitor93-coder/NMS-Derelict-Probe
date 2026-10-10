@@ -1,0 +1,34 @@
+{
+  "action_workers_per_session": 4,
+  "batch_id": "20261010T012644Z-d793c45a",
+  "max_concurrent_sessions": 3,
+  "published_report_count": 1,
+  "reports": [
+    {
+      "report_path": "research-uploads/20261010T012723Z-automatic-research-batch-20261010T012644Z-d793c45a-29b104/reports/20261010T012645Z-941a7cef/combined-results.json",
+      "report_sha256": "75f56e154e595c542e69aa6755898f7a9900ee8cb88321496ebfce5442bc7073",
+      "run_id": "20261010T012645Z-941a7cef",
+      "session_file": "20261010T012455Z_Ruflas-Simly_V.json",
+      "session_sha256": "e975eb2297c42b2c166ab5ad434783daecb0225fb4545fe9c8a8df7a9a6223ea",
+      "status": "completed-with-errors",
+      "summary": {
+        "completed": 7,
+        "failed": 1,
+        "total": 9,
+        "unsupported": 0,
+        "upload_actions_skipped": 1
+      }
+    }
+  ],
+  "schema_version": 1,
+  "session_count": 1,
+  "started_utc": "2026-10-10T01:26:45Z",
+  "state": "completed-with-errors",
+  "uploaded_utc": "20261010T012723Z",
+  "visible_to_lanes": [
+    "runtime-dispatch",
+    "seed-lineage",
+    "dungeon-decompile",
+    "metadata"
+  ]
+}
