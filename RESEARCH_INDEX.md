@@ -1,10 +1,8 @@
-## DUNGEON-C Lane C callback-range reconciliation — 2026-10-10
+## DUNGEON-C callback entry review and remaining static input — 2026-10-10
 
-The callback candidate at `0063A6D0` has three primary chained `.pdata` ranges totaling 2,430 bytes. The 1,180-byte digest applies only to the first two ranges; two later chained funclets are separate, and the combined primary-chain digest is unavailable. See `agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json`.
+The executable-matched 89-byte entry at `0063A6D0` calls helper stub `033E1B60` at `0063A706`, compares the return to RBX, returns 1 when equal, and otherwise branches to `0063A722` to compare `[RSI+0x295]`. The helper role and callback name remain unknown. Review: `agent-patches/dungeon-decompile/CALLBACK_ENTRY_RANGE_REVIEW_20261010.json`.
 
-Latest snapshot `research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/` has verified root artifact SHA-256 `87813ff2737bca7f6e85a07235844bf773af4a956ee1572bcd3fb0fbf43e8246` and journal SHA-256 `44edb993033e7b59036c86c13ef9b62ec451f27f049bf2d7b7d41dcecb98bede`. The journal contains two root events (23:41 and 23:44Z), with one exact-descriptor correlation each to `0063A6D0`; the snapshot adds no root event. Its named exact-root caller code export is an unrelated Oct 5 artifact, not code for the 23:44 event. The embedded 80-byte window matches a verified seed-function fragment but does not establish the capture's full executable identity.
-
-The zero and nonzero owner+0x10 observations are post-call fields, not the raw `FF 52 10` dispatch destination. The manual combined report remains governed by `research/LATEST_PARALLEL_ACTION_TEST.json` and SHA `816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439`. Preserve the separate meanings of the 43 asset-derived prediction, historical 35-container baseline, and post-update 16-target result. Seed-B's candidate helper `00639BE0` remains a separate lane dependency and is not resolved.
+The primary callback candidate spans 2,430 bytes in three chained `.pdata` ranges; the old 1,180-byte hash covers only the first two. Lane C is waiting for a listing of `0063B130..0063BEEC` from executable SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499` to decode table `0063BEBC`. No Surveyor action, NMS launch, WinDbg, or traversal is needed. The manual combined report authority and the separate 43/35/16 count interpretations remain unchanged.
 
 ## DUNGEON-C Oct 9 combined-report review — 2026-10-09
 
