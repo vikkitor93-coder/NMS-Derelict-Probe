@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "reviewed_utc": "2026-10-10T00:03:28Z",
+  "objective": "Correct the .pdata extent of the current callback candidate and reconcile the latest saved root-event evidence without overstating dispatch identity.",
+  "backup": {
+    "branch": "backup/main-before-dungeonC-final-20261010-0003",
+    "base_commit": "c8f5e3f6e4a25eeaea9152748ff08d47167101c0",
+    "rollback": "Revert the final Lane C publication commit on main and agent/dungeon-current-target-20261008-reconciled, or reset those refs to the recorded base only if no later commits depend on this publication."
+  },
+  "current_binary": {
+    "sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "identity_scope": "Locally inspected executable hash from the prior static analysis; the 23:41 and 23:44 runtime capture artifacts do not carry a full executable hash."
+  },
+  "pdata": {
+    "logical_entry_rva": "0063A6D0",
+    "primary_chained_ranges": [
+      {
+        "start": "0063A6D0",
+        "end_exclusive": "0063A729",
+        "length_bytes": 89,
+        "unwind_info": "04C2F500",
+        "flags": 0,
+        "role": "primary entry"
+      },
+      {
+        "start": "0063A729",
+        "end_exclusive": "0063AB6C",
+        "length_bytes": 1091,
+        "unwind_info": "04C2F510",
+        "flags": 4,
+        "chaininfo_target": "0063A6D0"
+      },
+      {
+        "start": "0063AB6C",
+        "end_exclusive": "0063B04E",
+        "length_bytes": 1250,
+        "unwind_info": "04C2F538",
+        "flags": 4,
+        "chaininfo_target": "0063A6D0",
+        "raw_fragment_sha256": "51e39e47017337915fa1b72986ab9639a7a5b462858bc8be38bd6c9cba2cc9f6",
+        "raw_fragment_source": "dungeon-seed-function-analysis-latest.json"
+      }
+    ],
+    "primary_total_length_bytes": 2430,
+    "prior_1180_byte_hash": {
+      "length_bytes": 1180,
+      "sha256": "a00336416913eead94306aec9d137106e868ae504072147eaba8225e0032b81b",
+      "scope": "Only ranges 0063A6D0..0063A729 and 0063A729..0063AB6C; not the full primary chained callback."
+    },
+    "primary_2430_byte_combined_sha256": null,
+    "separate_chained_funclets": [
+      {
+        "start": "0063B04E",
+        "end_exclusive": "0063B130",
+        "length_bytes": 226,
+        "unwind_info": "04C2F560",
+        "flags": 4,
+        "chaininfo_target": "0063AB6C"
+      },
+      {
+        "start": "0063B130",
+        "end_exclusive": "0063BEEC",
+        "length_bytes": 3516,
+        "unwind_info": "04C2F574",
+        "flags": 4,
+        "chaininfo_target": "0063AB6C"
+      }
+    ],
+    "all_five_ranges_address_envelope_bytes": 6172,
+    "note": "The two trailing funclet ranges are not one contiguous callback body. The full 2430-byte primary hash is unavailable because the matching raw bytes for its first two ranges are not in the shared evidence."
+  },
+  "static_call": {
+    "root_add_call_rva": "0063AC20",
+    "bytes": "E8 4B 3B 20 01",
+    "target_rva": "0183E770",
+    "support": "The call bytes at 0063AC20 are present in the verified 1250-byte third-range raw fragment and in the later 80-byte root-event code window at 0063ABF5+0x2B. This direct root AddResource call is distinct from the external caller's FF 52 10 call."
+  },
+  "latest_saved_snapshot": {
+    "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/",
+    "run_manifest_path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/run-manifest.json",
+    "upload_utc": "2026-10-09T23:55:20Z",
+    "action": "all-saved-evidence",
+    "manifest_verified_artifacts": [
+      {
+        "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/root-event-latest.json",
+        "sha256": "87813ff2737bca7f6e85a07235844bf773af4a956ee1572bcd3fb0fbf43e8246",
+        "verified": true
+      },
+      {
+        "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/capture-journal-20261009T233934Z-6012.jsonl",
+        "sha256": "44edb993033e7b59036c86c13ef9b62ec451f27f049bf2d7b7d41dcecb98bede",
+        "size_bytes": 860811,
+        "verified": true
+      },
+      {
+        "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/generation-baseline-latest.json",
+        "sha256": "67ee5348c0d3ea948fb93b81c9cf1122436a518fc2920bbc923df9e420526db8",
+        "verified": true
+      },
+      {
+        "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/dungeon-seed-function-analysis-latest.json",
+        "sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+        "verified": true
+      }
+    ],
+    "root_events": [
+      {
+        "utc": "2026-10-09T23:41:33.649Z",
+        "universe_address": "0000790006606CAB",
+        "descriptor": "00000279E1F32928",
+        "root_seed_candidate": "C36137A0B4914AD9",
+        "use_seed_value": true,
+        "root_add_caller_return": "0063AC25",
+        "external_caller_return": "02C0860A",
+        "logical_entry_match_count": 1,
+        "logical_entry_candidate": "0063A6D0",
+        "owner_plus_0x10_after_external_call": "0D2F0CBB00000000",
+        "owner_plus_0x10_target_identity": "not-in-loaded-module; not a dispatch target"
+      },
+      {
+        "utc": "2026-10-09T23:44:15.855Z",
+        "universe_address": "0000760006606CAB",
+        "descriptor": "00000279DD497928",
+        "root_seed_candidate": "9C2818C7FE094FC8",
+        "use_seed_value": true,
+        "root_add_caller_return": "0063AC25",
+        "external_caller_return": "02C0860A",
+        "logical_entry_match_count": 1,
+        "logical_entry_candidate": "0063A6D0",
+        "owner_plus_0x10_after_external_call": "0000000000000000",
+        "owner_plus_0x10_target_identity": "null-or-low; not a dispatch target"
+      }
+    ],
+    "root_events_in_snapshot": 2,
+    "new_root_event_added_by_23_54_upload": false,
+    "code_window_comparison": {
+      "capture_window_start": "0063ABF5",
+      "capture_window_bytes": 80,
+      "seed_fragment_start": "0063AB6C",
+      "offset_bytes": 137,
+      "bytewise_match": true,
+      "full_executable_identity_for_23_44": false
+    },
+    "baseline": {
+      "session": "20261009T234421Z_0000760006606CAB",
+      "dungeon_scene_instances": 0,
+      "logical_generated_chunks": 0,
+      "predicted_target_containers": 0,
+      "preset": "unresolved",
+      "interpretation": "No traversal or physical-container count; retain as an empty/unresolved measurement."
+    },
+    "new_root_event_added_by_23_55_upload": false,
+    "stale_code_export": {
+      "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/exact-root-caller-code-latest.json",
+      "sha256": "1f77e37699b97a802a768751bba4cc49cdbb1197dabc7dad73e479cdceaebf62",
+      "tool_version": "0.3.37",
+      "event_utc": "2026-10-05T01:03:01.131Z",
+      "descriptor": "000001DCBF948128",
+      "logical_entry": "00634BC0",
+      "nms_exe_sha256": "671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+      "applies_to_latest_23_44_event": false,
+      "note": "This saved code-export file is stale and belongs to the Oct 5 event. For the 23:44 event use only the embedded 80-byte root-event code window and its byte match to the 1250-byte seed-function fragment; no full executable identity is present."
+    }
+  },
+  "evidence_separation": {
+    "manual_parallel_pointer": "research/LATEST_PARALLEL_ACTION_TEST.json",
+    "manual_report": "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
+    "manual_report_sha256": "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439",
+    "manual_authority": "Combined report remains sole authority for that isolated manual run; it is not replaced by all-saved snapshots.",
+    "automatic_pointer": "research/LATEST_AUTOMATIC_RESEARCH_BATCH.json",
+    "automatic_batch_id": "20261009T231727Z-4cc0e6a5",
+    "automatic_index_sha256": "e8f703afa93485172c9108153696e518a2cf381446cb0aaccc63468fd75bb909",
+    "automatic_report_sha256": "48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3",
+    "caveat": "The 23:54 all-saved snapshot is provenance for saved artifacts and is not a new parallel or automatic combined report.",
+    "latest_snapshot_note": "The 23:55:20Z all-saved upload verifies the same two dungeon-root events as prior snapshots; its journal includes additional unrelated captures but no new root resource event."
+  },
+  "limits": [
+    "Neither the zero nor nonzero owner+0x10 observation was captured before the FF 52 10 instruction; neither identifies its dispatch target.",
+    "The separate resolver sample at 02C04977/02C0497A with candidate 00634BC0 remains unrelated to the exact 02C08607 caller and has zero matches.",
+    "The 23:44 runtime capture has no full NMS.exe SHA. Its 80-byte caller code window matches the existing hash-matched seed-function fragment only.",
+    "The callback semantic identity and raw virtual-slot destination remain unresolved.",
+    "Keep the asset-derived 43-target prediction separate from observed counts; historical 35-container baseline and separate post-update 16-target model remain distinct.",
+    "WinDbg is excluded per the user's report that it crashes NMS; no debugger or live NMS action was used."
+  ],
+  "human_intervention_required": false
+}
