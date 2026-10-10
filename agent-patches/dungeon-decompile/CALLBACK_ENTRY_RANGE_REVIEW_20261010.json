@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "lane": "DUNGEON-C",
+  "reviewed_utc": "2026-10-10T00:09:23Z",
+  "source": {
+    "artifact_path": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
+    "artifact_sha256": "13938e7d4711d6ee49d46d865b48c2e72887f2d48cb111a4c42d330055e22834",
+    "executable_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "runtime_function": {
+      "begin_rva": "0063A6D0",
+      "end_exclusive_rva": "0063A729",
+      "length_bytes": 89,
+      "unwind_info": "04C2F500"
+    },
+    "byte_window_sha256": "dc6fa62fa2578901da50c294098f08b4bc25afb0672c3e7475161de66f9d90d7",
+    "byte_window_sha256_matches_artifact": true
+  },
+  "static_decode": {
+    "observed_call": {
+      "rva": "0063A706",
+      "bytes": "E8 55 74 DA 02",
+      "kind": "call rel32",
+      "computed_destination": "033E1B60",
+      "target_stub_bytes": "E9 EB FE FF FF",
+      "tail_destination": "033E1A50"
+    },
+    "observed_operations": [
+      {
+        "rva": "0063A6F1",
+        "bytes": "48 8B 49 08",
+        "description": "load qword at [RCX+8] into RCX"
+      },
+      {
+        "rva": "0063A6F7",
+        "bytes": "41 8B 45 04",
+        "description": "load dword at [R13+4] into EAX"
+      },
+      {
+        "rva": "0063A6FB",
+        "bytes": "48 8D 1C C1",
+        "description": "compute RBX = RCX + RAX*8"
+      },
+      {
+        "rva": "0063A6FF",
+        "bytes": "48 8B D3",
+        "description": "copy RBX to RDX before the helper call"
+      },
+      {
+        "rva": "0063A706",
+        "bytes": "E8 55 74 DA 02",
+        "description": "call helper stub at 033E1B60"
+      }
+    ],
+    "return_check": {
+      "rva": "0063A70B",
+      "bytes": "48 3B C3",
+      "description": "compare helper return RAX with RBX"
+    },
+    "equal_path": {
+      "condition": "RAX == RBX",
+      "description": "set EAX to 1 and return"
+    },
+    "not_equal_path": {
+      "branch_rva": "0063A70E",
+      "bytes": "75 12",
+      "target_rva": "0063A722",
+      "description": "branch to compare byte [RSI+0x295] with zero"
+    },
+    "semantic_interpretation": "Only pointer calculation, helper call, equality test, and branch destinations are established. The helper role and callback name remain unknown."
+  },
+  "relation_to_root_event": {
+    "later_root_add_call_rva": "0063AC20",
+    "root_add_call_target_rva": "0183E770",
+    "range": "third primary chained .pdata range 0063AB6C..0063B04E",
+    "relation": "The root AddResource call lies within the same primary chained callback candidate, well after the 89-byte entry range; it is distinct from the external caller's FF 52 10."
+  },
+  "remaining_evidence": {
+    "required_range": {
+      "start_rva": "0063B130",
+      "end_exclusive_rva": "0063BEEC",
+      "length_bytes": 3516
+    },
+    "table_rva": "0063BEBC",
+    "reason": "No saved artifact contains the final chained funclet bytes around the table. The available code export contains only the 89-byte entry range, and the seed-function artifact contains only 0063AB6C..0063B04E.",
+    "exact_user_action": "In Ghidra CodeBrowser for NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, press G and navigate to 0063B130; copy/export the Listing through 0063BEEC with addresses, bytes, disassembly, and references to 0063BEBC into one text file.",
+    "success_condition": "Returned listing explicitly covers 0063B130 through 0063BEEC (including 0063BEBC) and identifies the matching executable SHA-256.",
+    "evidence_to_return": [
+      "One UTF-8 text file with matching executable SHA-256, the full 0063B130..0063BEEC Listing, and references to 0063BEBC."
+    ],
+    "full_derelict_traversal_required": false,
+    "surveyor_action_required": false,
+    "nms_launch_required": false,
+    "windbg_allowed": false
+  },
+  "limits": [
+    "Static byte-level behavior only; no live runtime evidence or semantic function name.",
+    "The 23:44 root capture has no full executable identity; its 80-byte window match is limited to saved fragment bytes.",
+    "The raw pre-call FF 52 10 destination remains unresolved.",
+    "Owner+0x10 reads are post-call fields, not dispatch-target observations."
+  ]
+}
