@@ -2,8 +2,8 @@
   "schema_version": 1,
   "lane": "DUNGEON-C",
   "branch": "agent/dungeon-current-target-20261008-reconciled",
-  "reviewed_utc": "2026-10-10T00:03:28Z",
-  "state": "runtime-correlated-static-callback-analysis-active",
+  "reviewed_utc": "2026-10-10T00:09:23Z",
+  "state": "waiting_on_user",
   "verified": {
     "historical_baseline": {
       "system": "00001A0004E84EFD",
@@ -435,11 +435,11 @@
     }
   },
   "blocked": {
-    "human_action_required": false,
-    "reason": "Offline byte-level work remains available. WinDbg is excluded per user report; no live NMS action is required for current analysis.",
+    "human_action_required": true,
+    "reason": "No saved artifact contains 0063B130..0063BEEC, and the local command runner fails before it can read the accessible NMS.exe path; the table at 0063BEBC cannot be decoded from saved evidence alone.",
     "next_lane": "dungeon-decompile"
   },
-  "next_lane_owned_step": "Continue repository-based offline analysis of callback generator-consumer references and the unmapped state table at 0063BEBC; do not duplicate Seed-B's candidate owner-producer trace or assign an unsupported callback identity.",
+  "next_lane_owned_step": "After the matching static listing is returned, decode the state table at 0063BEBC and update the callback analysis.",
   "latest_shared_upload_review": {
     "path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/",
     "run_manifest_path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/run-manifest.json",
@@ -579,12 +579,14 @@
     },
     "note": "Newest shared snapshot; root capture timestamp remains 2026-10-04T23:17:15.827Z. The exact-root-caller-code SHA-256 is still 207d8abc5d7d1e13fdb942315f8b7639d21ed30952a776638d6574ee22bfebb2. This is not a new runtime sample or a helper export."
   },
-  "updated_utc": "2026-10-10T00:03:28Z",
-  "status": "runtime-correlated-static-callback-analysis-active",
-  "summary": "Three .pdata ranges form the current primary callback candidate at 0063A6D0 (89 + 1,091 + 1,250 = 2,430 bytes). The prior 1,180-byte hash covers only the first two ranges; two later chained funclets are separate, and a combined 2,430-byte hash is unavailable. The 23:55:20Z all-saved snapshot manifest verifies four key artifacts and repeats two root events (23:41 and 23:44Z), with one exact-descriptor entry correlation each to 0063A6D0. The 23:44 80-byte caller window matches the hash-matched seed-function fragment, but the runtime capture has no full executable SHA. Owner+0x10 is post-call data (nonzero in one event, zero in the other), not the FF 52 10 target. The 43-target asset prediction, historical 35-container baseline, and separate post-update 16-target model remain distinct. Raw dispatch destination and callback semantics remain unresolved.",
-  "next_action": "Continue repository-based offline analysis of callback generator-consumer references and the unmapped state table at 0063BEBC; do not duplicate Seed-B's candidate owner-producer trace or assign an unsupported callback identity.",
-  "human_intervention_required": false,
-  "user_steps": [],
+  "updated_utc": "2026-10-10T00:09:23Z",
+  "status": "waiting_on_user",
+  "summary": "The 89-byte callback entry at 0063A6D0 calls stub 033E1B60 at 0063A706, compares RAX to RBX, returns 1 on equality, and branches to 0063A722 on inequality. The helper and callback semantics remain unknown. The primary callback candidate spans three chained .pdata ranges totaling 2,430 bytes; the prior 1,180-byte hash covers only its first two ranges. The latest saved snapshot has two root events and its named code export is a stale Oct 5 artifact. Owner+0x10 remains post-call data, not the FF 52 10 destination. Asset-derived 43, historical 35, and post-update 16 remain separate. Decoding the state table at 0063BEBC requires the missing final funclet listing.",
+  "next_action": "After the matching static listing is returned, decode the state table at 0063BEBC and update the callback analysis.",
+  "human_intervention_required": true,
+  "user_steps": [
+    "In Ghidra CodeBrowser for NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, press G and navigate to 0063B130; copy/export the Listing through 0063BEEC with addresses, bytes, disassembly, and references to 0063BEBC into one text file."
+  ],
   "current_build_static_map": {
     "report": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
     "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
@@ -687,7 +689,7 @@
   },
   "current_build_caller_context": {
     "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
-    "sha256": "a34fa4f04e53717c3e7c6af2f10191d8952b2d58100eb571480b7ae6ddad33e4",
+    "sha256": "ab6b92f3a7f36204b7a2da151a55f323783913052cca0caf36a126550b488950",
     "sha256_verified": true
   },
   "runtime_capture_evidence": [
@@ -805,16 +807,16 @@
     },
     "interpretation": "Same-session offline static cross-reference and field-offset evidence. The observed descriptor pointer and seed values match the static field locations for this event. This corroborates event-scoped dataflow at 0063A6D0 but does not provide a semantic function name or the pre-call FF 52 10 slot target."
   },
-  "next": "Continue repository-based offline analysis of callback generator-consumer references and the unmapped state table at 0063BEBC; do not duplicate Seed-B's candidate owner-producer trace or assign an unsupported callback identity.",
+  "next": "After the matching static listing is returned, decode the state table at 0063BEBC and update the callback analysis.",
   "latest_runtime_snapshot_review": {
     "path": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261009.json",
-    "sha256": "52fdd9f15aa40143fdb5e50a22ef71bd3c184bbc632d92526ece99ee0c9b5314",
+    "sha256": "7e9092f6ffe136f905983e3b1d23e8967ceaae4a9c1f8dd4d98910e7c238c2cd",
     "sha256_verified": true
   },
   "latest_saved_snapshot_path": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/",
   "latest_pdata_chain_correction": {
     "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json",
-    "sha256": "cb9e7fbb778aca2ee41a4d012f3f27ac2b280f6def468033578802c9e446398a",
+    "sha256": "2aee950f3d1c524c50780793cc793ac9feaecb02fdf4adc5dbbf1245acdbb3d6",
     "sha256_verified": true
   },
   "latest_exact_root_caller_event": {
@@ -843,5 +845,24 @@
     "path": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
     "candidate_helper_rva": "00639BE0",
     "finding": "candidate owner/descriptor producer only; seed write/formula unproven; Seed-B's human gate is independent of Lane C."
-  }
+  },
+  "progress": "Available executable-matched entry bytes were analyzed. Waiting for the missing final chained funclet listing; no NMS session, WinDbg, Surveyor action, or derelict traversal is needed.",
+  "human_action": {
+    "required": true,
+    "surveyor_request": "No Surveyor action; provide a static listing from the matching executable.",
+    "steps": [
+      "In Ghidra CodeBrowser for NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, press G and navigate to 0063B130; copy/export the Listing through 0063BEEC with addresses, bytes, disassembly, and references to 0063BEBC into one text file."
+    ],
+    "success_condition": "Returned listing explicitly covers 0063B130 through 0063BEEC (including 0063BEBC) and identifies the matching executable SHA-256.",
+    "evidence_to_return": [
+      "One UTF-8 text file with matching executable SHA-256, the full 0063B130..0063BEEC Listing, and references to 0063BEBC."
+    ],
+    "full_derelict_required": false
+  },
+  "primary_entry_behavior_review": {
+    "path": "agent-patches/dungeon-decompile/CALLBACK_ENTRY_RANGE_REVIEW_20261010.json",
+    "sha256": "974f3f03798d6b58eeac7970456992c66112d94121e5d88b397fc8c12722255a",
+    "sha256_verified": true
+  },
+  "local_tool_blocker": "exec_command: helper_unknown_error: setup refresh had errors; process creation failed before the read-only command ran."
 }
