@@ -57,8 +57,16 @@
     "derelict_relation_status": "unknown-not-claimed"
   },
   "human_validation": {
-    "required": false,
-    "reason": "Fresh analyze-seed-function upload is present and aligned to the current baseline, caller, and upstream evidence. Offline analysis can continue without NMS or user action."
+    "required": true,
+    "reason": "The complete helper body is unavailable in the repository, and current extension actions do not export arbitrary RVAs.",
+    "request": "Surveyor's Seed-Lineage panel has no arbitrary-RVA code-export control: “Extract upstream callers + upload” only follows references to 0063A6D0, so repeating it cannot provide helper 00639BE0's full body. A static Ghidra listing of the exact NMS.exe build is required.",
+    "steps": [
+      "Use the NMS.exe build with SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 in Ghidra CodeBrowser. Use Search > Go To (G) and enter 140639BE0 (RVA 00639BE0 at preferred image base 140000000).",
+      "Copy/export the complete Listing disassembly and Decompiler output for the function beginning at 00639BE0 through its return. Also press X on the function entry and include its complete cross-reference list. Save these together as a text file.",
+      "Attach the text file here. Success is visible when the listing begins at 00639BE0 with bytes 48 89 5C 24 10 and the cross-reference list includes 006395D3 and 00639B99. Do not launch NMS or traverse a derelict; neither is required."
+    ],
+    "success_condition": "Listing starts at RVA 00639BE0 with bytes 48 89 5C 24 10, contains the full function through return, and xrefs include 006395D3 and 00639B99.",
+    "full_derelict_required": false
   },
   "follow_up_analysis": {
     "path": "agent-patches/seed-lineage/SEED_B_ANALYSIS_20261002.json",
@@ -306,7 +314,7 @@
       }
     }
   },
-  "next_action": "Obtain a wider code extract or focused caller/upstream analysis for helper 00639BE0 and determine whether it writes owner+0x138 or forwards a seed from its arguments; keep the 000079 executable identity constraint.",
+  "next_action": "Await the requested helper 00639BE0 static listing, then determine whether it writes owner+0x138 or forwards the seed from its arguments.",
   "latest_seed_function_review": {
     "path": "agent-patches/seed-lineage/SEED_FUNCTION_REVIEW_20261009T233349Z.json",
     "session": "20261009T230838Z_0000790006606CAB",
@@ -364,6 +372,8 @@
     "pointer_flow": "helper return RAX -> RBX -> RDX argument",
     "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
     "owner_plus_0x138_seed_write_established": false,
-    "root_formula_resolved": false
-  }
+    "root_formula_resolved": false,
+    "human_gate": "Complete static listing of helper 00639BE0 requested; no runtime traversal required."
+  },
+  "updated_utc": "2026-10-09T23:57:15Z"
 }
