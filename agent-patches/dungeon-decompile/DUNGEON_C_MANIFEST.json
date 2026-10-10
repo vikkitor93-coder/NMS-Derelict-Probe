@@ -39,7 +39,7 @@
   },
   "research_status": {
     "published_consumer_function_found": false,
-    "next_method": "Continue repository-based offline analysis of callback generator-consumer references and the unmapped state table at 0063BEBC; do not duplicate Seed-B's candidate owner-producer trace or assign an unsupported callback identity.",
+    "next_method": "After the matching static listing is returned, decode the state table at 0063BEBC and update the callback analysis.",
     "candidate_identity_rule": "For events with producer-reported exact descriptor/caller-return single-hook correlation, record 0063A6D0 as event-scoped effective-entry correlation only. Do not infer raw [RDX+0x10] or callback semantic identity; owner+0x10 is separate post-call data.",
     "post_update_evidence": "research-uploads/20261004T231727Z-all-saved-evidence-cb3edc0a/",
     "latest_parallel_report_sha256": "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439",
@@ -48,7 +48,10 @@
     "prior_contiguous_hash_scope": "1180-byte hash applies only to first two chained ranges",
     "callback_semantics_resolved": false,
     "dispatch_target_resolved": false,
-    "cross_lane_dependency": "Seed-B tracks candidate helper 00639BE0 and is waiting for a full listing; no dependency blocks Lane C's current analysis."
+    "cross_lane_dependency": "Seed-B tracks candidate helper 00639BE0 and is waiting for a full listing; no dependency blocks Lane C's current analysis.",
+    "status": "waiting_on_user",
+    "human_gate": "Static listing of final funclet range is needed to decode table 0063BEBC; no live game run.",
+    "local_tool_blocker": "The local command runner failed during process setup; GitHub repository reads/writes remain available."
   },
   "human_validation": {
     "required": false,
@@ -58,7 +61,20 @@
     "asset": "NMS-Derelict-Probe-v0.3.58-DUNGEON-C-helper-export-0.3.39.zip",
     "asset_sha256": "94d158d2f70f09bb157f6be85537f9dfb1bbc53f5ef8c6147da882d3a41f2fed",
     "steps": [],
-    "success_condition": "Completed: matching descriptor and five validated bounded helper bodies are in the shared upload."
+    "success_condition": "Completed: matching descriptor and five validated bounded helper bodies are in the shared upload.",
+    "static_export_required": true,
+    "static_export_request": {
+      "status": "waiting_on_user",
+      "range": "0063B130..0063BEEC",
+      "table_rva": "0063BEBC",
+      "success_condition": "Returned listing explicitly covers 0063B130 through 0063BEEC (including 0063BEBC) and identifies the matching executable SHA-256.",
+      "evidence_to_return": [
+        "One UTF-8 text file with matching executable SHA-256, the full 0063B130..0063BEEC Listing, and references to 0063BEBC."
+      ],
+      "full_derelict_traversal_required": false,
+      "surveyor_action_required": false,
+      "nms_launch_required": false
+    }
   },
   "latest_scan": {
     "evidence_path": "research-uploads/20260930T172000Z-dungeon-decompile/dungeon-decompile-anchors-summary.json",
@@ -456,10 +472,10 @@
     },
     "scope_note": "This combined report alone is authoritative for this automatic batch. Its D exact-caller action matches the 23:08 session; other D action artifacts retain separate source inputs. The 23:14 all-saved snapshot repeats the same 23:08 runtime capture."
   },
-  "updated_utc": "2026-10-10T00:03:28Z",
+  "updated_utc": "2026-10-10T00:09:23Z",
   "latest_current_build_context": {
     "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
-    "sha256": "a34fa4f04e53717c3e7c6af2f10191d8952b2d58100eb571480b7ae6ddad33e4",
+    "sha256": "ab6b92f3a7f36204b7a2da151a55f323783913052cca0caf36a126550b488950",
     "sha256_verified": true,
     "exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
     "runtime_events": [
@@ -554,7 +570,7 @@
   },
   "pdata_chain_correction": {
     "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json",
-    "sha256": "cb9e7fbb778aca2ee41a4d012f3f27ac2b280f6def468033578802c9e446398a",
+    "sha256": "2aee950f3d1c524c50780793cc793ac9feaecb02fdf4adc5dbbf1245acdbb3d6",
     "sha256_verified": true,
     "primary_ranges": 3,
     "primary_length_bytes": 2430,
@@ -563,7 +579,7 @@
   },
   "latest_runtime_snapshot_review": {
     "path": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261009.json",
-    "sha256": "52fdd9f15aa40143fdb5e50a22ef71bd3c184bbc632d92526ece99ee0c9b5314",
+    "sha256": "7e9092f6ffe136f905983e3b1d23e8967ceaae4a9c1f8dd4d98910e7c238c2cd",
     "sha256_verified": true,
     "latest_saved_snapshot": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/",
     "manifest_verified": true,
@@ -582,5 +598,10 @@
     "journal_record_count": 1590,
     "stale_code_export_event_utc": "2026-10-05T01:03:01.131Z"
   },
-  "latest_status_sha256": "5a957407564c89036a538557a8771151fb2db2045e06e80c68c313d12f19e3d1"
+  "latest_status_sha256": "edfc9041a838456543e720ecb0432784372787fc369deac70192289de19ecca5",
+  "primary_entry_behavior_review": {
+    "path": "agent-patches/dungeon-decompile/CALLBACK_ENTRY_RANGE_REVIEW_20261010.json",
+    "sha256": "974f3f03798d6b58eeac7970456992c66112d94121e5d88b397fc8c12722255a",
+    "sha256_verified": true
+  }
 }
