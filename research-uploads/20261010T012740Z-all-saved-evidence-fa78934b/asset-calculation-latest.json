@@ -1,0 +1,1057 @@
+{
+  "version": 1,
+  "session_id": "20261009T161852Z_00006D0006606CAB",
+  "probe_version": "0.3.40",
+  "universe_address_hex": "00006D0006606CAB",
+  "pre_entry_seconds": 15.0,
+  "dungeon_scene_instances": 130,
+  "resolved_scene_instances": 130,
+  "unresolved_scene_instances": 0,
+  "predicted_salvage_crates": 12,
+  "predicted_crew_footlockers": 9,
+  "predicted_target_containers": 21,
+  "manual_f7_target_containers": 0,
+  "unresolved_scene_paths": [],
+  "instances": [
+    {
+      "instance_key": "002B4109",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/STAIRS_DOWN.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4358",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B43AD",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "003B4402",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4457",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B44AC",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_LSHAPE.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B44DE",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4533",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/CORRIDOR_STRAIGHT.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4588",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B464D",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B46F3",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLROOM_1_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B48D3",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4932",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B49D8",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4A9D",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4B62",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4C08",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4CAE",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4D73",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4E06",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B4E59",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/CORNER_BUNK00.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 1,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B4FBE",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B504B",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/WALL_BUNK01.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B51A3",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B5236",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B52FB",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLROOM_1_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B54DB",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B55A0",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLROOM_1_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B5780",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B57AB",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B580A",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B58CF",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLEXTERIOR_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B5A02",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B5AA8",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B5BE7",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B5CAC",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B5D0B",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLROOM_1_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B5EEB",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLROOM_1_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B60CB",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6171",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLROOM_1_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B6351",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B637C",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B63A7",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B63D2",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLEXTERIOR_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6505",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B65AB",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNERADJACENT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B664F",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLROOM_1_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B682F",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B688E",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6953",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_DEADEND_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6A92",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERRIGHT_C_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6B25",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6B78",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/WALL_BUNK01.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6CD0",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6D5D",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6DEA",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_OUTCORNER_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6E2C",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_FLOOR_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6E5A",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/WALL_BUNK01.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B6FB2",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/CORNER_BUNK00.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 1,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B7117",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/WALL_BUNK00.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 1,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B71F5",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B7288",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALLOUTCORNERLEFT_C_4.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B732F",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_4.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B73B7",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_4.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B7401",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_WALL_4.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B744B",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_4.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B74D3",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/ROOM_INCORNER_4.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B755B",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B75D3",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B764B",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B76C3",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B773B",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_BRANCH_UNLOCKED.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B77A9",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B7821",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_BRANCH_UNLOCKED.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B788F",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/EMPTY/DOOR_PATH_UNLOCKED.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B7907",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLOUTCORNERRIGHT_C_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B79A9",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_INCORNER_1_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B7B3A",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_INCORNER_1_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B7CFA",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLOUTCORNERLEFT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B7D67",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B7D82",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_INCORNER_1_5.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B7EAF",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_INCORNER_1_4.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B7FDD",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B7FF8",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B8017",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALL7.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B8396",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/CORNER00.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 1,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B8542",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALLOUTCORNERRIGHT_C_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B85C9",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_CREWTERMINAL.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B8604",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLOUTCORNERRIGHT_C_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B86A6",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLOUTCORNERRIGHT_C_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B877D",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALL_1_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B88C0",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B88DB",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_INCORNER_1_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B8A52",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_DEADEND1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B8CA8",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_CAPTTERMINAL.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B8CE6",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B8D01",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_INCORNER_1_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B8EC1",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALL_1_6.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B8F9D",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_INCORNER_1_1.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B915D",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALL_1_6.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B9239",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B9254",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/MEDI/ROOM_DEADEND2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B93CD",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALLOUTCORNERRIGHT_C_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B9454",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALL7.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B97D3",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/CORNER03.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 1,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002B98EC",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_INCORNER_1_8.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B99A6",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_FLOOR0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B9C0A",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/BARRACKS/ROOM_WALLOUTCORNERLEFT_C_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B9C29",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/ROOM_WALL_FINALTERMINAL.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B9C75",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_WALLOUTCORNERLEFT_C_4_2.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 1,
+      "target_containers": 2
+    },
+    {
+      "instance_key": "002B9D74",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_7.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002B9ED9",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_WALL_4_3.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 3,
+      "target_containers": 3
+    },
+    {
+      "instance_key": "002B9FD6",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_0.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002BA16F",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/END/ROOM_INCORNER_4_3.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA1F8",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA1FC",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FLOATER.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA200",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA204",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA208",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA20C",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FLOATER.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA210",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA214",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FLOATER.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA218",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FASTFLOATER.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA21C",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/SPAWNERS/FLOATER.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA220",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT00.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002BA2BB",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT03A.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA398",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT02A.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA49F",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT03A.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 0,
+      "crew_footlockers": 0,
+      "target_containers": 0
+    },
+    {
+      "instance_key": "002BA57C",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT04.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1
+    },
+    {
+      "instance_key": "002BA61F",
+      "scene_path": "MODELS/SPACE/POI/DUNGEON/COMM/STRAIGHT05A.SCENE.MBIN",
+      "resolved": true,
+      "salvage_crates": 1,
+      "crew_footlockers": 0,
+      "target_containers": 1
+    }
+  ]
+}
