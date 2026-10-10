@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "lane": "DUNGEON-C",
-  "reviewed_utc": "2026-10-10T00:03:28Z",
+  "reviewed_utc": "2026-10-10T00:09:23Z",
   "objective": "Reconcile current runtime-correlated caller events with local hash-matched static NMS.exe analysis.",
   "binary": {
     "path_note": "User-provided installed executable, inspected read-only",
@@ -198,6 +198,21 @@
           "0063AB6C"
         ]
       }
+    },
+    "primary_entry_behavior_review": "agent-patches/dungeon-decompile/CALLBACK_ENTRY_RANGE_REVIEW_20261010.json",
+    "primary_entry_behavior_sha256": "974f3f03798d6b58eeac7970456992c66112d94121e5d88b397fc8c12722255a",
+    "primary_entry_behavior": {
+      "source_artifact": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
+      "source_artifact_sha256": "13938e7d4711d6ee49d46d865b48c2e72887f2d48cb111a4c42d330055e22834",
+      "executable_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+      "callsite_rva": "0063A706",
+      "call_target_rva": "033E1B60",
+      "tail_destination_rva": "033E1A50",
+      "return_compares_to": "RBX",
+      "equal_returns_one": true,
+      "not_equal_branch_rva": "0063A722",
+      "semantic_identity": "unresolved",
+      "raw_dispatch_target_resolved": false
     }
   },
   "retained_limits": [
@@ -404,12 +419,27 @@
   },
   "pdata_correction": {
     "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json",
-    "sha256": "cb9e7fbb778aca2ee41a4d012f3f27ac2b280f6def468033578802c9e446398a",
+    "sha256": "2aee950f3d1c524c50780793cc793ac9feaecb02fdf4adc5dbbf1245acdbb3d6",
     "sha256_verified": true
   },
   "latest_snapshot_note": "The 23:54 all-saved upload repeats the 23:41 and 23:44 root events already present in the 23:48 snapshot; the journal grew but contains no additional root resource event.",
   "cross_lane_seed_producer_trace": {
     "path": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
     "status": "candidate owner/descriptor producer at 00639BE0; seed write/formula unresolved; Seed-B now requests its own full static listing from the user. Lane C does not duplicate this analysis and can continue independently."
+  },
+  "human_gate": {
+    "status": "waiting_on_user",
+    "required_range": "0063B130..0063BEEC",
+    "table_rva": "0063BEBC",
+    "exact_action": "In Ghidra CodeBrowser for NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, press G and navigate to 0063B130; copy/export the Listing through 0063BEEC with addresses, bytes, disassembly, and references to 0063BEBC into one text file.",
+    "success_condition": "Returned listing explicitly covers 0063B130 through 0063BEEC (including 0063BEBC) and identifies the matching executable SHA-256.",
+    "full_derelict_traversal_required": false,
+    "surveyor_action_required": false,
+    "nms_launch_required": false
+  },
+  "runner_access_attempt": {
+    "action": "Read-only check of the installed NMS.exe metadata to continue offline state-table analysis.",
+    "result": "The command runner did not start; it returned helper_unknown_error: setup refresh had errors before executing the command.",
+    "permission_denied": false
   }
 }
