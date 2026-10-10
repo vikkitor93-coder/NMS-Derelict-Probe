@@ -241,3 +241,8 @@ Next Seed-B action is offline comparison of address/system-seed/root-candidate p
 ## Seed-B shared owner/descriptor producer candidate (2026-10-09)
 
 Same-executable static windows for address `0000790006606CAB` show callsites `006395D3` and `00639B99` both invoke helper `00639BE0`. Each caller moves the helper return pointer from RAX into RBX, then into RDX for a direct call to logical-entry candidate `0063A6D0`. The callee consumes the descriptor's primary seed at owner `+0x138`. This narrows the search to a common producer/setup helper but does not show that the helper writes the seed or establish the root-seed formula. See `agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json`. No dispatch target or physical container count is concluded.
+
+
+## Seed-B evidence gate (2026-10-10)
+
+The Seed-Lineage lane has traced two same-executable callsites through helper 00639BE0 into the seed-consuming function. The complete helper body is not in repository evidence, and the available Surveyor controls do not export arbitrary RVAs. Seed lineage is waiting only for a Ghidra static listing of the matching helper from NMS.exe; no gameplay traversal is needed. See `agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json` and the current lane status.
