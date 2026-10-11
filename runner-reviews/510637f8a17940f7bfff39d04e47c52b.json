@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "request_id": "510637f8a17940f7bfff39d04e47c52b",
+  "source_sha256": "d6f387fe2e67aa54fe759918bcb42fb18a49b3167bdb99a770fb54dfa101bf44",
+  "status": "reviewed",
+  "reviewed_commit": "5d81805713d4e560991ec6d17be53336f3f1baa9",
+  "findings": {
+    "run_status": "failed",
+    "failed_stage": "tests",
+    "measured_facts": [
+      "runner-results/latest.json and runner-results/510637f8a17940f7bfff39d04e47c52b/manifest.json agree on request_id 510637f8a17940f7bfff39d04e47c52b, source_sha256 d6f387fe2e67aa54fe759918bcb42fb18a49b3167bdb99a770fb54dfa101bf44, status failed, prototype_version 0.1.12 and report_path runner-results/510637f8a17940f7bfff39d04e47c52b; result.json agrees on request_id, source hash, version and failed status",
+      "result.json records source-package returncode 0 followed by tests returncode 1; root_generation_verified is false and errors contains tests-failed",
+      "latest.log independently records source-package passed with returncode 0 and tests failed with returncode 1; it contains no failing test name or traceback",
+      "manifest records SHA-256 and byte counts for six uploaded files; these are recorded metadata only and were not independently recomputed"
+    ],
+    "limitations": [
+      "No code workspace containing this exact upload was available; the runner-evidence.zip and source.zip contents were not inspected or extracted."
+    ]
+  },
+  "next_action": "Inspect the sanitized test failure details from this run's runner-evidence.zip in an authorized code workspace, identify the first failing test and traceback, then reproduce only that focused test against the matching source_sha256 before proposing a fix."
+}
