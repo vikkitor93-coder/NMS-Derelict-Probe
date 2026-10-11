@@ -1,11 +1,11 @@
 {
-  "archive_bytes": 382292,
-  "archive_sha256": "cf739223741ce2ea29ada68b2ccd8389a7a05da85623d3a6f94bbed33d5b5ba0",
-  "archive_url": "https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/runner-updates/NMS-Runner-v0.1.9.zip",
+  "archive_bytes": 382394,
+  "archive_sha256": "3e631fbbc1ed43f3d6b6ec26ee4f898e69b92faf5de8d86f357811a8cfd5950b",
+  "archive_url": "https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/runner-updates/NMS-Runner-v0.1.10.zip",
   "files": {
     "AI_HANDOFF.md": {
-      "bytes": 14972,
-      "sha256": "69cec441e3120de0a42f62a8e7a248177d1c924e1b5c7739affe828931aa00aa"
+      "bytes": 14974,
+      "sha256": "24a87b6e3dc48497400c811f4a8ff65bc6e6358fd5eb1868999653a0d236ac38"
     },
     "CODE_REVIEW_20261011_v0.1.3.json": {
       "bytes": 3374,
@@ -20,8 +20,8 @@
       "sha256": "2be25683c0e6a68e72692f0338ca285a9069a1040f62d29be685d51c2ebbce3d"
     },
     "Install-Runner.cmd": {
-      "bytes": 1126,
-      "sha256": "63bf0796acc9718f9e9b219165e9360c0af88defc52cc0ba67595a1c7c2f0095"
+      "bytes": 1128,
+      "sha256": "7cd0f49658d614d00ed29286c48757e798f1da20f024653885b2761cdfe345a9"
     },
     "Install-Unicorn.cmd": {
       "bytes": 1761,
@@ -32,12 +32,12 @@
       "sha256": "50bb2117a29d3480cd70f9b696a0b27d3c70658f502ba37097e8b080a836f559"
     },
     "README.md": {
-      "bytes": 13616,
-      "sha256": "9ce65a686f85366369a82c2a325cbac82a9e6189e23a7071ffe8a36dfff9f7ad"
+      "bytes": 13618,
+      "sha256": "fec5b3c52f17d73aa4c7e7e30a4c12b85a2071af8c752d73775cdc15a856eb16"
     },
     "RUNNER.md": {
-      "bytes": 14467,
-      "sha256": "8ca5d180d7d685c85ed0ff88f4fa380a4a288bbe8fd9dd1d8245f62794e1171b"
+      "bytes": 14468,
+      "sha256": "74fd513ec73ae16b94b9b46101129476e8d06cc23b16b9e5692761e7b60564b5"
     },
     "STATUS.json": {
       "bytes": 4518,
@@ -52,16 +52,16 @@
       "sha256": "016bd37a65645e0aecf6ebedeb470c1a9c65ffe5a3b6f950d3729409252048f9"
     },
     "Start-Runner.cmd": {
-      "bytes": 2453,
-      "sha256": "213dfb202eb294c436d4b4a9f7a03190076a5452ed1de530a5261f25012d18ab"
+      "bytes": 2717,
+      "sha256": "dc9d7aaffb00cff0c876d9b12afc16364380e5872a0141e48e7ce6a3af7f8792"
     },
     "Test-Unicorn.cmd": {
       "bytes": 1051,
       "sha256": "648b77acdb5669cf4e20c0b2a7ec2785a7083109f3d22216ea52be0dda36d6e4"
     },
     "__init__.py": {
-      "bytes": 100,
-      "sha256": "e72a5f582776e5a1ac773c07b203f96da8b290f40357f39164ce834d68c919dd"
+      "bytes": 101,
+      "sha256": "206f58a5460d47a1c9b6ecd0c19557deb011032e930d91dc01c563508de79c7c"
     },
     "audit.py": {
       "bytes": 4630,
@@ -281,10 +281,10 @@
     }
   },
   "schema": 1,
-  "source_commit": "cd9607f61db3f86b87c5b08162332a0269af40a1",
-  "source_sha256": "d37dff6f4bba9ce219c8c6eae48ff42c30b3adfcecf6f28c00a150f2c671b50b",
+  "source_commit": "4b65eaddd4d9ebf2da417f817c3504493485cc9d",
+  "source_sha256": "094ba3d22d95ced34155624f38b3dcb7dc7faab9594059c7a148c91fe772b4d8",
   "tests_count": 100,
-  "tests_output_sha256": "4ed69fe2414340b04b5169078e2eb202bd21b3ed3e3bd6cbfa6dfbafb562cea5",
+  "tests_output_sha256": "cb766553880ee055a9a4654ff343ce1a701f090d9d858defea36b8c3dc2b6d1e",
   "tests_status": "passed",
-  "version": "0.1.9"
+  "version": "0.1.10"
 }
