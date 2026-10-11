@@ -1,6 +1,0 @@
-{"schema_version": 1, "prototype_version": "0.1.8", "stage": "snapshot", "status": "running", "request_id": "c32068e5af42454483d853aad6550d58", "source_sha256": "297a5d2deab20f6727e46fcfcbc58996676954824efdcff269a9c4fcbbbf4d6e"}
-{"schema_version": 1, "prototype_version": "0.1.8", "stage": "source-package", "status": "running"}
-{"schema_version": 1, "prototype_version": "0.1.8", "stage": "source-package", "status": "passed", "returncode": 0}
-{"schema_version": 1, "prototype_version": "0.1.8", "stage": "tests", "status": "running"}
-{"schema_version": 1, "prototype_version": "0.1.8", "stage": "tests", "status": "failed", "returncode": 1}
-{"schema_version": 1, "prototype_version": "0.1.8", "stage": "complete", "status": "failed", "errors": ["tests-failed"], "request_id": "c32068e5af42454483d853aad6550d58", "source_sha256": "297a5d2deab20f6727e46fcfcbc58996676954824efdcff269a9c4fcbbbf4d6e"}
