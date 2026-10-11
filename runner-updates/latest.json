@@ -1,0 +1,290 @@
+{
+  "archive_bytes": 382326,
+  "archive_sha256": "30ff49eabe5ce698974f75d12b36b5324fe9b0ac6939c13c01644e52e31f1346",
+  "archive_url": "https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/runner-updates/NMS-Runner-v0.1.9.zip",
+  "files": {
+    "AI_HANDOFF.md": {
+      "bytes": 14974,
+      "sha256": "5d8b0bdf4823585bbcc58db5e15cf81e88f4bd3d71b4c0ce53a79819c4aa9835"
+    },
+    "CODE_REVIEW_20261011_v0.1.3.json": {
+      "bytes": 3374,
+      "sha256": "9cfd4328e22387355296c1a3ab264999b7ce326e6505c4d87ebcdca2327171a1"
+    },
+    "Export-Offline-Evidence.cmd": {
+      "bytes": 913,
+      "sha256": "195505f8174ba72ad58b3e0e944338584e4648dbdd4ecb547c7e61f967b44254"
+    },
+    "GITHUB_CHECK_PROMPT.md": {
+      "bytes": 5408,
+      "sha256": "2be25683c0e6a68e72692f0338ca285a9069a1040f62d29be685d51c2ebbce3d"
+    },
+    "Install-Runner.cmd": {
+      "bytes": 1126,
+      "sha256": "63bf0796acc9718f9e9b219165e9360c0af88defc52cc0ba67595a1c7c2f0095"
+    },
+    "Install-Unicorn.cmd": {
+      "bytes": 1761,
+      "sha256": "fb366b453ebead03a50ddfbbaf6a9af703788971a16059ff10db11299e9ea73f"
+    },
+    "LOCAL_WORK_PROMPT.md": {
+      "bytes": 2228,
+      "sha256": "50bb2117a29d3480cd70f9b696a0b27d3c70658f502ba37097e8b080a836f559"
+    },
+    "README.md": {
+      "bytes": 13620,
+      "sha256": "126575ea6a1d1fcedc396c82b287d64338f7f746cb0d22c9beaa47caf495d883"
+    },
+    "RUNNER.md": {
+      "bytes": 14469,
+      "sha256": "6ce7fa7ca5444211538653b3834c02fa266b6c3ab7095c84173de46822fc787f"
+    },
+    "STATUS.json": {
+      "bytes": 4522,
+      "sha256": "ba0ba5de1efec3c892e69d730300996be07f96ac1c0db5a9612bca257e271ff2"
+    },
+    "Setup-GitHub.cmd": {
+      "bytes": 1578,
+      "sha256": "8fff5474abef3f33cb890184f03bc4e9fc680912446bb5182ab8be57a7214827"
+    },
+    "Start-Runner-CLI.cmd": {
+      "bytes": 74,
+      "sha256": "016bd37a65645e0aecf6ebedeb470c1a9c65ffe5a3b6f950d3729409252048f9"
+    },
+    "Start-Runner.cmd": {
+      "bytes": 2453,
+      "sha256": "213dfb202eb294c436d4b4a9f7a03190076a5452ed1de530a5261f25012d18ab"
+    },
+    "Test-Unicorn.cmd": {
+      "bytes": 1051,
+      "sha256": "648b77acdb5669cf4e20c0b2a7ec2785a7083109f3d22216ea52be0dda36d6e4"
+    },
+    "__init__.py": {
+      "bytes": 100,
+      "sha256": "e72a5f582776e5a1ac773c07b203f96da8b290f40357f39164ce834d68c919dd"
+    },
+    "audit.py": {
+      "bytes": 4630,
+      "sha256": "d5b30f796fac1d414b87f9c641f667b7e8a65a0f897b3fa90092301dca5b7fed"
+    },
+    "build_corpus.py": {
+      "bytes": 6593,
+      "sha256": "6665980f3b2bdf85174b2803b5fb1ad47d7036820c4ca4c8a4ad2db4f1024896"
+    },
+    "code_evidence.py": {
+      "bytes": 3604,
+      "sha256": "1fe55e9d35d103e7ec94554819d2c0d71dae06540f0fe798db6c49259370fc34"
+    },
+    "common.py": {
+      "bytes": 1187,
+      "sha256": "45134b0e6caadd3b0e2afe935b00941a2dab066b79b709ccf81ac562b3ce1352"
+    },
+    "evidence/dungeon-seed-function-analysis-latest.json": {
+      "bytes": 15904,
+      "sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212"
+    },
+    "evidence/generation-measurements-summary.json": {
+      "bytes": 57894,
+      "sha256": "1db051e4bd461497d4fd41a087266d07aa3b6b8665cdc10115b51715bc5eb753"
+    },
+    "evidence/offline-code-evidence-20261011-v0.1.1.json": {
+      "bytes": 124444,
+      "sha256": "5483ca6b013295c31f38ee77d67ed69e05ea7fbb088673b5cba636ec06b56a77"
+    },
+    "evidence/offline-code-evidence-20261011-v0.1.2.json": {
+      "bytes": 259694,
+      "sha256": "b80135c47bbb0f6155d8ecb5cfe96afeb951f27b985267476dbe65609f80f937"
+    },
+    "evidence/offline-code-evidence-20261011.json": {
+      "bytes": 44741,
+      "sha256": "3efc1efb8bd434bd284c86cca2d9a179a4ead47da6705161ed8a0eceed2dcb80"
+    },
+    "evidence/root-journal-analysis.json": {
+      "bytes": 52769,
+      "sha256": "04338e645b88046836b1fd42913d41afc2f2bdd009ac15ad6c2f44530447a280"
+    },
+    "export_evidence.py": {
+      "bytes": 11916,
+      "sha256": "362fd793e4e45034020b8a0a9b58faea1f834f8b9e063aa0c94a79673824a445"
+    },
+    "fixtures/20261009T234421Z_Irchol-Luhimo_XVII.json": {
+      "bytes": 179392,
+      "sha256": "63dd2cece8f7358d11609693924a495d52792723a5bfde7d10036595098d5645"
+    },
+    "fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json": {
+      "bytes": 748379,
+      "sha256": "6c1bd3d31aaa9cd0e35a6819f79d398c18e7ac6ac46fe8fa29ce87ce0262ed48"
+    },
+    "fixtures/20261010T012659Z_Ruflas-Simly_V.json": {
+      "bytes": 817699,
+      "sha256": "054b548d9a4c946bb37a332a42f47d8a6e985e620078de4f8d7d24b662e69baf"
+    },
+    "fixtures/20261010T021114Z_Ruflas-Simly_V.json": {
+      "bytes": 819324,
+      "sha256": "fc197faf0dae70acfdfbecda5022eaf50b257e5d5de5a0a220b66ee08f05bf18"
+    },
+    "fixtures/dungeon-generation-table.json": {
+      "bytes": 587282,
+      "sha256": "3b42df7efa4a0b5668d8a452835da089f342aeb99506676fc2e6f6e427ff853c"
+    },
+    "fixtures/manifest.json": {
+      "bytes": 4272,
+      "sha256": "f80325f06cea55d6a1ece28b7786f7349ef6774b72186379ec771212b2817c21"
+    },
+    "fixtures/room-crate-index.json": {
+      "bytes": 783276,
+      "sha256": "f7a58df95c86671ebe70d3bff29d6ca403b2a59967abf75d78c479ba29382034"
+    },
+    "github_exchange.py": {
+      "bytes": 14067,
+      "sha256": "256135eb44ffaad237d4677b5cfcf455c69911f5e1bc0e6954d8aeae2fe369f4"
+    },
+    "gui_process.py": {
+      "bytes": 4383,
+      "sha256": "5a80d1df231172c634fab75903a233f7dc3a0ed74e492be218a958ea9e74f9b8"
+    },
+    "install_runner.py": {
+      "bytes": 11180,
+      "sha256": "7a921fe7f7531bf54b0eae343ca4b189753fd8d8da90bd54bf4a240c41dcbd87"
+    },
+    "install_unicorn.py": {
+      "bytes": 4562,
+      "sha256": "92ec114db5487cc4b3672c016a34f8ad10cb7a7ac9b879e1026511e0002389a0"
+    },
+    "local_runner.py": {
+      "bytes": 19808,
+      "sha256": "61f4f6970f48ff5cd00cec8e171dde8da9296c73b2d35ebbc7d8ff55c9c67b12"
+    },
+    "native_check.py": {
+      "bytes": 5707,
+      "sha256": "886106369bc0a1d9e8f8e4a4056eabc4a33ec15a21591393bf62a4617354bd8b"
+    },
+    "package_experiment.py": {
+      "bytes": 4107,
+      "sha256": "a146a2bdc9dbc5f655688c60af080a73d39509d21cf58c906ad8ea7718320a95"
+    },
+    "prototype.py": {
+      "bytes": 3383,
+      "sha256": "13d8ac5fb1f82d703e6a6c7bc87186fb08b9f074a5a85089e0258853cd080cbc"
+    },
+    "public_seed.py": {
+      "bytes": 2060,
+      "sha256": "bfaaadc152cf743fc62fc980fc2c50e61442d8213e5f053b985d5a5d363d6aa4"
+    },
+    "requirements-unicorn.txt": {
+      "bytes": 15,
+      "sha256": "56bce36af734e3b9aeff2be4301bbc2a2c2b58ea1ea1e6ee6e792db84f96fbd4"
+    },
+    "rng_kernel.py": {
+      "bytes": 2381,
+      "sha256": "8d6d2bd049a3004f29c2a4ae464a2efdc50008a0663f6271aa62a83756031f5e"
+    },
+    "run.py": {
+      "bytes": 4852,
+      "sha256": "ff3155fd1eb650ff0d96806089d20b848e5a22866445e683c87cb15f755bd44b"
+    },
+    "runner_gui.py": {
+      "bytes": 19497,
+      "sha256": "266732b151beab13b6fe2dcf30a9b43bcf1be2bbe0023a03fe56bcb2dbc607d4"
+    },
+    "runner_protocol.py": {
+      "bytes": 2249,
+      "sha256": "6afd6d73a05f353c0e88e632c274be21428979eef25dc1e59a1a5db7d48f450f"
+    },
+    "start.py": {
+      "bytes": 2789,
+      "sha256": "4dddf960cb2f28015ae854e530c5b85dd2fad2240d0877da8c6751baa0957171"
+    },
+    "tests/test_derelict_offline.py": {
+      "bytes": 10154,
+      "sha256": "82dbd835777d2c6bf5dff3b58de6ffcde249ed85cc3c2e1a071184e91d7d03d0"
+    },
+    "tests/test_derelict_offline_code.py": {
+      "bytes": 6732,
+      "sha256": "b56bf78b2b1cb4c1b3e58a49cf687f71cfa4765cabc1961f7262a608246b6cbf"
+    },
+    "tests/test_derelict_offline_github.py": {
+      "bytes": 14621,
+      "sha256": "c22d484fb6af5f492c59ad1a26e3e70ed1b88577c83924645544212cad2a8767"
+    },
+    "tests/test_derelict_offline_gui.py": {
+      "bytes": 5098,
+      "sha256": "8fc38fc3c33488c55079a8869ba7852b70481e5492ef09f27f155a4464caf485"
+    },
+    "tests/test_derelict_offline_install.py": {
+      "bytes": 4402,
+      "sha256": "8ac1c2b07ee97c0f5da4cdd8144cdaec10052bf7dd6b9cbe63476ede1b57dbc9"
+    },
+    "tests/test_derelict_offline_install_folder.py": {
+      "bytes": 9016,
+      "sha256": "9aca78796d0a8d22cdf30e6e07c6a2e63330bf3281fd8659d3d23c6ef9df8143"
+    },
+    "tests/test_derelict_offline_runner.py": {
+      "bytes": 13286,
+      "sha256": "c9b840e4051b521d74d731a744a370e025cda87f5d63f3008fb643033a178e0d"
+    },
+    "tests/test_derelict_offline_unicorn.py": {
+      "bytes": 4997,
+      "sha256": "2337f75efd5eaa3cb5a073f5b089369156bd7cc94eb208c89d1a372e6102bd19"
+    },
+    "tools/analyze_dungeon_generation_table.py": {
+      "bytes": 10126,
+      "sha256": "33dc3a8eddb677220f3708e12e95dac5afb9fa0c0324fb078bfe8733c4d35527"
+    },
+    "tools/analyze_generation_baseline.py": {
+      "bytes": 39792,
+      "sha256": "bef81266480409949ad77809c5ec4dd509915bbb582da511f799113c660914ad"
+    },
+    "tools/analyze_nms_seed_function.py": {
+      "bytes": 17695,
+      "sha256": "2ab7d300ba8c8f79ec7dad17e9625c58e69e5d575e05b875d404a3aad6583bc7"
+    },
+    "tools/analyze_seed_room_correlation.py": {
+      "bytes": 7433,
+      "sha256": "4ad363319652386839093f020f7e38fb5ef481b28fa27ea83efe628c1c9644c1"
+    },
+    "tools/build_runner_update.py": {
+      "bytes": 3321,
+      "sha256": "2478c3a1a32ae2d2042f09997d8bb647b857cab2b987c3792c96e729aa177d46"
+    },
+    "tools/extract_nms_caller_code.py": {
+      "bytes": 13969,
+      "sha256": "d5dc29f70784fc2b0b431d500330fe4d3dd67df9588fb2530cb823f8fd45a3bc"
+    },
+    "tools/extract_nms_upstream_callers.py": {
+      "bytes": 12313,
+      "sha256": "93a17af96744f65f14ea7f25ff63ad48a002d49ef4a53fb4af953e2667a483dc"
+    },
+    "tools/record_generation_measurement.py": {
+      "bytes": 8616,
+      "sha256": "5d13f89a6a8262bceee403b0e9b1b4f3fc5a10d6574e5aaf47158962da38827b"
+    },
+    "unicorn-verification.json": {
+      "bytes": 3411,
+      "sha256": "f565c92c9a1a8477aec1a48ba6631e78f47d767682336a3dee75ddd913a6b4e4"
+    },
+    "unicorn_check.py": {
+      "bytes": 16110,
+      "sha256": "4322e172bcdeb2438a200a3a1a34e944708854e9709696fc9a1c93928f648608"
+    },
+    "update_protocol.py": {
+      "bytes": 13854,
+      "sha256": "0e9f06ee64afe7438809adeccf06b1fb92f304aa1964312bb3148f943ad8303e"
+    },
+    "verification.json": {
+      "bytes": 1558,
+      "sha256": "76f7fec0c7758eb3cceac52e963d1df4182e98970eb2aaefb65b19b183275eff"
+    },
+    "windows_job.py": {
+      "bytes": 2565,
+      "sha256": "dbe7f48a251d8b6f28b5c11d87b59d46a081bfc76cbe1b3d93a561e9172dea47"
+    }
+  },
+  "schema": 1,
+  "source_commit": "cd9607f61db3f86b87c5b08162332a0269af40a1",
+  "source_sha256": "d37dff6f4bba9ce219c8c6eae48ff42c30b3adfcecf6f28c00a150f2c671b50b",
+  "tests_count": 100,
+  "tests_output_sha256": "4ed69fe2414340b04b5169078e2eb202bd21b3ed3e3bd6cbfa6dfbafb562cea5",
+  "tests_status": "passed",
+  "version": "0.1.9"
+}
