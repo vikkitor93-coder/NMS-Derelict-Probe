@@ -1,38 +1,34 @@
 {
   "files": {
-    "code.json": {
-      "bytes": 1248,
-      "sha256": "9b7f1c21ada5f94ed5becb47cf9ff372ae3a9c80665e9a1de031884df3acca44"
+    "AI_HANDOFF.md": {
+      "bytes": 14922,
+      "sha256": "2fda5030f3de428f79d6b7d8d3d6b26c32e44db2ec94e9603eca8eafe3da662f"
     },
-    "diagnose.json": {
-      "bytes": 9549,
-      "sha256": "78b14db66f11d4f46d2716537803d64a61bb84008712822d95d805bdc3602174"
-    },
-    "emulate.json": {
-      "bytes": 3514,
-      "sha256": "9394cdab6146a029efc28aa4a3590cf488a83d2c4351009388d6de491af349d5"
+    "GITHUB_CHECK_PROMPT.md": {
+      "bytes": 5408,
+      "sha256": "2be25683c0e6a68e72692f0338ca285a9069a1040f62d29be685d51c2ebbce3d"
     },
     "latest.log": {
-      "bytes": 1499,
-      "sha256": "2abcc91e999866dbc0d0d8e1118960e6bb8fbfac30bc7d66f46bb6bf18b0a2e9"
+      "bytes": 905,
+      "sha256": "2eb3af4210e3c3b7c44cf4d5077640829ae3180283162d1c351604fc1679f904"
     },
     "result.json": {
-      "bytes": 839,
-      "sha256": "5d57af3d526c90f56029f3655e5a7dc71de9576c7b0194d4d62300793e585654"
+      "bytes": 670,
+      "sha256": "6e9366c64c09f8aeda58d99d2205fb7f8f2cde0aadd6351be541ee2f82ec0a9a"
     },
     "runner-evidence.zip": {
-      "bytes": 5703,
-      "sha256": "c6bf15c88220fcb8f10b9b8db8953171a581a82a1ee122a25644c40c79368ab8"
+      "bytes": 10115,
+      "sha256": "b93e12c199be9bba2e82437d77bbd1e19ec20d0b90cd299056416face56ee03e"
     },
     "source.zip": {
-      "bytes": 371899,
-      "sha256": "1f70785f549a3a892bea98ca416d75685c19f7fb258cf36d2d42b3ee96e02aac"
+      "bytes": 374827,
+      "sha256": "01dfe8c84d7967a34b204dda93ac32c232add474e820ef4ea055a4062742a628"
     }
   },
-  "prototype_version": "0.1.7",
-  "report_path": "runner-results/45126099872d49a4bb5c0e33a9926dd9",
-  "request_id": "45126099872d49a4bb5c0e33a9926dd9",
+  "prototype_version": "0.1.8",
+  "report_path": "runner-results/c32068e5af42454483d853aad6550d58",
+  "request_id": "c32068e5af42454483d853aad6550d58",
   "schema": 1,
-  "source_sha256": "176feec2effb23bd84b49067af9ff40abf816ce7006adbc070abdbd09101064e",
-  "status": "passed"
+  "source_sha256": "297a5d2deab20f6727e46fcfcbc58996676954824efdcff269a9c4fcbbbf4d6e",
+  "status": "failed"
 }
