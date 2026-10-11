@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "prototype_version": "0.1.8",
+  "schema": 1,
+  "request_id": "c32068e5af42454483d853aad6550d58",
+  "source_sha256": "297a5d2deab20f6727e46fcfcbc58996676954824efdcff269a9c4fcbbbf4d6e",
+  "action": "offline-check",
+  "status": "failed",
+  "stages": [
+    {
+      "stage": "source-package",
+      "returncode": 0
+    },
+    {
+      "stage": "tests",
+      "returncode": 1
+    }
+  ],
+  "root_generation_verified": false,
+  "execution_location": "local",
+  "local_only": false,
+  "errors": [
+    "tests-failed"
+  ],
+  "source_zip": "source.zip",
+  "evidence_zip": "runner-evidence.zip",
+  "source_zip_available": true
+}
