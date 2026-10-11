@@ -8,7 +8,7 @@
     "45126099872d49a4bb5c0e33a9926dd9",
     "c32068e5af42454483d853aad6550d58"
   ],
-  "completed_step": "Inventoried all runner uploads at the pinned branch head and reviewed the four unreceipted jobs. Cross-checked the 0.1.8 tested handoff against the available DUNGEON-C and Seed-B static text records for the caller chain, descriptor reads/writes, and requested callsites. Added current-hash static review of the 0063A6D0 entry range and bounded its helper-call/equality path. Reconciled the current-hash 02C08607 indirect-call record with the event-scoped Runtime-A hook-correction evidence. Independently hashed and extracted the exact c320 source archive, reproduced the Windows test-stage failure, isolated the deterministic newline assertion, and verified a local experimental test fix. Inspected the same snapshot's installer and transport for update support.",
+  "completed_step": "Inventoried all runner uploads at the pinned branch head and reviewed the four unreceipted jobs. Cross-checked the 0.1.8 tested handoff against the available DUNGEON-C and Seed-B static text records for the caller chain, descriptor reads/writes, and requested callsites. Added current-hash static review of the 0063A6D0 entry range and bounded its helper-call/equality path. Reconciled the current-hash 02C08607 indirect-call record with the event-scoped Runtime-A hook-correction evidence. Independently hashed and extracted the exact c320 source archive, reproduced the Windows test-stage failure, isolated the deterministic newline assertion, and verified a local experimental test fix. Inspected the same snapshot's installer and transport for update support. At branch head 4983b639e5e5a95a6af6278a4fdb0a78453120a0, continued same-executable static analysis of the caller/helper window: confirmed two caller-side owner-field zero stores after 00639BE0 returns and before the call to 0063A6D0; these do not touch the known seed/flag offsets.",
   "evidence_references": [
     {
       "path": "runner-results/c32068e5af42454483d853aad6550d58/result.json",
@@ -168,6 +168,17 @@
         "derelict_offline/github_exchange.py upload-only publish flow; no remote update polling or update action",
         "derelict_offline/tests/test_derelict_offline_runner.py failing text-versus-raw-zip assertion"
       ]
+    },
+    {
+      "path": "research-uploads/20261009T232432Z-seed-lineage-extract-upstream-08cc282f/dungeon-upstream-callers-latest.json",
+      "commit": "4983b639e5e5a95a6af6278a4fdb0a78453120a0",
+      "fields": [
+        "nms_exe.sha256=13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+        "source_session_id=20261009T230838Z_0000790006606CAB",
+        "direct_rel32_references[instruction_rva_hex=00639BB6].target_rva_hex=0063A6D0",
+        "code_window.start_rva_hex=006397B6; end_rva_exclusive_hex=00639CB6; byte_count=1280; sha256=0920897eae38ea3a863ad62504e24ec0944d720191b67fc55bcd4cec7d5cf48f",
+        "within code_window: call at 00639B99 reaches 00639BE0; post-return owner-field byte stores; call at 00639BB6 reaches 0063A6D0"
+      ]
     }
   ],
   "measured_findings": [
@@ -178,7 +189,8 @@
     "For the current executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, the 89-byte 0063A6D0..0063A729 runtime entry loads a pointer from [RCX+8], loads an index from [R13+4], computes RBX = RCX + index*8, passes RBX in RDX to a helper stub at 033E1B60 (tail destination 033E1A50), and compares the helper return RAX with RBX. The equal and not-equal branches are recorded; the helper semantics are not. Root AddResource at 0063AC20 is later in range 0063AB6C..0063B04E, so this entry review alone does not establish root derivation or the entry's semantic relation to the root.",
     "The current-hash DUNGEON-C manifest reports the effective callback destination for one signature-correlated 02C08607 FF 52 10 event as 0063A6D0 (return 02C0860A). This resolves that event's effective destination only: raw vtable-slot value was not captured, and semantic identity remains unresolved. The separate 0063A706 helper stub/tail target remains outside .pdata runtime-function entries.",
     "The recorded c320 source.zip metadata was independently verified: 374827 bytes and SHA-256 01dfe8c84d7967a34b204dda93ac32c232add474e820ef4ea055a4062742a628. On Windows, the exact source snapshot's 100-test suite failed deterministically at test_report_contains_exact_tested_ai_handoff_and_scheduled_prompt because normalized Path.read_text() values were compared with raw ZIP bytes. Changing the test comparison to compare file bytes fixed the focused test; the full suite then passed 100 tests with 10 skips. The other two failures from a no-console invocation disappeared when the subprocess tests ran with valid console handles, so they were not counted as reproduced source defects.",
-    "The 0.1.8 exact snapshot contains install_runner.py for explicit local versioned install/replace and github_exchange.py for evidence upload. It has no remote update polling, update manifest verification, or supervisor restart path; a GitHub push alone cannot trigger the current runner."
+    "The 0.1.8 exact snapshot contains install_runner.py for explicit local versioned install/replace and github_exchange.py for evidence upload. It has no remote update polling, update manifest verification, or supervisor restart path; a GitHub push alone cannot trigger the current runner.",
+    "For executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, the 1280-byte caller window beginning 006397B6 records a call at 00639B99 to helper 00639BE0. Its return pointer is copied to RBX; the caller then stores zero bytes at [RAX+0x250] and [RAX+0x1CB], moves that same pointer to RDX, and calls 0063A6D0 at 00639BB6. These two observed writes differ from the descriptor seed/use-seed fields at owner+0x138/+0x140 and do not establish seed assignment. The helper listing remains partial, so later writes are unknown."
   ],
   "unresolved_questions": [
     "Do 02D08081 and 02D08898 lie in 02D07C80 and 02D08430 respectively, and do those paths forward the sixth argument as the tested handoff states?",
@@ -188,9 +200,10 @@
     "What does the current-hash helper reached from 0063A706 / stub 033E1B60 to 033E1A50 return, and does it consume state relevant to the later root AddResource path?",
     "Can the matching event provide the raw dispatch slot address/value and target bytes, or is the already established hook-signature correlation sufficient for the specific root event? Keep that event separate from the runner test failure and from captures without matching provenance.",
     "Which immutable update channel and trust root should authorize automatic code execution? The current evidence branch is also writable by the runner's uploader, so it should not double as an unreviewed remote-code channel.",
-    "A bootstrap version must be installed/restarted once before remote updates can work; 0.1.8 cannot receive or run its own first update."
+    "A bootstrap version must be installed/restarted once before remote updates can work; 0.1.8 cannot receive or run its own first update.",
+    "The semantics of owner fields +0x250 and +0x1CB are unknown; the captured window does not show whether helper 00639BE0 or later caller code writes owner+0x138/+0x140."
   ],
-  "next_action": "The c320 failure is explained by a cross-platform test assertion; the local experimental correction passes the 100-test suite (10 skips) but has not been published or installed. To enable the requested future push-run-update-restart loop, add a separately trusted update channel, hash/signature and version validation, staged atomic install with rollback, and CLI/GUI supervisor restart; bootstrap the receiver once because 0.1.8 is upload-only. Do not publish to the runner evidence branch or alter its installed state until the update channel and bootstrap route are defined.",
+  "next_action": "Continue the already identified same-executable static boundary: obtain/inspect the complete 00639BE0 function and all relevant incoming argument setup for callsites 006395D3 and 00639B99; trace whether owner+0x138/+0x140 is written before passing the returned owner to 0063A6D0. Preserve the current hash constraint and do not infer the root formula from the observed caller-side +0x250/+0x1CB initialization.",
   "limitations": [
     "No code workspace is present. Manifest byte counts and SHA256 values were checked only as recorded metadata; source.zip and runner-evidence.zip were not downloaded or inspected.",
     "GitHub code search for the exact requested function addresses returned zero items with incomplete_results=true; absence from that index is not proof of absence from the executable."
