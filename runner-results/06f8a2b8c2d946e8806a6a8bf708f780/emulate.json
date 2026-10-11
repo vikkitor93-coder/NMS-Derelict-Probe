@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "prototype_version": "0.1.10",
+  "validation_engine": "Unicorn 2.1.4 x86-64",
+  "evidence_sha256": "b80135c47bbb0f6155d8ecb5cfe96afeb951f27b985267476dbe65609f80f937",
+  "code_validation": {
+    "schema_version": 1,
+    "prototype_version": "0.1.10",
+    "binary": {
+      "file_name": "NMS.exe",
+      "sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+      "size_bytes": 88560712,
+      "pe_timestamp_hex": "6ABE9229",
+      "preferred_image_base_hex": "0000000140000000"
+    },
+    "range_count": 149,
+    "verified_code_bytes": 103256,
+    "range_hashes_verified": true,
+    "window_checks": [
+      {
+        "case_id": "20261009T234421Z_0000760006606CAB",
+        "recomputed_window_matches": true
+      },
+      {
+        "case_id": "20261010T010105Z_0000760006606CAB",
+        "recomputed_window_matches": true
+      },
+      {
+        "case_id": "20261010T012659Z_0000750006606CAB",
+        "recomputed_window_matches": true
+      },
+      {
+        "case_id": "20261010T021114Z_0000750006606CAB",
+        "recomputed_window_matches": true
+      }
+    ],
+    "supported_arithmetic_binary": true,
+    "whole_executable_hash_independently_verified": false,
+    "identity_limit": "Full hash reported by exporter; original executable is not uploaded. Historical captures remain unpinned.",
+    "root_generation_verified": false,
+    "errors": []
+  },
+  "supplementary_dependency": {
+    "file": "offline-code-evidence-20261011-v0.1.1.json",
+    "sha256": "5483ca6b013295c31f38ee77d67ed69e05ea7fbb088673b5cba636ec06b56a77",
+    "rva_range_hex": [
+      "02BF9A00",
+      "02BF9B96"
+    ],
+    "bytes": 406,
+    "identity_matches_latest_export": true
+  },
+  "comparisons": {
+    "enabled_seed_initialization": 1009,
+    "supplied_state_output": 1004,
+    "empty_vector_descriptor_copy": 1024,
+    "identifier_swap_delete": 1003
+  },
+  "mismatches": 0,
+  "expected_failure": {
+    "nonempty_descriptor_copy": "Unmapped/protected memory at 0x145292041, size 1, access 19"
+  },
+  "allocator_boundary": {
+    "code_supplied_and_executed": true,
+    "first_absent_global_rva_hex": "05292041",
+    "global_state_model_supplied": false
+  },
+  "environment_models": [
+    {
+      "rva_hex": "033E4B4C",
+      "behavior": "return destination only when byte length is zero; otherwise refuse",
+      "identity": "copy-like ABI inferred; original helper not exported"
+    }
+  ],
+  "arithmetic_batch": {
+    "cases": 2013,
+    "seconds": 31.185544799998752,
+    "cases_per_second": 64.54913688088209,
+    "includes": [
+      "register/memory reset",
+      "instruction hooks",
+      "Unicorn arithmetic",
+      "Python comparison"
+    ],
+    "excludes": [
+      "initialization of emulator",
+      "descriptor functions",
+      "root derivation",
+      "layout generation",
+      "game baseline"
+    ],
+    "end_to_end_speedup": null
+  },
+  "limits": [
+    "Historical captures remain unpinned; captured seed values are test inputs only",
+    "Descriptor vectors are deliberately synthetic and empty in copy checks",
+    "Initialization block tests enabled-seed arithmetic only",
+    "RNG function is a palette candidate, not established dungeon layout generation",
+    "Nonempty clone reaches supplied allocator; its global/TLS state is absent; arbitrary imports fail"
+  ],
+  "root_derivation_verified": false,
+  "layout_generation_verified": false,
+  "errors": []
+}
