@@ -1,34 +1,46 @@
 {
   "files": {
     "AI_HANDOFF.md": {
-      "bytes": 15870,
-      "sha256": "1b4aed0fddf61f3457c61a930e5f16f2fdb785d4ab18a5c6de318fbbc6d857b0"
+      "bytes": 16034,
+      "sha256": "f146fa3790b218a0835236bc26203e7a74facc2ff8ea34443cc802e779b45fb0"
     },
     "GITHUB_CHECK_PROMPT.md": {
       "bytes": 5408,
       "sha256": "2be25683c0e6a68e72692f0338ca285a9069a1040f62d29be685d51c2ebbce3d"
     },
+    "code.json": {
+      "bytes": 1249,
+      "sha256": "c571d87412e995e8db29c49d829edd5d5ff837667cdb47377efe11d913cb7f12"
+    },
+    "diagnose.json": {
+      "bytes": 9550,
+      "sha256": "b87250f8dc0a31c7f1e9f2d9e990e0a02b0b0e33633ad0089d159cc31562f5e4"
+    },
+    "emulate.json": {
+      "bytes": 3516,
+      "sha256": "d18bd80c924474d4b7a4796d3c2c44d8356a7064f6984ea1aa2349556ed70799"
+    },
     "latest.log": {
-      "bytes": 911,
-      "sha256": "e2e80c1f66226001851606ccf2f2a928a5489bc996347c553c56744413401657"
+      "bytes": 1511,
+      "sha256": "1cba9573b92dd8a78968b011099cd62ac0a9848a2841af161e4ce41e46207425"
     },
     "result.json": {
-      "bytes": 671,
-      "sha256": "e02ce57d9e47200ff690040471311512d5d68b98f4985b479663626d4b208988"
+      "bytes": 840,
+      "sha256": "f8999f56aa8b21b3253d658e1d4755e65cd8219f9424d6487e954930e00b7f64"
     },
     "runner-evidence.zip": {
-      "bytes": 10466,
-      "sha256": "a771b3dfff1eeca46130e8b85be3becb96a560b064aa35183345e594ce8a57ea"
+      "bytes": 15435,
+      "sha256": "3165f3f849c96dbc1554237b63f10ab30c16622d2d6637f8855b02456c5d244f"
     },
     "source.zip": {
-      "bytes": 381481,
-      "sha256": "8d82ab6e91acbd930c2190d704e44dd8cd9259aaceb887c2bc3624bb0430c235"
+      "bytes": 385671,
+      "sha256": "9126c861156eb0f5b803fc8f5e72a9ae9fb994b2112cbdd310ed534cdb1670c5"
     }
   },
-  "prototype_version": "0.1.12",
-  "report_path": "runner-results/510637f8a17940f7bfff39d04e47c52b",
-  "request_id": "510637f8a17940f7bfff39d04e47c52b",
+  "prototype_version": "0.1.13",
+  "report_path": "runner-results/e03d1d8887864ce186e2e0042127cde0",
+  "request_id": "e03d1d8887864ce186e2e0042127cde0",
   "schema": 1,
-  "source_sha256": "d6f387fe2e67aa54fe759918bcb42fb18a49b3167bdb99a770fb54dfa101bf44",
-  "status": "failed"
+  "source_sha256": "da26dca1e612d586b15be8d2c0d1749e43e9a028e33046fd2d45ae779b358caa",
+  "status": "passed"
 }
