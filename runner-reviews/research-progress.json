@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "last_reviewed_commit": "78553786961d6cd23054a03e0598f8bd8bd2f602",
+  "last_reviewed_request": "c32068e5af42454483d853aad6550d58",
+  "reviewed_requests": [
+    "1bba0633b8f24830a93ce7408f9303c2",
+    "1579ce307c6443d8ae3b4f9fe822ae95",
+    "45126099872d49a4bb5c0e33a9926dd9",
+    "c32068e5af42454483d853aad6550d58"
+  ],
+  "completed_step": "Inventoried all runner uploads at the pinned branch head and reviewed the four unreceipted jobs. Cross-checked the 0.1.8 tested handoff against the available DUNGEON-C and Seed-B static text records for the caller chain, descriptor reads/writes, and requested callsites.",
+  "evidence_references": [
+    {
+      "path": "runner-results/c32068e5af42454483d853aad6550d58/result.json",
+      "commit": "78553786961d6cd23054a03e0598f8bd8bd2f602",
+      "fields": [
+        "request_id",
+        "source_sha256",
+        "status",
+        "stages",
+        "errors"
+      ]
+    },
+    {
+      "path": "runner-results/c32068e5af42454483d853aad6550d58/latest.log",
+      "commit": "78553786961d6cd23054a03e0598f8bd8bd2f602",
+      "fields": [
+        "source-package passed",
+        "tests failed returncode 1",
+        "no later stage detail"
+      ]
+    },
+    {
+      "path": "runner-results/c32068e5af42454483d853aad6550d58/AI_HANDOFF.md",
+      "commit": "78553786961d6cd23054a03e0598f8bd8bd2f602",
+      "fields": [
+        "research priority",
+        "caller chain claims",
+        "descriptor and seed status",
+        "smallest calculation boundary"
+      ]
+    },
+    {
+      "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md",
+      "commit": "78553786961d6cd23054a03e0598f8bd8bd2f602",
+      "fields": [
+        "current executable hash",
+        "wrapper 00639490 callers 001B2CF9, 02D08081, 02D08898",
+        "descriptor source through runtime stack argument",
+        "constructor 00639610 copies fields into owner +0x128"
+      ]
+    },
+    {
+      "path": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
+      "commit": "78553786961d6cd23054a03e0598f8bd8bd2f602",
+      "fields": [
+        "helper callsites 006395D3 and 00639B99 target 00639BE0",
+        "helper return passed to entry 0063A6D0",
+        "no owner+0x138 write established"
+      ]
+    },
+    {
+      "path": "agent-patches/seed-lineage/SEED_FUNCTION_REVIEW_20261009T233349Z.json",
+      "commit": "78553786961d6cd23054a03e0598f8bd8bd2f602",
+      "fields": [
+        "descriptor offset +0x128",
+        "primary seed read at 0063A8CE from owner +0x138 / descriptor +0x10",
+        "use-seed flag checked at 0063A936 from owner +0x140 / descriptor +0x18",
+        "possible_descriptor_field_writes is empty"
+      ]
+    },
+    {
+      "path": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
+      "commit": "78553786961d6cd23054a03e0598f8bd8bd2f602",
+      "fields": [
+        "existing human gate requests full listing and xrefs for 00639BE0",
+        "no root formula resolved"
+      ]
+    },
+    {
+      "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
+      "commit": "78553786961d6cd23054a03e0598f8bd8bd2f602",
+      "fields": [
+        "current NMS.exe hash",
+        "caller return 02C0860A",
+        "root AddResource call 0063AC20 to 0183E770",
+        "limitations on dispatch and runtime provenance"
+      ]
+    }
+  ],
+  "measured_findings": [
+    "The 0.1.8 request c32068e5af42454483d853aad6550d58 failed at tests after source-package passed; the readable log does not identify a failing test.",
+    "The tested handoff claims a 00639BE0 to 00639610 to 00227A40 producer/copy chain and associates 02D08081 and 02D08898 with targets 02D07C80 and 02D08430. The older current-executable text review supports the two callsites into wrapper 00639490 and stack-sourced descriptor, but the branch's accessible code records do not include bytes confirming those target-function associations or the claimed argument-six flow.",
+    "The 0063A6D0 evidence records seed and flag reads at owner +0x138 / +0x140 (descriptor +0x10 / +0x18) before root AddResource and no possible writes to those fields in that scanned function. The owner-producer trace also says no write is established by its excerpts.",
+    "Available emulator records verify bounded arithmetic and empty-vector operations only; root derivation, layout generation, physical inventory, and customization remain unverified."
+  ],
+  "unresolved_questions": [
+    "Do 02D08081 and 02D08898 lie in 02D07C80 and 02D08430 respectively, and do those paths forward the sixth argument as the tested handoff states?",
+    "Does 00227A40 write or copy the seed/flag fields into owner +0x138 / +0x140, or are those values supplied earlier by an unreviewed caller?",
+    "What is the smallest input-to-root calculation boundary once the producer chain and source fields are confirmed?",
+    "The existing full-function listing request for 00639BE0 remains pending; no new request for that same range is recorded here."
+  ],
+  "next_action": "After the existing 00639BE0 listing is returned, obtain current-hash Ghidra listings and xrefs for functions 02D07C80, 02D08430, 00639610, and 00227A40, including callsites 02D08081/02D08898 and dataflow into owner +0x128/+0x138/+0x140. Success: listings name the current executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 and show call targets, argument sources, and any writes to the descriptor seed/flag offsets.",
+  "limitations": [
+    "No code workspace is present. Manifest byte counts and SHA256 values were checked only as recorded metadata; source.zip and runner-evidence.zip were not downloaded or inspected.",
+    "GitHub code search for the exact requested function addresses returned zero items with incomplete_results=true; absence from that index is not proof of absence from the executable."
+  ]
+}
