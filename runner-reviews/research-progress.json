@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "last_reviewed_commit": "5bef17299ca2b5fc63d09dcfffad0ca9f4649ee9",
+  "last_reviewed_commit": "e982c87b92bac51fc217343e1b025b053bd23cdf",
   "last_reviewed_request": "c32068e5af42454483d853aad6550d58",
   "reviewed_requests": [
     "1bba0633b8f24830a93ce7408f9303c2",
@@ -8,7 +8,7 @@
     "45126099872d49a4bb5c0e33a9926dd9",
     "c32068e5af42454483d853aad6550d58"
   ],
-  "completed_step": "Inventoried all runner uploads at the pinned branch head and reviewed the four unreceipted jobs. Cross-checked the 0.1.8 tested handoff against the available DUNGEON-C and Seed-B static text records for the caller chain, descriptor reads/writes, and requested callsites. Added current-hash static review of the 0063A6D0 entry range and bounded its helper-call/equality path.",
+  "completed_step": "Inventoried all runner uploads at the pinned branch head and reviewed the four unreceipted jobs. Cross-checked the 0.1.8 tested handoff against the available DUNGEON-C and Seed-B static text records for the caller chain, descriptor reads/writes, and requested callsites. Added current-hash static review of the 0063A6D0 entry range and bounded its helper-call/equality path. Reconciled the current-hash 02C08607 indirect-call record with the event-scoped Runtime-A hook-correction evidence.",
   "evidence_references": [
     {
       "path": "runner-results/c32068e5af42454483d853aad6550d58/result.json",
@@ -108,6 +108,31 @@
         "NMS executable SHA-256",
         "call_instruction at 02C08607 is FF5210; indirect target unresolved"
       ]
+    },
+    {
+      "path": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
+      "commit": "e982c87b92bac51fc217343e1b025b053bd23cdf",
+      "fields": [
+        "exe_sha256",
+        "finding for 0063A706 target stub and tail-jump",
+        "dispatch_resolved",
+        "runtime_dispatch_lane",
+        "scope",
+        "caller",
+        "raw_vtable_slot_value_captured=false",
+        "semantic_identity=unresolved"
+      ]
+    },
+    {
+      "path": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
+      "commit": "e982c87b92bac51fc217343e1b025b053bd23cdf",
+      "fields": [
+        "current executable SHA-256",
+        "unique signature match at 0063A6D0",
+        "event/caller association to 02C08607 FF 52 10",
+        "effective destination is event-scoped",
+        "raw slot and semantic function identity limits"
+      ]
     }
   ],
   "measured_findings": [
@@ -115,16 +140,18 @@
     "The tested handoff claims a 00639BE0 to 00639610 to 00227A40 producer/copy chain and associates 02D08081 and 02D08898 with targets 02D07C80 and 02D08430. The older current-executable text review supports the two callsites into wrapper 00639490 and stack-sourced descriptor, but the branch's accessible code records do not include bytes confirming those target-function associations or the claimed argument-six flow.",
     "The 0063A6D0 evidence records seed and flag reads at owner +0x138 / +0x140 (descriptor +0x10 / +0x18) before root AddResource and no possible writes to those fields in that scanned function. The owner-producer trace also says no write is established by its excerpts.",
     "Available emulator records verify bounded arithmetic and empty-vector operations only; root derivation, layout generation, physical inventory, and customization remain unverified.",
-    "For the current executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, the 89-byte 0063A6D0..0063A729 runtime entry loads a pointer from [RCX+8], loads an index from [R13+4], computes RBX = RCX + index*8, passes RBX in RDX to a helper stub at 033E1B60 (tail destination 033E1A50), and compares the helper return RAX with RBX. The equal and not-equal branches are recorded; the helper semantics are not. Root AddResource at 0063AC20 is later in range 0063AB6C..0063B04E, so this entry review alone does not establish root derivation or the entry's semantic relation to the root."
+    "For the current executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, the 89-byte 0063A6D0..0063A729 runtime entry loads a pointer from [RCX+8], loads an index from [R13+4], computes RBX = RCX + index*8, passes RBX in RDX to a helper stub at 033E1B60 (tail destination 033E1A50), and compares the helper return RAX with RBX. The equal and not-equal branches are recorded; the helper semantics are not. Root AddResource at 0063AC20 is later in range 0063AB6C..0063B04E, so this entry review alone does not establish root derivation or the entry's semantic relation to the root.",
+    "The current-hash DUNGEON-C manifest reports the effective callback destination for one signature-correlated 02C08607 FF 52 10 event as 0063A6D0 (return 02C0860A). This resolves that event's effective destination only: raw vtable-slot value was not captured, and semantic identity remains unresolved. The separate 0063A706 helper stub/tail target remains outside .pdata runtime-function entries."
   ],
   "unresolved_questions": [
     "Do 02D08081 and 02D08898 lie in 02D07C80 and 02D08430 respectively, and do those paths forward the sixth argument as the tested handoff states?",
     "Does 00227A40 write or copy the seed/flag fields into owner +0x138 / +0x140, or are those values supplied earlier by an unreviewed caller?",
     "What is the smallest input-to-root calculation boundary once the producer chain and source fields are confirmed?",
     "The existing full-function listing request for 00639BE0 remains pending; no new request for that same range is recorded here.",
-    "What does the current-hash helper reached from 0063A706 / stub 033E1B60 to 033E1A50 return, and does it consume state relevant to the later root AddResource path?"
+    "What does the current-hash helper reached from 0063A706 / stub 033E1B60 to 033E1A50 return, and does it consume state relevant to the later root AddResource path?",
+    "Can the matching event provide the raw dispatch slot address/value and target bytes, or is the already established hook-signature correlation sufficient for the specific root event? Keep that event separate from the runner test failure and from captures without matching provenance."
   ],
-  "next_action": "After the existing 00639BE0 listing is returned, obtain current-hash Ghidra listings and xrefs for functions 02D07C80, 02D08430, 00639610, and 00227A40, including callsites 02D08081/02D08898 and dataflow into owner +0x128/+0x138/+0x140. Success: listings name the current executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 and show call targets, argument sources, and any writes to the descriptor seed/flag offsets. Use the already hash-pinned 89-byte 0063A6D0..0063A729 entry as a bounded candidate only: statically trace 0063A706 through stub 033E1B60 to 033E1A50 and identify the required input memory behind RCX and R13; establish whether its comparison feeds the later 0063AC20 root path. Preserve the pending 00639BE0 and 02D07C80/02D08430/00639610/00227A40 listing requests and do not emulate until helper bytes and caller state are supported.",
+  "next_action": "Continue the existing pending current-hash listing requests for 00639BE0, 02D07C80, 02D08430, 00639610, and 00227A40. In parallel, treat the DUNGEON-C callback target as resolved only for the documented event and trace the 0063A706 helper stub/tail target if matching-hash bytes become accessible. Do not infer the helper's semantic role or root derivation from the event-scoped dispatch result. For request c32068e5af42454483d853aad6550d58, the uploaded result/log expose only tests returncode 1; a named failing test/traceback is the specific missing diagnostic.",
   "limitations": [
     "No code workspace is present. Manifest byte counts and SHA256 values were checked only as recorded metadata; source.zip and runner-evidence.zip were not downloaded or inspected.",
     "GitHub code search for the exact requested function addresses returned zero items with incomplete_results=true; absence from that index is not proof of absence from the executable."
