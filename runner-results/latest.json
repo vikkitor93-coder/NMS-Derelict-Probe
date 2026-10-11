@@ -1,0 +1,26 @@
+{
+  "files": {
+    "latest.log": {
+      "bytes": 905,
+      "sha256": "0858b5e96488719b7ef5666e88e993d5cd6e6a0a563acc9f217dcf85ce07bce3"
+    },
+    "result.json": {
+      "bytes": 670,
+      "sha256": "b2201946782b0a9da565bf221db06b0432cd43d350c5b77ff6a69d745b9afe8b"
+    },
+    "runner-evidence.zip": {
+      "bytes": 794,
+      "sha256": "a7763a57c2ad9f6e378eca3a66c891879608e581a5b4937867399dc2070e92e2"
+    },
+    "source.zip": {
+      "bytes": 350640,
+      "sha256": "6f12426ed8959508bf2a61f8984259cbb119ac19df562d940d4f52392ca15ca0"
+    }
+  },
+  "prototype_version": "0.1.5",
+  "report_path": "runner-results/1bba0633b8f24830a93ce7408f9303c2",
+  "request_id": "1bba0633b8f24830a93ce7408f9303c2",
+  "schema": 1,
+  "source_sha256": "de3cf4cd914be33af310f9e1650e2fd7f6eac27a56334be5db1180f852e3ad92",
+  "status": "failed"
+}
