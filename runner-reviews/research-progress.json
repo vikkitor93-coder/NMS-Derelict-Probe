@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "last_reviewed_commit": "d3b21678584bcacdd3e74da29badcac2b11fa43d",
+  "last_reviewed_commit": "038b5dc41fbc9407297b95ef72635be7d9e7b416",
   "last_reviewed_request": "c32068e5af42454483d853aad6550d58",
   "reviewed_requests": [
     "1bba0633b8f24830a93ce7408f9303c2",
@@ -8,7 +8,7 @@
     "45126099872d49a4bb5c0e33a9926dd9",
     "c32068e5af42454483d853aad6550d58"
   ],
-  "completed_step": "Inventoried all runner uploads at the pinned branch head and reviewed the four unreceipted jobs. Cross-checked the 0.1.8 tested handoff against the available DUNGEON-C and Seed-B static text records for the caller chain, descriptor reads/writes, and requested callsites. Added current-hash static review of the 0063A6D0 entry range and bounded its helper-call/equality path. Reconciled the current-hash 02C08607 indirect-call record with the event-scoped Runtime-A hook-correction evidence. Independently hashed and extracted the exact c320 source archive, reproduced the Windows test-stage failure, isolated the deterministic newline assertion, and verified a local experimental test fix. Inspected the same snapshot's installer and transport for update support. At branch head 4983b639e5e5a95a6af6278a4fdb0a78453120a0, continued same-executable static analysis of the caller/helper window: confirmed two caller-side owner-field zero stores after 00639BE0 returns and before the call to 0063A6D0; these do not touch the known seed/flag offsets. At branch head f7bdb4e335cf0c5964d892d18130ebf165246160, compared the second same-executable helper caller: 006395D3→00639BE0 returns and forwards the pointer to 0063A6D0 at 006395E6 without an immediate store sequence; the separate 00639B99 path has the recorded +0x250/+0x1CB clears. At branch head 0a809672e0782bb779c7ff06a45e5338b5ed341e, extended the hash-pinned helper-prefix trace: bytes at 00639C33 call 02C20E90 with EDX=0x2A0 and R9D=0; no semantics are assigned to that callee.",
+  "completed_step": "Inventoried all runner uploads at the pinned branch head and reviewed the four unreceipted jobs. Cross-checked the 0.1.8 tested handoff against the available DUNGEON-C and Seed-B static text records for the caller chain, descriptor reads/writes, and requested callsites. Added current-hash static review of the 0063A6D0 entry range and bounded its helper-call/equality path. Reconciled the current-hash 02C08607 indirect-call record with the event-scoped Runtime-A hook-correction evidence. Independently hashed and extracted the exact c320 source archive, reproduced the Windows test-stage failure, isolated the deterministic newline assertion, and verified a local experimental test fix. Inspected the same snapshot's installer and transport for update support. At branch head 4983b639e5e5a95a6af6278a4fdb0a78453120a0, continued same-executable static analysis of the caller/helper window: confirmed two caller-side owner-field zero stores after 00639BE0 returns and before the call to 0063A6D0; these do not touch the known seed/flag offsets. At branch head f7bdb4e335cf0c5964d892d18130ebf165246160, compared the second same-executable helper caller: 006395D3→00639BE0 returns and forwards the pointer to 0063A6D0 at 006395E6 without an immediate store sequence; the separate 00639B99 path has the recorded +0x250/+0x1CB clears. At branch head 0a809672e0782bb779c7ff06a45e5338b5ed341e, extended the hash-pinned helper-prefix trace: bytes at 00639C33 call 02C20E90 with EDX=0x2A0 and R9D=0; no semantics are assigned to that callee. At pinned head 038b5dc41fbc9407297b95ef72635be7d9e7b416, checked the current-hash DUNGEON-C static map and Seed-B review against the pending 02D07C80/02D08430 targets: the map covers a different bounded parent and its 33 E8 sites, while the Seed-B text records caller RVAs 02D08081/02D08898 and descriptor-stack sourcing but does not provide target-function byte windows or descriptor-field stores.",
   "evidence_references": [
     {
       "path": "runner-results/c32068e5af42454483d853aad6550d58/result.json",
@@ -184,6 +184,28 @@
         "code_window[start=006397B6, sha256=0920897eae38ea3a863ad62504e24ec0944d720191b67fc55bcd4cec7d5cf48f] includes helper entry 00639BE0 through 00639CB6 (214 bytes from entry)",
         "within that helper slice, 00639C33 is E8 58 72 5E 02; rel32 target computes to 02C20E90; immediately before it EDX=0x2A0 and R9D=0; callee semantics unresolved"
       ]
+    },
+    {
+      "path": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
+      "commit": "038b5dc41fbc9407297b95ef72635be7d9e7b416",
+      "fields": [
+        "old_build.nms_exe_sha256=671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4",
+        "current_build.nms_exe_sha256=13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+        "current_build.parent_pdata_range=00636760..00636C33",
+        "direct_call_check.old_inventory_sites=33; current_decoded_E8_sites=33",
+        "conclusion; limitations"
+      ]
+    },
+    {
+      "path": "agent-patches/seed-lineage/SEED_B_PARALLEL_REVIEW_20261008.md",
+      "commit": "038b5dc41fbc9407297b95ef72635be7d9e7b416",
+      "fields": [
+        "current executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+        "wrapper 00639490 callers 001B2CF9, 02D08081, 02D08898",
+        "02D08081/02D08898 descriptor source through runtime stack argument",
+        "constructor 00639610 copies fields into owner +0x128",
+        "root-owned seed constructor remains unresolved"
+      ]
     }
   ],
   "measured_findings": [
@@ -197,7 +219,8 @@
     "The 0.1.8 exact snapshot contains install_runner.py for explicit local versioned install/replace and github_exchange.py for evidence upload. It has no remote update polling, update manifest verification, or supervisor restart path; a GitHub push alone cannot trigger the current runner.",
     "For executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, the 1280-byte caller window beginning 006397B6 records a call at 00639B99 to helper 00639BE0. Its return pointer is copied to RBX; the caller then stores zero bytes at [RAX+0x250] and [RAX+0x1CB], moves that same pointer to RDX, and calls 0063A6D0 at 00639BB6. These two observed writes differ from the descriptor seed/use-seed fields at owner+0x138/+0x140 and do not establish seed assignment. The helper listing remains partial, so later writes are unknown.",
     "The same hash-pinned upstream artifact shows a second path: 006395D3 calls 00639BE0 and 006395E6 calls 0063A6D0 after forwarding the helper result as the second argument; the intervening bytes contain no immediate owner-field stores. This contrasts with the 00639B99 path, where +0x250 and +0x1CB are explicitly zeroed before the 00639BB6 call. It does not establish whether either field was initialized inside the helper or earlier in the caller.",
-    "The available 214-byte prefix of helper 00639BE0 sets EDX=0x2A0 and R9D=0, then calls 02C20E90 at 00639C33 (E8 58 72 5E 02; target computed from rel32). The called routine's behavior and the remaining helper body are not present in this window; this does not prove allocation or seed initialization."
+    "The available 214-byte prefix of helper 00639BE0 sets EDX=0x2A0 and R9D=0, then calls 02C20E90 at 00639C33 (E8 58 72 5E 02; target computed from rel32). The called routine's behavior and the remaining helper body are not present in this window; this does not prove allocation or seed initialization.",
+    "The current-build static map is hash-pinned to 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 but covers only the mapped parent 00636760..00636C33 and its 33 E8 sites; it warns that addresses from earlier event/code exports are not current-build runtime evidence. The Seed-B review separately records callers 02D08081 and 02D08898 of wrapper 00639490 and stack-sourced descriptor input, but the available text does not provide bytes for target functions 02D07C80/02D08430 or writes to owner +0x138/+0x140. Therefore these paths remain unverified, not disproven."
   ],
   "unresolved_questions": [
     "Do 02D08081 and 02D08898 lie in 02D07C80 and 02D08430 respectively, and do those paths forward the sixth argument as the tested handoff states?",
@@ -212,7 +235,7 @@
     "Why the two 00639BE0 caller paths differ in immediate post-return initialization, and whether either earlier setup or the helper itself writes the descriptor seed/use-seed fields.",
     "What does the same-build call at 02C20E90 do in the 00639BE0 producer path, and does the complete helper initialize owner+0x138/+0x140 before return?"
   ],
-  "next_action": "Trace target 02C20E90 and obtain the remainder of 00639BE0 for the same NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499; then compare incoming argument setup at 006395D3 and 00639B99 and search for writes to owner+0x138/+0x140. Keep the two caller paths separate; do not interpret EDX=0x2A0 as allocation without callee evidence.",
+  "next_action": "Obtain hash-matched static listings and complete xrefs for targets 02D07C80 and 02D08430, including caller windows 02D08081 and 02D08898; determine argument flow and whether either path writes owner +0x138/+0x140. Keep the exact-build 00639BE0 listing requirement separate and do not infer semantics from RVAs alone.",
   "limitations": [
     "No code workspace is present. Manifest byte counts and SHA256 values were checked only as recorded metadata; source.zip and runner-evidence.zip were not downloaded or inspected.",
     "GitHub code search for the exact requested function addresses returned zero items with incomplete_results=true; absence from that index is not proof of absence from the executable."
