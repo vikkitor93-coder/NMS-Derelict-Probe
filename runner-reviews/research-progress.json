@@ -7,12 +7,12 @@
     "request_id": "4917f98b7a734768ac413372ab59861e"
   },
   "latest_evidence_check": {
-    "branch_head": "d6923cee285ca05fcf11f6174d4b37e4786a4d95",
+    "branch_head": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
     "latest_request_id": "4917f98b7a734768ac413372ab59861e",
     "latest_status": "passed",
     "latest_runner_version": "0.1.20",
     "queued_request_id": "1a131cab1568ef38e7f2c5b800000001",
-    "queued_request_status": "no result manifest observed at this head"
+    "queued_request_status": "no result manifest observed at pinned branch head 9e759db8cfcec40eec31a2e270dafb9041bfc54f"
   },
   "established_facts": [
     "Runner update 0.1.21 is published on runner-updates at commit 12b387159fc1cb791e1ecc8695dcc9ccbaccf13b. Package source_sha256=e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; archive SHA-256=591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940; 119 tests passed with 10 skips; archive and all 71 member hashes were independently checked.",
@@ -20,7 +20,11 @@
     "Saved evidence summary has 11 measurements. A local recomputation found that all 11 saved room-sequence salvage/footlocker/target sums match the saved aggregate counts; this verifies arithmetic consistency only, not live object completeness.",
     "Saved sessions for address 00001A0004E84EFD and candidate root 9256392A2F5A74AC record 35 containers for CARGO_FLOATERS and 16 for MEDI_FLOATERS. Sessions span probe versions and lack NMS.exe hash provenance.",
     "Within saved CARGO_FLOATERS rows, per-room target counts vary by family/kind: BARRACKS main 1/2/4 (16 rooms), CARG main 3/4/10/15/19 (26), END main 1/13 (8), and HANGAR main 3 (6). Family/kind alone is not a sufficient room-count lookup in this dataset.",
-    "For address 00001A0004E84EFD with CARGO_FLOATERS, six saved sessions record 35 containers: two sessions have no root candidate and four record 9256392A2F5A74AC. This weakens the need for root as a count input for this one system/preset, but sessions span probe versions and have no executable hash."
+    "For address 00001A0004E84EFD with CARGO_FLOATERS, six saved sessions record 35 containers: two sessions have no root candidate and four record 9256392A2F5A74AC. This weakens the need for root as a count input for this one system/preset, but sessions span probe versions and have no executable hash.",
+    "Across 133 saved asset-calculation-latest.json paths at commit 9e759db8cfcec40eec31a2e270dafb9041bfc54f, tree blob hashes reduce them to 5 unique file bodies and 4 distinct (session,address,count) calculations; most uploads repeat snapshots.",
+    "Distinct diagnostic asset-calculation snapshots report: address 0001550006607CAC, probe 0.3.5: 126/126 scenes resolved, 32 salvage + 19 footlockers = 51; address 0001BF0004E84EFD, probe 0.3.38: 164/164, 30+13=43; address 0001550006607CAC, probe 0.3.38: 146/146, 7+7=14; address 00006D0006606CAB, probe 0.3.40: 130/130, 12+9=21. All report manual_f7_target_containers=0.",
+    "The crate-target-discovery records accompanying these asset calculations explicitly say their counts are correlations/reference counts only and are not promoted to physical crate totals. The 51 and 14 estimates for address 0001550006607CAC use different probe versions; they do not establish either a real count change or an address-only prediction rule.",
+    "User correction: value 0063A6D0 was identified as a palette chosen according to the Shipwright mod; exclude it from crate-count and root-seed evidence."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -32,7 +36,7 @@
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
     "Room family/kind alone determines a fixed container count in the saved rows."
   ],
-  "latest_material_finding": "Saved asset evidence yields a verified 21-container sum for one captured scene-instance list: 130/130 instances resolve through the 1,433-entry room index, with no per-instance mismatch (12 salvage + 9 footlockers). This validates only scene-list-to-index arithmetic; it is not a pre-traversal prediction or live count.",
+  "latest_material_finding": "Deduplicating all 133 saved asset-calculation paths by Git blob gives 5 unique report bodies (4 distinct measured session/address/count tuples). The same address 0001550006607CAC has diagnostic estimates 51 at probe 0.3.5 and 14 at 0.3.38; paired crate-target-discovery notes explicitly limit these to correlation/reference counts, not physical totals. This narrows the asset-count proxy's evidential value but does not establish a game count or falsify address dependence.",
   "queued_experiments": [
     {
       "request_id": "1a131cab1568ef38e7f2c5b800000001",
@@ -47,13 +51,13 @@
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
     "No same-build multi-system rows currently establish whether system address/preset/root predicts total count before entering the derelict."
   ],
-  "next_action": "Preserve runner-requests/latest.json unchanged until request 1a131cab1568ef38e7f2c5b800000001 produces its manifest/result. Determine the currently installed runner version and whether GitHub upload is enabled. If it is 0.1.21, inspect its report/result upload after the next poll; if older, install the already-published 0.1.21 package so the exact source-pinned request can execute. Only after that request completes, publish the tested 0.1.22 diagnostic package, which will reveal the safe exact updater failure category on the next check.",
+  "next_action": "Keep runner-requests/latest.json pinned unchanged for request 1a131cab1568ef38e7f2c5b800000001 until its result appears. Independently, before interpreting asset estimates further, compare the probe-version-specific room-crate index/calculation logic for 0.3.5 vs 0.3.38 on same-address session 0001550006607CAC; determine whether the 51-to-14 change is explained by extracted scene inventory/index inputs. Do not promote either estimate to a physical crate count. When the queued runner result arrives, review it first.",
   "human_action_required": null,
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
-    "finding": "Reconciled the saved asset-based count for session 20261009T161852Z_00006D0006606CAB against the static room crate index. All 130 captured dungeon scene instances (61 unique paths) matched indexed scene entries; no misses or per-instance count mismatches. Recomputed totals were 12 salvage crates + 9 crew footlockers = 21 target containers, matching the recorded aggregate.",
-    "interpretation": "This verifies the arithmetic/index-lookup boundary from an already captured scene-instance list. It does not predict from system inputs, prove live-world object completeness, or supply an independent observed crate count. The session records manual_f7_target_containers=0.",
-    "provenance": "The evidence identifies probe_version 0.3.40 and session ID, but the asset-calculation record and all-saved-evidence manifest contain no matching NMS.exe SHA-256; leave the result unpinned to an executable build."
+    "finding": "Compared the complete saved asset-calculation artifact set at pinned commit 9e759db8cfcec40eec31a2e270dafb9041bfc54f using tree blob SHA values, then read one representative for each unique body and checked its session against associated generation-measurements-summary/crate-target-discovery records.",
+    "interpretation": "133 path copies reduce to 5 unique JSON bodies and 4 distinct session/address/count tuples. Example totals span 14-51; all shown scene instances resolve and manual F7 count is zero. The discovery reports explicitly label these counts as correlation/reference counts, not physical totals. Same address 0001550006607CAC differs across probe versions .3.5 and .3.38 (51 vs 14), so no address-only rule is established; version/session and proxy limitations prevent treating this as a falsification.",
+    "provenance": "Evidence pinned to nms-runner-evidence commit 9e759db8cfcec40eec31a2e270dafb9041bfc54f. Representative paths: research-uploads/20261004T084829Z-all-saved-evidence-5a094647/{asset-calculation-latest.json,generation-measurements-summary.json,crate-target-discovery.json}; research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/{asset-calculation-latest.json,crate-target-discovery.json}; research-uploads/20261008T191656Z-metadata-prepare-assets-4beb1d75/{asset-calculation-latest.json,crate-target-discovery.json}; research-uploads/20261009T163954Z-metadata-prepare-assets-6ae2fd90/{asset-calculation-latest.json,crate-target-discovery.json}. No NMS.exe SHA-256 is present in these report records."
   },
   "evidence_references": [
     {
@@ -93,6 +97,76 @@
         "files[].sha256",
         "files[].size",
         "no executable SHA-256 field"
+      ]
+    },
+    {
+      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
+      "path": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/asset-calculation-latest.json",
+      "fields": [
+        "session_id",
+        "probe_version",
+        "universe_address_hex",
+        "dungeon_scene_instances",
+        "resolved_scene_instances",
+        "predicted_salvage_crates",
+        "predicted_crew_footlockers",
+        "predicted_target_containers",
+        "manual_f7_target_containers"
+      ]
+    },
+    {
+      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
+      "path": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/crate-target-discovery.json",
+      "fields": [
+        "session_id",
+        "probe_version",
+        "universe_address_hex",
+        "diagnostic_only",
+        "note"
+      ]
+    },
+    {
+      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
+      "path": "research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/asset-calculation-latest.json",
+      "fields": [
+        "session_id",
+        "probe_version",
+        "universe_address_hex",
+        "dungeon_scene_instances",
+        "predicted_target_containers"
+      ]
+    },
+    {
+      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
+      "path": "research-uploads/20261008T191656Z-metadata-prepare-assets-4beb1d75/asset-calculation-latest.json",
+      "fields": [
+        "session_id",
+        "probe_version",
+        "universe_address_hex",
+        "dungeon_scene_instances",
+        "predicted_target_containers"
+      ]
+    },
+    {
+      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
+      "path": "research-uploads/20261009T163954Z-metadata-prepare-assets-6ae2fd90/asset-calculation-latest.json",
+      "fields": [
+        "session_id",
+        "probe_version",
+        "universe_address_hex",
+        "dungeon_scene_instances",
+        "predicted_target_containers"
+      ]
+    },
+    {
+      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
+      "path": "research-uploads/20261009T163954Z-metadata-prepare-assets-6ae2fd90/crate-target-discovery.json",
+      "fields": [
+        "session_id",
+        "probe_version",
+        "universe_address_hex",
+        "diagnostic_only",
+        "note"
       ]
     }
   ],
