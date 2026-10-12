@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "prototype_version": "0.1.21",
+  "schema": 1,
+  "request_id": "1a131cab1568ef38e7f2c5b800000001",
+  "action": "crate-count-audit",
+  "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
+  "status": "passed",
+  "stages": [
+    {
+      "stage": "crate-count-audit",
+      "returncode": 0
+    }
+  ],
+  "root_generation_verified": false,
+  "execution_location": "local",
+  "local_only": false,
+  "errors": [],
+  "source_zip": null,
+  "evidence_zip": "runner-evidence.zip",
+  "crate_count_report": "crate-count.json",
+  "source_zip_available": false
+}

@@ -1,0 +1,34 @@
+{
+  "files": {
+    "AI_HANDOFF.md": {
+      "bytes": 17831,
+      "sha256": "08ed3e92c725d03677efd9b69d5130e8fced8fb9b6dc68a1e4124a4e3eb7144b"
+    },
+    "GITHUB_CHECK_PROMPT.md": {
+      "bytes": 8363,
+      "sha256": "e765ca729f20afa6ded0b9d88f5ac297c5b15b8e05da2f033e8022fc81e1f4c0"
+    },
+    "crate-count.json": {
+      "bytes": 7238,
+      "sha256": "26f9fa4028aa2d7170789bd2c25ca46e7ad6c7746b499e587101a8397b8fd787"
+    },
+    "latest.log": {
+      "bytes": 701,
+      "sha256": "5fe7143bf1e671eccad7454c7b202c8becad7306050939780eb912edd6966148"
+    },
+    "result.json": {
+      "bytes": 629,
+      "sha256": "c8fabdfd0b4ecb44c4db2efa64d04c863b0ea3dcb8293b3bf7c15647621c4bbe"
+    },
+    "runner-evidence.zip": {
+      "bytes": 13313,
+      "sha256": "359ae31691701b180cdc4a60f0ea8e3ca5a8ed395ada8d07d2dd84f17b60058e"
+    }
+  },
+  "prototype_version": "0.1.21",
+  "report_path": "runner-results/1a131cab1568ef38e7f2c5b800000001",
+  "request_id": "1a131cab1568ef38e7f2c5b800000001",
+  "schema": 1,
+  "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
+  "status": "passed"
+}

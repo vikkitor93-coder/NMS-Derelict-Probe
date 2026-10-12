@@ -1,0 +1,4 @@
+{"schema_version": 1, "prototype_version": "0.1.21", "stage": "snapshot", "status": "running", "request_id": "1a131cab1568ef38e7f2c5b800000001", "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b"}
+{"schema_version": 1, "prototype_version": "0.1.21", "stage": "crate-count-audit", "status": "running"}
+{"schema_version": 1, "prototype_version": "0.1.21", "stage": "crate-count-audit", "status": "passed", "returncode": 0}
+{"schema_version": 1, "prototype_version": "0.1.21", "stage": "complete", "status": "passed", "errors": [], "request_id": "1a131cab1568ef38e7f2c5b800000001", "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b"}
