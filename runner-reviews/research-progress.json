@@ -29,7 +29,8 @@
     "For same address 0001550006607CAC, the 0.3.5 and 0.3.38 room-crate-index.json files each contain 1,433 unique scene paths with identical per-path salvage/footlocker/target values (0 changed common entries). Their asset snapshots differ in used scene list (126 instances/68 types vs 146/60), so the diagnostic estimate change 51→14 comes from different session scene inventories, not a changed static index.",
     "Static capability check of the exact 0.1.21 source snapshot (commit 808620042ce73815cf84eefc10e697817773b02d): its fixed request allowlist is offline-check, offline-check-and-export, and crate-count-audit; request schema has no action-specific parameters. For crate-count-audit local_runner.py sets source_zip=null and invokes only the crate-audit subcommand. crate_count_audit.py reads bundled evidence/generation-measurements-summary.json, sums saved per-room counts, and compares them with recorded aggregate fields; it does not inspect NMS.exe or locate the game's count producer.",
     "Exact 0.1.21 exporter check: offline-check-and-export runs package/tests/diagnose/code/emulate before export; export_evidence.py only emits bounded raw function/caller bytes for root-call-window matches and a fixed helper list, with hash-gated upstream candidates 00639490/00639A70/00639BE0/02D07C80/02D08430. It has no crate-count target and does not decode or execute game code. No NMS.exe was present in the available project checkout or runner-source workspace, so this desktop cannot run that exporter against a local executable.",
-    "Unpinned runtime sample from the packaged v0.3.75 fixture `derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json` (source baseline commit d09e01231b511f5215e50ea0b1df3f3ea264c970; local projection SHA-256 6c1bd3d31aaa9cd0e35a6819f79d398c18e7ac6ac46fe8fa29ce87ce0262ed48, matching the fixture manifest): probe 0.3.42, system address 0000760006606CAB, root candidate 9C2818C7FE094FC8; recording ran 01:01:05–01:18:26Z, started in AbandonedFreighter, ended in Default, and saw 12 rooms. The capture records 49 blue_crate, 26 salvage_crate and 7 footlocker marker events (82 marked events). Its room/index summary estimates 29 salvage plus 8 footlockers (37), four above the 33 salvage/footlocker markers. This is a measured marker-vs-index discrepancy, not a verified physical total: marker completeness is not recorded, and manifest reports game 7.05 only as user-reported with no NMS.exe SHA-256."
+    "Unpinned runtime sample from the packaged v0.3.75 fixture `derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json` (source baseline commit d09e01231b511f5215e50ea0b1df3f3ea264c970; local projection SHA-256 6c1bd3d31aaa9cd0e35a6819f79d398c18e7ac6ac46fe8fa29ce87ce0262ed48, matching the fixture manifest): probe 0.3.42, system address 0000760006606CAB, root candidate 9C2818C7FE094FC8; recording ran 01:01:05–01:18:26Z, started in AbandonedFreighter, ended in Default, and saw 12 rooms. The capture records 49 blue_crate, 26 salvage_crate and 7 footlocker marker events (82 marked events). Its room/index summary estimates 29 salvage plus 8 footlockers (37), four above the 33 salvage/footlocker markers. This is a measured marker-vs-index discrepancy, not a verified physical total: marker completeness is not recorded, and manifest reports game 7.05 only as user-reported with no NMS.exe SHA-256.",
+    "Confirmed static at project source commit d09e01231b511f5215e50ea0b1df3f3ea264c970: `_generation_room_summary` walks scene-probe events under `/DUNGEON/`, looks each scene path up in the local room-crate index, and sums the index's salvage/footlocker entries. Therefore `generation_room_summary.target_containers_seen=37` is an asset-index estimate, not a runtime enumeration. The separate `_auto_crate_summary` uses unique `countable` Engine.AddNodes keys and labels the result `live`/`high`; the 0.3.42 Irchol fixture contains no auto_crates report, so its 82 manual marker events cannot be checked against that direct hook."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -44,7 +45,7 @@
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
     "Room family/kind alone determines a fixed container count in the saved rows."
   ],
-  "latest_material_finding": "A second-system packaged runtime log provides the strongest count-related sample so far: 82 recorded marker events across blue crates, salvage crates and footlockers for address 0000760006606CAB/root candidate 9C2818C7FE094FC8. It is not a verified total because the capture has no executable hash or explicit marker-completeness flag. Its 37 indexed salvage/footlocker estimate differs from the 33 corresponding marker events, so the asset-index total should not be treated as an exact observed count.",
+  "latest_material_finding": "Pinned source analysis explains the earlier count mismatch: target_containers_seen is computed by summing a local asset-index lookup for each observed dungeon scene, while a separate live Engine.AddNodes hook counts unique matched object keys. The 0.3.42 Irchol capture logged 82 manual marker events and an index estimate of 37 salvage/footlockers, but lacks the live-hook report and executable SHA; 82 is not a proven complete physical total.",
   "queued_experiments": [
     {
       "request_id": "1a131cab1568ef38e7f2c5b800000001",
@@ -62,7 +63,7 @@
     "No NMS.exe is present in the available project checkout or runner source workspace; exact-binary export must run on the configured Windows runner after the compatible 0.1.21 request completes.",
     "The 0.3.42 Irchol-Luhimo XVII sample contains 82 marker events but no explicit marker-completeness flag or executable hash; its 37 index estimate exceeds the 33 salvage/footlocker markers by four."
   ],
-  "next_action": "Keep the existing 0.1.21 crate-count-audit request unchanged until the compatible runner completes M0. Separately, use this 0.3.42 sample to design the first targeted action around crate-count evidence: require an explicitly complete marker/traversal capture and executable SHA, then compare direct marker totals against runtime-spawn/index totals. The available 0.1.21 action cannot perform this comparison; implement it only on the isolated runner update branch after the pending request returns.",
+  "next_action": "Preserve queued runner request 1a131cab1568ef38e7f2c5b800000001 until a compatible 0.1.21 runner completes M0. For the first crate experiment afterward, compare three distinct quantities on one capture: manual marker events, scene-index estimate, and `_auto_crate_summary.count` with status/method plus NMS.exe SHA-256. The 0.3.42 fixture currently supports only the first two and lacks executable provenance; don't use its 82 markers as a model target until completeness is documented.",
   "human_action_required": {
     "action": "Install the already-published runner 0.1.21 package, then reopen the runner.",
     "reason": "0.1.20 cannot satisfy the request's exact 0.1.21 source-hash pin; 0.1.22 is intentionally not published because doing so could replace/preempt the pinned experiment.",
@@ -81,9 +82,9 @@
   },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
-    "finding": "Compared the bundled 0.3.42 Irchol-Luhimo XVII runtime marker log with its room/index estimate.",
-    "interpretation": "82 crate/container marker events are recorded (49 blue, 26 salvage, 7 footlocker); only 33 salvage/footlocker markers versus 37 index-estimated objects. Session leaves the derelict and includes 12 rooms, but cannot prove every object was marked. The capture's NMS executable hash is absent, so it remains an unpinned observed sample, not a confirmed total.",
-    "provenance": "Fixture manifest in the v0.3.75 complete source bundle; source baseline commit d09e01231b511f5215e50ea0b1df3f3ea264c970; projection hash independently recomputed locally."
+    "finding": "Traced the 0.3.42 room summary and direct runtime count paths in pinned project source.",
+    "interpretation": "The room summary's 37 is index-derived, not a direct runtime container count. A separate Engine.AddNodes-based auto count exists, but is absent from this older 0.3.42 capture. This accounts for why its index estimate (37) does not match the 33 salvage/footlocker marker events.",
+    "provenance": "GitHub source `mod/derelict_baseline_probe.py` at commit d09e01231b511f5215e50ea0b1df3f3ea264c970; functions `_generation_room_summary`, `_load_live_crate_index`, `_auto_crate_summary`; compared with packaged fixture `derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json`."
   },
   "evidence_references": [
     {
@@ -266,6 +267,15 @@
         "runtime_start=AbandonedFreighter; runtime_end=Default; total_rooms_seen=12",
         "fixture manifest game version 7.05 user-reported; executable_sha256=null",
         "fixture projection_sha256=6c1bd3d31aaa9cd0e35a6819f79d398c18e7ac6ac46fe8fa29ce87ce0262ed48"
+      ]
+    },
+    {
+      "commit": "d09e01231b511f5215e50ea0b1df3f3ea264c970",
+      "path": "mod/derelict_baseline_probe.py",
+      "fields": [
+        "`_generation_room_summary`: groups /DUNGEON scene-probe events and sums crate_index values",
+        "`_load_live_crate_index`: maps static scene entries into salvage/footlocker values",
+        "`_auto_crate_summary`: separate count of unique countable Engine.AddNodes keys; live/high status"
       ]
     }
   ],
