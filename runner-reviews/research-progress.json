@@ -37,7 +37,8 @@
     "Confirmed static at project source commit d09e01231b511f5215e50ea0b1df3f3ea264c970: the live auto-count target matcher accepts only ABAND_CRATE_M and FOOTLOCKER. Generic CRATE/LOCKER/CHEST discovery tokens only create discovery_only evidence and do not increment count. Blue crates use the manual F7 marker path (`_add_marker(\"blue_crate\")`); the blue total is recorded marker count, while historical_expected_blue_crates is a manual field. This source finding does not establish behavior of the older 0.3.42 fixture: it has no auto_crates report and its 49 blue count is manual-marker evidence.",
     "Offline inspection of fixture derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json found 1,530 scene_probe events, of which only two contain generic crate-related tokens: the AbandonedFreighter ambience and a room-level MODELS/SPACE/POI/DUNGEON/CARG/CORNER_CRATES00.SCENE.MBIN instance. No event identifies an individual blue crate. The fixture records 49 blue_crate F7 markers (container ordinals 1–82 overall); those are the only blue-count observations in this capture.",
     "Runner request 1a131cab1568ef38e7f2c5b800000001 completed on runner 0.1.21 with exact source pin e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; result manifest SHA-256 45494e56f5c2feef8adc3822dd9277719c6b2500, crate-count report SHA-256 26f9fa4028aa2d7170789bd2c25ca46e7ad6c7746b499e587101a8397b8fd787.",
-    "The crate-count-audit recomputed room sums for 11/11 rows with zero mismatches. The same recorded address/root has CARGO_FLOATERS total 35 and MEDI_FLOATERS total 16; this is a saved-summary association, not independently measured physical inventory or a proven causal rule."
+    "The crate-count-audit recomputed room sums for 11/11 rows with zero mismatches. The same recorded address/root has CARGO_FLOATERS total 35 and MEDI_FLOATERS total 16; this is a saved-summary association, not independently measured physical inventory or a proven causal rule.",
+    "Saved-summary comparison across six 00001A0004E84EFD/CARGO_FLOATERS captures (probe 0.3.10–0.3.18): all report 35 targets; the room-count multiset signature is identical, and reward seed CE0669F299792E85 is stable. Two early captures have no recorded dungeon root; four later captures record 9256392A2F5A74AC. The first pair differs in room order/signature but not the multiset. This shows stable saved summaries despite changing root-field capture availability; it does not prove the underlying root was absent or irrelevant."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -45,34 +46,34 @@
     "Total count may be the sum of per-room container multiplicities, but saved data does not prove the same formula predicts a derelict before traversal.",
     "For some fixed system/preset pairs, count may be stable without observing root; cross-system, same-build evidence is needed before excluding root generally.",
     "The two same-address snapshots nine days apart may reflect a time/session-dependent derelict state or capture-version/scene-enumeration differences; distinguish these only with executable-pinned runtime evidence and an independently observed count.",
-    "The current safe remote channel can complete M0 using crate-count-audit, but a later crate-generation experiment will require a new fixed allowlisted action because the 0.1.21 schema cannot request targeted executable inspection or a saved-session comparison.",
     "For Irchol-Luhimo XVII (address 0000760006606CAB, root candidate 9C2818C7FE094FC8), the saved 12-room marker log records 82 crate/container markers; the index estimate is 37 salvage/footlockers versus 33 such markers, but marker completeness and executable identity are unknown.",
-    "Automatic node/resource probes may see blue-crate labels as discovery-only when names contain generic CRATE tokens, but no capture has shown their actual names or a countable blue-crate ID."
+    "Automatic node/resource probes may see blue-crate labels as discovery-only when names contain generic CRATE tokens, but no capture has shown their actual names or a countable blue-crate ID.",
+    "For 00001A0004E84EFD/CARGO_FLOATERS, address/preset plus a stable per-room count multiset is consistent with the repeated 35 summaries; the available data cannot tell whether root is a causal input because missing root means uncaptured, not absent."
   ],
   "falsified_hypotheses": [
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
     "Room family/kind alone determines a fixed container count in the saved rows.",
     "The existing live auto-count summary covers every crate/container category, including blue crates."
   ],
-  "latest_material_finding": "M0 is demonstrated end-to-end: the exact source-pinned request ran, uploaded hash-listed evidence, and was reviewed. Its 11/11 arithmetic agreement validates saved-summary consistency only. Same address/root shows different preset totals (35 vs 16), making preset a candidate input while leaving physical counts and causality unproven.",
+  "latest_material_finding": "Across six saved 00001A0004E84EFD/CARGO_FLOATERS captures, all totals are 35 and room-count multisets/reward seed agree despite two captures lacking a recorded root candidate. This narrows the observable candidate set but does not falsify root dependence.",
   "queued_experiments": [],
   "unresolved_blockers": [
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
-    "No same-build multi-system rows currently establish whether system address/preset/root predicts total count before entering the derelict.",
-    "No NMS.exe is present in the available project checkout or runner source workspace; exact-binary export must run on the configured Windows runner after the compatible 0.1.21 request completes.",
+    "No same-build multi-system rows establish whether system address/preset/root predicts physical total count before traversal.",
+    "No NMS.exe is present in the available project checkout or runner-source workspace; the published runner audit does not inspect game code.",
     "The 0.3.42 Irchol-Luhimo XVII sample contains 82 marker events but no explicit marker-completeness flag or executable hash; its 37 index estimate exceeds the 33 salvage/footlocker markers by four.",
     "Blue-crate runtime object/resource identity is not known; F7 gives manual marker counts only, so current direct auto-count cannot yield total crate count.",
     "The completed 0.1.21 action audits bundled arithmetic only; it has no NMS.exe hash or physical crate-completeness evidence and does not inspect the count producer.",
     "No same-build, executable-pinned multi-system observations yet establish whether system address, preset, root, or another state predicts total physical count before traversal.",
     "Blue-crate runtime identity and marker completeness remain unknown; existing F7 counts cannot yet close the total-count gap."
   ],
-  "next_action": "Continue M1 by deduplicating and comparing existing saved sessions at the same address/preset across probe versions, then compare across addresses while separating missing-root and null-preset rows. Do not repeat crate-count-audit unchanged. Queue a new runner request only after identifying a supported fixed action that answers a distinct crate-count question; current allowlist cannot inspect NMS.exe or runtime objects.",
+  "next_action": "Continue M1 by auditing the two independent non-empty address/preset groups in the 11-row summary against their room sequences and capture provenance, then separate genuinely distinct sessions from repeated snapshots. Do not treat absent root logging as absent game state. Current runner actions offer no distinct follow-up beyond arithmetic audit; queue only if a new supported action is required.",
   "human_action_required": null,
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
-    "finding": "Reviewed hash-pinned request 1a131cab1568ef38e7f2c5b800000001 and confirmed the returned summary arithmetic plus same-address/root preset totals.",
-    "interpretation": "The complete remote request→execution→upload→review cycle works. Evidence supports M0 completion, not M1 or a claim about physical in-game totals.",
-    "provenance": "Runner 0.1.21; source SHA-256 e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; manifest SHA-256 45494e56f5c2feef8adc3822dd9277719c6b2500; reviewed commit 66f8f346127f8e4365b2673fdedde4f04d4ce9e6; receipt commit 7a71c498eb09f7dba86952ebfd02fd66bbf02979."
+    "finding": "Compared six saved CARGO_FLOATERS rows for address 00001A0004E84EFD across probe versions, including totals, reward seed, root-field availability, and per-room multiset signatures.",
+    "interpretation": "All six saved totals are 35; stable room-count multiset and reward seed make address/preset or downstream layout state plausible observables. Two missing root records are capture gaps, so root relevance remains unresolved.",
+    "provenance": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/generation-measurements-summary.json; blob SHA-1 6b327ee6a3b70c8ee5656d546f557831d9b48de1; branch evidence reviewed through commit 017764a13b030f9b2bba3f5ba5dd24a60bdd7f44."
   },
   "evidence_references": [
     {
@@ -267,18 +268,18 @@
       ]
     },
     {
-      "commit": "d09e01231b511f5215e50ea0b1df3f3ea264c970",
-      "path": "mod/derelict_baseline_probe.py",
+      "commit": "017764a13b030f9b2bba3f5ba5dd24a60bdd7f44",
+      "path": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/generation-measurements-summary.json",
       "fields": [
-        "TARGET_CRATE_IDS",
-        "AUTO_CRATE_DISCOVERY_TOKENS",
-        "_target_crate_name_match",
-        "_crate_discovery_name",
-        "_probe_spawned_node",
-        "_auto_crate_summary",
-        "marked_blue_crates",
-        "mark_blue_crate",
-        "historical_expected_blue_crates"
+        "session_id",
+        "probe_version",
+        "universe_address_hex",
+        "preset",
+        "target_containers",
+        "reward_seed_hexes",
+        "dungeon_root_seed_hexes",
+        "layout_multiset_signature_sha256",
+        "room_sequence"
       ]
     }
   ]
