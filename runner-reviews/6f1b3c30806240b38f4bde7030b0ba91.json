@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "request_id": "6f1b3c30806240b38f4bde7030b0ba91",
+  "source_sha256": "094ba3d22d95ced34155624f38b3dcb7dc7faab9594059c7a148c91fe772b4d8",
+  "status": "reviewed",
+  "reviewed_commit": "6e0eeb3829471f33d4ff7214185475229ca05027",
+  "findings": {
+    "run_status": "passed",
+    "failed_stage": null,
+    "measured_facts": [
+      "manifest.json and result.json agree on request_id, source_sha256, report_path, prototype_version 0.1.10 and status passed.",
+      "result.json records returncode 0 for source-package, tests, diagnose, code, emulate, and export; errors is empty.",
+      "result.json sets root_generation_verified=false. This pass verifies the runner stages recorded in the result, not root derivation or layout generation.",
+      "Manifest file sizes and SHA-256 values were treated as recorded metadata; they were not recomputed in this review."
+    ]
+  },
+  "next_action": "Keep this pass scoped to the recorded offline pipeline. Continue root research from the newest tested handoff and research-progress ledger; do not infer root or layout correctness from replay/emulation passes."
+}
