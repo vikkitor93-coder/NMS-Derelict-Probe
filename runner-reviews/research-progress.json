@@ -30,7 +30,7 @@
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
     "Room family/kind alone determines a fixed container count in the saved rows."
   ],
-  "latest_material_finding": "The same address+preset produced 35 in six historical sessions, including two with no captured root candidate; the same candidate root and address under MEDI_FLOATERS produced 16. Root may be unnecessary for count when system+preset are known, but cross-version/unpinned evidence cannot settle M2.",
+  "latest_material_finding": "Saved asset evidence yields a verified 21-container sum for one captured scene-instance list: 130/130 instances resolve through the 1,433-entry room index, with no per-instance mismatch (12 salvage + 9 footlockers). This validates only scene-list-to-index arithmetic; it is not a pre-traversal prediction or live count.",
   "queued_experiments": [
     {
       "request_id": "1a131cab1568ef38e7f2c5b800000001",
@@ -41,11 +41,57 @@
     }
   ],
   "unresolved_blockers": [
-    "No runner report has returned for the remote request yet; the 0.1.21 package must be applied by the local runner before this queue action can execute.",
-    "The 11 historical measurements have no executable SHA-256 and mix probe versions; they cannot establish a version-pinned count model.",
-    "Room labels are null in the saved room sequences, preventing a finer same-room-identity multiplicity comparison from this summary alone."
+    "Queued request 1a131cab1568ef38e7f2c5b800000001 has not produced a runner result; latest remains request 4917f98b7a734768ac413372ab59861e at runner 0.1.20.",
+    "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
+    "No same-build multi-system rows currently establish whether system address/preset/root predicts total count before entering the derelict."
   ],
-  "next_action": "Review the queued runner result first. Continue M1/M2 with a provenance audit of existing saved captures: determine whether any exact sessions behind generation-measurements-summary.json include a matching NMS.exe SHA; if not, use the runner's hash-locked selected executable for the smallest targeted static investigation of crate-count producer/consumer before asking for any new traversal. A root is not required unless a measured same-build comparison ties it to count.",
+  "next_action": "Check for the pending crate-count-audit result at the pinned evidence branch head. If absent, use the runner's existing safe request path only after this request completes; expand the allowlisted research capability on an isolated runner branch to inspect the already captured scene-instance-to-index count path or a selected executable's relevant read-only code. Keep the request narrow and hash-pinned; do not request a normal derelict traversal until this static boundary is exhausted.",
   "human_action_required": null,
-  "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs."
+  "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
+  "completed_step": {
+    "finding": "Reconciled the saved asset-based count for session 20261009T161852Z_00006D0006606CAB against the static room crate index. All 130 captured dungeon scene instances (61 unique paths) matched indexed scene entries; no misses or per-instance count mismatches. Recomputed totals were 12 salvage crates + 9 crew footlockers = 21 target containers, matching the recorded aggregate.",
+    "interpretation": "This verifies the arithmetic/index-lookup boundary from an already captured scene-instance list. It does not predict from system inputs, prove live-world object completeness, or supply an independent observed crate count. The session records manual_f7_target_containers=0.",
+    "provenance": "The evidence identifies probe_version 0.3.40 and session ID, but the asset-calculation record and all-saved-evidence manifest contain no matching NMS.exe SHA-256; leave the result unpinned to an executable build."
+  },
+  "evidence_references": [
+    {
+      "commit": "79d273001592cb2d8c707ffa562509deb52aa11f",
+      "path": "research-uploads/20261010T021347Z-all-saved-evidence-bae2d649/asset-calculation-latest.json",
+      "fields": [
+        "session_id",
+        "probe_version",
+        "dungeon_scene_instances",
+        "resolved_scene_instances",
+        "unresolved_scene_instances",
+        "predicted_salvage_crates",
+        "predicted_crew_footlockers",
+        "predicted_target_containers",
+        "manual_f7_target_containers",
+        "instances"
+      ]
+    },
+    {
+      "commit": "79d273001592cb2d8c707ffa562509deb52aa11f",
+      "path": "research-uploads/20261010T021347Z-all-saved-evidence-bae2d649/room-crate-index.json",
+      "fields": [
+        "scene_exports_indexed",
+        "dungeon_scenes_indexed",
+        "entries[].scene_path",
+        "entries[].salvage_crates",
+        "entries[].crew_footlockers",
+        "entries[].target_containers"
+      ]
+    },
+    {
+      "commit": "79d273001592cb2d8c707ffa562509deb52aa11f",
+      "path": "research-uploads/20261010T021347Z-all-saved-evidence-bae2d649/run-manifest.json",
+      "fields": [
+        "action",
+        "files[].name",
+        "files[].sha256",
+        "files[].size",
+        "no executable SHA-256 field"
+      ]
+    }
+  ]
 }
