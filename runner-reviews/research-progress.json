@@ -42,7 +42,8 @@
     "Repository-wide tree audit found 132 generation-measurements-summary.json paths but only 3 unique Git blobs: 9-row, 10-row, and 11-row summaries. 129 paths duplicate the 11-row summary; repeated uploads do not add independent system samples.",
     "Repository-wide tree audit found 133 asset-calculation-latest.json paths across 5 byte-distinct blobs, but two 0001BF0004E84EFD reports parse identically, leaving 4 distinct (session,address,estimate) records. All are static room-index estimates with manual F7 count zero, not measured physical totals.",
     "Distinct asset-index estimates include 0001550006607CAC at 51 (probe 0.3.5) and 14 (probe 0.3.38, different session/scene list), 0001BF0004E84EFD at 43, and 00006D0006606CAB at 21. These do not establish physical count changes or a system-address prediction rule.",
-    "User clarification: the completed Irichol-Luhimo XVII derelict cannot be replayed; an unfinished derelict can be revisited, but opened crates remain open. Do not request a repeat of the completed instance or open targets during a measurement pass. Current installed NMS.exe SHA-256 was measured as 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499; this identifies the current executable only and does not retroactively pin the older fixture."
+    "User clarification: the completed Irichol-Luhimo XVII derelict cannot be replayed; an unfinished derelict can be revisited, but opened crates remain open. Do not request a repeat of the completed instance or open targets during a measurement pass. Current installed NMS.exe SHA-256 was measured as 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499; this identifies the current executable only and does not retroactively pin the older fixture.",
+    "Hash-pinned static triage of the currently installed NMS.exe (SHA-256 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499; PE image base 0x140000000): an iced-x86 scan of .text found 9 direct RIP-relative references among 171 ASCII strings containing crate/dungeon terms. The direct hits were dungeon parameter/choice metadata thunks; no direct RIP-relative hit targeted the obvious scene-node strings CRATEM_OPEN, OBJ_CRATE_*, or FOOT_LOCKER_OPEN. This bounded negative result does not exclude indirect references or locate the crate-count producer."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -59,7 +60,7 @@
     "Room family/kind alone determines a fixed container count in the saved rows.",
     "The existing live auto-count summary covers every crate/container category, including blue crates."
   ],
-  "latest_material_finding": "After deduplicating repository-wide uploads, the usable measured summary still has only 11 rows and two non-empty system addresses; 129 of 132 summary files are copies of the same 11-row body. The extra cross-system figures are static asset-index estimates with no manual physical counts, so they cannot validate a count predictor.",
+  "latest_material_finding": "Saved runtime evidence still lacks count-complete physical observations. Static triage on current executable hash 13D5060D…626CC3499 found only dungeon-parameter metadata thunks among direct code references to the scanned crate/dungeon strings; it did not locate the count producer. Next discriminating observation remains same-session auto/discovery labels correlated with F7 marks for unopened blue crates in an unfinished derelict.",
   "queued_experiments": [],
   "unresolved_blockers": [
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
@@ -72,21 +73,22 @@
     "Blue-crate runtime identity and marker completeness remain unknown; existing F7 counts cannot yet close the total-count gap.",
     "Saved evidence is exhausted for physical-count validation: summary duplicates dominate, unique system/preset rows lack matching-build NMS.exe provenance, and asset-index totals have no complete manual count."
   ],
-  "next_action": "Use an unfinished derelict for a non-destructive runtime identity sample: start capture before boarding, F7-mark one or more visible unopened blue crates exactly once without opening them, and compare same-session auto_crates/crate-target-discovery labels. Record any already-open containers separately. This can test blue-crate matcher coverage; it does not establish total-count completeness. Do not repeat the completed Irichol instance.",
+  "next_action": "On an unfinished derelict, capture one or more visible unopened blue crates without opening them; correlate same-session auto_crates/crate-target-discovery labels with F7 marks. This tests blue matcher coverage, not total-count completeness. Preserve any already-open state separately. Current-executable static triage did not expose a direct crate scene-name code reference, so do not expand generic dungeon metadata tracing without new crate-count evidence.",
   "human_action_required": {
-    "action": "On an unfinished derelict that can still be revisited, collect a short non-destructive probe sample; do not open any crates during capture.",
+    "action": "On an unfinished derelict that can still be revisited, collect a short non-destructive runtime identity sample; do not open any crates.",
     "missing_data": "Same-session auto_crates and crate-target-discovery output correlated with manual F7 marks for visible unopened blue crates, plus manifest/probe version/current game build and executable hash.",
     "why_existing_evidence_cannot_provide_it": "The completed Irichol capture has no auto_crates report or individual blue-crate identities and cannot be replayed. Static source shows blue crates may be discovery-only, but runtime object labels have not been joined to a manual marker.",
     "steps": [
       "Choose any unfinished derelict with at least one unopened blue crate; do not use the completed Irichol derelict.",
       "Start a probe capture before boarding or before entering its remaining unexplored area.",
-      "Without opening the crate, use F7 once while targeting each visible unopened blue crate. Let automatic salvage/footlocker hooks and crate discovery logging run.",
-      "Stop after obtaining a same-session auto_crates/discovery record and the F7 marker(s); a full traversal is not required for this identity test. Upload the complete session bundle, including manifest and report files, and note which crates were already open before capture."
+      "Without opening the crate, press F7 once while targeting each visible unopened blue crate. Let automatic salvage/footlocker hooks and crate discovery logging run.",
+      "Stop after obtaining same-session auto_crates/discovery records and the F7 markers; full traversal is not required for this identity test. Upload the complete bundle and note which crates were already open.",
+      "Include the probe version, the game build number (user supplied: 1.20), and the current NMS.exe SHA-256."
     ],
     "expected_success_indicator": "At least one unopened blue_crate F7 marker and same-session node/resource discovery or auto_crates records are present, allowing a direct test of whether its runtime label is countable or discovery-only.",
     "hypothesis": "Blue crates may be omitted from the automatic count because their runtime objects are recognized only by generic CRATE discovery labels; a non-opening marker-to-label comparison can test this.",
     "full_derelict_traversal_required": false,
-    "limitation": "This sample tests runtime label/matcher coverage only. Predicting total count still requires a completeness-validated observation; previously opened crates must be accounted for separately."
+    "limitation": "This test only identifies runtime labels and matcher coverage. It does not validate total count, and opened crates must be accounted for separately."
   },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
