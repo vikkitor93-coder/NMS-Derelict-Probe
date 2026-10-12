@@ -1,11 +1,11 @@
 {
-  "archive_bytes": 385671,
-  "archive_sha256": "cca0a46fbfd7cf90b8ddb29a1f365d3b65d36bd0c97f48396c72a857fe7cca69",
-  "archive_url": "https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/runner-updates/runner-updates/NMS-Runner-v0.1.13.zip",
+  "archive_bytes": 386966,
+  "archive_sha256": "332d45ef8b400dfe75774728ad8e6dcfecff0864723b8f30b1089cbb0c23f48d",
+  "archive_url": "https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/runner-updates/runner-updates/NMS-Runner-v0.1.15.zip",
   "files": {
     "AI_HANDOFF.md": {
-      "bytes": 16034,
-      "sha256": "f146fa3790b218a0835236bc26203e7a74facc2ff8ea34443cc802e779b45fb0"
+      "bytes": 16710,
+      "sha256": "22c0bdb85b5c4b35f991a84b2f35bf9d26b776737a21aea242da50eaf3287246"
     },
     "CODE_REVIEW_20261011_v0.1.3.json": {
       "bytes": 3374,
@@ -16,8 +16,8 @@
       "sha256": "195505f8174ba72ad58b3e0e944338584e4648dbdd4ecb547c7e61f967b44254"
     },
     "GITHUB_CHECK_PROMPT.md": {
-      "bytes": 5408,
-      "sha256": "2be25683c0e6a68e72692f0338ca285a9069a1040f62d29be685d51c2ebbce3d"
+      "bytes": 7148,
+      "sha256": "d873c90a2b642e0644a789091c07e45ef0a28771bd8744d242a73525cd051b59"
     },
     "Install-Runner.cmd": {
       "bytes": 1128,
@@ -32,16 +32,16 @@
       "sha256": "50bb2117a29d3480cd70f9b696a0b27d3c70658f502ba37097e8b080a836f559"
     },
     "README.md": {
-      "bytes": 14053,
-      "sha256": "e5441f6f33d29803e139d72ee385572eb8b940ed9aa727e34921ea318fa78a4d"
+      "bytes": 14480,
+      "sha256": "718cb1816934770333643cfbdd7ad8ab5aced601e64a8e1cfa94d433203515a8"
     },
     "RUNNER.md": {
       "bytes": 15218,
       "sha256": "d104a79abac8cdf899a88a8b20cbed0663106c61a638aa3b35f3c884bdf04e3a"
     },
     "STATUS.json": {
-      "bytes": 4688,
-      "sha256": "8cb253af92e55fb778cdcd0114b516aa69224b149278e7c86826fb04afa18f41"
+      "bytes": 4821,
+      "sha256": "e1451090c3a5fd4d5ca90b8a16633e4a615e61c8d5c90a409fec3ae4fab9b57a"
     },
     "Setup-GitHub.cmd": {
       "bytes": 1578,
@@ -61,7 +61,7 @@
     },
     "__init__.py": {
       "bytes": 101,
-      "sha256": "6dea0d4beac011c738b472af0c001595b94bd1475e66deb69741949d2d73cd5d"
+      "sha256": "a11c79d44151f203a04f76e388c4bebbbd6d9112af5d02e8b3b7a032200bf9e4"
     },
     "audit.py": {
       "bytes": 4630,
@@ -208,8 +208,8 @@
       "sha256": "c22d484fb6af5f492c59ad1a26e3e70ed1b88577c83924645544212cad2a8767"
     },
     "tests/test_derelict_offline_gui.py": {
-      "bytes": 5098,
-      "sha256": "8fc38fc3c33488c55079a8869ba7852b70481e5492ef09f27f155a4464caf485"
+      "bytes": 6436,
+      "sha256": "5ef309004468252cbb805117aaae11d303977103566e54b46bcb8bce7413a7ad"
     },
     "tests/test_derelict_offline_install.py": {
       "bytes": 4402,
@@ -281,10 +281,10 @@
     }
   },
   "schema": 1,
-  "source_commit": "518eeb82e59331b123f60cfa9614e9ab584e1204",
-  "source_sha256": "da26dca1e612d586b15be8d2c0d1749e43e9a028e33046fd2d45ae779b358caa",
-  "tests_count": 106,
-  "tests_output_sha256": "dfc970b88d81a39764e1a891c3b66b4ad3290c5211355650a39819be8520de51",
+  "source_commit": "3ee3a1306386ff379882864e52eb194329e96d63",
+  "source_sha256": "01ef45856eef839eaa3dbbf5bed91769f6cc81f42bb8cf3516a096c4efb771e7",
+  "tests_count": 107,
+  "tests_output_sha256": "ee0e4c6a140e77b24755cd509ffb28a6dac5811bafba79415092573585d1da1e",
   "tests_status": "passed",
-  "version": "0.1.13"
+  "version": "0.1.15"
 }
