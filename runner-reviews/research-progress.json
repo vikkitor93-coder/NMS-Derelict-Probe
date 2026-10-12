@@ -8,7 +8,7 @@
     "receipt_commit": "7a71c498eb09f7dba86952ebfd02fd66bbf02979"
   },
   "latest_evidence_check": {
-    "branch_head": "66f8f346127f8e4365b2673fdedde4f04d4ce9e6",
+    "branch_head": "9313bf985a9ac4d6f992062320c19206fe473c7e",
     "latest_request_id": "1a131cab1568ef38e7f2c5b800000001",
     "latest_status": "passed",
     "latest_runner_version": "0.1.21",
@@ -43,7 +43,12 @@
     "Repository-wide tree audit found 133 asset-calculation-latest.json paths across 5 byte-distinct blobs, but two 0001BF0004E84EFD reports parse identically, leaving 4 distinct (session,address,estimate) records. All are static room-index estimates with manual F7 count zero, not measured physical totals.",
     "Distinct asset-index estimates include 0001550006607CAC at 51 (probe 0.3.5) and 14 (probe 0.3.38, different session/scene list), 0001BF0004E84EFD at 43, and 00006D0006606CAB at 21. These do not establish physical count changes or a system-address prediction rule.",
     "User clarification: the completed Irichol-Luhimo XVII derelict cannot be replayed; an unfinished derelict can be revisited, but opened crates remain open. Do not request a repeat of the completed instance or open targets during a measurement pass. Current installed NMS.exe SHA-256 was measured as 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499; this identifies the current executable only and does not retroactively pin the older fixture.",
-    "Hash-pinned static triage of the currently installed NMS.exe (SHA-256 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499; PE image base 0x140000000): an iced-x86 scan of .text found 9 direct RIP-relative references among 171 ASCII strings containing crate/dungeon terms. The direct hits were dungeon parameter/choice metadata thunks; no direct RIP-relative hit targeted the obvious scene-node strings CRATEM_OPEN, OBJ_CRATE_*, or FOOT_LOCKER_OPEN. This bounded negative result does not exclude indirect references or locate the crate-count producer."
+    "Hash-pinned static triage of the currently installed NMS.exe (SHA-256 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499; PE image base 0x140000000): an iced-x86 scan of .text found 9 direct RIP-relative references among 171 ASCII strings containing crate/dungeon terms. The direct hits were dungeon parameter/choice metadata thunks; no direct RIP-relative hit targeted the obvious scene-node strings CRATEM_OPEN, OBJ_CRATE_*, or FOOT_LOCKER_OPEN. This bounded negative result does not exclude indirect references or locate the crate-count producer.",
+    "Current installed assets were extracted read-only from 97 PAKs; the targeted archive scan found FREIGHTERDUNGEONSTABLE.MBIN in NMSARC.Precache.pak and a representative dungeon room scene in NMSARC.EntitySceneMBIN.pak. Current decompressed table MXML SHA-256=209c1a0ddf5c17528547c0e990756231dc3699a77d7e83417ba931ae7ea21967 (68,457 bytes); parsed table JSON SHA-256=4a8bbee27235f40903b1e7efdc9cb0ae9de1d9479cfed55b87f26adba0eb2d51.",
+    "Current table parse has 10 presets: eight with seven rooms and two maze variants with four. Its exposed rules specify room count/sequence and quest-item placement; no direct crate multiplicity/count field was found. This bounds the table's role but does not prove no indirect code-side count exists.",
+    "Current static room index SHA-256=aaf28c76814816083e7b04d8ad027dd63e992c8499ae002c3eea2b7dacc15de (1,433 dungeon scenes; 75 have salvage/footlocker targets). Target multiplicity varies among scene variants within families, e.g. BARRACKS 0–3, CARG 0–3, MEDI 0–2, END 0–3, HANGAR 0–1, COMM 0–1, infestation 0–1. Thus family/kind or preset alone is insufficient for the static salvage/footlocker sum; selected scene identity matters. This remains static asset evidence, not a physical runtime total.",
+    "Comparison against cached 2026-10-09 asset outputs found 1,433 common dungeon scene paths with zero per-path salvage/footlocker/target value changes; the freighter dungeon table MXML hash also matches. Asset drift is weakened as an explanation for historical static-index differences, but the old captures remain unpinned to the current executable.",
+    "Reproducibility inputs: extract_current_derelict_assets.py SHA-256=68e2fec8f91c9e14b12ce468974671c30985104ac4ebf8f9a2d3da5b2ef1b704; analyze_dungeon_generation_table.py SHA-256=33dc3a8eddb677220f3708e12e95dac5afb9fa0c0324fb078bfe8733c4d35527; build_scene_crate_index.py SHA-256=883e1598b4a05ff74b5624dbc08a6ab607c43bc66edb2230bff86fd76e023306. Outputs were isolated under the current workspace work/crate-static-assets-13d5060d."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -60,7 +65,7 @@
     "Room family/kind alone determines a fixed container count in the saved rows.",
     "The existing live auto-count summary covers every crate/container category, including blue crates."
   ],
-  "latest_material_finding": "Saved runtime evidence still lacks count-complete physical observations. Static triage on current executable hash 13D5060D…626CC3499 found only dungeon-parameter metadata thunks among direct code references to the scanned crate/dungeon strings; it did not locate the count producer. Next discriminating observation remains same-session auto/discovery labels correlated with F7 marks for unopened blue crates in an unfinished derelict.",
+  "latest_material_finding": "Current hash-pinned static assets narrow the salvage/footlocker count path: the preset table does not provide direct multiplicity, while per-scene variant counts vary. Future offline total prediction likely needs generated scene identity or equivalent derived state; blue-crate runtime identity and physical-count validation remain open.",
   "queued_experiments": [],
   "unresolved_blockers": [
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
@@ -71,9 +76,10 @@
     "The completed 0.1.21 action audits bundled arithmetic only; it has no NMS.exe hash or physical crate-completeness evidence and does not inspect the count producer.",
     "No same-build, executable-pinned multi-system observations yet establish whether system address, preset, root, or another state predicts total physical count before traversal.",
     "Blue-crate runtime identity and marker completeness remain unknown; existing F7 counts cannot yet close the total-count gap.",
-    "Saved evidence is exhausted for physical-count validation: summary duplicates dominate, unique system/preset rows lack matching-build NMS.exe provenance, and asset-index totals have no complete manual count."
+    "Saved evidence is exhausted for physical-count validation: summary duplicates dominate, unique system/preset rows lack matching-build NMS.exe provenance, and asset-index totals have no complete manual count.",
+    "Current static assets constrain per-scene multiplicity but do not reveal which scene variants are selected for a given system/preset; matching that selector to total count is still unresolved."
   ],
-  "next_action": "On an unfinished derelict, capture one or more visible unopened blue crates without opening them; correlate same-session auto_crates/crate-target-discovery labels with F7 marks. This tests blue matcher coverage, not total-count completeness. Preserve any already-open state separately. Current-executable static triage did not expose a direct crate scene-name code reference, so do not expand generic dungeon metadata tracing without new crate-count evidence.",
+  "next_action": "Do not queue the runner's fixed arithmetic audit again: its allowlist has no targeted static-asset or executable-disassembly action. Continue only with crate-relevant analysis of the current generated-scene selection boundary, or use a short non-destructive capture on an unfinished derelict to correlate F7 markers with auto/discovery labels for unopened blue crates. Do not open crates; already-open containers must be recorded separately and cannot be treated as absent. No full traversal is required for the label test.",
   "human_action_required": {
     "action": "On an unfinished derelict that can still be revisited, collect a short non-destructive runtime identity sample; do not open any crates.",
     "missing_data": "Same-session auto_crates and crate-target-discovery output correlated with manual F7 marks for visible unopened blue crates, plus manifest/probe version/current game build and executable hash.",
@@ -303,5 +309,23 @@
         "room_sequence"
       ]
     }
-  ]
+  ],
+  "latest_static_asset_experiment": {
+    "question": "Can the current static dungeon table alone encode total salvage/footlocker multiplicity, and has static scene composition drifted since the cached asset output?",
+    "provenance": {
+      "executable_sha256": "13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499",
+      "table_archive": "NMSARC.Precache.pak",
+      "scene_archive": "NMSARC.EntitySceneMBIN.pak",
+      "table_mxml_sha256": "209c1a0ddf5c17528547c0e990756231dc3699a77d7e83417ba931ae7ea21967",
+      "parsed_table_sha256": "4a8bbee27235f40903b1e7efdc9cb0ae9de1d9479cfed55b87f26adba0eb2d51",
+      "scene_index_sha256": "aaf28c76814816083e7b04d8ad027dd63e992c8499ae002c3eea2b7dacc15de",
+      "parser_sha256": "33dc3a8eddb677220f3708e12e95dac5afb9fa0c0324fb078bfe8733c4d35527",
+      "index_builder_sha256": "883e1598b4a05ff74b5624dbc08a6ab607c43bc66edb2230bff86fd76e023306",
+      "extractor_sha256": "68e2fec8f91c9e14b12ce468974671c30985104ac4ebf8f9a2d3da5b2ef1b704"
+    },
+    "finding": "The parsed preset table has no direct crate multiplicity; static target multiplicities vary by scene variant within families. The current dungeon scene index is unchanged versus cached 2026-10-09 common entries.",
+    "interpretation": "Supports selected scene identity as a necessary input for predicting indexed salvage/footlocker totals; it does not establish blue-crate composition, runtime selection, or total physical count.",
+    "workspace_output": "C:/Users/Vikman/Documents/Codex/2026-10-11/new-chat/work/crate-static-assets-13d5060d"
+  },
+  "experiments_awaiting_result": []
 }
