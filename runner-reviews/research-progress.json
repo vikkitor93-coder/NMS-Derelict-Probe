@@ -48,7 +48,8 @@
     "Current table parse has 10 presets: eight with seven rooms and two maze variants with four. Its exposed rules specify room count/sequence and quest-item placement; no direct crate multiplicity/count field was found. This bounds the table's role but does not prove no indirect code-side count exists.",
     "Current static room index SHA-256=aaf28c76814816083e7b04d8ad027dd63e992c8499ae002c3eea2b7dacc15de (1,433 dungeon scenes; 75 have salvage/footlocker targets). Target multiplicity varies among scene variants within families, e.g. BARRACKS 0–3, CARG 0–3, MEDI 0–2, END 0–3, HANGAR 0–1, COMM 0–1, infestation 0–1. Thus family/kind or preset alone is insufficient for the static salvage/footlocker sum; selected scene identity matters. This remains static asset evidence, not a physical runtime total.",
     "Comparison against cached 2026-10-09 asset outputs found 1,433 common dungeon scene paths with zero per-path salvage/footlocker/target value changes; the freighter dungeon table MXML hash also matches. Asset drift is weakened as an explanation for historical static-index differences, but the old captures remain unpinned to the current executable.",
-    "Reproducibility inputs: extract_current_derelict_assets.py SHA-256=68e2fec8f91c9e14b12ce468974671c30985104ac4ebf8f9a2d3da5b2ef1b704; analyze_dungeon_generation_table.py SHA-256=33dc3a8eddb677220f3708e12e95dac5afb9fa0c0324fb078bfe8733c4d35527; build_scene_crate_index.py SHA-256=883e1598b4a05ff74b5624dbc08a6ab607c43bc66edb2230bff86fd76e023306. Outputs were isolated under the current workspace work/crate-static-assets-13d5060d."
+    "Reproducibility inputs: extract_current_derelict_assets.py SHA-256=68e2fec8f91c9e14b12ce468974671c30985104ac4ebf8f9a2d3da5b2ef1b704; analyze_dungeon_generation_table.py SHA-256=33dc3a8eddb677220f3708e12e95dac5afb9fa0c0324fb078bfe8733c4d35527; build_scene_crate_index.py SHA-256=883e1598b4a05ff74b5624dbc08a6ab607c43bc66edb2230bff86fd76e023306. Outputs were isolated under the current workspace work/crate-static-assets-13d5060d.",
+    "Targeted read-only scan of all installed PAK filename indexes found FREIGHTERDUNGEONSTABLE.MBIN in NMSARC.Precache.pak and no additional path whose filename/path contains DUNGEON or FREIGHTER together with TABLE; this narrows named static-table sources but does not exclude a generically named selector table or code-side selection."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -65,7 +66,7 @@
     "Room family/kind alone determines a fixed container count in the saved rows.",
     "The existing live auto-count summary covers every crate/container category, including blue crates."
   ],
-  "latest_material_finding": "Current hash-pinned static assets narrow the salvage/footlocker count path: the preset table does not provide direct multiplicity, while per-scene variant counts vary. Future offline total prediction likely needs generated scene identity or equivalent derived state; blue-crate runtime identity and physical-count validation remain open.",
+  "latest_material_finding": "Current hash-pinned static assets establish that the named preset table does not encode container multiplicity directly, and scene-variant target counts differ. A bounded installed-PAK filename scan found no other explicitly named freighter/dungeon table. Runtime selection or a generically named/code-side selector remains unresolved; blue-crate identity and physical-count validation also remain open.",
   "queued_experiments": [],
   "unresolved_blockers": [
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
@@ -79,7 +80,7 @@
     "Saved evidence is exhausted for physical-count validation: summary duplicates dominate, unique system/preset rows lack matching-build NMS.exe provenance, and asset-index totals have no complete manual count.",
     "Current static assets constrain per-scene multiplicity but do not reveal which scene variants are selected for a given system/preset; matching that selector to total count is still unresolved."
   ],
-  "next_action": "Do not queue the runner's fixed arithmetic audit again: its allowlist has no targeted static-asset or executable-disassembly action. Continue only with crate-relevant analysis of the current generated-scene selection boundary, or use a short non-destructive capture on an unfinished derelict to correlate F7 markers with auto/discovery labels for unopened blue crates. Do not open crates; already-open containers must be recorded separately and cannot be treated as absent. No full traversal is required for the label test.",
+  "next_action": "The installed-asset name scan did not reveal another explicitly named freighter/dungeon table, and repository utilities do not implement scene selection. Do not repeat the runner arithmetic audit or expand generic metadata tracing. Next discriminating test is the short unopened-blue-crate runtime identity capture on an unfinished derelict: correlate one F7 mark with same-session auto_crates/discovery labels, leave the crate closed, and record already-open crates separately. No full traversal is required for this label test.",
   "human_action_required": {
     "action": "On an unfinished derelict that can still be revisited, collect a short non-destructive runtime identity sample; do not open any crates.",
     "missing_data": "Same-session auto_crates and crate-target-discovery output correlated with manual F7 marks for visible unopened blue crates, plus manifest/probe version/current game build and executable hash.",
@@ -323,9 +324,15 @@
       "index_builder_sha256": "883e1598b4a05ff74b5624dbc08a6ab607c43bc66edb2230bff86fd76e023306",
       "extractor_sha256": "68e2fec8f91c9e14b12ce468974671c30985104ac4ebf8f9a2d3da5b2ef1b704"
     },
-    "finding": "The parsed preset table has no direct crate multiplicity; static target multiplicities vary by scene variant within families. The current dungeon scene index is unchanged versus cached 2026-10-09 common entries.",
-    "interpretation": "Supports selected scene identity as a necessary input for predicting indexed salvage/footlocker totals; it does not establish blue-crate composition, runtime selection, or total physical count.",
-    "workspace_output": "C:/Users/Vikman/Documents/Codex/2026-10-11/new-chat/work/crate-static-assets-13d5060d"
+    "finding": "The table itself exposes no direct crate multiplicity, and a filename-index scan across installed PAKs found no other explicitly named freighter/dungeon table. Static target multiplicities vary by scene variant. The current index matches the cached 2026-10-09 common entries.",
+    "interpretation": "Supports selected scene identity as necessary for indexed salvage/footlocker totals; no separately named freighter/dungeon table was found by the bounded filename filter. This does not establish the code-side selector, blue-crate composition, runtime selection, or physical total.",
+    "workspace_output": "C:/Users/Vikman/Documents/Codex/2026-10-11/new-chat/work/crate-static-assets-13d5060d",
+    "pak_index_scan": {
+      "scope": "Filename indexes of installed *.pak files in current PCBANKS",
+      "filter": "path or filename contains DUNGEON or FREIGHTER and also TABLE",
+      "result": "FREIGHTERDUNGEONSTABLE.MBIN in NMSARC.Precache.pak; no additional matching table",
+      "limitation": "Name-based filter cannot exclude generically named tables or executable-side selectors"
+    }
   },
   "experiments_awaiting_result": []
 }
