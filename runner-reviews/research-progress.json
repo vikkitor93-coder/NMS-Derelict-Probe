@@ -38,7 +38,10 @@
     "Offline inspection of fixture derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json found 1,530 scene_probe events, of which only two contain generic crate-related tokens: the AbandonedFreighter ambience and a room-level MODELS/SPACE/POI/DUNGEON/CARG/CORNER_CRATES00.SCENE.MBIN instance. No event identifies an individual blue crate. The fixture records 49 blue_crate F7 markers (container ordinals 1–82 overall); those are the only blue-count observations in this capture.",
     "Runner request 1a131cab1568ef38e7f2c5b800000001 completed on runner 0.1.21 with exact source pin e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; result manifest SHA-256 45494e56f5c2feef8adc3822dd9277719c6b2500, crate-count report SHA-256 26f9fa4028aa2d7170789bd2c25ca46e7ad6c7746b499e587101a8397b8fd787.",
     "The crate-count-audit recomputed room sums for 11/11 rows with zero mismatches. The same recorded address/root has CARGO_FLOATERS total 35 and MEDI_FLOATERS total 16; this is a saved-summary association, not independently measured physical inventory or a proven causal rule.",
-    "Saved-summary comparison across six 00001A0004E84EFD/CARGO_FLOATERS captures (probe 0.3.10–0.3.18): all report 35 targets; the room-count multiset signature is identical, and reward seed CE0669F299792E85 is stable. Two early captures have no recorded dungeon root; four later captures record 9256392A2F5A74AC. The first pair differs in room order/signature but not the multiset. This shows stable saved summaries despite changing root-field capture availability; it does not prove the underlying root was absent or irrelevant."
+    "Saved-summary comparison across six 00001A0004E84EFD/CARGO_FLOATERS captures (probe 0.3.10–0.3.18): all report 35 targets; the room-count multiset signature is identical, and reward seed CE0669F299792E85 is stable. Two early captures have no recorded dungeon root; four later captures record 9256392A2F5A74AC. The first pair differs in room order/signature but not the multiset. This shows stable saved summaries despite changing root-field capture availability; it does not prove the underlying root was absent or irrelevant.",
+    "Repository-wide tree audit found 132 generation-measurements-summary.json paths but only 3 unique Git blobs: 9-row, 10-row, and 11-row summaries. 129 paths duplicate the 11-row summary; repeated uploads do not add independent system samples.",
+    "Repository-wide tree audit found 133 asset-calculation-latest.json paths across 5 byte-distinct blobs, but two 0001BF0004E84EFD reports parse identically, leaving 4 distinct (session,address,estimate) records. All are static room-index estimates with manual F7 count zero, not measured physical totals.",
+    "Distinct asset-index estimates include 0001550006607CAC at 51 (probe 0.3.5) and 14 (probe 0.3.38, different session/scene list), 0001BF0004E84EFD at 43, and 00006D0006606CAB at 21. These do not establish physical count changes or a system-address prediction rule."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -55,7 +58,7 @@
     "Room family/kind alone determines a fixed container count in the saved rows.",
     "The existing live auto-count summary covers every crate/container category, including blue crates."
   ],
-  "latest_material_finding": "Across six saved 00001A0004E84EFD/CARGO_FLOATERS captures, all totals are 35 and room-count multisets/reward seed agree despite two captures lacking a recorded root candidate. This narrows the observable candidate set but does not falsify root dependence.",
+  "latest_material_finding": "After deduplicating repository-wide uploads, the usable measured summary still has only 11 rows and two non-empty system addresses; 129 of 132 summary files are copies of the same 11-row body. The extra cross-system figures are static asset-index estimates with no manual physical counts, so they cannot validate a count predictor.",
   "queued_experiments": [],
   "unresolved_blockers": [
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
@@ -65,15 +68,29 @@
     "Blue-crate runtime object/resource identity is not known; F7 gives manual marker counts only, so current direct auto-count cannot yield total crate count.",
     "The completed 0.1.21 action audits bundled arithmetic only; it has no NMS.exe hash or physical crate-completeness evidence and does not inspect the count producer.",
     "No same-build, executable-pinned multi-system observations yet establish whether system address, preset, root, or another state predicts total physical count before traversal.",
-    "Blue-crate runtime identity and marker completeness remain unknown; existing F7 counts cannot yet close the total-count gap."
+    "Blue-crate runtime identity and marker completeness remain unknown; existing F7 counts cannot yet close the total-count gap.",
+    "Saved evidence is exhausted for physical-count validation: summary duplicates dominate, unique system/preset rows lack matching-build NMS.exe provenance, and asset-index totals have no complete manual count."
   ],
-  "next_action": "Continue M1 by auditing the two independent non-empty address/preset groups in the 11-row summary against their room sequences and capture provenance, then separate genuinely distinct sessions from repeated snapshots. Do not treat absent root logging as absent game state. Current runner actions offer no distinct follow-up beyond arithmetic audit; queue only if a new supported action is required.",
-  "human_action_required": null,
+  "next_action": "Obtain one hash-pinned runtime comparison on the existing Irchol-Luhimo XVII sample using probe instrumentation that emits auto_crates/discovery labels together with manual blue-crate F7 marks. Compare per-object names and total markers to determine whether blue crates are omitted by the current count matcher. The full 12-room traversal is required only to test marker completeness and total count; do not infer from an incomplete pass.",
+  "human_action_required": {
+    "action": "Repeat one capture of the existing Irchol-Luhimo XVII derelict with the current installed NMS Derelict Probe, and upload the full session bundle.",
+    "missing_data": "A matching-build runtime record that joins live node/resource names, the auto_crates report, manual blue_crate F7 markers, and a completeness/end-of-traversal indicator; include probe version and NMS.exe SHA-256 if available.",
+    "why_existing_evidence_cannot_provide_it": "The saved Irchol fixture contains 49 blue-crate markers but no auto_crates report or per-object blue identities, and it has no executable SHA or marker-completeness flag. Current static matcher covers salvage crates and footlockers only.",
+    "steps": [
+      "Load the same system recorded by the existing capture: address 0000760006606CAB (Irichol-Luhimo XVII).",
+      "Start a new probe capture before boarding. Traverse the derelict through the exit once; mark every blue crate with F7 exactly once while allowing the automatic salvage/footlocker hooks to run.",
+      "Confirm the capture records the beginning and the exit/end state, and that the exported bundle includes auto_crates, crate-target-discovery, marker records, room summary, and manifest. If auto_crates or discovery records are absent, upload the bundle anyway and note that.",
+      "Upload the complete capture bundle and report the probe version, exact game build number, and NMS.exe SHA-256. A full derelict traversal is required for a completeness/total-count check."
+    ],
+    "expected_success_indicator": "One session bundle contains both the auto node/resource records and blue F7 markers for the same run, with start/end evidence; matching object labels can be compared against blue-marker locations and total count.",
+    "hypothesis": "Tests whether blue crates are being spawned as discovery-only generic CRATE objects omitted by the current automatic matcher, and whether the existing 49-marker count is complete.",
+    "full_derelict_traversal_required": true
+  },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
-    "finding": "Compared six saved CARGO_FLOATERS rows for address 00001A0004E84EFD across probe versions, including totals, reward seed, root-field availability, and per-room multiset signatures.",
-    "interpretation": "All six saved totals are 35; stable room-count multiset and reward seed make address/preset or downstream layout state plausible observables. Two missing root records are capture gaps, so root relevance remains unresolved.",
-    "provenance": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/generation-measurements-summary.json; blob SHA-1 6b327ee6a3b70c8ee5656d546f557831d9b48de1; branch evidence reviewed through commit 017764a13b030f9b2bba3f5ba5dd24a60bdd7f44."
+    "finding": "Deduplicated all repository generation-measurement summary and asset-calculation uploads, then grouped the unique saved observations.",
+    "interpretation": "Only three unique summary bodies exist (9, 10, and 11 rows; 129 copies of the 11-row body). Other address counts are static estimates without observed physical counts, so no causal count rule can be tested from these duplicates.",
+    "provenance": "Recursive Git tree for evidence branch commit 017764a13b030f9b2bba3f5ba5dd24a60bdd7f44; 132 summary paths/3 unique blobs and 133 asset-calculation paths/5 unique blobs, with two 0001BF reports byte-different but JSON-identical."
   },
   "evidence_references": [
     {
