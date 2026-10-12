@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "last_reviewed_commit": "6e0eeb3829471f33d4ff7214185475229ca05027",
-  "last_reviewed_request": "2e1d2b4fb1f34b37bf06d42c3cc016aa",
+  "last_reviewed_commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+  "last_reviewed_request": "4917f98b7a734768ac413372ab59861e",
   "reviewed_requests": [
     "1bba0633b8f24830a93ce7408f9303c2",
     "1579ce307c6443d8ae3b4f9fe822ae95",
@@ -14,7 +14,7 @@
     "a8be954109454324889279e7561c7c81",
     "e03d1d8887864ce186e2e0042127cde0"
   ],
-  "completed_step": "Inventoried all runner uploads at the pinned branch head and reviewed the four unreceipted jobs. Cross-checked the 0.1.8 tested handoff against the available DUNGEON-C and Seed-B static text records for the caller chain, descriptor reads/writes, and requested callsites. Added current-hash static review of the 0063A6D0 entry range and bounded its helper-call/equality path. Reconciled the current-hash 02C08607 indirect-call record with the event-scoped Runtime-A hook-correction evidence. Independently hashed and extracted the exact c320 source archive, reproduced the Windows test-stage failure, isolated the deterministic newline assertion, and verified a local experimental test fix. Inspected the same snapshot's installer and transport for update support. At branch head 4983b639e5e5a95a6af6278a4fdb0a78453120a0, continued same-executable static analysis of the caller/helper window: confirmed two caller-side owner-field zero stores after 00639BE0 returns and before the call to 0063A6D0; these do not touch the known seed/flag offsets. At branch head f7bdb4e335cf0c5964d892d18130ebf165246160, compared the second same-executable helper caller: 006395D3→00639BE0 returns and forwards the pointer to 0063A6D0 at 006395E6 without an immediate store sequence; the separate 00639B99 path has the recorded +0x250/+0x1CB clears. At branch head 0a809672e0782bb779c7ff06a45e5338b5ed341e, extended the hash-pinned helper-prefix trace: bytes at 00639C33 call 02C20E90 with EDX=0x2A0 and R9D=0; no semantics are assigned to that callee. At pinned head 038b5dc41fbc9407297b95ef72635be7d9e7b416, checked the current-hash DUNGEON-C static map and Seed-B review against the pending 02D07C80/02D08430 targets: the map covers a different bounded parent and its 33 E8 sites, while the Seed-B text records caller RVAs 02D08081/02D08898 and descriptor-stack sourcing but does not provide target-function byte windows or descriptor-field stores. At pinned head 573a8ef6792619ecd26e84588acf745aea4ed18a, reviewed the hash-pinned DUNGEON-C helper dataflow record and separated its list-building path from the unresolved current root chain. At pinned head 3f3e3683ea4dc77538c7a883a48ccbcff8fd8d67, rechecked the four upload directories and confirmed each has a receipt; latest.json still points to the already-reviewed c32068e5af42454483d853aad6550d58. The exact local c320 source.zip (374859 bytes, SHA-256 820e10b9153b07b84a6917b624d4ef6ca8fdebc724602e0bf76a550d5fd966b3) and runner-evidence.zip (10110 bytes, SHA-256 e5d92f7254dfc56de19f22d73866c803afd2343bfb081542b4cb1ed738189414) match current-head manifest metadata. Independently recomputed the evidence JSON and SHA-256 values for its raw code ranges. The decoded bytes at 02D08067 and 02D08883 load the caller's sixth stack argument and store it in outgoing argument-six slot [RSP+0x28]; the rel32 calls at 02D08081 and 02D08898 both resolve to wrapper 00639490. This confirms the two bounded caller-to-wrapper descriptor paths, not that either is the current root producer. At pinned head f280c820b521a97e8e1718b288fd4d78decf32d8, used the exact c320 source snapshot's raw byte ranges for static disassembly. Traced caller R9 through wrapper 00639490, helper 00639BE0, constructor 00639610, and copy helper 00227A40 into owner+0x128; 00227A40 copies source descriptor blocks +0x10/+0x20 into the clone at +0x10/+0x20, so owner+0x138/+0x140 are copied from source +0x10/+0x18. The same wrapper passes the clone to 0063A6D0, whose pinned bytes read [rsi+0x138] and test [rsi+0x140]. Independently verified the selected ranges' SHA-256 values. Compared both 02D07C80 and 02D08430 local descriptors: the first supplies a mixed 64-bit value plus flag 1; the second supplies a pointer-sum value plus flag 1. The caller's stack arg six is a separate value from the R9 descriptor source in both paths. At pinned head 650bd426c8e09938ebc83304e5221bcaf54f51f7, continued static tracing inside the same exact-hash caller windows: identified how incoming registers and each function's saved incoming R9 feed the descriptor values, while confirming the export still does not expose direct callers into either target. At pinned head 85f5a41400b532e09d6cf426492bddffc1e3d1b8, checked repository caller/event records against the traced producer inputs. The checked-in direct-call inventory is for an older executable hash. The current-hash event record resolves one 02C08607 indirect call to 0063A6D0 without linking it to either producer. An all-saved-evidence root capture lacks executable-hash provenance and was excluded. At pinned upload commit 6e0eeb3829471f33d4ff7214185475229ca05027, reviewed six previously unreceipted runner jobs and recorded schema-1 receipts; all 12 job directories at that snapshot now have receipts. The latest pointer targets request 2e1d2b4fb1f34b37bf06d42c3cc016aa, whose 0.1.18 result records all five stages passed. Its diagnostics report 149 code ranges/103256 bytes and 4040 Unicorn comparisons with zero mismatches, while root_generation_verified and layout_generation_verified remain false. This confirms bounded pipeline results only and does not advance the root trace; the existing missing-parent-callsite next action remains.",
+  "completed_step": "Inventoried all runner uploads at the pinned branch head and reviewed the four unreceipted jobs. Cross-checked the 0.1.8 tested handoff against the available DUNGEON-C and Seed-B static text records for the caller chain, descriptor reads/writes, and requested callsites. Added current-hash static review of the 0063A6D0 entry range and bounded its helper-call/equality path. Reconciled the current-hash 02C08607 indirect-call record with the event-scoped Runtime-A hook-correction evidence. Independently hashed and extracted the exact c320 source archive, reproduced the Windows test-stage failure, isolated the deterministic newline assertion, and verified a local experimental test fix. Inspected the same snapshot's installer and transport for update support. At branch head 4983b639e5e5a95a6af6278a4fdb0a78453120a0, continued same-executable static analysis of the caller/helper window: confirmed two caller-side owner-field zero stores after 00639BE0 returns and before the call to 0063A6D0; these do not touch the known seed/flag offsets. At branch head f7bdb4e335cf0c5964d892d18130ebf165246160, compared the second same-executable helper caller: 006395D3→00639BE0 returns and forwards the pointer to 0063A6D0 at 006395E6 without an immediate store sequence; the separate 00639B99 path has the recorded +0x250/+0x1CB clears. At branch head 0a809672e0782bb779c7ff06a45e5338b5ed341e, extended the hash-pinned helper-prefix trace: bytes at 00639C33 call 02C20E90 with EDX=0x2A0 and R9D=0; no semantics are assigned to that callee. At pinned head 038b5dc41fbc9407297b95ef72635be7d9e7b416, checked the current-hash DUNGEON-C static map and Seed-B review against the pending 02D07C80/02D08430 targets: the map covers a different bounded parent and its 33 E8 sites, while the Seed-B text records caller RVAs 02D08081/02D08898 and descriptor-stack sourcing but does not provide target-function byte windows or descriptor-field stores. At pinned head 573a8ef6792619ecd26e84588acf745aea4ed18a, reviewed the hash-pinned DUNGEON-C helper dataflow record and separated its list-building path from the unresolved current root chain. At pinned head 3f3e3683ea4dc77538c7a883a48ccbcff8fd8d67, rechecked the four upload directories and confirmed each has a receipt; latest.json still points to the already-reviewed c32068e5af42454483d853aad6550d58. The exact local c320 source.zip (374859 bytes, SHA-256 820e10b9153b07b84a6917b624d4ef6ca8fdebc724602e0bf76a550d5fd966b3) and runner-evidence.zip (10110 bytes, SHA-256 e5d92f7254dfc56de19f22d73866c803afd2343bfb081542b4cb1ed738189414) match current-head manifest metadata. Independently recomputed the evidence JSON and SHA-256 values for its raw code ranges. The decoded bytes at 02D08067 and 02D08883 load the caller's sixth stack argument and store it in outgoing argument-six slot [RSP+0x28]; the rel32 calls at 02D08081 and 02D08898 both resolve to wrapper 00639490. This confirms the two bounded caller-to-wrapper descriptor paths, not that either is the current root producer. At pinned head f280c820b521a97e8e1718b288fd4d78decf32d8, used the exact c320 source snapshot's raw byte ranges for static disassembly. Traced caller R9 through wrapper 00639490, helper 00639BE0, constructor 00639610, and copy helper 00227A40 into owner+0x128; 00227A40 copies source descriptor blocks +0x10/+0x20 into the clone at +0x10/+0x20, so owner+0x138/+0x140 are copied from source +0x10/+0x18. The same wrapper passes the clone to 0063A6D0, whose pinned bytes read [rsi+0x138] and test [rsi+0x140]. Independently verified the selected ranges' SHA-256 values. Compared both 02D07C80 and 02D08430 local descriptors: the first supplies a mixed 64-bit value plus flag 1; the second supplies a pointer-sum value plus flag 1. The caller's stack arg six is a separate value from the R9 descriptor source in both paths. At pinned head 650bd426c8e09938ebc83304e5221bcaf54f51f7, continued static tracing inside the same exact-hash caller windows: identified how incoming registers and each function's saved incoming R9 feed the descriptor values, while confirming the export still does not expose direct callers into either target. At pinned head 85f5a41400b532e09d6cf426492bddffc1e3d1b8, checked repository caller/event records against the traced producer inputs. The checked-in direct-call inventory is for an older executable hash. The current-hash event record resolves one 02C08607 indirect call to 0063A6D0 without linking it to either producer. An all-saved-evidence root capture lacks executable-hash provenance and was excluded. At pinned upload commit 6e0eeb3829471f33d4ff7214185475229ca05027, reviewed six previously unreceipted runner jobs and recorded schema-1 receipts; all 12 job directories at that snapshot now have receipts. The latest pointer targets request 2e1d2b4fb1f34b37bf06d42c3cc016aa, whose 0.1.18 result records all five stages passed. Its diagnostics report 149 code ranges/103256 bytes and 4040 Unicorn comparisons with zero mismatches, while root_generation_verified and layout_generation_verified remain false. This confirms bounded pipeline results only and does not advance the root trace; the existing missing-parent-callsite next action remains.\nAt 5e74e056b9e217041828c572fec2833ff7e51662: At pinned upload commit 5e74e056b9e217041828c572fec2833ff7e51662, enumerated 13 runner-results job directories; 12 already had matching receipts and 4917f98b7a734768ac413372ab59861e was the only unreceipted job. Reviewed its 0.1.20 manifest/result and directly uploaded handoff/prompt; all five result stages report returncode 0. Recomputed byte counts and SHA-256 for all nine manifest-listed files and every value matches. The code/evidence artifacts repeat the existing 149-range/103256-byte bounded report and 4040 zero-mismatch emulator comparisons; root and layout remain unverified, and all four scene cases remain quarantined. The handoff labels the experiment 0.1.19 and nested diagnose test_status labels 0.1.4, inconsistent with outer manifest/result 0.1.20; treated these embedded labels as stale. No new caller-to-root lineage was established; the saved Ghidra xref/input-lineage next step remains.",
   "evidence_references": [
     {
       "path": "runner-results/c32068e5af42454483d853aad6550d58/result.json",
@@ -426,6 +426,103 @@
         "all recorded stages passed",
         "root_generation_verified=false"
       ]
+    },
+    {
+      "path": "runner-results/latest.json",
+      "commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+      "fields": [
+        "request_id",
+        "status",
+        "report_path",
+        "source_sha256",
+        "prototype_version"
+      ]
+    },
+    {
+      "path": "runner-results/4917f98b7a734768ac413372ab59861e/manifest.json",
+      "commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+      "fields": [
+        "request_id",
+        "source_sha256",
+        "status",
+        "prototype_version",
+        "report_path",
+        "files (all nine byte counts and SHA-256 values independently recomputed)"
+      ]
+    },
+    {
+      "path": "runner-results/4917f98b7a734768ac413372ab59861e/result.json",
+      "commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+      "fields": [
+        "five stages returncode=0",
+        "errors=[]",
+        "root_generation_verified=false"
+      ]
+    },
+    {
+      "path": "runner-results/4917f98b7a734768ac413372ab59861e/AI_HANDOFF.md",
+      "commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+      "fields": [
+        "Purpose and state labels experiment 0.1.19",
+        "research priority and code limitations"
+      ]
+    },
+    {
+      "path": "runner-results/4917f98b7a734768ac413372ab59861e/GITHUB_CHECK_PROMPT.md",
+      "commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+      "fields": [
+        "review workflow",
+        "receipt/progress schemas",
+        "scope and update constraints"
+      ]
+    },
+    {
+      "path": "runner-results/4917f98b7a734768ac413372ab59861e/code.json",
+      "commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+      "fields": [
+        "binary.sha256 (exporter-reported)",
+        "range_count=149",
+        "verified_code_bytes=103256",
+        "range_hashes_verified=true",
+        "whole_executable_hash_independently_verified=false",
+        "root_generation_verified=false"
+      ]
+    },
+    {
+      "path": "runner-results/4917f98b7a734768ac413372ab59861e/diagnose.json",
+      "commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+      "fields": [
+        "corpus_summary cases=4; strictly_pinned_cases=0",
+        "all_replays_match=true",
+        "root_generation_verified=false",
+        "root_to_layout_implemented=false",
+        "independent_physical_count_verified=false",
+        "nested test_status.prototype_version=0.1.4"
+      ]
+    },
+    {
+      "path": "runner-results/4917f98b7a734768ac413372ab59861e/emulate.json",
+      "commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+      "fields": [
+        "comparisons: 4040 total, mismatches=0",
+        "allocator_boundary.first_absent_global_rva_hex=05292041",
+        "root_derivation_verified=false",
+        "layout_generation_verified=false"
+      ]
+    },
+    {
+      "path": "runner-results/4917f98b7a734768ac413372ab59861e/runner-evidence.zip",
+      "commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+      "fields": [
+        "archive members: duplicate result.json/latest.log/diagnose.json/code.json/emulate.json/AI_HANDOFF.md/GITHUB_CHECK_PROMPT.md"
+      ]
+    },
+    {
+      "path": "runner-results/4917f98b7a734768ac413372ab59861e/source.zip",
+      "commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+      "fields": [
+        "manifest bytes=391232 and sha256=eecfa2a8de87ceb5ccb5c749632f93d81435ff47026244cfa086d5a6837ad17f; independently recomputed"
+      ]
     }
   ],
   "measured_findings": [
@@ -454,7 +551,8 @@
     "The repository CALLBACK_DIRECT_CALL_INVENTORY records source executable SHA-256 671de22649274b49fa07f5a246bc7252c4e08bb9ab623d2e65722fbab4e497a4 and target function 00634BC0; it cannot establish callers for current executable SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499.",
     "The current-hash DUNGEON_C manifest records an event-scoped effective destination 0063A6D0 for indirect call 02C08607 (return 02C0860A), while stating the raw slot was not captured and semantic identity is unresolved. This identifies one callback route for that event, but does not show that 02D07C80 or 02D08430 supplied its descriptor.",
     "The all-saved-evidence exact-root-caller artifact records caller return 02C0860A but contains no executable SHA-256 field. It remains unpinned and is not used to connect runtime values to the c320 hash-checked caller windows.",
-    "At pinned commit 6e0eeb3829471f33d4ff7214185475229, six jobs lacked receipts; each matching manifest/result pair reported passed stages and consistent request/source/status/version/report-path metadata. All six receipts were written. The latest 0.1.18 report records 149 ranges, 103256 verified code bytes, and 4040 Unicorn comparisons with zero mismatches, but sets root and layout verification false and reports zero strictly pinned corpus cases. Manifest file hashes and byte counts were not independently recomputed."
+    "At pinned commit 6e0eeb3829471f33d4ff7214185475229, six jobs lacked receipts; each matching manifest/result pair reported passed stages and consistent request/source/status/version/report-path metadata. All six receipts were written. The latest 0.1.18 report records 149 ranges, 103256 verified code bytes, and 4040 Unicorn comparisons with zero mismatches, but sets root and layout verification false and reports zero strictly pinned corpus cases. Manifest file hashes and byte counts were not independently recomputed.",
+    "At upload head 5e74e056b9e217041828c572fec2833ff7e51662, request 4917f98b7a734768ac413372ab59861e reports all five offline stages passed and all nine artifact hashes/byte counts match its manifest on recomputation. Its bounded checks still explicitly leave root derivation/layout unverified; the direct handoff and nested diagnostic carry stale version labels (0.1.19 and 0.1.4 versus outer 0.1.20)."
   ],
   "unresolved_questions": [
     "The two caller paths now statically reach 0063A6D0 with clone descriptors, but which path (if either) corresponds to the event-scoped 02C08607 root callback in the captured derelict session? No matching call-stack/descriptor capture ties a specific caller instance to that event.",
@@ -477,6 +575,7 @@
     "GitHub code search for the exact requested function addresses returned zero items with incomplete_results=true; absence from that index is not proof of absence from the executable.",
     "This pass performed static disassembly only on raw ranges embedded in the exact manifest-matched source archive. The exporter records emulation_ready=false and warns that code snippets do not retrospectively pin capture identity; no tests, game launch, process attachment, or emulator execution were performed.",
     "This invocation decoded only hash-recorded byte ranges from the exact c320 source snapshot. The local evidence export is selective, lacks the parent-function ranges for direct callers of 02D07C80/02D08430, and records emulation_ready=false; no code execution, tests, game launch, or runtime capture was performed.",
-    "No full NMS.exe is present in the exact c320 source package; the repository's CALLBACK_DIRECT_CALL_INVENTORY is pinned to a different executable SHA. A separate all-saved-evidence event capture lacks executable-hash provenance and was intentionally left unpinned."
+    "No full NMS.exe is present in the exact c320 source package; the repository's CALLBACK_DIRECT_CALL_INVENTORY is pinned to a different executable SHA. A separate all-saved-evidence event capture lacks executable-hash provenance and was intentionally left unpinned.",
+    "This upload's code report identifies NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 but states the executable was not uploaded or independently hashed; 149 selected ranges and repeated emulator checks do not establish the missing parent xrefs or caller-to-root lineage."
   ]
 }
