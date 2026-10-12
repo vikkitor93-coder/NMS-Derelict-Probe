@@ -1,7 +1,7 @@
 {
-  "archive_bytes": 387147,
-  "archive_sha256": "d7bf21803b346c74bd3376079d653b32a9b914463413a9d808abe4907207ceab",
-  "archive_url": "https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/runner-updates/runner-updates/NMS-Runner-v0.1.16.zip",
+  "archive_bytes": 387680,
+  "archive_sha256": "255bd34d0c1d29c0bef2276041af863cf7112711d867eadfd2d7ad17c29bf28a",
+  "archive_url": "https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/runner-updates/runner-updates/NMS-Runner-v0.1.17.zip",
   "files": {
     "AI_HANDOFF.md": {
       "bytes": 16919,
@@ -61,7 +61,7 @@
     },
     "__init__.py": {
       "bytes": 101,
-      "sha256": "d878f09afdd61939da453cd8170638f6cbd860ca05f0ea27df30673a3b2af73c"
+      "sha256": "197fafe0a8dc6bf8e5a5debdc3dd78326ea2512ee015584d9698bd3fa3247821"
     },
     "audit.py": {
       "bytes": 4630,
@@ -104,8 +104,8 @@
       "sha256": "04338e645b88046836b1fd42913d41afc2f2bdd009ac15ad6c2f44530447a280"
     },
     "export_evidence.py": {
-      "bytes": 11916,
-      "sha256": "362fd793e4e45034020b8a0a9b58faea1f834f8b9e063aa0c94a79673824a445"
+      "bytes": 12137,
+      "sha256": "3a16346bcca3f939a16ab461dfb77cdef5e978a0d6d33b97a47adcee814d958f"
     },
     "fixtures/20261009T234421Z_Irchol-Luhimo_XVII.json": {
       "bytes": 179392,
@@ -200,8 +200,8 @@
       "sha256": "82dbd835777d2c6bf5dff3b58de6ffcde249ed85cc3c2e1a071184e91d7d03d0"
     },
     "tests/test_derelict_offline_code.py": {
-      "bytes": 6732,
-      "sha256": "b56bf78b2b1cb4c1b3e58a49cf687f71cfa4765cabc1961f7262a608246b6cbf"
+      "bytes": 9001,
+      "sha256": "640ab92fa08788ddd38db3eb898348c081486381f9110a0941464094293e06a2"
     },
     "tests/test_derelict_offline_github.py": {
       "bytes": 14621,
@@ -282,9 +282,9 @@
   },
   "schema": 1,
   "source_commit": "8c112683381bed1049c554f8dd4af5f78deddccd",
-  "source_sha256": "f64d38707d2f09e8fa6f0a9203ea8e9f8820c41b9a00659a742fae09f182e6e7",
-  "tests_count": 108,
-  "tests_output_sha256": "09812f2133035a245c4ed00766aa67c4c6dec9369207eea05e9682dfb44276bc",
+  "source_sha256": "c6c17f5822c7da0cec9bfe3884187ecfed1a9e49c5947d383656ed5837be1b87",
+  "tests_count": 109,
+  "tests_output_sha256": "097f7b89e4f9a90fb7dd206a217cdb092a99fa95c942dfba2f839b8ff38a70a3",
   "tests_status": "passed",
-  "version": "0.1.16"
+  "version": "0.1.17"
 }
