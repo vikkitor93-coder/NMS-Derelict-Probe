@@ -7,12 +7,13 @@
     "request_id": "4917f98b7a734768ac413372ab59861e"
   },
   "latest_evidence_check": {
-    "branch_head": "db5eb8a3f1ba84b18bf08de4bd03437580539a4b",
+    "branch_head": "5f869fc9127510474479896fa6f2c3e0861b2acb",
     "latest_request_id": "4917f98b7a734768ac413372ab59861e",
     "latest_status": "passed",
     "latest_runner_version": "0.1.20",
     "queued_request_id": "1a131cab1568ef38e7f2c5b800000001",
-    "queued_request_status": "no result manifest observed at pinned branch head 9e759db8cfcec40eec31a2e270dafb9041bfc54f"
+    "queued_request_status": "awaiting compatible runner 0.1.21; pinned request not present in 13 result job directories at head 5f869fc9127510474479896fa6f2c3e0861b2acb",
+    "installed_runner_version": "0.1.20 (user-reported)"
   },
   "established_facts": [
     "Runner update 0.1.21 is published on runner-updates at commit 12b387159fc1cb791e1ecc8695dcc9ccbaccf13b. Package source_sha256=e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; archive SHA-256=591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940; 119 tests passed with 10 skips; archive and all 71 member hashes were independently checked.",
@@ -51,10 +52,26 @@
   "unresolved_blockers": [
     "Queued request 1a131cab1568ef38e7f2c5b800000001 has not produced a runner result; latest remains request 4917f98b7a734768ac413372ab59861e at runner 0.1.20.",
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
-    "No same-build multi-system rows currently establish whether system address/preset/root predicts total count before entering the derelict."
+    "No same-build multi-system rows currently establish whether system address/preset/root predicts total count before entering the derelict.",
+    "User reports installed runner version 0.1.20. The queued crate-count-audit request requires source SHA e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b (runner 0.1.21); latest result remains 4917f98b7a734768ac413372ab59861e. The supplied log shows repeated updater check-failed, so the remote request has not run."
   ],
-  "next_action": "Keep the source-pinned crate-count-audit request 1a131cab1568ef38e7f2c5b800000001 unchanged until the runner returns a result. When it completes, prioritize whether the exact executable's count producer is tied to the system address, root/state, preset, or enumerated room instances. Until then, do not treat any asset-calculation total as a physical count; the static room-to-target index is unchanged across the same-address snapshots.",
-  "human_action_required": null,
+  "next_action": "After the user starts runner 0.1.21, inspect the returned crate-count-audit result before any other request. If it fails during update polling or upload, use the already-tested isolated 0.1.22 safe updater-diagnostics package only after the 0.1.21-pinned request has completed or been explicitly retired.",
+  "human_action_required": {
+    "action": "Install the already-published runner 0.1.21 package, then reopen the runner.",
+    "reason": "0.1.20 cannot satisfy the request's exact 0.1.21 source-hash pin; 0.1.22 is intentionally not published because doing so could replace/preempt the pinned experiment.",
+    "steps": [
+      "Stop and close the current runner window.",
+      "Download and extract the verified 0.1.21 package: https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/runner-updates/runner-updates/NMS-Runner-v0.1.21.zip",
+      "Open Start-Runner.cmd from the extracted package to update the existing permanent runner folder; preserve its reports, requests, settings and environment.",
+      "Confirm the runner window reports 0.1.21 and leave it running for at least one 10-second poll; the expected success signal is a new result directory/manifest for request 1a131cab1568ef38e7f2c5b800000001."
+    ],
+    "package_provenance": {
+      "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
+      "archive_sha256": "591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940",
+      "archive_bytes": 396411,
+      "tests": "119 passed, 10 skipped"
+    }
+  },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
     "finding": "Compared the complete saved asset-calculation artifact set at pinned commit 9e759db8cfcec40eec31a2e270dafb9041bfc54f using tree blob SHA values, then read one representative for each unique body and checked its session against associated generation-measurements-summary/crate-target-discovery records.",
