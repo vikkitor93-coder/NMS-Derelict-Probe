@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "request_id": "4917f98b7a734768ac413372ab59861e",
+  "source_sha256": "0e3458aad3095b9f878ecb923b4ab510b3bdb57291c863ebd07f800f8519ee9f",
+  "status": "reviewed",
+  "reviewed_commit": "5e74e056b9e217041828c572fec2833ff7e51662",
+  "findings": {
+    "run_status": "passed",
+    "failed_stage": null,
+    "measured_facts": [
+      "At the pinned commit, runner-results/latest.json, this run's manifest.json and result.json agree on request_id 4917f98b7a734768ac413372ab59861e, source_sha256 0e3458aad3095b9f878ecb923b4ab510b3bdb57291c863ebd07f800f8519ee9f, prototype_version 0.1.20, status passed, and report_path runner-results/4917f98b7a734768ac413372ab59861e.",
+      "result.json records returncode 0 for source-package, tests, diagnose, code and emulate; errors is empty and root_generation_verified is false.",
+      "Recomputed byte counts and SHA-256 for all nine manifest-listed uploads (AI_HANDOFF.md, GITHUB_CHECK_PROMPT.md, code.json, diagnose.json, emulate.json, latest.log, result.json, runner-evidence.zip and source.zip); each matches the manifest.",
+      "code.json records 149 ranges / 103256 bytes, range_hashes_verified=true, four matching window checks, and root_generation_verified=false. The full NMS.exe hash is exporter-reported; the executable itself was not uploaded or independently hashed in this review.",
+      "diagnose.json records four asset-derived scene replays matching existing analyzer output. Counts are reported as salvage crates 29 / 18 and total target containers 37 / 23; all four corpus cases are quarantined/unpinned, independent_physical_count_verified=false, root_to_layout_implemented=false, and the table/main-room counts disagree (7 table rooms versus 9 or 10 captured groups).",
+      "emulate.json records 4040 comparisons with zero mismatches across enabled-seed arithmetic, supplied state/output, empty-vector descriptor copy and identifier swap-delete. The nonempty descriptor-copy case stops at absent global RVA 05292041; no global-state model is supplied. These bounded checks do not verify root derivation or layout generation.",
+      "The uploaded AI_HANDOFF.md describes the experiment as 0.1.19, and diagnose.json embeds test_status.prototype_version 0.1.4, while the manifest, result and top-level diagnostics identify 0.1.20. These embedded descriptions are stale and were not used as 0.1.20 test/version metadata."
+    ],
+    "hypotheses": []
+  },
+  "next_action": "Continue from the saved hash-pinned trace only when a current-build Ghidra listing provides all direct callsites to 02D07C80 and 02D08430 plus each parent function's bytes/disassembly and RCX/RDX/R8/R9 and stack-argument setup. Join either caller to the root event only with same-capture caller lineage and descriptor bytes matching owner+0x138/+0x140 at 0063A6D0."
+}
