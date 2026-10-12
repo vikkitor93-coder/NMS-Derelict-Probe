@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "request_id": "1a131cab1568ef38e7f2c5b800000001",
+  "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
+  "status": "reviewed",
+  "reviewed_commit": "66f8f346127f8e4365b2673fdedde4f04d4ce9e6",
+  "research_question": "Do the saved room-level salvage/footlocker measurements sum to their recorded aggregate totals, and do repeated system/root/preset observations suggest candidate count inputs?",
+  "findings": {
+    "action": "crate-count-audit",
+    "runner_version": "0.1.21",
+    "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
+    "measured": [
+      "11/11 rows with recomputable room counts match the saved aggregate totals; zero mismatches.",
+      "For address 00001A0004E84EFD and recorded root candidate 9256392A2F5A74AC, the saved CARGO_FLOATERS observations are 35 and MEDI_FLOATERS observation is 16.",
+      "The result has source_zip=null, no executable hash provenance, and only one crate-count-audit stage."
+    ],
+    "interpretation": "Confirms arithmetic consistency in the bundled summary and completes the first request/runner/upload/review cycle. It does not verify live container completeness or generation from system/root inputs. The preset/count association is a candidate relation only because the captures lack game executable hashes and span probe versions.",
+    "milestone_impact": "M0 complete; M1 remains in progress."
+  },
+  "next_action": "Use the existing saved evidence to refine the multi-system, same-preset count comparison. Do not repeat crate-count-audit unchanged; the current runner action only checks arithmetic and cannot inspect game code or physical inventory."
+}
