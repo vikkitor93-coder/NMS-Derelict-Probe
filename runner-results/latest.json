@@ -1,8 +1,8 @@
 {
   "files": {
     "AI_HANDOFF.md": {
-      "bytes": 16710,
-      "sha256": "22c0bdb85b5c4b35f991a84b2f35bf9d26b776737a21aea242da50eaf3287246"
+      "bytes": 16919,
+      "sha256": "4ce0202021e21e3d78e9e81e5b3cff7de998dd857f94f10d435257e340ff0cd7"
     },
     "GITHUB_CHECK_PROMPT.md": {
       "bytes": 7148,
@@ -10,37 +10,37 @@
     },
     "code.json": {
       "bytes": 1249,
-      "sha256": "ee40c56004bf55529517dc8eba91adee6e6c0b4cfdd707dae80fcb5f9529326e"
+      "sha256": "865ea2f8f7178d89628f8680e45e075904c0cfc11d8857b1dba11b58544b2e87"
     },
     "diagnose.json": {
       "bytes": 9550,
-      "sha256": "c9d508b64b0ca7378514e4d2a2d66203c3c1fe22508c292611bba7966d48c132"
+      "sha256": "816a90ba1e3f90cc87552add35eadf9afc7eaf2c0c53927dce76d576909cd014"
     },
     "emulate.json": {
-      "bytes": 3516,
-      "sha256": "3d8f0872a61663a0355cb93e7be62ff23318e87afe3e9ca7fad174491c2aa0e9"
+      "bytes": 3515,
+      "sha256": "237e05078842c0bc69269b2a0a55e2d6fc357031b843b5cf00afabdb949571eb"
     },
     "latest.log": {
       "bytes": 1511,
-      "sha256": "8a5975ceca7353c8e4589c99cccbf77406932d2aa9206d0e323c63a74a97b6e1"
+      "sha256": "84c1614c2d7daecd501c8125afe53be3c97f93267355d9924d21403b4a091b07"
     },
     "result.json": {
       "bytes": 840,
-      "sha256": "d8c5128a23a13bacdf8608b50d8597046a50dc8221b385fa12108b011b61aec7"
+      "sha256": "f2b117d2184044d1356afdec5099910b2af5349b673b7f0d0d535e2678b16f25"
     },
     "runner-evidence.zip": {
-      "bytes": 16382,
-      "sha256": "a678f2bba2a51a65c692f32ad327e1fafac5953552a389737a587b106045460e"
+      "bytes": 16457,
+      "sha256": "af68526a07cecffbaeaba6aa13b50e46862e692544110a7a32cda80f1b2b8ae7"
     },
     "source.zip": {
-      "bytes": 386966,
-      "sha256": "282bb56a0ad0efde50d0e26cd11c8cf1528d01acc802237fd2a87c2c1b8954b8"
+      "bytes": 387147,
+      "sha256": "802f81af8eef4e425b6fb4a945d0875a4a055d6156809bb90c3e8ab79eb38677"
     }
   },
-  "prototype_version": "0.1.15",
-  "report_path": "runner-results/a8be954109454324889279e7561c7c81",
-  "request_id": "a8be954109454324889279e7561c7c81",
+  "prototype_version": "0.1.16",
+  "report_path": "runner-results/3f48d4bbced14835bcbbe70fb056facf",
+  "request_id": "3f48d4bbced14835bcbbe70fb056facf",
   "schema": 1,
-  "source_sha256": "01ef45856eef839eaa3dbbf5bed91769f6cc81f42bb8cf3516a096c4efb771e7",
+  "source_sha256": "f64d38707d2f09e8fa6f0a9203ea8e9f8820c41b9a00659a742fae09f182e6e7",
   "status": "passed"
 }
