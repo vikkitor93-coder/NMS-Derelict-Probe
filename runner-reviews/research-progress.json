@@ -7,13 +7,13 @@
     "request_id": "4917f98b7a734768ac413372ab59861e"
   },
   "latest_evidence_check": {
-    "branch_head": "5f869fc9127510474479896fa6f2c3e0861b2acb",
+    "branch_head": "67acfdb30d87451bd64a5bdbd825a52698a5e06d",
     "latest_request_id": "4917f98b7a734768ac413372ab59861e",
     "latest_status": "passed",
     "latest_runner_version": "0.1.20",
     "queued_request_id": "1a131cab1568ef38e7f2c5b800000001",
     "queued_request_status": "awaiting compatible runner 0.1.21; pinned request not present in 13 result job directories at head 5f869fc9127510474479896fa6f2c3e0861b2acb",
-    "installed_runner_version": "0.1.20 (user-reported)"
+    "installed_runner_version": "0.1.20 (user-reported; 0.1.21 source pin remains unmet)"
   },
   "established_facts": [
     "Runner update 0.1.21 is published on runner-updates at commit 12b387159fc1cb791e1ecc8695dcc9ccbaccf13b. Package source_sha256=e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; archive SHA-256=591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940; 119 tests passed with 10 skips; archive and all 71 member hashes were independently checked.",
@@ -26,20 +26,22 @@
     "Distinct diagnostic asset-calculation snapshots report: address 0001550006607CAC, probe 0.3.5: 126/126 scenes resolved, 32 salvage + 19 footlockers = 51; address 0001BF0004E84EFD, probe 0.3.38: 164/164, 30+13=43; address 0001550006607CAC, probe 0.3.38: 146/146, 7+7=14; address 00006D0006606CAB, probe 0.3.40: 130/130, 12+9=21. All report manual_f7_target_containers=0.",
     "The crate-target-discovery records accompanying these asset calculations explicitly say their counts are correlations/reference counts only and are not promoted to physical crate totals. The 51 and 14 estimates for address 0001550006607CAC use different probe versions; they do not establish either a real count change or an address-only prediction rule.",
     "User correction: value 0063A6D0 was identified as a palette chosen according to the Shipwright mod; exclude it from crate-count and root-seed evidence.",
-    "For same address 0001550006607CAC, the 0.3.5 and 0.3.38 room-crate-index.json files each contain 1,433 unique scene paths with identical per-path salvage/footlocker/target values (0 changed common entries). Their asset snapshots differ in used scene list (126 instances/68 types vs 146/60), so the diagnostic estimate change 51→14 comes from different session scene inventories, not a changed static index."
+    "For same address 0001550006607CAC, the 0.3.5 and 0.3.38 room-crate-index.json files each contain 1,433 unique scene paths with identical per-path salvage/footlocker/target values (0 changed common entries). Their asset snapshots differ in used scene list (126 instances/68 types vs 146/60), so the diagnostic estimate change 51→14 comes from different session scene inventories, not a changed static index.",
+    "Static capability check of the exact 0.1.21 source snapshot (commit 808620042ce73815cf84eefc10e697817773b02d): its fixed request allowlist is offline-check, offline-check-and-export, and crate-count-audit; request schema has no action-specific parameters. For crate-count-audit local_runner.py sets source_zip=null and invokes only the crate-audit subcommand. crate_count_audit.py reads bundled evidence/generation-measurements-summary.json, sums saved per-room counts, and compares them with recorded aggregate fields; it does not inspect NMS.exe or locate the game's count producer."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
     "Room-family/kind counts alone are insufficient; a finer room identity, generation descriptor, or RNG/state may determine per-room container multiplicity.",
     "Total count may be the sum of per-room container multiplicities, but saved data does not prove the same formula predicts a derelict before traversal.",
     "For some fixed system/preset pairs, count may be stable without observing root; cross-system, same-build evidence is needed before excluding root generally.",
-    "The two same-address snapshots nine days apart may reflect a time/session-dependent derelict state or capture-version/scene-enumeration differences; distinguish these only with executable-pinned runtime evidence and an independently observed count."
+    "The two same-address snapshots nine days apart may reflect a time/session-dependent derelict state or capture-version/scene-enumeration differences; distinguish these only with executable-pinned runtime evidence and an independently observed count.",
+    "The current safe remote channel can complete M0 using crate-count-audit, but a later crate-generation experiment will require a new fixed allowlisted action because the 0.1.21 schema cannot request targeted executable inspection or a saved-session comparison."
   ],
   "falsified_hypotheses": [
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
     "Room family/kind alone determines a fixed container count in the saved rows."
   ],
-  "latest_material_finding": "The 133 asset-calculation paths contain 5 unique JSON blobs and 4 distinct session/address/count tuples. In the same-address 0001550006607CAC comparison, the static 1,433-scene target index is identical, while the session scene inventories differ (126 instances/68 types vs 146/60), producing diagnostic proxy totals 51 vs 14. These are explicitly correlation/reference counts, not physical crate totals; the result shows variation in captured scene composition, not its cause.",
+  "latest_material_finding": "Saved container estimates remain diagnostic only. New capability finding: the pending 0.1.21 crate-count-audit can verify arithmetic consistency of the bundled 11-row measurement summary but cannot inspect the NMS executable or identify a count-producing function. Its execution would complete the remote request/review loop, not milestone M1/M4 by itself.",
   "queued_experiments": [
     {
       "request_id": "1a131cab1568ef38e7f2c5b800000001",
@@ -55,7 +57,7 @@
     "No same-build multi-system rows currently establish whether system address/preset/root predicts total count before entering the derelict.",
     "User reports installed runner version 0.1.20. The queued crate-count-audit request requires source SHA e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b (runner 0.1.21); latest result remains 4917f98b7a734768ac413372ab59861e. The supplied log shows repeated updater check-failed, so the remote request has not run."
   ],
-  "next_action": "After the user starts runner 0.1.21, inspect the returned crate-count-audit result before any other request. If it fails during update polling or upload, use the already-tested isolated 0.1.22 safe updater-diagnostics package only after the 0.1.21-pinned request has completed or been explicitly retired.",
+  "next_action": "Preserve the pending request until a compatible 0.1.21 runner executes it. Review its result as an M0 transport proof plus a saved-summary arithmetic check only. Afterward, extend the isolated runner source with one narrowly scoped, read-only allowlisted crate-generation investigation action; the current protocol has no targeted executable-inspection action or parameters. First determine from existing runner configuration/evidence whether the exact NMS executable is available to a safe local analyzer, and define a fixed output boundary before coding.",
   "human_action_required": {
     "action": "Install the already-published runner 0.1.21 package, then reopen the runner.",
     "reason": "0.1.20 cannot satisfy the request's exact 0.1.21 source-hash pin; 0.1.22 is intentionally not published because doing so could replace/preempt the pinned experiment.",
@@ -74,9 +76,9 @@
   },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
-    "finding": "Compared the complete saved asset-calculation artifact set at pinned commit 9e759db8cfcec40eec31a2e270dafb9041bfc54f using tree blob SHA values, then read one representative for each unique body and checked its session against associated generation-measurements-summary/crate-target-discovery records.",
-    "interpretation": "133 path copies reduce to 5 unique JSON bodies and 4 distinct session/address/count tuples. Example totals span 14-51; all shown scene instances resolve and manual F7 count is zero. The discovery reports explicitly label these counts as correlation/reference counts, not physical totals. Same address 0001550006607CAC differs across probe versions .3.5 and .3.38 (51 vs 14), so no address-only rule is established; version/session and proxy limitations prevent treating this as a falsification. A follow-up parsed comparison of the two 0001550006607CAC room-crate indexes found all 1,433 paths matched and no per-path target count changed. The estimate delta therefore coincides with the distinct captured scene-instance inventory (not a static index revision).",
-    "provenance": "Evidence pinned to nms-runner-evidence commit 9e759db8cfcec40eec31a2e270dafb9041bfc54f. Representative paths: research-uploads/20261004T084829Z-all-saved-evidence-5a094647/{asset-calculation-latest.json,generation-measurements-summary.json,crate-target-discovery.json}; research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/{asset-calculation-latest.json,crate-target-discovery.json}; research-uploads/20261008T191656Z-metadata-prepare-assets-4beb1d75/{asset-calculation-latest.json,crate-target-discovery.json}; research-uploads/20261009T163954Z-metadata-prepare-assets-6ae2fd90/{asset-calculation-latest.json,crate-target-discovery.json}. No NMS.exe SHA-256 is present in these report records."
+    "finding": "Read the exact published 0.1.21 source snapshot and traced the request action dispatch into crate_count_audit.py.",
+    "interpretation": "The queued action is a safe, parameter-free offline audit of an existing measurement summary. It does not capture or analyze the live NMS executable. A successful uploaded report would prove the request pipeline for this action and recheck arithmetic, but would not identify the game's count producer or establish an offline prediction.",
+    "provenance": "Runner source commit 808620042ce73815cf84eefc10e697817773b02d; published package source SHA e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b. Checked runner_protocol.py, local_runner.py, crate_count_audit.py. Existing remote request remains 1a131cab1568ef38e7f2c5b800000001."
   },
   "evidence_references": [
     {
@@ -219,6 +221,31 @@
         "universe_address_hex",
         "instances",
         "predicted_target_containers"
+      ]
+    },
+    {
+      "commit": "808620042ce73815cf84eefc10e697817773b02d",
+      "path": "runner_protocol.py",
+      "fields": [
+        "ACTIONS",
+        "validate_request exact required keys"
+      ]
+    },
+    {
+      "commit": "808620042ce73815cf84eefc10e697817773b02d",
+      "path": "local_runner.py",
+      "fields": [
+        "crate-count-audit source_zip null",
+        "task dispatch crate-audit"
+      ]
+    },
+    {
+      "commit": "808620042ce73815cf84eefc10e697817773b02d",
+      "path": "crate_count_audit.py",
+      "fields": [
+        "input generation-measurements-summary.json",
+        "room_sequence sum checks",
+        "interpretation"
       ]
     }
   ],
