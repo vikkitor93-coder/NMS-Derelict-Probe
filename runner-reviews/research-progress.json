@@ -49,7 +49,8 @@
     "Current static room index SHA-256=aaf28c76814816083e7b04d8ad027dd63e992c8499ae002c3eea2b7dacc15de (1,433 dungeon scenes; 75 have salvage/footlocker targets). Target multiplicity varies among scene variants within families, e.g. BARRACKS 0–3, CARG 0–3, MEDI 0–2, END 0–3, HANGAR 0–1, COMM 0–1, infestation 0–1. Thus family/kind or preset alone is insufficient for the static salvage/footlocker sum; selected scene identity matters. This remains static asset evidence, not a physical runtime total.",
     "Comparison against cached 2026-10-09 asset outputs found 1,433 common dungeon scene paths with zero per-path salvage/footlocker/target value changes; the freighter dungeon table MXML hash also matches. Asset drift is weakened as an explanation for historical static-index differences, but the old captures remain unpinned to the current executable.",
     "Reproducibility inputs: extract_current_derelict_assets.py SHA-256=68e2fec8f91c9e14b12ce468974671c30985104ac4ebf8f9a2d3da5b2ef1b704; analyze_dungeon_generation_table.py SHA-256=33dc3a8eddb677220f3708e12e95dac5afb9fa0c0324fb078bfe8733c4d35527; build_scene_crate_index.py SHA-256=883e1598b4a05ff74b5624dbc08a6ab607c43bc66edb2230bff86fd76e023306. Outputs were isolated under the current workspace work/crate-static-assets-13d5060d.",
-    "Targeted read-only scan of all installed PAK filename indexes found FREIGHTERDUNGEONSTABLE.MBIN in NMSARC.Precache.pak and no additional path whose filename/path contains DUNGEON or FREIGHTER together with TABLE; this narrows named static-table sources but does not exclude a generically named selector table or code-side selection."
+    "Targeted read-only scan of all installed PAK filename indexes found FREIGHTERDUNGEONSTABLE.MBIN in NMSARC.Precache.pak and no additional path whose filename/path contains DUNGEON or FREIGHTER together with TABLE; this narrows named static-table sources but does not exclude a generically named selector table or code-side selection.",
+    "Hash-pinned static installed-asset trace (NMS.exe SHA-256 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499): a current dungeon room scene `CARG/ROOM_WALL_1_3.SCENE.MBIN` contains three references to `SPACEBASE/PROPS/CRATEM.SCENE.MBIN`; the matching `cratem.entity.mbin` (NMSARC.Precache.pak payload SHA-256 f15b654eb22fc570a66155cc9e25e01721b0c0b13b36850ec7eb3f496b1feae0) converts with MBINCompiler 7.4.1.3 to an entity carrying `GcSimpleInteractionComponentData`, `SimpleInteractionType=GenericReward`, `Id=R_ABAND_CRATE`, `ScanName=UI_SALVAGE_CRATE`, and crate scanner icon. This confirms that the CRATEM prop referenced by such room scenes is configured as a salvage crate. It does not identify the separate blue_crate F7 marker category or determine which room variants are selected."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -66,7 +67,7 @@
     "Room family/kind alone determines a fixed container count in the saved rows.",
     "The existing live auto-count summary covers every crate/container category, including blue crates."
   ],
-  "latest_material_finding": "Current hash-pinned static assets establish that the named preset table does not encode container multiplicity directly, and scene-variant target counts differ. A bounded installed-PAK filename scan found no other explicitly named freighter/dungeon table. Runtime selection or a generically named/code-side selector remains unresolved; blue-crate identity and physical-count validation also remain open.",
+  "latest_material_finding": "Current-build static asset trace confirms that a dungeon-room CRATEM prop resolves to an interactive GenericReward entity identified as R_ABAND_CRATE / UI_SALVAGE_CRATE. This validates that scene CRATEM references represent configured salvage crates; it still does not identify the blue_crate F7 category, scene selection, or physical total.",
   "queued_experiments": [],
   "unresolved_blockers": [
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
@@ -80,11 +81,11 @@
     "Saved evidence is exhausted for physical-count validation: summary duplicates dominate, unique system/preset rows lack matching-build NMS.exe provenance, and asset-index totals have no complete manual count.",
     "Current static assets constrain per-scene multiplicity but do not reveal which scene variants are selected for a given system/preset; matching that selector to total count is still unresolved."
   ],
-  "next_action": "The installed-asset name scan did not reveal another explicitly named freighter/dungeon table, and repository utilities do not implement scene selection. Do not repeat the runner arithmetic audit or expand generic metadata tracing. Next discriminating test is the short unopened-blue-crate runtime identity capture on an unfinished derelict: correlate one F7 mark with same-session auto_crates/discovery labels, leave the crate closed, and record already-open crates separately. No full traversal is required for this label test.",
+  "next_action": "For the next runtime identity sample, use a revisitable unfinished derelict and only mark visible unopened blue crates; do not open them. Correlate F7 blue_crate marks with same-session auto_crates and crate-target-discovery labels to test whether they map to the confirmed R_ABAND_CRATE/UI_SALVAGE_CRATE entity or are a separate category. Note already-open crates separately; this identity sample does not prove total-count completeness.",
   "human_action_required": {
     "action": "On an unfinished derelict that can still be revisited, collect a short non-destructive runtime identity sample; do not open any crates.",
     "missing_data": "Same-session auto_crates and crate-target-discovery output correlated with manual F7 marks for visible unopened blue crates, plus manifest/probe version/current game build and executable hash.",
-    "why_existing_evidence_cannot_provide_it": "The completed Irichol capture has no auto_crates report or individual blue-crate identities and cannot be replayed. Static source shows blue crates may be discovery-only, but runtime object labels have not been joined to a manual marker.",
+    "why_existing_evidence_cannot_provide_it": "The completed Irichol capture cannot be replayed and has no individual blue-crate object IDs. Static current-build evidence now confirms the CRATEM room prop is an R_ABAND_CRATE/UI_SALVAGE_CRATE GenericReward, but it does not connect the distinct blue_crate F7 marker type to a runtime label. Only an unfinished derelict capture can test that join; opened crates stay open and must be marked separately.",
     "steps": [
       "Choose any unfinished derelict with at least one unopened blue crate; do not use the completed Irichol derelict.",
       "Start a probe capture before boarding or before entering its remaining unexplored area.",
@@ -93,7 +94,7 @@
       "Include the probe version, the game build number (user supplied: 1.20), and the current NMS.exe SHA-256."
     ],
     "expected_success_indicator": "At least one unopened blue_crate F7 marker and same-session node/resource discovery or auto_crates records are present, allowing a direct test of whether its runtime label is countable or discovery-only.",
-    "hypothesis": "Blue crates may be omitted from the automatic count because their runtime objects are recognized only by generic CRATE discovery labels; a non-opening marker-to-label comparison can test this.",
+    "hypothesis": "Room-scene CRATEM props are salvage crates (confirmed statically); the unresolved hypothesis is whether the blue_crate F7 marker hits that same runtime object class or another category.",
     "full_derelict_traversal_required": false,
     "limitation": "This test only identifies runtime labels and matcher coverage. It does not validate total count, and opened crates must be accounted for separately."
   },
@@ -334,5 +335,27 @@
       "limitation": "Name-based filter cannot exclude generically named tables or executable-side selectors"
     }
   },
-  "experiments_awaiting_result": []
+  "experiments_awaiting_result": [],
+  "latest_static_crate_entity_experiment": {
+    "question": "Do room-scene CRATEM references correspond to an interactive salvage-crate entity, rather than only a generic decorative crate?",
+    "provenance": {
+      "executable_sha256": "13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499",
+      "executable_image_base": "0x140000000",
+      "archives": [
+        "NMSARC.EntitySceneMBIN.pak",
+        "NMSARC.Precache.pak"
+      ],
+      "mbincompiler_version": "7.4.1.3",
+      "mbincompiler_sha256": "4179DDDB665F7CDDBE9DDDDDF6E529172ABDD98B0097F65FDD224467D5BB3EA4",
+      "room_scene_mxml_sha256": "077788614182c99c09a1a6bc6a81cd4e0ca6ed8f8ba576f1560ab18ae18e01cb",
+      "room_scene": "MODELS/SPACE/POI/DUNGEON/CARG/ROOM_WALL_1_3.SCENE.MBIN",
+      "entity_mbin_sha256": "f15b654eb22fc570a66155cc9e25e01721b0c0b13b36850ec7eb3f496b1feae0",
+      "entity_mxml_sha256": "b7f1dac03b6f449b93b902cc1625fb7a296c61796573b9c4d763a5fca6c7ae34",
+      "placement_entity_mxml_sha256": "2691d261cb37ac1cf442786fcfadef65c6d899c7d4a4ed06b17e51c0456b24e7",
+      "workspace_output": "C:/Users/Vikman/Documents/Codex/2026-10-11/new-chat/work/crate-static-assets-13d5060d/pak-origin-probe"
+    },
+    "finding": "The selected CARG room MXML has three RefCrateM nodes targeting SPACEBASE/PROPS/CRATEM.SCENE.MBIN. The matching CRATEM entity defines GenericReward interaction, Id R_ABAND_CRATE, ScanName UI_SALVAGE_CRATE, and crate scanner icon. Separately, the DECORATION/CRATEM_PLACEMENT entity defines PartID _ABAND_CRATE_M; its placement scene is a locator.",
+    "interpretation": "Confirms these referenced CRATEM objects are configured salvage crates and supports the static scene index's salvage category. Does not prove every such prop spawns in the world, map it to the blue_crate F7 label, reveal runtime room selection, or predict total count.",
+    "status": "confirmed_static; no runner job"
+  }
 }
