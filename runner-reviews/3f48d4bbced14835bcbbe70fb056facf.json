@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "request_id": "3f48d4bbced14835bcbbe70fb056facf",
+  "source_sha256": "f64d38707d2f09e8fa6f0a9203ea8e9f8820c41b9a00659a742fae09f182e6e7",
+  "status": "reviewed",
+  "reviewed_commit": "3dfa93d101ea231be247c10534445ac2c78c9885",
+  "findings": {
+    "run_status": "passed",
+    "failed_stage": null,
+    "measured_facts": [
+      "manifest, result.json and latest.json agree on request_id, source_sha256, prototype_version 0.1.16 and passed status; all five stages returned 0",
+      "Recomputed byte counts and SHA-256 values for all nine manifested uploaded files from the local run report; all matched the manifest",
+      "code.json records 149 verified code ranges covering 103256 bytes and range_hashes_verified=true; whole_executable_hash_independently_verified=false",
+      "diagnose/emulate record four replay cases and 4040 bounded Unicorn comparisons with zero mismatches",
+      "The run does not establish root_generation or layout_generation; evidence marks both false"
+    ],
+    "limitations": [
+      "Replay/arithmetic agreement does not establish root derivation, room layout generation, inventory completeness, or freighter customization",
+      "Historical captures remain unpinned; the executable identity is reported by the exporter but the whole executable hash is not independently verified"
+    ]
+  },
+  "next_action": "Continue from the current-hash caller trace. Obtain hash-pinned parent-function bytes and direct callsites to 02D07C80 and 02D08430, including RCX/RDX/R8/R9 and stack-argument setup. Join a caller to the root event only if same-capture descriptor bytes match owner+0x138/+0x140 at 0063A6D0."
+}
