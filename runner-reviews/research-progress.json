@@ -7,12 +7,12 @@
     "request_id": "4917f98b7a734768ac413372ab59861e"
   },
   "latest_evidence_check": {
-    "branch_head": "67acfdb30d87451bd64a5bdbd825a52698a5e06d",
+    "branch_head": "7d7eb029a8160b6ccdedcbc9f59d24ea04529396",
     "latest_request_id": "4917f98b7a734768ac413372ab59861e",
     "latest_status": "passed",
     "latest_runner_version": "0.1.20",
     "queued_request_id": "1a131cab1568ef38e7f2c5b800000001",
-    "queued_request_status": "awaiting compatible runner 0.1.21; pinned request not present in 13 result job directories at head 5f869fc9127510474479896fa6f2c3e0861b2acb",
+    "queued_request_status": "still awaiting runner; pinned request absent from all 13 runner-results job directories at head 7d7eb029a8160b6ccdedcbc9f59d24ea04529396",
     "installed_runner_version": "0.1.20 (user-reported; 0.1.21 source pin remains unmet)"
   },
   "established_facts": [
@@ -27,7 +27,8 @@
     "The crate-target-discovery records accompanying these asset calculations explicitly say their counts are correlations/reference counts only and are not promoted to physical crate totals. The 51 and 14 estimates for address 0001550006607CAC use different probe versions; they do not establish either a real count change or an address-only prediction rule.",
     "User correction: value 0063A6D0 was identified as a palette chosen according to the Shipwright mod; exclude it from crate-count and root-seed evidence.",
     "For same address 0001550006607CAC, the 0.3.5 and 0.3.38 room-crate-index.json files each contain 1,433 unique scene paths with identical per-path salvage/footlocker/target values (0 changed common entries). Their asset snapshots differ in used scene list (126 instances/68 types vs 146/60), so the diagnostic estimate change 51→14 comes from different session scene inventories, not a changed static index.",
-    "Static capability check of the exact 0.1.21 source snapshot (commit 808620042ce73815cf84eefc10e697817773b02d): its fixed request allowlist is offline-check, offline-check-and-export, and crate-count-audit; request schema has no action-specific parameters. For crate-count-audit local_runner.py sets source_zip=null and invokes only the crate-audit subcommand. crate_count_audit.py reads bundled evidence/generation-measurements-summary.json, sums saved per-room counts, and compares them with recorded aggregate fields; it does not inspect NMS.exe or locate the game's count producer."
+    "Static capability check of the exact 0.1.21 source snapshot (commit 808620042ce73815cf84eefc10e697817773b02d): its fixed request allowlist is offline-check, offline-check-and-export, and crate-count-audit; request schema has no action-specific parameters. For crate-count-audit local_runner.py sets source_zip=null and invokes only the crate-audit subcommand. crate_count_audit.py reads bundled evidence/generation-measurements-summary.json, sums saved per-room counts, and compares them with recorded aggregate fields; it does not inspect NMS.exe or locate the game's count producer.",
+    "Exact 0.1.21 exporter check: offline-check-and-export runs package/tests/diagnose/code/emulate before export; export_evidence.py only emits bounded raw function/caller bytes for root-call-window matches and a fixed helper list, with hash-gated upstream candidates 00639490/00639A70/00639BE0/02D07C80/02D08430. It has no crate-count target and does not decode or execute game code. No NMS.exe was present in the available project checkout or runner-source workspace, so this desktop cannot run that exporter against a local executable."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -41,7 +42,7 @@
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
     "Room family/kind alone determines a fixed container count in the saved rows."
   ],
-  "latest_material_finding": "Saved container estimates remain diagnostic only. New capability finding: the pending 0.1.21 crate-count-audit can verify arithmetic consistency of the bundled 11-row measurement summary but cannot inspect the NMS executable or identify a count-producing function. Its execution would complete the remote request/review loop, not milestone M1/M4 by itself.",
+  "latest_material_finding": "The current pending 0.1.21 crate-count-audit remains an arithmetic check only. The alternative offline-check-and-export is also unsuitable as a targeted crate experiment: it runs the broad validation sequence and only exports bounded raw root/helper code bytes, without crate targets or decoding. No NMS.exe is available in the desktop code workspace. Crate count still has no code-identified producer.",
   "queued_experiments": [
     {
       "request_id": "1a131cab1568ef38e7f2c5b800000001",
@@ -55,9 +56,10 @@
     "Queued request 1a131cab1568ef38e7f2c5b800000001 has not produced a runner result; latest remains request 4917f98b7a734768ac413372ab59861e at runner 0.1.20.",
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
     "No same-build multi-system rows currently establish whether system address/preset/root predicts total count before entering the derelict.",
-    "User reports installed runner version 0.1.20. The queued crate-count-audit request requires source SHA e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b (runner 0.1.21); latest result remains 4917f98b7a734768ac413372ab59861e. The supplied log shows repeated updater check-failed, so the remote request has not run."
+    "User reports installed runner version 0.1.20. The queued crate-count-audit request requires source SHA e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b (runner 0.1.21); latest result remains 4917f98b7a734768ac413372ab59861e. The supplied log shows repeated updater check-failed, so the remote request has not run.",
+    "No NMS.exe is present in the available project checkout or runner source workspace; exact-binary export must run on the configured Windows runner after the compatible 0.1.21 request completes."
   ],
-  "next_action": "Preserve the pending request until a compatible 0.1.21 runner executes it. Review its result as an M0 transport proof plus a saved-summary arithmetic check only. Afterward, extend the isolated runner source with one narrowly scoped, read-only allowlisted crate-generation investigation action; the current protocol has no targeted executable-inspection action or parameters. First determine from existing runner configuration/evidence whether the exact NMS executable is available to a safe local analyzer, and define a fixed output boundary before coding.",
+  "next_action": "Keep request 1a131cab1568ef38e7f2c5b800000001 unchanged until 0.1.21 completes the M0 arithmetic audit. Then add one fixed, read-only crate-count investigation action to the isolated runner source. It should avoid the broad suite and use the runner's locally selected, SHA-pinned NMS.exe to extract a bounded crate-count candidate boundary; choose targets only from crate-linked static/runtime evidence, not the unrelated root helper list.",
   "human_action_required": {
     "action": "Install the already-published runner 0.1.21 package, then reopen the runner.",
     "reason": "0.1.20 cannot satisfy the request's exact 0.1.21 source-hash pin; 0.1.22 is intentionally not published because doing so could replace/preempt the pinned experiment.",
