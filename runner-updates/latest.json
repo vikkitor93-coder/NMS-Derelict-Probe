@@ -1,26 +1,38 @@
 {
-  "archive_bytes": 6002,
-  "archive_sha256": "ec746905e2df07c60876e2886c674f12111817eb9045521d2c5a32b60742fe18",
-  "archive_url": "https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/runner-updates/runner-updates/NMS-Runner-v0.1.19.zip",
+  "archive_bytes": 21083,
+  "archive_sha256": "bc1b1ac20b46b87bd602801ba27b9f6286fa51ca8c34c90f238ed6dc3c63099e",
+  "archive_url": "https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/runner-updates/runner-updates/NMS-Runner-v0.1.20.zip",
   "files": {
-    "Start-Runner.cmd": {
-      "bytes": 3379,
-      "sha256": "8b2199b0cc4d8575e5e70392e84329ee06381ff1d9468933dc9e6cd6fccb3199"
-    },
     "__init__.py": {
       "bytes": 104,
-      "sha256": "4dc7014778d431e7c26bb3abba67cac1108811d6f35594f06f0927754727afc7"
+      "sha256": "8681609fc9f41caf26e11d22a5bceb9cd2868bacf103c1f26134dad0708415b8"
     },
-    "export_evidence.py": {
-      "bytes": 12742,
-      "sha256": "970c0e10a095fe47570dbcbc915d781bba9fcac234ce82aa97e70cc0a15e4955"
+    "local_runner.py": {
+      "bytes": 26753,
+      "sha256": "c7316209c7e756a3089b025c621073153274ba16f3b501717bf5faad01356a5b"
+    },
+    "runner_gui.py": {
+      "bytes": 23998,
+      "sha256": "5036fd91424697b266a41c031bf60451b6e083ebf4cd367369be1bbb90700602"
+    },
+    "start.py": {
+      "bytes": 2885,
+      "sha256": "1c2e486089bbd2633a7245be004533d2f142f1fb722371bfe8f504a2aa87543b"
+    },
+    "update_protocol.py": {
+      "bytes": 18095,
+      "sha256": "dec182fb1fc647505c39e5c54b84ed3252299f2cace82b8f8bac89a1dc767094"
+    },
+    "windows_job.py": {
+      "bytes": 2956,
+      "sha256": "f88eba0f4a86b8a7b8da2ce27ee7f4f2486eef5d3c890acacd03e6c9ed706264"
     }
   },
   "schema": 1,
-  "source_commit": "78319c8991fbf1786da92a21d541e8d31e642fa2",
-  "source_sha256": "87cad76c18bb255b62ba87f6e0e943cc4cc0feb9b193b3eb722cd39d746bb29f",
-  "tests_count": 109,
-  "tests_output_sha256": "83cd4664fc4c79a307985aa5b12fb557a881ab4a72b5e37a3c64f29070fbcc32",
+  "source_commit": "33beeaedb4dbe0790a3617590a37bb7ccae06e16",
+  "source_sha256": "1f1ac94156fe34f9df884ab9732109d83b67b13ee2ac8f202bcf9e1665345ef0",
+  "tests_count": 112,
+  "tests_output_sha256": "e23ad537345b0a015ddd788f853cc4973fac95cb32c035a8f44aaa126f83c91d",
   "tests_status": "passed",
-  "version": "0.1.19"
+  "version": "0.1.20"
 }
