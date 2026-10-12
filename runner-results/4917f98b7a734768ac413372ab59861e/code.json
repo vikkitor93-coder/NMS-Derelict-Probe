@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "prototype_version": "0.1.20",
+  "binary": {
+    "file_name": "NMS.exe",
+    "sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+    "size_bytes": 88560712,
+    "pe_timestamp_hex": "6ABE9229",
+    "preferred_image_base_hex": "0000000140000000"
+  },
+  "range_count": 149,
+  "verified_code_bytes": 103256,
+  "range_hashes_verified": true,
+  "window_checks": [
+    {
+      "case_id": "20261009T234421Z_0000760006606CAB",
+      "recomputed_window_matches": true
+    },
+    {
+      "case_id": "20261010T010105Z_0000760006606CAB",
+      "recomputed_window_matches": true
+    },
+    {
+      "case_id": "20261010T012659Z_0000750006606CAB",
+      "recomputed_window_matches": true
+    },
+    {
+      "case_id": "20261010T021114Z_0000750006606CAB",
+      "recomputed_window_matches": true
+    }
+  ],
+  "supported_arithmetic_binary": true,
+  "whole_executable_hash_independently_verified": false,
+  "identity_limit": "Full hash reported by exporter; original executable is not uploaded. Historical captures remain unpinned.",
+  "root_generation_verified": false,
+  "errors": [],
+  "evidence_sha256": "b80135c47bbb0f6155d8ecb5cfe96afeb951f27b985267476dbe65609f80f937"
+}
