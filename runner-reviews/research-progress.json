@@ -3,16 +3,16 @@
   "current_milestone": "M0 — safe remote request channel is published; first runner execution and returned upload are pending.",
   "primary_objective": "Predict total derelict crate/container count offline from the smallest practical known inputs; defer room-layout reconstruction unless count prediction requires it.",
   "last_reviewed": {
-    "commit": "8cfbfa5da6d7586b9eeb758965642c6d70589ad7",
+    "commit": "4e8fd0d2d636f1df0ecb9a9532137cdaa386c2fd",
     "request_id": "4917f98b7a734768ac413372ab59861e"
   },
   "latest_evidence_check": {
-    "branch_head": "7d7eb029a8160b6ccdedcbc9f59d24ea04529396",
+    "branch_head": "4e8fd0d2d636f1df0ecb9a9532137cdaa386c2fd",
     "latest_request_id": "4917f98b7a734768ac413372ab59861e",
     "latest_status": "passed",
     "latest_runner_version": "0.1.20",
     "queued_request_id": "1a131cab1568ef38e7f2c5b800000001",
-    "queued_request_status": "still awaiting runner; pinned request absent from all 13 runner-results job directories at head 7d7eb029a8160b6ccdedcbc9f59d24ea04529396",
+    "queued_request_status": "still awaiting runner; exact request_id absent from all 13 result directories at branch head 4e8fd0d2d636f1df0ecb9a9532137cdaa386c2fd",
     "installed_runner_version": "0.1.20 (user-reported; 0.1.21 source pin remains unmet)"
   },
   "established_facts": [
@@ -30,7 +30,8 @@
     "Static capability check of the exact 0.1.21 source snapshot (commit 808620042ce73815cf84eefc10e697817773b02d): its fixed request allowlist is offline-check, offline-check-and-export, and crate-count-audit; request schema has no action-specific parameters. For crate-count-audit local_runner.py sets source_zip=null and invokes only the crate-audit subcommand. crate_count_audit.py reads bundled evidence/generation-measurements-summary.json, sums saved per-room counts, and compares them with recorded aggregate fields; it does not inspect NMS.exe or locate the game's count producer.",
     "Exact 0.1.21 exporter check: offline-check-and-export runs package/tests/diagnose/code/emulate before export; export_evidence.py only emits bounded raw function/caller bytes for root-call-window matches and a fixed helper list, with hash-gated upstream candidates 00639490/00639A70/00639BE0/02D07C80/02D08430. It has no crate-count target and does not decode or execute game code. No NMS.exe was present in the available project checkout or runner-source workspace, so this desktop cannot run that exporter against a local executable.",
     "Unpinned runtime sample from the packaged v0.3.75 fixture `derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json` (source baseline commit d09e01231b511f5215e50ea0b1df3f3ea264c970; local projection SHA-256 6c1bd3d31aaa9cd0e35a6819f79d398c18e7ac6ac46fe8fa29ce87ce0262ed48, matching the fixture manifest): probe 0.3.42, system address 0000760006606CAB, root candidate 9C2818C7FE094FC8; recording ran 01:01:05–01:18:26Z, started in AbandonedFreighter, ended in Default, and saw 12 rooms. The capture records 49 blue_crate, 26 salvage_crate and 7 footlocker marker events (82 marked events). Its room/index summary estimates 29 salvage plus 8 footlockers (37), four above the 33 salvage/footlocker markers. This is a measured marker-vs-index discrepancy, not a verified physical total: marker completeness is not recorded, and manifest reports game 7.05 only as user-reported with no NMS.exe SHA-256.",
-    "Confirmed static at project source commit d09e01231b511f5215e50ea0b1df3f3ea264c970: `_generation_room_summary` walks scene-probe events under `/DUNGEON/`, looks each scene path up in the local room-crate index, and sums the index's salvage/footlocker entries. Therefore `generation_room_summary.target_containers_seen=37` is an asset-index estimate, not a runtime enumeration. The separate `_auto_crate_summary` uses unique `countable` Engine.AddNodes keys and labels the result `live`/`high`; the 0.3.42 Irchol fixture contains no auto_crates report, so its 82 manual marker events cannot be checked against that direct hook."
+    "Confirmed static at project source commit d09e01231b511f5215e50ea0b1df3f3ea264c970: `_generation_room_summary` walks scene-probe events under `/DUNGEON/`, looks each scene path up in the local room-crate index, and sums the index's salvage/footlocker entries. Therefore `generation_room_summary.target_containers_seen=37` is an asset-index estimate, not a runtime enumeration. The separate `_auto_crate_summary` uses unique `countable` Engine.AddNodes keys and labels the result `live`/`high`; the 0.3.42 Irchol fixture contains no auto_crates report, so its 82 manual marker events cannot be checked against that direct hook.",
+    "Confirmed static at project source commit d09e01231b511f5215e50ea0b1df3f3ea264c970: the live auto-count target matcher accepts only ABAND_CRATE_M and FOOTLOCKER. Generic CRATE/LOCKER/CHEST discovery tokens only create discovery_only evidence and do not increment count. Blue crates use the manual F7 marker path (`_add_marker(\"blue_crate\")`); the blue total is recorded marker count, while historical_expected_blue_crates is a manual field. This source finding does not establish behavior of the older 0.3.42 fixture: it has no auto_crates report and its 49 blue count is manual-marker evidence."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -39,13 +40,15 @@
     "For some fixed system/preset pairs, count may be stable without observing root; cross-system, same-build evidence is needed before excluding root generally.",
     "The two same-address snapshots nine days apart may reflect a time/session-dependent derelict state or capture-version/scene-enumeration differences; distinguish these only with executable-pinned runtime evidence and an independently observed count.",
     "The current safe remote channel can complete M0 using crate-count-audit, but a later crate-generation experiment will require a new fixed allowlisted action because the 0.1.21 schema cannot request targeted executable inspection or a saved-session comparison.",
-    "For Irchol-Luhimo XVII (address 0000760006606CAB, root candidate 9C2818C7FE094FC8), the saved 12-room marker log records 82 crate/container markers; the index estimate is 37 salvage/footlockers versus 33 such markers, but marker completeness and executable identity are unknown."
+    "For Irchol-Luhimo XVII (address 0000760006606CAB, root candidate 9C2818C7FE094FC8), the saved 12-room marker log records 82 crate/container markers; the index estimate is 37 salvage/footlockers versus 33 such markers, but marker completeness and executable identity are unknown.",
+    "Automatic node/resource probes may see blue-crate labels as discovery-only when names contain generic CRATE tokens, but no capture has shown their actual names or a countable blue-crate ID."
   ],
   "falsified_hypotheses": [
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
-    "Room family/kind alone determines a fixed container count in the saved rows."
+    "Room family/kind alone determines a fixed container count in the saved rows.",
+    "The existing live auto-count summary covers every crate/container category, including blue crates."
   ],
-  "latest_material_finding": "Pinned source analysis explains the earlier count mismatch: target_containers_seen is computed by summing a local asset-index lookup for each observed dungeon scene, while a separate live Engine.AddNodes hook counts unique matched object keys. The 0.3.42 Irchol capture logged 82 manual marker events and an index estimate of 37 salvage/footlockers, but lacks the live-hook report and executable SHA; 82 is not a proven complete physical total.",
+  "latest_material_finding": "Pinned source separates the three count channels: room/index estimates cover only salvage crates and footlockers; the live node summary counts unique matched ABAND_CRATE_M and FOOTLOCKER nodes; blue crates are manual F7 markers. Generic crate-like node names are diagnostic discovery-only unless an exact target ID is learned. The 0.3.42 fixture contains 49 blue marker events, but lacks both the live summary and NMS.exe hash.",
   "queued_experiments": [
     {
       "request_id": "1a131cab1568ef38e7f2c5b800000001",
@@ -61,9 +64,10 @@
     "No same-build multi-system rows currently establish whether system address/preset/root predicts total count before entering the derelict.",
     "User reports installed runner version 0.1.20. The queued crate-count-audit request requires source SHA e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b (runner 0.1.21); latest result remains 4917f98b7a734768ac413372ab59861e. The supplied log shows repeated updater check-failed, so the remote request has not run.",
     "No NMS.exe is present in the available project checkout or runner source workspace; exact-binary export must run on the configured Windows runner after the compatible 0.1.21 request completes.",
-    "The 0.3.42 Irchol-Luhimo XVII sample contains 82 marker events but no explicit marker-completeness flag or executable hash; its 37 index estimate exceeds the 33 salvage/footlocker markers by four."
+    "The 0.3.42 Irchol-Luhimo XVII sample contains 82 marker events but no explicit marker-completeness flag or executable hash; its 37 index estimate exceeds the 33 salvage/footlocker markers by four.",
+    "Blue-crate runtime object/resource identity is not known; F7 gives manual marker counts only, so current direct auto-count cannot yield total crate count."
   ],
-  "next_action": "Preserve queued runner request 1a131cab1568ef38e7f2c5b800000001 until a compatible 0.1.21 runner completes M0. For the first crate experiment afterward, compare three distinct quantities on one capture: manual marker events, scene-index estimate, and `_auto_crate_summary.count` with status/method plus NMS.exe SHA-256. The 0.3.42 fixture currently supports only the first two and lacks executable provenance; don't use its 82 markers as a model target until completeness is documented.",
+  "next_action": "Keep pending request 1a131cab1568ef38e7f2c5b800000001 unchanged until a source-pinned 0.1.21 runner executes it. After M0, run an executable-hash-pinned derelict capture with the auto node hooks and manual F7 markers together; compare exact spawned-node/resource names near blue-crate F7 events. If the names identify a blue-crate product/resource, add a narrowly matched countable target on an isolated probe branch and validate against a complete marker pass; otherwise identify the object-creation boundary before attempting offline total prediction.",
   "human_action_required": {
     "action": "Install the already-published runner 0.1.21 package, then reopen the runner.",
     "reason": "0.1.20 cannot satisfy the request's exact 0.1.21 source-hash pin; 0.1.22 is intentionally not published because doing so could replace/preempt the pinned experiment.",
@@ -82,9 +86,9 @@
   },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
-    "finding": "Traced the 0.3.42 room summary and direct runtime count paths in pinned project source.",
-    "interpretation": "The room summary's 37 is index-derived, not a direct runtime container count. A separate Engine.AddNodes-based auto count exists, but is absent from this older 0.3.42 capture. This accounts for why its index estimate (37) does not match the 33 salvage/footlocker marker events.",
-    "provenance": "GitHub source `mod/derelict_baseline_probe.py` at commit d09e01231b511f5215e50ea0b1df3f3ea264c970; functions `_generation_room_summary`, `_load_live_crate_index`, `_auto_crate_summary`; compared with packaged fixture `derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json`."
+    "finding": "Pinned the blue-crate measurement path and confirmed the current live count omits that category.",
+    "interpretation": "In source d09e012, only salvage crates and crew footlockers can be countable from AddNodes/AddGroupNode hooks. Blue crates are recorded through user F7 markers; generic crate-name discovery is not count evidence. This narrows the first required measurement change to identifying blue-crate node/resource names under a matching executable.",
+    "provenance": "GitHub mod/derelict_baseline_probe.py at d09e01231b511f5215e50ea0b1df3f3ea264c970; functions _target_crate_name_match, _crate_discovery_name, _probe_spawned_node, _auto_crate_summary, mark_blue_crate, marked_blue_crates; runner-results/latest.json and 13 result directories checked at branch head 4e8fd0d2d636f1df0ecb9a9532137cdaa386c2fd."
   },
   "evidence_references": [
     {
@@ -276,6 +280,21 @@
         "`_generation_room_summary`: groups /DUNGEON scene-probe events and sums crate_index values",
         "`_load_live_crate_index`: maps static scene entries into salvage/footlocker values",
         "`_auto_crate_summary`: separate count of unique countable Engine.AddNodes keys; live/high status"
+      ]
+    },
+    {
+      "commit": "d09e01231b511f5215e50ea0b1df3f3ea264c970",
+      "path": "mod/derelict_baseline_probe.py",
+      "fields": [
+        "TARGET_CRATE_IDS",
+        "AUTO_CRATE_DISCOVERY_TOKENS",
+        "_target_crate_name_match",
+        "_crate_discovery_name",
+        "_probe_spawned_node",
+        "_auto_crate_summary",
+        "marked_blue_crates",
+        "mark_blue_crate",
+        "historical_expected_blue_crates"
       ]
     }
   ],
