@@ -17,18 +17,20 @@
     "The 0.1.21 runner polls nms-runner-evidence/runner-requests/latest.json every 10 seconds, accepts only three fixed actions, pins requests to its exact packaged source digest, and adds the targeted crate-count-audit action. No command, argument, executable path or RVA is accepted.",
     "Saved evidence summary has 11 measurements. A local recomputation found that all 11 saved room-sequence salvage/footlocker/target sums match the saved aggregate counts; this verifies arithmetic consistency only, not live object completeness.",
     "Saved sessions for address 00001A0004E84EFD and candidate root 9256392A2F5A74AC record 35 containers for CARGO_FLOATERS and 16 for MEDI_FLOATERS. Sessions span probe versions and lack NMS.exe hash provenance.",
-    "Within saved CARGO_FLOATERS rows, per-room target counts vary by family/kind: BARRACKS main 1/2/4 (16 rooms), CARG main 3/4/10/15/19 (26), END main 1/13 (8), and HANGAR main 3 (6). Family/kind alone is not a sufficient room-count lookup in this dataset."
+    "Within saved CARGO_FLOATERS rows, per-room target counts vary by family/kind: BARRACKS main 1/2/4 (16 rooms), CARG main 3/4/10/15/19 (26), END main 1/13 (8), and HANGAR main 3 (6). Family/kind alone is not a sufficient room-count lookup in this dataset.",
+    "For address 00001A0004E84EFD with CARGO_FLOATERS, six saved sessions record 35 containers: two sessions have no root candidate and four record 9256392A2F5A74AC. This weakens the need for root as a count input for this one system/preset, but sessions span probe versions and have no executable hash."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
     "Room-family/kind counts alone are insufficient; a finer room identity, generation descriptor, or RNG/state may determine per-room container multiplicity.",
-    "Total count may be the sum of per-room container multiplicities, but saved data does not prove the same formula predicts a derelict before traversal."
+    "Total count may be the sum of per-room container multiplicities, but saved data does not prove the same formula predicts a derelict before traversal.",
+    "For some fixed system/preset pairs, count may be stable without observing root; cross-system, same-build evidence is needed before excluding root generally."
   ],
   "falsified_hypotheses": [
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
     "Room family/kind alone determines a fixed container count in the saved rows."
   ],
-  "latest_material_finding": "The crate-first audit narrowed the candidate inputs: preset matters in the recorded same-root pair, and container multiplicity varies within room family/kind. The evidence is historical and executable-version-unpinned.",
+  "latest_material_finding": "The same address+preset produced 35 in six historical sessions, including two with no captured root candidate; the same candidate root and address under MEDI_FLOATERS produced 16. Root may be unnecessary for count when system+preset are known, but cross-version/unpinned evidence cannot settle M2.",
   "queued_experiments": [
     {
       "request_id": "1a131cab1568ef38e7f2c5b800000001",
@@ -43,7 +45,7 @@
     "The 11 historical measurements have no executable SHA-256 and mix probe versions; they cannot establish a version-pinned count model.",
     "Room labels are null in the saved room sequences, preventing a finer same-room-identity multiplicity comparison from this summary alone."
   ],
-  "next_action": "Review runner-results/1a131cab1568ef38e7f2c5b800000001 when uploaded. Then run a targeted comparison that groups per-room multiplicities by the finest recorded room identity and preset; if the current summary's room_label remains null, use existing saved sessions/asset maps for a join before requesting any new traversal. Determine whether count can be predicted from known preset plus room-generation descriptors without deriving the root.",
+  "next_action": "Review the queued runner result first. Continue M1/M2 with a provenance audit of existing saved captures: determine whether any exact sessions behind generation-measurements-summary.json include a matching NMS.exe SHA; if not, use the runner's hash-locked selected executable for the smallest targeted static investigation of crate-count producer/consumer before asking for any new traversal. A root is not required unless a measured same-build comparison ties it to count.",
   "human_action_required": null,
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs."
 }
