@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "input": "evidence/generation-measurements-summary.json",
+  "input_version": 1,
+  "measurement_rows": 11,
+  "rows_with_recomputable_room_counts": 11,
+  "rows_matching_recorded_totals": 11,
+  "rows_with_mismatched_or_missing_totals": 0,
+  "executable_hash_provenance_present": false,
+  "capture_version_scope": "probe version is recorded per row; game executable hash is absent",
+  "same_address_and_recorded_root_different_preset_totals": [
+    {
+      "universe_address_hex": "00001A0004E84EFD",
+      "root_candidate_hex": "9256392A2F5A74AC",
+      "preset_totals": {
+        "CARGO_FLOATERS": [
+          35
+        ],
+        "MEDI_FLOATERS": [
+          16
+        ]
+      },
+      "sessions": [
+        "20260929T183320Z_00001A0004E84EFD",
+        "20260929T185821Z_00001A0004E84EFD",
+        "20260929T195205Z_00001A0004E84EFD",
+        "20260929T201042Z_00001A0004E84EFD",
+        "20260930T173540Z_00001A0004E84EFD"
+      ]
+    }
+  ],
+  "samples": [
+    {
+      "session_id": "20260929T144401Z_0001550006607CAC",
+      "probe_version": "0.3.5",
+      "universe_address_hex": "0001550006607CAC",
+      "preset": "CARGO_FLOATERS",
+      "root_candidates_hex": [
+        "00C9E8DF0327789E"
+      ],
+      "room_count": 9,
+      "room_sum": 51,
+      "recorded_total": 51,
+      "salvage_sum": 32,
+      "recorded_salvage": 32,
+      "footlocker_sum": 19,
+      "recorded_footlockers": 19,
+      "target_sum": 51,
+      "recorded_target_sum": 51,
+      "matches_recorded_totals": true
+    },
+    {
+      "session_id": "20260929T161635Z_00001A0004E84EFD",
+      "probe_version": "0.3.10",
+      "universe_address_hex": "00001A0004E84EFD",
+      "preset": "CARGO_FLOATERS",
+      "root_candidates_hex": [],
+      "room_count": 8,
+      "room_sum": 35,
+      "recorded_total": 35,
+      "salvage_sum": 31,
+      "recorded_salvage": 31,
+      "footlocker_sum": 4,
+      "recorded_footlockers": 4,
+      "target_sum": 35,
+      "recorded_target_sum": 35,
+      "matches_recorded_totals": true
+    },
+    {
+      "session_id": "20260929T172658Z_00001A0004E84EFD",
+      "probe_version": "0.3.11",
+      "universe_address_hex": "00001A0004E84EFD",
+      "preset": "CARGO_FLOATERS",
+      "root_candidates_hex": [],
+      "room_count": 8,
+      "room_sum": 35,
+      "recorded_total": 35,
+      "salvage_sum": 31,
+      "recorded_salvage": 31,
+      "footlocker_sum": 4,
+      "recorded_footlockers": 4,
+      "target_sum": 35,
+      "recorded_target_sum": 35,
+      "matches_recorded_totals": true
+    },
+    {
+      "session_id": "20260929T175122Z_0001550006607CAC",
+      "probe_version": "0.3.12",
+      "universe_address_hex": "0001550006607CAC",
+      "preset": "CARGO_FLOATERS",
+      "root_candidates_hex": [
+        "00C9E8DF0327789E"
+      ],
+      "room_count": 9,
+      "room_sum": 51,
+      "recorded_total": 51,
+      "salvage_sum": 32,
+      "recorded_salvage": 32,
+      "footlocker_sum": 19,
+      "recorded_footlockers": 19,
+      "target_sum": 51,
+      "recorded_target_sum": 51,
+      "matches_recorded_totals": true
+    },
+    {
+      "session_id": "20260929T183320Z_00001A0004E84EFD",
+      "probe_version": "0.3.13",
+      "universe_address_hex": "00001A0004E84EFD",
+      "preset": "CARGO_FLOATERS",
+      "root_candidates_hex": [
+        "9256392A2F5A74AC"
+      ],
+      "room_count": 8,
+      "room_sum": 35,
+      "recorded_total": 35,
+      "salvage_sum": 31,
+      "recorded_salvage": 31,
+      "footlocker_sum": 4,
+      "recorded_footlockers": 4,
+      "target_sum": 35,
+      "recorded_target_sum": 35,
+      "matches_recorded_totals": true
+    },
+    {
+      "session_id": "20260929T185821Z_00001A0004E84EFD",
+      "probe_version": "0.3.14",
+      "universe_address_hex": "00001A0004E84EFD",
+      "preset": "CARGO_FLOATERS",
+      "root_candidates_hex": [
+        "9256392A2F5A74AC"
+      ],
+      "room_count": 8,
+      "room_sum": 35,
+      "recorded_total": 35,
+      "salvage_sum": 31,
+      "recorded_salvage": 31,
+      "footlocker_sum": 4,
+      "recorded_footlockers": 4,
+      "target_sum": 35,
+      "recorded_target_sum": 35,
+      "matches_recorded_totals": true
+    },
+    {
+      "session_id": "20260929T195205Z_00001A0004E84EFD",
+      "probe_version": "0.3.17",
+      "universe_address_hex": "00001A0004E84EFD",
+      "preset": "CARGO_FLOATERS",
+      "root_candidates_hex": [
+        "9256392A2F5A74AC"
+      ],
+      "room_count": 8,
+      "room_sum": 35,
+      "recorded_total": 35,
+      "salvage_sum": 31,
+      "recorded_salvage": 31,
+      "footlocker_sum": 4,
+      "recorded_footlockers": 4,
+      "target_sum": 35,
+      "recorded_target_sum": 35,
+      "matches_recorded_totals": true
+    },
+    {
+      "session_id": "20260929T201042Z_00001A0004E84EFD",
+      "probe_version": "0.3.18",
+      "universe_address_hex": "00001A0004E84EFD",
+      "preset": "CARGO_FLOATERS",
+      "root_candidates_hex": [
+        "9256392A2F5A74AC"
+      ],
+      "room_count": 8,
+      "room_sum": 35,
+      "recorded_total": 35,
+      "salvage_sum": 31,
+      "recorded_salvage": 31,
+      "footlocker_sum": 4,
+      "recorded_footlockers": 4,
+      "target_sum": 35,
+      "recorded_target_sum": 35,
+      "matches_recorded_totals": true
+    },
+    {
+      "session_id": "20260929T203022Z_00001A0004E84EFD",
+      "probe_version": "0.3.19",
+      "universe_address_hex": "00001A0004E84EFD",
+      "preset": null,
+      "root_candidates_hex": [
+        "9256392A2F5A74AC"
+      ],
+      "room_count": 0,
+      "room_sum": 0,
+      "recorded_total": 0,
+      "salvage_sum": 0,
+      "recorded_salvage": 0,
+      "footlocker_sum": 0,
+      "recorded_footlockers": 0,
+      "target_sum": 0,
+      "recorded_target_sum": 0,
+      "matches_recorded_totals": true
+    },
+    {
+      "session_id": "20260930T173540Z_00001A0004E84EFD",
+      "probe_version": "0.3.33",
+      "universe_address_hex": "00001A0004E84EFD",
+      "preset": "MEDI_FLOATERS",
+      "root_candidates_hex": [
+        "9256392A2F5A74AC"
+      ],
+      "room_count": 10,
+      "room_sum": 16,
+      "recorded_total": 16,
+      "salvage_sum": 11,
+      "recorded_salvage": 11,
+      "footlocker_sum": 5,
+      "recorded_footlockers": 5,
+      "target_sum": 16,
+      "recorded_target_sum": 16,
+      "matches_recorded_totals": true
+    },
+    {
+      "session_id": "20261001T033313Z_00001A0004E84EFD",
+      "probe_version": "0.3.33",
+      "universe_address_hex": "00001A0004E84EFD",
+      "preset": null,
+      "root_candidates_hex": [
+        "9256392A2F5A74AC"
+      ],
+      "room_count": 0,
+      "room_sum": 0,
+      "recorded_total": 0,
+      "salvage_sum": 0,
+      "recorded_salvage": 0,
+      "footlocker_sum": 0,
+      "recorded_footlockers": 0,
+      "target_sum": 0,
+      "recorded_target_sum": 0,
+      "matches_recorded_totals": true
+    }
+  ],
+  "interpretation": "Checks only arithmetic agreement between saved per-room counts and saved aggregate fields. It does not verify live-game object completeness or predict counts from system inputs."
+}
