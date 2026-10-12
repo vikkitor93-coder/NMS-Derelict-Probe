@@ -770,7 +770,7 @@
     "02D08430's record vector at object +0x138/+0x13C/+0x140 has a verified consumer: 02D0111E0, reached from the same exact-hash parser at 02D07949.",
     "02D0111E0 filters 0x1B8 rows on dword +0x1A0==1, suppresses already-seen row pointers, then traverses each row's nested 0x110-entry list at +0x1AC/+0x1B0.",
     "The consumer groups by a string identity (record +0x90) and appends distinct 8-byte pairs into a per-identity vector; it builds a separate result vector in object fields +0x148/+0x14C/+0x150. This is verified record aggregation, not yet a derelict root or room-generation calculation.",
-    "In the current hash-matched executable, the 02D08430 record parser is called from the unwind-chained 02D07570 routine via RVA 02D07949. It aggregates selected nested records by a string key into 0x198-byte entries; no static evidence yet ties those entries to owner+0x138/+0x140 or derelict generation."
+    "In the current hash-matched executable, the helper at RVA 02D011E0 reads the 0x1B8-byte records in the object vector populated by the 02D08430 path. Its caller at RVA 02D07949 supplies the object pointer plus one 0x104-byte input record and a parallel dword value; the helper groups selected nested records by a string key into 0x198-byte entries. No static evidence yet ties those entries to owner+0x138/+0x140 or derelict generation."
   ],
   "unresolved_questions": [
     "The two caller paths now statically reach 0063A6D0 with clone descriptors, but which path (if either) corresponds to the event-scoped 02C08607 root callback in the captured derelict session? No matching call-stack/descriptor capture ties a specific caller instance to that event.",
