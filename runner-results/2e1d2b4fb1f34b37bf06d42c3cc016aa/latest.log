@@ -1,0 +1,12 @@
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "snapshot", "status": "running", "request_id": "2e1d2b4fb1f34b37bf06d42c3cc016aa", "source_sha256": "48320938d7a7b1efea23359679ce3bc83e1ed25be631f54fa889d937621ff271"}
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "source-package", "status": "running"}
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "source-package", "status": "passed", "returncode": 0}
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "tests", "status": "running"}
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "tests", "status": "passed", "returncode": 0}
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "diagnose", "status": "running"}
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "diagnose", "status": "passed", "returncode": 0}
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "code", "status": "running"}
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "code", "status": "passed", "returncode": 0}
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "emulate", "status": "running"}
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "emulate", "status": "passed", "returncode": 0}
+{"schema_version": 1, "prototype_version": "0.1.18", "stage": "complete", "status": "passed", "errors": [], "request_id": "2e1d2b4fb1f34b37bf06d42c3cc016aa", "source_sha256": "48320938d7a7b1efea23359679ce3bc83e1ed25be631f54fa889d937621ff271"}
