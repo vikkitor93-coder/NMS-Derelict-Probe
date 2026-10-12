@@ -7,10 +7,12 @@
     "request_id": "4917f98b7a734768ac413372ab59861e"
   },
   "latest_evidence_check": {
-    "branch_head_before_queue": "8cfbfa5da6d7586b9eeb758965642c6d70589ad7",
+    "branch_head": "d6923cee285ca05fcf11f6174d4b37e4786a4d95",
     "latest_request_id": "4917f98b7a734768ac413372ab59861e",
-    "all_known_job_receipts_present": true,
-    "new_uploads": false
+    "latest_status": "passed",
+    "latest_runner_version": "0.1.20",
+    "queued_request_id": "1a131cab1568ef38e7f2c5b800000001",
+    "queued_request_status": "no result manifest observed at this head"
   },
   "established_facts": [
     "Runner update 0.1.21 is published on runner-updates at commit 12b387159fc1cb791e1ecc8695dcc9ccbaccf13b. Package source_sha256=e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; archive SHA-256=591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940; 119 tests passed with 10 skips; archive and all 71 member hashes were independently checked.",
@@ -45,7 +47,7 @@
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
     "No same-build multi-system rows currently establish whether system address/preset/root predicts total count before entering the derelict."
   ],
-  "next_action": "Check for the pending crate-count-audit result at the pinned evidence branch head. If absent, use the runner's existing safe request path only after this request completes; expand the allowlisted research capability on an isolated runner branch to inspect the already captured scene-instance-to-index count path or a selected executable's relevant read-only code. Keep the request narrow and hash-pinned; do not request a normal derelict traversal until this static boundary is exhausted.",
+  "next_action": "Preserve runner-requests/latest.json unchanged until request 1a131cab1568ef38e7f2c5b800000001 produces its manifest/result. Determine the currently installed runner version and whether GitHub upload is enabled. If it is 0.1.21, inspect its report/result upload after the next poll; if older, install the already-published 0.1.21 package so the exact source-pinned request can execute. Only after that request completes, publish the tested 0.1.22 diagnostic package, which will reveal the safe exact updater failure category on the next check.",
   "human_action_required": null,
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
@@ -93,5 +95,11 @@
         "no executable SHA-256 field"
       ]
     }
-  ]
+  ],
+  "runner_update_issue": {
+    "measured": "User-provided log excerpt shows repeated [update] check-failed records approximately every 10 seconds from 20:24:56Z through 20:33:18Z. The latest evidence pointer remained on request 4917f98b7a734768ac413372ab59861e (runner 0.1.20); this does not identify the currently installed runner version.",
+    "confirmed_static": "In source commit 808620042ce73815cf84eefc10e697817773b02d, derelict_offline/local_runner.py catches ValueError/OSError during channel/feed/package checks, records only feed-or-package-verification-failed, then continues into normal request/uploader polling. Thus this status names the updater subsystem and is not itself a crate-job failure.",
+    "inference": "A diagnostic-category patch was implemented on isolated local branch research/update-check-diagnostics at f82d6a2278ba76ceaf58774359ae314c9dae2241. Focused tests passed (32); full suite passed (120 tests, 10 skips); candidate 0.1.22 ZIP built with archive SHA-256 6febb16b8d7eaea3477972b211947a84543ae2baec9549ba9623dc480c3ce5e9. It is not published because the outstanding remote request is pinned to 0.1.21 source SHA e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; publishing 0.1.22 first could make the runner reject that request.",
+    "unverified": "The exact cause of feed-or-package-verification-failed and the runner version/configuration on the user's machine remain unknown."
+  }
 }
