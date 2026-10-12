@@ -1,19 +1,22 @@
 {
   "schema": 1,
-  "current_milestone": "M0 — safe remote request channel is published; first runner execution and returned upload are pending.",
+  "current_milestone": "M0 complete; M1 crate-count observables and smallest useful inputs remain under investigation.",
   "primary_objective": "Predict total derelict crate/container count offline from the smallest practical known inputs; defer room-layout reconstruction unless count prediction requires it.",
   "last_reviewed": {
-    "commit": "d5ce3d3905b23939e81a86b2e5a6bd3d03e4e082",
-    "request_id": "4917f98b7a734768ac413372ab59861e"
+    "commit": "66f8f346127f8e4365b2673fdedde4f04d4ce9e6",
+    "request_id": "1a131cab1568ef38e7f2c5b800000001",
+    "receipt_commit": "7a71c498eb09f7dba86952ebfd02fd66bbf02979"
   },
   "latest_evidence_check": {
-    "branch_head": "d5ce3d3905b23939e81a86b2e5a6bd3d03e4e082",
-    "latest_request_id": "4917f98b7a734768ac413372ab59861e",
+    "branch_head": "66f8f346127f8e4365b2673fdedde4f04d4ce9e6",
+    "latest_request_id": "1a131cab1568ef38e7f2c5b800000001",
     "latest_status": "passed",
-    "latest_runner_version": "0.1.20",
-    "queued_request_id": "1a131cab1568ef38e7f2c5b800000001",
-    "queued_request_status": "still awaiting runner; exact request_id absent from all 13 result directories at branch head 4e8fd0d2d636f1df0ecb9a9532137cdaa386c2fd",
-    "installed_runner_version": "0.1.20 (user-reported; 0.1.21 source pin remains unmet)"
+    "latest_runner_version": "0.1.21",
+    "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
+    "result_manifest_sha256": "45494e56f5c2feef8adc3822dd9277719c6b2500",
+    "queued_request_id": null,
+    "queued_request_status": "completed and reviewed",
+    "installed_runner_version": "0.1.21 result provenance confirmed by returned manifest; no separate local installation claim"
   },
   "established_facts": [
     "Runner update 0.1.21 is published on runner-updates at commit 12b387159fc1cb791e1ecc8695dcc9ccbaccf13b. Package source_sha256=e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; archive SHA-256=591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940; 119 tests passed with 10 skips; archive and all 71 member hashes were independently checked.",
@@ -32,7 +35,9 @@
     "Unpinned runtime sample from the packaged v0.3.75 fixture `derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json` (source baseline commit d09e01231b511f5215e50ea0b1df3f3ea264c970; local projection SHA-256 6c1bd3d31aaa9cd0e35a6819f79d398c18e7ac6ac46fe8fa29ce87ce0262ed48, matching the fixture manifest): probe 0.3.42, system address 0000760006606CAB, root candidate 9C2818C7FE094FC8; recording ran 01:01:05–01:18:26Z, started in AbandonedFreighter, ended in Default, and saw 12 rooms. The capture records 49 blue_crate, 26 salvage_crate and 7 footlocker marker events (82 marked events). Its room/index summary estimates 29 salvage plus 8 footlockers (37), four above the 33 salvage/footlocker markers. This is a measured marker-vs-index discrepancy, not a verified physical total: marker completeness is not recorded, and manifest reports game 7.05 only as user-reported with no NMS.exe SHA-256.",
     "Confirmed static at project source commit d09e01231b511f5215e50ea0b1df3f3ea264c970: `_generation_room_summary` walks scene-probe events under `/DUNGEON/`, looks each scene path up in the local room-crate index, and sums the index's salvage/footlocker entries. Therefore `generation_room_summary.target_containers_seen=37` is an asset-index estimate, not a runtime enumeration. The separate `_auto_crate_summary` uses unique `countable` Engine.AddNodes keys and labels the result `live`/`high`; the 0.3.42 Irchol fixture contains no auto_crates report, so its 82 manual marker events cannot be checked against that direct hook.",
     "Confirmed static at project source commit d09e01231b511f5215e50ea0b1df3f3ea264c970: the live auto-count target matcher accepts only ABAND_CRATE_M and FOOTLOCKER. Generic CRATE/LOCKER/CHEST discovery tokens only create discovery_only evidence and do not increment count. Blue crates use the manual F7 marker path (`_add_marker(\"blue_crate\")`); the blue total is recorded marker count, while historical_expected_blue_crates is a manual field. This source finding does not establish behavior of the older 0.3.42 fixture: it has no auto_crates report and its 49 blue count is manual-marker evidence.",
-    "Offline inspection of fixture derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json found 1,530 scene_probe events, of which only two contain generic crate-related tokens: the AbandonedFreighter ambience and a room-level MODELS/SPACE/POI/DUNGEON/CARG/CORNER_CRATES00.SCENE.MBIN instance. No event identifies an individual blue crate. The fixture records 49 blue_crate F7 markers (container ordinals 1–82 overall); those are the only blue-count observations in this capture."
+    "Offline inspection of fixture derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json found 1,530 scene_probe events, of which only two contain generic crate-related tokens: the AbandonedFreighter ambience and a room-level MODELS/SPACE/POI/DUNGEON/CARG/CORNER_CRATES00.SCENE.MBIN instance. No event identifies an individual blue crate. The fixture records 49 blue_crate F7 markers (container ordinals 1–82 overall); those are the only blue-count observations in this capture.",
+    "Runner request 1a131cab1568ef38e7f2c5b800000001 completed on runner 0.1.21 with exact source pin e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; result manifest SHA-256 45494e56f5c2feef8adc3822dd9277719c6b2500, crate-count report SHA-256 26f9fa4028aa2d7170789bd2c25ca46e7ad6c7746b499e587101a8397b8fd787.",
+    "The crate-count-audit recomputed room sums for 11/11 rows with zero mismatches. The same recorded address/root has CARGO_FLOATERS total 35 and MEDI_FLOATERS total 16; this is a saved-summary association, not independently measured physical inventory or a proven causal rule."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -49,47 +54,25 @@
     "Room family/kind alone determines a fixed container count in the saved rows.",
     "The existing live auto-count summary covers every crate/container category, including blue crates."
   ],
-  "latest_material_finding": "Current source's automatic count omits blue crates; F7 markers provide manual blue counts. Offline scan of the 0.3.42 Irchol fixture found no per-blue-crate spawn identities among 1,530 scene-probe events (only one room-level CORNER_CRATES scene hit). Therefore the existing sample cannot tell us what node/resource label to match for an automatic blue count.",
-  "queued_experiments": [
-    {
-      "request_id": "1a131cab1568ef38e7f2c5b800000001",
-      "action": "crate-count-audit",
-      "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
-      "queue_commit": "07c1e10e0cc6b0e77a57d2a7974b07d96329f50c",
-      "status": "awaiting runner"
-    }
-  ],
+  "latest_material_finding": "M0 is demonstrated end-to-end: the exact source-pinned request ran, uploaded hash-listed evidence, and was reviewed. Its 11/11 arithmetic agreement validates saved-summary consistency only. Same address/root shows different preset totals (35 vs 16), making preset a candidate input while leaving physical counts and causality unproven.",
+  "queued_experiments": [],
   "unresolved_blockers": [
-    "Queued request 1a131cab1568ef38e7f2c5b800000001 has not produced a runner result; latest remains request 4917f98b7a734768ac413372ab59861e at runner 0.1.20.",
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
     "No same-build multi-system rows currently establish whether system address/preset/root predicts total count before entering the derelict.",
-    "User reports installed runner version 0.1.20. The queued crate-count-audit request requires source SHA e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b (runner 0.1.21); latest result remains 4917f98b7a734768ac413372ab59861e. The supplied log shows repeated updater check-failed, so the remote request has not run.",
     "No NMS.exe is present in the available project checkout or runner source workspace; exact-binary export must run on the configured Windows runner after the compatible 0.1.21 request completes.",
     "The 0.3.42 Irchol-Luhimo XVII sample contains 82 marker events but no explicit marker-completeness flag or executable hash; its 37 index estimate exceeds the 33 salvage/footlocker markers by four.",
-    "Blue-crate runtime object/resource identity is not known; F7 gives manual marker counts only, so current direct auto-count cannot yield total crate count."
+    "Blue-crate runtime object/resource identity is not known; F7 gives manual marker counts only, so current direct auto-count cannot yield total crate count.",
+    "The completed 0.1.21 action audits bundled arithmetic only; it has no NMS.exe hash or physical crate-completeness evidence and does not inspect the count producer.",
+    "No same-build, executable-pinned multi-system observations yet establish whether system address, preset, root, or another state predicts total physical count before traversal.",
+    "Blue-crate runtime identity and marker completeness remain unknown; existing F7 counts cannot yet close the total-count gap."
   ],
-  "next_action": "Keep pending request 1a131cab1568ef38e7f2c5b800000001 unchanged until a source-pinned 0.1.21 runner executes it. After M0, run an executable-hash-pinned derelict capture with the auto node hooks and manual F7 markers together; compare exact spawned-node/resource names near blue-crate F7 events. If the names identify a blue-crate product/resource, add a narrowly matched countable target on an isolated probe branch and validate against a complete marker pass; otherwise identify the object-creation boundary before attempting offline total prediction.",
-  "human_action_required": {
-    "action": "Install the already-published runner 0.1.21 package, then reopen the runner.",
-    "reason": "0.1.20 cannot satisfy the request's exact 0.1.21 source-hash pin; 0.1.22 is intentionally not published because doing so could replace/preempt the pinned experiment.",
-    "steps": [
-      "Stop and close the current runner window.",
-      "Download and extract the verified 0.1.21 package: https://raw.githubusercontent.com/vikkitor93-coder/NMS-Derelict-Probe/runner-updates/runner-updates/NMS-Runner-v0.1.21.zip",
-      "Open Start-Runner.cmd from the extracted package to update the existing permanent runner folder; preserve its reports, requests, settings and environment.",
-      "Confirm the runner window reports 0.1.21 and leave it running for at least one 10-second poll; the expected success signal is a new result directory/manifest for request 1a131cab1568ef38e7f2c5b800000001."
-    ],
-    "package_provenance": {
-      "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
-      "archive_sha256": "591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940",
-      "archive_bytes": 396411,
-      "tests": "119 passed, 10 skipped"
-    }
-  },
+  "next_action": "Continue M1 by deduplicating and comparing existing saved sessions at the same address/preset across probe versions, then compare across addresses while separating missing-root and null-preset rows. Do not repeat crate-count-audit unchanged. Queue a new runner request only after identifying a supported fixed action that answers a distinct crate-count question; current allowlist cannot inspect NMS.exe or runtime objects.",
+  "human_action_required": null,
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
-    "finding": "Measured whether the existing 0.3.42 fixture exposes blue crate object identities in scene-probe records.",
-    "interpretation": "No: the only crate-token scene record is a room-level CORNER_CRATES scene; all 49 blue crate observations are manual F7 markers. The record stream cannot support object-name recovery for this sample.",
-    "provenance": "Local offline scan of packaged fixture `derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json` from source baseline d09e01231b511f5215e50ea0b1df3f3ea264c970; projection SHA-256 6c1bd3d31aaa9cd0e35a6819f79d398c18e7ac6ac46fe8fa29ce87ce0262ed48; probe 0.3.42, game version user-reported 7.05, no executable SHA."
+    "finding": "Reviewed hash-pinned request 1a131cab1568ef38e7f2c5b800000001 and confirmed the returned summary arithmetic plus same-address/root preset totals.",
+    "interpretation": "The complete remote request→execution→upload→review cycle works. Evidence supports M0 completion, not M1 or a claim about physical in-game totals.",
+    "provenance": "Runner 0.1.21; source SHA-256 e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; manifest SHA-256 45494e56f5c2feef8adc3822dd9277719c6b2500; reviewed commit 66f8f346127f8e4365b2673fdedde4f04d4ce9e6; receipt commit 7a71c498eb09f7dba86952ebfd02fd66bbf02979."
   },
   "evidence_references": [
     {
@@ -298,11 +281,5 @@
         "historical_expected_blue_crates"
       ]
     }
-  ],
-  "runner_update_issue": {
-    "measured": "User-provided log excerpt shows repeated [update] check-failed records approximately every 10 seconds from 20:24:56Z through 20:33:18Z. The latest evidence pointer remained on request 4917f98b7a734768ac413372ab59861e (runner 0.1.20); this does not identify the currently installed runner version.",
-    "confirmed_static": "In source commit 808620042ce73815cf84eefc10e697817773b02d, derelict_offline/local_runner.py catches ValueError/OSError during channel/feed/package checks, records only feed-or-package-verification-failed, then continues into normal request/uploader polling. Thus this status names the updater subsystem and is not itself a crate-job failure.",
-    "inference": "A diagnostic-category patch was implemented on isolated local branch research/update-check-diagnostics at f82d6a2278ba76ceaf58774359ae314c9dae2241. Focused tests passed (32); full suite passed (120 tests, 10 skips); candidate 0.1.22 ZIP built with archive SHA-256 6febb16b8d7eaea3477972b211947a84543ae2baec9549ba9623dc480c3ce5e9. It is not published because the outstanding remote request is pinned to 0.1.21 source SHA e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; publishing 0.1.22 first could make the runner reject that request.",
-    "unverified": "The exact cause of feed-or-package-verification-failed and the runner version/configuration on the user's machine remain unknown."
-  }
+  ]
 }
