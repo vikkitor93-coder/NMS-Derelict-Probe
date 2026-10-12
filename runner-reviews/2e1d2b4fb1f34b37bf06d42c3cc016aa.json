@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "request_id": "2e1d2b4fb1f34b37bf06d42c3cc016aa",
+  "source_sha256": "48320938d7a7b1efea23359679ce3bc83e1ed25be631f54fa889d937621ff271",
+  "status": "reviewed",
+  "reviewed_commit": "6e0eeb3829471f33d4ff7214185475229ca05027",
+  "findings": {
+    "run_status": "passed",
+    "failed_stage": null,
+    "measured_facts": [
+      "At reviewed commit, latest.json, manifest.json and result.json agree on request_id, source_sha256, status passed, prototype_version 0.1.18 and report_path.",
+      "result.json records returncode 0 for source-package, tests, diagnose, code, and emulate; latest.log records each stage passed and errors is empty.",
+      "diagnose.json and emulate.json report 149 code ranges and 103256 bytes, exporter-recorded range_hashes_verified=true, 4040 Unicorn comparisons with zero mismatches, and four replay cases matching their prior analyzer outputs.",
+      "Those records explicitly set root_generation_verified=false and layout_generation_verified=false; the replay records also set independent_physical_count_verified=false. The pass does not verify root derivation, layout, physical inventory, or freighter customization.",
+      "The NMS.exe full SHA-256 is exporter-reported; the report says the executable itself was not uploaded and historical captures remain unpinned. Manifest file sizes and hashes were not independently recomputed in this review."
+    ]
+  },
+  "next_action": "Continue the saved root trace only when current-build direct caller ranges for 02D07C80 and 02D08430 and their input setup are available; link a caller to the root event only with same-capture lineage and matching descriptor bytes at owner+0x138/+0x140."
+}
