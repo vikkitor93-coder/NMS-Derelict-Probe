@@ -56,7 +56,8 @@
     "The batch measurement summary (SHA-256 1dd0d70b5e95d69c2fedc251cf24a676c560159b506a83a4c9d03179cd932166) contains six CARGO_FLOATERS estimates across three addresses: 51 at 0001550006607CAC, 35 at 00001A0004E84EFD, and 23 at 0000750006606CAB. Repeated same-address saved rows keep their index estimate/layout multiset stable. This shows preset alone is insufficient to explain the static estimate; it does not show physical totals or prove the cause.",
     "Batch report SHA-256 702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996 is committed on main at 08b674407726406cbd3fff98d23371f85a2509e9. Seven of nine actions completed; Prepare-Crate-Assets failed because MBINCompiler rejected an extracted file as invalid MBIN, and upload_runtime_capture was not run by the isolated no-upload batch mode. This failure is an execution issue, not research evidence. The new session-analysis report includes no matching NMS.exe SHA-256.",
     "Hash-pinned local NMS.exe scan (SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499; PE timestamp 6ABE9229; image base 0x140000000) found zero raw ASCII occurrences of R_ABAND_CRATE, _ABAND_CRATE_M, R_ABAND_OPEN, R_ABAND_WALK_S, or FOOTLOCKER. A direct code xref search for these literal tokens cannot locate the count producer in this executable; this does not exclude hashed IDs, indirect asset references, or other strings.",
-    "Independent local calculation against the current scene index reproduced all 9 Ruflas-Simly V logical-group static estimates exactly: each room group's scene-path instance multiplicities mapped to the index sum reported salvage/footlocker values, with zero unresolved scene instances; grand total 18 salvage + 5 footlockers = 23. Inputs: baseline artifact SHA-256 c080e87cabe8a943dcabef2e1978e40a32fb8ff69b9f6c805aafda8dedebdc31; local room-index SHA-256 aaf28c76814816083e7b04d8ad027dd63e992c8499ae002c3eea2b7dacc15de; report SHA-256 702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996."
+    "Independent local calculation against the current scene index reproduced all 9 Ruflas-Simly V logical-group static estimates exactly: each room group's scene-path instance multiplicities mapped to the index sum reported salvage/footlocker values, with zero unresolved scene instances; grand total 18 salvage + 5 footlockers = 23. Inputs: baseline artifact SHA-256 c080e87cabe8a943dcabef2e1978e40a32fb8ff69b9f6c805aafda8dedebdc31; local room-index SHA-256 aaf28c76814816083e7b04d8ad027dd63e992c8499ae002c3eea2b7dacc15de; report SHA-256 702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996.",
+    "In the six-row CARGO_FLOATERS comparison, five older summary rows (probe 0.3.5–0.3.14) report 7 main rooms, matching the static preset table's 7; Ruflas-Simly V (probe 0.3.42) reports 9 logical groups/main rooms and 0 dead ends, so main_room_count_matches_table=false and room_model_status=needs-review. Because these are different probe versions and the capture lacks a matching NMS.exe hash, the mismatch cannot be assigned to game generation rather than capture/grouping changes."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -68,7 +69,8 @@
     "Automatic node/resource probes may see blue-crate labels as discovery-only when names contain generic CRATE tokens, but no capture has shown their actual names or a countable blue-crate ID.",
     "For 00001A0004E84EFD/CARGO_FLOATERS, address/preset plus a stable per-room count multiset is consistent with the repeated 35 summaries; the available data cannot tell whether root is a causal input because missing root means uncaptured, not absent.",
     "Within the same inferred preset, per-session selected room-scene composition drives the static target estimate; whether its selector can be predicted offline from address/root and whether estimates match physical totals remain unknown.",
-    "Scene-index estimate variation is explained by selected per-room scene composition/multiplicity, beyond preset or room family; whether the game's selector can be predicted from pre-traversal inputs remains unknown."
+    "Scene-index estimate variation is explained by selected per-room scene composition/multiplicity, beyond preset or room family; whether the game's selector can be predicted from pre-traversal inputs remains unknown.",
+    "The 7-versus-9 room-group mismatch may be caused by probe-version event grouping/classification changes; verify this before using logical_groups as a stable crate-count input."
   ],
   "falsified_hypotheses": [
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
@@ -76,7 +78,7 @@
     "The existing live auto-count summary covers every crate/container category, including blue crates.",
     "The target interaction IDs are present as raw ASCII literals in NMS.exe and can be followed by direct string xrefs."
   ],
-  "latest_material_finding": "The 23 estimate is independently reproducible as a per-scene-index sum across all nine logical groups (zero unresolved scenes); it is an arithmetic validation of the estimator, not a physical inventory. The pre-traversal room/scene selector remains the unresolved input.",
+  "latest_material_finding": "The new 23 static estimate reproduces arithmetically, but its room grouping is flagged needs-review: the preset table specifies 7 rooms while the 0.3.42 capture groups 9 as main rooms. Five older CARGO_FLOATERS rows report 7 main rooms; version mismatch prevents attributing the difference to NMS.",
   "queued_experiments": [],
   "unresolved_blockers": [
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
@@ -91,7 +93,7 @@
     "Ruflas-Simly V's two blue_crate markers are temporally associated with R_ABAND_CRATE calls, but no individual object identity or physical-total completeness is captured; auto_crates found zero targets. The session lacks an NMS.exe hash.",
     "Fresh 20261013 saved-session analysis has a verified session input hash and output hashes but no matching NMS.exe hash; all reported 23/35/51 totals remain scene-index estimates. Automatic batch Prepare-Crate-Assets failed at MBINCompiler and supplied no new asset payload."
   ],
-  "next_action": "Determine what pre-traversal state selects target-bearing room scene variants. Compare the exact CARGO_FLOATERS generation rules and scene/placement descriptors against a hash-pinned code-side selector boundary; use only an implemented runner action for executable extraction. Do not treat 23 as physical count or repeat the completed derelict.",
+  "next_action": "First compare how probe versions 0.3.14 and 0.3.42 form scene parent groups and classify dead ends; use saved logs/source only and do not repeat gameplay. If the grouping changed, normalize the comparison. Then inspect the supported room-selection code boundary for inputs that predict target-bearing scene choices. Keep the 23 value labeled as a static estimate.",
   "human_action_required": null,
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
@@ -419,5 +421,31 @@
       "target_sum": 23
     },
     "classification": "confirmed_static_index_recomputation; not physical count"
+  },
+  "latest_grouping_comparison": {
+    "question": "Does the newest logical-room grouping agree with the preset table and prior CARGO_FLOATERS rows?",
+    "provenance": {
+      "combined_results_sha256": "702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996",
+      "session_sha256": "37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932",
+      "preset_table": "CARGO_FLOATERS.rooms=7"
+    },
+    "measured": {
+      "prior_rows_matching_table": 5,
+      "prior_probe_versions": [
+        "0.3.5",
+        "0.3.10",
+        "0.3.12",
+        "0.3.13",
+        "0.3.14"
+      ],
+      "latest_probe_version": "0.3.42",
+      "latest_logical_groups": 9,
+      "latest_observed_main_rooms": 9,
+      "latest_dead_end_rooms": 0,
+      "latest_main_room_count_matches_table": false,
+      "latest_room_model_status": "needs-review"
+    },
+    "interpretation": "Capture/grouping mismatch is established; cause is unknown because probe versions and executable provenance differ.",
+    "classification": "measured_report_fields"
   }
 }
