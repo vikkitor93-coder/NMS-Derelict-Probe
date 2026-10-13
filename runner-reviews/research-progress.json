@@ -14,10 +14,12 @@
     "latest_runner_version": "0.1.21",
     "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
     "result_manifest_sha256": "45494e56f5c2feef8adc3822dd9277719c6b2500",
-    "queued_request_id": "20261013T1849Z-export-00639BE0",
-    "queued_request_status": "awaiting local runner pickup",
+    "queued_request_id": "93c2fa98e6814c45a7c12c11c06e205f",
+    "queued_request_status": "corrected request queued; awaiting runner result",
     "installed_runner_version": "0.1.21 result provenance confirmed by returned manifest; no separate local installation claim",
-    "request_commit": "623b6cb267503a353aeae1e4d2621029b9ab96ec"
+    "request_commit": "c7af3ac362ce77ae9155f95d05310cbe80629d43",
+    "prior_rejected_request_id": "20261013T1849Z-export-00639BE0",
+    "prior_rejection": "runner log reported invalid-or-unavailable; no request executed"
   },
   "established_facts": [
     "Runner update 0.1.21 is published on runner-updates at commit 12b387159fc1cb791e1ecc8695dcc9ccbaccf13b. Package source_sha256=e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; archive SHA-256=591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940; 119 tests passed with 10 skips; archive and all 71 member hashes were independently checked.",
@@ -55,7 +57,8 @@
     "New saved runtime capture: session 20261013T182312Z_0000750006606CAB, probe 0.3.42, system address 0000750006606CAB, root candidate 2A41B0E7EF42A1F7; session ran 18:23:12.018–18:24:50.780Z and ended by leaving the abandoned freighter. It recorded 9 main rooms; generation_room_summary reports 18 salvage + 5 footlockers = 23 from the scene-index estimate, not a physical enumeration. Two F7 blue_crate markers were each followed by R_ABAND_CRATE trace calls nearest-marker deltas 602/1311 ms and 739/1431 ms, with reward seeds 214D7F915D5415EE and 9E21D110530B6C58 respectively; each pair logged peek=true then peek=false. auto_crates count remained 0, with no candidate names, and diagnostics reported no errors or sample-limit hit. This is temporal correlation only: no object-ID link, unopened/opened state, marker-completeness proof, or physical crate total. Local session JSON SHA-256=37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932; uploaded capture journal SHA-256=bfad60506fd76db6531a1fea8cde80f734e45e9e90b3204a599d188e01bd357a in main upload commit 2d918cedd744d6d017974500a326a0f2391ceac2. The upload contains the journal, not the full session JSON; the capture does not record a matching NMS.exe hash.",
     "Automatic saved-session batch 20261013T182533Z-0fef6736, report run 20261013T182534Z-4f832f18, verified input session 20261013T182312Z_0000750006606CAB at SHA-256 37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932. Analyze-generation tool 0.3.24 output SHA-256 c080e87cabe8a943dcabef2e1978e40a32fb8ff69b9f6c805aafda8dedebdc31 inferred CARGO_FLOATERS (high), grouped 9 main logical rooms / 121 scene instances, and summed the static room-index estimate as 18 salvage + 5 footlockers = 23. This does not enumerate physical containers.",
     "The batch measurement summary (SHA-256 1dd0d70b5e95d69c2fedc251cf24a676c560159b506a83a4c9d03179cd932166) contains six CARGO_FLOATERS estimates across three addresses: 51 at 0001550006607CAC, 35 at 00001A0004E84EFD, and 23 at 0000750006606CAB. Repeated same-address saved rows keep their index estimate/layout multiset stable. This shows preset alone is insufficient to explain the static estimate; it does not show physical totals or prove the cause.",
-    "Batch report SHA-256 702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996 is committed on main at 08b674407726406cbd3fff98d23371f85a2509e9. Seven of nine actions completed; Prepare-Crate-Assets failed because MBINCompiler rejected an extracted file as invalid MBIN, and upload_runtime_capture was not run by the isolated no-upload batch mode. This failure is an execution issue, not research evidence. The new session-analysis report includes no matching NMS.exe SHA-256."
+    "Batch report SHA-256 702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996 is committed on main at 08b674407726406cbd3fff98d23371f85a2509e9. Seven of nine actions completed; Prepare-Crate-Assets failed because MBINCompiler rejected an extracted file as invalid MBIN, and upload_runtime_capture was not run by the isolated no-upload batch mode. This failure is an execution issue, not research evidence. The new session-analysis report includes no matching NMS.exe SHA-256.",
+    "Confirmed runner request-format diagnosis: source 0.1.21 validator requires request_id to match exactly 32 lowercase hexadecimal characters. The first queued ID contained timestamp text and uppercase letters; the runner log reports no execution. Local runner_protocol.py SHA-256 ee0cb1af240789fdcefb9e0ac8eedc04d2cbc36b57c1d6725963b2744aba8ca1 matches the 0.1.21 package manifest."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -86,20 +89,10 @@
     "Saved evidence is exhausted for physical-count validation: summary duplicates dominate, unique system/preset rows lack matching-build NMS.exe provenance, and asset-index totals have no complete manual count.",
     "Current static assets constrain per-scene multiplicity but do not reveal which scene variants are selected for a given system/preset; matching that selector to total count is still unresolved.",
     "Ruflas-Simly V's two blue_crate markers are temporally associated with R_ABAND_CRATE calls, but no individual object identity or physical-total completeness is captured; auto_crates found zero targets. The session lacks an NMS.exe hash.",
-    "Fresh 20261013 saved-session analysis has a verified session input hash and output hashes but no matching NMS.exe hash; all reported 23/35/51 totals remain scene-index estimates. Automatic batch Prepare-Crate-Assets failed at MBINCompiler and supplied no new asset payload.",
-    "Request 20261013T1849Z-export-00639BE0 is queued but has not been picked up; the local NMS Offline runner must be started/resumed on the Windows PC. No NMS game launch or derelict traversal is required."
+    "Fresh 20261013 saved-session analysis has a verified session input hash and output hashes but no matching NMS.exe hash; all reported 23/35/51 totals remain scene-index estimates. Automatic batch Prepare-Crate-Assets failed at MBINCompiler and supplied no new asset payload."
   ],
-  "next_action": "After the user starts/resumes NMS Offline Runner 0.1.21, review runner-results/<request_id>/manifest.json and offline-evidence.zip. Confirm the NMS.exe hash and whether helper 00639BE0 is included; decode the returned function bytes, then request Ghidra only if the fixed export lacks the needed evidence.",
-  "human_action_required": {
-    "action": "Start or resume NMS Offline Runner 0.1.21 so it can pick up the queued export request.",
-    "steps": [
-      "Open NMS Offline Runner 0.1.21 on the Windows PC.",
-      "If its status is Stopped, click Start; leave it open while the queued request runs.",
-      "Wait for the run to finish and the GitHub upload to complete."
-    ],
-    "success_condition": "GitHub runner-results/latest.json changes to request_id 20261013T1849Z-export-00639BE0 and the matching result reports completion.",
-    "game_or_derelict_required": false
-  },
+  "next_action": "Review runner-results/93c2fa98e6814c45a7c12c11c06e205f/manifest.json and offline-evidence.zip when uploaded; verify executable hash and whether helper 00639BE0 is included, then decode its exported bytes. The runner is already active; no human step is currently needed.",
+  "human_action_required": null,
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
     "finding": "Deduplicated all repository generation-measurement summary and asset-calculation uploads, then grouped the unique saved observations.",
@@ -364,11 +357,11 @@
   },
   "experiments_awaiting_result": [
     {
-      "request_id": "20261013T1849Z-export-00639BE0",
+      "request_id": "93c2fa98e6814c45a7c12c11c06e205f",
       "action": "offline-check-and-export",
       "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
-      "status": "queued; runner has not picked it up as of this review",
-      "question": "Does the hash-gated fixed export produce helper 00639BE0 bytes for the pinned current NMS.exe?"
+      "status": "queued after malformed request was rejected before execution",
+      "question": "Does the hash-gated fixed export produce the helper 00639BE0 bytes for the pinned current NMS.exe?"
     }
   ],
   "latest_static_crate_entity_experiment": {
