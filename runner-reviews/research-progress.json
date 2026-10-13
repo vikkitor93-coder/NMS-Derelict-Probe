@@ -65,14 +65,15 @@
     "For Irchol-Luhimo XVII (address 0000760006606CAB, root candidate 9C2818C7FE094FC8), the saved 12-room marker log records 82 crate/container markers; the index estimate is 37 salvage/footlockers versus 33 such markers, but marker completeness and executable identity are unknown.",
     "Automatic node/resource probes may see blue-crate labels as discovery-only when names contain generic CRATE tokens, but no capture has shown their actual names or a countable blue-crate ID.",
     "For 00001A0004E84EFD/CARGO_FLOATERS, address/preset plus a stable per-room count multiset is consistent with the repeated 35 summaries; the available data cannot tell whether root is a causal input because missing root means uncaptured, not absent.",
-    "Within the same inferred preset, per-session selected room-scene composition drives the static target estimate; whether its selector can be predicted offline from address/root and whether estimates match physical totals remain unknown."
+    "Within the same inferred preset, per-session selected room-scene composition drives the static target estimate; whether its selector can be predicted offline from address/root and whether estimates match physical totals remain unknown.",
+    "Scene-index estimate variation is explained by selected per-room scene composition/multiplicity, beyond preset or room family; whether the game's selector can be predicted from pre-traversal inputs remains unknown."
   ],
   "falsified_hypotheses": [
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
     "Room family/kind alone determines a fixed container count in the saved rows.",
     "The existing live auto-count summary covers every crate/container category, including blue crates."
   ],
-  "latest_material_finding": "Across six saved CARGO_FLOATERS rows and three addresses, the scene-index estimate varies 51, 35, and 23. This supports selected-room composition or another address-derived state as relevant to the estimate; it does not validate physical totals. For Ruflas-Simly V the fresh analysis infers 9 logical rooms and estimates 23 targets (18 salvage + 5 footlockers); reward-marker timing remains a correlation.",
+  "latest_material_finding": "For the six CARGO_FLOATERS summary rows at three addresses, scene-index estimates are 51, 35, and 23; grouped room contributions differ within the same family (CARG: 30, 29, 19 respectively; BARRACKS: 8, 2, 4; END/HANGAR account for the remainder). Ruflas-Simly V's nine logical groups sum to the 23 static estimate. This narrows the estimate's dependence to selected scene composition, but none of these are verified physical totals.",
   "queued_experiments": [],
   "unresolved_blockers": [
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
@@ -87,7 +88,7 @@
     "Ruflas-Simly V's two blue_crate markers are temporally associated with R_ABAND_CRATE calls, but no individual object identity or physical-total completeness is captured; auto_crates found zero targets. The session lacks an NMS.exe hash.",
     "Fresh 20261013 saved-session analysis has a verified session input hash and output hashes but no matching NMS.exe hash; all reported 23/35/51 totals remain scene-index estimates. Automatic batch Prepare-Crate-Assets failed at MBINCompiler and supplied no new asset payload."
   ],
-  "next_action": "Use the verified per-session `logical_groups` and static room index to identify the smallest room-scene features that explain the 23/35/51 estimates; compare the repeated-address rows for invariants, then seek an exact upstream selector/count boundary. Keep this strictly as static-estimate work until a physical total is available; do not revisit the completed derelict.",
+  "next_action": "Inspect the generation-table and code-side room-selection boundary that chooses specific room/scene variants; request only a supported, targeted runner action if the existing allowlist can answer it. Keep estimates separate from physical totals and do not repeat the completed derelict.",
   "human_action_required": null,
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
@@ -373,5 +374,18 @@
     "finding": "The selected CARG room MXML has three RefCrateM nodes targeting SPACEBASE/PROPS/CRATEM.SCENE.MBIN. The matching CRATEM entity defines GenericReward interaction, Id R_ABAND_CRATE, ScanName UI_SALVAGE_CRATE, and crate scanner icon. Separately, the DECORATION/CRATEM_PLACEMENT entity defines PartID _ABAND_CRATE_M; its placement scene is a locator.",
     "interpretation": "Confirms these referenced CRATEM objects are configured salvage crates and supports the static scene index's salvage category. Does not prove every such prop spawns in the world, map it to the blue_crate F7 label, reveal runtime room selection, or predict total count.",
     "status": "confirmed_static; no runner job"
+  },
+  "unresolved_blocker": [
+    "No physical crate total is available for the new Ruflas-Simly V sample, and the saved session lacks a matching NMS.exe hash; scene-index sums cannot validate the estimate against in-game total."
+  ],
+  "latest_analysis": {
+    "finding": "Within the same inferred CARGO_FLOATERS preset, the per-room indexed target sums are not fixed by family: CARG sums are 30/29/19 across the three address groups; BARRACKS sums 8/2/4, with totals 51/35/23.",
+    "evidence": {
+      "batch": "20261013T182533Z-0fef6736",
+      "run_id": "20261013T182534Z-4f832f18",
+      "combined_results_sha256": "702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996",
+      "batch_results_pointer_sha256_verified": "fa194200c3a55b71d337f441ba3dd33551cc9fe0340b8e7a635d41be8ab6aa01"
+    },
+    "classification": "inference_from_static_scene-index_estimates"
   }
 }
