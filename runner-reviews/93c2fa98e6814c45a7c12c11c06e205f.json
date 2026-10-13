@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "request_id": "93c2fa98e6814c45a7c12c11c06e205f",
+  "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
+  "status": "reviewed",
+  "reviewed_commit": "436e6f2d0017890f79d76cf91cee3e2a19ba0576",
+  "research_question": "Does the fixed export include helper 00639BE0 from the matching NMS.exe?",
+  "measured_findings": [
+    "Runner 0.1.21 accepted and executed the valid 32-character lowercase-hex request 93c2fa98e6814c45a7c12c11c06e205f.",
+    "source-package, tests, diagnose, code, and emulate stages each returned 0.",
+    "Export stopped with nms-exe-not-selected; no offline-evidence.zip or requested function export was produced.",
+    "The result and latest pointer agree on request ID, source digest, runner version, and failed status; the latest log ends with the same export-selection error."
+  ],
+  "interpretation": "This is a runner setup failure, not evidence about helper 00639BE0 or crate generation. The next export requires selecting the local NMS.exe first; the runner documentation says it will hash-check the selected file and will not launch, modify, or copy the executable.",
+  "milestone_impact": "M0 request delivery, execution, upload, and review path is functioning for this request. M1 is unchanged; this run added no crate-generation evidence.",
+  "next_action": "User selects the installed game's NMS.exe in the runner using Start-Runner.cmd --exe \"<full path to NMS.exe>\"; then queue a fresh offline-check-and-export request for the pinned helper target."
+}
