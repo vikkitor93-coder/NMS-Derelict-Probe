@@ -60,7 +60,8 @@
     "Direct review of the saved combined-results room_sequence fields: 0.3.14 records 8 numbered parent groups (Room 0-7), of which 7 are main and 1 is a separately labeled dead_end; 0.3.42 records 9 numbered parent groups (Room 0-8), labels all 9 main, but Room 1 carries a DEADEND_BUNK0 scene-path marker in dead_end_evidence. This establishes report-level grouping/classification inconsistency, not whether the NMS room layout changed.",
     "The v0.3.42 release commit 21b7284ba408a807f38e1e773e30033b44d8eaed describes a Surveyor Agent Console layout refresh and explicitly says the live game/probe capture protocol is unchanged. This rules out a capture-protocol change in that particular release, but does not explain differences from probe 0.3.14 or exclude other code/game-version changes.",
     "GitHub log review: upload `research-uploads/20261013T182238Z-all-saved-evidence-af6f1178/capture-journal-20261013T182059Z-9524.jsonl` contains 965 `resource_add` rows from 18:21:02.600–18:22:26.113Z. It records broad resource/scene asset loads across EMPTY, HANGAR, BARRACKS, CARG, INFESTATION, COMM, SPAWNERS, MEDI, and END, not individual crate spawns or a physical count. The raw Ruflas session JSON is identified in the batch manifest by SHA-256 37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932, but the GitHub batch upload includes the report/pointer rather than that raw session file.",
-    "Correction to the prior cross-version room comparison: the 0.3.14/35 sample is system 00001A0004E84EFD; Ruflas 0.3.42/23 is system 0000750006606CAB. Those are different derelicts, so their room-group counts do not prove a capture grouping change. Ruflas Room 1 contains a dead-end-named scene asset, but that alone does not prove the room itself should be classified as a dead end."
+    "Correction to the prior cross-version room comparison: the 0.3.14/35 sample is system 00001A0004E84EFD; Ruflas 0.3.42/23 is system 0000750006606CAB. Those are different derelicts, so their room-group counts do not prove a capture grouping change. Ruflas Room 1 contains a dead-end-named scene asset, but that alone does not prove the room itself should be classified as a dead end.",
+    "User visual clarification: every searchable box container on their derelicts is blue. The prior instruction to count `salvage crates` and `blue crates` separately was wrong and would double-count one visual category. For the next physical tally, record searchable blue boxes once and footlockers separately. The 18+5=23 scene-index estimate remains a static estimate; mapping all user-observed blue boxes to the index's salvage-crate category is plausible but not yet measured."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -81,7 +82,7 @@
     "The existing live auto-count summary covers every crate/container category, including blue crates.",
     "The target interaction IDs are present as raw ASCII literals in NMS.exe and can be followed by direct string xrefs."
   ],
-  "latest_material_finding": "GitHub capture-journal inspection confirms that the saved 10/13 trace is an asset-load log, not a container-spawn log. Ruflas still has a static estimate of 18 salvage crates + 5 footlockers = 23; auto_crates detected zero, and no physical total is saved. A complete visual tally is now the missing evidence.",
+  "latest_material_finding": "User clarified all searchable box containers are blue in their derelicts. Replace the earlier two-box-category instruction with one searchable-blue-box count plus a separate footlocker count. The saved scene-index estimate of 18 salvage-crate targets + 5 footlockers = 23 remains unverified physically.",
   "queued_experiments": [],
   "unresolved_blockers": [
     "No hash-pinned physical count exists for Ruflas-Simly V (address 0000750006606CAB, root candidate 2A41B0E7EF42A1F7); the value 23 is only an asset-index estimate.",
@@ -89,18 +90,18 @@
     "No supported runner action or available executable workspace can currently identify the game code that selects the crate-bearing room variants.",
     "A second independent physical total will still be needed after the first tally to test whether any offline predictor generalizes."
   ],
-  "next_action": "HUMAN STEP: If Ruflas-Simly V (address 0000750006606CAB; root 2A41B0E7EF42A1F7) is still unfinished, make one complete room-by-room pass. Do not open any containers. Count standard salvage crates, footlockers, and blue crates separately; count any already-open container once. Send `salvage=__, footlockers=__, blue=__, all_rooms_visited=yes/no`. First compare salvage+footlockers with the saved estimate 23. If Ruflas is no longer available unfinished, do not repeat completed Irichol; use another unfinished derelict and send its address/root with the same three counts. After that, compare a second independent sample before claiming offline prediction.",
+  "next_action": "HUMAN STEP: If Ruflas-Simly V (address 0000750006606CAB; root 2A41B0E7EF42A1F7) is still unfinished, make one complete room-by-room pass. Do not open any containers. Count each searchable blue box once and count footlockers separately; count containers already open as present. Send `searchable_blue_boxes=__, footlockers=__, all_rooms_visited=yes/no`. Compare their sum with the saved estimate 23. If Ruflas is no longer available unfinished, do not repeat completed Irichol; use another unfinished derelict and send its address/root with the same two counts. Test a second independent sample before claiming offline prediction.",
   "human_action_required": {
     "needed": true,
-    "why": "All GitHub/local saved evidence has been checked. The saved 10/13 journal contains no individual crate spawns and the counter found zero, so static estimates cannot be checked against reality.",
+    "why": "Saved evidence does not contain a physical crate total; the capture journal records resource loads and the automatic counter found zero.",
     "exact_steps": [
-      "Use Ruflas-Simly V only if it remains an unfinished derelict.",
-      "Walk every room once; do not open containers. Count already-open containers as present.",
-      "Write down salvage crates, footlockers, and blue crates as three separate numbers.",
-      "Send the three numbers and confirm whether every room was checked. If possible, upload the new Surveyor session JSON as well."
+      "Use Ruflas-Simly V only if it remains unfinished.",
+      "Walk every room once and do not open containers. Count already-open containers as present.",
+      "Count every searchable blue box once. Keep footlockers as a separate count.",
+      "Send both counts and confirm whether every room was checked. If possible, upload the new Surveyor session JSON."
     ],
-    "success_indicator": "A complete three-category visual count for the same Ruflas system/root, with every room checked. Compare salvage+footlockers against the estimate 23; keep blue-crate count separate.",
-    "hypothesis_distinguished": "Whether the scene-index prediction of 18 salvage crates + 5 footlockers = 23 matches an actual derelict, and whether the two existing blue-crate marker events represent a complete blue-crate total.",
+    "success_indicator": "A complete count of searchable blue boxes and footlockers for the same Ruflas system/root. Compare the two counts together with the estimate 23.",
+    "hypothesis_distinguished": "Whether the scene-index estimate of 18 searchable crate targets plus 5 footlockers matches the physical derelict. The blue boxes are one visible category, not a separate count to add again.",
     "full_traversal_required": true,
     "no_container_opening_required": true
   },
