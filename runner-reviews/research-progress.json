@@ -54,7 +54,8 @@
     "New saved runtime capture: session 20261013T182312Z_0000750006606CAB, probe 0.3.42, system address 0000750006606CAB, root candidate 2A41B0E7EF42A1F7; session ran 18:23:12.018–18:24:50.780Z and ended by leaving the abandoned freighter. It recorded 9 main rooms; generation_room_summary reports 18 salvage + 5 footlockers = 23 from the scene-index estimate, not a physical enumeration. Two F7 blue_crate markers were each followed by R_ABAND_CRATE trace calls nearest-marker deltas 602/1311 ms and 739/1431 ms, with reward seeds 214D7F915D5415EE and 9E21D110530B6C58 respectively; each pair logged peek=true then peek=false. auto_crates count remained 0, with no candidate names, and diagnostics reported no errors or sample-limit hit. This is temporal correlation only: no object-ID link, unopened/opened state, marker-completeness proof, or physical crate total. Local session JSON SHA-256=37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932; uploaded capture journal SHA-256=bfad60506fd76db6531a1fea8cde80f734e45e9e90b3204a599d188e01bd357a in main upload commit 2d918cedd744d6d017974500a326a0f2391ceac2. The upload contains the journal, not the full session JSON; the capture does not record a matching NMS.exe hash.",
     "Automatic saved-session batch 20261013T182533Z-0fef6736, report run 20261013T182534Z-4f832f18, verified input session 20261013T182312Z_0000750006606CAB at SHA-256 37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932. Analyze-generation tool 0.3.24 output SHA-256 c080e87cabe8a943dcabef2e1978e40a32fb8ff69b9f6c805aafda8dedebdc31 inferred CARGO_FLOATERS (high), grouped 9 main logical rooms / 121 scene instances, and summed the static room-index estimate as 18 salvage + 5 footlockers = 23. This does not enumerate physical containers.",
     "The batch measurement summary (SHA-256 1dd0d70b5e95d69c2fedc251cf24a676c560159b506a83a4c9d03179cd932166) contains six CARGO_FLOATERS estimates across three addresses: 51 at 0001550006607CAC, 35 at 00001A0004E84EFD, and 23 at 0000750006606CAB. Repeated same-address saved rows keep their index estimate/layout multiset stable. This shows preset alone is insufficient to explain the static estimate; it does not show physical totals or prove the cause.",
-    "Batch report SHA-256 702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996 is committed on main at 08b674407726406cbd3fff98d23371f85a2509e9. Seven of nine actions completed; Prepare-Crate-Assets failed because MBINCompiler rejected an extracted file as invalid MBIN, and upload_runtime_capture was not run by the isolated no-upload batch mode. This failure is an execution issue, not research evidence. The new session-analysis report includes no matching NMS.exe SHA-256."
+    "Batch report SHA-256 702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996 is committed on main at 08b674407726406cbd3fff98d23371f85a2509e9. Seven of nine actions completed; Prepare-Crate-Assets failed because MBINCompiler rejected an extracted file as invalid MBIN, and upload_runtime_capture was not run by the isolated no-upload batch mode. This failure is an execution issue, not research evidence. The new session-analysis report includes no matching NMS.exe SHA-256.",
+    "Hash-pinned local NMS.exe scan (SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499; PE timestamp 6ABE9229; image base 0x140000000) found zero raw ASCII occurrences of R_ABAND_CRATE, _ABAND_CRATE_M, R_ABAND_OPEN, R_ABAND_WALK_S, or FOOTLOCKER. A direct code xref search for these literal tokens cannot locate the count producer in this executable; this does not exclude hashed IDs, indirect asset references, or other strings."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -71,9 +72,10 @@
   "falsified_hypotheses": [
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
     "Room family/kind alone determines a fixed container count in the saved rows.",
-    "The existing live auto-count summary covers every crate/container category, including blue crates."
+    "The existing live auto-count summary covers every crate/container category, including blue crates.",
+    "The target interaction IDs are present as raw ASCII literals in NMS.exe and can be followed by direct string xrefs."
   ],
-  "latest_material_finding": "For the six CARGO_FLOATERS summary rows at three addresses, scene-index estimates are 51, 35, and 23; grouped room contributions differ within the same family (CARG: 30, 29, 19 respectively; BARRACKS: 8, 2, 4; END/HANGAR account for the remainder). Ruflas-Simly V's nine logical groups sum to the 23 static estimate. This narrows the estimate's dependence to selected scene composition, but none of these are verified physical totals.",
+  "latest_material_finding": "Scene-index estimate variation within CARGO_FLOATERS follows selected scene composition; exact interaction ID literals are absent from the pinned NMS.exe, ruling out direct literal xrefs as the count-producer route. Physical count remains unvalidated.",
   "queued_experiments": [],
   "unresolved_blockers": [
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
@@ -88,7 +90,7 @@
     "Ruflas-Simly V's two blue_crate markers are temporally associated with R_ABAND_CRATE calls, but no individual object identity or physical-total completeness is captured; auto_crates found zero targets. The session lacks an NMS.exe hash.",
     "Fresh 20261013 saved-session analysis has a verified session input hash and output hashes but no matching NMS.exe hash; all reported 23/35/51 totals remain scene-index estimates. Automatic batch Prepare-Crate-Assets failed at MBINCompiler and supplied no new asset payload."
   ],
-  "next_action": "Inspect the generation-table and code-side room-selection boundary that chooses specific room/scene variants; request only a supported, targeted runner action if the existing allowlist can answer it. Keep estimates separate from physical totals and do not repeat the completed derelict.",
+  "next_action": "Inspect asset-side interaction/resource descriptors and the executable path that consumes dungeon room-selection state; avoid direct-string xref work for absent IDs. Only queue a request if the documented runner allowlist has a targeted action; crate-count-audit alone repeats saved arithmetic and does not answer this question. Keep scene-index estimates separate from physical totals; do not revisit the completed derelict.",
   "human_action_required": null,
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
@@ -387,5 +389,16 @@
       "batch_results_pointer_sha256_verified": "fa194200c3a55b71d337f441ba3dd33551cc9fe0340b8e7a635d41be8ab6aa01"
     },
     "classification": "inference_from_static_scene-index_estimates"
+  },
+  "latest_static_xref_experiment": {
+    "question": "Are crate interaction IDs embedded as raw executable strings that can be followed by direct RIP-relative xrefs?",
+    "provenance": {
+      "executable_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+      "pe_timestamp_hex": "6ABE9229",
+      "image_base_hex": "0000000140000000",
+      "scan": "exact ASCII tokens in NMS.exe; .text RIP-relative scan gated on literal presence"
+    },
+    "result": "zero occurrences for five target strings; direct xref scan had no possible targets",
+    "classification": "confirmed_static_negative_result"
   }
 }
