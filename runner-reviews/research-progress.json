@@ -3,20 +3,19 @@
   "current_milestone": "M0 complete; M1 crate-count observables and smallest useful inputs remain under investigation.",
   "primary_objective": "Predict total derelict crate/container count offline from the smallest practical known inputs; defer room-layout reconstruction unless count prediction requires it.",
   "last_reviewed": {
-    "commit": "08b674407726406cbd3fff98d23371f85a2509e9",
-    "request_id": "20261013T182534Z-4f832f18",
-    "receipt_commit": "65002012e22de8ba8d0fa17860adee897ca565a2"
+    "commit": "7443954f721c6cea0e214859d95469ec96c7bae7",
+    "request_id": "2eed2b3ed43943fd99c0c0a31fbdb2c8",
+    "receipt_commit": "bb32829f91cd949898e54344fc6cde0b7e9b6d38"
   },
   "latest_evidence_check": {
-    "branch_head": "9313bf985a9ac4d6f992062320c19206fe473c7e",
-    "latest_request_id": "1a131cab1568ef38e7f2c5b800000001",
+    "branch_head": "7443954f721c6cea0e214859d95469ec96c7bae7",
+    "latest_request_id": "2eed2b3ed43943fd99c0c0a31fbdb2c8",
     "latest_status": "passed",
     "latest_runner_version": "0.1.21",
     "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
-    "result_manifest_sha256": "45494e56f5c2feef8adc3822dd9277719c6b2500",
+    "result_sha256": "f36e7c7f9c199ac980450fbaa3ea3e294f428b42bb535862cbfae0ea73d82b39",
     "queued_request_id": null,
-    "queued_request_status": "completed and reviewed",
-    "installed_runner_version": "0.1.21 result provenance confirmed by returned manifest; no separate local installation claim"
+    "queued_request_status": "no crate-specific request pending"
   },
   "established_facts": [
     "Runner update 0.1.21 is published on runner-updates at commit 12b387159fc1cb791e1ecc8695dcc9ccbaccf13b. Package source_sha256=e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; archive SHA-256=591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940; 119 tests passed with 10 skips; archive and all 71 member hashes were independently checked.",
@@ -59,7 +58,9 @@
     "Independent local calculation against the current scene index reproduced all 9 Ruflas-Simly V logical-group static estimates exactly: each room group's scene-path instance multiplicities mapped to the index sum reported salvage/footlocker values, with zero unresolved scene instances; grand total 18 salvage + 5 footlockers = 23. Inputs: baseline artifact SHA-256 c080e87cabe8a943dcabef2e1978e40a32fb8ff69b9f6c805aafda8dedebdc31; local room-index SHA-256 aaf28c76814816083e7b04d8ad027dd63e992c8499ae002c3eea2b7dacc15de; report SHA-256 702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996.",
     "In the six-row CARGO_FLOATERS comparison, five older summary rows (probe 0.3.5–0.3.14) report 7 main rooms, matching the static preset table's 7; Ruflas-Simly V (probe 0.3.42) reports 9 logical groups/main rooms and 0 dead ends, so main_room_count_matches_table=false and room_model_status=needs-review. Because these are different probe versions and the capture lacks a matching NMS.exe hash, the mismatch cannot be assigned to game generation rather than capture/grouping changes.",
     "Direct review of the saved combined-results room_sequence fields: 0.3.14 records 8 numbered parent groups (Room 0-7), of which 7 are main and 1 is a separately labeled dead_end; 0.3.42 records 9 numbered parent groups (Room 0-8), labels all 9 main, but Room 1 carries a DEADEND_BUNK0 scene-path marker in dead_end_evidence. This establishes report-level grouping/classification inconsistency, not whether the NMS room layout changed.",
-    "The v0.3.42 release commit 21b7284ba408a807f38e1e773e30033b44d8eaed describes a Surveyor Agent Console layout refresh and explicitly says the live game/probe capture protocol is unchanged. This rules out a capture-protocol change in that particular release, but does not explain differences from probe 0.3.14 or exclude other code/game-version changes."
+    "The v0.3.42 release commit 21b7284ba408a807f38e1e773e30033b44d8eaed describes a Surveyor Agent Console layout refresh and explicitly says the live game/probe capture protocol is unchanged. This rules out a capture-protocol change in that particular release, but does not explain differences from probe 0.3.14 or exclude other code/game-version changes.",
+    "GitHub log review: upload `research-uploads/20261013T182238Z-all-saved-evidence-af6f1178/capture-journal-20261013T182059Z-9524.jsonl` contains 965 `resource_add` rows from 18:21:02.600–18:22:26.113Z. It records broad resource/scene asset loads across EMPTY, HANGAR, BARRACKS, CARG, INFESTATION, COMM, SPAWNERS, MEDI, and END, not individual crate spawns or a physical count. The raw Ruflas session JSON is identified in the batch manifest by SHA-256 37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932, but the GitHub batch upload includes the report/pointer rather than that raw session file.",
+    "Correction to the prior cross-version room comparison: the 0.3.14/35 sample is system 00001A0004E84EFD; Ruflas 0.3.42/23 is system 0000750006606CAB. Those are different derelicts, so their room-group counts do not prove a capture grouping change. Ruflas Room 1 contains a dead-end-named scene asset, but that alone does not prove the room itself should be classified as a dead end."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -80,23 +81,29 @@
     "The existing live auto-count summary covers every crate/container category, including blue crates.",
     "The target interaction IDs are present as raw ASCII literals in NMS.exe and can be followed by direct string xrefs."
   ],
-  "latest_material_finding": "Saved room_sequence comparison narrowed the mismatch: probe 0.3.14 has Room 0-7 with 7 main + 1 dead_end; 0.3.42 has Room 0-8 with 9 main, while Room 1 contains a dead-end scene marker yet remains classified main. This demonstrates a report classification inconsistency; cause and game-layout change remain unknown. The published 0.3.42 commit says its change was console layout only and the live game/probe capture protocol stayed unchanged; this narrows one potential source but does not explain the 0.3.14-to-0.3.42 gap.",
+  "latest_material_finding": "GitHub capture-journal inspection confirms that the saved 10/13 trace is an asset-load log, not a container-spawn log. Ruflas still has a static estimate of 18 salvage crates + 5 footlockers = 23; auto_crates detected zero, and no physical total is saved. A complete visual tally is now the missing evidence.",
   "queued_experiments": [],
   "unresolved_blockers": [
-    "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
-    "No same-build multi-system rows establish whether system address/preset/root predicts physical total count before traversal.",
-    "No NMS.exe is present in the available project checkout or runner-source workspace; the published runner audit does not inspect game code.",
-    "The 0.3.42 Irchol-Luhimo XVII sample contains 82 marker events but no explicit marker-completeness flag or executable hash; its 37 index estimate exceeds the 33 salvage/footlocker markers by four.",
-    "The completed 0.1.21 action audits bundled arithmetic only; it has no NMS.exe hash or physical crate-completeness evidence and does not inspect the count producer.",
-    "No same-build, executable-pinned multi-system observations yet establish whether system address, preset, root, or another state predicts total physical count before traversal.",
-    "Blue-crate runtime identity and marker completeness remain unknown; existing F7 counts cannot yet close the total-count gap.",
-    "Saved evidence is exhausted for physical-count validation: summary duplicates dominate, unique system/preset rows lack matching-build NMS.exe provenance, and asset-index totals have no complete manual count.",
-    "Current static assets constrain per-scene multiplicity but do not reveal which scene variants are selected for a given system/preset; matching that selector to total count is still unresolved.",
-    "Ruflas-Simly V's two blue_crate markers are temporally associated with R_ABAND_CRATE calls, but no individual object identity or physical-total completeness is captured; auto_crates found zero targets. The session lacks an NMS.exe hash.",
-    "Fresh 20261013 saved-session analysis has a verified session input hash and output hashes but no matching NMS.exe hash; all reported 23/35/51 totals remain scene-index estimates. Automatic batch Prepare-Crate-Assets failed at MBINCompiler and supplied no new asset payload."
+    "No hash-pinned physical count exists for Ruflas-Simly V (address 0000750006606CAB, root candidate 2A41B0E7EF42A1F7); the value 23 is only an asset-index estimate.",
+    "The saved GitHub capture journal records resource loads, not spawned/physical crate objects; the automatic counter reported zero.",
+    "No supported runner action or available executable workspace can currently identify the game code that selects the crate-bearing room variants.",
+    "A second independent physical total will still be needed after the first tally to test whether any offline predictor generalizes."
   ],
-  "next_action": "1) Find the raw saved event logs for the 0.3.14 and 0.3.42 captures and compare their room-parent names, scene paths, and capture/game-version metadata. 2) Find the exact 0.3.14 capture-source version if available; if not, leave the cause unresolved instead of guessing. 3) Recalculate estimates only after applying one consistent grouping rule. 4) Then inspect the game-code path that selects room scenes and record which pre-traversal inputs it reads; use a runner action only if the runner allowlist supports that exact read-only analysis. 5) Validate any predicted count against an independently observed physical total; keep the current 23 estimate separate.",
-  "human_action_required": null,
+  "next_action": "HUMAN STEP: If Ruflas-Simly V (address 0000750006606CAB; root 2A41B0E7EF42A1F7) is still unfinished, make one complete room-by-room pass. Do not open any containers. Count standard salvage crates, footlockers, and blue crates separately; count any already-open container once. Send `salvage=__, footlockers=__, blue=__, all_rooms_visited=yes/no`. First compare salvage+footlockers with the saved estimate 23. If Ruflas is no longer available unfinished, do not repeat completed Irichol; use another unfinished derelict and send its address/root with the same three counts. After that, compare a second independent sample before claiming offline prediction.",
+  "human_action_required": {
+    "needed": true,
+    "why": "All GitHub/local saved evidence has been checked. The saved 10/13 journal contains no individual crate spawns and the counter found zero, so static estimates cannot be checked against reality.",
+    "exact_steps": [
+      "Use Ruflas-Simly V only if it remains an unfinished derelict.",
+      "Walk every room once; do not open containers. Count already-open containers as present.",
+      "Write down salvage crates, footlockers, and blue crates as three separate numbers.",
+      "Send the three numbers and confirm whether every room was checked. If possible, upload the new Surveyor session JSON as well."
+    ],
+    "success_indicator": "A complete three-category visual count for the same Ruflas system/root, with every room checked. Compare salvage+footlockers against the estimate 23; keep blue-crate count separate.",
+    "hypothesis_distinguished": "Whether the scene-index prediction of 18 salvage crates + 5 footlockers = 23 matches an actual derelict, and whether the two existing blue-crate marker events represent a complete blue-crate total.",
+    "full_traversal_required": true,
+    "no_container_opening_required": true
+  },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
     "finding": "Deduplicated all repository generation-measurement summary and asset-calculation uploads, then grouped the unique saved observations.",
@@ -382,18 +389,20 @@
     "interpretation": "Confirms these referenced CRATEM objects are configured salvage crates and supports the static scene index's salvage category. Does not prove every such prop spawns in the world, map it to the blue_crate F7 label, reveal runtime room selection, or predict total count.",
     "status": "confirmed_static; no runner job"
   },
-  "unresolved_blocker": [
-    "No physical crate total is available for the new Ruflas-Simly V sample, and the saved session lacks a matching NMS.exe hash; scene-index sums cannot validate the estimate against in-game total."
-  ],
+  "unresolved_blocker": "No hash-pinned physical count exists for Ruflas-Simly V (address 0000750006606CAB, root candidate 2A41B0E7EF42A1F7); the value 23 is only an asset-index estimate.",
   "latest_analysis": {
-    "finding": "Within the same inferred CARGO_FLOATERS preset, the per-room indexed target sums are not fixed by family: CARG sums are 30/29/19 across the three address groups; BARRACKS sums 8/2/4, with totals 51/35/23.",
+    "finding": "GitHub log files were read directly. The 535,654-byte capture journal has 965 resource_add records over about 84 seconds and lists candidate dungeon scene assets across several room families. It does not contain individual physical crate/footlocker spawn records. The runner's latest offline-check passed all five stages but did not inspect game logic or validate crate count.",
     "evidence": {
-      "batch": "20261013T182533Z-0fef6736",
-      "run_id": "20261013T182534Z-4f832f18",
-      "combined_results_sha256": "702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996",
-      "batch_results_pointer_sha256_verified": "fa194200c3a55b71d337f441ba3dd33551cc9fe0340b8e7a635d41be8ab6aa01"
+      "capture_journal_path": "research-uploads/20261013T182238Z-all-saved-evidence-af6f1178/capture-journal-20261013T182059Z-9524.jsonl",
+      "capture_journal_git_blob_sha": "02af39142d1d9b969a1edf0fe614495e1c32f5f3",
+      "batch_results_path": "research-uploads/20261013T182626Z-automatic-research-batch-20261013T182533Z-0fef6736-d74744/batch-results.json",
+      "session_sha256": "37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932",
+      "runner_request_id": "2eed2b3ed43943fd99c0c0a31fbdb2c8",
+      "runner_result_path": "runner-results/2eed2b3ed43943fd99c0c0a31fbdb2c8",
+      "runner_source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
+      "runner_result_sha256": "f36e7c7f9c199ac980450fbaa3ea3e294f428b42bb535862cbfae0ea73d82b39"
     },
-    "classification": "inference_from_static_scene-index_estimates"
+    "classification": "measured_log_scope_and_runner_status"
   },
   "latest_static_xref_experiment": {
     "question": "Are crate interaction IDs embedded as raw executable strings that can be followed by direct RIP-relative xrefs?",
@@ -425,33 +434,26 @@
     "classification": "confirmed_static_index_recomputation; not physical count"
   },
   "latest_grouping_comparison": {
-    "question": "Does the 0.3.42 logical-room sequence classify rooms consistently with 0.3.14?",
+    "question": "Do the 0.3.14 and 0.3.42 reports prove a room grouping change?",
     "provenance": {
-      "combined_results_sha256": "702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996",
-      "session_sha256": "37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932",
-      "preset_table": "CARGO_FLOATERS.rooms=7"
+      "v0314_session": "20260929T185821Z_00001A0004E84EFD",
+      "v0342_session": "20261013T182312Z_0000750006606CAB",
+      "session_sha256": "37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932"
     },
     "measured": {
       "v0314": {
-        "numbered_parent_groups": 8,
-        "group_ids": "Room 0-7",
-        "main_groups": 7,
-        "dead_end_groups": 1,
-        "reported_targets": 35
+        "universe_address_hex": "00001A0004E84EFD",
+        "reported_targets": 35,
+        "numbered_parent_groups": 8
       },
-      "v0342": {
-        "numbered_parent_groups": 9,
-        "group_ids": "Room 0-8",
-        "main_groups": 9,
-        "dead_end_groups": 0,
+      "v0342_ruflas": {
+        "universe_address_hex": "0000750006606CAB",
         "reported_targets": 23,
-        "groups_with_dead_end_scene_evidence": [
-          "Room 1"
-        ]
+        "numbered_parent_groups": 9
       },
-      "v0342_room1_evidence": "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN"
+      "v0342_room1_scene_evidence": "MODELS/SPACE/POI/DUNGEON/BARRACKS/DEADEND_BUNK0.SCENE.MBIN"
     },
-    "interpretation": "The newest report labels a parent group as main even though its saved evidence includes a dead-end scene. This proves report-level classification inconsistency. It does not distinguish changed probe grouping from changed game layout because the probe versions and executable hashes are not comparable here.",
-    "classification": "measured_report_fields"
+    "interpretation": "These are different systems/derelicts and cannot establish a same-derelict grouping change. A dead-end-named scene inside Ruflas Room 1 is a scene-level observation, not proof that the room is a dead-end group.",
+    "classification": "cross-system_comparison_not_diagnostic_of_version_drift"
   }
 }
