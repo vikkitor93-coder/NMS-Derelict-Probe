@@ -26,36 +26,37 @@
     "Hash-pinned existing analysis shows the dungeon-root resource path reads a descriptor seed and UseSeed flag before adding MODELS/SPACE/POI/DUNGEON.SCENE.MBIN; the producer of that descriptor and its relationship to crate-bearing room selection are not established.",
     "New read-only .pdata disassembly of the root-event caller in the matching executable: RVA 02C0840E..02C089DA, size 1484; the call at 02C08607 is a virtual dispatch inside a generic queue/worker routine that manages and removes work nodes. It exposes no visible crate-count calculation, so this caller is not the count boundary.",
     "Runner 0.1.21 has only fixed offline-check, offline-check-and-export, and crate-count-audit actions; it cannot accept a targeted RVA/function request. The audit only recomputes saved summary arithmetic.",
-    "The active gap is the deterministic mapping from pre-traversal inputs (likely system address plus preset and possibly a derived generation seed) to the selected room-scene multiset and its total."
+    "The active gap is the deterministic mapping from pre-traversal inputs (likely system address plus preset and possibly a derived generation seed) to the selected room-scene multiset and its total.",
+    "A more targeted same-executable seed-lineage trace (agent/seed-lineage, commit 184ce2b30f0e674bd4a66429a9e73ddde80420c5; artifact blob 2b22a7bc7732efa0f95366b251d30b5cdb320e4d) shows RVA 006395D3 and 00639B99 both call helper 00639BE0; each helper return is passed as the owner argument to seed-consuming function 0063A6D0. The helper body and any write/forwarding of the seed fields remain unproven."
   ],
   "active_hypotheses": [
-    "The count is the sum of the static searchable-box and footlocker entries for the selected room scenes; the user authorizes treating those totals as correct.",
-    "Preset affects the selected scene/count. Whether the system address, derived root seed, or a later RNG state determines room variants remains unknown.",
-    "A root/derived seed may be needed for offline room selection, but root relevance is not proven; root alone cannot explain the same-address 35 versus 16 preset pair."
+    "Selected room-scene identities and multiplicities determine the total through the static room index; the user's repeated physical matches authorize using that total without further tallying.",
+    "The room-variant selector may use the root descriptor seed and preset. The candidate producer path is shared helper 00639BE0; causation and smallest sufficient inputs remain unknown."
   ],
   "falsified_hypotheses": [
     "Root value alone determines total count, because the same saved address/root pair is associated with different totals under CARGO_FLOATERS and MEDI_FLOATERS.",
     "Preset or room-family label alone gives a fixed total; selected room-scene variants have different indexed multiplicities.",
-    "The root-event caller at RVA 02C0840E is itself the crate-count producer."
+    "The root-event caller at RVA 02C0840E is itself the crate-count producer.",
+    "Root value alone determines total; the same saved address/root with different presets has different totals."
   ],
-  "latest_material_finding": "Using the exact installed NMS.exe (SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499), a read-only .pdata-bounded disassembly identified the function containing the root-event call as generic queue/worker processing, not a visible crate counter. Static table evidence confirms preset weights but no count. The remaining bridge is the function that selects seeded room variants; request one targeted Ghidra export to continue.",
+  "latest_material_finding": "The crate-count value is accepted as correct per the user's repeated matches. Existing same-build evidence narrows the next relevant seed path: two callers (RVA 006395D3 and 00639B99) share helper 00639BE0, whose return reaches the seed-consuming function at 0063A6D0. No available artifact shows whether 00639BE0 writes/forwards the seed. This is the next useful boundary to inspect.",
   "queued_experiments": [],
   "unresolved_blockers": [
-    "Need a Ghidra decompilation/listing on the exact hash-pinned NMS.exe to follow the descriptor seed into dungeon generation and identify the room-variant selector. The available runner cannot extract arbitrary functions or xrefs."
+    "Need a Ghidra decompilation/listing for candidate helper 00639BE0 and follow-up function 00639610 on the exact executable. The available fixed-action runner cannot export arbitrary functions/xrefs. This static evidence is needed to determine whether the root seed is a usable count input and where the room selector begins."
   ],
-  "next_action": "Human step: on the matching NMS.exe (SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499), export the Ghidra decompilation and disassembly for the function starting at RVA 0063A6D0 (image address 0x14063A6D0) and the function containing RVA 0063AC20. Include the caller/reference view for the runtime dispatch at RVA 02C08607, if Ghidra identifies it. Return the exported text or JSON. No game launch, traversal, or crate opening is needed. Then trace the seed/preset into the room-variant selector and implement the smallest offline count calculation.",
+  "next_action": "Human step: export Ghidra Listing + Decompiler + X references for image address 0x140639BE0 (RVA 00639BE0) in NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. Include callers 006395D3 and 00639B99. Then export the function at 0x140639610 (FUN_140639610) if the helper passes into it. Return one text/JSON artifact. No game launch, crate opening, or traversal. Use the output to test seed-field writes/forwarding; if that does not connect to room choice, stop root tracing and locate the preset/room-variant selector.",
   "human_action_required": {
     "needed": true,
-    "why": "Local read-only analysis can disassemble the observed caller but cannot recover the higher-level object/seed data flow. The existing remote runner has no targeted function-disassembly action, and Ghidra is not available as a callable tool in this session.",
+    "why": "Repository, saved-session, fixed runner, and local read-only executable checks are exhausted for this boundary. The available remote runner has no arbitrary-RVA/xref action, and a callable Ghidra session is unavailable here.",
     "exact_steps": [
-      "Open the installed NMS.exe in Ghidra and confirm its SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499.",
-      "Go to image address 0x14063A6D0 (RVA 0063A6D0). Export or copy the full decompiler view and full listing for that function.",
-      "Also export the decompiler view and listing for the function containing image address 0x14063AC20 (RVA 0063AC20). Keep the calls and memory accesses involving descriptor offsets +0x10, +0x18, and owner offset +0x128 visible.",
-      "If Ghidra resolves the call at image address 0x142C08607 (RVA 02C08607), include its target/caller reference details.",
-      "Upload the exported text/JSON here or to the project evidence folder. Do not launch NMS or traverse/open anything."
+      "In Ghidra, open the installed NMS.exe and confirm SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499.",
+      "Go to image address 0x140639BE0 (RVA 00639BE0). Export the full Listing and Decompiler output through the function's return.",
+      "Press X on 0x140639BE0 and include the references showing the callers at RVAs 006395D3 and 00639B99.",
+      "If the output calls FUN_140639610, also export that function's full Listing and Decompiler output.",
+      "Upload or paste that single text/JSON artifact here. Do not launch the game or revisit any derelict."
     ],
-    "success_indicator": "Received decompiler/listing exports from NMS.exe hash 13d5060d...3499 covering the seed-consuming root-load path; the next analysis can determine whether/how that seed reaches room-variant selection.",
-    "hypothesis_distinguished": "Whether the root descriptor seed is an input to dungeon room generation and which function/state is the next room-selection boundary.",
+    "success_indicator": "The returned listing/decompilation is from the stated executable hash and includes the full helper, its caller references, and FUN_140639610 when applicable.",
+    "hypothesis_distinguished": "Whether helper 00639BE0 creates/forwards the seed-bearing owner/descriptor, and whether the seed can be traced toward room selection.",
     "full_traversal_required": false,
     "game_launch_required": false,
     "crate_opening_required": false
@@ -100,6 +101,18 @@
       "sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
       "rva": "02C0840E..02C089DA",
       "method": "read-only .pdata + iced-x86 disassembly in this invocation"
+    },
+    {
+      "commit": "184ce2b30f0e674bd4a66429a9e73ddde80420c5",
+      "branch": "agent/seed-lineage",
+      "path": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
+      "blob_sha": "2b22a7bc7732efa0f95366b251d30b5cdb320e4d",
+      "fields": [
+        "same-executable callers 006395D3/00639B99",
+        "shared helper 00639BE0",
+        "argument flow to 0063A6D0",
+        "what remains unproven"
+      ]
     }
   ],
   "latest_static_asset_experiment": {
@@ -148,7 +161,7 @@
     "interpretation": "Confirms these referenced CRATEM objects are configured salvage crates and supports the static scene index's salvage category. Does not prove every such prop spawns in the world, map it to the blue_crate F7 label, reveal runtime room selection, or predict total count.",
     "status": "confirmed_static; no runner job"
   },
-  "unresolved_blocker": "Need a Ghidra decompilation/listing on the exact hash-pinned NMS.exe to follow the descriptor seed into dungeon generation and identify the room-variant selector. The available runner cannot extract arbitrary functions or xrefs.",
+  "unresolved_blocker": "Need a Ghidra decompilation/listing for candidate helper 00639BE0 and follow-up function 00639610 on the exact executable. The available fixed-action runner cannot export arbitrary functions/xrefs. This static evidence is needed to determine whether the root seed is a usable count input and where the room selector begins.",
   "latest_analysis": {
     "finding": "GitHub log files were read directly. The 535,654-byte capture journal has 965 resource_add records over about 84 seconds and lists candidate dungeon scene assets across several room families. It does not contain individual physical crate/footlocker spawn records. The runner's latest offline-check passed all five stages but did not inspect game logic or validate crate count.",
     "evidence": {
@@ -229,5 +242,27 @@
     "finding": "The call is a virtual dispatch inside a generic queue/worker loop; surrounding instructions manipulate and remove task/list nodes. No visible crate count accumulation or container enumeration appears in this caller.",
     "interpretation": "This caller path is not the crate-count producer; follow the seeded descriptor into room selection instead.",
     "classification": "confirmed_static_disassembly_with_limited_semantic_inference"
+  },
+  "latest_static_seed_producer_candidate": {
+    "question": "Which routine supplies the owner object passed into the dungeon-root seed consumer?",
+    "provenance": {
+      "repository": "vikkitor93-coder/NMS-Derelict-Probe",
+      "evidence_branch": "agent/seed-lineage",
+      "evidence_commit": "184ce2b30f0e674bd4a66429a9e73ddde80420c5",
+      "evidence_path": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
+      "evidence_blob_sha": "2b22a7bc7732efa0f95366b251d30b5cdb320e4d",
+      "executable_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
+    },
+    "measured": {
+      "caller_helper_calls": [
+        "006395D3",
+        "00639B99"
+      ],
+      "shared_helper": "00639BE0",
+      "consumer": "0063A6D0",
+      "flow": "helper return RAX -> RBX -> RDX second argument to 0063A6D0"
+    },
+    "unknown": "Helper body, seed write/forwarding, and relationship from this seed path to crate-bearing room selection are not proven.",
+    "classification": "same-build_static_dataflow_candidate"
   }
 }
