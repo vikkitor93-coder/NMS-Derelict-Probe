@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "request_id": "2eed2b3ed43943fd99c0c0a31fbdb2c8",
+  "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
+  "status": "reviewed",
+  "reviewed_commit": "7443954f721c6cea0e214859d95469ec96c7bae7",
+  "research_question": "Did the latest runner offline-check complete successfully, and does it provide crate-count evidence?",
+  "measured_findings": [
+    "GitHub runner-results/latest.json and manifest identify request 2eed2b3ed43943fd99c0c0a31fbdb2c8, action offline-check, runner 0.1.21, pinned source SHA e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b.",
+    "latest.log records source-package, tests, diagnose, code, and emulate stages all passed with return code 0; result.json reports root_generation_verified=false.",
+    "The logged offline-check ran project validation stages and did not produce a new physical crate count or direct game count-producer evidence."
+  ],
+  "interpretation": "Runner execution succeeded, but it does not reduce uncertainty about physical crate totals. In the same saved sample, the runtime capture has auto_crates.count=0 and the 23 value is a scene-index estimate.",
+  "milestone_impact": "M0 remains complete. No M1/M4/M5 advancement.",
+  "next_action": "Use an unfinished derelict for one complete visual tally: count salvage crates, footlockers, and blue crates separately without opening them; compare salvage plus footlocker counts with the 23 scene-index estimate for Ruflas-Simly V if that same derelict remains unfinished."
+}
