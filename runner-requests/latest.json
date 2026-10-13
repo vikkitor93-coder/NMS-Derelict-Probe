@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "1a131cab1568ef38e7f2c5b800000001",
-  "action": "crate-count-audit",
+  "request_id": "20261013T1849Z-export-00639BE0",
+  "action": "offline-check-and-export",
   "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b"
 }
