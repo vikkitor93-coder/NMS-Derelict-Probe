@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "request_id": "20261013T182534Z-4f832f18",
+  "status": "reviewed",
+  "reviewed_commit": "08b674407726406cbd3fff98d23371f85a2509e9",
+  "source_sha256": null,
+  "input_sha256": "37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932",
+  "result_sha256": "702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996",
+  "runner_version": "automatic research batch; overall version not reported; artifact tools identify versions individually",
+  "research_question": "What does automatic saved-session analysis establish about crate counts and candidate inputs for Ruflas-Simly V?",
+  "measured_findings": [
+    "Input session hash was verified. Generation analysis inferred CARGO_FLOATERS at high confidence, found 9 main logical room groups and 121 scene instances, and summed the static scene-index estimate to 18 salvage plus 5 footlockers = 23.",
+    "The same saved capture records root candidate 2A41B0E7EF42A1F7 and reward seed candidates R_ABAND_CRATE=214D7F915D5415EE and 9E21D110530B6C58.",
+    "The six-row measurement output includes same-preset CARGO_FLOATERS index estimates of 51 at address 0001550006607CAC, 35 at 00001A0004E84EFD, and 23 at 0000750006606CAB. These are asset-index estimates, not observed physical totals.",
+    "Batch status was completed-with-errors: 7 of 9 actions completed, Prepare-Crate-Assets failed because MBINCompiler rejected an extracted asset as not a valid MBIN, and upload_runtime_capture was intentionally not run in isolated_parallel_test_no_github_upload mode."
+  ],
+  "interpretation": "The result supports that CARGO_FLOATERS preset alone does not determine even the saved static scene-index estimate across addresses. It does not establish a physical crate total, a causal role for root/reward seeds, or prediction from system inputs. The asset-preparation failure is an execution failure and is not evidence about crate generation. Executable hash was not supplied for this session analysis.",
+  "milestone_impact": "M1 remains active; useful observables were consolidated, but no reliable relationship to measured physical counts was established.",
+  "next_action": "Inspect existing saved scene-group and measurement outputs for the smallest deterministic selector/state that explains the different per-session estimates; keep index-derived totals separate from physical counts and avoid repeating the completed derelict."
+}
