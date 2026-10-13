@@ -14,9 +14,10 @@
     "latest_runner_version": "0.1.21",
     "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
     "result_manifest_sha256": "45494e56f5c2feef8adc3822dd9277719c6b2500",
-    "queued_request_id": null,
-    "queued_request_status": "completed and reviewed",
-    "installed_runner_version": "0.1.21 result provenance confirmed by returned manifest; no separate local installation claim"
+    "queued_request_id": "20261013T1849Z-export-00639BE0",
+    "queued_request_status": "awaiting local runner pickup",
+    "installed_runner_version": "0.1.21 result provenance confirmed by returned manifest; no separate local installation claim",
+    "request_commit": "623b6cb267503a353aeae1e4d2621029b9ab96ec"
   },
   "established_facts": [
     "Runner update 0.1.21 is published on runner-updates at commit 12b387159fc1cb791e1ecc8695dcc9ccbaccf13b. Package source_sha256=e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; archive SHA-256=591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940; 119 tests passed with 10 skips; archive and all 71 member hashes were independently checked.",
@@ -85,10 +86,20 @@
     "Saved evidence is exhausted for physical-count validation: summary duplicates dominate, unique system/preset rows lack matching-build NMS.exe provenance, and asset-index totals have no complete manual count.",
     "Current static assets constrain per-scene multiplicity but do not reveal which scene variants are selected for a given system/preset; matching that selector to total count is still unresolved.",
     "Ruflas-Simly V's two blue_crate markers are temporally associated with R_ABAND_CRATE calls, but no individual object identity or physical-total completeness is captured; auto_crates found zero targets. The session lacks an NMS.exe hash.",
-    "Fresh 20261013 saved-session analysis has a verified session input hash and output hashes but no matching NMS.exe hash; all reported 23/35/51 totals remain scene-index estimates. Automatic batch Prepare-Crate-Assets failed at MBINCompiler and supplied no new asset payload."
+    "Fresh 20261013 saved-session analysis has a verified session input hash and output hashes but no matching NMS.exe hash; all reported 23/35/51 totals remain scene-index estimates. Automatic batch Prepare-Crate-Assets failed at MBINCompiler and supplied no new asset payload.",
+    "Request 20261013T1849Z-export-00639BE0 is queued but has not been picked up; the local NMS Offline runner must be started/resumed on the Windows PC. No NMS game launch or derelict traversal is required."
   ],
-  "next_action": "Use the verified per-session `logical_groups` and static room index to identify the smallest room-scene features that explain the 23/35/51 estimates; compare the repeated-address rows for invariants, then seek an exact upstream selector/count boundary. Keep this strictly as static-estimate work until a physical total is available; do not revisit the completed derelict.",
-  "human_action_required": null,
+  "next_action": "After the user starts/resumes NMS Offline Runner 0.1.21, review runner-results/<request_id>/manifest.json and offline-evidence.zip. Confirm the NMS.exe hash and whether helper 00639BE0 is included; decode the returned function bytes, then request Ghidra only if the fixed export lacks the needed evidence.",
+  "human_action_required": {
+    "action": "Start or resume NMS Offline Runner 0.1.21 so it can pick up the queued export request.",
+    "steps": [
+      "Open NMS Offline Runner 0.1.21 on the Windows PC.",
+      "If its status is Stopped, click Start; leave it open while the queued request runs.",
+      "Wait for the run to finish and the GitHub upload to complete."
+    ],
+    "success_condition": "GitHub runner-results/latest.json changes to request_id 20261013T1849Z-export-00639BE0 and the matching result reports completion.",
+    "game_or_derelict_required": false
+  },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
     "finding": "Deduplicated all repository generation-measurement summary and asset-calculation uploads, then grouped the unique saved observations.",
@@ -351,7 +362,15 @@
       "limitation": "Name-based filter cannot exclude generically named tables or executable-side selectors"
     }
   },
-  "experiments_awaiting_result": [],
+  "experiments_awaiting_result": [
+    {
+      "request_id": "20261013T1849Z-export-00639BE0",
+      "action": "offline-check-and-export",
+      "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
+      "status": "queued; runner has not picked it up as of this review",
+      "question": "Does the hash-gated fixed export produce helper 00639BE0 bytes for the pinned current NMS.exe?"
+    }
+  ],
   "latest_static_crate_entity_experiment": {
     "question": "Do room-scene CRATEM references correspond to an interactive salvage-crate entity, rather than only a generic decorative crate?",
     "provenance": {
