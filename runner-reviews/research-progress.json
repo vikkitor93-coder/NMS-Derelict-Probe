@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "current_milestone": "M0 complete; M1 crate-count observables and smallest useful inputs remain under investigation.",
-  "primary_objective": "Predict total derelict crate/container count offline from the smallest practical known inputs; defer room-layout reconstruction unless count prediction requires it.",
+  "current_milestone": "M1 — observables identified; offline system/preset-to-count inputs remain unresolved.",
+  "primary_objective": "Predict the derelict's total searchable blue-box plus footlocker count offline from the smallest practical pre-traversal inputs. Treat the user's repeated matching counts as the working ground-truth assumption; do not request another physical count.",
   "last_reviewed": {
     "commit": "7443954f721c6cea0e214859d95469ec96c7bae7",
     "request_id": "2eed2b3ed43943fd99c0c0a31fbdb2c8",
@@ -18,92 +18,47 @@
     "queued_request_status": "no crate-specific request pending"
   },
   "established_facts": [
-    "Runner update 0.1.21 is published on runner-updates at commit 12b387159fc1cb791e1ecc8695dcc9ccbaccf13b. Package source_sha256=e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; archive SHA-256=591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940; 119 tests passed with 10 skips; archive and all 71 member hashes were independently checked.",
-    "The 0.1.21 runner polls nms-runner-evidence/runner-requests/latest.json every 10 seconds, accepts only three fixed actions, pins requests to its exact packaged source digest, and adds the targeted crate-count-audit action. No command, argument, executable path or RVA is accepted.",
-    "Saved evidence summary has 11 measurements. A local recomputation found that all 11 saved room-sequence salvage/footlocker/target sums match the saved aggregate counts; this verifies arithmetic consistency only, not live object completeness.",
-    "Saved sessions for address 00001A0004E84EFD and candidate root 9256392A2F5A74AC record 35 containers for CARGO_FLOATERS and 16 for MEDI_FLOATERS. Sessions span probe versions and lack NMS.exe hash provenance.",
-    "Within saved CARGO_FLOATERS rows, per-room target counts vary by family/kind: BARRACKS main 1/2/4 (16 rooms), CARG main 3/4/10/15/19 (26), END main 1/13 (8), and HANGAR main 3 (6). Family/kind alone is not a sufficient room-count lookup in this dataset.",
-    "For address 00001A0004E84EFD with CARGO_FLOATERS, six saved sessions record 35 containers: two sessions have no root candidate and four record 9256392A2F5A74AC. This weakens the need for root as a count input for this one system/preset, but sessions span probe versions and have no executable hash.",
-    "Across 133 saved asset-calculation-latest.json paths at commit 9e759db8cfcec40eec31a2e270dafb9041bfc54f, tree blob hashes reduce them to 5 unique file bodies and 4 distinct (session,address,count) calculations; most uploads repeat snapshots.",
-    "Distinct diagnostic asset-calculation snapshots report: address 0001550006607CAC, probe 0.3.5: 126/126 scenes resolved, 32 salvage + 19 footlockers = 51; address 0001BF0004E84EFD, probe 0.3.38: 164/164, 30+13=43; address 0001550006607CAC, probe 0.3.38: 146/146, 7+7=14; address 00006D0006606CAB, probe 0.3.40: 130/130, 12+9=21. All report manual_f7_target_containers=0.",
-    "The crate-target-discovery records accompanying these asset calculations explicitly say their counts are correlations/reference counts only and are not promoted to physical crate totals. The 51 and 14 estimates for address 0001550006607CAC use different probe versions; they do not establish either a real count change or an address-only prediction rule.",
-    "User correction: value 0063A6D0 was identified as a palette chosen according to the Shipwright mod; exclude it from crate-count and root-seed evidence.",
-    "For same address 0001550006607CAC, the 0.3.5 and 0.3.38 room-crate-index.json files each contain 1,433 unique scene paths with identical per-path salvage/footlocker/target values (0 changed common entries). Their asset snapshots differ in used scene list (126 instances/68 types vs 146/60), so the diagnostic estimate change 51→14 comes from different session scene inventories, not a changed static index.",
-    "Static capability check of the exact 0.1.21 source snapshot (commit 808620042ce73815cf84eefc10e697817773b02d): its fixed request allowlist is offline-check, offline-check-and-export, and crate-count-audit; request schema has no action-specific parameters. For crate-count-audit local_runner.py sets source_zip=null and invokes only the crate-audit subcommand. crate_count_audit.py reads bundled evidence/generation-measurements-summary.json, sums saved per-room counts, and compares them with recorded aggregate fields; it does not inspect NMS.exe or locate the game's count producer.",
-    "Exact 0.1.21 exporter check: offline-check-and-export runs package/tests/diagnose/code/emulate before export; export_evidence.py only emits bounded raw function/caller bytes for root-call-window matches and a fixed helper list, with hash-gated upstream candidates 00639490/00639A70/00639BE0/02D07C80/02D08430. It has no crate-count target and does not decode or execute game code. No NMS.exe was present in the available project checkout or runner-source workspace, so this desktop cannot run that exporter against a local executable.",
-    "Unpinned runtime sample from the packaged v0.3.75 fixture `derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json` (source baseline commit d09e01231b511f5215e50ea0b1df3f3ea264c970; local projection SHA-256 6c1bd3d31aaa9cd0e35a6819f79d398c18e7ac6ac46fe8fa29ce87ce0262ed48, matching the fixture manifest): probe 0.3.42, system address 0000760006606CAB, root candidate 9C2818C7FE094FC8; recording ran 01:01:05–01:18:26Z, started in AbandonedFreighter, ended in Default, and saw 12 rooms. The capture records 49 blue_crate, 26 salvage_crate and 7 footlocker marker events (82 marked events). Its room/index summary estimates 29 salvage plus 8 footlockers (37), four above the 33 salvage/footlocker markers. This is a measured marker-vs-index discrepancy, not a verified physical total: marker completeness is not recorded, and manifest reports game 7.05 only as user-reported with no NMS.exe SHA-256.",
-    "Confirmed static at project source commit d09e01231b511f5215e50ea0b1df3f3ea264c970: `_generation_room_summary` walks scene-probe events under `/DUNGEON/`, looks each scene path up in the local room-crate index, and sums the index's salvage/footlocker entries. Therefore `generation_room_summary.target_containers_seen=37` is an asset-index estimate, not a runtime enumeration. The separate `_auto_crate_summary` uses unique `countable` Engine.AddNodes keys and labels the result `live`/`high`; the 0.3.42 Irchol fixture contains no auto_crates report, so its 82 manual marker events cannot be checked against that direct hook.",
-    "Confirmed static at project source commit d09e01231b511f5215e50ea0b1df3f3ea264c970: the live auto-count target matcher accepts only ABAND_CRATE_M and FOOTLOCKER. Generic CRATE/LOCKER/CHEST discovery tokens only create discovery_only evidence and do not increment count. Blue crates use the manual F7 marker path (`_add_marker(\"blue_crate\")`); the blue total is recorded marker count, while historical_expected_blue_crates is a manual field. This source finding does not establish behavior of the older 0.3.42 fixture: it has no auto_crates report and its 49 blue count is manual-marker evidence.",
-    "Offline inspection of fixture derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json found 1,530 scene_probe events, of which only two contain generic crate-related tokens: the AbandonedFreighter ambience and a room-level MODELS/SPACE/POI/DUNGEON/CARG/CORNER_CRATES00.SCENE.MBIN instance. No event identifies an individual blue crate. The fixture records 49 blue_crate F7 markers (container ordinals 1–82 overall); those are the only blue-count observations in this capture.",
-    "Runner request 1a131cab1568ef38e7f2c5b800000001 completed on runner 0.1.21 with exact source pin e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; result manifest SHA-256 45494e56f5c2feef8adc3822dd9277719c6b2500, crate-count report SHA-256 26f9fa4028aa2d7170789bd2c25ca46e7ad6c7746b499e587101a8397b8fd787.",
-    "The crate-count-audit recomputed room sums for 11/11 rows with zero mismatches. The same recorded address/root has CARGO_FLOATERS total 35 and MEDI_FLOATERS total 16; this is a saved-summary association, not independently measured physical inventory or a proven causal rule.",
-    "Saved-summary comparison across six 00001A0004E84EFD/CARGO_FLOATERS captures (probe 0.3.10–0.3.18): all report 35 targets; the room-count multiset signature is identical, and reward seed CE0669F299792E85 is stable. Two early captures have no recorded dungeon root; four later captures record 9256392A2F5A74AC. The first pair differs in room order/signature but not the multiset. This shows stable saved summaries despite changing root-field capture availability; it does not prove the underlying root was absent or irrelevant.",
-    "Repository-wide tree audit found 132 generation-measurements-summary.json paths but only 3 unique Git blobs: 9-row, 10-row, and 11-row summaries. 129 paths duplicate the 11-row summary; repeated uploads do not add independent system samples.",
-    "Repository-wide tree audit found 133 asset-calculation-latest.json paths across 5 byte-distinct blobs, but two 0001BF0004E84EFD reports parse identically, leaving 4 distinct (session,address,estimate) records. All are static room-index estimates with manual F7 count zero, not measured physical totals.",
-    "Distinct asset-index estimates include 0001550006607CAC at 51 (probe 0.3.5) and 14 (probe 0.3.38, different session/scene list), 0001BF0004E84EFD at 43, and 00006D0006606CAB at 21. These do not establish physical count changes or a system-address prediction rule.",
-    "User clarification: the completed Irichol-Luhimo XVII derelict cannot be replayed; an unfinished derelict can be revisited, but opened crates remain open. Do not request a repeat of the completed instance or open targets during a measurement pass. Current installed NMS.exe SHA-256 was measured as 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499; this identifies the current executable only and does not retroactively pin the older fixture.",
-    "Hash-pinned static triage of the currently installed NMS.exe (SHA-256 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499; PE image base 0x140000000): an iced-x86 scan of .text found 9 direct RIP-relative references among 171 ASCII strings containing crate/dungeon terms. The direct hits were dungeon parameter/choice metadata thunks; no direct RIP-relative hit targeted the obvious scene-node strings CRATEM_OPEN, OBJ_CRATE_*, or FOOT_LOCKER_OPEN. This bounded negative result does not exclude indirect references or locate the crate-count producer.",
-    "Current installed assets were extracted read-only from 97 PAKs; the targeted archive scan found FREIGHTERDUNGEONSTABLE.MBIN in NMSARC.Precache.pak and a representative dungeon room scene in NMSARC.EntitySceneMBIN.pak. Current decompressed table MXML SHA-256=209c1a0ddf5c17528547c0e990756231dc3699a77d7e83417ba931ae7ea21967 (68,457 bytes); parsed table JSON SHA-256=4a8bbee27235f40903b1e7efdc9cb0ae9de1d9479cfed55b87f26adba0eb2d51.",
-    "Current table parse has 10 presets: eight with seven rooms and two maze variants with four. Its exposed rules specify room count/sequence and quest-item placement; no direct crate multiplicity/count field was found. This bounds the table's role but does not prove no indirect code-side count exists.",
-    "Current static room index SHA-256=aaf28c76814816083e7b04d8ad027dd63e992c8499ae002c3eea2b7dacc15de (1,433 dungeon scenes; 75 have salvage/footlocker targets). Target multiplicity varies among scene variants within families, e.g. BARRACKS 0–3, CARG 0–3, MEDI 0–2, END 0–3, HANGAR 0–1, COMM 0–1, infestation 0–1. Thus family/kind or preset alone is insufficient for the static salvage/footlocker sum; selected scene identity matters. This remains static asset evidence, not a physical runtime total.",
-    "Comparison against cached 2026-10-09 asset outputs found 1,433 common dungeon scene paths with zero per-path salvage/footlocker/target value changes; the freighter dungeon table MXML hash also matches. Asset drift is weakened as an explanation for historical static-index differences, but the old captures remain unpinned to the current executable.",
-    "Reproducibility inputs: extract_current_derelict_assets.py SHA-256=68e2fec8f91c9e14b12ce468974671c30985104ac4ebf8f9a2d3da5b2ef1b704; analyze_dungeon_generation_table.py SHA-256=33dc3a8eddb677220f3708e12e95dac5afb9fa0c0324fb078bfe8733c4d35527; build_scene_crate_index.py SHA-256=883e1598b4a05ff74b5624dbc08a6ab607c43bc66edb2230bff86fd76e023306. Outputs were isolated under the current workspace work/crate-static-assets-13d5060d.",
-    "Targeted read-only scan of all installed PAK filename indexes found FREIGHTERDUNGEONSTABLE.MBIN in NMSARC.Precache.pak and no additional path whose filename/path contains DUNGEON or FREIGHTER together with TABLE; this narrows named static-table sources but does not exclude a generically named selector table or code-side selection.",
-    "Hash-pinned static installed-asset trace (NMS.exe SHA-256 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499): a current dungeon room scene `CARG/ROOM_WALL_1_3.SCENE.MBIN` contains three references to `SPACEBASE/PROPS/CRATEM.SCENE.MBIN`; the matching `cratem.entity.mbin` (NMSARC.Precache.pak payload SHA-256 f15b654eb22fc570a66155cc9e25e01721b0c0b13b36850ec7eb3f496b1feae0) converts with MBINCompiler 7.4.1.3 to an entity carrying `GcSimpleInteractionComponentData`, `SimpleInteractionType=GenericReward`, `Id=R_ABAND_CRATE`, `ScanName=UI_SALVAGE_CRATE`, and crate scanner icon. This confirms that the CRATEM prop referenced by such room scenes is configured as a salvage crate. It does not identify the separate blue_crate F7 marker category or determine which room variants are selected.",
-    "New saved runtime capture: session 20261013T182312Z_0000750006606CAB, probe 0.3.42, system address 0000750006606CAB, root candidate 2A41B0E7EF42A1F7; session ran 18:23:12.018–18:24:50.780Z and ended by leaving the abandoned freighter. It recorded 9 main rooms; generation_room_summary reports 18 salvage + 5 footlockers = 23 from the scene-index estimate, not a physical enumeration. Two F7 blue_crate markers were each followed by R_ABAND_CRATE trace calls nearest-marker deltas 602/1311 ms and 739/1431 ms, with reward seeds 214D7F915D5415EE and 9E21D110530B6C58 respectively; each pair logged peek=true then peek=false. auto_crates count remained 0, with no candidate names, and diagnostics reported no errors or sample-limit hit. This is temporal correlation only: no object-ID link, unopened/opened state, marker-completeness proof, or physical crate total. Local session JSON SHA-256=37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932; uploaded capture journal SHA-256=bfad60506fd76db6531a1fea8cde80f734e45e9e90b3204a599d188e01bd357a in main upload commit 2d918cedd744d6d017974500a326a0f2391ceac2. The upload contains the journal, not the full session JSON; the capture does not record a matching NMS.exe hash.",
-    "Automatic saved-session batch 20261013T182533Z-0fef6736, report run 20261013T182534Z-4f832f18, verified input session 20261013T182312Z_0000750006606CAB at SHA-256 37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932. Analyze-generation tool 0.3.24 output SHA-256 c080e87cabe8a943dcabef2e1978e40a32fb8ff69b9f6c805aafda8dedebdc31 inferred CARGO_FLOATERS (high), grouped 9 main logical rooms / 121 scene instances, and summed the static room-index estimate as 18 salvage + 5 footlockers = 23. This does not enumerate physical containers.",
-    "The batch measurement summary (SHA-256 1dd0d70b5e95d69c2fedc251cf24a676c560159b506a83a4c9d03179cd932166) contains six CARGO_FLOATERS estimates across three addresses: 51 at 0001550006607CAC, 35 at 00001A0004E84EFD, and 23 at 0000750006606CAB. Repeated same-address saved rows keep their index estimate/layout multiset stable. This shows preset alone is insufficient to explain the static estimate; it does not show physical totals or prove the cause.",
-    "Batch report SHA-256 702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996 is committed on main at 08b674407726406cbd3fff98d23371f85a2509e9. Seven of nine actions completed; Prepare-Crate-Assets failed because MBINCompiler rejected an extracted file as invalid MBIN, and upload_runtime_capture was not run by the isolated no-upload batch mode. This failure is an execution issue, not research evidence. The new session-analysis report includes no matching NMS.exe SHA-256.",
-    "Hash-pinned local NMS.exe scan (SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499; PE timestamp 6ABE9229; image base 0x140000000) found zero raw ASCII occurrences of R_ABAND_CRATE, _ABAND_CRATE_M, R_ABAND_OPEN, R_ABAND_WALK_S, or FOOTLOCKER. A direct code xref search for these literal tokens cannot locate the count producer in this executable; this does not exclude hashed IDs, indirect asset references, or other strings.",
-    "Independent local calculation against the current scene index reproduced all 9 Ruflas-Simly V logical-group static estimates exactly: each room group's scene-path instance multiplicities mapped to the index sum reported salvage/footlocker values, with zero unresolved scene instances; grand total 18 salvage + 5 footlockers = 23. Inputs: baseline artifact SHA-256 c080e87cabe8a943dcabef2e1978e40a32fb8ff69b9f6c805aafda8dedebdc31; local room-index SHA-256 aaf28c76814816083e7b04d8ad027dd63e992c8499ae002c3eea2b7dacc15de; report SHA-256 702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996.",
-    "In the six-row CARGO_FLOATERS comparison, five older summary rows (probe 0.3.5–0.3.14) report 7 main rooms, matching the static preset table's 7; Ruflas-Simly V (probe 0.3.42) reports 9 logical groups/main rooms and 0 dead ends, so main_room_count_matches_table=false and room_model_status=needs-review. Because these are different probe versions and the capture lacks a matching NMS.exe hash, the mismatch cannot be assigned to game generation rather than capture/grouping changes.",
-    "Direct review of the saved combined-results room_sequence fields: 0.3.14 records 8 numbered parent groups (Room 0-7), of which 7 are main and 1 is a separately labeled dead_end; 0.3.42 records 9 numbered parent groups (Room 0-8), labels all 9 main, but Room 1 carries a DEADEND_BUNK0 scene-path marker in dead_end_evidence. This establishes report-level grouping/classification inconsistency, not whether the NMS room layout changed.",
-    "The v0.3.42 release commit 21b7284ba408a807f38e1e773e30033b44d8eaed describes a Surveyor Agent Console layout refresh and explicitly says the live game/probe capture protocol is unchanged. This rules out a capture-protocol change in that particular release, but does not explain differences from probe 0.3.14 or exclude other code/game-version changes.",
-    "GitHub log review: upload `research-uploads/20261013T182238Z-all-saved-evidence-af6f1178/capture-journal-20261013T182059Z-9524.jsonl` contains 965 `resource_add` rows from 18:21:02.600–18:22:26.113Z. It records broad resource/scene asset loads across EMPTY, HANGAR, BARRACKS, CARG, INFESTATION, COMM, SPAWNERS, MEDI, and END, not individual crate spawns or a physical count. The raw Ruflas session JSON is identified in the batch manifest by SHA-256 37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932, but the GitHub batch upload includes the report/pointer rather than that raw session file.",
-    "Correction to the prior cross-version room comparison: the 0.3.14/35 sample is system 00001A0004E84EFD; Ruflas 0.3.42/23 is system 0000750006606CAB. Those are different derelicts, so their room-group counts do not prove a capture grouping change. Ruflas Room 1 contains a dead-end-named scene asset, but that alone does not prove the room itself should be classified as a dead end.",
-    "User visual clarification: every searchable box container on their derelicts is blue. The prior instruction to count `salvage crates` and `blue crates` separately was wrong and would double-count one visual category. For the next physical tally, record searchable blue boxes once and footlockers separately. The 18+5=23 scene-index estimate remains a static estimate; mapping all user-observed blue boxes to the index's salvage-crate category is plausible but not yet measured."
+    "User reports prior scene-index totals have always matched their observed derelict counts and instructs us to assume the total is correct. Treat as a user-authorized working assumption; no recount is required.",
+    "Count data currently span three CARGO_FLOATERS addresses with totals 51, 35, and 23; at address 00001A0004E84EFD, CARGO_FLOATERS=35 and MEDI_FLOATERS=16. Therefore preset is required; the dataset is still too small to prove a general system-input predictor.",
+    "Static scene-index calculation exactly reconstructs recorded per-room estimates from selected scene paths. Each searchable box is counted once as blue; footlockers remain separate.",
+    "The installed static DungeonOptions mapping has ten weighted presets, but the table has no direct crate-total field. Selected room-scene identities/multiplicities are needed to calculate the count.",
+    "The exact installed NMS.exe SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 (image base 0x140000000).",
+    "Hash-pinned existing analysis shows the dungeon-root resource path reads a descriptor seed and UseSeed flag before adding MODELS/SPACE/POI/DUNGEON.SCENE.MBIN; the producer of that descriptor and its relationship to crate-bearing room selection are not established.",
+    "New read-only .pdata disassembly of the root-event caller in the matching executable: RVA 02C0840E..02C089DA, size 1484; the call at 02C08607 is a virtual dispatch inside a generic queue/worker routine that manages and removes work nodes. It exposes no visible crate-count calculation, so this caller is not the count boundary.",
+    "Runner 0.1.21 has only fixed offline-check, offline-check-and-export, and crate-count-audit actions; it cannot accept a targeted RVA/function request. The audit only recomputes saved summary arithmetic.",
+    "The active gap is the deterministic mapping from pre-traversal inputs (likely system address plus preset and possibly a derived generation seed) to the selected room-scene multiset and its total."
   ],
   "active_hypotheses": [
-    "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
-    "Room-family/kind counts alone are insufficient; a finer room identity, generation descriptor, or RNG/state may determine per-room container multiplicity.",
-    "Total count may be the sum of per-room container multiplicities, but saved data does not prove the same formula predicts a derelict before traversal.",
-    "For some fixed system/preset pairs, count may be stable without observing root; cross-system, same-build evidence is needed before excluding root generally.",
-    "The two same-address snapshots nine days apart may reflect a time/session-dependent derelict state or capture-version/scene-enumeration differences; distinguish these only with executable-pinned runtime evidence and an independently observed count.",
-    "For Irchol-Luhimo XVII (address 0000760006606CAB, root candidate 9C2818C7FE094FC8), the saved 12-room marker log records 82 crate/container markers; the index estimate is 37 salvage/footlockers versus 33 such markers, but marker completeness and executable identity are unknown.",
-    "Automatic node/resource probes may see blue-crate labels as discovery-only when names contain generic CRATE tokens, but no capture has shown their actual names or a countable blue-crate ID.",
-    "For 00001A0004E84EFD/CARGO_FLOATERS, address/preset plus a stable per-room count multiset is consistent with the repeated 35 summaries; the available data cannot tell whether root is a causal input because missing root means uncaptured, not absent.",
-    "Within the same inferred preset, per-session selected room-scene composition drives the static target estimate; whether its selector can be predicted offline from address/root and whether estimates match physical totals remain unknown.",
-    "Scene-index estimate variation is explained by selected per-room scene composition/multiplicity, beyond preset or room family; whether the game's selector can be predicted from pre-traversal inputs remains unknown.",
-    "The 0.3.42 report's increase from 8 to 9 parent groups may reflect changed event grouping, a changed generated layout, or both; its dead-end scene evidence being labeled main shows the room-kind classifier is not reliable enough to interpret the 9 main-room value literally."
+    "The count is the sum of the static searchable-box and footlocker entries for the selected room scenes; the user authorizes treating those totals as correct.",
+    "Preset affects the selected scene/count. Whether the system address, derived root seed, or a later RNG state determines room variants remains unknown.",
+    "A root/derived seed may be needed for offline room selection, but root relevance is not proven; root alone cannot explain the same-address 35 versus 16 preset pair."
   ],
   "falsified_hypotheses": [
-    "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
-    "Room family/kind alone determines a fixed container count in the saved rows.",
-    "The existing live auto-count summary covers every crate/container category, including blue crates.",
-    "The target interaction IDs are present as raw ASCII literals in NMS.exe and can be followed by direct string xrefs."
+    "Root value alone determines total count, because the same saved address/root pair is associated with different totals under CARGO_FLOATERS and MEDI_FLOATERS.",
+    "Preset or room-family label alone gives a fixed total; selected room-scene variants have different indexed multiplicities.",
+    "The root-event caller at RVA 02C0840E is itself the crate-count producer."
   ],
-  "latest_material_finding": "User clarified all searchable box containers are blue in their derelicts. Replace the earlier two-box-category instruction with one searchable-blue-box count plus a separate footlocker count. The saved scene-index estimate of 18 salvage-crate targets + 5 footlockers = 23 remains unverified physically.",
+  "latest_material_finding": "Using the exact installed NMS.exe (SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499), a read-only .pdata-bounded disassembly identified the function containing the root-event call as generic queue/worker processing, not a visible crate counter. Static table evidence confirms preset weights but no count. The remaining bridge is the function that selects seeded room variants; request one targeted Ghidra export to continue.",
   "queued_experiments": [],
   "unresolved_blockers": [
-    "No hash-pinned physical count exists for Ruflas-Simly V (address 0000750006606CAB, root candidate 2A41B0E7EF42A1F7); the value 23 is only an asset-index estimate.",
-    "The saved GitHub capture journal records resource loads, not spawned/physical crate objects; the automatic counter reported zero.",
-    "No supported runner action or available executable workspace can currently identify the game code that selects the crate-bearing room variants.",
-    "A second independent physical total will still be needed after the first tally to test whether any offline predictor generalizes."
+    "Need a Ghidra decompilation/listing on the exact hash-pinned NMS.exe to follow the descriptor seed into dungeon generation and identify the room-variant selector. The available runner cannot extract arbitrary functions or xrefs."
   ],
-  "next_action": "HUMAN STEP: If Ruflas-Simly V (address 0000750006606CAB; root 2A41B0E7EF42A1F7) is still unfinished, make one complete room-by-room pass. Do not open any containers. Count each searchable blue box once and count footlockers separately; count containers already open as present. Send `searchable_blue_boxes=__, footlockers=__, all_rooms_visited=yes/no`. Compare their sum with the saved estimate 23. If Ruflas is no longer available unfinished, do not repeat completed Irichol; use another unfinished derelict and send its address/root with the same two counts. Test a second independent sample before claiming offline prediction.",
+  "next_action": "Human step: on the matching NMS.exe (SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499), export the Ghidra decompilation and disassembly for the function starting at RVA 0063A6D0 (image address 0x14063A6D0) and the function containing RVA 0063AC20. Include the caller/reference view for the runtime dispatch at RVA 02C08607, if Ghidra identifies it. Return the exported text or JSON. No game launch, traversal, or crate opening is needed. Then trace the seed/preset into the room-variant selector and implement the smallest offline count calculation.",
   "human_action_required": {
     "needed": true,
-    "why": "Saved evidence does not contain a physical crate total; the capture journal records resource loads and the automatic counter found zero.",
+    "why": "Local read-only analysis can disassemble the observed caller but cannot recover the higher-level object/seed data flow. The existing remote runner has no targeted function-disassembly action, and Ghidra is not available as a callable tool in this session.",
     "exact_steps": [
-      "Use Ruflas-Simly V only if it remains unfinished.",
-      "Walk every room once and do not open containers. Count already-open containers as present.",
-      "Count every searchable blue box once. Keep footlockers as a separate count.",
-      "Send both counts and confirm whether every room was checked. If possible, upload the new Surveyor session JSON."
+      "Open the installed NMS.exe in Ghidra and confirm its SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499.",
+      "Go to image address 0x14063A6D0 (RVA 0063A6D0). Export or copy the full decompiler view and full listing for that function.",
+      "Also export the decompiler view and listing for the function containing image address 0x14063AC20 (RVA 0063AC20). Keep the calls and memory accesses involving descriptor offsets +0x10, +0x18, and owner offset +0x128 visible.",
+      "If Ghidra resolves the call at image address 0x142C08607 (RVA 02C08607), include its target/caller reference details.",
+      "Upload the exported text/JSON here or to the project evidence folder. Do not launch NMS or traverse/open anything."
     ],
-    "success_indicator": "A complete count of searchable blue boxes and footlockers for the same Ruflas system/root. Compare the two counts together with the estimate 23.",
-    "hypothesis_distinguished": "Whether the scene-index estimate of 18 searchable crate targets plus 5 footlockers matches the physical derelict. The blue boxes are one visible category, not a separate count to add again.",
-    "full_traversal_required": true,
-    "no_container_opening_required": true
+    "success_indicator": "Received decompiler/listing exports from NMS.exe hash 13d5060d...3499 covering the seed-consuming root-load path; the next analysis can determine whether/how that seed reaches room-variant selection.",
+    "hypothesis_distinguished": "Whether the root descriptor seed is an input to dungeon room generation and which function/state is the next room-selection boundary.",
+    "full_traversal_required": false,
+    "game_launch_required": false,
+    "crate_opening_required": false
   },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
@@ -113,221 +68,10 @@
   },
   "evidence_references": [
     {
-      "commit": "79d273001592cb2d8c707ffa562509deb52aa11f",
-      "path": "research-uploads/20261010T021347Z-all-saved-evidence-bae2d649/asset-calculation-latest.json",
+      "commit": "8097e2999955da21307038c7c5e98dcad4526210",
+      "path": "runner-reviews/research-progress.json",
       "fields": [
-        "session_id",
-        "probe_version",
-        "dungeon_scene_instances",
-        "resolved_scene_instances",
-        "unresolved_scene_instances",
-        "predicted_salvage_crates",
-        "predicted_crew_footlockers",
-        "predicted_target_containers",
-        "manual_f7_target_containers",
-        "instances"
-      ]
-    },
-    {
-      "commit": "79d273001592cb2d8c707ffa562509deb52aa11f",
-      "path": "research-uploads/20261010T021347Z-all-saved-evidence-bae2d649/room-crate-index.json",
-      "fields": [
-        "scene_exports_indexed",
-        "dungeon_scenes_indexed",
-        "entries[].scene_path",
-        "entries[].salvage_crates",
-        "entries[].crew_footlockers",
-        "entries[].target_containers"
-      ]
-    },
-    {
-      "commit": "79d273001592cb2d8c707ffa562509deb52aa11f",
-      "path": "research-uploads/20261010T021347Z-all-saved-evidence-bae2d649/run-manifest.json",
-      "fields": [
-        "action",
-        "files[].name",
-        "files[].sha256",
-        "files[].size",
-        "no executable SHA-256 field"
-      ]
-    },
-    {
-      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
-      "path": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/asset-calculation-latest.json",
-      "fields": [
-        "session_id",
-        "probe_version",
-        "universe_address_hex",
-        "dungeon_scene_instances",
-        "resolved_scene_instances",
-        "predicted_salvage_crates",
-        "predicted_crew_footlockers",
-        "predicted_target_containers",
-        "manual_f7_target_containers"
-      ]
-    },
-    {
-      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
-      "path": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/crate-target-discovery.json",
-      "fields": [
-        "session_id",
-        "probe_version",
-        "universe_address_hex",
-        "diagnostic_only",
-        "note"
-      ]
-    },
-    {
-      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
-      "path": "research-uploads/20261007T001735Z-metadata-prepare-assets-offline-repair/asset-calculation-latest.json",
-      "fields": [
-        "session_id",
-        "probe_version",
-        "universe_address_hex",
-        "dungeon_scene_instances",
-        "predicted_target_containers"
-      ]
-    },
-    {
-      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
-      "path": "research-uploads/20261008T191656Z-metadata-prepare-assets-4beb1d75/asset-calculation-latest.json",
-      "fields": [
-        "session_id",
-        "probe_version",
-        "universe_address_hex",
-        "dungeon_scene_instances",
-        "predicted_target_containers"
-      ]
-    },
-    {
-      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
-      "path": "research-uploads/20261009T163954Z-metadata-prepare-assets-6ae2fd90/asset-calculation-latest.json",
-      "fields": [
-        "session_id",
-        "probe_version",
-        "universe_address_hex",
-        "dungeon_scene_instances",
-        "predicted_target_containers"
-      ]
-    },
-    {
-      "commit": "9e759db8cfcec40eec31a2e270dafb9041bfc54f",
-      "path": "research-uploads/20261009T163954Z-metadata-prepare-assets-6ae2fd90/crate-target-discovery.json",
-      "fields": [
-        "session_id",
-        "probe_version",
-        "universe_address_hex",
-        "diagnostic_only",
-        "note"
-      ]
-    },
-    {
-      "commit": "db5eb8a3f1ba84b18bf08de4bd03437580539a4b",
-      "path": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/room-crate-index.json",
-      "fields": [
-        "dungeon_scenes_indexed",
-        "entries[].scene_path",
-        "entries[].salvage_crates",
-        "entries[].crew_footlockers",
-        "entries[].target_containers"
-      ]
-    },
-    {
-      "commit": "db5eb8a3f1ba84b18bf08de4bd03437580539a4b",
-      "path": "research-uploads/20261008T191656Z-metadata-prepare-assets-4beb1d75/room-crate-index.json",
-      "fields": [
-        "dungeon_scenes_indexed",
-        "entries[].scene_path",
-        "entries[].salvage_crates",
-        "entries[].crew_footlockers",
-        "entries[].target_containers"
-      ]
-    },
-    {
-      "commit": "db5eb8a3f1ba84b18bf08de4bd03437580539a4b",
-      "path": "research-uploads/20261008T191656Z-metadata-prepare-assets-4beb1d75/asset-calculation-latest.json",
-      "fields": [
-        "session_id",
-        "probe_version",
-        "universe_address_hex",
-        "instances",
-        "predicted_target_containers"
-      ]
-    },
-    {
-      "commit": "808620042ce73815cf84eefc10e697817773b02d",
-      "path": "runner_protocol.py",
-      "fields": [
-        "ACTIONS",
-        "validate_request exact required keys"
-      ]
-    },
-    {
-      "commit": "808620042ce73815cf84eefc10e697817773b02d",
-      "path": "local_runner.py",
-      "fields": [
-        "crate-count-audit source_zip null",
-        "task dispatch crate-audit"
-      ]
-    },
-    {
-      "commit": "808620042ce73815cf84eefc10e697817773b02d",
-      "path": "crate_count_audit.py",
-      "fields": [
-        "input generation-measurements-summary.json",
-        "room_sequence sum checks",
-        "interpretation"
-      ]
-    },
-    {
-      "commit": "d09e01231b511f5215e50ea0b1df3f3ea264c970",
-      "path": "derelict_offline/fixtures/20261010T010105Z_Irchol-Luhimo_XVII.json",
-      "fields": [
-        "session_id=20261010T010105Z_0000760006606CAB",
-        "probe_version=0.3.42",
-        "universe_address_hex=0000760006606CAB",
-        "root_candidate=9C2818C7FE094FC8",
-        "markers by type: blue_crate 49, salvage_crate 26, footlocker 7",
-        "generation_room_summary target_containers_seen=37; salvage=29; footlockers=8",
-        "runtime_start=AbandonedFreighter; runtime_end=Default; total_rooms_seen=12",
-        "fixture manifest game version 7.05 user-reported; executable_sha256=null",
-        "fixture projection_sha256=6c1bd3d31aaa9cd0e35a6819f79d398c18e7ac6ac46fe8fa29ce87ce0262ed48"
-      ]
-    },
-    {
-      "commit": "d09e01231b511f5215e50ea0b1df3f3ea264c970",
-      "path": "mod/derelict_baseline_probe.py",
-      "fields": [
-        "`_generation_room_summary`: groups /DUNGEON scene-probe events and sums crate_index values",
-        "`_load_live_crate_index`: maps static scene entries into salvage/footlocker values",
-        "`_auto_crate_summary`: separate count of unique countable Engine.AddNodes keys; live/high status"
-      ]
-    },
-    {
-      "commit": "017764a13b030f9b2bba3f5ba5dd24a60bdd7f44",
-      "path": "research-uploads/20261004T084829Z-all-saved-evidence-5a094647/generation-measurements-summary.json",
-      "fields": [
-        "session_id",
-        "probe_version",
-        "universe_address_hex",
-        "preset",
-        "target_containers",
-        "reward_seed_hexes",
-        "dungeon_root_seed_hexes",
-        "layout_multiset_signature_sha256",
-        "room_sequence"
-      ]
-    },
-    {
-      "commit": "2d918cedd744d6d017974500a326a0f2391ceac2",
-      "path": "research-uploads/20261013T182438Z-all-saved-evidence-1467ab4b/capture-journal-20261013T182059Z-9524.jsonl",
-      "sha256": "bfad60506fd76db6531a1fea8cde80f734e45e9e90b3204a599d188e01bd357a",
-      "fields": [
-        "capture journal hash pinned by run-manifest.json",
-        "session 20261013T182312Z_0000750006606CAB; probe 0.3.42; address 0000750006606CAB; root candidate 2A41B0E7EF42A1F7",
-        "two blue_crate F7 markers and nearest-prior R_ABAND_CRATE reward calls; deltas and reward seeds recorded in marker context",
-        "auto_crates count=0; no candidate name; journal upload does not include full session JSON",
-        "local session JSON SHA-256=37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932; NMS.exe hash not recorded in capture"
+        "prior findings and context"
       ]
     },
     {
@@ -335,13 +79,27 @@
       "path": "research-uploads/20261013T182626Z-automatic-research-batch-20261013T182533Z-0fef6736-d74744/reports/20261013T182534Z-4f832f18/combined-results.json",
       "sha256": "702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996",
       "fields": [
-        "session_sha256 verified by batch-results.json",
-        "generation-baseline artifact SHA-256 c080e87cabe8a943dcabef2e1978e40a32fb8ff69b9f6c805aafda8dedebdc31",
-        "generation-measurements-summary SHA-256 1dd0d70b5e95d69c2fedc251cf24a676c560159b506a83a4c9d03179cd932166",
-        "same preset CARGO_FLOATERS estimates 51, 35, 23 at three addresses; asset-index estimates only",
-        "batch status completed-with-errors: 7/9 complete, MBIN asset prep failed, upload skipped by no-upload mode",
-        "no NMS.exe SHA-256 in session analysis"
+        "session inputs",
+        "preset",
+        "per-room scene list",
+        "scene-index count"
       ]
+    },
+    {
+      "commit": "d09e01231b511f5215e50ea0b1df3f3ea264c970",
+      "path": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
+      "fields": [
+        "root resource",
+        "seed descriptor observation",
+        "runtime call context",
+        "executable SHA-256"
+      ]
+    },
+    {
+      "path": "local NMS.exe",
+      "sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+      "rva": "02C0840E..02C089DA",
+      "method": "read-only .pdata + iced-x86 disassembly in this invocation"
     }
   ],
   "latest_static_asset_experiment": {
@@ -390,7 +148,7 @@
     "interpretation": "Confirms these referenced CRATEM objects are configured salvage crates and supports the static scene index's salvage category. Does not prove every such prop spawns in the world, map it to the blue_crate F7 label, reveal runtime room selection, or predict total count.",
     "status": "confirmed_static; no runner job"
   },
-  "unresolved_blocker": "No hash-pinned physical count exists for Ruflas-Simly V (address 0000750006606CAB, root candidate 2A41B0E7EF42A1F7); the value 23 is only an asset-index estimate.",
+  "unresolved_blocker": "Need a Ghidra decompilation/listing on the exact hash-pinned NMS.exe to follow the descriptor seed into dungeon generation and identify the room-variant selector. The available runner cannot extract arbitrary functions or xrefs.",
   "latest_analysis": {
     "finding": "GitHub log files were read directly. The 535,654-byte capture journal has 965 resource_add records over about 84 seconds and lists candidate dungeon scene assets across several room families. It does not contain individual physical crate/footlocker spawn records. The runner's latest offline-check passed all five stages but did not inspect game logic or validate crate count.",
     "evidence": {
@@ -456,5 +214,20 @@
     },
     "interpretation": "These are different systems/derelicts and cannot establish a same-derelict grouping change. A dead-end-named scene inside Ruflas Room 1 is a scene-level observation, not proof that the room is a dead-end group.",
     "classification": "cross-system_comparison_not_diagnostic_of_version_drift"
+  },
+  "latest_static_root_caller_disassembly": {
+    "question": "Does the root-event caller at RVA 02C08607 contain the crate-count producer?",
+    "provenance": {
+      "executable_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+      "image_base_hex": "0000000140000000",
+      "pdata_function_start_rva": "02C0840E",
+      "pdata_function_end_rva_exclusive": "02C089DA",
+      "function_size_bytes": 1484,
+      "call_rva": "02C08607",
+      "method": "Read-only PE .pdata recovery and iced-x86 disassembly on installed executable"
+    },
+    "finding": "The call is a virtual dispatch inside a generic queue/worker loop; surrounding instructions manipulate and remove task/list nodes. No visible crate count accumulation or container enumeration appears in this caller.",
+    "interpretation": "This caller path is not the crate-count producer; follow the seeded descriptor into room selection instead.",
+    "classification": "confirmed_static_disassembly_with_limited_semantic_inference"
   }
 }
