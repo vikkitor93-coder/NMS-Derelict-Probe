@@ -50,7 +50,8 @@
     "Comparison against cached 2026-10-09 asset outputs found 1,433 common dungeon scene paths with zero per-path salvage/footlocker/target value changes; the freighter dungeon table MXML hash also matches. Asset drift is weakened as an explanation for historical static-index differences, but the old captures remain unpinned to the current executable.",
     "Reproducibility inputs: extract_current_derelict_assets.py SHA-256=68e2fec8f91c9e14b12ce468974671c30985104ac4ebf8f9a2d3da5b2ef1b704; analyze_dungeon_generation_table.py SHA-256=33dc3a8eddb677220f3708e12e95dac5afb9fa0c0324fb078bfe8733c4d35527; build_scene_crate_index.py SHA-256=883e1598b4a05ff74b5624dbc08a6ab607c43bc66edb2230bff86fd76e023306. Outputs were isolated under the current workspace work/crate-static-assets-13d5060d.",
     "Targeted read-only scan of all installed PAK filename indexes found FREIGHTERDUNGEONSTABLE.MBIN in NMSARC.Precache.pak and no additional path whose filename/path contains DUNGEON or FREIGHTER together with TABLE; this narrows named static-table sources but does not exclude a generically named selector table or code-side selection.",
-    "Hash-pinned static installed-asset trace (NMS.exe SHA-256 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499): a current dungeon room scene `CARG/ROOM_WALL_1_3.SCENE.MBIN` contains three references to `SPACEBASE/PROPS/CRATEM.SCENE.MBIN`; the matching `cratem.entity.mbin` (NMSARC.Precache.pak payload SHA-256 f15b654eb22fc570a66155cc9e25e01721b0c0b13b36850ec7eb3f496b1feae0) converts with MBINCompiler 7.4.1.3 to an entity carrying `GcSimpleInteractionComponentData`, `SimpleInteractionType=GenericReward`, `Id=R_ABAND_CRATE`, `ScanName=UI_SALVAGE_CRATE`, and crate scanner icon. This confirms that the CRATEM prop referenced by such room scenes is configured as a salvage crate. It does not identify the separate blue_crate F7 marker category or determine which room variants are selected."
+    "Hash-pinned static installed-asset trace (NMS.exe SHA-256 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499): a current dungeon room scene `CARG/ROOM_WALL_1_3.SCENE.MBIN` contains three references to `SPACEBASE/PROPS/CRATEM.SCENE.MBIN`; the matching `cratem.entity.mbin` (NMSARC.Precache.pak payload SHA-256 f15b654eb22fc570a66155cc9e25e01721b0c0b13b36850ec7eb3f496b1feae0) converts with MBINCompiler 7.4.1.3 to an entity carrying `GcSimpleInteractionComponentData`, `SimpleInteractionType=GenericReward`, `Id=R_ABAND_CRATE`, `ScanName=UI_SALVAGE_CRATE`, and crate scanner icon. This confirms that the CRATEM prop referenced by such room scenes is configured as a salvage crate. It does not identify the separate blue_crate F7 marker category or determine which room variants are selected.",
+    "New saved runtime capture: session 20261013T182312Z_0000750006606CAB, probe 0.3.42, system address 0000750006606CAB, root candidate 2A41B0E7EF42A1F7; session ran 18:23:12.018–18:24:50.780Z and ended by leaving the abandoned freighter. It recorded 9 main rooms; generation_room_summary reports 18 salvage + 5 footlockers = 23 from the scene-index estimate, not a physical enumeration. Two F7 blue_crate markers were each followed by R_ABAND_CRATE trace calls nearest-marker deltas 602/1311 ms and 739/1431 ms, with reward seeds 214D7F915D5415EE and 9E21D110530B6C58 respectively; each pair logged peek=true then peek=false. auto_crates count remained 0, with no candidate names, and diagnostics reported no errors or sample-limit hit. This is temporal correlation only: no object-ID link, unopened/opened state, marker-completeness proof, or physical crate total. Local session JSON SHA-256=37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932; uploaded capture journal SHA-256=bfad60506fd76db6531a1fea8cde80f734e45e9e90b3204a599d188e01bd357a in main upload commit 2d918cedd744d6d017974500a326a0f2391ceac2. The upload contains the journal, not the full session JSON; the capture does not record a matching NMS.exe hash."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -67,37 +68,22 @@
     "Room family/kind alone determines a fixed container count in the saved rows.",
     "The existing live auto-count summary covers every crate/container category, including blue crates."
   ],
-  "latest_material_finding": "Current-build static asset trace confirms that a dungeon-room CRATEM prop resolves to an interactive GenericReward entity identified as R_ABAND_CRATE / UI_SALVAGE_CRATE. This validates that scene CRATEM references represent configured salvage crates; it still does not identify the blue_crate F7 category, scene selection, or physical total.",
+  "latest_material_finding": "The 20261013 Ruflas-Simly V capture associates two F7 blue_crate marks by nearest-prior timing with R_ABAND_CRATE reward calls and distinct reward seeds. This strengthens the candidate link between blue-crate interactions and the salvage-crate reward path, but does not identify the marked object directly or establish count/open state. The automatic counter stayed at zero; the room-index estimate was 23.",
   "queued_experiments": [],
   "unresolved_blockers": [
     "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
     "No same-build multi-system rows establish whether system address/preset/root predicts physical total count before traversal.",
     "No NMS.exe is present in the available project checkout or runner-source workspace; the published runner audit does not inspect game code.",
     "The 0.3.42 Irchol-Luhimo XVII sample contains 82 marker events but no explicit marker-completeness flag or executable hash; its 37 index estimate exceeds the 33 salvage/footlocker markers by four.",
-    "Blue-crate runtime object/resource identity is not known; F7 gives manual marker counts only, so current direct auto-count cannot yield total crate count.",
     "The completed 0.1.21 action audits bundled arithmetic only; it has no NMS.exe hash or physical crate-completeness evidence and does not inspect the count producer.",
     "No same-build, executable-pinned multi-system observations yet establish whether system address, preset, root, or another state predicts total physical count before traversal.",
     "Blue-crate runtime identity and marker completeness remain unknown; existing F7 counts cannot yet close the total-count gap.",
     "Saved evidence is exhausted for physical-count validation: summary duplicates dominate, unique system/preset rows lack matching-build NMS.exe provenance, and asset-index totals have no complete manual count.",
-    "Current static assets constrain per-scene multiplicity but do not reveal which scene variants are selected for a given system/preset; matching that selector to total count is still unresolved."
+    "Current static assets constrain per-scene multiplicity but do not reveal which scene variants are selected for a given system/preset; matching that selector to total count is still unresolved.",
+    "Ruflas-Simly V's two blue_crate markers are temporally associated with R_ABAND_CRATE calls, but no individual object identity or physical-total completeness is captured; auto_crates found zero targets. The session lacks an NMS.exe hash."
   ],
-  "next_action": "For the next runtime identity sample, use a revisitable unfinished derelict and only mark visible unopened blue crates; do not open them. Correlate F7 blue_crate marks with same-session auto_crates and crate-target-discovery labels to test whether they map to the confirmed R_ABAND_CRATE/UI_SALVAGE_CRATE entity or are a separate category. Note already-open crates separately; this identity sample does not prove total-count completeness.",
-  "human_action_required": {
-    "action": "On an unfinished derelict that can still be revisited, collect a short non-destructive runtime identity sample; do not open any crates.",
-    "missing_data": "Same-session auto_crates and crate-target-discovery output correlated with manual F7 marks for visible unopened blue crates, plus manifest/probe version/current game build and executable hash.",
-    "why_existing_evidence_cannot_provide_it": "The completed Irichol capture cannot be replayed and has no individual blue-crate object IDs. Static current-build evidence now confirms the CRATEM room prop is an R_ABAND_CRATE/UI_SALVAGE_CRATE GenericReward, but it does not connect the distinct blue_crate F7 marker type to a runtime label. Only an unfinished derelict capture can test that join; opened crates stay open and must be marked separately.",
-    "steps": [
-      "Choose any unfinished derelict with at least one unopened blue crate; do not use the completed Irichol derelict.",
-      "Start a probe capture before boarding or before entering its remaining unexplored area.",
-      "Without opening the crate, press F7 once while targeting each visible unopened blue crate. Let automatic salvage/footlocker hooks and crate discovery logging run.",
-      "Stop after obtaining same-session auto_crates/discovery records and the F7 markers; full traversal is not required for this identity test. Upload the complete bundle and note which crates were already open.",
-      "Include the probe version, the game build number (user supplied: 1.20), and the current NMS.exe SHA-256."
-    ],
-    "expected_success_indicator": "At least one unopened blue_crate F7 marker and same-session node/resource discovery or auto_crates records are present, allowing a direct test of whether its runtime label is countable or discovery-only.",
-    "hypothesis": "Room-scene CRATEM props are salvage crates (confirmed statically); the unresolved hypothesis is whether the blue_crate F7 marker hits that same runtime object class or another category.",
-    "full_derelict_traversal_required": false,
-    "limitation": "This test only identifies runtime labels and matcher coverage. It does not validate total count, and opened crates must be accounted for separately."
-  },
+  "next_action": "Compare existing saved sessions/journals for blue_crate marker-to-R_ABAND_CRATE timing and seed patterns, keeping physical counts and index estimates separate. Then target the earliest offline/static boundary that selects or accumulates crate count; do not request a replay of a completed derelict, and do not treat reopened-crate state as reset.",
+  "human_action_required": null,
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
     "finding": "Deduplicated all repository generation-measurement summary and asset-calculation uploads, then grouped the unique saved observations.",
@@ -309,6 +295,18 @@
         "dungeon_root_seed_hexes",
         "layout_multiset_signature_sha256",
         "room_sequence"
+      ]
+    },
+    {
+      "commit": "2d918cedd744d6d017974500a326a0f2391ceac2",
+      "path": "research-uploads/20261013T182438Z-all-saved-evidence-1467ab4b/capture-journal-20261013T182059Z-9524.jsonl",
+      "sha256": "bfad60506fd76db6531a1fea8cde80f734e45e9e90b3204a599d188e01bd357a",
+      "fields": [
+        "capture journal hash pinned by run-manifest.json",
+        "session 20261013T182312Z_0000750006606CAB; probe 0.3.42; address 0000750006606CAB; root candidate 2A41B0E7EF42A1F7",
+        "two blue_crate F7 markers and nearest-prior R_ABAND_CRATE reward calls; deltas and reward seeds recorded in marker context",
+        "auto_crates count=0; no candidate name; journal upload does not include full session JSON",
+        "local session JSON SHA-256=37216df04b24561f0f11a4e90842e10d55acce837b29eb1e58be2b069ce9c932; NMS.exe hash not recorded in capture"
       ]
     }
   ],
