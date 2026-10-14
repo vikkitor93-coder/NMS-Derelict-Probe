@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "request_id": "e7219010624a4bb2b14a94fe95f531a8",
+  "source_sha256": "5cd61d2d099744bb03b6c9285d7793535cf48d51e29349ac2610bd18117096c7",
+  "status": "reviewed",
+  "reviewed_commit": "e61f450589ad46e662be1b71171c572fef1f8bdb",
+  "research_question": "Does runner 0.1.23 export exact-hash NMS code evidence after a local executable path is saved?",
+  "measured_findings": [
+    "The request source SHA matches installed source 0.1.23, but its result reports prototype_version 0.1.21.",
+    "Source-package, tests, diagnose, code, and emulate passed; export failed with nms-exe-not-selected.",
+    "The running worker process predates installation and selection; its startup-loaded executable value remained empty.",
+    "Separately, direct bounded exporter output matched NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, exported 109707 code bytes, produced 155 function ranges and no errors; its 16 raw call candidates to RVA 00639BE0 are not instruction-boundary verified."
+  ],
+  "interpretation": "The runner update and private executable selection are present on disk, but the old resident process must restart to load them. The local bounded export is compatible with the exact binary but its raw caller candidates are not yet confirmed callsites.",
+  "milestone_impact": "No crate-count milestone advanced; export evidence narrows the existing 00639BE0 caller investigation only.",
+  "next_action": "Ask user to fully close the resident runner and reopen Start-Runner.cmd. After restart, queue a fresh request pinned to source SHA 5cd61d2d099744bb03b6c9285d7793535cf48d51e29349ac2610bd18117096c7."
+}
