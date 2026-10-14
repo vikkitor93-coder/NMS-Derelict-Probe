@@ -88,15 +88,15 @@
     "The existing live auto-count summary covers every crate/container category, including blue crates.",
     "All 16 exported upstream candidates to 00639BE0 are merely byte-pattern false positives; instruction decoding verified each as a direct call."
   ],
-  "latest_material_finding": "Pinned offline export analysis (NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499; export JSON SHA-256 B80135C47BBB0F6155D8ECB5CFE96AFEB951F27B985267476DBE65609F80F937): 02D08430 directly calls 00639490 and 00639BE0; the surrounding bounded code passes descriptor-like objects, but no container-count producer or room-scene selection is proven. The 02D07C80 body likewise has no direct count evidence. This narrows the old helper trace without supporting a crate-count claim.",
+  "latest_material_finding": "Static analysis of saved export evidence/offline-code-evidence-20261011-v0.1.2.json (JSON SHA-256 B80135C47BBB0F6155D8ECB5CFE96AFEB951F27B985267476DBE65609F80F937; exporter-reported NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499): the export contains 21 raw E8/E9 candidates to descriptor helpers; iced-x86 decoding verifies all 21 are direct calls to 00639490/00639A70/00639BE0. 02D08430 calls 00639490 and 00639BE0 with descriptor-like state. The bounded export has no direct call candidate to 02D07C80 or 02D08430 and shows no crate-count producer or root-seed write. This narrows the helper path; it does not prove no indirect reference.",
   "queued_experiments": [],
   "unresolved_blockers": [
-    "The current runner's remote allowlist has no targeted caller/xref action for these exact-hash functions. Existing saved logs and exports are available; no new gameplay capture is needed. A safe runner capability update is needed before obtaining new exact-executable caller evidence."
+    "No root/system-seed derivation or crate-count decision boundary is established. Existing runner export is fixed and does not trace indirect references or the descriptor's upstream seed-field producer. Saved logs remain independent by unique name; no new gameplay capture is needed for the next step."
   ],
-  "next_action": "Do not request another derelict capture. Extend the isolated research runner with a read-only, executable-hash-gated caller/xref export for 02D07C80 and 02D08430 (or a more directly evidenced room-selection target), verify the bounded output and tests, then queue that structured action. Decode returned hits; use Unicorn only if the selected function's required inputs and memory state are captured/modelled.",
+  "next_action": "Do not ask for another traversal. Continue from the exact-hash saved export and existing Probe logs: map the 21 verified helper call contexts to descriptor seed fields and identify the upstream producer. If current bounded bytes cannot resolve that, prepare a read-only runner extension for indirect xrefs/field-write tracing on the same pinned executable; then use Unicorn only for a routine with recorded arguments and modeled memory. Keep every unique log name as its own sample and use its accepted count as the target.",
   "human_action_required": {
     "required": false,
-    "action": "No game traversal or new capture. Resume with offline runner/tool work; a runner restart/update may only be needed after a verified update is published."
+    "action": "No new capture or derelict traversal. Continue with existing logs and offline runner/Unicorn work."
   },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
