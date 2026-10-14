@@ -1,0 +1,46 @@
+{
+  "files": {
+    "AI_HANDOFF.md": {
+      "bytes": 17965,
+      "sha256": "8fda4eea5dcc58f09cc12bb24820ecf8691336adb5933f08f50cc4098ab4ce25"
+    },
+    "GITHUB_CHECK_PROMPT.md": {
+      "bytes": 8363,
+      "sha256": "e765ca729f20afa6ded0b9d88f5ac297c5b15b8e05da2f033e8022fc81e1f4c0"
+    },
+    "code.json": {
+      "bytes": 1249,
+      "sha256": "325b6e76f672e8ddb787c06009263e812ca52c5195604ec2179e3f23c64da65f"
+    },
+    "diagnose.json": {
+      "bytes": 9550,
+      "sha256": "fd5dce2e97adcb250ecc8a06f9e8fc581a607d7175d3b232ffd8b2c5266665bb"
+    },
+    "emulate.json": {
+      "bytes": 3516,
+      "sha256": "e25cc5c254da41c454480f11964acea9c66bdc9e558a93a065da6a208b71f003"
+    },
+    "latest.log": {
+      "bytes": 1511,
+      "sha256": "75957794540e0f7fdd7413cef9bf8d6a1c2256979265ab1fd9928054431fa449"
+    },
+    "result.json": {
+      "bytes": 840,
+      "sha256": "dfccfc04f0e99bfff62375017052febf1445bd2e42a98a365967148f86d705f8"
+    },
+    "runner-evidence.zip": {
+      "bytes": 17236,
+      "sha256": "a8ca54792342e53c8513cfc66134fdfe089ae663c5061bbda51b3d25f4f32db8"
+    },
+    "source.zip": {
+      "bytes": 398804,
+      "sha256": "c7ce076d0b71277dffb4cb49ca5a23e4c81683907aef9578b8d2af50f5400fce"
+    }
+  },
+  "prototype_version": "0.1.21",
+  "report_path": "runner-results/9699578fb267429abd4b4e31e59561d1",
+  "request_id": "9699578fb267429abd4b4e31e59561d1",
+  "schema": 1,
+  "source_sha256": "5cd61d2d099744bb03b6c9285d7793535cf48d51e29349ac2610bd18117096c7",
+  "status": "passed"
+}
