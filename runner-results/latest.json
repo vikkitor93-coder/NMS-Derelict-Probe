@@ -1,8 +1,8 @@
 {
   "files": {
     "AI_HANDOFF.md": {
-      "bytes": 17831,
-      "sha256": "08ed3e92c725d03677efd9b69d5130e8fced8fb9b6dc68a1e4124a4e3eb7144b"
+      "bytes": 17965,
+      "sha256": "8fda4eea5dcc58f09cc12bb24820ecf8691336adb5933f08f50cc4098ab4ce25"
     },
     "GITHUB_CHECK_PROMPT.md": {
       "bytes": 8363,
@@ -10,37 +10,37 @@
     },
     "code.json": {
       "bytes": 1249,
-      "sha256": "5a24ced1c10bd5cc56c59b1d3d7f1b206106ffe3370554cfd2739784ae7d0053"
+      "sha256": "325b6e76f672e8ddb787c06009263e812ca52c5195604ec2179e3f23c64da65f"
     },
     "diagnose.json": {
       "bytes": 9550,
-      "sha256": "b1ccd9eacb8f31eda7dbd7fdaf71c58d6676f7305f3e3628684b3a75bfb41e56"
+      "sha256": "fd5dce2e97adcb250ecc8a06f9e8fc581a607d7175d3b232ffd8b2c5266665bb"
     },
     "emulate.json": {
       "bytes": 3516,
-      "sha256": "151d85b14e8c96a48b3a4732f02d17e32dfa2188adf3d8d087ae8cf29241fb48"
+      "sha256": "e25cc5c254da41c454480f11964acea9c66bdc9e558a93a065da6a208b71f003"
     },
     "latest.log": {
-      "bytes": 1627,
-      "sha256": "ebb43bfd10bd7c0b7595d98037130ce38643a29c52facb3752beafd12d5f201e"
+      "bytes": 1511,
+      "sha256": "75957794540e0f7fdd7413cef9bf8d6a1c2256979265ab1fd9928054431fa449"
     },
     "result.json": {
-      "bytes": 883,
-      "sha256": "f2cd0ab9ce7bad02fd0af4a7f12fcff0c887a4ab0ce36d91792681a459a15671"
+      "bytes": 840,
+      "sha256": "dfccfc04f0e99bfff62375017052febf1445bd2e42a98a365967148f86d705f8"
     },
     "runner-evidence.zip": {
-      "bytes": 17228,
-      "sha256": "bf1185b700c236224fec76bcf5d23f2a1bcb9a332e759cee7bca2b1c1432449c"
+      "bytes": 17236,
+      "sha256": "a8ca54792342e53c8513cfc66134fdfe089ae663c5061bbda51b3d25f4f32db8"
     },
     "source.zip": {
-      "bytes": 396411,
-      "sha256": "2c31cf0c4d9df4e0e6bb692c1595420cdffef44ebab54a638bd558209453f05c"
+      "bytes": 398804,
+      "sha256": "c7ce076d0b71277dffb4cb49ca5a23e4c81683907aef9578b8d2af50f5400fce"
     }
   },
   "prototype_version": "0.1.21",
-  "report_path": "runner-results/1aaeade7ceac457bbf22df65d81bd17b",
-  "request_id": "1aaeade7ceac457bbf22df65d81bd17b",
+  "report_path": "runner-results/9699578fb267429abd4b4e31e59561d1",
+  "request_id": "9699578fb267429abd4b4e31e59561d1",
   "schema": 1,
-  "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
-  "status": "failed"
+  "source_sha256": "5cd61d2d099744bb03b6c9285d7793535cf48d51e29349ac2610bd18117096c7",
+  "status": "passed"
 }
