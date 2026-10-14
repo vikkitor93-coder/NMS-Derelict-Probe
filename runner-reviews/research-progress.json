@@ -3,25 +3,23 @@
   "current_milestone": "M0 complete; M1 crate-count observables and smallest useful inputs remain under investigation.",
   "primary_objective": "Predict total derelict crate/container count offline from the smallest practical known inputs; defer room-layout reconstruction unless count prediction requires it.",
   "last_reviewed": {
-    "commit": "e61f450589ad46e662be1b71171c572fef1f8bdb",
-    "request_id": "e7219010624a4bb2b14a94fe95f531a8",
-    "receipt_commit": "9c267ad9d5073e6fcb4b1bd3e0ad2cf8c4c1dbb0"
+    "commit": "a0ecfb2dd1bec0acec62071bf588a280c78cb075",
+    "request_id": "d392928da9e84c4fb2b6837594a51f71",
+    "receipt_commit": "a11c315611b0e4edac4085116c12c5a040db2918"
   },
   "latest_evidence_check": {
-    "branch_head": "9c267ad9d5073e6fcb4b1bd3e0ad2cf8c4c1dbb0",
-    "latest_request_id": "e7219010624a4bb2b14a94fe95f531a8",
-    "latest_status": "failed",
-    "latest_runner_version": "0.1.21 resident process; installed files are 0.1.23",
+    "branch_head": "a0ecfb2dd1bec0acec62071bf588a280c78cb075",
+    "latest_request_id": "d392928da9e84c4fb2b6837594a51f71",
+    "latest_status": "passed",
+    "latest_runner_version": "0.1.23",
     "source_sha256": "5cd61d2d099744bb03b6c9285d7793535cf48d51e29349ac2610bd18117096c7",
-    "result_manifest_sha256": "3ae559483dd7c671c7539531c01457dde2535568",
+    "request_commit": null,
+    "result_sha256": "7577100c83ab1c061066ad4f3383243ee7ca9a4e9e649ceb1dc683b8a8098a83",
+    "result_manifest_blob_sha": "d430e331b3540a809bb98873c09880dae6016d72",
+    "latest_log_sha256": "f0435c8ddb528aab22bb055983e545c758f583603a95495fddce9fef56c1539d",
     "queued_request_id": null,
-    "queued_request_status": "completed failed with nms-exe-not-selected; restart runner before next request",
-    "installed_runner_version": "0.1.23 installed locally; executable selection saved privately and hash verified",
-    "request_commit": "fda9ca4cac12ba3613008fd014ba7ba7becfd996",
-    "prior_rejected_request_id": "20261013T1849Z-export-00639BE0",
-    "prior_rejection": "runner log reported invalid-or-unavailable; no request executed",
-    "result_sha256": "7449751ea95c35ba6cbc65c2f839a2fe509ab2680d8779cc61f41b58914ccedb",
-    "latest_log_sha256": "785f791981e312924cbd9a84adb83ceb5a294bedf3e9a23560a2d8d783c2b39c"
+    "queued_request_status": "none",
+    "configured_executable_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
   },
   "established_facts": [
     "Runner update 0.1.21 is published on runner-updates at commit 12b387159fc1cb791e1ecc8695dcc9ccbaccf13b. Package source_sha256=e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; archive SHA-256=591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940; 119 tests passed with 10 skips; archive and all 71 member hashes were independently checked.",
@@ -65,7 +63,9 @@
     "Runner 0.1.23 is installed locally; update-feed checks default to 60 seconds and the GUI supports a saved custom interval of 1 to 1440 minutes. The separate GitHub research-request poll remains 10 seconds. Focused/full runner suite: 122 passed, 10 skipped.",
     "The user-selected NMS.exe path is saved only in local .local configuration and its current SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499.",
     "The bounded local exporter matched that executable hash, emitted 109707 code bytes and 155 ranges with no errors. Sixteen byte-pattern call candidates target RVA 00639BE0; all are marked instruction_boundary_verified=false, so they are not confirmed callers.",
-    "The resident worker had started before update 0.1.23 and before the executable was selected. It continued to report version 0.1.21 and failed export with nms-exe-not-selected; close and reopen the runner so it loads the installed code and saved selection."
+    "The resident worker had started before update 0.1.23 and before the executable was selected. It continued to report version 0.1.21 and failed export with nms-exe-not-selected; close and reopen the runner so it loads the installed code and saved selection.",
+    "After user restarted runner 0.1.23 with saved NMS.exe selection, runner result d392928da9e84c4fb2b6837594a51f71 passed all six offline-check-and-export stages with errors=[]; result manifest SHA-256=7577100c83ab1c061066ad4f3383243ee7ca9a4e9e649ceb1dc683b8a8098a83, committed on evidence branch a0ecfb2dd1bec0acec62071bf588a280c78cb075.",
+    "For the configured NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 (reported by exporter, not independently hash-verified), iced-x86 independently decoded all 16 exported candidates as direct calls to RVA 00639BE0. This helper allocates/initializes a 0x2A0-byte object and calls 00639610; nearby wrappers 00639490 and 00639A70 then call 0063A6D0. The evidence does not establish a crate-count connection; stop this branch absent new linkage."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -81,17 +81,18 @@
   "falsified_hypotheses": [
     "The recorded candidate root alone uniquely determines the saved total across the observed same-address sessions.",
     "Room family/kind alone determines a fixed container count in the saved rows.",
-    "The existing live auto-count summary covers every crate/container category, including blue crates."
+    "The existing live auto-count summary covers every crate/container category, including blue crates.",
+    "All 16 exported upstream candidates to 00639BE0 are merely byte-pattern false positives; instruction decoding verified each as a direct call."
   ],
-  "latest_material_finding": "Exact-hash local export succeeded, but remote export request e721 failed because the resident 0.1.21 worker had not reloaded the saved executable selection. Its 16 raw candidates to 00639BE0 remain unverified instruction boundaries.",
+  "latest_material_finding": "Runner restart/path selection succeeded; all 16 exported 00639BE0 candidate sites are true direct calls, but this object-initialization chain has no demonstrated crate-count link. The seed/helper branch is deprioritized.",
   "queued_experiments": [],
   "unresolved_blockers": [
-    "Resident runner process is still version 0.1.21 and was started before NMS.exe selection; request e721 completed failed with nms-exe-not-selected. A restart is required before queueing the next export."
+    "No known runner action currently locates the crate-count decision boundary; existing exporter output does not include crate-specific dynamic scene-selection analysis. Continue checking existing saved sessions/evidence before asking for new gameplay data."
   ],
-  "next_action": "After the user closes and reopens the updated runner, verify it reports 0.1.23 and that the saved executable is loaded. Then queue a fresh offline-check-and-export pinned to source 5cd61d2d099744bb03b6c9285d7793535cf48d51e29349ac2610bd18117096c7; inspect the returned executable hash and continue validating the 00639BE0 candidate callers.",
+  "next_action": "Audit the newest saved capture logs and source-pinned analysis outputs for another system with a recorded searchable-blue-box count plus pre-traversal address/preset/root or selected scene sequence. Compare those samples against the known counts; if existing evidence has no usable multi-system pair, define one minimal human capture that does not require opening boxes.",
   "human_action_required": {
-    "required": true,
-    "action": "Fully close the current runner window and reopen %USERPROFILE%\\Documents\\NMS Runner\\Start-Runner.cmd. No NMS launch or derelict traversal is needed. In the updated window, optionally set the update-check interval in whole minutes (1–1440) and save it."
+    "required": false,
+    "action": null
   },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
@@ -377,5 +378,15 @@
     "finding": "The selected CARG room MXML has three RefCrateM nodes targeting SPACEBASE/PROPS/CRATEM.SCENE.MBIN. The matching CRATEM entity defines GenericReward interaction, Id R_ABAND_CRATE, ScanName UI_SALVAGE_CRATE, and crate scanner icon. Separately, the DECORATION/CRATEM_PLACEMENT entity defines PartID _ABAND_CRATE_M; its placement scene is a locator.",
     "interpretation": "Confirms these referenced CRATEM objects are configured salvage crates and supports the static scene index's salvage category. Does not prove every such prop spawns in the world, map it to the blue_crate F7 label, reveal runtime room selection, or predict total count.",
     "status": "confirmed_static; no runner job"
+  },
+  "latest_runner_export_review": {
+    "request_id": "d392928da9e84c4fb2b6837594a51f71",
+    "receipt_path": "runner-reviews/d392928da9e84c4fb2b6837594a51f71.json",
+    "result_commit": "a0ecfb2dd1bec0acec62071bf588a280c78cb075",
+    "receipt_commit": "a11c315611b0e4edac4085116c12c5a040db2918",
+    "result_status": "passed",
+    "decoded_direct_call_candidates": 16,
+    "target_rva": "00639BE0",
+    "research_interpretation": "true direct callers; crate-count relevance unproven"
   }
 }
