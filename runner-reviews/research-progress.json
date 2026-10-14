@@ -3,25 +3,25 @@
   "current_milestone": "M0 complete; M1 crate-count observables and smallest useful inputs remain under investigation.",
   "primary_objective": "Predict total derelict crate/container count offline from the smallest practical known inputs; defer room-layout reconstruction unless count prediction requires it.",
   "last_reviewed": {
-    "commit": "436e6f2d0017890f79d76cf91cee3e2a19ba0576",
-    "request_id": "93c2fa98e6814c45a7c12c11c06e205f",
-    "receipt_commit": "5f8e239cf8e1d4a87cf5a9140bf905042e131c9e"
+    "commit": "e61f450589ad46e662be1b71171c572fef1f8bdb",
+    "request_id": "e7219010624a4bb2b14a94fe95f531a8",
+    "receipt_commit": "9c267ad9d5073e6fcb4b1bd3e0ad2cf8c4c1dbb0"
   },
   "latest_evidence_check": {
-    "branch_head": "5f8e239cf8e1d4a87cf5a9140bf905042e131c9e",
-    "latest_request_id": "93c2fa98e6814c45a7c12c11c06e205f",
+    "branch_head": "9c267ad9d5073e6fcb4b1bd3e0ad2cf8c4c1dbb0",
+    "latest_request_id": "e7219010624a4bb2b14a94fe95f531a8",
     "latest_status": "failed",
-    "latest_runner_version": "0.1.21",
-    "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
-    "result_manifest_sha256": "45494e56f5c2feef8adc3822dd9277719c6b2500",
+    "latest_runner_version": "0.1.21 resident process; installed files are 0.1.23",
+    "source_sha256": "5cd61d2d099744bb03b6c9285d7793535cf48d51e29349ac2610bd18117096c7",
+    "result_manifest_sha256": "3ae559483dd7c671c7539531c01457dde2535568",
     "queued_request_id": null,
-    "queued_request_status": "completed but export blocked; wait for local NMS.exe selection before queueing another request",
-    "installed_runner_version": "0.1.21 result provenance confirmed by returned manifest; no separate local installation claim",
-    "request_commit": "c7af3ac362ce77ae9155f95d05310cbe80629d43",
+    "queued_request_status": "completed failed with nms-exe-not-selected; restart runner before next request",
+    "installed_runner_version": "0.1.23 installed locally; executable selection saved privately and hash verified",
+    "request_commit": "fda9ca4cac12ba3613008fd014ba7ba7becfd996",
     "prior_rejected_request_id": "20261013T1849Z-export-00639BE0",
     "prior_rejection": "runner log reported invalid-or-unavailable; no request executed",
-    "result_sha256": "eacc8e711789fb8a03e5c584ee14445decd8437263f94e3dbbdff35cb83c09b2",
-    "latest_log_sha256": "61ac2c23192e21c64b4c950eadc5f880180b0cb489de10b3655378e77b424745"
+    "result_sha256": "7449751ea95c35ba6cbc65c2f839a2fe509ab2680d8779cc61f41b58914ccedb",
+    "latest_log_sha256": "785f791981e312924cbd9a84adb83ceb5a294bedf3e9a23560a2d8d783c2b39c"
   },
   "established_facts": [
     "Runner update 0.1.21 is published on runner-updates at commit 12b387159fc1cb791e1ecc8695dcc9ccbaccf13b. Package source_sha256=e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b; archive SHA-256=591028ebf96a7c34ab9a7952ea04d713d0b5dd290b71b619b1c2b4a4fc698940; 119 tests passed with 10 skips; archive and all 71 member hashes were independently checked.",
@@ -61,7 +61,11 @@
     "The batch measurement summary (SHA-256 1dd0d70b5e95d69c2fedc251cf24a676c560159b506a83a4c9d03179cd932166) contains six CARGO_FLOATERS estimates across three addresses: 51 at 0001550006607CAC, 35 at 00001A0004E84EFD, and 23 at 0000750006606CAB. Repeated same-address saved rows keep their index estimate/layout multiset stable. This shows preset alone is insufficient to explain the static estimate; it does not show physical totals or prove the cause.",
     "Batch report SHA-256 702eb8dd2814e3917c50ed1e1f7f3a6136a72cc49ada53aa94bc33ec734bf996 is committed on main at 08b674407726406cbd3fff98d23371f85a2509e9. Seven of nine actions completed; Prepare-Crate-Assets failed because MBINCompiler rejected an extracted file as invalid MBIN, and upload_runtime_capture was not run by the isolated no-upload batch mode. This failure is an execution issue, not research evidence. The new session-analysis report includes no matching NMS.exe SHA-256.",
     "Confirmed runner request-format diagnosis: source 0.1.21 validator requires request_id to match exactly 32 lowercase hexadecimal characters. The first queued ID contained timestamp text and uppercase letters; the runner log reports no execution. Local runner_protocol.py SHA-256 ee0cb1af240789fdcefb9e0ac8eedc04d2cbc36b57c1d6725963b2744aba8ca1 matches the 0.1.21 package manifest.",
-    "Runner request 93c2fa98e6814c45a7c12c11c06e205f completed on v0.1.21 with pinned source e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b. Package/tests/diagnose/code/emulate passed; export failed only with nms-exe-not-selected. The returned result, latest pointer, and latest log agree; no offline-evidence.zip or helper export was produced."
+    "Runner request 93c2fa98e6814c45a7c12c11c06e205f completed on v0.1.21 with pinned source e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b. Package/tests/diagnose/code/emulate passed; export failed only with nms-exe-not-selected. The returned result, latest pointer, and latest log agree; no offline-evidence.zip or helper export was produced.",
+    "Runner 0.1.23 is installed locally; update-feed checks default to 60 seconds and the GUI supports a saved custom interval of 1 to 1440 minutes. The separate GitHub research-request poll remains 10 seconds. Focused/full runner suite: 122 passed, 10 skipped.",
+    "The user-selected NMS.exe path is saved only in local .local configuration and its current SHA-256 is 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499.",
+    "The bounded local exporter matched that executable hash, emitted 109707 code bytes and 155 ranges with no errors. Sixteen byte-pattern call candidates target RVA 00639BE0; all are marked instruction_boundary_verified=false, so they are not confirmed callers.",
+    "The resident worker had started before update 0.1.23 and before the executable was selected. It continued to report version 0.1.21 and failed export with nms-exe-not-selected; close and reopen the runner so it loads the installed code and saved selection."
   ],
   "active_hypotheses": [
     "Preset is a necessary input or selector for predicting count; recorded same-address/root sessions differ by preset and total.",
@@ -79,31 +83,15 @@
     "Room family/kind alone determines a fixed container count in the saved rows.",
     "The existing live auto-count summary covers every crate/container category, including blue crates."
   ],
-  "latest_material_finding": "The remote request path works, but this export cannot inspect 00639BE0 until the runner has a locally selected NMS.exe. This failure is setup-only and gives no evidence about crate generation.",
+  "latest_material_finding": "Exact-hash local export succeeded, but remote export request e721 failed because the resident 0.1.21 worker had not reloaded the saved executable selection. Its 16 raw candidates to 00639BE0 remain unverified instruction boundaries.",
   "queued_experiments": [],
   "unresolved_blockers": [
-    "The 0.3.40 scene-instance evidence lacks an NMS.exe SHA-256 and a manual observed count, so the 21 total is not executable-pinned or independently validated against the live world.",
-    "No same-build multi-system rows establish whether system address/preset/root predicts physical total count before traversal.",
-    "The 0.3.42 Irchol-Luhimo XVII sample contains 82 marker events but no explicit marker-completeness flag or executable hash; its 37 index estimate exceeds the 33 salvage/footlocker markers by four.",
-    "The completed 0.1.21 action audits bundled arithmetic only; it has no NMS.exe hash or physical crate-completeness evidence and does not inspect the count producer.",
-    "No same-build, executable-pinned multi-system observations yet establish whether system address, preset, root, or another state predicts total physical count before traversal.",
-    "Blue-crate runtime identity and marker completeness remain unknown; existing F7 counts cannot yet close the total-count gap.",
-    "Saved evidence is exhausted for physical-count validation: summary duplicates dominate, unique system/preset rows lack matching-build NMS.exe provenance, and asset-index totals have no complete manual count.",
-    "Current static assets constrain per-scene multiplicity but do not reveal which scene variants are selected for a given system/preset; matching that selector to total count is still unresolved.",
-    "Ruflas-Simly V's two blue_crate markers are temporally associated with R_ABAND_CRATE calls, but no individual object identity or physical-total completeness is captured; auto_crates found zero targets. The session lacks an NMS.exe hash.",
-    "Fresh 20261013 saved-session analysis has a verified session input hash and output hashes but no matching NMS.exe hash; all reported 23/35/51 totals remain scene-index estimates. Automatic batch Prepare-Crate-Assets failed at MBINCompiler and supplied no new asset payload.",
-    "The local runner has no NMS.exe selected. Selecting the user's installed executable is required before another offline-check-and-export request can produce the 00639BE0 evidence."
+    "Resident runner process is still version 0.1.21 and was started before NMS.exe selection; request e721 completed failed with nms-exe-not-selected. A restart is required before queueing the next export."
   ],
-  "next_action": "After user confirms the local NMS.exe selection, queue a fresh offline-check-and-export request with a new valid 32-character lowercase-hex request_id; inspect the returned manifest and offline-evidence.zip for helper 00639BE0.",
+  "next_action": "After the user closes and reopens the updated runner, verify it reports 0.1.23 and that the saved executable is loaded. Then queue a fresh offline-check-and-export pinned to source 5cd61d2d099744bb03b6c9285d7793535cf48d51e29349ac2610bd18117096c7; inspect the returned executable hash and continue validating the 00639BE0 candidate callers.",
   "human_action_required": {
     "required": true,
-    "steps": [
-      "Stop the NMS Offline Runner.",
-      "Start it with its executable-selection option: Start-Runner.cmd --exe \"<full path to the installed game's NMS.exe>\". Choose the actual NMS.exe file if the runner opens a file picker.",
-      "Wait until the runner is running again, then tell me “ready”."
-    ],
-    "success_indicator": "Runner shows that NMS.exe is selected and its file hash is saved. The game does not need to be launched and no derelict needs to be entered.",
-    "purpose": "Enables a fresh, read-only fixed export request for helper 00639BE0."
+    "action": "Fully close the current runner window and reopen C:\\Users\\Vikman\\Documents\\NMS Runner\\Start-Runner.cmd. No NMS launch or derelict traversal is needed. In the updated window, optionally set the update-check interval in whole minutes (1–1440) and save it."
   },
   "legacy_root_analysis": "Earlier root/helper findings remain in the previous research-progress revision at commit 8cfbfa5da6d7586b9eeb758965642c6d70589ad7; continue only when they connect to crate-count inputs.",
   "completed_step": {
