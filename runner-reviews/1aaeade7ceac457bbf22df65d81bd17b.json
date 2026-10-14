@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "request_id": "1aaeade7ceac457bbf22df65d81bd17b",
+  "source_sha256": "e6c254250461627bea445f2e1ce45f15b7403970ac5c8fa8c956f9f90d8c031b",
+  "status": "reviewed",
+  "reviewed_commit": "e61f450589ad46e662be1b71171c572fef1f8bdb",
+  "research_question": "Can the exact NMS executable be checked and exported by the installed runner?",
+  "measured_findings": [
+    "The request ran source-package, tests, diagnose, code, and emulate successfully.",
+    "The export stage failed with nms-exe-not-selected; result manifest status is failed and prototype_version is 0.1.21."
+  ],
+  "interpretation": "Execution failure caused by missing executable selection at runner startup. It provides no evidence for or against crate generation.",
+  "milestone_impact": "M0 request/result protocol works; no crate-generation milestone advanced.",
+  "next_action": "After confirming the updated runner process has loaded the saved executable selection, queue a fresh source-pinned offline-check-and-export request."
+}
