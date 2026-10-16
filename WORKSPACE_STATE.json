@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-16T21:05:00Z",
+  "updated_utc": "2026-10-16T21:10:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -10,7 +10,7 @@
     "candidate_branch": "main",
     "candidate_base": "main@5cd18ea942680bfb95479cb7a2a967ba65d1d506",
     "candidate_status": "Surveyor 0.3.70 is published to main. Queued saved sessions now run concurrently in bounded groups of three, each with four isolated research actions; per-session reports are saved to research-output/automatic-session-batches and published as one hash-verified batch for all lanes. Full 225-test suite, compileall, and 186-file/39-part updater package checks pass. Windows installation validation remains pending.",
-    "current_research_action": "Matching-build local assets confirm square salvage crates and footlockers share GenericReward / R_ABAND_CRATE; the configured reward table includes ammo, recipes, procedural tech, and other entries, but selection behavior, payout count, per-container RNG, and module rank remain unknown. Raw NMS.exe labels identify TryFirst_ThenSelectAlways, RewardChoice, and cGcGenericRewardTableEntry; RTTI contains several cGcRewardManager GiveReward lambda names. Targeted no-analysis Ghidra vtable results do not expose the generic roller, and raw-label reference queries are inconclusive because analysis was skipped. Continue offline with bounded reward-manager dispatch/code-reference tracing; no game launch is needed. Targeted raw `.text` RIP-relative scan found only RTTI accessor thunks for the cGcRewardManager lambda type descriptors, not reward implementations; generic reward-table dispatch remains unresolved."
+    "current_research_action": "Matching-build assets confirm square salvage crates and footlockers share GenericReward / R_ABAND_CRATE; configured reward entries and the unresolved selection/payout questions are documented. Exact-build RTTI scans show cGcRewardManager lambda accessors only; the historical ReNMS cGcRealityManager generic-reward map is not exposed by a matching 7.05 RTTI name and is not a current-build code lead. Continue bounded static tracing from the concrete simple-interaction dispatch into reward grant/table lookup; keep generation and rewards distinct. No game launch needed."
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
