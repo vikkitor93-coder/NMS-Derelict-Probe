@@ -1,4 +1,12 @@
-## Live investigation checkpoint - 2026-10-16 22:09Z
+## Live investigation checkpoint - 2026-10-16 22:36Z
+
+- Shipwright remains a verified system-generator harness baseline on NMS.exe SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`; it provides no derelict generation evidence.
+- Independent join of saved session `20260929T175122Z_0001550006607CAC.json` (SHA-256 `D83AEBB07E4E14E47F5432A7C2175EC3B71C1BC0D061F650D4C1093ADC4019B9`) with `room-crate-index.json` (SHA-256 `B2E1E5C7F4F5273D373FD5DB44049EFB3C84A7C5F6D0F22DC9F2690B93BEF721`) yields nine runtime Room 0..8 groups and 32 authored CRATEM / 19 FOOT_LOCKER references associated with their loaded child scenes. This is a room-associated asset prediction, not a physical/active-container count; the index has no verified source-pak manifest and the nested dungeon prop entity files are missing from that cache. Audit: `research-output/ghidra-static-20261015/ROOM_CRATE_ASSET_CROSSWALK_20261016.md`.
+- The matching local `NMSARC.Precache.pak` is SHA-256 `A6371A8B2F065ECA33FD306A16CBE2BACA9D4CE75806C71E42F74E1AB9295032`. D is extracting the exact dungeon prop scene/entity members offline to verify reward wiring. B is decoding the 18 configured `R_ABAND_CRATE` list items; A is tracing activation dispatch; C is tracing resource-object construction after the static `+0x80` slot could not be tied to a vftable.
+- The saved session's auto-crate result remains `count=0`, `confidence=unproven`, `method=none`; it is unresolved detection, not a zero-container result. The predicted 32/19 are not a live inventory and no reward payout, RNG, or technology rank has been established.
+- No human action is requested while exact-pak extraction and the bounded static dispatch traces remain executable.
+
+## Previous live investigation checkpoint - 2026-10-16 22:09Z
 
 - Shipwright compatibility remains a harness baseline only. The note is now in commit 9048267 on GitHub main; the recurring backup script includes the note.
 - Matching-build container assets configure both square salvage crates and footlockers as GenericReward / R_ABAND_CRATE. Native selection/grant/RNG/rank remain unresolved.
