@@ -2,7 +2,7 @@
 
 - Shipwright compatibility remains a harness baseline only. The note is now in commit 9048267 on GitHub main; the recurring backup script includes the note.
 - Matching-build container assets configure both square salvage crates and footlockers as GenericReward / R_ABAND_CRATE. Native selection/grant/RNG/rank remain unresolved.
-- The saved 0001550006607CAC / 00C9E8DF0327789E 9/32/19 result is a table-validated offline model record, not a confirmed live traversal. Later runtime captures corroborate the address/root pair but are from different sessions.
+- Cached session 20260929T175122Z_0001550006607CAC.json ties root 00C9E8DF0327789E to live scene nodes Room 0..Room 8, supporting 9 rooms in that session. Its scanner reports 0 containers with confidence unproven; CSV totals 32/19 remain table-validated model output, not live counts.
 - FUN_1411001D0 -> FUN_1411015C0 and its callback chain resolve to resource traversal and flag updates, not the room graph builder. The generator topology path remains unidentified.
 - A-D are continuing distinct bounded offline tasks: A activation dispatch, B loaded reward-list consumers, C dungeon parameter layout/consumer offsets, D saved-vector provenance. No live game action is needed yet.
 
