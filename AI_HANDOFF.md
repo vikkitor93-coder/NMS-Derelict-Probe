@@ -1,3 +1,7 @@
+## Shipwright Windows baseline — 2026-10-16
+
+The existing MIT-licensed Shipwright checkout at `C:\Users\Vikman\tools\NMS-Shipwright` (commit `f89691ed037edf437a7406c176aa6b96e654d314`) resolved its function signatures against the local NMS.exe SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`. `SystemGen.system` also completed a Unicorn smoke run for valid UA `0000750006606CAB`, returning 50 ship records. This is a star-system harness baseline only; it provides no derelict generation evidence. Full inputs and limits: `research-output/SHIPWRIGHT_WINDOWS_BASELINE_20261016.md`.
+
 ## Current research checkpoint — RTTI narrowed, generic reward dispatch unresolved — 2026-10-16
 
 A targeted scan of the matching executable’s `.text` found five references to `cGcRewardManager` lambda TypeDescriptors; all are tiny RTTI accessor thunks, not reward implementations. The `GiveReward` node type names had no `.text` RIP-relative references. This does not resolve generic reward-table dispatch; continue with bounded container interaction dispatch tracing. Detailed addresses and byte checks are in `research-output/ghidra-static-20261015/REWARD_TABLE_PIPELINE_20261016.md`.
