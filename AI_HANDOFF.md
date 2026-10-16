@@ -1,3 +1,8 @@
+## Current research checkpoint — container reward dispatch — 2026-10-16
+
+The square salvage crate and footlocker both configure `GenericReward / R_ABAND_CRATE`. Their table config includes ammo, recipes, procedural technology, and other entries; selection and payout behavior remain unresolved. Exact asset hashes and the table fields are recorded in `research-output/ghidra-static-20261015/REWARD_TABLE_PIPELINE_20261016.md`.
+
+On the matching NMS.exe build, raw labels include `TryFirst_ThenSelectAlways`, `RewardChoice`, and `cGcGenericRewardTableEntry`; RTTI contains several `cGcRewardManager::GiveReward...` lambda names. These confirm reward-manager code exists but do not identify the generic table roller. The no-analysis Ghidra project exposes interaction vtables, but targeted string xrefs are absent and must not be interpreted as proof of no use. Continue offline with bounded code references and reward-manager dispatch. No game action is needed for this static trace.
 ## DUNGEON-C Lane C status — 2026-10-10 00:09Z
 
 Lane C reviewed the available executable-matched entry bytes. In the 89-byte entry range `0063A6D0..0063A729`, the call at `0063A706` targets helper stub `033E1B60` (tail destination `033E1A50`). Its return is compared with RBX: equality returns 1, and inequality branches to `0063A722` to compare byte `[RSI+0x295]`. This does not establish a helper role or function name. Full analysis: `agent-patches/dungeon-decompile/CALLBACK_ENTRY_RANGE_REVIEW_20261010.json`.
