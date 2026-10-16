@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-16T22:36:49Z",
+  "updated_utc": "2026-10-16T22:45:28Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -10,7 +10,7 @@
     "candidate_branch": "main",
     "candidate_base": "main@5cd18ea942680bfb95479cb7a2a967ba65d1d506",
     "candidate_status": "Surveyor 0.3.70 is published to main. Queued saved sessions now run concurrently in bounded groups of three, each with four isolated research actions; per-session reports are saved to research-output/automatic-session-batches and published as one hash-verified batch for all lanes. Full 225-test suite, compileall, and 186-file/39-part updater package checks pass. Windows installation validation remains pending.",
-    "current_research_action": "Exact-build Shipwright resolution and SystemGen smoke remain a harness baseline only. For session 20260929T175122Z_0001550006607CAC (root 00C9E8DF0327789E), an independent join of the saved Room 0..8 scene events to the cached dungeon room-crate index reproduces 32 authored CRATEM and 19 FOOT_LOCKER node references by room; this is a room-associated asset prediction, not a live active-container count. The auto-crate scanner remains 0/unproven, the index has no pak provenance manifest, and nested dungeon prop entity exports are missing. D is extracting those members from exact NMSARC.Precache.pak SHA-256 A6371A8B2F065ECA33FD306A16CBE2BACA9D4CE75806C71E42F74E1AB9295032; B decodes the 18 configured R_ABAND_CRATE list items and serialized list fields; A traces activation dispatch; C traces resource object construction behind an unresolved dynamic vtable +0x80 call. Native reward selection/grant/RNG/rank and the actual room topology builder remain unresolved. Do not request live NMS input until these offline routes are exhausted."
+    "current_research_action": "Exact-build Shipwright resolution and SystemGen smoke remain a harness baseline only. For session 20260929T175122Z_0001550006607CAC/root 00C9E8DF0327789E, a verified join between the saved Room 0..8 scene events and cached room-crate index reproduces 32 authored CRATEM and 19 FOOT_LOCKER references by room. D extracted the exact 7.05 room/prop MBIN members: NMSARC.EntitySceneMBIN.pak SHA-256 58958536E58DFAEB81E0423B5508C7D3DBF3713BAC09E857577FEB275D9F2627 and NMSARC.Precache.pak SHA-256 A6371A8B2F065ECA33FD306A16CBE2BACA9D4CE75806C71E42F74E1AB9295032; all 23 room-scene hashes match cache, and both spacebase prop entities configure GenericReward/R_ABAND_CRATE identically. This verifies 51 authored rewardable refs, not active instances or payouts. The saved probe scanner remains 0/unproven. D inspects whether current capture can census runtime instances; B traces the decoded 18-item reward table into selection/grant; A follows GenericReward=10 activation state; C follows the manager loader behind resource vtable slot +0x80. Actual selection, quantity, RNG, reward payout, tech rank, and dungeon topology remain unresolved. Do not request a live run until current probe capture feasibility and these static runtime routes are exhausted."
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
