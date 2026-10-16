@@ -1,3 +1,11 @@
+## Live investigation checkpoint - 2026-10-16 22:09Z
+
+- Shipwright compatibility remains a harness baseline only. The note is now in commit 9048267 on GitHub main; the recurring backup script includes the note.
+- Matching-build container assets configure both square salvage crates and footlockers as GenericReward / R_ABAND_CRATE. Native selection/grant/RNG/rank remain unresolved.
+- The saved 0001550006607CAC / 00C9E8DF0327789E 9/32/19 result is a table-validated offline model record, not a confirmed live traversal. Later runtime captures corroborate the address/root pair but are from different sessions.
+- FUN_1411001D0 -> FUN_1411015C0 and its callback chain resolve to resource traversal and flag updates, not the room graph builder. The generator topology path remains unidentified.
+- A-D are continuing distinct bounded offline tasks: A activation dispatch, B loaded reward-list consumers, C dungeon parameter layout/consumer offsets, D saved-vector provenance. No live game action is needed yet.
+
 ## Shipwright Windows baseline — 2026-10-16
 
 The existing MIT-licensed Shipwright checkout at `C:\Users\Vikman\tools\NMS-Shipwright` (commit `f89691ed037edf437a7406c176aa6b96e654d314`) resolved its function signatures against the local NMS.exe SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`. `SystemGen.system` also completed a Unicorn smoke run for valid UA `0000750006606CAB`, returning 50 ship records. This is a star-system harness baseline only; it provides no derelict generation evidence. Full inputs and limits: `research-output/SHIPWRIGHT_WINDOWS_BASELINE_20261016.md`.
