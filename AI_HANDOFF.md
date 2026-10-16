@@ -1,3 +1,6 @@
+## Current research checkpoint — RTTI narrowed, generic reward dispatch unresolved — 2026-10-16
+
+A targeted scan of the matching executable’s `.text` found five references to `cGcRewardManager` lambda TypeDescriptors; all are tiny RTTI accessor thunks, not reward implementations. The `GiveReward` node type names had no `.text` RIP-relative references. This does not resolve generic reward-table dispatch; continue with bounded container interaction dispatch tracing. Detailed addresses and byte checks are in `research-output/ghidra-static-20261015/REWARD_TABLE_PIPELINE_20261016.md`.
 ## Current research checkpoint — container reward dispatch — 2026-10-16
 
 The square salvage crate and footlocker both configure `GenericReward / R_ABAND_CRATE`. Their table config includes ammo, recipes, procedural technology, and other entries; selection and payout behavior remain unresolved. Exact asset hashes and the table fields are recorded in `research-output/ghidra-static-20261015/REWARD_TABLE_PIPELINE_20261016.md`.
