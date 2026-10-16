@@ -1,16 +1,16 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-10T00:09:23Z",
+  "updated_utc": "2026-10-16T18:30:21Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
-    "current_objective": "Install the local DerelictFreighterFarming archive on Windows and validate repeat derelict behavior on NMS 7.05.",
+    "current_objective": "Identify the No Man’s Sky 7.05 abandoned-freighter room/layout and container/reward generation paths, then determine whether captured seeds and system data can predict them.",
     "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
     "candidate_version": "0.3.70",
     "candidate_branch": "main",
     "candidate_base": "main@5cd18ea942680bfb95479cb7a2a967ba65d1d506",
     "candidate_status": "Surveyor 0.3.70 is published to main. Queued saved sessions now run concurrently in bounded groups of three, each with four isolated research actions; per-session reports are saved to research-output/automatic-session-batches and published as one hash-verified batch for all lanes. Full 225-test suite, compileall, and 186-file/39-part updater package checks pass. Windows installation validation remains pending.",
-    "current_research_action": "Queued saved sessions are analyzed in parallel batches; each saved session remains an independent evidence cohort. Agents follow research/LATEST_AUTOMATIC_RESEARCH_BATCH.json to per-session reports."
+    "current_research_action": "Shipwright exact-build signature resolution and the 0000750006606CAB SystemGen smoke test pass. Matching-build static work confirms helper 00639BE0 copies caller data into the descriptor seed field consumed downstream, but caller input semantics/layout linkage remain unresolved. The requested callback funclet listing is now local. Trace actual room graph and crate/reward generation; saved manual counts are not tied to the captured 000075 root."
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
@@ -33,12 +33,12 @@
     },
     "seed-lineage": {
       "branch": "agent/seed-lineage",
-      "status": "Offline callsites identify helper 00639BE0 as the owner/descriptor producer candidate; awaiting its complete static listing to trace seed assignment.",
+      "status": "Matching-build local Ghidra trace confirms both 006395D3 and 00639B99 directly call helper 00639BE0; its setup chain copies caller fifth-argument data into owner+0x138, the descriptor seed field later consumed at 0063A6D0. The caller input semantics and match to a particular captured runtime root remain unresolved.",
       "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
       "result_summary": "Latest automatic combined report research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json verifies to 48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3; it pairs a fresh 000079 generation baseline with stale/different-sample seed-function (000155), caller (00006D), and upstream (000155) outputs. The later lane-exclusive 000079 seed-function artifact is hash-verified and aligns with caller/upstream on executable 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. A separate 000076 exact root capture records candidate 9C2818C7FE094FC8, public system seed D4759808, UseSeedValue=true, and caller 02C0860A; its executable identity is absent. Formula and dispatch target remain unresolved. Offline follow-up matched two same-executable caller sites (006395D3 and 00639B99) to common helper 00639BE0. Both return pointers are passed as RDX into 0063A6D0, which reads an embedded descriptor seed at owner+0x138. This is a producer/setup candidate, not proof the helper writes the seed.",
-      "human_validation_required": true,
+      "human_validation_required": false,
       "review": "agent-patches/seed-lineage/SEED_B_ROOT_CAPTURE_REVIEW_20261009T234615Z.json",
-      "next_action": "User to return the complete Ghidra listing and xrefs for helper 00639BE0 from the matching NMS.exe build; no live NMS session or traversal required.",
+      "next_action": "Trace the fifth incoming argument at both helper callers upstream and determine whether it matches a captured root seed. Then validate any candidate layout seed against a saved/live derelict observation; do not infer a layout formula from the descriptor write alone.",
       "parallel_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
       "extension_version": "1.0.6",
       "latest_report": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json",
@@ -107,29 +107,25 @@
         "owner_plus_0x10": "0000000000000000",
         "dispatch_target_resolved": false
       },
-      "latest_owner_producer_trace": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
+      "latest_owner_producer_trace": "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md",
       "owner_producer_helper_rva": "00639BE0",
-      "owner_producer_seed_write_established": false,
+      "owner_producer_seed_write_established": true,
       "human_request": {
-        "reason": "The repo contains only partial code windows around the helper. Surveyor's Seed-Lineage extension has no arbitrary-RVA extraction action, and the supplied local executable cannot be read through this session's local execution tools.",
-        "steps": [
-          "Use the NMS.exe build with SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499 in Ghidra CodeBrowser. Use Search > Go To (G) and enter 140639BE0 (RVA 00639BE0 at preferred image base 140000000).",
-          "Copy/export the complete Listing disassembly and Decompiler output for the function beginning at 00639BE0 through its return. Press X on the function entry and include its complete cross-reference list. Save the listing, decompiler output, executable hash, and references in one text file.",
-          "Attach that text file here. Success is visible when the listing starts at 00639BE0 with bytes 48 89 5C 24 10, includes the complete function through return, and the xrefs include 006395D3 and 00639B99. Do not launch NMS or traverse a derelict."
+        "status": "resolved-locally",
+        "resolved_utc": "2026-10-16T18:30:21Z",
+        "evidence": [
+          "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md",
+          "research-output/ghidra-static-20261015/LISTING_0063B130_0063BEEC_20261016.txt"
         ],
-        "success_condition": "Complete helper function listing at 00639BE0 from the matching executable, with cross-references confirming 006395D3 and 00639B99.",
-        "evidence_to_return": [
-          "One text file containing the matching executable SHA-256, full disassembly, decompiler output, and xref list."
-        ],
-        "full_derelict_required": false
+        "note": "Matching executable SHA-256 verified; helper listing, direct callsites, and descriptor seed write traced locally. No live NMS action was needed for this static request."
       }
     },
     "dungeon-decompile": {
       "branch": "agent/dungeon-current-target-20261008-reconciled",
-      "status": "waiting_on_user",
+      "status": "offline_static_review",
       "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "After the matching static listing is returned, decode the state table at 0063BEBC and update the callback analysis.",
-      "latest_evidence": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/",
+      "next_action": "Use the local 0063B130..0063BEEC listing to inspect the data region at 0063BEBC (Ghidra -noanalysis reported zero exact xrefs); continue locating the actual room graph builder and establish whether GenerateFreighterDungeon parameters reach it.",
+      "latest_evidence": "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md; research-output/ghidra-static-20261015/LISTING_0063B130_0063BEEC_20261016.txt",
       "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
       "current_build_static_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
       "helper_dataflow_review": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
@@ -154,7 +150,7 @@
       "primary_callback_chain_bytes": 2430,
       "raw_dispatch_target_resolved": false,
       "callback_semantic_identity_resolved": false,
-      "cross_lane_seed_producer_trace": "agent-patches/seed-lineage/SEED_B_OWNER_PRODUCER_TRACE_20261009T2357.json",
+      "cross_lane_seed_producer_trace": "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md",
       "latest_entry_behavior_review": "agent-patches/dungeon-decompile/CALLBACK_ENTRY_RANGE_REVIEW_20261010.json",
       "primary_entry_call_target": "033E1B60"
     },
@@ -204,31 +200,6 @@
           "candidate_json_files": 97,
           "pairs_found": 0
         }
-      },
-      {
-        "lane": "seed-lineage",
-        "kind": "provide-static-helper-listing",
-        "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-        "next_action": "User to return the complete Ghidra listing and xrefs for helper 00639BE0 from the matching NMS.exe build; no live NMS session or traversal required.",
-        "success_condition": "Complete helper function listing at 00639BE0 from the matching executable, with cross-references confirming 006395D3 and 00639B99.",
-        "evidence_to_return": [
-          "One text file containing the matching executable SHA-256, full disassembly, decompiler output, and xref list."
-        ],
-        "full_derelict_required": false,
-        "surveyor_action_required": false
-      },
-      {
-        "lane": "dungeon-decompile",
-        "kind": "offline-callback-funclet-listing",
-        "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-        "next_action": "In Ghidra CodeBrowser for NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499, press G and navigate to 0063B130; copy/export the Listing through 0063BEEC with addresses, bytes, disassembly, and references to 0063BEBC into one text file.",
-        "success_condition": "Returned listing explicitly covers 0063B130 through 0063BEEC (including 0063BEBC) and identifies the matching executable SHA-256.",
-        "evidence_to_return": [
-          "One UTF-8 text file with matching executable SHA-256, the full 0063B130..0063BEEC Listing, and references to 0063BEBC."
-        ],
-        "full_derelict_required": false,
-        "surveyor_action_required": false,
-        "nms_launch_required": false
       }
     ]
   },

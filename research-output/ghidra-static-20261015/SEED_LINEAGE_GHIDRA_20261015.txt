@@ -1,0 +1,749 @@
+﻿NMS.exe SHA-256: 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499
+Analysis: Ghidra 12.1.4, x86:LE:64:default, headless targeted import with -noanalysis; flow-following disassembly and decompilation. This is not whole-program analysis.
+Executable: G:\SteamLibrary\steamapps\common\No Man's Sky\Binaries\NMS.exe
+
+===== HELPER 00639BE0 =====
+Address: 140639be0 (RVA 00639BE0)
+Reachable disassembly from 140639be0: 204 instructions
+Function: FUN_140639be0
+Entry: 140639be0 (RVA 00639BE0)
+Body: [[140639be0, 140639fd1]]
+Thunks: false
+Entry bytes: 48 89 5C 24 10 48 89 6C 24 18 56 57 41 54 41 56 41 57 48 81 EC 70 03 00
+Cross-references to helper entry:
+  1474c68d4 (RVA 074C68D4) -> 140639be0 [DATA, operand 0]
+  1406395d3 (RVA 006395D3) -> 140639be0 [UNCONDITIONAL_CALL, operand 0]
+  140639b99 (RVA 00639B99) -> 140639be0 [UNCONDITIONAL_CALL, operand 0]
+  Reference count: 3
+Decompiler completed: true
+----- DECOMPILER OUTPUT -----
+
+longlong FUN_140639be0(uint *param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4,
+                      longlong param_5,longlong param_6,undefined8 *param_7,undefined1 param_8,
+                      undefined8 *param_9,undefined8 *param_10,undefined1 param_11,
+                      undefined1 param_12,undefined1 param_13,undefined4 *param_14)
+
+{
+  uint uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  undefined4 uVar6;
+  undefined4 uVar7;
+  undefined4 uVar8;
+  undefined8 uVar9;
+  undefined8 uVar10;
+  undefined8 uVar11;
+  longlong lVar12;
+  undefined8 *puVar13;
+  undefined8 *puVar14;
+  longlong lVar15;
+  longlong lVar16;
+  longlong lStackX_8;
+  longlong *plVar17;
+  undefined8 uVar18;
+  undefined4 uVar19;
+  undefined8 in_stack_fffffffffffffc98;
+  undefined8 uVar20;
+  undefined4 uVar21;
+  undefined8 auStack_328 [32];
+  undefined8 auStack_228 [32];
+  undefined1 auStack_128 [256];
+  
+  uVar18 = CONCAT44((int)((ulonglong)in_stack_fffffffffffffc98 >> 0x20),4);
+  lVar12 = FUN_142c20e90(0x14500a050,0x2a0,&UNK_144a41320,0,&UNK_144a41320,0x10,uVar18);
+  lStackX_8 = lVar12;
+  puVar13 = (undefined8 *)FUN_140206ce0(auStack_128,param_3);
+  lVar16 = 2;
+  lVar15 = 2;
+  puVar14 = auStack_328;
+  do {
+    uVar20 = puVar13[1];
+    uVar9 = puVar13[2];
+    uVar10 = puVar13[3];
+    *puVar14 = *puVar13;
+    puVar14[1] = uVar20;
+    uVar20 = puVar13[4];
+    uVar11 = puVar13[5];
+    puVar14[2] = uVar9;
+    puVar14[3] = uVar10;
+    uVar9 = puVar13[6];
+    uVar10 = puVar13[7];
+    puVar14[4] = uVar20;
+    puVar14[5] = uVar11;
+    uVar20 = puVar13[8];
+    uVar11 = puVar13[9];
+    puVar14[6] = uVar9;
+    puVar14[7] = uVar10;
+    uVar9 = puVar13[10];
+    uVar10 = puVar13[0xb];
+    puVar14[8] = uVar20;
+    puVar14[9] = uVar11;
+    uVar20 = puVar13[0xc];
+    uVar11 = puVar13[0xd];
+    puVar14[10] = uVar9;
+    puVar14[0xb] = uVar10;
+    uVar9 = puVar13[0xe];
+    uVar10 = puVar13[0xf];
+    puVar14[0xc] = uVar20;
+    puVar14[0xd] = uVar11;
+    puVar14[0xe] = uVar9;
+    puVar14[0xf] = uVar10;
+    lVar15 = lVar15 + -1;
+    puVar13 = puVar13 + 0x10;
+    puVar14 = puVar14 + 0x10;
+  } while (lVar15 != 0);
+  uVar1 = param_1[0x49];
+  param_1[0x49] = uVar1 + 1;
+  puVar13 = auStack_328;
+  puVar14 = auStack_228;
+  do {
+    uVar20 = puVar13[1];
+    uVar9 = puVar13[2];
+    uVar10 = puVar13[3];
+    *puVar14 = *puVar13;
+    puVar14[1] = uVar20;
+    uVar20 = puVar13[4];
+    uVar11 = puVar13[5];
+    puVar14[2] = uVar9;
+    puVar14[3] = uVar10;
+    uVar9 = puVar13[6];
+    uVar10 = puVar13[7];
+    puVar14[4] = uVar20;
+    puVar14[5] = uVar11;
+    uVar20 = puVar13[8];
+    uVar11 = puVar13[9];
+    puVar14[6] = uVar9;
+    puVar14[7] = uVar10;
+    uVar9 = puVar13[10];
+    uVar10 = puVar13[0xb];
+    puVar14[8] = uVar20;
+    puVar14[9] = uVar11;
+    uVar19 = *(undefined4 *)(puVar13 + 0xc);
+    uVar21 = *(undefined4 *)((longlong)puVar13 + 100);
+    uVar2 = *(undefined4 *)(puVar13 + 0xd);
+    uVar3 = *(undefined4 *)((longlong)puVar13 + 0x6c);
+    puVar14[10] = uVar9;
+    puVar14[0xb] = uVar10;
+    uVar4 = *(undefined4 *)(puVar13 + 0xe);
+    uVar5 = *(undefined4 *)((longlong)puVar13 + 0x74);
+    uVar6 = *(undefined4 *)(puVar13 + 0xf);
+    uVar7 = *(undefined4 *)((longlong)puVar13 + 0x7c);
+    *(undefined4 *)(puVar14 + 0xc) = uVar19;
+    *(undefined4 *)((longlong)puVar14 + 100) = uVar21;
+    *(undefined4 *)(puVar14 + 0xd) = uVar2;
+    *(undefined4 *)((longlong)puVar14 + 0x6c) = uVar3;
+    *(undefined4 *)(puVar14 + 0xe) = uVar4;
+    *(undefined4 *)((longlong)puVar14 + 0x74) = uVar5;
+    *(undefined4 *)(puVar14 + 0xf) = uVar6;
+    *(undefined4 *)((longlong)puVar14 + 0x7c) = uVar7;
+    lVar16 = lVar16 + -1;
+    puVar13 = puVar13 + 0x10;
+    puVar14 = puVar14 + 0x10;
+  } while (lVar16 != 0);
+  uVar18 = CONCAT71((int7)((ulonglong)uVar18 >> 8),param_13);
+  lVar15 = param_5;
+  FUN_140639610(lVar12,uVar1 + 1,param_2,auStack_228,param_4,param_5,uVar18);
+  uVar19 = (undefined4)((ulonglong)lVar15 >> 0x20);
+  uVar21 = (undefined4)((ulonglong)uVar18 >> 0x20);
+  uVar1 = param_1[1];
+  lVar12 = *(longlong *)(param_1 + 2);
+  if (uVar1 < *param_1) {
+    *(longlong *)(lVar12 + (ulonglong)uVar1 * 8) = lStackX_8;
+    param_1[1] = param_1[1] + 1;
+  }
+  else {
+    plVar17 = &lStackX_8;
+    uVar21 = 0;
+    lVar12 = FUN_142bf95c0(param_1,FUN_142bf9f00,uVar1 + 1,lVar12,(ulonglong)uVar1,plVar17,1,0,0,8,8
+                           ,0xffffffff,lVar12,0);
+    uVar19 = (undefined4)((ulonglong)plVar17 >> 0x20);
+  }
+  lVar15 = lStackX_8;
+  *(longlong *)(param_1 + 2) = lVar12;
+  uVar18 = param_7[1];
+  *(undefined8 *)(lStackX_8 + 0x180) = *param_7;
+  *(undefined8 *)(lStackX_8 + 0x188) = uVar18;
+  *(undefined1 *)(lStackX_8 + 400) = param_8;
+  uVar18 = param_10[1];
+  *(undefined8 *)(lStackX_8 + 0x198) = *param_10;
+  *(undefined8 *)(lStackX_8 + 0x1a0) = uVar18;
+  uVar18 = param_9[1];
+  uVar20 = param_9[2];
+  uVar9 = param_9[3];
+  *(undefined8 *)(lStackX_8 + 0x1a8) = *param_9;
+  *(undefined8 *)(lStackX_8 + 0x1b0) = uVar18;
+  *(undefined8 *)(lStackX_8 + 0x1b8) = uVar20;
+  *(undefined8 *)(lStackX_8 + 0x1c0) = uVar9;
+  *(undefined1 *)(lStackX_8 + 0x1c8) = param_11;
+  *(undefined1 *)(lStackX_8 + 0x1ca) = param_12;
+  uVar2 = param_14[1];
+  uVar3 = param_14[2];
+  uVar4 = param_14[3];
+  uVar5 = param_14[4];
+  uVar6 = param_14[5];
+  uVar7 = param_14[6];
+  uVar8 = param_14[7];
+  *(undefined4 *)(lStackX_8 + 0x230) = *param_14;
+  *(undefined4 *)(lStackX_8 + 0x234) = uVar2;
+  *(undefined4 *)(lStackX_8 + 0x238) = uVar3;
+  *(undefined4 *)(lStackX_8 + 0x23c) = uVar4;
+  *(undefined4 *)(lStackX_8 + 0x240) = uVar5;
+  *(undefined4 *)(lStackX_8 + 0x244) = uVar6;
+  *(undefined4 *)(lStackX_8 + 0x248) = uVar7;
+  *(undefined4 *)(lStackX_8 + 0x24c) = uVar8;
+  if (param_6 == 0) {
+    *(undefined4 *)(lStackX_8 + 0x27c) = 0;
+  }
+  else {
+    uVar20 = CONCAT44(uVar21,4);
+    uVar18 = CONCAT44(uVar19,0x10);
+    lVar16 = FUN_142c20e90(0x14500a050,0x1ce0,&UNK_144a41320,0,&UNK_144a41320,uVar18,uVar20);
+    *(longlong *)(lVar15 + 0x178) = lVar16;
+    lVar15 = 0x42;
+    lVar12 = lVar16;
+    do {
+      func_0x00014274c720(lVar12);
+      uVar19 = (undefined4)((ulonglong)uVar18 >> 0x20);
+      uVar21 = (undefined4)((ulonglong)uVar20 >> 0x20);
+      lVar12 = lVar12 + 0x70;
+      lVar15 = lVar15 + -1;
+    } while (lVar15 != 0);
+    FUN_141e1a340(lVar16);
+    func_0x0001433e4b46(*(undefined8 *)(lStackX_8 + 0x178),param_6,0x1ce0);
+    *(undefined4 *)(lStackX_8 + 0x27c) = 1;
+  }
+  lVar12 = lStackX_8;
+  if (param_5 != 0) {
+    puVar13 = (undefined8 *)
+              FUN_142c20e90(0x14500a050,0x10,&UNK_144a41320,0,&UNK_144a41320,CONCAT44(uVar19,0x10),
+                            CONCAT44(uVar21,4));
+    *(undefined8 **)(lVar12 + 0x158) = puVar13;
+    *puVar13 = 0;
+    *(undefined4 *)(puVar13 + 1) = 0;
+    *(undefined2 *)((longlong)puVar13 + 0xc) = 0x100;
+    _guard_check_icall(puVar13);
+    FUN_140211720(*(undefined8 *)(lVar12 + 0x158),param_5);
+  }
+  return lStackX_8;
+}
+
+
+----- HELPER LISTING -----
+INS 140639be0 (RVA 00639BE0)  48 89 5C 24 10                                   MOV qword ptr [RSP + 0x10],RBX
+INS 140639be5 (RVA 00639BE5)  48 89 6C 24 18                                   MOV qword ptr [RSP + 0x18],RBP
+INS 140639bea (RVA 00639BEA)  56                                               PUSH RSI
+INS 140639beb (RVA 00639BEB)  57                                               PUSH RDI
+INS 140639bec (RVA 00639BEC)  41 54                                            PUSH R12
+INS 140639bee (RVA 00639BEE)  41 56                                            PUSH R14
+INS 140639bf0 (RVA 00639BF0)  41 57                                            PUSH R15
+INS 140639bf2 (RVA 00639BF2)  48 81 EC 70 03 00 00                             SUB RSP,0x370
+INS 140639bf9 (RVA 00639BF9)  4C 8D 25 20 77 40 04                             LEA R12,[0x144a41320]
+INS 140639c00 (RVA 00639C00)  C7 44 24 30 04 00 00 00                          MOV dword ptr [RSP + 0x30],0x4
+INS 140639c08 (RVA 00639C08)  4D 8B F1                                         MOV R14,R9
+INS 140639c0b (RVA 00639C0B)  C7 44 24 28 10 00 00 00                          MOV dword ptr [RSP + 0x28],0x10
+INS 140639c13 (RVA 00639C13)  49 8B D8                                         MOV RBX,R8
+INS 140639c16 (RVA 00639C16)  4C 89 64 24 20                                   MOV qword ptr [RSP + 0x20],R12
+INS 140639c1b (RVA 00639C1B)  4C 8B FA                                         MOV R15,RDX
+INS 140639c1e (RVA 00639C1E)  48 8B F9                                         MOV RDI,RCX
+INS 140639c21 (RVA 00639C21)  4D 8B C4                                         MOV R8,R12
+INS 140639c24 (RVA 00639C24)  48 8D 0D 25 04 9D 04                             LEA RCX,[0x14500a050]
+INS 140639c2b (RVA 00639C2B)  45 33 C9                                         XOR R9D,R9D
+INS 140639c2e (RVA 00639C2E)  BA A0 02 00 00                                   MOV EDX,0x2a0
+INS 140639c33 (RVA 00639C33)  E8 58 72 5E 02                                   CALL 0x142c20e90
+    REF -> 142c20e90 (RVA 02C20E90) [UNCONDITIONAL_CALL, operand 0]
+INS 140639c38 (RVA 00639C38)  48 8B D3                                         MOV RDX,RBX
+INS 140639c3b (RVA 00639C3B)  48 89 84 24 A0 03 00 00                          MOV qword ptr [RSP + 0x3a0],RAX
+INS 140639c43 (RVA 00639C43)  48 8D 8C 24 70 02 00 00                          LEA RCX,[RSP + 0x270]
+INS 140639c4b (RVA 00639C4B)  48 8B F0                                         MOV RSI,RAX
+INS 140639c4e (RVA 00639C4E)  E8 8D D0 BC FF                                   CALL 0x140206ce0
+    REF -> 140206ce0 (RVA 00206CE0) [UNCONDITIONAL_CALL, operand 0]
+INS 140639c53 (RVA 00639C53)  41 B8 02 00 00 00                                MOV R8D,0x2
+INS 140639c59 (RVA 00639C59)  48 8D 4C 24 70                                   LEA RCX,[RSP + 0x70]
+INS 140639c5e (RVA 00639C5E)  41 8B D0                                         MOV EDX,R8D
+INS 140639c61 (RVA 00639C61)  48 8D 89 80 00 00 00                             LEA RCX,[RCX + 0x80]
+INS 140639c68 (RVA 00639C68)  0F 10 00                                         MOVUPS XMM0,xmmword ptr [RAX]
+INS 140639c6b (RVA 00639C6B)  0F 10 48 10                                      MOVUPS XMM1,xmmword ptr [RAX + 0x10]
+INS 140639c6f (RVA 00639C6F)  48 8D 80 80 00 00 00                             LEA RAX,[RAX + 0x80]
+INS 140639c76 (RVA 00639C76)  0F 11 41 80                                      MOVUPS xmmword ptr [RCX + -0x80],XMM0
+INS 140639c7a (RVA 00639C7A)  0F 10 40 A0                                      MOVUPS XMM0,xmmword ptr [RAX + -0x60]
+INS 140639c7e (RVA 00639C7E)  0F 11 49 90                                      MOVUPS xmmword ptr [RCX + -0x70],XMM1
+INS 140639c82 (RVA 00639C82)  0F 10 48 B0                                      MOVUPS XMM1,xmmword ptr [RAX + -0x50]
+INS 140639c86 (RVA 00639C86)  0F 11 41 A0                                      MOVUPS xmmword ptr [RCX + -0x60],XMM0
+INS 140639c8a (RVA 00639C8A)  0F 10 40 C0                                      MOVUPS XMM0,xmmword ptr [RAX + -0x40]
+INS 140639c8e (RVA 00639C8E)  0F 11 49 B0                                      MOVUPS xmmword ptr [RCX + -0x50],XMM1
+INS 140639c92 (RVA 00639C92)  0F 10 48 D0                                      MOVUPS XMM1,xmmword ptr [RAX + -0x30]
+INS 140639c96 (RVA 00639C96)  0F 11 41 C0                                      MOVUPS xmmword ptr [RCX + -0x40],XMM0
+INS 140639c9a (RVA 00639C9A)  0F 10 40 E0                                      MOVUPS XMM0,xmmword ptr [RAX + -0x20]
+INS 140639c9e (RVA 00639C9E)  0F 11 49 D0                                      MOVUPS xmmword ptr [RCX + -0x30],XMM1
+INS 140639ca2 (RVA 00639CA2)  0F 10 48 F0                                      MOVUPS XMM1,xmmword ptr [RAX + -0x10]
+INS 140639ca6 (RVA 00639CA6)  0F 11 41 E0                                      MOVUPS xmmword ptr [RCX + -0x20],XMM0
+INS 140639caa (RVA 00639CAA)  0F 11 49 F0                                      MOVUPS xmmword ptr [RCX + -0x10],XMM1
+INS 140639cae (RVA 00639CAE)  48 83 EA 01                                      SUB RDX,0x1
+INS 140639cb2 (RVA 00639CB2)  75 AD                                            JNZ 0x140639c61
+    REF -> 140639c61 (RVA 00639C61) [CONDITIONAL_JUMP, operand 0]
+INS 140639cb4 (RVA 00639CB4)  8B 97 24 01 00 00                                MOV EDX,dword ptr [RDI + 0x124]
+INS 140639cba (RVA 00639CBA)  48 8D 8C 24 70 01 00 00                          LEA RCX,[RSP + 0x170]
+INS 140639cc2 (RVA 00639CC2)  FF C2                                            INC EDX
+INS 140639cc4 (RVA 00639CC4)  48 8D 44 24 70                                   LEA RAX,[RSP + 0x70]
+INS 140639cc9 (RVA 00639CC9)  89 97 24 01 00 00                                MOV dword ptr [RDI + 0x124],EDX
+INS 140639ccf (RVA 00639CCF)  90                                               NOP
+INS 140639cd0 (RVA 00639CD0)  48 8D 89 80 00 00 00                             LEA RCX,[RCX + 0x80]
+INS 140639cd7 (RVA 00639CD7)  0F 10 00                                         MOVUPS XMM0,xmmword ptr [RAX]
+INS 140639cda (RVA 00639CDA)  0F 10 48 10                                      MOVUPS XMM1,xmmword ptr [RAX + 0x10]
+INS 140639cde (RVA 00639CDE)  48 8D 80 80 00 00 00                             LEA RAX,[RAX + 0x80]
+INS 140639ce5 (RVA 00639CE5)  0F 11 41 80                                      MOVUPS xmmword ptr [RCX + -0x80],XMM0
+INS 140639ce9 (RVA 00639CE9)  0F 10 40 A0                                      MOVUPS XMM0,xmmword ptr [RAX + -0x60]
+INS 140639ced (RVA 00639CED)  0F 11 49 90                                      MOVUPS xmmword ptr [RCX + -0x70],XMM1
+INS 140639cf1 (RVA 00639CF1)  0F 10 48 B0                                      MOVUPS XMM1,xmmword ptr [RAX + -0x50]
+INS 140639cf5 (RVA 00639CF5)  0F 11 41 A0                                      MOVUPS xmmword ptr [RCX + -0x60],XMM0
+INS 140639cf9 (RVA 00639CF9)  0F 10 40 C0                                      MOVUPS XMM0,xmmword ptr [RAX + -0x40]
+INS 140639cfd (RVA 00639CFD)  0F 11 49 B0                                      MOVUPS xmmword ptr [RCX + -0x50],XMM1
+INS 140639d01 (RVA 00639D01)  0F 10 48 D0                                      MOVUPS XMM1,xmmword ptr [RAX + -0x30]
+INS 140639d05 (RVA 00639D05)  0F 11 41 C0                                      MOVUPS xmmword ptr [RCX + -0x40],XMM0
+INS 140639d09 (RVA 00639D09)  0F 10 40 E0                                      MOVUPS XMM0,xmmword ptr [RAX + -0x20]
+INS 140639d0d (RVA 00639D0D)  0F 11 49 D0                                      MOVUPS xmmword ptr [RCX + -0x30],XMM1
+INS 140639d11 (RVA 00639D11)  0F 10 48 F0                                      MOVUPS XMM1,xmmword ptr [RAX + -0x10]
+INS 140639d15 (RVA 00639D15)  0F 11 41 E0                                      MOVUPS xmmword ptr [RCX + -0x20],XMM0
+INS 140639d19 (RVA 00639D19)  0F 11 49 F0                                      MOVUPS xmmword ptr [RCX + -0x10],XMM1
+INS 140639d1d (RVA 00639D1D)  49 83 E8 01                                      SUB R8,0x1
+INS 140639d21 (RVA 00639D21)  75 AD                                            JNZ 0x140639cd0
+    REF -> 140639cd0 (RVA 00639CD0) [CONDITIONAL_JUMP, operand 0]
+INS 140639d23 (RVA 00639D23)  0F B6 84 24 00 04 00 00                          MOVZX EAX,byte ptr [RSP + 0x400]
+INS 140639d2b (RVA 00639D2B)  4C 8D 8C 24 70 01 00 00                          LEA R9,[RSP + 0x170]
+INS 140639d33 (RVA 00639D33)  48 8B AC 24 C0 03 00 00                          MOV RBP,qword ptr [RSP + 0x3c0]
+INS 140639d3b (RVA 00639D3B)  4D 8B C7                                         MOV R8,R15
+INS 140639d3e (RVA 00639D3E)  88 44 24 30                                      MOV byte ptr [RSP + 0x30],AL
+INS 140639d42 (RVA 00639D42)  48 8B CE                                         MOV RCX,RSI
+INS 140639d45 (RVA 00639D45)  48 89 6C 24 28                                   MOV qword ptr [RSP + 0x28],RBP
+INS 140639d4a (RVA 00639D4A)  4C 89 74 24 20                                   MOV qword ptr [RSP + 0x20],R14
+INS 140639d4f (RVA 00639D4F)  E8 BC F8 FF FF                                   CALL 0x140639610
+    REF -> 140639610 (RVA 00639610) [UNCONDITIONAL_CALL, operand 0]
+INS 140639d54 (RVA 00639D54)  8B 57 04                                         MOV EDX,dword ptr [RDI + 0x4]
+INS 140639d57 (RVA 00639D57)  45 33 FF                                         XOR R15D,R15D
+INS 140639d5a (RVA 00639D5A)  48 8B 4F 08                                      MOV RCX,qword ptr [RDI + 0x8]
+INS 140639d5e (RVA 00639D5E)  3B 17                                            CMP EDX,dword ptr [RDI]
+INS 140639d60 (RVA 00639D60)  73 11                                            JNC 0x140639d73
+    REF -> 140639d73 (RVA 00639D73) [CONDITIONAL_JUMP, operand 0]
+INS 140639d62 (RVA 00639D62)  48 8B 84 24 A0 03 00 00                          MOV RAX,qword ptr [RSP + 0x3a0]
+INS 140639d6a (RVA 00639D6A)  48 89 04 D1                                      MOV qword ptr [RCX + RDX*0x8],RAX
+INS 140639d6e (RVA 00639D6E)  FF 47 04                                         INC dword ptr [RDI + 0x4]
+INS 140639d71 (RVA 00639D71)  EB 62                                            JMP 0x140639dd5
+    REF -> 140639dd5 (RVA 00639DD5) [UNCONDITIONAL_JUMP, operand 0]
+INS 140639d73 (RVA 00639D73)  4C 89 7C 24 68                                   MOV qword ptr [RSP + 0x68],R15
+INS 140639d78 (RVA 00639D78)  48 8D 84 24 A0 03 00 00                          LEA RAX,[RSP + 0x3a0]
+INS 140639d80 (RVA 00639D80)  48 89 4C 24 60                                   MOV qword ptr [RSP + 0x60],RCX
+INS 140639d85 (RVA 00639D85)  44 8D 42 01                                      LEA R8D,[RDX + 0x1]
+INS 140639d89 (RVA 00639D89)  C7 44 24 58 FF FF FF FF                          MOV dword ptr [RSP + 0x58],0xffffffff
+INS 140639d91 (RVA 00639D91)  4C 8B C9                                         MOV R9,RCX
+INS 140639d94 (RVA 00639D94)  48 C7 44 24 50 08 00 00 00                       MOV qword ptr [RSP + 0x50],0x8
+INS 140639d9d (RVA 00639D9D)  48 8B CF                                         MOV RCX,RDI
+INS 140639da0 (RVA 00639DA0)  48 C7 44 24 48 08 00 00 00                       MOV qword ptr [RSP + 0x48],0x8
+INS 140639da9 (RVA 00639DA9)  4C 89 7C 24 40                                   MOV qword ptr [RSP + 0x40],R15
+INS 140639dae (RVA 00639DAE)  4C 89 7C 24 38                                   MOV qword ptr [RSP + 0x38],R15
+INS 140639db3 (RVA 00639DB3)  48 C7 44 24 30 01 00 00 00                       MOV qword ptr [RSP + 0x30],0x1
+INS 140639dbc (RVA 00639DBC)  48 89 44 24 28                                   MOV qword ptr [RSP + 0x28],RAX
+INS 140639dc1 (RVA 00639DC1)  48 89 54 24 20                                   MOV qword ptr [RSP + 0x20],RDX
+INS 140639dc6 (RVA 00639DC6)  48 8D 15 33 01 5C 02                             LEA RDX,[0x142bf9f00]
+INS 140639dcd (RVA 00639DCD)  E8 EE F7 5B 02                                   CALL 0x142bf95c0
+    REF -> 142bf95c0 (RVA 02BF95C0) [UNCONDITIONAL_CALL, operand 0]
+INS 140639dd2 (RVA 00639DD2)  48 8B C8                                         MOV RCX,RAX
+INS 140639dd5 (RVA 00639DD5)  48 8B 84 24 D0 03 00 00                          MOV RAX,qword ptr [RSP + 0x3d0]
+INS 140639ddd (RVA 00639DDD)  4C 8B B4 24 C8 03 00 00                          MOV R14,qword ptr [RSP + 0x3c8]
+INS 140639de5 (RVA 00639DE5)  48 89 4F 08                                      MOV qword ptr [RDI + 0x8],RCX
+INS 140639de9 (RVA 00639DE9)  48 8B 8C 24 A0 03 00 00                          MOV RCX,qword ptr [RSP + 0x3a0]
+INS 140639df1 (RVA 00639DF1)  0F 28 00                                         MOVAPS XMM0,xmmword ptr [RAX]
+INS 140639df4 (RVA 00639DF4)  0F 11 81 80 01 00 00                             MOVUPS xmmword ptr [RCX + 0x180],XMM0
+INS 140639dfb (RVA 00639DFB)  48 8B 84 24 A0 03 00 00                          MOV RAX,qword ptr [RSP + 0x3a0]
+INS 140639e03 (RVA 00639E03)  0F B6 8C 24 D8 03 00 00                          MOVZX ECX,byte ptr [RSP + 0x3d8]
+INS 140639e0b (RVA 00639E0B)  88 88 90 01 00 00                                MOV byte ptr [RAX + 0x190],CL
+INS 140639e11 (RVA 00639E11)  48 8B 8C 24 A0 03 00 00                          MOV RCX,qword ptr [RSP + 0x3a0]
+INS 140639e19 (RVA 00639E19)  48 8B 84 24 E8 03 00 00                          MOV RAX,qword ptr [RSP + 0x3e8]
+INS 140639e21 (RVA 00639E21)  0F 10 00                                         MOVUPS XMM0,xmmword ptr [RAX]
+INS 140639e24 (RVA 00639E24)  48 8B 84 24 E0 03 00 00                          MOV RAX,qword ptr [RSP + 0x3e0]
+INS 140639e2c (RVA 00639E2C)  0F 11 81 98 01 00 00                             MOVUPS xmmword ptr [RCX + 0x198],XMM0
+INS 140639e33 (RVA 00639E33)  48 8B 8C 24 A0 03 00 00                          MOV RCX,qword ptr [RSP + 0x3a0]
+INS 140639e3b (RVA 00639E3B)  0F 10 00                                         MOVUPS XMM0,xmmword ptr [RAX]
+INS 140639e3e (RVA 00639E3E)  0F 10 48 10                                      MOVUPS XMM1,xmmword ptr [RAX + 0x10]
+INS 140639e42 (RVA 00639E42)  0F 11 81 A8 01 00 00                             MOVUPS xmmword ptr [RCX + 0x1a8],XMM0
+INS 140639e49 (RVA 00639E49)  0F 11 89 B8 01 00 00                             MOVUPS xmmword ptr [RCX + 0x1b8],XMM1
+INS 140639e50 (RVA 00639E50)  48 8B 84 24 A0 03 00 00                          MOV RAX,qword ptr [RSP + 0x3a0]
+INS 140639e58 (RVA 00639E58)  0F B6 8C 24 F0 03 00 00                          MOVZX ECX,byte ptr [RSP + 0x3f0]
+INS 140639e60 (RVA 00639E60)  88 88 C8 01 00 00                                MOV byte ptr [RAX + 0x1c8],CL
+INS 140639e66 (RVA 00639E66)  48 8B 84 24 A0 03 00 00                          MOV RAX,qword ptr [RSP + 0x3a0]
+INS 140639e6e (RVA 00639E6E)  0F B6 8C 24 F8 03 00 00                          MOVZX ECX,byte ptr [RSP + 0x3f8]
+INS 140639e76 (RVA 00639E76)  88 88 CA 01 00 00                                MOV byte ptr [RAX + 0x1ca],CL
+INS 140639e7c (RVA 00639E7C)  48 8B 84 24 08 04 00 00                          MOV RAX,qword ptr [RSP + 0x408]
+INS 140639e84 (RVA 00639E84)  48 8B 8C 24 A0 03 00 00                          MOV RCX,qword ptr [RSP + 0x3a0]
+INS 140639e8c (RVA 00639E8C)  0F 10 00                                         MOVUPS XMM0,xmmword ptr [RAX]
+INS 140639e8f (RVA 00639E8F)  0F 10 48 10                                      MOVUPS XMM1,xmmword ptr [RAX + 0x10]
+INS 140639e93 (RVA 00639E93)  0F 11 81 30 02 00 00                             MOVUPS xmmword ptr [RCX + 0x230],XMM0
+INS 140639e9a (RVA 00639E9A)  0F 11 89 40 02 00 00                             MOVUPS xmmword ptr [RCX + 0x240],XMM1
+INS 140639ea1 (RVA 00639EA1)  4D 85 F6                                         TEST R14,R14
+INS 140639ea4 (RVA 00639EA4)  0F 84 91 00 00 00                                JZ 0x140639f3b
+    REF -> 140639f3b (RVA 00639F3B) [CONDITIONAL_JUMP, operand 0]
+INS 140639eaa (RVA 00639EAA)  48 8B 9C 24 A0 03 00 00                          MOV RBX,qword ptr [RSP + 0x3a0]
+INS 140639eb2 (RVA 00639EB2)  48 8D 0D 97 01 9D 04                             LEA RCX,[0x14500a050]
+INS 140639eb9 (RVA 00639EB9)  C7 44 24 30 04 00 00 00                          MOV dword ptr [RSP + 0x30],0x4
+INS 140639ec1 (RVA 00639EC1)  45 33 C9                                         XOR R9D,R9D
+INS 140639ec4 (RVA 00639EC4)  C7 44 24 28 10 00 00 00                          MOV dword ptr [RSP + 0x28],0x10
+INS 140639ecc (RVA 00639ECC)  4D 8B C4                                         MOV R8,R12
+INS 140639ecf (RVA 00639ECF)  BA E0 1C 00 00                                   MOV EDX,0x1ce0
+INS 140639ed4 (RVA 00639ED4)  4C 89 64 24 20                                   MOV qword ptr [RSP + 0x20],R12
+INS 140639ed9 (RVA 00639ED9)  E8 B2 6F 5E 02                                   CALL 0x142c20e90
+    REF -> 142c20e90 (RVA 02C20E90) [UNCONDITIONAL_CALL, operand 0]
+INS 140639ede (RVA 00639EDE)  48 89 83 78 01 00 00                             MOV qword ptr [RBX + 0x178],RAX
+INS 140639ee5 (RVA 00639EE5)  48 8B F0                                         MOV RSI,RAX
+INS 140639ee8 (RVA 00639EE8)  48 8B D8                                         MOV RBX,RAX
+INS 140639eeb (RVA 00639EEB)  BF 42 00 00 00                                   MOV EDI,0x42
+INS 140639ef0 (RVA 00639EF0)  48 8B CB                                         MOV RCX,RBX
+INS 140639ef3 (RVA 00639EF3)  E8 28 28 11 02                                   CALL 0x14274c720
+    REF -> 14274c720 (RVA 0274C720) [UNCONDITIONAL_CALL, operand 0]
+INS 140639ef8 (RVA 00639EF8)  48 83 C3 70                                      ADD RBX,0x70
+INS 140639efc (RVA 00639EFC)  48 83 EF 01                                      SUB RDI,0x1
+INS 140639f00 (RVA 00639F00)  75 EE                                            JNZ 0x140639ef0
+    REF -> 140639ef0 (RVA 00639EF0) [CONDITIONAL_JUMP, operand 0]
+INS 140639f02 (RVA 00639F02)  48 8B CE                                         MOV RCX,RSI
+INS 140639f05 (RVA 00639F05)  E8 36 04 7E 01                                   CALL 0x141e1a340
+    REF -> 141e1a340 (RVA 01E1A340) [UNCONDITIONAL_CALL, operand 0]
+INS 140639f0a (RVA 00639F0A)  48 8B 8C 24 A0 03 00 00                          MOV RCX,qword ptr [RSP + 0x3a0]
+INS 140639f12 (RVA 00639F12)  41 B8 E0 1C 00 00                                MOV R8D,0x1ce0
+INS 140639f18 (RVA 00639F18)  49 8B D6                                         MOV RDX,R14
+INS 140639f1b (RVA 00639F1B)  48 8B 89 78 01 00 00                             MOV RCX,qword ptr [RCX + 0x178]
+INS 140639f22 (RVA 00639F22)  E8 1F AC DA 02                                   CALL 0x1433e4b46
+    REF -> 1433e4b46 (RVA 033E4B46) [UNCONDITIONAL_CALL, operand 0]
+INS 140639f27 (RVA 00639F27)  48 8B 84 24 A0 03 00 00                          MOV RAX,qword ptr [RSP + 0x3a0]
+INS 140639f2f (RVA 00639F2F)  C7 80 7C 02 00 00 01 00 00 00                    MOV dword ptr [RAX + 0x27c],0x1
+INS 140639f39 (RVA 00639F39)  EB 0F                                            JMP 0x140639f4a
+    REF -> 140639f4a (RVA 00639F4A) [UNCONDITIONAL_JUMP, operand 0]
+INS 140639f3b (RVA 00639F3B)  48 8B 84 24 A0 03 00 00                          MOV RAX,qword ptr [RSP + 0x3a0]
+INS 140639f43 (RVA 00639F43)  44 89 B8 7C 02 00 00                             MOV dword ptr [RAX + 0x27c],R15D
+INS 140639f4a (RVA 00639F4A)  48 85 ED                                         TEST RBP,RBP
+INS 140639f4d (RVA 00639F4D)  74 5F                                            JZ 0x140639fae
+    REF -> 140639fae (RVA 00639FAE) [CONDITIONAL_JUMP, operand 0]
+INS 140639f4f (RVA 00639F4F)  48 8B 9C 24 A0 03 00 00                          MOV RBX,qword ptr [RSP + 0x3a0]
+INS 140639f57 (RVA 00639F57)  48 8D 0D F2 00 9D 04                             LEA RCX,[0x14500a050]
+INS 140639f5e (RVA 00639F5E)  C7 44 24 30 04 00 00 00                          MOV dword ptr [RSP + 0x30],0x4
+INS 140639f66 (RVA 00639F66)  45 33 C9                                         XOR R9D,R9D
+INS 140639f69 (RVA 00639F69)  C7 44 24 28 10 00 00 00                          MOV dword ptr [RSP + 0x28],0x10
+INS 140639f71 (RVA 00639F71)  4D 8B C4                                         MOV R8,R12
+INS 140639f74 (RVA 00639F74)  BA 10 00 00 00                                   MOV EDX,0x10
+INS 140639f79 (RVA 00639F79)  4C 89 64 24 20                                   MOV qword ptr [RSP + 0x20],R12
+INS 140639f7e (RVA 00639F7E)  E8 0D 6F 5E 02                                   CALL 0x142c20e90
+    REF -> 142c20e90 (RVA 02C20E90) [UNCONDITIONAL_CALL, operand 0]
+INS 140639f83 (RVA 00639F83)  48 89 83 58 01 00 00                             MOV qword ptr [RBX + 0x158],RAX
+INS 140639f8a (RVA 00639F8A)  48 8B C8                                         MOV RCX,RAX
+INS 140639f8d (RVA 00639F8D)  4C 89 38                                         MOV qword ptr [RAX],R15
+INS 140639f90 (RVA 00639F90)  44 89 78 08                                      MOV dword ptr [RAX + 0x8],R15D
+INS 140639f94 (RVA 00639F94)  66 C7 40 0C 00 01                                MOV word ptr [RAX + 0xc],0x100
+INS 140639f9a (RVA 00639F9A)  E8 91 42 B7 FF                                   CALL 0x1401ae230
+    REF -> 1401ae230 (RVA 001AE230) [UNCONDITIONAL_CALL, operand 0]
+INS 140639f9f (RVA 00639F9F)  48 8B 8B 58 01 00 00                             MOV RCX,qword ptr [RBX + 0x158]
+INS 140639fa6 (RVA 00639FA6)  48 8B D5                                         MOV RDX,RBP
+INS 140639fa9 (RVA 00639FA9)  E8 72 77 BD FF                                   CALL 0x140211720
+    REF -> 140211720 (RVA 00211720) [UNCONDITIONAL_CALL, operand 0]
+INS 140639fae (RVA 00639FAE)  48 8B 84 24 A0 03 00 00                          MOV RAX,qword ptr [RSP + 0x3a0]
+INS 140639fb6 (RVA 00639FB6)  4C 8D 9C 24 70 03 00 00                          LEA R11,[RSP + 0x370]
+INS 140639fbe (RVA 00639FBE)  49 8B 5B 38                                      MOV RBX,qword ptr [R11 + 0x38]
+INS 140639fc2 (RVA 00639FC2)  49 8B 6B 40                                      MOV RBP,qword ptr [R11 + 0x40]
+INS 140639fc6 (RVA 00639FC6)  49 8B E3                                         MOV RSP,R11
+INS 140639fc9 (RVA 00639FC9)  41 5F                                            POP R15
+INS 140639fcb (RVA 00639FCB)  41 5E                                            POP R14
+INS 140639fcd (RVA 00639FCD)  41 5C                                            POP R12
+INS 140639fcf (RVA 00639FCF)  5F                                               POP RDI
+INS 140639fd0 (RVA 00639FD0)  5E                                               POP RSI
+INS 140639fd1 (RVA 00639FD1)  C3                                               RET
+Code units emitted: 204
+
+
+===== CANDIDATE CALLER 00639490 =====
+Reachable instructions from 140639490: 74
+Function: FUN_140639490
+Body: [[140639490, 14063960b]]
+Observed helper callsite: 1406395d3 (RVA 006395D3)
+References into caller entry:
+  1474c68a4 (RVA 074C68A4) -> 140639490 [DATA]
+  Reference count: 1
+Decompiler completed: true
+----- DECOMPILER OUTPUT -----
+
+undefined4 *
+FUN_140639490(undefined8 param_1,undefined4 *param_2,undefined8 param_3,undefined8 param_4,
+             undefined8 param_5,undefined8 param_6,undefined8 param_7,undefined1 param_8,
+             undefined4 *param_9,undefined1 param_10,undefined1 param_11)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  undefined8 uVar3;
+  undefined8 uStack_58;
+  ulonglong uStack_50;
+  undefined4 uStack_48;
+  undefined4 uStack_44;
+  undefined4 uStack_40;
+  undefined4 uStack_3c;
+  undefined4 uStack_38;
+  undefined4 uStack_34;
+  undefined4 uStack_30;
+  undefined1 uStack_2c;
+  undefined2 uStack_2b;
+  undefined1 uStack_29;
+  undefined8 uStack_28;
+  undefined8 uStack_20;
+  undefined8 uStack_18;
+  undefined8 uStack_10;
+  
+  *param_2 = 0;
+  _guard_check_icall(param_2);
+  uStack_50 = uStack_50 & 0xffffffffffffff00;
+  uStack_28 = 0;
+  uStack_20 = 0;
+  uStack_18 = 0;
+  uStack_10 = 0;
+  uStack_58 = 0;
+  uStack_38 = param_9[4];
+  uStack_34 = param_9[5];
+  uStack_30 = param_9[6];
+  uVar1 = param_9[7];
+  uStack_48 = *param_9;
+  uStack_44 = param_9[1];
+  uStack_40 = param_9[2];
+  uStack_3c = param_9[3];
+  uStack_2c = (undefined1)uVar1;
+  uStack_2b = (undefined2)((uint)uVar1 >> 8);
+  uStack_29 = (undefined1)((uint)uVar1 >> 0x18);
+  uVar3 = FUN_140639be0(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,&uStack_48,
+                        &uStack_58,param_10,param_11,0,&uStack_28);
+  do {
+    iVar2 = FUN_14063a6d0(param_1,uVar3);
+  } while (iVar2 == 0);
+  return param_2;
+}
+
+
+----- CALLER LISTING -----
+140639490 (RVA 00639490) 48 89 5C 24 08  MOV qword ptr [RSP + 0x8],RBX
+140639495 (RVA 00639495) 48 89 74 24 10  MOV qword ptr [RSP + 0x10],RSI
+14063949a (RVA 0063949A) 48 89 7C 24 18  MOV qword ptr [RSP + 0x18],RDI
+14063949f (RVA 0063949F) 41 56  PUSH R14
+1406394a1 (RVA 006394A1) 48 81 EC C0 00 00 00  SUB RSP,0xc0
+1406394a8 (RVA 006394A8) 48 8B F1  MOV RSI,RCX
+1406394ab (RVA 006394AB) C7 02 00 00 00 00  MOV dword ptr [RDX],0x0
+1406394b1 (RVA 006394B1) 48 8B CA  MOV RCX,RDX
+1406394b4 (RVA 006394B4) 49 8B D9  MOV RBX,R9
+1406394b7 (RVA 006394B7) 49 8B F8  MOV RDI,R8
+1406394ba (RVA 006394BA) 4C 8B F2  MOV R14,RDX
+1406394bd (RVA 006394BD) E8 6E 4D B7 FF  CALL 0x1401ae230
+    REF -> 1401ae230 (RVA 001AE230) [UNCONDITIONAL_CALL]
+1406394c2 (RVA 006394C2) 33 C0  XOR EAX,EAX
+1406394c4 (RVA 006394C4) 0F 57 C0  XORPS XMM0,XMM0
+1406394c7 (RVA 006394C7) 48 89 44 24 70  MOV qword ptr [RSP + 0x70],RAX
+1406394cc (RVA 006394CC) 0F 57 C9  XORPS XMM1,XMM1
+1406394cf (RVA 006394CF) 88 44 24 78  MOV byte ptr [RSP + 0x78],AL
+1406394d3 (RVA 006394D3) 4C 8B CB  MOV R9,RBX
+1406394d6 (RVA 006394D6) 0F 11 84 24 90 00 00 00  MOVUPS xmmword ptr [RSP + 0x90],XMM0
+1406394de (RVA 006394DE) 48 89 84 24 91 00 00 00  MOV qword ptr [RSP + 0x91],RAX
+1406394e6 (RVA 006394E6) 4C 8B C7  MOV R8,RDI
+1406394e9 (RVA 006394E9) 89 84 24 99 00 00 00  MOV dword ptr [RSP + 0x99],EAX
+1406394f0 (RVA 006394F0) 49 8B D6  MOV RDX,R14
+1406394f3 (RVA 006394F3) 66 89 84 24 9D 00 00 00  MOV word ptr [RSP + 0x9d],AX
+1406394fb (RVA 006394FB) 48 8B CE  MOV RCX,RSI
+1406394fe (RVA 006394FE) 88 84 24 9F 00 00 00  MOV byte ptr [RSP + 0x9f],AL
+140639505 (RVA 00639505) 48 8B 84 24 10 01 00 00  MOV RAX,qword ptr [RSP + 0x110]
+14063950d (RVA 0063950D) 0F 11 84 24 80 00 00 00  MOVUPS xmmword ptr [RSP + 0x80],XMM0
+140639515 (RVA 00639515) 0F 11 8C 24 81 00 00 00  MOVUPS xmmword ptr [RSP + 0x81],XMM1
+14063951d (RVA 0063951D) 0F 10 84 24 80 00 00 00  MOVUPS XMM0,xmmword ptr [RSP + 0x80]
+140639525 (RVA 00639525) 0F 10 8C 24 90 00 00 00  MOVUPS XMM1,xmmword ptr [RSP + 0x90]
+14063952d (RVA 0063952D) 0F 29 84 24 A0 00 00 00  MOVAPS xmmword ptr [RSP + 0xa0],XMM0
+140639535 (RVA 00639535) 0F 28 44 24 70  MOVAPS XMM0,xmmword ptr [RSP + 0x70]
+14063953a (RVA 0063953A) 66 0F 7F 44 24 70  MOVDQA xmmword ptr [RSP + 0x70],XMM0
+140639540 (RVA 00639540) 0F 10 40 10  MOVUPS XMM0,xmmword ptr [RAX + 0x10]
+140639544 (RVA 00639544) 0F 29 8C 24 B0 00 00 00  MOVAPS xmmword ptr [RSP + 0xb0],XMM1
+14063954c (RVA 0063954C) 0F 10 08  MOVUPS XMM1,xmmword ptr [RAX]
+14063954f (RVA 0063954F) 48 8D 84 24 A0 00 00 00  LEA RAX,[RSP + 0xa0]
+140639557 (RVA 00639557) 0F 29 84 24 90 00 00 00  MOVAPS xmmword ptr [RSP + 0x90],XMM0
+14063955f (RVA 0063955F) 48 89 44 24 68  MOV qword ptr [RSP + 0x68],RAX
+140639564 (RVA 00639564) 0F B6 84 24 20 01 00 00  MOVZX EAX,byte ptr [RSP + 0x120]
+14063956c (RVA 0063956C) C6 44 24 60 00  MOV byte ptr [RSP + 0x60],0x0
+140639571 (RVA 00639571) 88 44 24 58  MOV byte ptr [RSP + 0x58],AL
+140639575 (RVA 00639575) 0F B6 84 24 18 01 00 00  MOVZX EAX,byte ptr [RSP + 0x118]
+14063957d (RVA 0063957D) 88 44 24 50  MOV byte ptr [RSP + 0x50],AL
+140639581 (RVA 00639581) 48 8D 44 24 70  LEA RAX,[RSP + 0x70]
+140639586 (RVA 00639586) 48 89 44 24 48  MOV qword ptr [RSP + 0x48],RAX
+14063958b (RVA 0063958B) 48 8D 84 24 80 00 00 00  LEA RAX,[RSP + 0x80]
+140639593 (RVA 00639593) 48 89 44 24 40  MOV qword ptr [RSP + 0x40],RAX
+140639598 (RVA 00639598) 0F B6 84 24 08 01 00 00  MOVZX EAX,byte ptr [RSP + 0x108]
+1406395a0 (RVA 006395A0) 88 44 24 38  MOV byte ptr [RSP + 0x38],AL
+1406395a4 (RVA 006395A4) 48 8B 84 24 00 01 00 00  MOV RAX,qword ptr [RSP + 0x100]
+1406395ac (RVA 006395AC) 48 89 44 24 30  MOV qword ptr [RSP + 0x30],RAX
+1406395b1 (RVA 006395B1) 48 8B 84 24 F8 00 00 00  MOV RAX,qword ptr [RSP + 0xf8]
+1406395b9 (RVA 006395B9) 48 89 44 24 28  MOV qword ptr [RSP + 0x28],RAX
+1406395be (RVA 006395BE) 48 8B 84 24 F0 00 00 00  MOV RAX,qword ptr [RSP + 0xf0]
+1406395c6 (RVA 006395C6) 48 89 44 24 20  MOV qword ptr [RSP + 0x20],RAX
+1406395cb (RVA 006395CB) 0F 29 8C 24 80 00 00 00  MOVAPS xmmword ptr [RSP + 0x80],XMM1
+1406395d3 (RVA 006395D3) E8 08 06 00 00  CALL 0x140639be0
+    REF -> 140639be0 (RVA 00639BE0) [UNCONDITIONAL_CALL]
+1406395d8 (RVA 006395D8) 48 8B D8  MOV RBX,RAX
+1406395db (RVA 006395DB) 0F 1F 44 00 00  NOP dword ptr [RAX + RAX*0x1]
+1406395e0 (RVA 006395E0) 48 8B D3  MOV RDX,RBX
+1406395e3 (RVA 006395E3) 48 8B CE  MOV RCX,RSI
+1406395e6 (RVA 006395E6) E8 E5 10 00 00  CALL 0x14063a6d0
+    REF -> 14063a6d0 (RVA 0063A6D0) [UNCONDITIONAL_CALL]
+1406395eb (RVA 006395EB) 85 C0  TEST EAX,EAX
+1406395ed (RVA 006395ED) 74 F1  JZ 0x1406395e0
+    REF -> 1406395e0 (RVA 006395E0) [CONDITIONAL_JUMP]
+1406395ef (RVA 006395EF) 4C 8D 9C 24 C0 00 00 00  LEA R11,[RSP + 0xc0]
+1406395f7 (RVA 006395F7) 49 8B C6  MOV RAX,R14
+1406395fa (RVA 006395FA) 49 8B 5B 10  MOV RBX,qword ptr [R11 + 0x10]
+1406395fe (RVA 006395FE) 49 8B 73 18  MOV RSI,qword ptr [R11 + 0x18]
+140639602 (RVA 00639602) 49 8B 7B 20  MOV RDI,qword ptr [R11 + 0x20]
+140639606 (RVA 00639606) 49 8B E3  MOV RSP,R11
+140639609 (RVA 00639609) 41 5E  POP R14
+14063960b (RVA 0063960B) C3  RET
+Code units emitted: 74
+
+===== CANDIDATE CALLER 00639A70 =====
+Reachable instructions from 140639a70: 72
+Function: FUN_140639a70
+Body: [[140639a70, 140639bdb]]
+Observed helper callsite: 140639b99 (RVA 00639B99)
+References into caller entry:
+  1474c68c8 (RVA 074C68C8) -> 140639a70 [DATA]
+  Reference count: 1
+Decompiler completed: true
+----- DECOMPILER OUTPUT -----
+
+undefined4 *
+FUN_140639a70(undefined8 param_1,undefined4 *param_2,undefined8 param_3,undefined8 param_4,
+             undefined8 param_5,undefined4 *param_6)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  longlong lVar3;
+  undefined8 uStack_58;
+  ulonglong uStack_50;
+  undefined4 uStack_48;
+  undefined4 uStack_44;
+  undefined4 uStack_40;
+  undefined4 uStack_3c;
+  undefined4 uStack_38;
+  undefined4 uStack_34;
+  undefined4 uStack_30;
+  undefined1 uStack_2c;
+  undefined2 uStack_2b;
+  undefined1 uStack_29;
+  undefined8 uStack_28;
+  undefined8 uStack_20;
+  undefined8 uStack_18;
+  undefined8 uStack_10;
+  
+  *param_2 = 0;
+  _guard_check_icall(param_2);
+  uStack_50 = uStack_50 & 0xffffffffffffff00;
+  uStack_28 = 0;
+  uStack_20 = 0;
+  uStack_18 = 0;
+  uStack_10 = 0;
+  uStack_58 = 0;
+  uStack_38 = param_6[4];
+  uStack_34 = param_6[5];
+  uStack_30 = param_6[6];
+  uVar1 = param_6[7];
+  uStack_48 = *param_6;
+  uStack_44 = param_6[1];
+  uStack_40 = param_6[2];
+  uStack_3c = param_6[3];
+  uStack_2c = (undefined1)uVar1;
+  uStack_2b = (undefined2)((uint)uVar1 >> 8);
+  uStack_29 = (undefined1)((uint)uVar1 >> 0x18);
+  lVar3 = FUN_140639be0(param_1,param_2,param_3,param_4,param_5,0,0x1462d8750,0,&uStack_48,
+                        &uStack_58,0,0,0,&uStack_28);
+  *(undefined1 *)(lVar3 + 0x250) = 0;
+  *(undefined1 *)(lVar3 + 0x1cb) = 0;
+  do {
+    iVar2 = FUN_14063a6d0(param_1,lVar3);
+  } while (iVar2 == 0);
+  return param_2;
+}
+
+
+----- CALLER LISTING -----
+140639a70 (RVA 00639A70) 48 89 5C 24 08  MOV qword ptr [RSP + 0x8],RBX
+140639a75 (RVA 00639A75) 48 89 74 24 10  MOV qword ptr [RSP + 0x10],RSI
+140639a7a (RVA 00639A7A) 48 89 7C 24 18  MOV qword ptr [RSP + 0x18],RDI
+140639a7f (RVA 00639A7F) 41 56  PUSH R14
+140639a81 (RVA 00639A81) 48 81 EC C0 00 00 00  SUB RSP,0xc0
+140639a88 (RVA 00639A88) 48 8B F1  MOV RSI,RCX
+140639a8b (RVA 00639A8B) C7 02 00 00 00 00  MOV dword ptr [RDX],0x0
+140639a91 (RVA 00639A91) 48 8B CA  MOV RCX,RDX
+140639a94 (RVA 00639A94) 49 8B D9  MOV RBX,R9
+140639a97 (RVA 00639A97) 49 8B F8  MOV RDI,R8
+140639a9a (RVA 00639A9A) 4C 8B F2  MOV R14,RDX
+140639a9d (RVA 00639A9D) E8 8E 47 B7 FF  CALL 0x1401ae230
+    REF -> 1401ae230 (RVA 001AE230) [UNCONDITIONAL_CALL]
+140639aa2 (RVA 00639AA2) 33 C0  XOR EAX,EAX
+140639aa4 (RVA 00639AA4) 0F 57 C0  XORPS XMM0,XMM0
+140639aa7 (RVA 00639AA7) 0F 11 84 24 90 00 00 00  MOVUPS xmmword ptr [RSP + 0x90],XMM0
+140639aaf (RVA 00639AAF) 48 89 84 24 91 00 00 00  MOV qword ptr [RSP + 0x91],RAX
+140639ab7 (RVA 00639AB7) 4C 8B CB  MOV R9,RBX
+140639aba (RVA 00639ABA) 89 84 24 99 00 00 00  MOV dword ptr [RSP + 0x99],EAX
+140639ac1 (RVA 00639AC1) 0F 57 C9  XORPS XMM1,XMM1
+140639ac4 (RVA 00639AC4) 66 89 84 24 9D 00 00 00  MOV word ptr [RSP + 0x9d],AX
+140639acc (RVA 00639ACC) 4C 8B C7  MOV R8,RDI
+140639acf (RVA 00639ACF) 88 84 24 9F 00 00 00  MOV byte ptr [RSP + 0x9f],AL
+140639ad6 (RVA 00639AD6) 49 8B D6  MOV RDX,R14
+140639ad9 (RVA 00639AD9) 48 89 44 24 70  MOV qword ptr [RSP + 0x70],RAX
+140639ade (RVA 00639ADE) 48 8B CE  MOV RCX,RSI
+140639ae1 (RVA 00639AE1) 88 44 24 78  MOV byte ptr [RSP + 0x78],AL
+140639ae5 (RVA 00639AE5) 48 8B 84 24 F8 00 00 00  MOV RAX,qword ptr [RSP + 0xf8]
+140639aed (RVA 00639AED) 0F 11 84 24 80 00 00 00  MOVUPS xmmword ptr [RSP + 0x80],XMM0
+140639af5 (RVA 00639AF5) 0F 11 8C 24 81 00 00 00  MOVUPS xmmword ptr [RSP + 0x81],XMM1
+140639afd (RVA 00639AFD) 0F 10 84 24 80 00 00 00  MOVUPS XMM0,xmmword ptr [RSP + 0x80]
+140639b05 (RVA 00639B05) 0F 10 8C 24 90 00 00 00  MOVUPS XMM1,xmmword ptr [RSP + 0x90]
+140639b0d (RVA 00639B0D) 0F 29 84 24 A0 00 00 00  MOVAPS xmmword ptr [RSP + 0xa0],XMM0
+140639b15 (RVA 00639B15) 0F 28 44 24 70  MOVAPS XMM0,xmmword ptr [RSP + 0x70]
+140639b1a (RVA 00639B1A) 66 0F 7F 44 24 70  MOVDQA xmmword ptr [RSP + 0x70],XMM0
+140639b20 (RVA 00639B20) 0F 28 40 10  MOVAPS XMM0,xmmword ptr [RAX + 0x10]
+140639b24 (RVA 00639B24) 0F 29 8C 24 B0 00 00 00  MOVAPS xmmword ptr [RSP + 0xb0],XMM1
+140639b2c (RVA 00639B2C) 0F 28 08  MOVAPS XMM1,xmmword ptr [RAX]
+140639b2f (RVA 00639B2F) 48 8D 84 24 A0 00 00 00  LEA RAX,[RSP + 0xa0]
+140639b37 (RVA 00639B37) 48 89 44 24 68  MOV qword ptr [RSP + 0x68],RAX
+140639b3c (RVA 00639B3C) 48 8D 44 24 70  LEA RAX,[RSP + 0x70]
+140639b41 (RVA 00639B41) C6 44 24 60 00  MOV byte ptr [RSP + 0x60],0x0
+140639b46 (RVA 00639B46) C6 44 24 58 00  MOV byte ptr [RSP + 0x58],0x0
+140639b4b (RVA 00639B4B) C6 44 24 50 00  MOV byte ptr [RSP + 0x50],0x0
+140639b50 (RVA 00639B50) 48 89 44 24 48  MOV qword ptr [RSP + 0x48],RAX
+140639b55 (RVA 00639B55) 48 8D 84 24 80 00 00 00  LEA RAX,[RSP + 0x80]
+140639b5d (RVA 00639B5D) 48 89 44 24 40  MOV qword ptr [RSP + 0x40],RAX
+140639b62 (RVA 00639B62) 48 8D 05 E7 EB C9 05  LEA RAX,[0x1462d8750]
+140639b69 (RVA 00639B69) C6 44 24 38 00  MOV byte ptr [RSP + 0x38],0x0
+140639b6e (RVA 00639B6E) 48 89 44 24 30  MOV qword ptr [RSP + 0x30],RAX
+140639b73 (RVA 00639B73) 48 8B 84 24 F0 00 00 00  MOV RAX,qword ptr [RSP + 0xf0]
+140639b7b (RVA 00639B7B) 48 C7 44 24 28 00 00 00 00  MOV qword ptr [RSP + 0x28],0x0
+140639b84 (RVA 00639B84) 48 89 44 24 20  MOV qword ptr [RSP + 0x20],RAX
+140639b89 (RVA 00639B89) 0F 29 8C 24 80 00 00 00  MOVAPS xmmword ptr [RSP + 0x80],XMM1
+140639b91 (RVA 00639B91) 0F 29 84 24 90 00 00 00  MOVAPS xmmword ptr [RSP + 0x90],XMM0
+140639b99 (RVA 00639B99) E8 42 00 00 00  CALL 0x140639be0
+    REF -> 140639be0 (RVA 00639BE0) [UNCONDITIONAL_CALL]
+140639b9e (RVA 00639B9E) 48 8B D8  MOV RBX,RAX
+140639ba1 (RVA 00639BA1) C6 80 50 02 00 00 00  MOV byte ptr [RAX + 0x250],0x0
+140639ba8 (RVA 00639BA8) C6 80 CB 01 00 00 00  MOV byte ptr [RAX + 0x1cb],0x0
+140639baf (RVA 00639BAF) 90  NOP
+140639bb0 (RVA 00639BB0) 48 8B D3  MOV RDX,RBX
+140639bb3 (RVA 00639BB3) 48 8B CE  MOV RCX,RSI
+140639bb6 (RVA 00639BB6) E8 15 0B 00 00  CALL 0x14063a6d0
+    REF -> 14063a6d0 (RVA 0063A6D0) [UNCONDITIONAL_CALL]
+140639bbb (RVA 00639BBB) 85 C0  TEST EAX,EAX
+140639bbd (RVA 00639BBD) 74 F1  JZ 0x140639bb0
+    REF -> 140639bb0 (RVA 00639BB0) [CONDITIONAL_JUMP]
+140639bbf (RVA 00639BBF) 4C 8D 9C 24 C0 00 00 00  LEA R11,[RSP + 0xc0]
+140639bc7 (RVA 00639BC7) 49 8B C6  MOV RAX,R14
+140639bca (RVA 00639BCA) 49 8B 5B 10  MOV RBX,qword ptr [R11 + 0x10]
+140639bce (RVA 00639BCE) 49 8B 73 18  MOV RSI,qword ptr [R11 + 0x18]
+140639bd2 (RVA 00639BD2) 49 8B 7B 20  MOV RDI,qword ptr [R11 + 0x20]
+140639bd6 (RVA 00639BD6) 49 8B E3  MOV RSP,R11
+140639bd9 (RVA 00639BD9) 41 5E  POP R14
+140639bdb (RVA 00639BDB) C3  RET
+Code units emitted: 72
