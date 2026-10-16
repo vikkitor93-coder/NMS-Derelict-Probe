@@ -1,0 +1,65 @@
+Executable: /G:/SteamLibrary/steamapps/common/No Man's Sky/Binaries/NMS.exe
+Image base: 140000000
+Expected NMS.exe SHA-256: 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499
+
+===== SUBOBJECT INITIALIZER 00227A40 =====
+Entry: 140227a40 (RVA 00227A40)
+Reachable instructions: 26
+Function: FUN_140227a40
+Body: [[140227a40, 140227aa8]]
+Cross-references to entry:
+  14749eb48 (RVA 0749EB48) -> 140227a40 [DATA, operand 0]
+  1406396c2 (RVA 006396C2) -> 140227a40 [UNCONDITIONAL_CALL, operand 0]
+  Reference count: 2
+Decompiler completed: true
+----- DECOMPILER OUTPUT -----
+
+undefined8 * FUN_140227a40(undefined8 *param_1,longlong param_2)
+
+{
+  undefined8 uVar1;
+  
+  *param_1 = 0;
+  param_1[1] = 0;
+  uVar1 = FUN_142bf9a00(param_1,*(undefined8 *)(param_2 + 8),*(undefined4 *)(param_2 + 4),0x20,8,
+                        0xffffffff,0,0);
+  param_1[1] = uVar1;
+  uVar1 = *(undefined8 *)(param_2 + 0x18);
+  param_1[2] = *(undefined8 *)(param_2 + 0x10);
+  param_1[3] = uVar1;
+  uVar1 = *(undefined8 *)(param_2 + 0x28);
+  param_1[4] = *(undefined8 *)(param_2 + 0x20);
+  param_1[5] = uVar1;
+  return param_1;
+}
+
+
+----- LISTING -----
+140227a40 (RVA 00227A40) 48 89 5C 24 08  MOV qword ptr [RSP + 0x8],RBX
+140227a45 (RVA 00227A45) 57  PUSH RDI
+140227a46 (RVA 00227A46) 48 83 EC 40  SUB RSP,0x40
+140227a4a (RVA 00227A4A) 33 C0  XOR EAX,EAX
+140227a4c (RVA 00227A4C) 48 8B DA  MOV RBX,RDX
+140227a4f (RVA 00227A4F) 48 89 44 24 38  MOV qword ptr [RSP + 0x38],RAX
+140227a54 (RVA 00227A54) 41 B9 20 00 00 00  MOV R9D,0x20
+140227a5a (RVA 00227A5A) 48 89 01  MOV qword ptr [RCX],RAX
+140227a5d (RVA 00227A5D) 48 8B F9  MOV RDI,RCX
+140227a60 (RVA 00227A60) 48 89 41 08  MOV qword ptr [RCX + 0x8],RAX
+140227a64 (RVA 00227A64) 44 8B 42 04  MOV R8D,dword ptr [RDX + 0x4]
+140227a68 (RVA 00227A68) 48 8B 52 08  MOV RDX,qword ptr [RDX + 0x8]
+140227a6c (RVA 00227A6C) 48 89 44 24 30  MOV qword ptr [RSP + 0x30],RAX
+140227a71 (RVA 00227A71) C7 44 24 28 FF FF FF FF  MOV dword ptr [RSP + 0x28],0xffffffff
+140227a79 (RVA 00227A79) 48 C7 44 24 20 08 00 00 00  MOV qword ptr [RSP + 0x20],0x8
+140227a82 (RVA 00227A82) E8 79 1F 9D 02  CALL 0x142bf9a00
+    REF -> 142bf9a00 (RVA 02BF9A00) [UNCONDITIONAL_CALL]
+140227a87 (RVA 00227A87) 48 89 47 08  MOV qword ptr [RDI + 0x8],RAX
+140227a8b (RVA 00227A8B) 48 8B C7  MOV RAX,RDI
+140227a8e (RVA 00227A8E) 0F 10 43 10  MOVUPS XMM0,xmmword ptr [RBX + 0x10]
+140227a92 (RVA 00227A92) 0F 11 47 10  MOVUPS xmmword ptr [RDI + 0x10],XMM0
+140227a96 (RVA 00227A96) 0F 10 43 20  MOVUPS XMM0,xmmword ptr [RBX + 0x20]
+140227a9a (RVA 00227A9A) 48 8B 5C 24 50  MOV RBX,qword ptr [RSP + 0x50]
+140227a9f (RVA 00227A9F) 0F 11 47 20  MOVUPS xmmword ptr [RDI + 0x20],XMM0
+140227aa3 (RVA 00227AA3) 48 83 C4 40  ADD RSP,0x40
+140227aa7 (RVA 00227AA7) 5F  POP RDI
+140227aa8 (RVA 00227AA8) C3  RET
+Code units emitted: 26

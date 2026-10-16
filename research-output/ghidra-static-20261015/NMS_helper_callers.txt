@@ -1,0 +1,294 @@
+Executable: /G:/SteamLibrary/steamapps/common/No Man's Sky/Binaries/NMS.exe
+Image base: 140000000
+Expected NMS.exe SHA-256: 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499
+
+===== CANDIDATE CALLER 00639490 =====
+Reachable instructions from 140639490: 74
+Function: FUN_140639490
+Body: [[140639490, 14063960b]]
+Observed helper callsite: 1406395d3 (RVA 006395D3)
+References into caller entry:
+  1474c68a4 (RVA 074C68A4) -> 140639490 [DATA]
+  Reference count: 1
+Decompiler completed: true
+----- DECOMPILER OUTPUT -----
+
+undefined4 *
+FUN_140639490(undefined8 param_1,undefined4 *param_2,undefined8 param_3,undefined8 param_4,
+             undefined8 param_5,undefined8 param_6,undefined8 param_7,undefined1 param_8,
+             undefined4 *param_9,undefined1 param_10,undefined1 param_11)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  undefined8 uVar3;
+  undefined8 uStack_58;
+  ulonglong uStack_50;
+  undefined4 uStack_48;
+  undefined4 uStack_44;
+  undefined4 uStack_40;
+  undefined4 uStack_3c;
+  undefined4 uStack_38;
+  undefined4 uStack_34;
+  undefined4 uStack_30;
+  undefined1 uStack_2c;
+  undefined2 uStack_2b;
+  undefined1 uStack_29;
+  undefined8 uStack_28;
+  undefined8 uStack_20;
+  undefined8 uStack_18;
+  undefined8 uStack_10;
+  
+  *param_2 = 0;
+  _guard_check_icall(param_2);
+  uStack_50 = uStack_50 & 0xffffffffffffff00;
+  uStack_28 = 0;
+  uStack_20 = 0;
+  uStack_18 = 0;
+  uStack_10 = 0;
+  uStack_58 = 0;
+  uStack_38 = param_9[4];
+  uStack_34 = param_9[5];
+  uStack_30 = param_9[6];
+  uVar1 = param_9[7];
+  uStack_48 = *param_9;
+  uStack_44 = param_9[1];
+  uStack_40 = param_9[2];
+  uStack_3c = param_9[3];
+  uStack_2c = (undefined1)uVar1;
+  uStack_2b = (undefined2)((uint)uVar1 >> 8);
+  uStack_29 = (undefined1)((uint)uVar1 >> 0x18);
+  uVar3 = FUN_140639be0(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,&uStack_48,
+                        &uStack_58,param_10,param_11,0,&uStack_28);
+  do {
+    iVar2 = FUN_14063a6d0(param_1,uVar3);
+  } while (iVar2 == 0);
+  return param_2;
+}
+
+
+----- CALLER LISTING -----
+140639490 (RVA 00639490) 48 89 5C 24 08  MOV qword ptr [RSP + 0x8],RBX
+140639495 (RVA 00639495) 48 89 74 24 10  MOV qword ptr [RSP + 0x10],RSI
+14063949a (RVA 0063949A) 48 89 7C 24 18  MOV qword ptr [RSP + 0x18],RDI
+14063949f (RVA 0063949F) 41 56  PUSH R14
+1406394a1 (RVA 006394A1) 48 81 EC C0 00 00 00  SUB RSP,0xc0
+1406394a8 (RVA 006394A8) 48 8B F1  MOV RSI,RCX
+1406394ab (RVA 006394AB) C7 02 00 00 00 00  MOV dword ptr [RDX],0x0
+1406394b1 (RVA 006394B1) 48 8B CA  MOV RCX,RDX
+1406394b4 (RVA 006394B4) 49 8B D9  MOV RBX,R9
+1406394b7 (RVA 006394B7) 49 8B F8  MOV RDI,R8
+1406394ba (RVA 006394BA) 4C 8B F2  MOV R14,RDX
+1406394bd (RVA 006394BD) E8 6E 4D B7 FF  CALL 0x1401ae230
+    REF -> 1401ae230 (RVA 001AE230) [UNCONDITIONAL_CALL]
+1406394c2 (RVA 006394C2) 33 C0  XOR EAX,EAX
+1406394c4 (RVA 006394C4) 0F 57 C0  XORPS XMM0,XMM0
+1406394c7 (RVA 006394C7) 48 89 44 24 70  MOV qword ptr [RSP + 0x70],RAX
+1406394cc (RVA 006394CC) 0F 57 C9  XORPS XMM1,XMM1
+1406394cf (RVA 006394CF) 88 44 24 78  MOV byte ptr [RSP + 0x78],AL
+1406394d3 (RVA 006394D3) 4C 8B CB  MOV R9,RBX
+1406394d6 (RVA 006394D6) 0F 11 84 24 90 00 00 00  MOVUPS xmmword ptr [RSP + 0x90],XMM0
+1406394de (RVA 006394DE) 48 89 84 24 91 00 00 00  MOV qword ptr [RSP + 0x91],RAX
+1406394e6 (RVA 006394E6) 4C 8B C7  MOV R8,RDI
+1406394e9 (RVA 006394E9) 89 84 24 99 00 00 00  MOV dword ptr [RSP + 0x99],EAX
+1406394f0 (RVA 006394F0) 49 8B D6  MOV RDX,R14
+1406394f3 (RVA 006394F3) 66 89 84 24 9D 00 00 00  MOV word ptr [RSP + 0x9d],AX
+1406394fb (RVA 006394FB) 48 8B CE  MOV RCX,RSI
+1406394fe (RVA 006394FE) 88 84 24 9F 00 00 00  MOV byte ptr [RSP + 0x9f],AL
+140639505 (RVA 00639505) 48 8B 84 24 10 01 00 00  MOV RAX,qword ptr [RSP + 0x110]
+14063950d (RVA 0063950D) 0F 11 84 24 80 00 00 00  MOVUPS xmmword ptr [RSP + 0x80],XMM0
+140639515 (RVA 00639515) 0F 11 8C 24 81 00 00 00  MOVUPS xmmword ptr [RSP + 0x81],XMM1
+14063951d (RVA 0063951D) 0F 10 84 24 80 00 00 00  MOVUPS XMM0,xmmword ptr [RSP + 0x80]
+140639525 (RVA 00639525) 0F 10 8C 24 90 00 00 00  MOVUPS XMM1,xmmword ptr [RSP + 0x90]
+14063952d (RVA 0063952D) 0F 29 84 24 A0 00 00 00  MOVAPS xmmword ptr [RSP + 0xa0],XMM0
+140639535 (RVA 00639535) 0F 28 44 24 70  MOVAPS XMM0,xmmword ptr [RSP + 0x70]
+14063953a (RVA 0063953A) 66 0F 7F 44 24 70  MOVDQA xmmword ptr [RSP + 0x70],XMM0
+140639540 (RVA 00639540) 0F 10 40 10  MOVUPS XMM0,xmmword ptr [RAX + 0x10]
+140639544 (RVA 00639544) 0F 29 8C 24 B0 00 00 00  MOVAPS xmmword ptr [RSP + 0xb0],XMM1
+14063954c (RVA 0063954C) 0F 10 08  MOVUPS XMM1,xmmword ptr [RAX]
+14063954f (RVA 0063954F) 48 8D 84 24 A0 00 00 00  LEA RAX,[RSP + 0xa0]
+140639557 (RVA 00639557) 0F 29 84 24 90 00 00 00  MOVAPS xmmword ptr [RSP + 0x90],XMM0
+14063955f (RVA 0063955F) 48 89 44 24 68  MOV qword ptr [RSP + 0x68],RAX
+140639564 (RVA 00639564) 0F B6 84 24 20 01 00 00  MOVZX EAX,byte ptr [RSP + 0x120]
+14063956c (RVA 0063956C) C6 44 24 60 00  MOV byte ptr [RSP + 0x60],0x0
+140639571 (RVA 00639571) 88 44 24 58  MOV byte ptr [RSP + 0x58],AL
+140639575 (RVA 00639575) 0F B6 84 24 18 01 00 00  MOVZX EAX,byte ptr [RSP + 0x118]
+14063957d (RVA 0063957D) 88 44 24 50  MOV byte ptr [RSP + 0x50],AL
+140639581 (RVA 00639581) 48 8D 44 24 70  LEA RAX,[RSP + 0x70]
+140639586 (RVA 00639586) 48 89 44 24 48  MOV qword ptr [RSP + 0x48],RAX
+14063958b (RVA 0063958B) 48 8D 84 24 80 00 00 00  LEA RAX,[RSP + 0x80]
+140639593 (RVA 00639593) 48 89 44 24 40  MOV qword ptr [RSP + 0x40],RAX
+140639598 (RVA 00639598) 0F B6 84 24 08 01 00 00  MOVZX EAX,byte ptr [RSP + 0x108]
+1406395a0 (RVA 006395A0) 88 44 24 38  MOV byte ptr [RSP + 0x38],AL
+1406395a4 (RVA 006395A4) 48 8B 84 24 00 01 00 00  MOV RAX,qword ptr [RSP + 0x100]
+1406395ac (RVA 006395AC) 48 89 44 24 30  MOV qword ptr [RSP + 0x30],RAX
+1406395b1 (RVA 006395B1) 48 8B 84 24 F8 00 00 00  MOV RAX,qword ptr [RSP + 0xf8]
+1406395b9 (RVA 006395B9) 48 89 44 24 28  MOV qword ptr [RSP + 0x28],RAX
+1406395be (RVA 006395BE) 48 8B 84 24 F0 00 00 00  MOV RAX,qword ptr [RSP + 0xf0]
+1406395c6 (RVA 006395C6) 48 89 44 24 20  MOV qword ptr [RSP + 0x20],RAX
+1406395cb (RVA 006395CB) 0F 29 8C 24 80 00 00 00  MOVAPS xmmword ptr [RSP + 0x80],XMM1
+1406395d3 (RVA 006395D3) E8 08 06 00 00  CALL 0x140639be0
+    REF -> 140639be0 (RVA 00639BE0) [UNCONDITIONAL_CALL]
+1406395d8 (RVA 006395D8) 48 8B D8  MOV RBX,RAX
+1406395db (RVA 006395DB) 0F 1F 44 00 00  NOP dword ptr [RAX + RAX*0x1]
+1406395e0 (RVA 006395E0) 48 8B D3  MOV RDX,RBX
+1406395e3 (RVA 006395E3) 48 8B CE  MOV RCX,RSI
+1406395e6 (RVA 006395E6) E8 E5 10 00 00  CALL 0x14063a6d0
+    REF -> 14063a6d0 (RVA 0063A6D0) [UNCONDITIONAL_CALL]
+1406395eb (RVA 006395EB) 85 C0  TEST EAX,EAX
+1406395ed (RVA 006395ED) 74 F1  JZ 0x1406395e0
+    REF -> 1406395e0 (RVA 006395E0) [CONDITIONAL_JUMP]
+1406395ef (RVA 006395EF) 4C 8D 9C 24 C0 00 00 00  LEA R11,[RSP + 0xc0]
+1406395f7 (RVA 006395F7) 49 8B C6  MOV RAX,R14
+1406395fa (RVA 006395FA) 49 8B 5B 10  MOV RBX,qword ptr [R11 + 0x10]
+1406395fe (RVA 006395FE) 49 8B 73 18  MOV RSI,qword ptr [R11 + 0x18]
+140639602 (RVA 00639602) 49 8B 7B 20  MOV RDI,qword ptr [R11 + 0x20]
+140639606 (RVA 00639606) 49 8B E3  MOV RSP,R11
+140639609 (RVA 00639609) 41 5E  POP R14
+14063960b (RVA 0063960B) C3  RET
+Code units emitted: 74
+
+===== CANDIDATE CALLER 00639A70 =====
+Reachable instructions from 140639a70: 72
+Function: FUN_140639a70
+Body: [[140639a70, 140639bdb]]
+Observed helper callsite: 140639b99 (RVA 00639B99)
+References into caller entry:
+  1474c68c8 (RVA 074C68C8) -> 140639a70 [DATA]
+  Reference count: 1
+Decompiler completed: true
+----- DECOMPILER OUTPUT -----
+
+undefined4 *
+FUN_140639a70(undefined8 param_1,undefined4 *param_2,undefined8 param_3,undefined8 param_4,
+             undefined8 param_5,undefined4 *param_6)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  longlong lVar3;
+  undefined8 uStack_58;
+  ulonglong uStack_50;
+  undefined4 uStack_48;
+  undefined4 uStack_44;
+  undefined4 uStack_40;
+  undefined4 uStack_3c;
+  undefined4 uStack_38;
+  undefined4 uStack_34;
+  undefined4 uStack_30;
+  undefined1 uStack_2c;
+  undefined2 uStack_2b;
+  undefined1 uStack_29;
+  undefined8 uStack_28;
+  undefined8 uStack_20;
+  undefined8 uStack_18;
+  undefined8 uStack_10;
+  
+  *param_2 = 0;
+  _guard_check_icall(param_2);
+  uStack_50 = uStack_50 & 0xffffffffffffff00;
+  uStack_28 = 0;
+  uStack_20 = 0;
+  uStack_18 = 0;
+  uStack_10 = 0;
+  uStack_58 = 0;
+  uStack_38 = param_6[4];
+  uStack_34 = param_6[5];
+  uStack_30 = param_6[6];
+  uVar1 = param_6[7];
+  uStack_48 = *param_6;
+  uStack_44 = param_6[1];
+  uStack_40 = param_6[2];
+  uStack_3c = param_6[3];
+  uStack_2c = (undefined1)uVar1;
+  uStack_2b = (undefined2)((uint)uVar1 >> 8);
+  uStack_29 = (undefined1)((uint)uVar1 >> 0x18);
+  lVar3 = FUN_140639be0(param_1,param_2,param_3,param_4,param_5,0,0x1462d8750,0,&uStack_48,
+                        &uStack_58,0,0,0,&uStack_28);
+  *(undefined1 *)(lVar3 + 0x250) = 0;
+  *(undefined1 *)(lVar3 + 0x1cb) = 0;
+  do {
+    iVar2 = FUN_14063a6d0(param_1,lVar3);
+  } while (iVar2 == 0);
+  return param_2;
+}
+
+
+----- CALLER LISTING -----
+140639a70 (RVA 00639A70) 48 89 5C 24 08  MOV qword ptr [RSP + 0x8],RBX
+140639a75 (RVA 00639A75) 48 89 74 24 10  MOV qword ptr [RSP + 0x10],RSI
+140639a7a (RVA 00639A7A) 48 89 7C 24 18  MOV qword ptr [RSP + 0x18],RDI
+140639a7f (RVA 00639A7F) 41 56  PUSH R14
+140639a81 (RVA 00639A81) 48 81 EC C0 00 00 00  SUB RSP,0xc0
+140639a88 (RVA 00639A88) 48 8B F1  MOV RSI,RCX
+140639a8b (RVA 00639A8B) C7 02 00 00 00 00  MOV dword ptr [RDX],0x0
+140639a91 (RVA 00639A91) 48 8B CA  MOV RCX,RDX
+140639a94 (RVA 00639A94) 49 8B D9  MOV RBX,R9
+140639a97 (RVA 00639A97) 49 8B F8  MOV RDI,R8
+140639a9a (RVA 00639A9A) 4C 8B F2  MOV R14,RDX
+140639a9d (RVA 00639A9D) E8 8E 47 B7 FF  CALL 0x1401ae230
+    REF -> 1401ae230 (RVA 001AE230) [UNCONDITIONAL_CALL]
+140639aa2 (RVA 00639AA2) 33 C0  XOR EAX,EAX
+140639aa4 (RVA 00639AA4) 0F 57 C0  XORPS XMM0,XMM0
+140639aa7 (RVA 00639AA7) 0F 11 84 24 90 00 00 00  MOVUPS xmmword ptr [RSP + 0x90],XMM0
+140639aaf (RVA 00639AAF) 48 89 84 24 91 00 00 00  MOV qword ptr [RSP + 0x91],RAX
+140639ab7 (RVA 00639AB7) 4C 8B CB  MOV R9,RBX
+140639aba (RVA 00639ABA) 89 84 24 99 00 00 00  MOV dword ptr [RSP + 0x99],EAX
+140639ac1 (RVA 00639AC1) 0F 57 C9  XORPS XMM1,XMM1
+140639ac4 (RVA 00639AC4) 66 89 84 24 9D 00 00 00  MOV word ptr [RSP + 0x9d],AX
+140639acc (RVA 00639ACC) 4C 8B C7  MOV R8,RDI
+140639acf (RVA 00639ACF) 88 84 24 9F 00 00 00  MOV byte ptr [RSP + 0x9f],AL
+140639ad6 (RVA 00639AD6) 49 8B D6  MOV RDX,R14
+140639ad9 (RVA 00639AD9) 48 89 44 24 70  MOV qword ptr [RSP + 0x70],RAX
+140639ade (RVA 00639ADE) 48 8B CE  MOV RCX,RSI
+140639ae1 (RVA 00639AE1) 88 44 24 78  MOV byte ptr [RSP + 0x78],AL
+140639ae5 (RVA 00639AE5) 48 8B 84 24 F8 00 00 00  MOV RAX,qword ptr [RSP + 0xf8]
+140639aed (RVA 00639AED) 0F 11 84 24 80 00 00 00  MOVUPS xmmword ptr [RSP + 0x80],XMM0
+140639af5 (RVA 00639AF5) 0F 11 8C 24 81 00 00 00  MOVUPS xmmword ptr [RSP + 0x81],XMM1
+140639afd (RVA 00639AFD) 0F 10 84 24 80 00 00 00  MOVUPS XMM0,xmmword ptr [RSP + 0x80]
+140639b05 (RVA 00639B05) 0F 10 8C 24 90 00 00 00  MOVUPS XMM1,xmmword ptr [RSP + 0x90]
+140639b0d (RVA 00639B0D) 0F 29 84 24 A0 00 00 00  MOVAPS xmmword ptr [RSP + 0xa0],XMM0
+140639b15 (RVA 00639B15) 0F 28 44 24 70  MOVAPS XMM0,xmmword ptr [RSP + 0x70]
+140639b1a (RVA 00639B1A) 66 0F 7F 44 24 70  MOVDQA xmmword ptr [RSP + 0x70],XMM0
+140639b20 (RVA 00639B20) 0F 28 40 10  MOVAPS XMM0,xmmword ptr [RAX + 0x10]
+140639b24 (RVA 00639B24) 0F 29 8C 24 B0 00 00 00  MOVAPS xmmword ptr [RSP + 0xb0],XMM1
+140639b2c (RVA 00639B2C) 0F 28 08  MOVAPS XMM1,xmmword ptr [RAX]
+140639b2f (RVA 00639B2F) 48 8D 84 24 A0 00 00 00  LEA RAX,[RSP + 0xa0]
+140639b37 (RVA 00639B37) 48 89 44 24 68  MOV qword ptr [RSP + 0x68],RAX
+140639b3c (RVA 00639B3C) 48 8D 44 24 70  LEA RAX,[RSP + 0x70]
+140639b41 (RVA 00639B41) C6 44 24 60 00  MOV byte ptr [RSP + 0x60],0x0
+140639b46 (RVA 00639B46) C6 44 24 58 00  MOV byte ptr [RSP + 0x58],0x0
+140639b4b (RVA 00639B4B) C6 44 24 50 00  MOV byte ptr [RSP + 0x50],0x0
+140639b50 (RVA 00639B50) 48 89 44 24 48  MOV qword ptr [RSP + 0x48],RAX
+140639b55 (RVA 00639B55) 48 8D 84 24 80 00 00 00  LEA RAX,[RSP + 0x80]
+140639b5d (RVA 00639B5D) 48 89 44 24 40  MOV qword ptr [RSP + 0x40],RAX
+140639b62 (RVA 00639B62) 48 8D 05 E7 EB C9 05  LEA RAX,[0x1462d8750]
+140639b69 (RVA 00639B69) C6 44 24 38 00  MOV byte ptr [RSP + 0x38],0x0
+140639b6e (RVA 00639B6E) 48 89 44 24 30  MOV qword ptr [RSP + 0x30],RAX
+140639b73 (RVA 00639B73) 48 8B 84 24 F0 00 00 00  MOV RAX,qword ptr [RSP + 0xf0]
+140639b7b (RVA 00639B7B) 48 C7 44 24 28 00 00 00 00  MOV qword ptr [RSP + 0x28],0x0
+140639b84 (RVA 00639B84) 48 89 44 24 20  MOV qword ptr [RSP + 0x20],RAX
+140639b89 (RVA 00639B89) 0F 29 8C 24 80 00 00 00  MOVAPS xmmword ptr [RSP + 0x80],XMM1
+140639b91 (RVA 00639B91) 0F 29 84 24 90 00 00 00  MOVAPS xmmword ptr [RSP + 0x90],XMM0
+140639b99 (RVA 00639B99) E8 42 00 00 00  CALL 0x140639be0
+    REF -> 140639be0 (RVA 00639BE0) [UNCONDITIONAL_CALL]
+140639b9e (RVA 00639B9E) 48 8B D8  MOV RBX,RAX
+140639ba1 (RVA 00639BA1) C6 80 50 02 00 00 00  MOV byte ptr [RAX + 0x250],0x0
+140639ba8 (RVA 00639BA8) C6 80 CB 01 00 00 00  MOV byte ptr [RAX + 0x1cb],0x0
+140639baf (RVA 00639BAF) 90  NOP
+140639bb0 (RVA 00639BB0) 48 8B D3  MOV RDX,RBX
+140639bb3 (RVA 00639BB3) 48 8B CE  MOV RCX,RSI
+140639bb6 (RVA 00639BB6) E8 15 0B 00 00  CALL 0x14063a6d0
+    REF -> 14063a6d0 (RVA 0063A6D0) [UNCONDITIONAL_CALL]
+140639bbb (RVA 00639BBB) 85 C0  TEST EAX,EAX
+140639bbd (RVA 00639BBD) 74 F1  JZ 0x140639bb0
+    REF -> 140639bb0 (RVA 00639BB0) [CONDITIONAL_JUMP]
+140639bbf (RVA 00639BBF) 4C 8D 9C 24 C0 00 00 00  LEA R11,[RSP + 0xc0]
+140639bc7 (RVA 00639BC7) 49 8B C6  MOV RAX,R14
+140639bca (RVA 00639BCA) 49 8B 5B 10  MOV RBX,qword ptr [R11 + 0x10]
+140639bce (RVA 00639BCE) 49 8B 73 18  MOV RSI,qword ptr [R11 + 0x18]
+140639bd2 (RVA 00639BD2) 49 8B 7B 20  MOV RDI,qword ptr [R11 + 0x20]
+140639bd6 (RVA 00639BD6) 49 8B E3  MOV RSP,R11
+140639bd9 (RVA 00639BD9) 41 5E  POP R14
+140639bdb (RVA 00639BDB) C3  RET
+Code units emitted: 72
