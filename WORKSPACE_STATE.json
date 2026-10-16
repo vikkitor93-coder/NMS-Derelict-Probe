@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "updated_utc": "2026-10-16T22:09:00Z",
+  "updated_utc": "2026-10-16T22:14:00Z",
   "integration": {
     "branch": "main",
     "canonical_version": "0.3.69",
@@ -10,7 +10,7 @@
     "candidate_branch": "main",
     "candidate_base": "main@5cd18ea942680bfb95479cb7a2a967ba65d1d506",
     "candidate_status": "Surveyor 0.3.70 is published to main. Queued saved sessions now run concurrently in bounded groups of three, each with four isolated research actions; per-session reports are saved to research-output/automatic-session-batches and published as one hash-verified batch for all lanes. Full 225-test suite, compileall, and 186-file/39-part updater package checks pass. Windows installation validation remains pending.",
-    "current_research_action": "Matching-build assets confirm square salvage crates and footlockers share GenericReward / R_ABAND_CRATE; native selection, grant count, RNG input, and tech rank remain unresolved. A bounded component slot-23 trace found no reward-manager edge; B's new bounded scan reaches reward entry/list hashing but not a loaded-list consumer. The freighter worker FUN_1411015C0 callback chain resolves to resource traversal/state updates, not room topology; C is mapping the 0x90-byte params record and searching field-offset consumers. The strongest saved 0001550006607CAC / 00C9E8DF0327789E 9-room/32-salvage/19-footlocker record is marked validated-against-table and is not an independent live traversal; later runtime root captures are different sessions. The 0000750006606CAB / 2A41B0E7EF42A1F7 root is captured, but its user-reported 9/18/5 counts remain unjoined. Agents A-D continue distinct offline tasks; do not request live NMS action until these are exhausted."
+    "current_research_action": "Matching-build assets confirm square salvage crates and footlockers share GenericReward / R_ABAND_CRATE; native selection, grant count, RNG input, and tech rank remain unresolved. A bounded component slot-23 trace found no reward-manager edge; B's instruction-aware scan reaches hash/structure helpers but not loaded-list selection. The freighter worker FUN_1411015C0 callback chain resolves to resource traversal/state updates, not room topology; C is mapping the 0x90-byte params record and searching field-offset consumers. Cached session 20260929T175122Z_0001550006607CAC.json ties root 00C9E8DF0327789E to nine live scene parent labels Room 0..Room 8. Its crate scanner reports count 0, confidence unproven; the 32 salvage / 19 footlocker values are table-validated model output, not live counts. The 0000750006606CAB / 2A41B0E7EF42A1F7 root is captured, but its user-reported 9/18/5 counts remain unjoined. Agents A-D continue distinct offline tasks; do not request live NMS action until these are exhausted."
   },
   "lane_claims": {
     "runtime-dispatch": "claimed",
