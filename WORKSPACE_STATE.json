@@ -1,242 +1,242 @@
 {
-  "schema_version": 3,
-  "updated_utc": "2026-10-16T23:07:00Z",
-  "integration": {
-    "branch": "main",
-    "canonical_version": "0.3.69",
-    "current_objective": "Identify the No Man’s Sky 7.05 abandoned-freighter room/layout and container/reward generation paths, then determine whether captured seeds and system data can predict them.",
-    "shared_goal": "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
-    "candidate_version": "0.3.70",
-    "candidate_branch": "main",
-    "candidate_base": "main@5cd18ea942680bfb95479cb7a2a967ba65d1d506",
-    "candidate_status": "Surveyor 0.3.70 is published to main. Queued saved sessions now run concurrently in bounded groups of three, each with four isolated research actions; per-session reports are saved to research-output/automatic-session-batches and published as one hash-verified batch for all lanes. Full 225-test suite, compileall, and 186-file/39-part updater package checks pass. Windows installation validation remains pending.",
-    "current_research_action": "Verified against NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499: A traced GenericReward type-10 callback through 0x14054D060 and 0x14054F660 to manager row base +0x4B68+index*0x248; the +0x4F8 key flows to row-state/event maintenance, not a proven reward grant. B independently mapped GcRewardTable construction/parser/hash ownership around 0x140EEBD2F and 0x1424D1F30/0x1424DCFC0; actual list selection, grant, RNG, count and rank remain unknown. C verified manager entries initialize +0x30 null and publish at +0x90[index]; a callback-record +0x30 write is unrelated; async population and dungeon graph builder remain unresolved. D verified exact-build node hierarchy access: GetNodeNumChildren RVA 0x1843DA0, sibling helper VA 0x141843CD0, structure table at manager+0x70 with 0x14 records (count +0, parent +4, first child +8, next sibling +0x10); bounded traversal can establish scene-graph presence/Room association only, not active state or payout. Active candidate root from project-root.txt is D:\\Orca\\Temp\\NMS-Derelict-Probe-v0.3.75-build-20261015, PROBE_VERSION 0.3.46, source SHA-256 64309747C7F7FB3BD42E139864A13C5A4CC0DD1A9586EC3FB978B46532BDE6B1, matching installed file; main checkout source 0.3.40 is stale for runtime capture. D is implementing an isolated bounded capture delta; A follows post-selection consumers, B follows reward-table registry/lookup, C follows async loader into topology. Known validation vector remains session 20260929T175122Z_0001550006607CAC, 9 rooms and 32/19 authored refs, not confirmed live instances. Do not ask for a live run until candidate code is reviewed and built."
-  },
-  "lane_claims": {
-    "runtime-dispatch": "claimed",
-    "seed-lineage": "claimed",
-    "dungeon-decompile": "claimed",
-    "metadata": "claimed-agent-d-published"
-  },
-  "lanes": {
-    "runtime-dispatch": {
-      "branch": "main",
-      "status": "Probe 0.3.40 resets live root-seed captures on system change and reports raw/effective seed state separately; normal runtime check pending.",
-      "manifest": "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
-      "artifact": "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
-      "latest_review": "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
-      "extension_version": "1.0.6",
-      "human_validation_required": true,
-      "next_action": "Update Surveyor in-app, enter a different system, confirm the old root seed clears, then observe the next root capture's raw value, UseSeedValue, and effective state.",
-      "latest_report": "research-uploads/20261008T191019Z-parallel-action-test/combined-results.json",
-      "latest_report_sha256": "1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471"
-    },
-    "seed-lineage": {
-      "branch": "agent/seed-lineage",
-      "status": "Matching-build local Ghidra trace confirms both 006395D3 and 00639B99 directly call helper 00639BE0; its setup chain copies caller fifth-argument data into owner+0x138, the descriptor seed field later consumed at 0063A6D0. The caller input semantics and match to a particular captured runtime root remain unresolved.",
-      "manifest": "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
-      "result_summary": "Latest automatic combined report research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json verifies to 48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3; it pairs a fresh 000079 generation baseline with stale/different-sample seed-function (000155), caller (00006D), and upstream (000155) outputs. The later lane-exclusive 000079 seed-function artifact is hash-verified and aligns with caller/upstream on executable 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. A separate 000076 exact root capture records candidate 9C2818C7FE094FC8, public system seed D4759808, UseSeedValue=true, and caller 02C0860A; its executable identity is absent. Formula and dispatch target remain unresolved. Offline follow-up matched two same-executable caller sites (006395D3 and 00639B99) to common helper 00639BE0. Both return pointers are passed as RDX into 0063A6D0, which reads an embedded descriptor seed at owner+0x138. This is a producer/setup candidate, not proof the helper writes the seed.",
-      "human_validation_required": false,
-      "review": "agent-patches/seed-lineage/SEED_B_ROOT_CAPTURE_REVIEW_20261009T234615Z.json",
-      "next_action": "Trace the fifth incoming argument at both helper callers upstream and determine whether it matches a captured root seed. Then validate any candidate layout seed against a saved/live derelict observation; do not infer a layout formula from the descriptor write alone.",
-      "parallel_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
-      "extension_version": "1.0.6",
-      "latest_report": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json",
-      "latest_report_sha256": "48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3",
-      "candidate_extension_version": "1.0.6",
-      "build_request_id": "seed-lineage-fresh-baseline-action-20261009",
-      "latest_report_kind": "automatic_saved_session",
-      "latest_all_saved_evidence_snapshot": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
-      "latest_runtime_capture": "research-uploads/20261009T161848Z-upload-runtime-capture/exact-root-caller-latest.json",
-      "latest_automatic_batch_index": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/batch-results.json",
-      "latest_automatic_batch_index_sha256": "e8f703afa93485172c9108153696e518a2cf381446cb0aaccc63468fd75bb909",
-      "latest_automatic_batch_report": "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json",
-      "latest_automatic_batch_report_sha256": "48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3",
-      "latest_lane_action_snapshot": {
-        "run_manifest_path": "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
-        "uploaded_utc": "20261009T233356Z",
-        "verified_files": {
-          "generation_baseline": {
-            "path": "research-uploads/20261009T232049Z-seed-lineage-analyze-generation-a4d98eab/generation-baseline-latest.json",
-            "sha256": "6244a4e8f2d74ed7d5f54f94ad62f53edbd495ed99c5cbe41c42cc22b07dd714",
-            "session": "20261009T230838Z_0000790006606CAB",
-            "address": "0000790006606CAB",
-            "root": "C36137A0B4914AD9",
-            "preset": "CARGO_FLOATERS",
-            "predicted_targets": 32
-          },
-          "caller": {
-            "path": "research-uploads/20261009T232144Z-seed-lineage-extract-caller-9ac5f53b/dungeon-caller-code-latest.json",
-            "sha256": "e63c2a420c9d30e1d21509ff815cdb2250ce9ede1583f59379fbf7a3e332ffbe",
-            "session": "20261009T230838Z_0000790006606CAB",
-            "address": "0000790006606CAB",
-            "root": "C36137A0B4914AD9",
-            "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
-          },
-          "upstream": {
-            "path": "research-uploads/20261009T232432Z-seed-lineage-extract-upstream-08cc282f/dungeon-upstream-callers-latest.json",
-            "sha256": "65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52",
-            "session": "20261009T230838Z_0000790006606CAB",
-            "address": "0000790006606CAB",
-            "root": "C36137A0B4914AD9",
-            "caller_sha256": "e63c2a420c9d30e1d21509ff815cdb2250ce9ede1583f59379fbf7a3e332ffbe",
-            "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
-          },
-          "seed_function": {
-            "path": "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json",
-            "sha256": "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
-            "sha256_status": "independently verified from exact GitHub base64 bytes; matches both upload manifests",
-            "session": "20261009T230838Z_0000790006606CAB",
-            "address": "0000790006606CAB",
-            "root": "C36137A0B4914AD9",
-            "nms_exe_sha256": "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
-            "upstream_sha256": "65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52",
-            "fresh": true
-          }
-        }
-      },
-      "latest_exact_root_capture": {
-        "path": "research-uploads/20261009T234615Z-analyze-generation/exact-root-caller-latest.json",
-        "sha256": "87813ff2737bca7f6e85a07235844bf773af4a956ee1572bcd3fb0fbf43e8246",
-        "session": "20261009T234421Z_0000760006606CAB",
-        "address": "0000760006606CAB",
-        "root": "9C2818C7FE094FC8",
-        "public_system_seed": "D4759808",
-        "exe_identity_verified": false,
-        "caller_return": "02C0860A",
-        "owner_plus_0x10": "0000000000000000",
-        "dispatch_target_resolved": false
-      },
-      "latest_owner_producer_trace": "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md",
-      "owner_producer_helper_rva": "00639BE0",
-      "owner_producer_seed_write_established": true,
-      "human_request": {
-        "status": "resolved-locally",
-        "resolved_utc": "2026-10-16T18:30:21Z",
-        "evidence": [
-          "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md",
-          "research-output/ghidra-static-20261015/LISTING_0063B130_0063BEEC_20261016.txt"
-        ],
-        "note": "Matching executable SHA-256 verified; helper listing, direct callsites, and descriptor seed write traced locally. No live NMS action was needed for this static request."
-      }
-    },
-    "dungeon-decompile": {
-      "branch": "agent/dungeon-current-target-20261008-reconciled",
-      "status": "offline_static_review",
-      "manifest": "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
-      "next_action": "Use the local 0063B130..0063BEEC listing to inspect the data region at 0063BEBC (Ghidra -noanalysis reported zero exact xrefs); continue locating the actual room graph builder and establish whether GenerateFreighterDungeon parameters reach it.",
-      "latest_evidence": "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md; research-output/ghidra-static-20261015/LISTING_0063B130_0063BEEC_20261016.txt",
-      "review": "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
-      "current_build_static_map": "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
-      "helper_dataflow_review": "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
-      "new_root_capture_review": "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json",
-      "root_callback_code_export": "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
-      "latest_combined_report": "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
-      "latest_combined_report_sha256": "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439",
-      "latest_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261009.json",
-      "latest_report": "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
-      "latest_report_sha256": "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439",
-      "latest_run_id": "20261009T163626Z-9056847b",
-      "latest_automatic_batch_report": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
-      "latest_automatic_batch_report_sha256": "fb7126c475d65d0e764d802b74ed6a6ca99c56fb72d75c65da9e0e3f6335f1f4",
-      "latest_automatic_batch_index": "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/batch-results.json",
-      "latest_automatic_batch_index_sha256": "4ae5af8f6814e14d1e5e16ca1eeeaf455599b1e22d47286ba01e2b513f3f25cd",
-      "latest_runtime_snapshot_manifest": "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/run-manifest.json",
-      "latest_runtime_snapshot_review": "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261009.json",
-      "latest_pdata_chain_correction": "agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json",
-      "latest_current_build_context": "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
-      "latest_root_event_sha256": "87813ff2737bca7f6e85a07235844bf773af4a956ee1572bcd3fb0fbf43e8246",
-      "latest_capture_journal_sha256": "44edb993033e7b59036c86c13ef9b62ec451f27f049bf2d7b7d41dcecb98bede",
-      "primary_callback_chain_bytes": 2430,
-      "raw_dispatch_target_resolved": false,
-      "callback_semantic_identity_resolved": false,
-      "cross_lane_seed_producer_trace": "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md",
-      "latest_entry_behavior_review": "agent-patches/dungeon-decompile/CALLBACK_ENTRY_RANGE_REVIEW_20261010.json",
-      "primary_entry_call_target": "033E1B60"
-    },
-    "metadata": {
-      "branch": "agent/metadata-room-model-reconcile-20261008",
-      "status": "waiting_on_user",
-      "objective": "Reconcile analyzer parent-key groups with static abandoned-freighter room rules while keeping generated group counts, asset predictions, and observed traversal evidence separate.",
-      "manifest": "agent-patches/metadata/METADATA_D_20261007_MANIFEST.json",
-      "static_map": "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
-      "human_validation_required": true,
-      "static_root_trace": "agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json",
-      "parallel_action_review": "agent-patches/metadata/ROOM_MODEL_RECONCILIATION_20261008.json",
-      "next_action": "Repository search is complete: no existing scene-to-RoomId crosswalk was found. Continue this comparison only when new source evidence explicitly pairs a generated scene with a static R_*/B_* ID; no Surveyor control sequence is established and no full traversal is required.",
-      "latest_parallel_report": "research-uploads/20261009T004133Z-parallel-action-test/combined-results.json",
-      "latest_parallel_report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
-      "latest_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
-      "latest_run_id": "20261009T004054Z-9fedea65",
-      "result_summary": "Reviewed main:dungeon.zip and the newest pointer/report. The archive has no room-ID-to-scene mapping. Across 97 main JSON files mentioning both terms, zero same-record pairs exist. Current MEDI saved-session analysis reports 10 analyzer groups vs Rooms=7; prior CARGO evidence remains 11 groups vs Rooms=7. The 43/14 target totals are asset-derived predictions, not observed counts.",
-      "archive_sha256": "5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60",
-      "repository_search_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
-      "repository_search_same_record_pairs": 0,
-      "repository_search_candidate_json_files": 97
-    }
-  },
-  "human_intervention": {
-    "required_now": true,
-    "pending": [
-      {
-        "lane": "runtime-dispatch",
-        "kind": "verify-system-change-seed-reset",
-        "next_action": "Update Surveyor through its in-app updater. Enter a different system and confirm the previous root capture clears; on the next root capture, inspect raw seed, UseSeedValue, and effective state.",
-        "full_derelict_required": false
-      },
-      {
-        "lane": "metadata",
-        "kind": "new-source-evidence-required-for-room-id-scene-crosswalk",
-        "manifest": "agent-patches/metadata/METADATA_D_20261007_MANIFEST.json",
-        "next_action": "Repository search is complete: no existing scene-to-RoomId crosswalk was found. Continue this comparison only when new source evidence explicitly pairs a generated scene with a static R_*/B_* ID; no Surveyor control sequence is established and no full traversal is required.",
-        "report": "research-uploads/20261009T004133Z-parallel-action-test/combined-results.json",
-        "report_sha256": "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
-        "full_derelict_required": false,
-        "surveyor_action_required": false,
-        "archive_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
-        "archive_sha256": "5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60",
-        "repository_search_review": "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
-        "same_record_pair_scan": {
-          "candidate_json_files": 97,
-          "pairs_found": 0
-        }
-      }
-    ]
-  },
-  "new_agent_start": {
-    "rule": "Read AGENT_START_HERE.md first. Work only within your assigned, non-overlapping lane. Use the latest combined report pointer for the parallel run it identifies. Keep executing agent-owned work until complete or a genuine human-only gate remains; do not stop at an executable next-step description. For shared Surveyor changes, submit a complete build request under build-requests/<lane>/<request-id>/ and publish the request bundle; the primary integration assistant compiles ready requests into one tested release. Do not publish a competing full Surveyor build.",
-    "resume_order": [
-      "AGENT_START_HERE.md",
-      "WORKSPACE_STATE.json",
-      "RESEARCH_INDEX.md",
-      "AI_HANDOFF.md",
-      "AGENT_WORKFLOW.md",
-      "the assigned lane manifest and only relevant files/evidence"
-    ],
-    "branch_rule": "For a new independent task, create a fresh branch from current main named agent/<short-lane-id>. Use agent/metadata only if it is still free when you begin.",
-    "output_rule": "Keep unfinished experiments on your lane branch. Publish completed, tested, documented lane research and build-request bundles to main with tests, evidence, lane status/manifest, base commit, verified file hashes, and rollback notes. Publish lane status/manifest updates to the lane branch for Agent Console and keep the main copy synchronized. Update WORKSPACE_STATE.json and affected AI_HANDOFF.md/research records when lane facts or shared pointers change, without overwriting unrelated lane findings. Shared Surveyor application/updater releases are compiled and published by the primary integration assistant from ready build requests.",
-    "autonomy_rule": "Continue until the objective is complete or only a genuine human-only gate remains. At each apparent stopping point, do the next useful action available through repository history, code, evidence, tests, or tools; diagnose failures and try a reasonable fix/fallback. After completing the assigned objective, continue with the next useful non-duplicative task in the lane. A dependency blocks only dependent work. Ask the user only for live PC/NMS action, inaccessible local evidence, unavailable credentials/authorization, or information only they can provide; finish independent work first and provide one exact numbered recipe."
-  },
-  "artifact_policy": {
-    "complete_zip_storage": "ChatGPT Library",
-    "canonical_library_path": "/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip",
-    "github_role": "GitHub main is the shared continuity source for completed lane updates, manifests, status, handoffs, build requests, evidence, and integration history. Keep lane-branch status current for Agent Console as well."
-  },
-  "cross_mode_rule": "Normal ChatGPT and Work/Codex must treat committed GitHub state as authoritative and may switch roles without relying on hidden conversation context.",
-  "candidate_integration": {
-    "branch": "feature/derelict-farming-0.3.53",
-    "base_branch": "main",
-    "version": "0.3.53",
-    "status": "release-candidate-pending-windows-mod-validation",
-    "next_action": "Use the Surveyor archive installer with the mod archive downloaded for personal use, restart NMS, and verify same-system repeat derelict behavior.",
-    "compatibility": "Mod source is 7.04; NMS 7.05 runtime not yet verified."
-  },
-  "last_source_candidate_publication": {
-    "version": "0.3.64",
-    "branch": "main",
-    "base_commit": "ac5eda228d9ce87e2b70cf09a75fdfeb8d193a9a",
-    "status": "source-and-workflow-files-published; updater-manifest-remains-0.3.61-pending-Windows-validation",
-    "backup_branch": "backup/main-before-v0.3.64-20261008",
-    "commit": "5c1a383d386e55678f23a608adb07075b4403d78"
-  }
+    "schema_version":  3,
+    "updated_utc":  "2026-10-16T23:24:00Z",
+    "integration":  {
+                        "branch":  "main",
+                        "canonical_version":  "0.3.69",
+                        "current_objective":  "Identify the No Manâ€™s Sky 7.05 abandoned-freighter room/layout and container/reward generation paths, then determine whether captured seeds and system data can predict them.",
+                        "shared_goal":  "identify and safely invoke the real NMS abandoned-freighter/dungeon generator so arbitrary seeds can be generated and inspected without normal gameplay",
+                        "candidate_version":  "0.3.70",
+                        "candidate_branch":  "main",
+                        "candidate_base":  "main@5cd18ea942680bfb95479cb7a2a967ba65d1d506",
+                        "candidate_status":  "Surveyor 0.3.70 is published to main. Queued saved sessions now run concurrently in bounded groups of three, each with four isolated research actions; per-session reports are saved to research-output/automatic-session-batches and published as one hash-verified batch for all lanes. Full 225-test suite, compileall, and 186-file/39-part updater package checks pass. Windows installation validation remains pending.",
+                        "current_research_action":  "Matching NMS.exe SHA-256 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. Installed mod probe is 0.3.46 with SHA-256 64309747C7F7FB3BD42E139864A13C5A4CC0DD1A9586EC3FB978B46532BDE6B1; isolated candidate is 0.3.47 with SHA-256 04FD47A07E656852B2FC4CFA65CA0FD55DAAC81FD17E344A0C3D2D43BBA45015. Root independently verified candidate source ZIP SHA-256 8FEC6CD4541198D17D5A49C2C5C2391C7EEED316D4A9DED2FC04951740A4A32A, 200 members, CRC clean. Candidate subtree census establishes graph presence/Room association only; active state and payout unknown. Before live use, review duplicate-link completeness and synchronous scan cost (up to 512 nodes x 64 captures, several ReadProcessMemory calls per node in AddNodes/AddGroupNode.after). Latest local session 20261016T153622Z_0000750006606CAB started in AbandonedFreighter but is unended, has zero markers and no reward events; no NMS.exe process is currently running and no newer session exists. A verified GiveGenericReward.before emits reward_id/seed and flags but not owner +0x4F8 or caller vtable; one controlled crate opening can produce an output sample, not resolve selection. Earlier B parser trace still lacks the R_ABAND_CRATE list consumer. Current live Orca Tasks: A saved reward-event audit task_01998dce7c6f; B reward-table references task_8be6958aef68; C async registry +0x30 task_f42806d8be40; D node active-state/census-safety task_2133f9abfd92. All four were live at 2026-10-16T23:24Z. Keep candidate isolated; do not install until code safety review is complete."
+                    },
+    "lane_claims":  {
+                        "runtime-dispatch":  "claimed",
+                        "seed-lineage":  "claimed",
+                        "dungeon-decompile":  "claimed",
+                        "metadata":  "claimed-agent-d-published"
+                    },
+    "lanes":  {
+                  "runtime-dispatch":  {
+                                           "branch":  "main",
+                                           "status":  "Probe 0.3.40 resets live root-seed captures on system change and reports raw/effective seed state separately; normal runtime check pending.",
+                                           "manifest":  "agent-patches/runtime-dispatch/RUNTIME_A_MANIFEST.json",
+                                           "artifact":  "/NMS-Derelict-Probe/Agent-Builds/runtime-dispatch/NMS-Derelict-Probe-v0.3.38-RUNTIME-A.zip",
+                                           "latest_review":  "agent-patches/runtime-dispatch/RUNTIME_A_HOOK_TARGET_CORRECTION_20261008.md",
+                                           "extension_version":  "1.0.6",
+                                           "human_validation_required":  true,
+                                           "next_action":  "Update Surveyor in-app, enter a different system, confirm the old root seed clears, then observe the next root capture\u0027s raw value, UseSeedValue, and effective state.",
+                                           "latest_report":  "research-uploads/20261008T191019Z-parallel-action-test/combined-results.json",
+                                           "latest_report_sha256":  "1493b3fab6d3641efb755337c483073a65d9e76a324cfa6a20f034658c5b5471"
+                                       },
+                  "seed-lineage":  {
+                                       "branch":  "agent/seed-lineage",
+                                       "status":  "Matching-build local Ghidra trace confirms both 006395D3 and 00639B99 directly call helper 00639BE0; its setup chain copies caller fifth-argument data into owner+0x138, the descriptor seed field later consumed at 0063A6D0. The caller input semantics and match to a particular captured runtime root remain unresolved.",
+                                       "manifest":  "agent-patches/seed-lineage/SEED_B_MANIFEST.json",
+                                       "result_summary":  "Latest automatic combined report research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json verifies to 48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3; it pairs a fresh 000079 generation baseline with stale/different-sample seed-function (000155), caller (00006D), and upstream (000155) outputs. The later lane-exclusive 000079 seed-function artifact is hash-verified and aligns with caller/upstream on executable 13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499. A separate 000076 exact root capture records candidate 9C2818C7FE094FC8, public system seed D4759808, UseSeedValue=true, and caller 02C0860A; its executable identity is absent. Formula and dispatch target remain unresolved. Offline follow-up matched two same-executable caller sites (006395D3 and 00639B99) to common helper 00639BE0. Both return pointers are passed as RDX into 0063A6D0, which reads an embedded descriptor seed at owner+0x138. This is a producer/setup candidate, not proof the helper writes the seed.",
+                                       "human_validation_required":  false,
+                                       "review":  "agent-patches/seed-lineage/SEED_B_ROOT_CAPTURE_REVIEW_20261009T234615Z.json",
+                                       "next_action":  "Trace the fifth incoming argument at both helper callers upstream and determine whether it matches a captured root seed. Then validate any candidate layout seed against a saved/live derelict observation; do not infer a layout formula from the descriptor write alone.",
+                                       "parallel_report_sha256":  "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
+                                       "extension_version":  "1.0.6",
+                                       "latest_report":  "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json",
+                                       "latest_report_sha256":  "48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3",
+                                       "candidate_extension_version":  "1.0.6",
+                                       "build_request_id":  "seed-lineage-fresh-baseline-action-20261009",
+                                       "latest_report_kind":  "automatic_saved_session",
+                                       "latest_all_saved_evidence_snapshot":  "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
+                                       "latest_runtime_capture":  "research-uploads/20261009T161848Z-upload-runtime-capture/exact-root-caller-latest.json",
+                                       "latest_automatic_batch_index":  "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/batch-results.json",
+                                       "latest_automatic_batch_index_sha256":  "e8f703afa93485172c9108153696e518a2cf381446cb0aaccc63468fd75bb909",
+                                       "latest_automatic_batch_report":  "research-uploads/20261009T231823Z-automatic-research-batch-20261009T231727Z-4cc0e6a5-286919/reports/20261009T231728Z-208c8af6/combined-results.json",
+                                       "latest_automatic_batch_report_sha256":  "48bdc7cbeebdf489752d4b0f1bc3bbfcbd2bf6eadc7682d03c3f8344aa58bab3",
+                                       "latest_lane_action_snapshot":  {
+                                                                           "run_manifest_path":  "research-uploads/20261009T233356Z-seed-lineage-all-saved-evidence-ccef446e-d64e1d89/run-manifest.json",
+                                                                           "uploaded_utc":  "20261009T233356Z",
+                                                                           "verified_files":  {
+                                                                                                  "generation_baseline":  {
+                                                                                                                              "path":  "research-uploads/20261009T232049Z-seed-lineage-analyze-generation-a4d98eab/generation-baseline-latest.json",
+                                                                                                                              "sha256":  "6244a4e8f2d74ed7d5f54f94ad62f53edbd495ed99c5cbe41c42cc22b07dd714",
+                                                                                                                              "session":  "20261009T230838Z_0000790006606CAB",
+                                                                                                                              "address":  "0000790006606CAB",
+                                                                                                                              "root":  "C36137A0B4914AD9",
+                                                                                                                              "preset":  "CARGO_FLOATERS",
+                                                                                                                              "predicted_targets":  32
+                                                                                                                          },
+                                                                                                  "caller":  {
+                                                                                                                 "path":  "research-uploads/20261009T232144Z-seed-lineage-extract-caller-9ac5f53b/dungeon-caller-code-latest.json",
+                                                                                                                 "sha256":  "e63c2a420c9d30e1d21509ff815cdb2250ce9ede1583f59379fbf7a3e332ffbe",
+                                                                                                                 "session":  "20261009T230838Z_0000790006606CAB",
+                                                                                                                 "address":  "0000790006606CAB",
+                                                                                                                 "root":  "C36137A0B4914AD9",
+                                                                                                                 "nms_exe_sha256":  "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
+                                                                                                             },
+                                                                                                  "upstream":  {
+                                                                                                                   "path":  "research-uploads/20261009T232432Z-seed-lineage-extract-upstream-08cc282f/dungeon-upstream-callers-latest.json",
+                                                                                                                   "sha256":  "65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52",
+                                                                                                                   "session":  "20261009T230838Z_0000790006606CAB",
+                                                                                                                   "address":  "0000790006606CAB",
+                                                                                                                   "root":  "C36137A0B4914AD9",
+                                                                                                                   "caller_sha256":  "e63c2a420c9d30e1d21509ff815cdb2250ce9ede1583f59379fbf7a3e332ffbe",
+                                                                                                                   "nms_exe_sha256":  "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499"
+                                                                                                               },
+                                                                                                  "seed_function":  {
+                                                                                                                        "path":  "research-uploads/20261009T233349Z-seed-lineage-analyze-seed-function-1ac8a6b3/dungeon-seed-function-analysis-latest.json",
+                                                                                                                        "sha256":  "38f2b537f2e6c33d6bdf69e74561cf5a11be39f018bd4e6d87577fda1dc99212",
+                                                                                                                        "sha256_status":  "independently verified from exact GitHub base64 bytes; matches both upload manifests",
+                                                                                                                        "session":  "20261009T230838Z_0000790006606CAB",
+                                                                                                                        "address":  "0000790006606CAB",
+                                                                                                                        "root":  "C36137A0B4914AD9",
+                                                                                                                        "nms_exe_sha256":  "13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499",
+                                                                                                                        "upstream_sha256":  "65cf35f2aca92aa21aea0082ca2dd0fa1ff8c211a05ea9b5b323b0730bee0a52",
+                                                                                                                        "fresh":  true
+                                                                                                                    }
+                                                                                              }
+                                                                       },
+                                       "latest_exact_root_capture":  {
+                                                                         "path":  "research-uploads/20261009T234615Z-analyze-generation/exact-root-caller-latest.json",
+                                                                         "sha256":  "87813ff2737bca7f6e85a07235844bf773af4a956ee1572bcd3fb0fbf43e8246",
+                                                                         "session":  "20261009T234421Z_0000760006606CAB",
+                                                                         "address":  "0000760006606CAB",
+                                                                         "root":  "9C2818C7FE094FC8",
+                                                                         "public_system_seed":  "D4759808",
+                                                                         "exe_identity_verified":  false,
+                                                                         "caller_return":  "02C0860A",
+                                                                         "owner_plus_0x10":  "0000000000000000",
+                                                                         "dispatch_target_resolved":  false
+                                                                     },
+                                       "latest_owner_producer_trace":  "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md",
+                                       "owner_producer_helper_rva":  "00639BE0",
+                                       "owner_producer_seed_write_established":  true,
+                                       "human_request":  {
+                                                             "status":  "resolved-locally",
+                                                             "resolved_utc":  "2026-10-16T18:30:21Z",
+                                                             "evidence":  [
+                                                                              "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md",
+                                                                              "research-output/ghidra-static-20261015/LISTING_0063B130_0063BEEC_20261016.txt"
+                                                                          ],
+                                                             "note":  "Matching executable SHA-256 verified; helper listing, direct callsites, and descriptor seed write traced locally. No live NMS action was needed for this static request."
+                                                         }
+                                   },
+                  "dungeon-decompile":  {
+                                            "branch":  "agent/dungeon-current-target-20261008-reconciled",
+                                            "status":  "offline_static_review",
+                                            "manifest":  "agent-patches/dungeon-decompile/DUNGEON_C_MANIFEST.json",
+                                            "next_action":  "Use the local 0063B130..0063BEEC listing to inspect the data region at 0063BEBC (Ghidra -noanalysis reported zero exact xrefs); continue locating the actual room graph builder and establish whether GenerateFreighterDungeon parameters reach it.",
+                                            "latest_evidence":  "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md; research-output/ghidra-static-20261015/LISTING_0063B130_0063BEEC_20261016.txt",
+                                            "review":  "agent-patches/dungeon-decompile/HELPER_EXPORT_REVIEW_20261005.json",
+                                            "current_build_static_map":  "agent-patches/dungeon-decompile/CURRENT_BUILD_STATIC_MAP_20261005.json",
+                                            "helper_dataflow_review":  "agent-patches/dungeon-decompile/HELPER_DATAFLOW_20261005.json",
+                                            "new_root_capture_review":  "agent-patches/dungeon-decompile/NEW_ROOT_CAPTURE_REVIEW_20261007.json",
+                                            "root_callback_code_export":  "agent-patches/dungeon-decompile/ROOT_CALLBACK_CODE_20261007.json",
+                                            "latest_combined_report":  "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
+                                            "latest_combined_report_sha256":  "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439",
+                                            "latest_review":  "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261009.json",
+                                            "latest_report":  "research-uploads/20261009T163702Z-parallel-action-test/combined-results.json",
+                                            "latest_report_sha256":  "816587755486c772fa03efbb0461f7983bc196bf149eb90b1588024f6a54f439",
+                                            "latest_run_id":  "20261009T163626Z-9056847b",
+                                            "latest_automatic_batch_report":  "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/reports/20261009T163435Z-b91c6dbb/combined-results.json",
+                                            "latest_automatic_batch_report_sha256":  "fb7126c475d65d0e764d802b74ed6a6ca99c56fb72d75c65da9e0e3f6335f1f4",
+                                            "latest_automatic_batch_index":  "research-uploads/20261009T163525Z-automatic-research-batch-20261009T163434Z-bf1ed756-3b9b70/batch-results.json",
+                                            "latest_automatic_batch_index_sha256":  "4ae5af8f6814e14d1e5e16ca1eeeaf455599b1e22d47286ba01e2b513f3f25cd",
+                                            "latest_runtime_snapshot_manifest":  "research-uploads/20261009T235520Z-all-saved-evidence-83dacdde/run-manifest.json",
+                                            "latest_runtime_snapshot_review":  "agent-patches/dungeon-decompile/PARALLEL_REVIEW_20261009.json",
+                                            "latest_pdata_chain_correction":  "agent-patches/dungeon-decompile/CURRENT_BUILD_PDATA_CHAIN_CORRECTION_20261009.json",
+                                            "latest_current_build_context":  "agent-patches/dungeon-decompile/CURRENT_BUILD_CALLER_CONTEXT_20261009.json",
+                                            "latest_root_event_sha256":  "87813ff2737bca7f6e85a07235844bf773af4a956ee1572bcd3fb0fbf43e8246",
+                                            "latest_capture_journal_sha256":  "44edb993033e7b59036c86c13ef9b62ec451f27f049bf2d7b7d41dcecb98bede",
+                                            "primary_callback_chain_bytes":  2430,
+                                            "raw_dispatch_target_resolved":  false,
+                                            "callback_semantic_identity_resolved":  false,
+                                            "cross_lane_seed_producer_trace":  "research-output/ghidra-static-20261015/DERELICT_GENERATOR_TRACE_20261016.md",
+                                            "latest_entry_behavior_review":  "agent-patches/dungeon-decompile/CALLBACK_ENTRY_RANGE_REVIEW_20261010.json",
+                                            "primary_entry_call_target":  "033E1B60"
+                                        },
+                  "metadata":  {
+                                   "branch":  "agent/metadata-room-model-reconcile-20261008",
+                                   "status":  "waiting_on_user",
+                                   "objective":  "Reconcile analyzer parent-key groups with static abandoned-freighter room rules while keeping generated group counts, asset predictions, and observed traversal evidence separate.",
+                                   "manifest":  "agent-patches/metadata/METADATA_D_20261007_MANIFEST.json",
+                                   "static_map":  "agent-patches/metadata/CURRENT_DUNGEON_OPTIONS_20261007.json",
+                                   "human_validation_required":  true,
+                                   "static_root_trace":  "agent-patches/metadata/STATIC_ROOT_SCENE_TRACE_20261007.json",
+                                   "parallel_action_review":  "agent-patches/metadata/ROOM_MODEL_RECONCILIATION_20261008.json",
+                                   "next_action":  "Repository search is complete: no existing scene-to-RoomId crosswalk was found. Continue this comparison only when new source evidence explicitly pairs a generated scene with a static R_*/B_* ID; no Surveyor control sequence is established and no full traversal is required.",
+                                   "latest_parallel_report":  "research-uploads/20261009T004133Z-parallel-action-test/combined-results.json",
+                                   "latest_parallel_report_sha256":  "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
+                                   "latest_review":  "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
+                                   "latest_run_id":  "20261009T004054Z-9fedea65",
+                                   "result_summary":  "Reviewed main:dungeon.zip and the newest pointer/report. The archive has no room-ID-to-scene mapping. Across 97 main JSON files mentioning both terms, zero same-record pairs exist. Current MEDI saved-session analysis reports 10 analyzer groups vs Rooms=7; prior CARGO evidence remains 11 groups vs Rooms=7. The 43/14 target totals are asset-derived predictions, not observed counts.",
+                                   "archive_sha256":  "5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60",
+                                   "repository_search_review":  "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
+                                   "repository_search_same_record_pairs":  0,
+                                   "repository_search_candidate_json_files":  97
+                               }
+              },
+    "human_intervention":  {
+                               "required_now":  true,
+                               "pending":  [
+                                               {
+                                                   "lane":  "runtime-dispatch",
+                                                   "kind":  "verify-system-change-seed-reset",
+                                                   "next_action":  "Update Surveyor through its in-app updater. Enter a different system and confirm the previous root capture clears; on the next root capture, inspect raw seed, UseSeedValue, and effective state.",
+                                                   "full_derelict_required":  false
+                                               },
+                                               {
+                                                   "lane":  "metadata",
+                                                   "kind":  "new-source-evidence-required-for-room-id-scene-crosswalk",
+                                                   "manifest":  "agent-patches/metadata/METADATA_D_20261007_MANIFEST.json",
+                                                   "next_action":  "Repository search is complete: no existing scene-to-RoomId crosswalk was found. Continue this comparison only when new source evidence explicitly pairs a generated scene with a static R_*/B_* ID; no Surveyor control sequence is established and no full traversal is required.",
+                                                   "report":  "research-uploads/20261009T004133Z-parallel-action-test/combined-results.json",
+                                                   "report_sha256":  "af6166966fb37b738d9a584103275a10f28d1d39e6e39f23181e63a4beacd972",
+                                                   "full_derelict_required":  false,
+                                                   "surveyor_action_required":  false,
+                                                   "archive_review":  "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
+                                                   "archive_sha256":  "5ef8b70e92e8923ce8dac3c96c055f52841dc831516bbb35f976b8c265196c60",
+                                                   "repository_search_review":  "agent-patches/metadata/DUNGEON_ZIP_ROOM_ID_REVIEW_20261009.json",
+                                                   "same_record_pair_scan":  {
+                                                                                 "candidate_json_files":  97,
+                                                                                 "pairs_found":  0
+                                                                             }
+                                               }
+                                           ]
+                           },
+    "new_agent_start":  {
+                            "rule":  "Read AGENT_START_HERE.md first. Work only within your assigned, non-overlapping lane. Use the latest combined report pointer for the parallel run it identifies. Keep executing agent-owned work until complete or a genuine human-only gate remains; do not stop at an executable next-step description. For shared Surveyor changes, submit a complete build request under build-requests/\u003clane\u003e/\u003crequest-id\u003e/ and publish the request bundle; the primary integration assistant compiles ready requests into one tested release. Do not publish a competing full Surveyor build.",
+                            "resume_order":  [
+                                                 "AGENT_START_HERE.md",
+                                                 "WORKSPACE_STATE.json",
+                                                 "RESEARCH_INDEX.md",
+                                                 "AI_HANDOFF.md",
+                                                 "AGENT_WORKFLOW.md",
+                                                 "the assigned lane manifest and only relevant files/evidence"
+                                             ],
+                            "branch_rule":  "For a new independent task, create a fresh branch from current main named agent/\u003cshort-lane-id\u003e. Use agent/metadata only if it is still free when you begin.",
+                            "output_rule":  "Keep unfinished experiments on your lane branch. Publish completed, tested, documented lane research and build-request bundles to main with tests, evidence, lane status/manifest, base commit, verified file hashes, and rollback notes. Publish lane status/manifest updates to the lane branch for Agent Console and keep the main copy synchronized. Update WORKSPACE_STATE.json and affected AI_HANDOFF.md/research records when lane facts or shared pointers change, without overwriting unrelated lane findings. Shared Surveyor application/updater releases are compiled and published by the primary integration assistant from ready build requests.",
+                            "autonomy_rule":  "Continue until the objective is complete or only a genuine human-only gate remains. At each apparent stopping point, do the next useful action available through repository history, code, evidence, tests, or tools; diagnose failures and try a reasonable fix/fallback. After completing the assigned objective, continue with the next useful non-duplicative task in the lane. A dependency blocks only dependent work. Ask the user only for live PC/NMS action, inaccessible local evidence, unavailable credentials/authorization, or information only they can provide; finish independent work first and provide one exact numbered recipe."
+                        },
+    "artifact_policy":  {
+                            "complete_zip_storage":  "ChatGPT Library",
+                            "canonical_library_path":  "/NMS-Derelict-Probe/Canonical/NMS-Derelict-Probe-v0.3.38-canonical.zip",
+                            "github_role":  "GitHub main is the shared continuity source for completed lane updates, manifests, status, handoffs, build requests, evidence, and integration history. Keep lane-branch status current for Agent Console as well."
+                        },
+    "cross_mode_rule":  "Normal ChatGPT and Work/Codex must treat committed GitHub state as authoritative and may switch roles without relying on hidden conversation context.",
+    "candidate_integration":  {
+                                  "branch":  "feature/derelict-farming-0.3.53",
+                                  "base_branch":  "main",
+                                  "version":  "0.3.53",
+                                  "status":  "release-candidate-pending-windows-mod-validation",
+                                  "next_action":  "Use the Surveyor archive installer with the mod archive downloaded for personal use, restart NMS, and verify same-system repeat derelict behavior.",
+                                  "compatibility":  "Mod source is 7.04; NMS 7.05 runtime not yet verified."
+                              },
+    "last_source_candidate_publication":  {
+                                              "version":  "0.3.64",
+                                              "branch":  "main",
+                                              "base_commit":  "ac5eda228d9ce87e2b70cf09a75fdfeb8d193a9a",
+                                              "status":  "source-and-workflow-files-published; updater-manifest-remains-0.3.61-pending-Windows-validation",
+                                              "backup_branch":  "backup/main-before-v0.3.64-20261008",
+                                              "commit":  "5c1a383d386e55678f23a608adb07075b4403d78"
+                                          }
 }
