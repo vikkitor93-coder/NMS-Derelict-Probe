@@ -395,3 +395,10 @@ Requested evidence: use the matching NMS.exe SHA-256 `13d5060d4efb9d2a6a6b1b349b
 
 The old ReNMS SDK declares a generic reward ID map on `cGcRealityManager`, but the exact 7.05 executable has no matching manager TypeDescriptor or field-name string. The only substring hit is the distinct `cGcRealityManagerData` RTTI name. This historical hint gives no code edge; generic reward selection remains unresolved. Details and exact offsets are in `research-output/ghidra-static-20261015/REWARD_TABLE_PIPELINE_20261016.md`.
 
+
+## Runtime incident: Probe 0.3.49 late-attach candidate — 2026-10-17
+
+- The isolated 0.3.81 source package carried Probe 0.3.49 with a new `cGcApplication.Update.before` callback intended to recover nmspy's application singleton after late attach.
+- On matching NMS 7.05 PID 30272 (SHA-256 `13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499`), the callback logged `late_application_singleton_recovered` with address `0xE`. This is not a plausible application pointer. The user then reported a crash. The injector later reported `ConnectionRefusedError: [WinError 1225]`; the precise crash cause is not independently proven, but the new recovery hook is unsafe and is the leading suspect.
+- NMS and the injector were no longer running. The attach monitor started for this run was stopped by exact PID/script identity. The installed mod was restored from the pre-0.3.49 backup and verified SHA-256 `6BBEEAB0A8C9391C99833B129455DFF1B4C04FC9861AB41BEAE28BB42199176E` against that backup.
+- Do not redeploy this recovery callback as written. Before another live attempt, establish pyMHF's callback argument representation for `cGcApplication.Update`, validate a plausible pointer without mapping arbitrary addresses, and add a non-mutating diagnostic path. The prior successful attach heartbeat does not establish that runtime game data is valid.
