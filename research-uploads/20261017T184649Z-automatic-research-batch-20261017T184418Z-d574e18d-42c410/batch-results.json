@@ -1,0 +1,64 @@
+{
+  "action_workers_per_session": 4,
+  "batch_id": "20261017T184418Z-d574e18d",
+  "max_concurrent_sessions": 3,
+  "published_report_count": 3,
+  "reports": [
+    {
+      "report_path": "research-uploads/20261017T184649Z-automatic-research-batch-20261017T184418Z-d574e18d-42c410/reports/20261017T184419Z-9f26d69b/combined-results.json",
+      "report_sha256": "284022595a1bc84b4dfb3003317b311462aad86f17ed160a4122122135fa93f9",
+      "run_id": "20261017T184419Z-9f26d69b",
+      "session_file": "20261017T002812Z_unknown.json",
+      "session_sha256": "53c5c0d2161797f94f4a61e054496840d1ad33bd6b2b1a5e35b7885708e802a3",
+      "status": "completed-with-errors",
+      "summary": {
+        "completed": 7,
+        "failed": 1,
+        "total": 9,
+        "unsupported": 0,
+        "upload_actions_skipped": 1
+      }
+    },
+    {
+      "report_path": "research-uploads/20261017T184649Z-automatic-research-batch-20261017T184418Z-d574e18d-42c410/reports/20261017T184419Z-fccbe410/combined-results.json",
+      "report_sha256": "8f7f99d34c1724965496b01ca91f929f95c542d708e8a3ab108271ffb3959db0",
+      "run_id": "20261017T184419Z-fccbe410",
+      "session_file": "20261017T142745Z_0000750006606CAB.json",
+      "session_sha256": "6e09ece00dc00330a63b1e8fc9c3ee0ae77d6b0d20b2ded6d5de8a9c17343aff",
+      "status": "completed-with-errors",
+      "summary": {
+        "completed": 7,
+        "failed": 1,
+        "total": 9,
+        "unsupported": 0,
+        "upload_actions_skipped": 1
+      }
+    },
+    {
+      "report_path": "research-uploads/20261017T184649Z-automatic-research-batch-20261017T184418Z-d574e18d-42c410/reports/20261017T184419Z-96ff83ac/combined-results.json",
+      "report_sha256": "dbf86f899d882d0abbd120e7d96bf8d23f6bf0f27deeb50e4e922051ce7654e4",
+      "run_id": "20261017T184419Z-96ff83ac",
+      "session_file": "20261017T162055Z_0000750006606CAB.json",
+      "session_sha256": "f595a740231ed948cd8fb543c31c8377bfc857a306e6712cd9c0ad6a56e87637",
+      "status": "completed-with-errors",
+      "summary": {
+        "completed": 7,
+        "failed": 1,
+        "total": 9,
+        "unsupported": 0,
+        "upload_actions_skipped": 1
+      }
+    }
+  ],
+  "schema_version": 1,
+  "session_count": 3,
+  "started_utc": "2026-10-17T18:44:18Z",
+  "state": "completed-with-errors",
+  "uploaded_utc": "20261017T184649Z",
+  "visible_to_lanes": [
+    "runtime-dispatch",
+    "seed-lineage",
+    "dungeon-decompile",
+    "metadata"
+  ]
+}
