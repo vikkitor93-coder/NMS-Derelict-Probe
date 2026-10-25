@@ -1,0 +1,99 @@
+{
+ "schema": 1,
+ "build": "NMS 7.05 (NMS.exe SHA-256 13D5060D...3499)",
+ "about": "User-confirmed in-game ground truth for the derelict generator, end reward and crate loot. Only observed facts are listed: an unobserved value is left out (never a prediction). Checked by tools/golden_ingame_705.py. Item keys are the reward-table ids the predictors use (tech modules: <TECH>_NAME_L).",
+ "layouts": [
+  {"address": "00003B0006606CAA", "seed": "7D7ED1B33E15365D", "preset": "CARGO_BUGS", "rooms": 11, "crates": 17, "footlockers": 6, "instances": 145,
+   "source": "live census + captured layout fixture (GENERATOR_VALIDATION_VS_LIVE_20261020.md; minimap/check_update.py GOLDEN_LAYOUTS)"},
+  {"address": "0000750006606CAB", "seed": "A4391301293DA029", "preset": "CARGO_BUGS", "rooms": 9, "crates": 18, "footlockers": 5, "instances": 121,
+   "source": "live census (GENERATOR_VALIDATION_VS_LIVE_20261020.md; minimap/check_update.py GOLDEN_LAYOUTS)"},
+  {"address": "0000320006606CAA", "seed": "1907F3194383C5C4", "preset": "CARGO_FLOATERS", "rooms": 9, "crates": 29, "footlockers": 18,
+   "source": "live census, session 20261017T203551Z (GENERATOR_VALIDATION_VS_LIVE_20261020.md, SYSTEM_CRATE_CENSUS_20261018.md)"}
+ ],
+ "end_rewards": [
+  {"address": "0002250006607CAA", "name": "Salvaged Fleet Fuel Unit", "class": "B", "source": "user screenshot 2026-10-20 (check_update.py GOLDEN_REWARD)"},
+  {"address": "00002F0006607CAA", "name": "A-Class Reactor", "class": "A", "source": "user, glyphs 502F06607CAA, STATUS.md 'Reward check 13:50: MATCH'"},
+  {"address": "0000FE0006607CAA", "name": "Salvaged Fleet Beacon", "class": "C", "source": "user screenshot (SS Hinoku XV), STATUS.md 'Reward check 14:3x: MATCH'"}
+ ],
+ "containers": [
+  {"address": "0000FE0006607CAA", "kind": "salvage_crate", "room": 2, "item": "SHIPGUN1_NAME_L", "amount": 1, "class": "C",
+   "source": "Photon Cannon Module x1 C, repeats after reload and on another save (CRATE_LOOT_PREDICTION_20261021.md)"},
+  {"address": "0000FE0006607CAA", "kind": "salvage_crate", "room": 3, "item": "FIENDCORE",
+   "source": "Larval Core, repeats after reload; final count not confirmed (CRATE_LOOT_PREDICTION_20261021.md)"},
+  {"address": "0000360006607CAA", "kind": "salvage_crate", "room": 1, "item": "FRIG_TOKEN", "amount": 1, "source": "blind test 2026-10-22, all 5 crates matched in item and amount"},
+  {"address": "0000360006607CAA", "kind": "salvage_crate", "room": 4, "item": "AF_METAL", "amount": 30, "source": "blind test 2026-10-22"},
+  {"address": "0000360006607CAA", "kind": "salvage_crate", "room": 6, "item": "FISHCORE", "amount": 2, "source": "blind test 2026-10-22"},
+  {"address": "0000360006607CAA", "kind": "salvage_crate", "room": 7, "item": "FIENDCORE", "amount": 2, "source": "blind test 2026-10-22"},
+  {"address": "0000360006607CAA", "kind": "salvage_crate", "room": 8, "item": "FISHCORE", "amount": 2, "source": "blind test 2026-10-22"}
+ ],
+ "seed_runs": [
+  {"name": "0000320006606CAA 47-seed R_ABAND_CRATE recording", "address": "0000320006606CAA", "table": "R_ABAND_CRATE",
+   "source": "Probe session 20261017T203551Z seeds (research-output/UNTITLED1_PROBE_TIMESTAMP_CORRELATION.csv) vs video D:/Untitled1.mp4 popups (CRATE_LOOT_PREDICTION_20261021.md); seq 24, 44, 45 not visible in the sampled video",
+   "seeds": [
+    {"seq": 1, "seed": "DB54E6400C926555", "item": "FISHCORE", "amount": 2},
+    {"seq": 2, "seed": "A02642D35986ABC4", "item": "SHIPJUMP_NAME_L"},
+    {"seq": 3, "seed": "BB7320257A72A80B", "item": "AF_METAL", "amount": 30},
+    {"seq": 4, "seed": "D3B47BB7ACCF423A", "item": "AMMO"},
+    {"seq": 5, "seed": "A9A08308A72FE39F", "item": "AMMO"},
+    {"seq": 6, "seed": "B3BA3BCA508B27AC", "item": "SeaHorror"},
+    {"seq": 7, "seed": "8924C322F0CEC827", "item": "AF_METAL", "amount": 28},
+    {"seq": 8, "seed": "13C161F185581C0A", "item": "DERELICT_RECIPE"},
+    {"seq": 9, "seed": "46BEA6808D75BC92", "item": "AMMO", "amount": 257},
+    {"seq": 10, "seed": "BB4BC168B408DBCD", "item": "ION1_NAME_L"},
+    {"seq": 11, "seed": "408C8DC1B6FAD49D", "item": "EYEBALL", "amount": 3},
+    {"seq": 12, "seed": "040288152C62D789", "item": "TRA_ENERGY5", "amount": 3},
+    {"seq": 13, "seed": "CADE2F7517F6401E", "item": "FIENDCORE", "amount": 2},
+    {"seq": 14, "seed": "DC4B5444CA97BA2B", "item": "EYEBALL", "amount": 3},
+    {"seq": 15, "seed": "37C67B765BF99D48", "item": "STORM_CRYSTAL", "amount": 2},
+    {"seq": 16, "seed": "40A77A852381F740", "item": "AMMO", "amount": 186},
+    {"seq": 17, "seed": "E0A0DCF6E2F9DF70", "item": "AF_METAL", "amount": 29},
+    {"seq": 18, "seed": "609A66C435D0D80D", "item": "AMMO", "amount": 194},
+    {"seq": 19, "seed": "DA24BB130C985437", "item": "TRA_ENERGY5"},
+    {"seq": 20, "seed": "DA24BB130C985437", "item": "TRA_ENERGY5"},
+    {"seq": 21, "seed": "1AD062CC0B87D65D", "item": "TRA_ENERGY5", "amount": 3},
+    {"seq": 22, "seed": "B66A04ADA3CD5D39", "item": "AMMO", "amount": 168},
+    {"seq": 23, "seed": "7ECA8005E9A5ED24", "item": "TRA_ENERGY5", "amount": 3},
+    {"seq": 25, "seed": "08D9E96B99755D60", "item": "DERELICT_RECIPE"},
+    {"seq": 26, "seed": "33617ADEFC4F6F07", "item": "DERELICT_RECIPE"},
+    {"seq": 27, "seed": "EE1148CCBF7789E9", "item": "FIENDCORE", "amount": 2},
+    {"seq": 28, "seed": "789FE9D81BF0B300", "item": "AMMO", "amount": 199},
+    {"seq": 29, "seed": "A43C485087B5D39C", "item": "FIENDCORE", "amount": 2},
+    {"seq": 30, "seed": "89C79679566CC382", "item": "AF_METAL", "amount": 29},
+    {"seq": 31, "seed": "A49FE78B1363EAD4", "item": "STORM_CRYSTAL", "amount": 2},
+    {"seq": 32, "seed": "9811442453ED693D", "item": "TRA_ENERGY5", "amount": 3},
+    {"seq": 33, "seed": "D2B7EE08F41FC9FB", "item": "AF_METAL", "amount": 30},
+    {"seq": 34, "seed": "F8A37B90CEECE4F9", "item": "AMMO", "amount": 133},
+    {"seq": 35, "seed": "8EC20129A5B310A0", "item": "EYEBALL", "amount": 2},
+    {"seq": 36, "seed": "27719846D4146247", "item": "AMMO", "amount": 262},
+    {"seq": 37, "seed": "95044BC84B7E5BAB", "item": "SHIPGUN1_NAME_L"},
+    {"seq": 38, "seed": "9C8C44D1B566A16E", "item": "BioSample"},
+    {"seq": 39, "seed": "0B874768E5B1380D", "item": "AMMO", "amount": 200},
+    {"seq": 40, "seed": "966BFA27AABAFAE7", "item": "TRA_ENERGY5", "amount": 3},
+    {"seq": 41, "seed": "B7F44905EC03B987", "item": "STORM_CRYSTAL", "amount": 2},
+    {"seq": 42, "seed": "2D604C8AC502C98A", "item": "AF_METAL", "amount": 30},
+    {"seq": 43, "seed": "F545CE1ED238263A", "item": "AMMO", "amount": 124},
+    {"seq": 46, "seed": "BE64798E9A25367A", "item": "AMMO"},
+    {"seq": 47, "seed": "4E22705585814BB8", "item": "AMMO"}
+   ],
+   "sums": [
+    {"seqs": [4, 5], "item": "AMMO", "amount": 337, "source": "combined toast Ammo x6 -> 337"},
+    {"seqs": [19, 20], "item": "TRA_ENERGY5", "amount": 6, "source": "combined toast Fusion Core x1 -> 6"},
+    {"seqs": [46, 47], "item": "AMMO", "amount": 391, "source": "combined toast Ammo x23 -> 391"}
+   ]},
+  {"name": "0000320006606CAA tall lockers 5/5", "address": "0000320006606CAA", "table": "R_ABAND_LOCK",
+   "source": "5 captured R_ABAND_LOCK seeds, same run; video rows 26, 27, 30, 47, 48 (CRATE_LOOT_PREDICTION_20261021.md)",
+   "seeds": [
+    {"seq": 1, "seed": "20602FE18059F01E", "item": "WAR_CURIO1", "amount": 1},
+    {"seq": 2, "seed": "2C7957B4D5245ACE", "item": "EXP_CURIO2", "amount": 1},
+    {"seq": 3, "seed": "4B8787BCCBD3BDD8", "item": "TRA_ENERGY1", "amount": 2},
+    {"seq": 4, "seed": "FF5A005ADA706BAF", "item": "AF_METAL", "amount": 24},
+    {"seq": 5, "seed": "4D9B7B535E6376C5", "item": "AMMO", "amount": 183}
+   ], "sums": []},
+  {"name": "0000FE0006607CAA crate seeds (captured)", "address": "0000FE0006607CAA", "table": "R_ABAND_CRATE",
+   "source": "captured reward seeds of the two FE crates (CRATE_LOOT_PREDICTION_20261021.md)",
+   "seeds": [
+    {"seq": 1, "seed": "CBF9457ED4E527F9", "item": "SHIPGUN1_NAME_L", "amount": 1, "class": "C"},
+    {"seq": 2, "seed": "7BC7BB07C4D8C222", "item": "FIENDCORE"}
+   ], "sums": []}
+ ]
+}

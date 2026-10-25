@@ -1,0 +1,139 @@
+{
+ "about": "Profile info shown by tools/frigate_search_705.py (--help, start banner, --list-profiles). Edit the numbers here after re-measuring; the tool reads this file at start. 'presets' is the stage-A preset set the tool really uses.",
+ "updated": "2026-10-23",
+ "caveat": "Recall comes from limited samples: the 160,663 systems in the scanner DB with Salvaged Frigate Modules computed (galaxy 0 regions around the scanned area) and one test region (0460ACAA: 81 systems with >=2, 18 with >=3, only 1 with >=4 modules). Other regions can differ by 10-20 points (05605CAA had 65% >=3 recall for balanced vs 81% atlas-wide). Speeds are single runs on this 12-thread PC (scanner reference = mean of 2 runs); the live scanner was scanning on and off during the runs (host CPU 34-85%), so treat them as +-15%. 'Cached writer' speeds apply only when the writer results are already in the writer cache (re-search of systems the scanner, a backlog or an earlier search generated).",
+ "atlas_systems": 160663,
+ "region": {
+  "name": "0460ACAA",
+  "systems": 531,
+  "truth_ge2": 81,
+  "truth_ge3": 18,
+  "truth_ge4": 1
+ },
+ "thresholds": {
+  "2": 7,
+  "3": 19,
+  "4": 34
+ },
+ "profiles": {
+  "no-filter": {
+   "summary": "baseline: every system fully computed, nothing missed (same work per system as the scanner)",
+   "presets": "all",
+   "stage_b": false,
+   "atlas": {
+    "2": {
+     "full_pct": 100.0,
+     "r2": 100.0,
+     "r3": 100.0,
+     "r4": 100.0
+    },
+    "3": {
+     "full_pct": 100.0,
+     "r2": 100.0,
+     "r3": 100.0,
+     "r4": 100.0
+    },
+    "4": {
+     "full_pct": 100.0,
+     "r2": 100.0,
+     "r3": 100.0,
+     "r4": 100.0
+    }
+   },
+   "region_m3": null,
+   "speed": null
+  },
+  "all": {
+   "summary": "all 10 presets, stage B only: skips the post-writer work for systems with too few containers",
+   "presets": "all",
+   "stage_b": true,
+   "atlas": {
+    "2": {
+     "full_pct": 96.0,
+     "r2": 99.8,
+     "r3": 100.0,
+     "r4": 100.0
+    },
+    "3": {
+     "full_pct": 68.1,
+     "r2": 91.6,
+     "r3": 96.7,
+     "r4": 98.8
+    },
+    "4": {
+     "full_pct": 27.8,
+     "r2": 54.0,
+     "r3": 68.0,
+     "r4": 78.8
+    }
+   },
+   "region_m3": null,
+   "speed": null
+  },
+  "balanced": {
+   "summary": "default: the 4 CARGO presets FLOATERS/TURRETS/MAZE/BUGS (no SLIME, no MEDI_*) + stage B",
+   "presets": [
+    "CARGO_FLOATERS",
+    "CARGO_MAZE",
+    "CARGO_BUGS",
+    "CARGO_TURRETS"
+   ],
+   "stage_b": true,
+   "atlas": {
+    "2": {
+     "full_pct": 44.7,
+     "r2": 71.3,
+     "r3": 81.5,
+     "r4": 89.3
+    },
+    "3": {
+     "full_pct": 44.3,
+     "r2": 71.1,
+     "r3": 81.4,
+     "r4": 89.3
+    },
+    "4": {
+     "full_pct": 26.6,
+     "r2": 52.0,
+     "r3": 66.1,
+     "r4": 77.3
+    }
+   },
+   "region_m3": null,
+   "speed": null
+  },
+  "fast": {
+   "summary": "balanced without the slow CARGO_TURRETS preset: CARGO FLOATERS/MAZE/BUGS + stage B",
+   "presets": [
+    "CARGO_FLOATERS",
+    "CARGO_MAZE",
+    "CARGO_BUGS"
+   ],
+   "stage_b": true,
+   "atlas": {
+    "2": {
+     "full_pct": 30.9,
+     "r2": 46.4,
+     "r3": 51.0,
+     "r4": 54.9
+    },
+    "3": {
+     "full_pct": 30.6,
+     "r2": 46.2,
+     "r3": 50.9,
+     "r4": 54.9
+    },
+    "4": {
+     "full_pct": 15.7,
+     "r2": 30.5,
+     "r3": 38.7,
+     "r4": 45.4
+    }
+   },
+   "region_m3": null,
+   "speed": null
+  }
+ },
+ "scanner_reference": null,
+ "measured_runs": "D:/Orca/Temp/claude/searcher-cache-20261023/res/summary.json (research-output/SEARCHER_PORT_AND_WRITER_CACHE_20261023.md)"
+}
