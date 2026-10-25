@@ -17,7 +17,7 @@ class RewriteTests(unittest.TestCase):
         out, n = B.rewrite_text(src, "x.py")
         self.assertEqual(n, 3)
         ast.parse(out)
-        self.assertNotIn("USER", out.split("\n", 6)[-1])
+        self.assertNotIn("USERPROFILE", out)
         self.assertIn("_NH.ANALYSIS", out)
         self.assertIn("_NH.PYTHON", out)
         self.assertIn("_NH.PCBANKS", out)

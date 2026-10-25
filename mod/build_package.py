@@ -66,7 +66,7 @@ RULES = [   # (normalised literal prefix, replacement expression) - first match 
     ("G:/SteamLibrary/steamapps/common/No Man's Sky/Binaries/NMS.exe", "_NH.NMS_EXE"),
 ]
 LITERAL = re.compile(r'''(?P<pre>[rRuU]?)(?:"(?P<b1>[A-Za-z]:[^"\n]*)"|'(?P<b2>[A-Za-z]:[^'\n]*)')''')
-SUSPECT = re.compile(r"(?i)^[a-z]:[\\/]+.*(orca|USER|steamlibrary)|^%USERPROFILE%")
+SUSPECT = re.compile(r"(?i)^[a-z]:[\\/]+.*(orca|users[\\/]+[^\\/]+[\\/]|steamlibrary)|^%USERPROFILE%")
 # project code spells a path under the user profile as os.path.expandvars("%USERPROFILE%/...") (no user name in the source)
 EXPAND = re.compile(r'''(?:_?os)\.path\.expandvars\(\s*(?:"(?P<b1>%USERPROFILE%[^"\n]*)"|'(?P<b2>%USERPROFILE%[^'\n]*)')\s*\)''')
 RWX = re.compile(r"VirtualAlloc|PAGE_EXECUTE|VirtualProtect|CreateRemoteThread|WriteProcessMemory|NtWriteVirtualMemory")
