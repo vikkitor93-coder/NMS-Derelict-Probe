@@ -1,4 +1,4 @@
-﻿# Derelict container reward path — 2026-10-16
+# Derelict container reward path — 2026-10-16
 
 ## Target identity and local asset evidence
 
@@ -31,6 +31,14 @@
 ## Next offline target
 
 Trace the actual GenericReward interaction dispatch from `cGcSimpleInteractionComponent` to the generic reward manager/table lookup. Then resolve `TryFirst_ThenSelectAlways`, reward grant count, inventory-choice input, and the seed passed into procedural technology generation. Keep `RewardChoice` percentages as configuration until that code is understood. A clean live crate observation tied to root `2A41B0E7EF42A1F7` at system `0000750006606CAB` would later validate outputs, but it is not needed to continue this static trace.
+
+## Salvaged Frigate Module target and online cross-check — 2026-10-17
+
+- The user clarified the research target: Salvaged Frigate Modules (the item ID is `FRIG_TOKEN`), and their reason for investigating derelict crate loot. They believe both the square blue crates and footlockers share the same loot table. The exact local 7.05 entity evidence above confirms both configure `GenericReward` with `R_ABAND_CRATE`.
+- Online reference pages independently identify Salvaged Frigate Modules as a possible derelict-freighter crate reward. The [No Man's Sky Wiki item page](https://nomanssky.fandom.com/wiki/Salvaged_Frigate_Module) reports 2.5%; [No Man's Sky Resources](https://www.nomansskyresources.com/derelict-freighters) lists Salvaged Frigate Module under the crate contents; the [item ID list](https://nomanssky.fandom.com/wiki/Item_Id_List) maps `FRIG_TOKEN` to Salvaged Frigate Module. Xaine's historical [2.62 loot table](https://www.xainesworld.com/derelict-freighter-loot-tables-2-62/) lists it specifically under Large Crates at 3.8%, demonstrating that its reported chance has varied by game version/table.
+- In the extracted exact-build 7.05 `R_ABAND_CRATE` table above, `FRIG_TOKEN` has configured outer weight 5. The listed fallback weights sum to 198; under the traced cumulative weighted fallback, this is 5/198 = 2.525% of fallback selections. This agrees closely with the online 2.5% figure and is strong support that the sought-after module is in the shared reward table.
+- Qualification: 2.525% is the normalized configured fallback weight, not a measured player payout rate. `RewardChoice=TryFirst_ThenSelectAlways` has a separate first-entry attempt before fallback; the extracted first entry is `TIMEDUST` with zero outer weight and an inner 0.33 condition. Preserve the selector caveat. The common crate table applies to both physical container assets locally, so these sources do not support restricting `FRIG_TOKEN` to square crates versus footlockers in this build.
+- The user's reviewed video/Excel labels remain useful to map observed popups to the opening sequence, but do not need to be repeated to establish table membership. For a future run, materially better evidence would be a simultaneous, timestamped inventory-delta capture (or an item-grant hook) joined to the existing reward seed and marker stream; do not ask the user to redo manual pairing without that improvement.
 
 ## Executable symbol and interaction-dispatch follow-up — 2026-10-16
 

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "build": "NMS 7.05; executable SHA-256 13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499",
+  "source_archive": "G:\\SteamLibrary\\steamapps\\common\\No Man's Sky\\GAMEDATA\\PCBANKS\\NMSARC.Precache.pak",
+  "source_archive_sha256": "A6371A8B2F065ECA33FD306A16CBE2BACA9D4CE75806C71E42F74E1AB9295032",
+  "extractor": "hgpaktool.HGPAKFile.extract(filters), full-member extraction (not extract_specific)",
+  "hgpaktool_version": "1.1.3",
+  "assets": [
+    {
+      "member": "metadata/reality/tables/freighterdungeonstable.mbin",
+      "relative_path": "metadata/reality/tables/freighterdungeonstable.mbin",
+      "size_bytes": 11416,
+      "sha256": "F5AFB96F49560BF39A0EC6FFC295540ED4C38165E4458DF2C7785FE391E1A82A"
+    },
+    {
+      "member": "models/space/poi/dungeon/entities/dungeon.entity.mbin",
+      "relative_path": "models/space/poi/dungeon/entities/dungeon.entity.mbin",
+      "size_bytes": 120,
+      "sha256": "2F67B0B86278C76A23F72BA6C772F4206DDE1D7FF4F1CBDB8150554073FFF5BA"
+    },
+    {
+      "member": "models/space/poi/parts/dungeon_entrance/entities/dungeonentrance.entity.mbin",
+      "relative_path": "models/space/poi/parts/dungeon_entrance/entities/dungeonentrance.entity.mbin",
+      "size_bytes": 792,
+      "sha256": "7AE4ACEC4521F5E8347B9D61514CF59DAE7A24E722A7058A1126BEB999B243E8"
+    }
+  ]
+}

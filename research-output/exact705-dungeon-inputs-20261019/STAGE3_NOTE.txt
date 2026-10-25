@@ -1,0 +1,3 @@
+Restored 2026-10-25 (stage 3 M1) by re-running tools/extract_build_data_705.py --reproduce-705 on the installed 7.05 game
+(NMS.exe sha 13D5060D...). The original 7.05 workspace copies were lost; this is a re-extraction (asset_source_rows.bin
+sha256 39c87c68... matches the logged 7.05 value). Same note applies to generatedbase-table-705 and exact705-generatedbase-scenes-20261019.
