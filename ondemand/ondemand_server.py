@@ -107,6 +107,9 @@ def load_config(argv=None):
     p = HERE / "config.json"
     if p.is_file():
         cfg.update({k: v for k, v in json.loads(p.read_text(encoding="utf-8")).items() if k in DEFAULTS})
+    p = HERE / "config.local.json"   # untracked (.gitignore): this machine's real tailnet_bind / relay_ips; wins over config.json
+    if p.is_file():
+        cfg.update({k: v for k, v in json.loads(p.read_text(encoding="utf-8")).items() if k in DEFAULTS})
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--port", type=int)
     ap.add_argument("--workers", type=int)

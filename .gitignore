@@ -4,3 +4,8 @@ __pycache__/
 *.log
 asset-work-v1/
 gui-actions/
+
+# machine-specific values (copy ondemand/config.local.example.json)
+ondemand/config.local.json
+*.local.json
+*.local.txt

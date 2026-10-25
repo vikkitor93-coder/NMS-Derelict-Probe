@@ -128,7 +128,7 @@ Chain: `public site -> Funnel on the Pi -> relay.py on the Pi (D:/Orca/NMS-Traff
 The PC then needs no Funnel and no tunnel of its own, and the home IP is never in the path.
 
 PC side (all off until you set two values; the loopback listener on 127.0.0.1:8791 is unchanged):
-1. In `ondemand/config.json` (create it next to `ondemand_server.py`):
+1. In `ondemand/config.local.json` (untracked, wins over `ondemand/config.json`; copy `config.local.example.json` next to `ondemand_server.py`):
    ```json
    { "tailnet_bind": "100.x.x.x", "relay_ips": ["<the Pi's tailnet IP, e.g. 100.x.y.z>"] }
    ```

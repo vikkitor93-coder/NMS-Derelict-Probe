@@ -1,0 +1,4 @@
+{
+  "tailnet_bind": "<tailscale-ip>",
+  "relay_ips": ["<relay-tailscale-ip>"]
+}
