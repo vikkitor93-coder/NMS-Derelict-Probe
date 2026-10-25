@@ -43,7 +43,7 @@ import golden_ingame_705 as GI  # noqa: E402
 
 ROOT = HERE.parent
 ATLAS = Path("D:/Orca/NMS-Derelict-Atlas")
-EMU_PY = os.environ.get("EMU_PYTHON", "%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe")
+EMU_PY = os.environ.get("EMU_PYTHON", os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe"))
 WORKER = HERE / "compare_builds_worker_705.py"
 BELOW_NORMAL = 0x4000 if os.name == "nt" else 0
 LAYOUT_FIELDS = ("seed_preset", "rooms", "pieces", "crates", "footlockers", "briefcases", "tall_lockers")

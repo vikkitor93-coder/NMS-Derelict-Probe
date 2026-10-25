@@ -40,7 +40,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from derelict_seed_preset_705 import derelict_seed_preset  # noqa: E402
 
-PYTHON = Path(os.environ.get("EMU_PYTHON", "%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe"))
+PYTHON = Path(os.environ.get("EMU_PYTHON", os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe")))
 WORKER = HERE / "frigate_search_worker_705.py"
 ATLAS = Path("D:/Orca/NMS-Derelict-Atlas")
 OUT_DIR = Path("D:/Orca/Temp/claude/frigate-search-20261022")

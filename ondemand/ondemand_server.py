@@ -88,7 +88,7 @@ DEFAULTS = {
     "work_dir": str(HERE / "work"),
     "log_dir": str(HERE / "logs"),
     "eta_config": str(HERE / "eta_config.json"),
-    "emu_python": "%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe",
+    "emu_python": os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe"),
     "worker_script": str(TOOLS / "scan_worker_705.py"),
     "worker_log": False,          # worker stderr -> DEVNULL (it could carry addresses); True writes logs/worker-N.log
     "writer_cache": "off",        # writer-result cache file for the worker, or "off" (default OFF since 2026-10-24)

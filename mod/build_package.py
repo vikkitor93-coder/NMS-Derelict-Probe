@@ -27,6 +27,7 @@ import argparse
 import ast
 import hashlib
 import json
+import os
 import re
 import shutil
 import sys
@@ -65,7 +66,9 @@ RULES = [   # (normalised literal prefix, replacement expression) - first match 
     ("G:/SteamLibrary/steamapps/common/No Man's Sky/Binaries/NMS.exe", "_NH.NMS_EXE"),
 ]
 LITERAL = re.compile(r'''(?P<pre>[rRuU]?)(?:"(?P<b1>[A-Za-z]:[^"\n]*)"|'(?P<b2>[A-Za-z]:[^'\n]*)')''')
-SUSPECT = re.compile(r"(?i)^[a-z]:[\\/]+.*(orca|USER|steamlibrary)")
+SUSPECT = re.compile(r"(?i)^[a-z]:[\\/]+.*(orca|USER|steamlibrary)|^%USERPROFILE%")
+# project code spells a path under the user profile as os.path.expandvars("%USERPROFILE%/...") (no user name in the source)
+EXPAND = re.compile(r'''(?:_?os)\.path\.expandvars\(\s*(?:"(?P<b1>%USERPROFILE%[^"\n]*)"|'(?P<b2>%USERPROFILE%[^'\n]*)')\s*\)''')
 RWX = re.compile(r"VirtualAlloc|PAGE_EXECUTE|VirtualProtect|CreateRemoteThread|WriteProcessMemory|NtWriteVirtualMemory")
 
 
@@ -84,7 +87,7 @@ def rewrite_text(text: str, name: str) -> tuple[str, int]:
                 return f"(str({expr})" + (f" + {rest!r}" if rest else "") + ")"
         raise SystemExit(f"{name}: no rewrite rule for path literal {body!r}")
 
-    out = LITERAL.sub(sub, text)
+    out = LITERAL.sub(sub, EXPAND.sub(sub, text))
     if "_NH." in out and "import nmshome as _NH" not in out:
         out = insert_import(out, name)
     return out, n
@@ -206,7 +209,7 @@ def manifest(pkg: Path) -> dict:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", default="D:/Orca/NMS-Derelict-Minimap-dist/NMS-Derelict-Minimap")
-    ap.add_argument("--shipwright", default="%USERPROFILE%/tools/NMS-Shipwright")
+    ap.add_argument("--shipwright", default=os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright"))
     ap.add_argument("--with-mbincompiler", action="store_true")
     ap.add_argument("--no-runtime", action="store_true", help="skip the Python runtime copy (fast, for testing the code layout)")
     a = ap.parse_args()

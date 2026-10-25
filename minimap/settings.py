@@ -29,7 +29,7 @@ def defaults() -> dict:
         "nms_exe": "",
         "analysis_dir": str(parent / "NMS-Derelict-Probe-analysis"),
         "fastgen_dir": str(parent / "NMS-Derelict-Probe-fastgen"),
-        "emu_python": os.environ.get("EMU_PYTHON", "%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe"),
+        "emu_python": os.environ.get("EMU_PYTHON", os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe")),
     }
 
 

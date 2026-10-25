@@ -26,7 +26,7 @@ sys.path.insert(0, str(HERE))
 from build_atlas_index import address as atlas_address, systems  # noqa: E402
 from nms_paths_705 import out_path  # noqa: E402
 
-PYTHON = Path(os.environ.get("EMU_PYTHON", "%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe"))
+PYTHON = Path(os.environ.get("EMU_PYTHON", os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe")))
 WORKER = HERE / "crate_loot_worker_705.py"
 DEFAULT_CACHE = out_path("D:/Orca/NMS-Derelict-Probe-analysis/crate-loot-cache/predictions-v2.csv")
 FIELDS = ("address", "frigate_modules", "frigate_modules_ambiguous", "frigate_module_rooms",

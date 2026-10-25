@@ -26,7 +26,7 @@ from build_atlas_index import address as atlas_address, systems  # noqa: E402
 from nms_paths_705 import out_path  # noqa: E402
 import predict_end_reward_705 as predictor  # noqa: E402
 
-PYTHON = Path(os.environ.get("EMU_PYTHON", "%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe"))
+PYTHON = Path(os.environ.get("EMU_PYTHON", os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe")))
 WORKER = HERE / "end_reward_worker_705.py"
 DEFAULT_CACHE = out_path("D:/Orca/NMS-Derelict-Probe-analysis/end-reward-cache/rewards.csv")
 FIELDS = ("address", "reward_name", "reward_class", "reward_ambiguous", "reward_alt")

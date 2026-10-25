@@ -19,11 +19,12 @@ The generator's tail (timers, after SpacePoiPositions are written) faults on a l
 expected and does not affect the positions.
 """
 import json
+import os
 import struct
 import sys
 from pathlib import Path
 
-SHIPWRIGHT = "%USERPROFILE%/tools/NMS-Shipwright"
+SHIPWRIGHT = os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright")
 sys.path.insert(0, SHIPWRIGHT)
 from nms_procgen.emu import APP, SENTINEL  # noqa: E402
 from nms_procgen.systemgen import SystemGen  # noqa: E402

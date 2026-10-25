@@ -8,7 +8,7 @@ $repo = 'D:\Orca\NMS-Derelict-Probe'
 $backupRoot = 'D:\Orca\NMS-Derelict-Probe-backups'
 $rewardCache = 'D:\Orca\NMS-Derelict-Probe-analysis\end-reward-cache\rewards.csv'
 $crateLootCache = 'D:\Orca\NMS-Derelict-Probe-analysis\crate-loot-cache\predictions-v2.csv'
-$python = '%USERPROFILE%\AppData\Local\Programs\Python\Python313\python.exe'
+$python = Join-Path $env:USERPROFILE 'AppData\Local\Programs\Python\Python313\python.exe'
 $log = Join-Path $backupRoot 'backup-research.log'
 New-Item -ItemType Directory -Path $backupRoot -Force | Out-Null
 

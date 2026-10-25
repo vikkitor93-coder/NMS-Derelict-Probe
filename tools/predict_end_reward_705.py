@@ -36,7 +36,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from derelict_seed_preset_705 import derelict_seed_preset  # noqa: E402
 
-EMU_PY = os.environ.get("EMU_PYTHON", "%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe")
+EMU_PY = os.environ.get("EMU_PYTHON", os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe"))
 FASTGEN = Path("D:/Orca/NMS-Derelict-Probe-fastgen/fast_generate_705.py")
 LAYOUT_DIRS = [Path("D:/Orca/NMS-Derelict-Probe-analysis/emu/fastgen/generated"),
                Path("D:/Orca/NMS-Derelict-Probe-analysis/emu/generated")]

@@ -36,7 +36,7 @@ ROOT = HERE.parent
 ANALYSIS = Path("D:/Orca/NMS-Derelict-Probe-analysis")
 FASTGEN = Path("D:/Orca/NMS-Derelict-Probe-fastgen")
 BUILDS = ANALYSIS / "builds"
-SHIPWRIGHT = Path("%USERPROFILE%/tools/NMS-Shipwright")
+SHIPWRIGHT = Path(os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright"))
 EXE_SHA_705 = "13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499"
 BASE_ID = "7.05"
 

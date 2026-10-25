@@ -24,7 +24,7 @@ HERE = Path(__file__).resolve().parent
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 DATA = HERE / "golden_ingame_705.json"
-EMU_PY = os.environ.get("EMU_PYTHON", "%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe")
+EMU_PY = os.environ.get("EMU_PYTHON", os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe"))
 WORKER = HERE / "compare_builds_worker_705.py"
 BELOW_NORMAL = 0x4000 if os.name == "nt" else 0
 

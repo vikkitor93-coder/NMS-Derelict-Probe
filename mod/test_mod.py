@@ -12,7 +12,7 @@ class RewriteTests(unittest.TestCase):
     def test_paths_become_nmshome_lookups(self):
         src = ('"""doc mentions D:/Orca/x"""\nfrom __future__ import annotations\nimport os\n'
                'A = Path("D:/Orca/NMS-Derelict-Probe-analysis/emu/generated")\n'
-               'E = os.environ.get("EMU_PYTHON", "%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe")\n'
+               'E = os.environ.get("EMU_PYTHON", os.path.expandvars("%USERPROFILE%/tools/NMS-Shipwright/.venv/Scripts/python.exe"))\n'
                'P = Path(r"G:\\SteamLibrary\\steamapps\\common\\No Man\'s Sky\\GAMEDATA\\PCBANKS\\NMSARC.Precache.pak")\n')
         out, n = B.rewrite_text(src, "x.py")
         self.assertEqual(n, 3)
