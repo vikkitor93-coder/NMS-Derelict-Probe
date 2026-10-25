@@ -2,6 +2,8 @@
 
 Read this file first when joining the project from normal ChatGPT, Work, Codex, or another AI surface.
 
+**Then read [`STATUS.md`](STATUS.md) before starting any step.** It lists the current goal, open questions, settled facts, dead ends not to repeat, and where everything is. Grep it and its "Search here first" locations before doing new work, and update it whenever a fact settles or an approach fails.
+
 ## Your role
 
 You are one autonomous research/coding agent in a parallel reverse-engineering project. You are **not** the only AI working on the repository. Your job is to advance one non-overlapping research lane toward the shared goal, publish reproducible evidence, and leave enough state in GitHub that another AI can continue without this chat history.

@@ -1,3 +1,107 @@
+# CURRENT AI HANDOFF ? 2026-10-22
+
+Read `D:/Orca/NMS-COORDINATION.md`, then `research-output/CODEX_HANDOFF_20261022.md`, `STATUS.md`, and `WORKSPACE_STATE.json`. The scanner was explicitly paused by the user; the old 17:56 progress figure is historical. Do not restart/resume it or publish an index while working through the staged coding/tests. Update-resilience comparison and regression state are summarized at the top of `STATUS.md`; staged speed work and remaining benchmarks are in `research-output/SPEED_FIXES_STAGING_20261022.md`. Never launch or attach to NMS.
+
+## 95% USAGE STOP (2026-10-22 late, Claude main session) - NEXT AGENT START HERE
+
+All agents paused/stopped for the 95% usage rule. State:
+- DONE today: Done checkbox (viewer, server restarted); Tailscale PC + phone (<phone>) working; compact map format 4 (local only, 1,772/1,772 identical, ~2x smaller); cloud CPU research (research-output/CLOUD_CPU_COST_20261022.md); generator profile (GENERATOR_PROFILE_20261022.md); frigate early-reject searcher (FRIGATE_SEARCH_20261022.md, tools/frigate_search_705.py); TURRETS root cause (TURRETS_WRITER_SLOWNESS_20261022.md: game retry loop, no exact early exit; writer-result cache 9.4x on re-runs posted as REQUEST to scanner agent).
+- PAUSED: staging speed fixes 1-4 (resume: `bash run_phase1.sh` in D:/Orca/Temp/claude/staging-20261022/tests; apply diffs on top of current live files, do NOT copy files over; see staging PAUSED note below). Update-guard steps 1-5 (see its PAUSED note; tools exist: tools/update_guard_705.py, relocate_generator_705.py, compare_builds_705.py, golden_ingame_705.py).
+- QUEUED (after staging): searcher items 2 (per-preset probability table + --recall-target) and 3 (2% audit sampling of rejected systems).
+- USER APPROVALS PENDING: staging fixes 1-4 switch-over (after results); writer-result cache; prune threshold; compact format for all maps; public vs private site.
+- User decisions: cloud test = not now. Scanner backlog was paused by the user for timing tests - user resumes it.
+- The 95% stop rule stands (the user skipped it once, "just now").
+
+# CURRENT HANDOFF ? NMS Derelict Probe ? 2026-10-22 17:56 UTC
+
+`research-output/CODEX_HANDOFF_20261022.md` is the authoritative current handoff for this NMS project. Older handoff sections below are historical and may describe obsolete scanner states.
+
+Immediate state: LAN scanner PID 44808 is in the Salvaged Frigate Module backlog, 39,266/87,264 finished at the last check, 7 BelowNormal workers, 1.65 systems/s, ETA 08:04; no regions active and no API error. `finish_after=true` is set: the user asked the scanner to stop after the module backlog. **Do not restart or interrupt it.** Refresh the scanner page to monitor; its page-side formatter is already on disk. After it stops, audit cache and actual atlas publication, recompute pruning numbers, and do not delete anything without user approval.
+
+For priorities, human-only checks, paths, test record, and public-site gate, read `research-output/CODEX_HANDOFF_20261022.md`, then `STATUS.md` and `WORKSPACE_STATE.json`. First read `D:/Orca/NMS-COORDINATION.md`. Never launch or attach to NMS.
+
+---
+
+## CLAUDE HANDOFF - 2026-10-21 evening (latest)
+
+The current state and open items are in STATUS.md, section "NEXT AGENT START HERE". Nothing is running. Read D:/Orca/NMS-COORDINATION.md first.
+
+## CODEX HANDOFF ? 2026-10-21 (latest)
+
+- **Live minimap (2026-10-21):** `minimap/` + `tools/live_position_705.py` (read-only memory reader, NMS 13D5060D). Launch `tools/Derelict-Minimap.cmd`; details `minimap/README.md`, STATUS.md line 'Live minimap'. Local only, not published.
+- User direction: rewards must run inside the normal scanner and show visible progress. The user said this flow is untested, so code only for now; no actual reward or layout scan was started. Updated code is in `D:/Orca/NMS-Derelict-Probe-fastgen/app/scanner.py`; restart the scanner LAN server/desktop app before a user-started run. On Scan, it reconciles the cache, computes missing rewards, displays progress in existing status detail, uploads every 500 newly computed rows plus the final remainder, then enters ordinary region scanning. Pause/stop take effect at chunk boundaries.
+- Mock-only check: 1,003 fake addresses, 1,003 cache rows, three checkpoint uploads. Scanner module compile passed. Latest fast suite: 20 passed, 0 failed, 1 skipped. Viewer verify: 1,456 layouts, 0 different. Full suite: **21 passed, 0 failed, 0 skipped** (91s).
+- Partial rewards on disk: 7,706/60,190 (12.8%; C=4,099, B=2,038, A=1,215, S=354). No backfill process is active. Last published atlas commits `7a27af3`, `3efd509`.
+- Low-poly GLBs replaced viewer 3D container geometry. Public candidate v5 is staged at `D:/Orca/NMS-Derelict-Probe-analysis/public-site-candidate-20261021-v5/site/`; it includes `piece_props.json` and excludes official glyph PNGs. No site deployed. User will provide destination choice later.
+- User confirms pointer lock works; narrow-passage issue and mobile controls still need user browser testing.
+- Remaining user actions: start scanner after restart when ready; test mobile/tight-space Walk inside; provide public-site destination when ready; complete the listed in-game blind/reward/count/turret/hazard checks in `research-output/CODEX_HANDOFF_CHECKLIST_20261021.md`.
+
+## CURRENT STATE - 2026-10-20 14:30 UTC (read first)
+
+- **LATEST (2026-10-21): HANDOFF 2026-10-21 (usage 92%, resets 04:30): two agents were told to save and write progress notes: research-output/VIEWER_AGENT_PROGRESS_20261021.md (viewer tasks 1-5: locked column layout, draggable Columns rows, totals = Salvaged Frigate Module Crates by default, 3D layer checkboxes and no duplicate fixtures with game-coloured shapes, first-person walk mode, end-reward column/picker/card) and research-output/END_REWARD_DATA_PROGRESS_20261021.md (fast batch end-reward predictor, precompute cache D:/Orca/NMS-Derelict-Probe-analysis/end-reward-cache/rewards.csv, REQUEST to the scanner for reward columns). Next agent: read those two notes and D:/Orca/NMS-COORDINATION.md, then finish what's left. Still the user's decision: GitHub Pages location. Full detail: STATUS.md top entries.**
+
+- **Objective:** finish the NMS 7.05 offline arbitrary-address derelict generator. No NMS launch or attach; crate contents and rewards are out of scope.
+- **Fixture:** the exact-build native writer reproduces address `00003B0006606CAA` from asset-derived inputs: 11 rooms and 145 placements. A4720 transforms fit 145/145 captured component positions within `1e-5` (124 exact); all 23 authored containers fit within the same tolerance. See `research-output/A4720_TRANSFORM_CONTAINER_FIT_20261020.md`. This is a model-to-capture check, not a live A4720 observation.
+- **Second seed:** RESOLVED. `0000320006606CAA` completes (CARGO_FLOATERS, 9 rooms, 140 instances, 29+18). The earlier runs stopped at the instruction cap; the native search is long but finite.
+- **Validated (2026-10-20):** `tools/generate_derelict_705.py <ADDRESS16>` (address → seed → preset → emulated native writer) matches the user-confirmed live census exactly for 3 derelicts, in rooms/crates/footlockers: `00003B0006606CAA` BUGS 11/17/6 (plus all 145 positions), `0000750006606CAB` BUGS 9/18/5, `0000320006606CAA` FLOATERS 9/29/18. It matches the old root-seed analyzer counts for 3 more addresses. The default is uncapped (about 6× faster, byte-identical). Report: `research-output/GENERATOR_VALIDATION_VS_LIVE_20261020.md`. Next steps: `STATUS.md` → Next actions. No user action required.
+- **Blind test #1 CONFIRMED (2026-10-20 09:38Z):** at a new system (glyphs `122506607CAA`), the live writer seed `0A94CF6386B356A4` and CARGO_FLOATERS preset exactly match the prediction made before boarding. See `research-output/BLIND_PREDICTION_0002250006607CAA_20261020.md`.
+- **Viewer (2026-10-20):** `tools/Derelict-Viewer.cmd` -> http://127.0.0.1:8765/ (`viewer/`, docs `viewer/README.md`): region table (real systems), per-derelict 2D deck maps (exact room cell masks, mirrored x, doors, stair links, fixtures) and 3D view (clean rooms, doors, stairwell holes + steps, fixtures, hangar stand-in ship; experimental game meshes from `tools/build_piece_meshes_705.py`). Decoded: room record u16[0..5] bbox + u16[12..15] cell mask (z fastest); doors = DOOR_* t + 4*A[2]; piece geometry centre = t + 8*A[2].
+- **Walls done:** real wall outlines in the viewer; see `STATUS.md` -> 'Wall shapes DONE'. User action: none required.
+- **HANDOFF 2026-10-20 ~18:00 local (usage 95%, resets 18:30): viewer v4-v6.** Read `STATUS.md` 'Viewer v6' first.
+  - Done and tested:
+    - official glyph icons with an Icons/Hex switch, and table paging (100–1000);
+    - floors cache, so a cold region load is 0.5 s;
+    - the table reads the GitHub atlas in the browser, all regions in one table;
+    - shared `viewer/static/model.js` with pack/unpack/build;
+    - pre-built views at 1.2 KB gzip per system, regression-checked on 1,367 derelicts;
+    - `tools/derelict_view.py`, a byte-identical Python pack;
+    - combined list `tools/build_atlas_index.py`;
+    - lookalike SVG glyphs in `viewer/static/glyphs-svg/`;
+    - a staged public site test in `D:/Orca/NMS-Derelict-Probe-analysis/site-test`.
+  - The local LAN server is running (http://192.168.x.x:8765/).
+  - **ANSWERED 18:00:** top 100 only, minimise size and file count. v7 DONE (see STATUS 'Viewer v7'); waiting on the scanner agent via D:/Orca/NMS-COORDINATION.md. Pages location still open.
+  - **Waiting on the user's answers** (asked in chat):
+    1. Publish views for all systems or only the top 100? Recommendation: all.
+    2. Views in the atlas repo or a separate views repo? Recommendation: separate.
+    3. GitHub Pages location: `docs/` in the atlas repo or its own repo.
+  - After those answers:
+    - Publish `index/` and `views/`. Nothing is pushed yet.
+    - Integrate `build_atlas_index` and the view writing into the scanner/publisher (`D:/Orca/NMS-Derelict-Probe-fastgen/app/atlas.py`). That code is another agent's and was being edited; coordinate before changing it.
+    - Do not commit in `D:/Orca/NMS-Derelict-Atlas` while the scanner is pushing.
+    - Note: the scanner keeps no derelict.json, so views must be written at scan time.
+- **Codex usage:** latest query was 5% of the 5-hour session and 50% weekly. The `NMS-Derelict-Research-Backup` task runs every 30 minutes and snapshots the shared workspace, including Codex changes; it skips unchanged snapshots. A manual Codex snapshot was also created at `D:/Orca/NMS-Derelict-Probe-backups/NMS-Derelict-Probe-snapshot-20261020T024956Z-codex-20261020.zip` (SHA-256 `2E9F2FBA8BA845631501AC93544D18771B79F2302C6623875FBC2414620E8C3C`).
+- `WORKSPACE_STATE.json` is the machine-readable current state; `STATUS.md` is the concise project status. The prior Probe crash-capture milestone below is historical.
+
+## HISTORICAL MILESTONE - resolve the Probe 0.3.55 r4 crash (2026-10-19)
+
+The user reordered the previous offline layout-reconstruction milestone. This crash-resolution milestone is exclusive until a bounded replacement candidate is reviewed and ready for one user-run. r4 and the earlier Python-hook canaries remain suspended. The agent did not launch or attach to NMS.
+
+Confirmed defect: r4 declares the generation worker with one pointer argument, but the matching-build caller places the copied preset in RDX and seed pointer in R8 as well as the component in RCX. pyMHF builds the detour and original trampoline from that declared signature, so the other two arguments are not preserved. The dump's NMS return address maps to the instruction after this worker call. This is a confirmed ABI defect on the observed crash path, but does not alone prove the complete `python313.dll` access-violation cause.
+
+The r4 profile also loaded seven native hooks across three mods, including NMS.py's application-update hook; its runtime hash label actually identifies the target executable. The worker path is fiber-backed and the dump lacks private symbols. A bounded ABI/fiber harness reproduced the one-argument corruption and passed the corrected three-argument bridge for thread, fiber, and same-thread fiber-yield cases. An offline inventory preserved the full hook/runtime-entry-point scope.
+
+The replacement transport is an external, one-shot CDB breakpoint at writer RVA `0x0039E5E0`; it does not load Python hooks. Its disposable event/timeout fixture passed: one hit captured the four register arguments plus two stack arguments and detached; the no-event controller break detached and the child stayed alive. The event-call interval was 76 ms in that .NET fixture, not an NMS pause estimate. Candidate files: `tools/Run-Layout-Capture-0.3.55-cdb.cmd`, `tools/run_layout_capture_0_3_55_cdb.ps1`, and `tools/Run-Layout-Capture-0.3.55-cdb-README.md`. It captures only six raw scalar arguments at entry; it does not read pointers, capture the return, or produce a layout. Static review is complete (2026-10-19): r1 had a blocking defect (its `bl` check expected `NMS+0x39e5e0`, but NMS.exe exports put an `AK::WriteBytesBuffer::GetPos+...` name there, so every run would fail after pausing NMS) plus symbol-server, post-detach `DebugBreakProcess`, and parse-scope hazards. Profile `0.3.55-cdb-r2` fixes all four and passed event, no-event, and forced-mismatch end-to-end runs of the real script against the fixture; details and hashes in `tools/Run-Layout-Capture-0.3.55-cdb-README.md`. r2 is ready for one user-run; the agent has not attached to NMS. Incident record: `research-output/probe-layout-capture-0.3.55-capture-only-r4-canary/R4_CRASH_TRIAGE_20261019.md`.
+
+## DEFERRED MILESTONE - reproduce one known derelict outside gameplay (deferred 2026-10-19)
+
+This milestone was active until the user reordered the work on 2026-10-19; it is now **deferred**. The known NMS 7.05 fixture has an offline replay of 145 captured room-component instances in 11 labeled rooms and 23 authored crate/footlocker positions, matching the fixture's per-room and total counts. That replay reconstructs a captured layout; it does not generate the layout from a seed. Completion requires producing the room graph, selected scenes, and container placements outside gameplay from the fixture's generator inputs, then matching the replay. Crate contents and reward selection remain out of scope.
+
+Preferred fixture: universe address `00003B0006606CAA`; 11 rooms, 17 square crates, and 6 footlockers. The original session is `user-data/NMSDerelictSurveyor-moved-from-C-20261018/sessions/20261018T005220Z_00003B0006606CAA.json` (SHA-256 `87EBE6B171C2396423C18AFA4D114784078D895569ECDAABC5D7AC1D36EDB31C`). The new capture is session `20261019T003952Z_00003B0006606CAA` (SHA-256 `AE9D0241531866792F67CA3E1A84B40C56247AC7579E4326541EE6EC2C588049`), Probe 0.3.54, matching NMS executable SHA-256 `13d5060d4efb9d2a6a6b1b349bc4257231056cc2a055df4bb15d816262cc3499`.
+
+The new capture's 145 room/resource events match the original fixture event-for-event. It has 148 delayed transform samples; all 145 room-component instances join to a valid nonzero sample. The 69 unique room-scene members were extracted from the matching 7.05 archive (SHA-256 `58958536E58DFAEB81E0423B5508C7D3DBF3713BAC09E857577FEB275D9F2627`), converted to MXML, and each conversion matches the existing cache byte for byte.
+
+Replay outputs: `research-output/known-derelict-replay-20261019/KNOWN_DERELICT_LAYOUT_REPLAY_20261019.md`, the full JSON, and room/container CSVs in the same folder. Rebuild the replay with `tools/reconstruct_known_derelict_layout.py`. The exact member hashes and extraction/converter provenance are in `exact705/exact705-room-scene-members.sha256.json`; output/input hashes are listed in `KNOWN_DERELICT_LAYOUT_REPLAY_20261019.sha256`.
+
+The Probe-recorded `C7DD2B2F667D36DD` is the `DUNGEON.SCENE.MBIN` resource seed and is absent from the current worker-to-writer seed path. Under the stock zero-override path, the address-derived `7D7ED1B33E15365D` reaches `FUN_14039E5E0` unchanged, but runtime override and selected component rows are not observed, so the saved fixture's seed/preset link remains conditional. The helper ports now compose through `nms_dungeon_writer_search_705.py`: one RNG is carried through room selection, the 200/500/1000 native retries, topology, A1DA0, and A2780. The driver returns room rows, grid, sparse placement descriptors, and RNG state. The A2780 theme tag and descriptor byte `+0x0E` are the logical room index; the shuffled slot counter only selects a candidate row. `nms_dungeon_instance_705.py` composes candidate source-row transforms with A4720's grid offset and authored direct crate/footlocker references.
+
+Latest checkpoint at deferral: the composed conditional candidate reached A2780 but generated 59,606 placements versus the replay's 145 scene instances. Its static map provider walks only each root MXML and misses callback-tagged nodes in referenced scenes. Exact-build A3270 confirms that a zero-dimension map returns success, while A5480 writes no grid cells for it; do not filter zero rows in the port. Whether recursive references are active in this writer context remains unresolved, so the candidate is not a reproduction. The capture-only Probe 0.3.55 profiles are quarantined after two original-draft crashes, a further r1 crash, and the user's report of machine-wide lag followed by a forced shutdown. This layout milestone is deferred; the active work is defined above. Crate contents and reward selection remain out of scope.
+
+## Latest runtime retest checkpoint - 2026-10-19
+
+- Two original-draft runs and one capture-only r1 run recorded the same Windows signature: `python313.dll`, access violation `0xC0000005`, fault offset `0x2ABDA3`. The second original-draft run's last live status showed 538,606 resource lookups, 920 scene-probe events, and 107 generated-scene events. The r1 run then attached at NMS startup and also crashed. No retained dump identifies the callback; see `research-output/probe-layout-capture-0.3.55-capture-only-r1/CODE_REVIEW.md` and the quarantine follow-up at the end of this handoff.
+- Capture-only r1 keeps the three exact-build layout hooks and disables other native Probe hooks before registration. Its source SHA-256 is `73A07CBA13F2A0761A2C44DC85B930AA0F364FF4A67E8B9CF8ED60260A1ECF5D`. It is not a safe fix: the r1 run also crashed, and the user reported system-wide lag and a forced shutdown.
+- The r2 candidate reduces the native profile further but has not run. Both profiles and the one-click launcher are quarantined. Do not attach until the callbacks have an offline audit and the capture design is revised.
+- Per-process NMS minidumps were configured for `live-runtime/NMSDerelictSurveyor/crash-dumps/` (up to three), but the latest archived WER report contained no dump. After reboot, no NMS or pyMHF attach process was running.
 ## Resume checkpoint — 2026-10-17 01:25Z — next objective: fix infinite loading
 
 - User paused work for today. Tomorrow's first objective is to diagnose and fix the NMS infinite-loading regression; this was the original blocking problem. Do not substitute a downgraded probe as the solution.
@@ -409,3 +513,47 @@ The old ReNMS SDK declares a generic reward ID map on `cGcRealityManager`, but t
 - On matching NMS 7.05 PID 30272 (SHA-256 `13D5060D4EFB9D2A6A6B1B349BC4257231056CC2A055DF4BB15D816262CC3499`), the callback logged `late_application_singleton_recovered` with address `0xE`. This is not a plausible application pointer. The user then reported a crash. The injector later reported `ConnectionRefusedError: [WinError 1225]`; the precise crash cause is not independently proven, but the new recovery hook is unsafe and is the leading suspect.
 - NMS and the injector were no longer running. The attach monitor started for this run was stopped by exact PID/script identity. The installed mod was restored from the pre-0.3.49 backup and verified SHA-256 `6BBEEAB0A8C9391C99833B129455DFF1B4C04FC9861AB41BEAE28BB42199176E` against that backup.
 - Do not redeploy this recovery callback as written. Before another live attempt, establish pyMHF's callback argument representation for `cGcApplication.Update`, validate a plausible pointer without mapping arbitrary addresses, and add a non-mutating diagnostic path. The prior successful attach heartbeat does not establish that runtime game data is valid.
+
+## Runtime incident: Probe 0.3.55 capture-only r1 crash and r2 mitigation — 2026-10-19
+
+- The one-click capture-only r1 run started at 14:44:32 UTC. It attached pyMHF to NMS PID 13956 at 14:44:37, before game states `APPLOCALLOAD` (14:48:13) and `APPVIEW` (14:49:55). pyMHF reported 3 mods and 8 hooks. The user reported severe startup lag from white screen to ship.
+- Windows recorded another `NMS.exe` access violation in `python313.dll`, `0xC0000005` at `0x2ABDA3`, at 14:52:05.969 UTC. The r1 session contained 45 path samples ending at 14:51:49.700 and no layout, scene, resource, or trace events. The layout capture remained armed. This narrows the issue away from the original high-volume hooks but does not identify the faulting callback.
+- The per-user `HKCU` LocalDumps value did not retain a dump. Microsoft documents per-process LocalDumps under `HKLM` and requires administrator rights. An HKLM write failed with access denied in this session; the next runtime incident still needs a dump for stack attribution.
+- A new untested candidate is `research-output/probe-layout-capture-0.3.55-capture-only-r2/derelict_baseline_probe.py`, SHA-256 `8EFF802E82A29CD81AC2448C58F0C274E94FDC470EBC2D6008EF88F9C4983C46`. It retains only the top-level layout-generator detour, reduces main-loop/status polling, and is staged under `live-runtime/NMSDerelictSurveyor/diagnostics/layout-capture-only-r2-modroot/` with the same hash.
+- `Run-Layout-Capture-0.3.55.cmd` now starts NMS and the overlay immediately, then waits for `Ctrl+Alt+Shift+F12` at the ship before attaching pyMHF. The overlay shows this waiting state. This avoids debugger/instrumentation during startup; it is a mitigation candidate, not confirmed live behavior. r2 captures top-level seed/preset inputs only, not source rows or manager-map rows.
+
+## Runtime incident follow-up: Probe 0.3.55 quarantine — 2026-10-19
+
+- The user reports that after the 0.3.55 capture run, the whole PC became laggy and they forced a shutdown. Windows records an NMS `AppHangTransient` at 14:53:39 UTC, an NMS access violation in `python313.dll` at 14:52:05 UTC, an unexpected prior shutdown at 15:33:31, and Kernel-Power event 41 after boot at 15:50:10. These corroborate the hang/crash and unclean shutdown but do not identify a callback or prove the probe caused all machine-wide lag.
+- The persisted run state and installed-file record identify capture-only r1, SHA-256 `73A07CBA13F2A0761A2C44DC85B930AA0F364FF4A67E8B9CF8ED60260A1ECF5D`, attached to PID 13956 four seconds after NMS launch. r1 enabled the layout-writer, source-row-builder, and manager-map-acceptance detours; pyMHF reported eight hooks. The captured session has only 45 position samples and no layout event. The exact faulting callback remains unknown; the archived WER report contains no dump.
+- r2 (`8EFF802E82A29CD81AC2448C58F0C274E94FDC470EBC2D6008EF88F9C4983C46`) has no run record and remains untested. r1 and r2 stay quarantined; `tools/PROBE_0.3.55_CAPTURE_QUARANTINED.md` still gates both legacy entry points.
+- Offline review found a synchronous hot-path risk in r1: per-row `ReadProcessMemory`, metadata reads, dictionary construction, and hex encoding run inside the source-row detour; the 2,048-row cap is enforced after this work. A second detour copies/hex-encodes up to 1,024 manager rows inside its callback. This could stall NMS if reached, but the missing capture event and dump leave causality unproven. r2 removes those two detours but retains the top-level writer hook and is not approved for live use.
+- The attach helper also serialized `Get-Content` provider objects directly into JSON, expanding `PSPath`/`PSDrive` metadata. `launcher-events.jsonl` is 351,812,112 bytes and was written at 14:54:33 UTC. The helper now converts its tail to plain strings; original bytes are preserved at `research-output/probe-layout-capture-0.3.55-capture-only-r2/launch_nms_classic.ps1.before-log-tail-fix-20261019` (SHA-256 `E7619EE7DF507DB150A9C6D5FDE5A00E52BC64245D3737C0BB54DF5ECD9C368D`). The log was left intact. D: had about 290.9 GB free, so no disk-full cause is established. This logging bug is a credible additional load contributor but does not prove the cause of the shutdown.
+
+## Runtime incident follow-up: r3 low-work canary prepared — 2026-10-19
+
+- New source: `research-output/probe-layout-capture-0.3.55-capture-only-r3-canary/derelict_layout_canary.py`, SHA-256 `21481554D78BC0F2454E45993F67B9A077D9674D421EBF15BD8A1B17E29AAEB0`; staged mod-root copy has the same hash.
+- r3 enables only the exact-build `FUN_14039E5E0` after-hook. It captures six scalar argument values and the return byte for the first call. The callback does no pointer reads, `ReadProcessMemory`, formatting, JSON serialization, or file I/O. A daemon worker writes one small event and status file. There are no other native hooks or per-frame callbacks.
+- The launcher is `tools/Run-Layout-Capture-0.3.55-r3.cmd`, with PowerShell worker `tools/run_layout_capture_0_3_55_r3.ps1`. It pins the NMS and r3 source hashes, plus attach helper SHA-256 `166CB9F5C8E612F9921BDB705AD49D6E7DC6DB8C89753DE1FD7E446E2446CDAC` and the log-tail-fixed classic launcher SHA-256 `0B0ED571DAF479CFCB5D162E3B1C38069699E7F069B9F8E6DFC2D3E07A4C0EF5`.
+- r3 is a one-shot stability canary, not the requested native-buffer capture: it does not read seed, preset, output, or room-map memory. A persisted event proves the callback ran with those scalar values; it does not establish pointer contents or runtime safety for a later data-reading hook.
+- No NMS launch, injection, or gameplay was performed. The source and PowerShell launcher received static inspection only. A new human run is ready through the r3 `.cmd`; stop and do not retry if the system becomes laggy.
+
+
+## Codex continuation: 2026-10-21 01:33Z
+
+- Implemented fullscreen entry/exit, mobile walking controls, and reduced first-person collision radius for narrow spaces. Backups are next to each changed viewer file with `.pre-fullscreen-mobile-20261021`.
+- Added `research-output/CODEX_HANDOFF_CHECKLIST_20261021.md`, which consolidates the outstanding live checks without launching NMS.
+- JS syntax checks passed. Browser touch and tight-passage validation is still open. Reward batch remains unattended in the background; remaining independent work is in progress.
+
+- Full offline regression: `python -I tools/regression_test_705.py --full` yielded 20 passed and only e2 failed because the published index is still older than format 4. `piece_props.py --check` passed; the fresh `derelict_view.py --verify` was still running at 01:41Z. Refreshed public candidate v3 served all requested static files and `?atlas=` index with HTTP 200.
+
+- At 01:46Z, `derelict_view.py --verify` passed on 1,456 layouts (0 different). Full regression completed with 20 pass and only the expected stale-index e2 failure. The snapshot builder was optimized after its scheduled run remained active while enumerating excluded trees; its fresh rerun is pending.
+
+- The 01:45 backup snapshot completed after the excluded-tree/hash optimization: 13,776,602 bytes, 2,258 entries, ZIP CRC clean; reward-cache copy was also made and hashed. Next scheduled run 02:10Z.
+
+- 01:48Z fast regression rerun: 19 pass, 1 fail, 1 skip in 59s; full mode: 20 pass, 1 fail, 0 skip in 115s. Both fail only e2 because format-4 reward index publication is pending. `derelict_view.py --verify`: 1,456 layouts, 0 differences.
+
+
+## 2026-10-23 portable minimap package
+
+Portable minimap package BUILT (2026-10-23, user: 'make all necessary arrangements for the portable real mod version'; local only, nothing uploaded): `python -I mod/build_package.py [--with-mbincompiler] [--keep-data]` -> `D:/Orca/NMS-Derelict-Minimap-dist/NMS-Derelict-Minimap/` (python.org runtime + unicorn/pefile/hgpaktool, our code with machine paths rewritten in COPIES, nothing in fastgen/app edited). Install.cmd -> `minimap/first_run.py` builds all game data from the user's own install (extract_build_data_705 via first_run_driver; verified byte-identical to the validated 7.05 data, 653/653 files) -> choose autostart (Startup shortcut, self-removing after NMS missing 3 days over >=7 days or unused 30 days), Steam launch option (nothing resident), or by hand; `minimap/lifecycle.py` install/uninstall + Installed-apps entry. Native writer is NOT shipped (RWX memory = antivirus flag); package uses `--engine unicorn` (identical layout, ~25 s per new derelict). Tested cold in the package: golden layouts, golden reward, 54 seed checks PASS; derelict 0000760004607CAB = same card/modules as the dev tree; map render 6/6 byte-identical; overlay single-instance + STOP file + shortcut create/remove OK. 23 minimap + 5 mod tests pass. See `mod/README.md`. Open: Defender/VirusTotal results, MBINCompiler licence, code signing, second-PC test, GOG/Game Pass. 
