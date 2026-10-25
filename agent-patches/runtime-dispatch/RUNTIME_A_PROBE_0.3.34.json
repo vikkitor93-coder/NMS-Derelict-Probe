@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "lane": "runtime-dispatch",
+  "branch": "agent/runtime-dispatch",
+  "probe_version": "0.3.34",
+  "surveyor_app_version": "0.3.43",
+  "extension_version": "1.0.1",
+  "purpose": "At the exact descriptor-correlated dungeon root event, capture the read-only raw owner+0x10 value and best-effort target module identity; expose this in live status and the overlay.",
+  "measured_facts": [
+    "Capture code reads 8 bytes once at owner+0x10 only after an exact descriptor-correlated root event is identified.",
+    "The value and target identity are persisted in the root event and live-status generation_rooms summary.",
+    "The code does not write NMS process memory."
+  ],
+  "inferences": [
+    "The loaded-module base/RVA is an address classification only; the target semantic type is not established."
+  ],
+  "hypotheses": [
+    "The slot may be relevant to the runtime dispatch investigation; runtime evidence is required to establish its role."
+  ],
+  "human_action": {
+    "required": true,
+    "steps": [
+      "Extract the Runtime-A 0.3.34 complete source/build over the existing Surveyor project/mod directory and keep current data/settings.",
+      "Fully exit No Man's Sky.",
+      "Open Surveyor and use Start NMS to load the updated probe.",
+      "Load the same known derelict and wait for +0x10 captured in the overlay.",
+      "Click Analyze generation + upload in Surveyor.",
+      "Verify the runtime-dispatch upload receipt, then return to Main and write check."
+    ],
+    "success_condition": "Overlay reports ROOT+0x10 captured with value and target address/RVA identity; evidence upload receipt succeeds.",
+    "full_traversal_required": false
+  },
+  "verification": {
+    "command": "python -m unittest discover -s tests -v",
+    "result": "154 tests passed",
+    "compile": "python -m compileall -q tools overlay tests mod \u2014 passed",
+    "json": "live-status schema and extension index parsed \u2014 passed",
+    "runtime": "Windows pyMHF/NMS live validation pending"
+  },
+  "rollback": [
+    "Restore the previous mod/derelict_baseline_probe.py (probe 0.3.33) and fully restart NMS.",
+    "Restore the previous overlay/derelict_overlay.py only if reverting the display as well."
+  ],
+  "changed_files": [
+    "mod/derelict_baseline_probe.py",
+    "overlay/derelict_overlay.py",
+    "schema/live-status-v1.schema.json",
+    "tests/test_tools.py",
+    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.34.patch"
+  ],
+  "sha256": {
+    "mod/derelict_baseline_probe.py": "6132b5b58a202454e6091f4eba1ba633090d1eba2e11e898ca581920c7d48aeb",
+    "overlay/derelict_overlay.py": "8026d39fa548989edcd1124ad13c321fd94f548b1611dbb6a5b11a071f1468bb",
+    "schema/live-status-v1.schema.json": "59f505e631e141a46331c1a35e1f927e2dd57f34fcdc03390a1a76ae3c2bf9f6",
+    "tests/test_tools.py": "1ace2a01957652cd20cdb3dd31bc4602a204b9b7d84af455a308eacea492314d",
+    "agent-patches/runtime-dispatch/runtime-a-probe-0.3.34.patch": "3341755c42edb63442f7df37c9c8879aa55dd39ae55d712512bd36af84be7cc8"
+  },
+  "patch_base": "NMS-Derelict-Probe-v0.3.43.zip (app/probe 0.3.33 source snapshot)",
+  "pull_request_target": "integration/issue-8-ui-extensions"
+}
