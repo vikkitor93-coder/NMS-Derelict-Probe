@@ -1,0 +1,4 @@
+Stage 3 (M1, 2026-10-25): stub_generator.py and the stub tests (stub_test.py, client_stub_test.js,
+run_original_phases_stub.py) are kept here, not in ondemand/. ondemand_server.py imports stub_generator from its own
+folder (ondemand/) when run with --generator stub; copy or move stub_generator.py up one level to use that mode.
+They were not run in stage 3.

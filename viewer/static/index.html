@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Derelict Viewer</title>
+  <meta name="robots" content="noindex">
+  <script src="config.js"></script>
+  <script src="gate.js"></script>
+  <link rel="stylesheet" href="app.css">
+  <script type="importmap">{ "imports": { "three": "./vendor/three/three.module.min.js" } }</script>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#/">Derelict Viewer <span class="muted">NMS 7.05</span></a>
+    <form id="gen-form" class="gen" autocomplete="off">
+      <input id="gen-input" placeholder="Glyph code (12 hex) or address (16 hex)" spellcheck="false" maxlength="24">
+      <select id="gen-galaxy" title="Galaxy (for glyph codes)">
+        <option value="0">Euclid</option>
+      </select>
+      <button type="submit">Generate</button>
+      <span id="gen-status" class="muted"></span>
+    </form>
+    <label class="glyph-mode" title="Show portal addresses as the game's glyph icons or as hex digits">Glyphs
+      <select id="glyph-mode"><option value="icons">Icons</option><option value="hex">Hex</option></select></label>
+  </header>
+  <main id="app"></main>
+  <footer class="foot"><a href="#/about">About and credits</a> · <span id="foot-lock" hidden><a href="#" id="lock-link">Lock</a> · </span><span class="muted" id="foot-disc"></span></footer>
+  <div id="tip" class="tip" hidden></div>
+  <script src="model.js"></script>
+  <script src="compact.js"></script>
+  <script src="names.js"></script>
+  <script src="credits.js"></script>
+  <script src="ondemand.js"></script>
+  <script src="share.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

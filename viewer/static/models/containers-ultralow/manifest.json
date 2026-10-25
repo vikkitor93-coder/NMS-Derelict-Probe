@@ -1,0 +1,104 @@
+{
+  "version": "1.1.0",
+  "polygons_per_object": 6,
+  "triangles_per_object": 12,
+  "texture": "containers-atlas.png",
+  "texture_size": [
+    384,
+    256
+  ],
+  "models": [
+    {
+      "id": "salvage_crate",
+      "polygons": 6,
+      "triangles": 12,
+      "vertices": 8,
+      "draw_calls": 1,
+      "bounds": [
+        [
+          -0.53,
+          0.53
+        ],
+        [
+          0.0,
+          0.782
+        ],
+        [
+          -0.44,
+          0.44
+        ]
+      ],
+      "glb": "salvage_crate.glb",
+      "obj": "salvage_crate.obj"
+    },
+    {
+      "id": "crew_footlocker",
+      "polygons": 6,
+      "triangles": 12,
+      "vertices": 8,
+      "draw_calls": 1,
+      "bounds": [
+        [
+          -0.655,
+          0.655
+        ],
+        [
+          0.0,
+          0.7174999999999999
+        ],
+        [
+          -0.36,
+          0.36
+        ]
+      ],
+      "glb": "crew_footlocker.glb",
+      "obj": "crew_footlocker.obj"
+    },
+    {
+      "id": "crew_locker",
+      "polygons": 6,
+      "triangles": 12,
+      "vertices": 8,
+      "draw_calls": 1,
+      "bounds": [
+        [
+          -0.34,
+          0.34
+        ],
+        [
+          0.0,
+          2.18
+        ],
+        [
+          -0.225,
+          0.2625
+        ]
+      ],
+      "glb": "crew_locker.glb",
+      "obj": "crew_locker.obj"
+    },
+    {
+      "id": "secure_briefcase",
+      "polygons": 6,
+      "triangles": 12,
+      "vertices": 8,
+      "draw_calls": 1,
+      "bounds": [
+        [
+          -0.375,
+          0.375
+        ],
+        [
+          0.0,
+          0.2305
+        ],
+        [
+          -0.24,
+          0.28300000000000003
+        ]
+      ],
+      "glb": "secure_briefcase.glb",
+      "obj": "secure_briefcase.obj"
+    }
+  ]
+}

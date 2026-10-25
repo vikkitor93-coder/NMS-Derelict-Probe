@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Derelict Minimap</title>
+<link rel="stylesheet" href="minimap.css">
+</head>
+<body>
+<header>
+  <h1>Derelict Minimap</h1>
+  <span id="live" class="pill">connecting…</span>
+  <form id="pick" autocomplete="off">
+    <input id="pick-input" placeholder="glyphs (12 hex) – empty follows the game" maxlength="19" spellcheck="false">
+    <button type="submit">Show</button>
+  </form>
+</header>
+
+<section id="card" class="card" aria-live="polite"><p class="muted">Waiting for a system…</p></section>
+
+<section class="mapbar">
+  <div id="decks" role="tablist" aria-label="Decks"></div>
+  <label class="follow"><input type="checkbox" id="follow" checked> follow my deck</label>
+  <button id="anchor" type="button" title="Use when this derelict was summoned (not the system's own): stand just inside the entrance and press">I'm at the entrance</button>
+  <button id="anchor-reset" type="button" hidden>Use system position</button>
+</section>
+<p id="where" class="where muted"></p>
+<div id="map" class="map"></div>
+<p class="legend">
+  <span><i class="k crate"></i>salvage crate</span><span><i class="k locker"></i>footlocker</span>
+  <span><i class="k brief"></i>briefcase</span><span><i class="k tall"></i>tall locker</span>
+  <span><i class="k me"></i>you</span><span><i class="k ent"></i>entrance</span>
+</p>
+<details class="dev"><summary>Dev</summary><pre id="dev"></pre></details>
+
+<script src="model.js"></script>
+<script src="minimap.js"></script>
+</body>
+</html>
